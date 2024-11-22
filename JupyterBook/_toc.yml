@@ -11,7 +11,7 @@ parts:
   chapters:
   - file: Ch1_SLEEPY_basics
     sections:
-      -file: Chapter1/Ch1_expsys
+    - file: Chapter1/Ch1_expsys
   - file: Ch2_SolutionNMR
   - file: Ch3_DynamicsSolids
   - file: Ch4_DNP

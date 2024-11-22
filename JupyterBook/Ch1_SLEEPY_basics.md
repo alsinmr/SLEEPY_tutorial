@@ -1,4 +1,4 @@
-# <font color="maroon">SLEEPY basics</font>
+# <font color="red">SLEEPY basics</font>
 
 The first chapter of the tutorial introduces the different "objects", how to create them, how to use them, and how they interact. Most objects in SLEEPY are intended to connect to familiar concepts in magnetic resonance, for example, we have a Hamiltonian object, a Liouvillian object, a propagator object, a pulse-sequence object, and a density matrix object. The way these interact should hopefully be at least somewhat intuitive.
 
