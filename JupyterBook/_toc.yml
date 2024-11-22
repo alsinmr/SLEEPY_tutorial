@@ -1,0 +1,18 @@
+# Table of contents
+# Learn more at https://jupyterbook.org/customize/toc.html
+
+format: jb-book
+root: intro
+parts:
+- chapters:
+  - file: GettingStarted
+- caption: Tutorial
+  numbered: false
+  chapters:
+  - file: Ch1_SLEEPY_basics
+    sections:
+      -file: Chapter1/Ch1_expsys
+  - file: Ch2_SolutionNMR
+  - file: Ch3_DynamicsSolids
+  - file: Ch4_DNP
+  - file: Ch5_ParamagneticEffects
