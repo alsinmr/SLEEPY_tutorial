@@ -24,6 +24,6 @@ If you're starting from scratch, you may consider installing [Anaconda](https://
 Once set up, any of the webpages with code in the tutorial can be downloaded with the button in the upper right (pick .ipynb) and run locally. 
 
 ## Google Colab
-Colab has the advantage that there is no local installation requirement, with the basic Python modules already setup. The notebooks that we provide include a few lines at the beginning that download SLEEPY and import it.
+Colab has the advantage that there is no local installation requirement, with the base requirements for Python already setup. The notebooks that we provide include a few lines at the beginning that install the additional requirements for MDAnalysis and NGL viewer, so you don't have to know how to set it up– just execute the cells (shift+enter executes a cell).
 
 For all notebooks in the tutorial, there is a button near the top that redirects you to Google Colab, where you can then edit and execute contents of the notebook: ![](https://colab.research.google.com/assets/colab-badge.svg)
