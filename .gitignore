@@ -162,7 +162,3 @@ cython_debug/
 # Jupyter book
 *.doctree
 *.pickle
-JupyterBook/_build/.doctrees/*
-JupyterBook/_build/.jupyter_cache/*
-JupyterBook/_build/jupyter_execute/
-*.po
