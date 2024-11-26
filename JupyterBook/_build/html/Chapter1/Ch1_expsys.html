@@ -132,7 +132,7 @@ const thebe_selector_output = ".output, .cell_output"
 <ul class="current nav bd-sidenav">
  <li class="toctree-l1 current active has-children">
   <a class="reference internal" href="../Ch1_SLEEPY_basics.html">
-   <font color="red">
+   <font color="maroon">
     SLEEPY basics
    </font>
   </a>
@@ -400,6 +400,21 @@ title="Print to PDF"
    Defining Interactions
   </a>
  </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#functions-and-contents-of-expsys">
+   Functions and contents of ExpSys
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#the-powder-average">
+   The powder average
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#the-spin-operators">
+   The Spin Operators
+  </a>
+ </li>
 </ul>
 
     </nav>
@@ -434,6 +449,21 @@ title="Print to PDF"
    Defining Interactions
   </a>
  </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#functions-and-contents-of-expsys">
+   Functions and contents of ExpSys
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#the-powder-average">
+   The powder average
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#the-spin-operators">
+   The Spin Operators
+  </a>
+ </li>
 </ul>
 
                         </nav>
@@ -461,7 +491,7 @@ title="Print to PDF"
 </section>
 <section id="defining-nuclei-and-experimental-conditions">
 <h2>Defining nuclei and experimental conditions<a class="headerlink" href="#defining-nuclei-and-experimental-conditions" title="Permalink to this headline">#</a></h2>
-<p>The experimental system defines the magnetic field, the nuclei in the spin-system, the spinning rate, the temperature, the rotor angle, the powder average, and the number of gamma angles calculated during one rotor period. Except for the field and nuclei, these all have default values and only need to be provided to change the default values.</p>
+<p>The experimental system defines the magnetic field, the nuclei in the spin-system, the spinning rate, the temperature, the rotor angle, the powder average, and the number of gamma angles calculated during one rotor period. Except for the field and nuclei, these all have default values and only need to be provided if other values are needed.</p>
 <ul class="simple">
 <li><p>v0H: The magnetic field strength, given as the <span class="math notranslate nohighlight">\(^1\)</span>H frequency in MHz (required, unless B0 provided)</p></li>
 <li><p>B0: The magnetic field strength in Tesla (required, unless v0H provided)</p></li>
@@ -507,10 +537,11 @@ title="Print to PDF"
 <li><p>hyperfine: Specify Axx, Ayy, and Azz. If all entries are equal, will be treated as an isotropic interaction. “euler” may be optionally provided.</p></li>
 <li><p>quadrupole: Specify delta in Hz (CHECK THIS INPUT). Optionally specify eta and euler</p></li>
 <li><p>g: Electron g-tensor. Specify gxx, gyy, and gzz, and optionally euler.</p></li>
+<li><p>ZF: Electron zero-field (still missing)</p></li>
 </ul>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">delta</span><span class="o">=</span><span class="n">sl</span><span class="o">.</span><span class="n">Tools</span><span class="o">.</span><span class="n">dipole_coupling</span><span class="p">(</span><span class="mf">.105</span><span class="p">,</span><span class="s1">&#39;1H&#39;</span><span class="p">,</span><span class="s1">&#39;13C&#39;</span><span class="p">)</span>  <span class="c1">#Calculate H-C dipole for 1.05 Angstrom distance</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">delta</span><span class="o">=</span><span class="n">sl</span><span class="o">.</span><span class="n">Tools</span><span class="o">.</span><span class="n">dipole_coupling</span><span class="p">(</span><span class="mf">.109</span><span class="p">,</span><span class="s1">&#39;1H&#39;</span><span class="p">,</span><span class="s1">&#39;13C&#39;</span><span class="p">)</span>  <span class="c1">#Calculate H-C dipole for 1.05 Angstrom distance</span>
 <span class="n">ex</span><span class="o">.</span><span class="n">set_inter</span><span class="p">(</span><span class="s1">&#39;dipole&#39;</span><span class="p">,</span><span class="n">i0</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">i1</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">delta</span><span class="o">=</span><span class="n">delta</span><span class="p">)</span> <span class="c1">#H-C dipole coupling</span>
 <span class="n">ex</span><span class="o">.</span><span class="n">set_inter</span><span class="p">(</span><span class="s1">&#39;CSA&#39;</span><span class="p">,</span><span class="n">i</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">delta</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span><span class="n">eta</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span> <span class="c1">#13C CSA</span>
 <span class="n">_</span><span class="o">=</span><span class="n">ex</span><span class="o">.</span><span class="n">set_inter</span><span class="p">(</span><span class="s1">&#39;CS&#39;</span><span class="p">,</span><span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">ppm</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span> <span class="c1">#1H isotropic chemical shift</span>
@@ -518,7 +549,7 @@ title="Print to PDF"
 </div>
 </div>
 </div>
-<p>Note that when setting an interaction, ex returns itself. This lets us string together multiple commands, for example, the following line will achieve the same interactions as above.</p>
+<p>Note that when setting an interaction, ex returns itself. This lets us string together multiple commands, for example, the following line will achieve the same interactions as above. Note that if an interaction is defined twice for the same spin or spins, the former definition will be overwritten.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">_</span><span class="o">=</span><span class="n">ex</span><span class="o">.</span><span class="n">set_inter</span><span class="p">(</span><span class="s1">&#39;dipole&#39;</span><span class="p">,</span><span class="n">i0</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">i1</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">delta</span><span class="o">=</span><span class="n">delta</span><span class="p">)</span><span class="o">.</span><span class="n">set_inter</span><span class="p">(</span><span class="s1">&#39;CSA&#39;</span><span class="p">,</span><span class="n">i</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">delta</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span><span class="n">eta</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span>\
@@ -543,11 +574,280 @@ Temperature = 298 K
 Powder Average: JCP59 with 99 angles
 Interactions:
 	dipole between spins 0,1 with arguments:
-		(delta=52194.25)
+		(delta=46656.38)
 	CSA on spin 1 with arguments: (delta=100.00,eta=1.00)
 	CS on spin 0 with arguments: (ppm=10.00)
 
-&lt;SLEEPY.ExpSys.ExpSys object at 0x7f7df05d7a20&gt;
+&lt;SLEEPY.ExpSys.ExpSys object at 0x7fdc909e0ba8&gt;
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="functions-and-contents-of-expsys">
+<h2>Functions and contents of ExpSys<a class="headerlink" href="#functions-and-contents-of-expsys" title="Permalink to this headline">#</a></h2>
+<p>The ExpSys object, ex, contains various useful pieces of information (both to the user, and the program). For example:</p>
+<ul class="simple">
+<li><p>ex.B0: Magnetic field</p></li>
+<li><p>ex.Nucs: Nuclei/electrons in spin-system</p></li>
+<li><p>ex.S: Spins of nuclei in spin-system</p></li>
+<li><p>ex.Peq: Thermal polarization of spins in spin-system (based on Larmor frequency only)</p></li>
+<li><p>ex.gamma: Gyromagnetic ratio of spins in spin-system</p></li>
+<li><p>ex.v0: Larmor frequency of spins in spin-system</p></li>
+<li><p>ex.vr: Rotor frequency</p></li>
+<li><p>ex.taur: Rotor period</p></li>
+<li><p>ex.rotor_angle: rotor angle</p></li>
+<li><p>ex.inter: List of all interactions entered</p></li>
+</ul>
+<p>It also contains a number of functions</p>
+<ul class="simple">
+<li><p>ex.copy: Returns a copy of ex (useful for building exchange calculations, where interactions may change due to exchange, but things like the field, Nuclei, etc. should remain fixed)</p></li>
+<li><p>ex.Hamiltonian: Returns a Hamiltonian object for the spin-system</p></li>
+<li><p>ex.Liouvillian: Returns a Liouvillian object for the spin-system</p></li>
+</ul>
+<p>Finally, it contains important objects</p>
+<ul class="simple">
+<li><p>ex.pwdavg: Powder average object for the spin-system. Note, if all interactions are isotropic, when a Liouvillian or Hamiltonian is created, the powder average will be replaced with a 1-element powder-average.</p></li>
+<li><p>ex.Op: Spin-operator object, which contains the spin-operators for the spin-system</p></li>
+</ul>
+</section>
+<section id="the-powder-average">
+<h2>The powder average<a class="headerlink" href="#the-powder-average" title="Permalink to this headline">#</a></h2>
+<p>The powder average can be changed, by simply replacing the powder average object (can be generated from sl.PowderAvg), or by running the function pwdavg.set_pwd_type. Note that this needs to be done before calculating propagators.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">ex</span><span class="o">.</span><span class="n">pwdavg</span><span class="o">=</span><span class="n">sl</span><span class="o">.</span><span class="n">PowderAvg</span><span class="p">(</span><span class="s1">&#39;rep144&#39;</span><span class="p">,</span><span class="n">gamma_encoded</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">ex</span><span class="o">.</span><span class="n">pwdavg</span><span class="o">.</span><span class="n">set_powder_type</span><span class="p">(</span><span class="s1">&#39;rep144&#39;</span><span class="p">,</span><span class="n">gamma_encoded</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Both would set the powder average to a repulsion powder average with 144 alpha and beta angles. Setting gamma_encode to True will skip the average over gamma_angles, which speeds up some calculations considerably, but will return incorrect results for pulse sequences that are not gamma encoded (e.g. REDOR).</p>
+<p>The powder average object contains useful information about how to execute the powder average. For example:</p>
+<ul class="simple">
+<li><p>pwdavg.PwdType : Type of powder average used</p></li>
+<li><p>pwdavg.N : Number of angles in the powder average</p></li>
+<li><p>pwdavg.alpha : alpha angles</p></li>
+<li><p>pwdavg.beta : beta angles</p></li>
+<li><p>pwdavg.gamma : gamma angles</p></li>
+<li><p>pwdavg.weight : weight to use when summing the powder average</p></li>
+<li><p>pwdavg.gamma_encoded : Boolean, determines whether averaging over gamma is skipped (cannot be set except at initialization, or when running pwdavg.set_pwd_type</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ex</span><span class="o">.</span><span class="n">pwdavg</span><span class="o">.</span><span class="n">set_powder_type</span><span class="p">(</span><span class="s1">&#39;rep256&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Typing ex.pwdavg at the command line will provide basic information about the powder average</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ex</span><span class="o">.</span><span class="n">pwdavg</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Powder Average
+Type:	rep256 with 25600 angles
+
+&lt;SLEEPY.PowderAvg.PowderAvg object at 0x7fdc910df3c8&gt;
+</pre></div>
+</div>
+</div>
+</div>
+<p>The powder average can also be plotted. By default, this plots the <span class="math notranslate nohighlight">\(\alpha\)</span> and <span class="math notranslate nohighlight">\(\beta\)</span> angles, but can be switched to <span class="math notranslate nohighlight">\(\beta\)</span> and <span class="math notranslate nohighlight">\(\gamma\)</span> angles by setting beta_gamma to True</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ex</span><span class="o">.</span><span class="n">pwdavg</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;Axes3DSubplot:xlabel=&#39;x&#39;, ylabel=&#39;y&#39;&gt;
+</pre></div>
+</div>
+<img alt="../_images/Ch1_expsys_23_1.png" src="../_images/Ch1_expsys_23_1.png" />
+</div>
+</div>
+</section>
+<section id="the-spin-operators">
+<h2>The Spin Operators<a class="headerlink" href="#the-spin-operators" title="Permalink to this headline">#</a></h2>
+<p>The spin operators are used to build the Hamiltonian for a given spin system. They are found in ex.Op, although one can also create a spin-operators from sl.SpinOp, with a list of spins as input. ex.Op contains basic information about the operators:</p>
+<ul class="simple">
+<li><p>ex.Op.N: Number of spins</p></li>
+<li><p>ex.Op.S: Spin number</p></li>
+<li><p>ex.Op.Mult: Multiplicity of each spin (2*S+1)</p></li>
+<li><p>ex.Hlabels/ex.Llabels: Latex labels for each spin state in Hilbert and Liouville space</p></li>
+<li><p>ex.state_index: List of states of each spin in the density matrix (used for spin-exchange)
+To access the spin matrices themselves, we first provide an index to go the desired spin, and then choose the spin matrix that we want:</p></li>
+</ul>
+<p>Possible matrices: x, y, z, alpha, beta, m (<span class="math notranslate nohighlight">\(I^-\)</span>), p (<span class="math notranslate nohighlight">\(I^+\)</span>), eye (identity matrix)</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ex</span><span class="o">.</span><span class="n">Op</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">x</span>  <span class="c1">#Example: x operator for the 0th spin</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[0. +0.j, 0. +0.j, 0.5+0.j, 0. +0.j],
+       [0. +0.j, 0. +0.j, 0. +0.j, 0.5+0.j],
+       [0.5+0.j, 0. +0.j, 0. +0.j, 0. +0.j],
+       [0. +0.j, 0.5+0.j, 0. +0.j, 0. +0.j]])
+</pre></div>
+</div>
+</div>
+</div>
+<p>We also have access to the coherence order of each element of the matrix (ex.Op[0].coherence_order).</p>
+<p>Finally, we have access to the matrices for spherical tensors, via e.g. ex.Op[0].T. T can be be indexed to give the rank 0, rank 1, and rank 2 (if spin-1 or higher) operators. The resulting list contains the operators running from the lowest to highest index.</p>
+<p>So, ex.Op[0].T[1][0] returns <span class="math notranslate nohighlight">\(T_{1,-1}^{(0)}\)</span>, that is the rank <span class="math notranslate nohighlight">\(m=-1\)</span> component of the rank-1 tensor for spin 0.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ex</span><span class="o">.</span><span class="n">Op</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">T</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="c1">#eg m=-1 component of the rank-1 tensor for spin 0</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[-0.        +0.j, -0.        +0.j, -0.70710678+0.j,
+        -0.        +0.j],
+       [-0.        +0.j, -0.        +0.j, -0.        +0.j,
+        -0.70710678+0.j],
+       [-0.        +0.j, -0.        +0.j, -0.        +0.j,
+        -0.        +0.j],
+       [-0.        +0.j, -0.        +0.j, -0.        +0.j,
+        -0.        +0.j]])
+</pre></div>
+</div>
+</div>
+</div>
+<p>However, what we usually need for building Hamiltonians is the rank-2 spherical tensors. For 1-spin tensors, these are obtained first by changing the mode of the spherical tensor to ‘B0_LF’, for example:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ex</span><span class="o">.</span><span class="n">Op</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">T</span><span class="o">.</span><span class="n">set_mode</span><span class="p">(</span><span class="s1">&#39;B0_LF&#39;</span><span class="p">)</span>
+<span class="n">ex</span><span class="o">.</span><span class="n">Op</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">T</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[array([[0., 0., 0., 0.],
+        [0., 0., 0., 0.],
+        [0., 0., 0., 0.],
+        [0., 0., 0., 0.]]), array([[0. +0.j, 0. +0.j, 0. +0.j, 0. +0.j],
+        [0. +0.j, 0. +0.j, 0. +0.j, 0. +0.j],
+        [0.5+0.j, 0. +0.j, 0. +0.j, 0. +0.j],
+        [0. +0.j, 0.5+0.j, 0. +0.j, 0. +0.j]]), array([[ 0.40824829+0.j,  0.        +0.j,  0.        +0.j,
+          0.        +0.j],
+        [ 0.        +0.j,  0.40824829+0.j,  0.        +0.j,
+          0.        +0.j],
+        [ 0.        +0.j,  0.        +0.j, -0.40824829+0.j,
+         -0.        +0.j],
+        [ 0.        +0.j,  0.        +0.j, -0.        +0.j,
+         -0.40824829+0.j]]), array([[-0. +0.j, -0. +0.j, -0.5+0.j, -0. +0.j],
+        [-0. +0.j, -0. +0.j, -0. +0.j, -0.5+0.j],
+        [-0. +0.j, -0. +0.j, -0. +0.j, -0. +0.j],
+        [-0. +0.j, -0. +0.j, -0. +0.j, -0. +0.j]]), array([[0., 0., 0., 0.],
+        [0., 0., 0., 0.],
+        [0., 0., 0., 0.],
+        [0., 0., 0., 0.]])]
+</pre></div>
+</div>
+</div>
+</div>
+<p>For spin-spin interactions, we need to multiply the spin-operators together and also define whether both spins are in the rotating frame or lab frame. For example, if the first spin is in the lab frame and second in the rotating frame, we use:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">T2spin</span><span class="o">=</span><span class="n">ex</span><span class="o">.</span><span class="n">Op</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">T</span><span class="o">*</span><span class="n">ex</span><span class="o">.</span><span class="n">Op</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">T</span>
+<span class="n">T2spin</span><span class="o">.</span><span class="n">set_mode</span><span class="p">(</span><span class="s1">&#39;LF_RF&#39;</span><span class="p">)</span>
+<span class="n">T2spin</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[array([[0., 0., 0., 0.],
+        [0., 0., 0., 0.],
+        [0., 0., 0., 0.],
+        [0., 0., 0., 0.]]),
+ array([[-0.  +0.j, -0.  +0.j, -0.25+0.j, -0.  +0.j],
+        [-0.  +0.j, -0.  +0.j, -0.  +0.j,  0.25-0.j],
+        [-0.  +0.j, -0.  +0.j, -0.  +0.j, -0.  +0.j],
+        [-0.  +0.j, -0.  +0.j, -0.  +0.j, -0.  +0.j]]),
+ array([[ 0.20412415+0.j,  0.        +0.j,  0.        +0.j,
+          0.        +0.j],
+        [ 0.        +0.j, -0.20412415+0.j,  0.        +0.j,
+          0.        +0.j],
+        [ 0.        +0.j,  0.        +0.j, -0.20412415+0.j,
+          0.        +0.j],
+        [ 0.        +0.j,  0.        +0.j,  0.        +0.j,
+          0.20412415+0.j]]),
+ array([[ 0.  +0.j,  0.  +0.j,  0.  +0.j,  0.  +0.j],
+        [ 0.  +0.j,  0.  +0.j,  0.  +0.j,  0.  +0.j],
+        [ 0.25+0.j,  0.  +0.j,  0.  +0.j,  0.  +0.j],
+        [ 0.  +0.j, -0.25+0.j,  0.  +0.j,  0.  +0.j]]),
+ array([[0., 0., 0., 0.],
+        [0., 0., 0., 0.],
+        [0., 0., 0., 0.],
+        [0., 0., 0., 0.]])]
+</pre></div>
+</div>
+</div>
+</div>
+<p>If both spins are in the rotating frame, then we need to define if this is a homonuclear (‘homo’) or heteronuclear (‘het’) interaction. If we compare the results, we see that off-diagonal terms emerge for the homonuclear interaction, but not for the heternuclear interaction.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">T2spin</span><span class="o">.</span><span class="n">set_mode</span><span class="p">(</span><span class="s1">&#39;homo&#39;</span><span class="p">)</span>
+<span class="n">T2spin</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[array([[0., 0., 0., 0.],
+        [0., 0., 0., 0.],
+        [0., 0., 0., 0.],
+        [0., 0., 0., 0.]]), array([[0., 0., 0., 0.],
+        [0., 0., 0., 0.],
+        [0., 0., 0., 0.],
+        [0., 0., 0., 0.]]), array([[ 0.20412415+0.j,  0.        +0.j,  0.        +0.j,
+          0.        +0.j],
+        [ 0.        +0.j, -0.20412415+0.j, -0.20412415+0.j,
+          0.        +0.j],
+        [ 0.        +0.j, -0.20412415+0.j, -0.20412415+0.j,
+          0.        +0.j],
+        [ 0.        +0.j,  0.        +0.j,  0.        +0.j,
+          0.20412415+0.j]]), array([[0., 0., 0., 0.],
+        [0., 0., 0., 0.],
+        [0., 0., 0., 0.],
+        [0., 0., 0., 0.]]), array([[0., 0., 0., 0.],
+        [0., 0., 0., 0.],
+        [0., 0., 0., 0.],
+        [0., 0., 0., 0.]])]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">T2spin</span><span class="o">.</span><span class="n">set_mode</span><span class="p">(</span><span class="s1">&#39;het&#39;</span><span class="p">)</span>
+<span class="n">T2spin</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[array([[0., 0., 0., 0.],
+        [0., 0., 0., 0.],
+        [0., 0., 0., 0.],
+        [0., 0., 0., 0.]]), array([[0., 0., 0., 0.],
+        [0., 0., 0., 0.],
+        [0., 0., 0., 0.],
+        [0., 0., 0., 0.]]), array([[ 0.20412415+0.j,  0.        +0.j,  0.        +0.j,
+          0.        +0.j],
+        [ 0.        +0.j, -0.20412415+0.j,  0.        +0.j,
+          0.        +0.j],
+        [ 0.        +0.j,  0.        +0.j, -0.20412415+0.j,
+          0.        +0.j],
+        [ 0.        +0.j,  0.        +0.j,  0.        +0.j,
+          0.20412415+0.j]]), array([[0., 0., 0., 0.],
+        [0., 0., 0., 0.],
+        [0., 0., 0., 0.],
+        [0., 0., 0., 0.]]), array([[0., 0., 0., 0.],
+        [0., 0., 0., 0.],
+        [0., 0., 0., 0.],
+        [0., 0., 0., 0.]])]
 </pre></div>
 </div>
 </div>
@@ -586,7 +886,7 @@ Interactions:
         <i class="fas fa-angle-left"></i>
         <div class="prev-next-info">
             <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title"><font color="red">SLEEPY basics</font></p>
+            <p class="prev-next-title"><font color="maroon">SLEEPY basics</font></p>
         </div>
     </a>
     <a class='right-next' id="next-link" href="../Ch2_SolutionNMR.html" title="next page">

@@ -11,7 +11,11 @@ parts:
   chapters:
   - file: Ch1_SLEEPY_basics
     sections:
+    - file: Chapter1/Ch1_basics
+    - file: Chapter1/Ch1_Objects
     - file: Chapter1/Ch1_expsys
+    - file: Chapter1/Ch1_Liouvillian
+    - file: Chapter1/Ch1_Propagation
   - file: Ch2_SolutionNMR
   - file: Ch3_DynamicsSolids
   - file: Ch4_DNP

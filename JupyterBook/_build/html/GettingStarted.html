@@ -53,7 +53,7 @@ const thebe_selector_output = ".output, .cell_output"
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="SLEEPY basics" href="Ch1_SLEEPY_basics.html" />
-    <link rel="prev" title="Welcome to the pyDIFRATE tutorial" href="intro.html" />
+    <link rel="prev" title="Welcome to the SLEEPY tutorial" href="intro.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
     
@@ -109,7 +109,7 @@ const thebe_selector_output = ".output, .cell_output"
         <ul class="nav bd-sidenav bd-sidenav__home-link">
             <li class="toctree-l1">
                 <a class="reference internal" href="intro.html">
-                    Welcome to the pyDIFRATE tutorial
+                    Welcome to the SLEEPY tutorial
                 </a>
             </li>
         </ul>
@@ -128,12 +128,26 @@ const thebe_selector_output = ".output, .cell_output"
  </span>
 </p>
 <ul class="nav bd-sidenav">
- <li class="toctree-l1">
+ <li class="toctree-l1 has-children">
   <a class="reference internal" href="Ch1_SLEEPY_basics.html">
    <font color="maroon">
     SLEEPY basics
    </font>
   </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
+  <label for="toctree-checkbox-1">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="Chapter1/Ch1_expsys.html">
+     <font color="#0093AF">
+      Experimental Settings and Spin-System Definition
+     </font>
+    </a>
+   </li>
+  </ul>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="Ch2_SolutionNMR.html">
@@ -441,7 +455,7 @@ title="Print to PDF"
 </section>
 <section id="google-colab">
 <h2>Google Colab<a class="headerlink" href="#google-colab" title="Permalink to this headline">#</a></h2>
-<p>Colab has the advantage that there is no local installation requirement, with the base requirements for Python already setup. The notebooks that we provide include a few lines at the beginning that install the additional requirements for MDAnalysis and NGL viewer, so you don’t have to know how to set it up– just execute the cells (shift+enter executes a cell).</p>
+<p>Colab has the advantage that there is no local installation requirement, with the basic Python modules already setup. The notebooks that we provide include a few lines at the beginning that download SLEEPY and import it.</p>
 <p>For all notebooks in the tutorial, there is a button near the top that redirects you to Google Colab, where you can then edit and execute contents of the notebook: <img alt="" src="https://colab.research.google.com/assets/colab-badge.svg" /></p>
 </section>
 </section>
@@ -477,7 +491,7 @@ title="Print to PDF"
         <i class="fas fa-angle-left"></i>
         <div class="prev-next-info">
             <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title">Welcome to the pyDIFRATE tutorial</p>
+            <p class="prev-next-title">Welcome to the SLEEPY tutorial</p>
         </div>
     </a>
     <a class='right-next' id="next-link" href="Ch1_SLEEPY_basics.html" title="next page">

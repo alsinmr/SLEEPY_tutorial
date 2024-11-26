@@ -16,7 +16,7 @@ import numpy as np
 
 # ## Defining nuclei and experimental conditions
 
-# The experimental system defines the magnetic field, the nuclei in the spin-system, the spinning rate, the temperature, the rotor angle, the powder average, and the number of gamma angles calculated during one rotor period. Except for the field and nuclei, these all have default values and only need to be provided to change the default values.
+# The experimental system defines the magnetic field, the nuclei in the spin-system, the spinning rate, the temperature, the rotor angle, the powder average, and the number of gamma angles calculated during one rotor period. Except for the field and nuclei, these all have default values and only need to be provided if other values are needed.
 # 
 # - v0H: The magnetic field strength, given as the $^1$H frequency in MHz (required, unless B0 provided)
 # - B0: The magnetic field strength in Tesla (required, unless v0H provided)
@@ -60,18 +60,19 @@ ex=sl.ExpSys(v0H=600,Nucs=['1H','13C'])
 # - hyperfine: Specify Axx, Ayy, and Azz. If all entries are equal, will be treated as an isotropic interaction. "euler" may be optionally provided.
 # - quadrupole: Specify delta in Hz (CHECK THIS INPUT). Optionally specify eta and euler
 # - g: Electron g-tensor. Specify gxx, gyy, and gzz, and optionally euler.
+# - ZF: Electron zero-field (still missing)
 # 
 
 # In[4]:
 
 
-delta=sl.Tools.dipole_coupling(.105,'1H','13C')  #Calculate H-C dipole for 1.05 Angstrom distance
+delta=sl.Tools.dipole_coupling(.109,'1H','13C')  #Calculate H-C dipole for 1.05 Angstrom distance
 ex.set_inter('dipole',i0=0,i1=1,delta=delta) #H-C dipole coupling
 ex.set_inter('CSA',i=1,delta=100,eta=1) #13C CSA
 _=ex.set_inter('CS',i=0,ppm=10) #1H isotropic chemical shift
 
 
-# Note that when setting an interaction, ex returns itself. This lets us string together multiple commands, for example, the following line will achieve the same interactions as above.
+# Note that when setting an interaction, ex returns itself. This lets us string together multiple commands, for example, the following line will achieve the same interactions as above. Note that if an interaction is defined twice for the same spin or spins, the former definition will be overwritten.
 
 # In[5]:
 
@@ -87,8 +88,135 @@ _=ex.set_inter('dipole',i0=0,i1=1,delta=delta).set_inter('CSA',i=1,delta=100,eta
 ex
 
 
-# In[ ]:
+# ## Functions and contents of ExpSys
+
+# The ExpSys object, ex, contains various useful pieces of information (both to the user, and the program). For example:
+# 
+# - ex.B0: Magnetic field
+# - ex.Nucs: Nuclei/electrons in spin-system
+# - ex.S: Spins of nuclei in spin-system
+# - ex.Peq: Thermal polarization of spins in spin-system (based on Larmor frequency only)
+# - ex.gamma: Gyromagnetic ratio of spins in spin-system
+# - ex.v0: Larmor frequency of spins in spin-system
+# - ex.vr: Rotor frequency
+# - ex.taur: Rotor period
+# - ex.rotor_angle: rotor angle
+# - ex.inter: List of all interactions entered
+# 
+# It also contains a number of functions
+# 
+# - ex.copy: Returns a copy of ex (useful for building exchange calculations, where interactions may change due to exchange, but things like the field, Nuclei, etc. should remain fixed)
+# - ex.Hamiltonian: Returns a Hamiltonian object for the spin-system
+# - ex.Liouvillian: Returns a Liouvillian object for the spin-system
+# 
+# Finally, it contains important objects
+# 
+# - ex.pwdavg: Powder average object for the spin-system. Note, if all interactions are isotropic, when a Liouvillian or Hamiltonian is created, the powder average will be replaced with a 1-element powder-average.
+# - ex.Op: Spin-operator object, which contains the spin-operators for the spin-system
+
+# ## The powder average
+
+# The powder average can be changed, by simply replacing the powder average object (can be generated from sl.PowderAvg), or by running the function pwdavg.set_pwd_type. Note that this needs to be done before calculating propagators.
+# ```
+# ex.pwdavg=sl.PowderAvg('rep144',gamma_encoded=True)
+# ex.pwdavg.set_powder_type('rep144',gamma_encoded=True)
+# ```
+# Both would set the powder average to a repulsion powder average with 144 alpha and beta angles. Setting gamma_encode to True will skip the average over gamma_angles, which speeds up some calculations considerably, but will return incorrect results for pulse sequences that are not gamma encoded (e.g. REDOR).
+# 
+# The powder average object contains useful information about how to execute the powder average. For example:
+# - pwdavg.PwdType : Type of powder average used
+# - pwdavg.N : Number of angles in the powder average
+# - pwdavg.alpha : alpha angles
+# - pwdavg.beta : beta angles
+# - pwdavg.gamma : gamma angles
+# - pwdavg.weight : weight to use when summing the powder average
+# - pwdavg.gamma_encoded : Boolean, determines whether averaging over gamma is skipped (cannot be set except at initialization, or when running pwdavg.set_pwd_type
+
+# In[7]:
 
 
+ex.pwdavg.set_powder_type('rep256')
 
+
+# Typing ex.pwdavg at the command line will provide basic information about the powder average
+
+# In[8]:
+
+
+ex.pwdavg
+
+
+# The powder average can also be plotted. By default, this plots the $\alpha$ and $\beta$ angles, but can be switched to $\beta$ and $\gamma$ angles by setting beta_gamma to True
+
+# In[9]:
+
+
+ex.pwdavg.plot()
+
+
+# ## The Spin Operators
+
+# The spin operators are used to build the Hamiltonian for a given spin system. They are found in ex.Op, although one can also create a spin-operators from sl.SpinOp, with a list of spins as input. ex.Op contains basic information about the operators:
+# - ex.Op.N: Number of spins
+# - ex.Op.S: Spin number
+# - ex.Op.Mult: Multiplicity of each spin (2*S+1)
+# - ex.Hlabels/ex.Llabels: Latex labels for each spin state in Hilbert and Liouville space
+# - ex.state_index: List of states of each spin in the density matrix (used for spin-exchange)
+# To access the spin matrices themselves, we first provide an index to go the desired spin, and then choose the spin matrix that we want:
+# 
+# Possible matrices: x, y, z, alpha, beta, m ($I^-$), p ($I^+$), eye (identity matrix)
+# 
+# 
+
+# In[10]:
+
+
+ex.Op[0].x  #Example: x operator for the 0th spin
+
+
+# We also have access to the coherence order of each element of the matrix (ex.Op[0].coherence_order).
+# 
+# Finally, we have access to the matrices for spherical tensors, via e.g. ex.Op[0].T. T can be be indexed to give the rank 0, rank 1, and rank 2 (if spin-1 or higher) operators. The resulting list contains the operators running from the lowest to highest index.
+# 
+# So, ex.Op[0].T[1][0] returns $T_{1,-1}^{(0)}$, that is the rank $m=-1$ component of the rank-1 tensor for spin 0.
+
+# In[11]:
+
+
+ex.Op[0].T[1][0] #eg m=-1 component of the rank-1 tensor for spin 0
+
+
+# However, what we usually need for building Hamiltonians is the rank-2 spherical tensors. For 1-spin tensors, these are obtained first by changing the mode of the spherical tensor to 'B0_LF', for example:
+
+# In[12]:
+
+
+ex.Op[0].T.set_mode('B0_LF')
+ex.Op[0].T[2]
+
+
+# For spin-spin interactions, we need to multiply the spin-operators together and also define whether both spins are in the rotating frame or lab frame. For example, if the first spin is in the lab frame and second in the rotating frame, we use:
+
+# In[13]:
+
+
+T2spin=ex.Op[0].T*ex.Op[1].T
+T2spin.set_mode('LF_RF')
+T2spin[2]
+
+
+# If both spins are in the rotating frame, then we need to define if this is a homonuclear ('homo') or heteronuclear ('het') interaction. If we compare the results, we see that off-diagonal terms emerge for the homonuclear interaction, but not for the heternuclear interaction.
+
+# In[14]:
+
+
+T2spin.set_mode('homo')
+T2spin[2]
+
+
+# In[15]:
+
+
+T2spin.set_mode('het')
+T2spin[2]
 

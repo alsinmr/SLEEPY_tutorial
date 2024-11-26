@@ -1,0 +1,775 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>Propagators and Sequences &#8212; SLEEPY Tutorial</title>
+    
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=5115cc725059bd94278eecd172e13a965bf8f5a9" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.b7bb847fb20b106c3d81b95245e65545.min.css" />
+    
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Solution NMR" href="../Ch2_SolutionNMR.html" />
+    <link rel="prev" title="Hamiltonians and Liouvillians" href="Ch1_Liouvillian.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
+<!-- Checkboxes to toggle the left sidebar -->
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
+<label class="overlay overlay-navbar" for="__navigation">
+    <div class="visually-hidden">Toggle navigation sidebar</div>
+</label>
+<!-- Checkboxes to toggle the in-page toc -->
+<input type="checkbox" class="sidebar-toggle" name="__page-toc" id="__page-toc" aria-label="Toggle in-page Table of Contents">
+<label class="overlay overlay-pagetoc" for="__page-toc">
+    <div class="visually-hidden">Toggle in-page Table of Contents</div>
+</label>
+<!-- Headers at the top -->
+<div class="announcement header-item noprint"></div>
+<div class="header header-item noprint"></div>
+
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<!-- Sidebar -->
+<div class="bd-sidebar noprint" id="site-navigation">
+    <div class="bd-sidebar__content">
+        <div class="bd-sidebar__top"><div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../index.html">
+      
+        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+        
+      
+      
+      <img src="../_static/logo.png" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">SLEEPY Tutorial</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../intro.html">
+                    Welcome to the SLEEPY tutorial
+                </a>
+            </li>
+        </ul>
+        <ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../GettingStarted.html">
+   <font color="maroon">
+    Getting Started
+   </font>
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  Tutorial
+ </span>
+</p>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1 current active has-children">
+  <a class="reference internal" href="../Ch1_SLEEPY_basics.html">
+   <font color="maroon">
+    SLEEPY basics
+   </font>
+  </a>
+  <input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
+  <label for="toctree-checkbox-1">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul class="current">
+   <li class="toctree-l2">
+    <a class="reference internal" href="Ch1_basics.html">
+     A Quick Start
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="Ch1_Objects.html">
+     <font color="maroon">
+      Objects
+     </font>
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="Ch1_expsys.html">
+     <font color="#0093AF">
+      Experimental Settings and Spin-System Definition
+     </font>
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="Ch1_Liouvillian.html">
+     <font color="#0093AF">
+      Hamiltonians and Liouvillians
+     </font>
+    </a>
+   </li>
+   <li class="toctree-l2 current active">
+    <a class="current reference internal" href="#">
+     <font color="#0093AF">
+      Propagators and Sequences
+     </font>
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../Ch2_SolutionNMR.html">
+   <font color="maroon">
+    Solution NMR
+   </font>
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../Ch3_DynamicsSolids.html">
+   <font color="maroon">
+    Dynamics in Solids
+   </font>
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../Ch4_DNP.html">
+   <font color="maroon">
+    Dynamic Nuclear Polarization
+   </font>
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../Ch5_ParamagneticEffects.html">
+   <font color="maroon">
+    Paramagnetic Effects
+   </font>
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav></div>
+        <div class="bd-sidebar__bottom">
+             <!-- To handle the deprecated key -->
+            
+            <div class="navbar_extra_footer">
+            Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+            </div>
+            
+        </div>
+    </div>
+    <div id="rtd-footer-container"></div>
+</div>
+
+
+          
+
+
+          
+<!-- A tiny helper pixel to detect if we've scrolled -->
+<div class="sbt-scroll-pixel-helper"></div>
+<!-- Main content -->
+<div class="col py-0 content-container">
+    
+    <div class="header-article row sticky-top noprint">
+        
+
+
+
+<div class="col py-1 d-flex header-article-main">
+    <div class="header-article__left">
+        
+        <label for="__navigation"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="right"
+title="Toggle navigation"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-bars"></i>
+  </span>
+
+</label>
+
+        
+    </div>
+    <div class="header-article__right">
+<div class="menu-dropdown menu-dropdown-launch-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Launch interactive content">
+      <i class="fas fa-rocket"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://mybinder.org/v2/gh/alsinmr/SLEEPY_tutorial/master?urlpath=tree/JupyterBook/Chapter1/Ch1_Propagation.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Launch on Binder"
+>
+  
+
+<span class="headerbtn__icon-container">
+  
+    <img src="../_static/images/logo_binder.svg">
+  </span>
+<span class="headerbtn__text-container">Binder</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<button onclick="toggleFullScreen()"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="bottom"
+title="Fullscreen mode"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+<div class="menu-dropdown menu-dropdown-repository-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Source repositories">
+      <i class="fab fa-github"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://github.com/alsinmr/SLEEPY_tutorial/"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Source repository"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="headerbtn__text-container">repository</span>
+</a>
+
+      </li>
+      
+      <li>
+        <a href="https://github.com/alsinmr/SLEEPY_tutorial//issues/new?title=Issue%20on%20page%20%2FChapter1/Ch1_Propagation.html&body=Your%20issue%20content%20here."
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Open an issue"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="headerbtn__text-container">open issue</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<div class="menu-dropdown menu-dropdown-download-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Download this page">
+      <i class="fas fa-download"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="../_sources/Chapter1/Ch1_Propagation.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Download source file"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="headerbtn__text-container">.ipynb</span>
+</a>
+
+      </li>
+      
+      <li>
+        
+<button onclick="printPdf(this)"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="left"
+title="Print to PDF"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="headerbtn__text-container">.pdf</span>
+</button>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+<label for="__page-toc"
+  class="headerbtn headerbtn-page-toc"
+  
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-list"></i>
+  </span>
+
+</label>
+
+    </div>
+</div>
+
+<!-- Table of contents -->
+<div class="col-md-3 bd-toc show noprint">
+    <div class="tocsection onthispage pt-5 pb-3">
+        <i class="fas fa-list"></i> Contents
+    </div>
+    <nav id="bd-toc-nav" aria-label="Page">
+        <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#setup">
+   Setup
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#propagators-without-pulses">
+   Propagators without pulses
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#special-propagators">
+     Special propagators
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#sequences">
+   Sequences
+  </a>
+ </li>
+</ul>
+
+    </nav>
+</div>
+    </div>
+    <div class="article row">
+        <div class="col pl-md-3 pl-lg-5 content-container">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1><font  color = "#0093AF"> Propagators and Sequences</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#setup">
+   Setup
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#propagators-without-pulses">
+   Propagators without pulses
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#special-propagators">
+     Special propagators
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#sequences">
+   Sequences
+  </a>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            <main id="main-content" role="main">
+                
+              <div>
+                
+  <section class="tex2jax_ignore mathjax_ignore" id="font-color-0093af-propagators-and-sequences">
+<h1><font  color = "#0093AF"> Propagators and Sequences<a class="headerlink" href="#font-color-0093af-propagators-and-sequences" title="Permalink to this headline">#</a></h1>
+<p>Propagators are responsible for moving the density matrix, <span class="math notranslate nohighlight">\(\hat{\rho}(t)\)</span> forward in time in magnetic resonance simulations. For a constant Liouvillian, the propagator, <span class="math notranslate nohighlight">\(\hat{\hat{U}}(t,t+\Delta t)\)</span> is given by
+\begin{equation}
+\hat{\hat{U}}(t,t+\Delta t)=\exp(\hat{\hat{L}}(t)\Delta t)
+\end{equation}
+such that
+\begin{equation}
+\hat{\rho}(t+\Delta t)=\hat{\hat{U}}(t,t+\Delta t)\hat{\rho}(t)
+\end{equation}
+Of course, the Liouvillian is often not constant, either due to rotor spinning or a pulse sequence. In this case, the propagator is constructed as a product of piecewise constant propagators.</p>
+<p>\begin{equation}
+U(t_0,t_n)=U(t_{n-1},t_{n})*U(t_{n-2},t_{n-1)})…U(t_1,t_2)*U(t_0,t_1)
+\end{equation}</p>
+<p>SLEEPY handles the construction of the propagator for a time-dependent Liouvillian from propagators generated from piecewise-constant Liouvillians internally. Here, we start without pulses, where time-dependence arises only from rotor spinning.</p>
+<section id="setup">
+<h2>Setup<a class="headerlink" href="#setup" title="Permalink to this headline">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">os</span>
+<span class="n">os</span><span class="o">.</span><span class="n">chdir</span><span class="p">(</span><span class="s1">&#39;../../../&#39;</span><span class="p">)</span>
+<span class="kn">import</span> <span class="nn">SLEEPY</span> <span class="k">as</span> <span class="nn">sl</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ex</span><span class="o">=</span><span class="n">sl</span><span class="o">.</span><span class="n">ExpSys</span><span class="p">(</span><span class="n">v0H</span><span class="o">=</span><span class="mi">600</span><span class="p">,</span><span class="n">Nucs</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;1H&#39;</span><span class="p">,</span><span class="s1">&#39;13C&#39;</span><span class="p">],</span><span class="n">vr</span><span class="o">=</span><span class="mi">60000</span><span class="p">)</span> 
+<span class="n">ex</span><span class="o">.</span><span class="n">set_inter</span><span class="p">(</span><span class="s1">&#39;dipole&#39;</span><span class="p">,</span><span class="n">i0</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">i1</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">delta</span><span class="o">=</span><span class="mi">44000</span><span class="p">)</span><span class="o">.</span><span class="n">set_inter</span><span class="p">(</span><span class="s1">&#39;CSA&#39;</span><span class="p">,</span><span class="n">i</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">delta</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span><span class="n">eta</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span>\
+    <span class="n">set_inter</span><span class="p">(</span><span class="s1">&#39;CS&#39;</span><span class="p">,</span><span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">ppm</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span> <span class="c1">#Add a dipole, CSA to 13C, and CS to 1H</span>
+
+<span class="n">ex1</span><span class="o">=</span><span class="n">ex</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span> <span class="c1">#Copy the above</span>
+<span class="n">ex1</span><span class="o">.</span><span class="n">set_inter</span><span class="p">(</span><span class="s1">&#39;dipole&#39;</span><span class="p">,</span><span class="n">i0</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">i1</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">delta</span><span class="o">=</span><span class="mi">44000</span><span class="p">,</span><span class="n">euler</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">30</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">/</span><span class="mi">180</span><span class="p">,</span><span class="mi">0</span><span class="p">])</span>
+
+<span class="n">L</span><span class="o">=</span><span class="n">sl</span><span class="o">.</span><span class="n">Liouvillian</span><span class="p">(</span><span class="n">ex</span><span class="p">,</span><span class="n">ex1</span><span class="p">,</span><span class="n">kex</span><span class="o">=</span><span class="n">sl</span><span class="o">.</span><span class="n">Tools</span><span class="o">.</span><span class="n">twoSite_kex</span><span class="p">(</span><span class="mf">1e-5</span><span class="p">))</span> <span class="c1">#Here, we produce the exchange matrix with twoSite_kex</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="propagators-without-pulses">
+<h2>Propagators without pulses<a class="headerlink" href="#propagators-without-pulses" title="Permalink to this headline">#</a></h2>
+<p>We first generate the default propagator from the Liouvillian. These propagators do not have contributions from applied radio-frequency fields.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">U</span><span class="o">=</span><span class="n">L</span><span class="o">.</span><span class="n">U</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>U has a few key features: it has a starting time relative to the rotor period (t0), and a length (Dt). If unspecified when creating the propagator, the length is one rotor period (L.taur), since this helps makes computational speed faster. Defining Dt will override this length. If spinning is not included, then Dt must be specified since the rotor period is no longer defined (note that even if spinning is specified in ex, if no anisotropic interactions are defined, then the rotor period becomes undefined and Dt must be specified).</p>
+<p>U also has a starting time relative to the rotor period.</p>
+<p>Unless we are not spinning, it is important that when multiplying propagators, that the end of the propagator to the right (the first to be applied in time) ends when the propagator to the left starts. That is, to calculate</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">U1</span><span class="o">*</span><span class="n">U0</span>
+</pre></div>
+</div>
+<p>we require that <code class="docutils literal notranslate"><span class="pre">U0.tf%U0.taur==U1.t0</span></code> (% is the modulo operator, so this is the same point in the rotor period, although it is ok if U0.tf is multiple rotor periods after U1.t0, as long as they are equal modulo taur. Note that ‘taur’ is available in most SLEEPY objects, although defaults to None (has no value) if spinning is not included.</p>
+<p>Note that while t0 may also be specified when a propagator is created, but if omitted, then t0 is set to ex.current_time (or L.expsys.current_time). ex.current_time is updated whenever a propagator is created, to match the time at the end of that propagator. Then, if propagators are created in the order in which they will be applied, they will always be created with the correct t0.</p>
+<p>A density matrix also has a time associated with it, and to multiply</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">U</span><span class="o">*</span><span class="n">rho</span>
+</pre></div>
+</div>
+<p>we require, similarly, that <code class="docutils literal notranslate"><span class="pre">U.t0==rho.t%rho.taur</span></code></p>
+<p>Note that the current_time may be reset using L.reset_prop_time(t), where the default time, t, is zero.</p>
+<p>We make an example where we generate two propagators, and see how their initial times are defined.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">L</span><span class="o">.</span><span class="n">reset_prop_time</span><span class="p">()</span>
+<span class="n">U0</span><span class="o">=</span><span class="n">L</span><span class="o">.</span><span class="n">U</span><span class="p">(</span><span class="n">Dt</span><span class="o">=</span><span class="n">L</span><span class="o">.</span><span class="n">taur</span><span class="o">/</span><span class="mi">3</span><span class="p">)</span>
+<span class="n">U1</span><span class="o">=</span><span class="n">L</span><span class="o">.</span><span class="n">U</span><span class="p">(</span><span class="n">Dt</span><span class="o">=</span><span class="n">L</span><span class="o">.</span><span class="n">taur</span><span class="o">*</span><span class="mi">2</span><span class="o">/</span><span class="mi">3</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;U0: t0=</span><span class="si">{</span><span class="n">U0</span><span class="o">.</span><span class="n">t0</span><span class="o">*</span><span class="mf">1e6</span><span class="si">:</span><span class="s1">.3f</span><span class="si">}</span><span class="s1"> us, tf=</span><span class="si">{</span><span class="n">U0</span><span class="o">.</span><span class="n">tf</span><span class="o">*</span><span class="mf">1e6</span><span class="si">:</span><span class="s1">.3f</span><span class="si">}</span><span class="s1"> us, Dt=</span><span class="si">{</span><span class="n">U0</span><span class="o">.</span><span class="n">Dt</span><span class="o">*</span><span class="mf">1e6</span><span class="si">:</span><span class="s1">.3f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;U1: t0=</span><span class="si">{</span><span class="n">U1</span><span class="o">.</span><span class="n">t0</span><span class="o">*</span><span class="mf">1e6</span><span class="si">:</span><span class="s1">.3f</span><span class="si">}</span><span class="s1"> us, tf=</span><span class="si">{</span><span class="n">U1</span><span class="o">.</span><span class="n">tf</span><span class="o">*</span><span class="mf">1e6</span><span class="si">:</span><span class="s1">.3f</span><span class="si">}</span><span class="s1"> us, Dt=</span><span class="si">{</span><span class="n">U1</span><span class="o">.</span><span class="n">Dt</span><span class="o">*</span><span class="mf">1e6</span><span class="si">:</span><span class="s1">.3f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>U0: t0=0.000 us, tf=5.556 us, Dt=5.556
+U1: t0=5.556 us, tf=16.667 us, Dt=11.111
+</pre></div>
+</div>
+</div>
+</div>
+<p>Note that while the first propagator has t0=0, the second starts at 5.556 <span class="math notranslate nohighlight">\(\mu\)</span>s, when the previous propagator ended. This happens because when U0 was created, ex.current_time was updated to match the end of U0. Then, we can easily take their product without have problems with mis-matched starting and ending times. When we do so, we get a propagator with length of one rotor period.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">U1</span><span class="o">*</span><span class="n">U0</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Propagator with length of 16.667 microseconds (t0=0.000,tf=16.667)
+Constructed from the following Liouvillian:
+	Liouvillian under the following conditions:
+		2-spin system (1H,13C)
+		B0 = 14.092 T (600.000 MHz 1H frequency)
+		rotor angle = 54.736 degrees
+		rotor frequency = 60.0 kHz
+		Temperature = 298 K
+		Powder Average: JCP59 with 99 angles
+	
+	The individual Hamiltonians have the following interactions
+		Hamiltonian #0
+			dipole between spins 0,1 with arguments:
+				(delta=44000.00)
+			CSA on spin 1 with arguments: (delta=100.00,eta=1.00)
+			CS on spin 0 with arguments: (ppm=10.00)
+		
+		Hamiltonian #1
+			CSA on spin 1 with arguments: (delta=100.00,eta=1.00)
+			CS on spin 0 with arguments: (ppm=10.00)
+			dipole between spins 0,1 with arguments:
+				(delta=44000.00,euler=[0.00,30.00,0.00])
+		
+		
+	Hamiltonians are coupled by exchange matrix:
+		array([[-50000.,  50000.],
+		       [ 50000., -50000.]])
+	
+&lt;SLEEPY.Propagator.Propagator object at 0x7fc2799e63c8&gt;
+</pre></div>
+</div>
+</div>
+</div>
+<p>Note that if we multiply U0 by itself, we get a warning, since the end of U0 is not the same time as the beginning of U0 (relative to the rotor period)</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">_</span><span class="o">=</span><span class="n">U0</span><span class="o">*</span><span class="n">U0</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/Users/albertsmith/Documents/GitHub/SLEEPY/Propagator.py:234: UserWarning: 
+First propagator ends at 5.555555555555556e-06 but second propagator starts at 0.0
+  warnings.warn(f&#39;\nFirst propagator ends at {U.tf%self.taur} but second propagator starts at {self.t0%U.taur}&#39;)
+</pre></div>
+</div>
+</div>
+</div>
+<p>As with the Hamiltonian and Liouvillian, propagators can also be plotted:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#U0.plot(mode=&#39;abs&#39;)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<section id="special-propagators">
+<h3>Special propagators<a class="headerlink" href="#special-propagators" title="Permalink to this headline">#</a></h3>
+<p>The Liouvillian can also produce propagators for <span class="math notranslate nohighlight">\(\delta\)</span>-pulses (i.e. pulses with zero length) and an identity propagator. Both types have zero length, and they can be multiplied with propagators ending at any time (they do acquire an initial time, but this is not checked when multiplying these types of propagators). The identity propagator does not have any effect on other propagators or density matrices, but is occasionally useful as a kind of propagator pre-allocation.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">Ueye</span><span class="o">=</span><span class="n">L</span><span class="o">.</span><span class="n">Ueye</span><span class="p">()</span>
+<span class="c1">#Ueye.plot(mode=&#39;re&#39;)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>A <span class="math notranslate nohighlight">\(\delta\)</span>-pulse propagator needs to be provided with a channel (‘13C’,’1H’, etc.) or a spin-index (0,1,2). The spin-index will apply the pulse just to one spin, even if there are other spins of the same nucleus type. Obviously this is unphysical, but can be useful for creating selective pulses without actually fully simulating them.</p>
+<p>The default flip angle for the <span class="math notranslate nohighlight">\(\delta\)</span>-pulse is a <span class="math notranslate nohighlight">\(\pi\)</span>-pulse with an ‘x’ phase, but adjusting phi (flip angle) and phase, any <span class="math notranslate nohighlight">\(\delta\)</span>-pulse may be obtained.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">Ud</span><span class="o">=</span><span class="n">L</span><span class="o">.</span><span class="n">Udelta</span><span class="p">(</span><span class="s1">&#39;13C&#39;</span><span class="p">,</span><span class="n">phi</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span><span class="n">phase</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span>  <span class="c1">#pi/2 y-pulse on 13C</span>
+<span class="c1">#Ud.plot(mode=&#39;re&#39;)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="sequences">
+<h2>Sequences<a class="headerlink" href="#sequences" title="Permalink to this headline">#</a></h2>
+<p>Of course, we would also like to be able to apply pulses for our propagators. This is achieved with the sequence object, which is also generated from the Liouvillian.</p>
+<p>Sequences are used to create propagators, although in some cases, propagators are only calculated internally within rho when used with a sequence.</p>
+<p>We initialize a sequence by calling L.Sequence(). Usually, when we add channels to the sequence, we define a time-axis while doing so, which will then define the length of the sequence. However, it is possible to use the sequence to just define the amplitude of a continuously applied field. In this case, under spinning, the sequence length then becomes one rotor period by default. If no spinning is used, then this case requires initializing the sequency with a length (<code class="docutils literal notranslate"><span class="pre">Dt=1e-3</span></code> would, for example, make a 1 ms sequence).</p>
+<p>Once a sequence is defined, we add channels to it. Channels may be added the usual way, by specifying the nucleus, but they may also be added to a specific spin by index.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">seq</span><span class="o">=</span><span class="n">L</span><span class="o">.</span><span class="n">Sequence</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>We start with a sequence that has no time axis, just a constant field applied to <span class="math notranslate nohighlight">\(^{13}\)</span>C, applied in the <em>y</em>-direction. We use <code class="docutils literal notranslate"><span class="pre">seq.plot()</span></code> to visualize the result.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">seq</span><span class="o">.</span><span class="n">add_channel</span><span class="p">(</span><span class="s1">&#39;13C&#39;</span><span class="p">,</span><span class="n">v1</span><span class="o">=</span><span class="mi">25000</span><span class="p">,</span><span class="n">phase</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">seq</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&lt;AxesSubplot:ylabel=&#39;$v_1$ / kHz&#39;&gt;,
+ &lt;AxesSubplot:xlabel=&#39;t / $\\mu$s&#39;, ylabel=&#39;$v_1$ / kHz&#39;&gt;]
+</pre></div>
+</div>
+<img alt="../_images/Ch1_Propagation_25_1.png" src="../_images/Ch1_Propagation_25_1.png" />
+</div>
+</div>
+<p>Alternatively, we may use pulses. We may overwrite the existing channels, or just create a new sequence (here we overwrite the <span class="math notranslate nohighlight">\(^{13}\)</span>C channel by calling it without any arguments (the default for v1 is 0). Note that the ‘add_channel’ function returns itself, so we can string together multiple calls to seq.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">v1</span><span class="o">=</span><span class="mi">150000</span>
+<span class="n">tpi</span><span class="o">=</span><span class="mi">1</span><span class="o">/</span><span class="n">v1</span><span class="o">/</span><span class="mi">2</span>
+<span class="n">t</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="n">L</span><span class="o">.</span><span class="n">taur</span><span class="o">/</span><span class="mi">2</span><span class="o">-</span><span class="n">tpi</span><span class="p">,</span><span class="n">L</span><span class="o">.</span><span class="n">taur</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span><span class="n">L</span><span class="o">.</span><span class="n">taur</span><span class="o">-</span><span class="n">tpi</span><span class="p">,</span><span class="n">L</span><span class="o">.</span><span class="n">taur</span><span class="p">]</span>
+<span class="n">seq</span><span class="o">.</span><span class="n">add_channel</span><span class="p">(</span><span class="s1">&#39;13C&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">add_channel</span><span class="p">(</span><span class="s1">&#39;1H&#39;</span><span class="p">,</span><span class="n">t</span><span class="o">=</span><span class="n">t</span><span class="p">,</span><span class="n">v1</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="n">v1</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="n">v1</span><span class="p">])</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&lt;AxesSubplot:ylabel=&#39;$v_1$ / kHz&#39;&gt;,
+ &lt;AxesSubplot:xlabel=&#39;t / $\\mu$s&#39;, ylabel=&#39;$v_1$ / kHz&#39;&gt;]
+</pre></div>
+</div>
+<img alt="../_images/Ch1_Propagation_27_1.png" src="../_images/Ch1_Propagation_27_1.png" />
+</div>
+</div>
+<p>Note that this setup lets us easily create shaped pulses by just providing a time axis and an amplitude.</p>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./Chapter1"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+            </main>
+            <footer class="footer-article noprint">
+                
+    <!-- Previous / next buttons -->
+<div class='prev-next-area'>
+    <a class='left-prev' id="prev-link" href="Ch1_Liouvillian.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title"><font  color = "#0093AF"> Hamiltonians and Liouvillians</p>
+        </div>
+    </a>
+    <a class='right-next' id="next-link" href="../Ch2_SolutionNMR.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title"><font color="maroon">Solution NMR</font></p>
+    </div>
+    <i class="fas fa-angle-right"></i>
+    </a>
+</div>
+            </footer>
+        </div>
+    </div>
+    <div class="footer-content row">
+        <footer class="col footer"><p>
+  
+    By Albert Smith<br/>
+  
+      &copy; Copyright 2025.<br/>
+</p>
+        </footer>
+    </div>
+    
+</div>
+
+
+      </div>
+    </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
+
+
+  </body>
+</html>
