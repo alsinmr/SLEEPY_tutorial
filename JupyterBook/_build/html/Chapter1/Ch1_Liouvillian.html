@@ -151,7 +151,7 @@ const thebe_selector_output = ".output, .cell_output"
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="Ch1_Objects.html">
-     <font color="maroon">
+     <font color="#0093AF">
       Objects
      </font>
     </a>
@@ -598,11 +598,14 @@ title="Print to PDF"
 <img alt="../_images/Ch1_Liouvillian_10_1.png" src="../_images/Ch1_Liouvillian_10_1.png" />
 </div>
 </div>
-<p>The Hamiltonian is built from the 5 rotating components of the Hamiltonian. If we have <span class="math notranslate nohighlight">\(n_\gamma\)</span> steps per rotor period, and we’re at the kth step, this is done as follows:
+<p>The Hamiltonian is built from the 5 rotating components of the Hamiltonian. If we have <span class="math notranslate nohighlight">\(n_\gamma\)</span> steps per rotor period, and we’re at the kth step, this is done as follows:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
 \begin{eqnarray}
-\phi&amp;=&amp;\exp(2\pi i k/n_\gamma) \nonumber \
+\phi&amp;=&amp;\exp(2\pi i k/n_\gamma) \nonumber \\
 \hat{H}&amp;=&amp;\phi^{-n}*\hat{H}_n
-\end{eqnarray}</p>
+\end{eqnarray}
+\end{split}\]</div>
 <p>The rotating components are obtained via the Hn function, where n (-2,-1,0,1,2) must be provided. For example, for the fifth element of the powder average, if we want the <span class="math notranslate nohighlight">\(n=-1\)</span> component, we would call:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -702,14 +705,20 @@ Type: larmor on spin 1
 </div>
 </div>
 </div>
-<p>The coherent Liouvillian is created by calculating
+<p>The coherent Liouvillian is created by calculating</p>
+<div class="math notranslate nohighlight">
+\[
 \begin{equation}
 \hat{\hat{L}}=i(\hat{H}\otimes\hat{\mathbf{1}}-\hat{\mathbf{1}}\otimes\hat{H})
-\end{equation}</p>
+\end{equation}
+\]</div>
 <p><span class="math notranslate nohighlight">\(\hat{\mathbf{1}}\)</span> is an identity matrix with the same dimensions as <span class="math notranslate nohighlight">\(\hat{H}\)</span>. In SLEEPY, we separate the individual components, such that we acquired</p>
-<p>\begin{equation}
+<div class="math notranslate nohighlight">
+\[
+\begin{equation}
 \hat{\hat{L}}_n=i(\hat{H}_n\otimes\hat{\mathbf{1}}-\hat{\mathbf{1}}\otimes\hat{H}_n)
-\end{equation}</p>
+\end{equation}
+\]</div>
 <section id="access-and-plot-the-liouvillian">
 <h3>Access and plot the Liouvillian<a class="headerlink" href="#access-and-plot-the-liouvillian" title="Permalink to this headline">#</a></h3>
 <p>Access to specific components of the Liouvillian and plotting use the same rules as for the Hamiltonian. For example, to access the 5th element of the powder average, and the <span class="math notranslate nohighlight">\(n=1\)</span> component of the coherent Liouvillian, we would use</p>
@@ -823,15 +832,18 @@ Type: larmor on spin 1
 <img alt="../_images/Ch1_Liouvillian_40_1.png" src="../_images/Ch1_Liouvillian_40_1.png" />
 </div>
 </div>
-<p>However, on its own, this isn’t very useful because the two dipole orientations are not exchanging. For this, we must also include the exchange matrix, of the form:
+<p>However, on its own, this isn’t very useful because the two dipole orientations are not exchanging. For this, we must also include the exchange matrix, of the form:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
 \begin{equation}
-\mathbf{K}<em>{ex}=
+\mathbf{K}_{ex}=
 \begin{pmatrix}
--k</em>{01}&amp;k_{10} \
+-k_{01}&amp;k_{10} \\
 k_{01}&amp;-k_{10}
 \end{pmatrix}
 \end{equation}
-Exchange matrices should always be mass conserving, i.e., the columns should sum to 0. Usually, they should also satisfy detailed balance, i.e., <span class="math notranslate nohighlight">\(k_{m,n}/k_{n,m}=p_n/p_m\)</span> where <span class="math notranslate nohighlight">\(p_n\)</span> are equilibrium populations.</p>
+\end{split}\]</div>
+<p>Exchange matrices should always be mass conserving, i.e., the columns should sum to 0. Usually, they should also satisfy detailed balance, i.e., <span class="math notranslate nohighlight">\(k_{m,n}/k_{n,m}=p_n/p_m\)</span> where <span class="math notranslate nohighlight">\(p_n\)</span> are equilibrium populations.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">L</span><span class="o">.</span><span class="n">kex</span><span class="o">=</span><span class="p">[[</span><span class="o">-</span><span class="mf">1e3</span><span class="p">,</span><span class="mf">1e3</span><span class="p">],[</span><span class="mf">1e3</span><span class="p">,</span><span class="o">-</span><span class="mf">1e3</span><span class="p">]]</span>  <span class="c1">#Symmetric exchange between two sites</span>

@@ -16,6 +16,7 @@ parts:
     - file: Chapter1/Ch1_expsys
     - file: Chapter1/Ch1_Liouvillian
     - file: Chapter1/Ch1_Propagation
+    - file: Chapter1/Ch1_rho
   - file: Ch2_SolutionNMR
   - file: Ch3_DynamicsSolids
   - file: Ch4_DNP

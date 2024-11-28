@@ -52,10 +52,13 @@ H[5].plot() #Plot the Hamiltonian for the 5th element of the powder average
 
 
 # The Hamiltonian is built from the 5 rotating components of the Hamiltonian. If we have $n_\gamma$ steps per rotor period, and we're at the kth step, this is done as follows:
+# 
+# $$
 # \begin{eqnarray}
 # \phi&=&\exp(2\pi i k/n_\gamma) \nonumber \\
 # \hat{H}&=&\phi^{-n}*\hat{H}_n
 # \end{eqnarray}
+# $$
 # 
 # The rotating components are obtained via the Hn function, where n (-2,-1,0,1,2) must be provided. For example, for the fifth element of the powder average, if we want the $n=-1$ component, we would call:
 
@@ -109,15 +112,20 @@ L=sl.Liouvillian(H)  #alternatively
 
 
 # The coherent Liouvillian is created by calculating
+# 
+# $$
 # \begin{equation}
 # \hat{\hat{L}}=i(\hat{H}\otimes\hat{\mathbf{1}}-\hat{\mathbf{1}}\otimes\hat{H})
 # \end{equation}
+# $$
 # 
 # $\hat{\mathbf{1}}$ is an identity matrix with the same dimensions as $\hat{H}$. In SLEEPY, we separate the individual components, such that we acquired
 # 
+# $$
 # \begin{equation}
 # \hat{\hat{L}}_n=i(\hat{H}_n\otimes\hat{\mathbf{1}}-\hat{\mathbf{1}}\otimes\hat{H}_n)
 # \end{equation}
+# $$
 
 # ### Access and plot the Liouvillian
 
@@ -208,6 +216,8 @@ L.plot()
 
 
 # However, on its own, this isn't very useful because the two dipole orientations are not exchanging. For this, we must also include the exchange matrix, of the form:
+# 
+# $$
 # \begin{equation}
 # \mathbf{K}_{ex}=
 # \begin{pmatrix}
@@ -215,6 +225,8 @@ L.plot()
 # k_{01}&-k_{10}
 # \end{pmatrix}
 # \end{equation}
+# $$
+# 
 # Exchange matrices should always be mass conserving, i.e., the columns should sum to 0. Usually, they should also satisfy detailed balance, i.e., $k_{m,n}/k_{n,m}=p_n/p_m$ where $p_n$ are equilibrium populations.
 
 # In[18]:

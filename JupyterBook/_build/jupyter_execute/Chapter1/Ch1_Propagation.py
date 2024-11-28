@@ -5,21 +5,27 @@
 
 # Propagators are responsible for moving the density matrix, $\hat{\rho}(t)$ forward in time in magnetic resonance simulations. For a constant Liouvillian, the propagator, $\hat{\hat{U}}(t,t+\Delta t)$ is given by
 # 
+# $$
 # \begin{equation}
 # \hat{\hat{U}}(t,t+\Delta t)=\exp(\hat{\hat{L}}(t)\Delta t)
 # \end{equation}
+# $$
 # 
 # such that
 # 
+# $$
 # \begin{equation}
 # \hat{\rho}(t+\Delta t)=\hat{\hat{U}}(t,t+\Delta t)\hat{\rho}(t)
 # \end{equation}
+# $$
 # 
 # Of course, the Liouvillian is often not constant, either due to rotor spinning or a pulse sequence. In this case, the propagator is constructed as a product of piecewise constant propagators.
 # 
+# $$
 # \begin{equation}
 # U(t_0,t_n)=U(t_{n-1},t_{n})*U(t_{n-2},t_{n-1)})...U(t_1,t_2)*U(t_0,t_1)
 # \end{equation}
+# $$
 # 
 # SLEEPY handles the construction of the propagator for a time-dependent Liouvillian from propagators generated from piecewise-constant Liouvillians internally. Here, we start without pulses, where time-dependence arises only from rotor spinning.
 
@@ -186,7 +192,7 @@ U0=seq.U(Dt=5e-6)
 U0.plot()
 
 
-# However, now if we generate another 5 μs sequence, we obtain a very different propagator, because both t0 and t0_seq have been set forward by 5 μs. We can check t0_seq before and after generating U1 to see how this works.
+# However, now if we generate another 5 μs sequence, we obtain a very different propagator, because both t0 and t0_seq have been set forward by 5 μs, so now the propagator contains a $\pi$-pulse on $^1$H. We can check t0_seq before and after generating U1 to see how this works.
 
 # In[14]:
 

@@ -503,17 +503,26 @@ title="Print to PDF"
   <section class="tex2jax_ignore mathjax_ignore" id="font-color-0093af-propagators-and-sequences">
 <h1><font  color = "#0093AF"> Propagators and Sequences<a class="headerlink" href="#font-color-0093af-propagators-and-sequences" title="Permalink to this headline">#</a></h1>
 <p>Propagators are responsible for moving the density matrix, <span class="math notranslate nohighlight">\(\hat{\rho}(t)\)</span> forward in time in magnetic resonance simulations. For a constant Liouvillian, the propagator, <span class="math notranslate nohighlight">\(\hat{\hat{U}}(t,t+\Delta t)\)</span> is given by</p>
-<p>\begin{equation}
+<div class="math notranslate nohighlight">
+\[
+\begin{equation}
 \hat{\hat{U}}(t,t+\Delta t)=\exp(\hat{\hat{L}}(t)\Delta t)
-\end{equation}</p>
+\end{equation}
+\]</div>
 <p>such that</p>
-<p>\begin{equation}
+<div class="math notranslate nohighlight">
+\[
+\begin{equation}
 \hat{\rho}(t+\Delta t)=\hat{\hat{U}}(t,t+\Delta t)\hat{\rho}(t)
-\end{equation}</p>
+\end{equation}
+\]</div>
 <p>Of course, the Liouvillian is often not constant, either due to rotor spinning or a pulse sequence. In this case, the propagator is constructed as a product of piecewise constant propagators.</p>
-<p>\begin{equation}
-U(t_0,t_n)=U(t_{n-1},t_{n})*U(t_{n-2},t_{n-1)})…U(t_1,t_2)*U(t_0,t_1)
-\end{equation}</p>
+<div class="math notranslate nohighlight">
+\[
+\begin{equation}
+U(t_0,t_n)=U(t_{n-1},t_{n})*U(t_{n-2},t_{n-1)})...U(t_1,t_2)*U(t_0,t_1)
+\end{equation}
+\]</div>
 <p>SLEEPY handles the construction of the propagator for a time-dependent Liouvillian from propagators generated from piecewise-constant Liouvillians internally. Here, we start without pulses, where time-dependence arises only from rotor spinning.</p>
 <section id="setup">
 <h2>Setup<a class="headerlink" href="#setup" title="Permalink to this headline">#</a></h2>
@@ -755,7 +764,7 @@ First propagator ends at 5.555555555555556e-06 but second propagator starts at 0
 <img alt="../_images/Ch1_Propagation_30_1.png" src="../_images/Ch1_Propagation_30_1.png" />
 </div>
 </div>
-<p>However, now if we generate another 5 μs sequence, we obtain a very different propagator, because both t0 and t0_seq have been set forward by 5 μs. We can check t0_seq before and after generating U1 to see how this works.</p>
+<p>However, now if we generate another 5 μs sequence, we obtain a very different propagator, because both t0 and t0_seq have been set forward by 5 μs, so now the propagator contains a <span class="math notranslate nohighlight">\(\pi\)</span>-pulse on <span class="math notranslate nohighlight">\(^1\)</span>H. We can check t0_seq before and after generating U1 to see how this works.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Before: </span><span class="si">{</span><span class="n">seq</span><span class="o">.</span><span class="n">t0_seq</span><span class="o">*</span><span class="mf">1e6</span><span class="si">:</span><span class="s1">.2f</span><span class="si">}</span><span class="s1"> microseconds&#39;</span><span class="p">)</span>

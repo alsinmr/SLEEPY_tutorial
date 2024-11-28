@@ -151,7 +151,7 @@ const thebe_selector_output = ".output, .cell_output"
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="Ch1_Objects.html">
-     <font color="maroon">
+     <font color="#0093AF">
       Objects
      </font>
     </a>
@@ -475,9 +475,9 @@ title="Print to PDF"
 <li><p>Hamiltonian (H): Contains the Hamiltonian, although the user can bypass the Hamiltonian and generate the Liouvillian directly (Hamiltonians are contained within the Liouvillian).</p></li>
 <li><p>Sequence (seq): Generated from a Liouvillian, and allows the user to define time-dependent, multi-channel pulse sequences. Sequences can be used directly with the density matrix, or can be used to generator propagators.</p></li>
 <li><p>Propagator (U): Propagates the density matrix forward in time. Propagators can be generated from a sequence, in which case they will include rf-pulses in the sequence, or from the Liouvillian directly, in which case no rf irradiation is included. Identity propagators and <span class="math notranslate nohighlight">\(\delta\)</span>-pulses are available from the Liouvillian. Propagators may be multiplied together or by the density matrix. They may also be raised to integer powers (in solid-state NMR, they must then be exactly one rotor period).</p></li>
-<li><p>Rho (rho): Rho is the density matrix, which defines the state of the spin-system. In SLEEPY, rho also contains the detection operator, so that simply calling rho (<code class="docutils literal notranslate"><span class="pre">rho()</span></code>) will perform a detection operation for the current state of the density matrix. Rho records all detection operations and stores the results in <code class="docutils literal notranslate"><span class="pre">rho.I</span></code>, which is a 2D matrix (the first dimension runs over possible multiple detection operators, the second dimension runs over all detection calls). A special function, <code class="docutils literal notranslate"><span class="pre">rho.DetProp</span></code> takes a sequence or propagator and executes multiple detection and propagation steps (this function usually operates in the eigenbasis, making this calculation much faster than simply looping over propagation and detection operations). The Rho ‘plot’ function will plot either time-domain or Fourier transformed spectra (<code class="docutils literal notranslate"><span class="pre">FT=True</span></code>(</p></li>
+<li><p>Rho (rho): Rho is the density matrix, which defines the state of the spin-system. In SLEEPY, rho also contains the detection operator, so that simply calling rho (<code class="docutils literal notranslate"><span class="pre">rho()</span></code>) will perform a detection operation for the current state of the density matrix. Rho records all detection operations and stores the results in <code class="docutils literal notranslate"><span class="pre">rho.I</span></code>, which is a 2D matrix (the first dimension runs over possible multiple detection operators, the second dimension runs over all detection calls). A special function, <code class="docutils literal notranslate"><span class="pre">rho.DetProp</span></code> takes a sequence or propagator and executes multiple detection and propagation steps (this function usually operates in the eigenbasis, making this calculation much faster than simply looping over propagation and detection operations). The Rho ‘plot’ function will plot either time-domain or Fourier transformed spectra (<code class="docutils literal notranslate"><span class="pre">FT=True</span></code>).</p></li>
 </ul>
-<p>Note that SLEEPY is intended to be <em>interactive</em>, so all of these objects will provide a description of itself if its variable name is typed at the command line, or included in a “print” call. Furthermore, except for ExpSys, each object has a “plot” function, that gives a graphical representation of the object.</p>
+<p>Note that SLEEPY is intended to be <em>interactive</em>, so each of these objects will provide a description of itself if its variable name is typed at the command line, or included in a “print” call. Furthermore, except for ExpSys, each object has a “plot” function, that gives a graphical representation of the object or a plot of data in the object.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">os</span>
@@ -659,7 +659,7 @@ Current time is 16666.667 microseconds
     <a class='right-next' id="next-link" href="Ch1_Objects.html" title="next page">
     <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title"><font color="maroon">Objects</font></p>
+        <p class="prev-next-title"><font color="#0093AF">Objects</font></p>
     </div>
     <i class="fas fa-angle-right"></i>
     </a>

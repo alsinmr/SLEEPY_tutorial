@@ -6,4 +6,5 @@ The first chapter of SLEEPY begins with a simple example of a SLEEPY simulation 
 - [](Chapter1/Ch1_Objects.md)
 - [](Chapter1/Ch1_expsys.ipynb)
 - [](Chapter1/Ch1_Liouvillian.ipynb)
-- [](Chapter1/Ch1_Propagation.md)
+- [](Chapter1/Ch1_Propagation.ipynb)
+- [](Chapter1/Ch1_rho.ipynb)
