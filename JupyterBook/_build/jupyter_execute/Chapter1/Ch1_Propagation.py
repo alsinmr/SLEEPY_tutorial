@@ -4,13 +4,17 @@
 # # <font  color = "#0093AF"> Propagators and Sequences
 
 # Propagators are responsible for moving the density matrix, $\hat{\rho}(t)$ forward in time in magnetic resonance simulations. For a constant Liouvillian, the propagator, $\hat{\hat{U}}(t,t+\Delta t)$ is given by
+# 
 # \begin{equation}
 # \hat{\hat{U}}(t,t+\Delta t)=\exp(\hat{\hat{L}}(t)\Delta t)
 # \end{equation}
+# 
 # such that
+# 
 # \begin{equation}
 # \hat{\rho}(t+\Delta t)=\hat{\hat{U}}(t,t+\Delta t)\hat{\rho}(t)
 # \end{equation}
+# 
 # Of course, the Liouvillian is often not constant, either due to rotor spinning or a pulse sequence. In this case, the propagator is constructed as a product of piecewise constant propagators.
 # 
 # \begin{equation}
@@ -107,7 +111,7 @@ _=U0*U0
 # In[7]:
 
 
-#U0.plot(mode='abs')
+U0.plot(mode='abs')
 
 
 # ### Special propagators
@@ -118,7 +122,7 @@ _=U0*U0
 
 
 Ueye=L.Ueye()
-#Ueye.plot(mode='re')
+Ueye.plot(mode='re')
 
 
 # A $\delta$-pulse propagator needs to be provided with a channel ('13C','1H', etc.) or a spin-index (0,1,2). The spin-index will apply the pulse just to one spin, even if there are other spins of the same nucleus type. Obviously this is unphysical, but can be useful for creating selective pulses without actually fully simulating them.
@@ -129,7 +133,7 @@ Ueye=L.Ueye()
 
 
 Ud=L.Udelta('13C',phi=np.pi/2,phase=np.pi/2)  #pi/2 y-pulse on 13C
-#Ud.plot(mode='re')
+Ud.plot(mode='re')
 
 
 # ## Sequences
@@ -138,7 +142,7 @@ Ud=L.Udelta('13C',phi=np.pi/2,phase=np.pi/2)  #pi/2 y-pulse on 13C
 # 
 # Sequences are used to create propagators, although in some cases, propagators are only calculated internally within rho when used with a sequence.
 # 
-# We initialize a sequence by calling L.Sequence(). Usually, when we add channels to the sequence, we define a time-axis while doing so, which will then define the length of the sequence. However, it is possible to use the sequence to just define the amplitude of a continuously applied field. In this case, under spinning, the sequence length then becomes one rotor period by default. If no spinning is used, then this case requires initializing the sequency with a length (`Dt=1e-3` would, for example, make a 1 ms sequence).
+# We initialize a sequence by calling L.Sequence(). Usually, when we add channels to the sequence, we define a time-axis while doing so, which will then define the length of the sequence. However, it is possible to use the sequence to just define the amplitude and phase of a continuously applied field (or even just a delay). In this case, under spinning, the sequence length then becomes one rotor period by default. If no spinning is used, then this case requires initializing the sequency with a length (`Dt=1e-3` would, for example, make a 1 ms sequence).
 # 
 # Once a sequence is defined, we add channels to it. Channels may be added the usual way, by specifying the nucleus, but they may also be added to a specific spin by index.
 
@@ -168,7 +172,47 @@ t=[0,L.taur/2-tpi,L.taur/2,L.taur-tpi,L.taur]
 seq.add_channel('13C').add_channel('1H',t=t,v1=[0,v1,0,v1]).plot()
 
 
-# Note that this setup lets us easily create shaped pulses by just providing a time axis and an amplitude. 
+# Note that this setup lets us easily create shaped pulses by just providing a time axis and a time-dependent amplitude. 
+
+# ### Generating propagators from sequences
+# A propagator is generated from a sequence by calling seq.U(). By default, the resulting propagator will have t0 at ex.current_time, and Dt will be the length of the sequence (seq.Dt). However, both t0 and Dt may be user defined when calling seq.U. Additionally, t0_seq may also be defined. This results in a propagator that starts partway through the sequence. Note that for a cyclic sequence (the default sequence type: can be changed by calling `L.Sequence(cyclic=False)`), t0_seq defaults to the end of the last call to the sequence, but otherwise defaults to 0. Then, we can interupt a sequence, for example, for detection, without having to actively re-synchronize it. 
+# 
+# We can observe this behavior below. We start with a 5 μs sequence, such that no $^1$H pulses are applied. We obtain a propagator without off-diagonal terms in the imaginary part except due to exchange, since the system only has a heteronuclear dipole coupling.
+
+# In[13]:
+
+
+U0=seq.U(Dt=5e-6)
+U0.plot()
+
+
+# However, now if we generate another 5 μs sequence, we obtain a very different propagator, because both t0 and t0_seq have been set forward by 5 μs. We can check t0_seq before and after generating U1 to see how this works.
+
+# In[14]:
+
+
+print(f'Before: {seq.t0_seq*1e6:.2f} microseconds')
+U1=seq.U(Dt=5e-6)
+print(f'After: {seq.t0_seq*1e6:.2f} microseconds')
+U1.plot()
+
+
+# We complete the sequence, and do one more check of t0_seq, which should now be set back to 0. We also check that multiplying all the propagators together works, since they were generated one after another to cover a rotor cycle.
+
+# In[15]:
+
+
+U2=seq.U(Dt=seq.Dt-U0.Dt-U1.Dt)
+print(seq.t0_seq)
+
+
+# In[16]:
+
+
+U2*U1*U0
+
+
+# We will later see that sequences can be a powerful tool for performing more complicated calculations. For example, if we want to calculate spinning sidebands, we need to interupt the rotor period to detect (detecting once a rotor period folds all sidebands back onto the main peak). However, we would have to then generate propagators for different parts of the rotor period and multiply them many times, always in the right sequence. While not so hard to code, the operation is very slow. The rho.DetProp function, which will be introduced in the next section, on the other hand may be combined with a sequence (possibly an empty one), to perform this operation in the eigenbases of the propagators to rapidly obtain a spectrum. This power comes from the flexibility of sequences, as compared to propagators, which are only valid starting always at the same point in the rotor period.
 
 # In[ ]:
 

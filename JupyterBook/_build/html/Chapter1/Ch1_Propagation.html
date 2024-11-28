@@ -144,12 +144,14 @@ const thebe_selector_output = ".output, .cell_output"
   <ul class="current">
    <li class="toctree-l2">
     <a class="reference internal" href="Ch1_basics.html">
-     A Quick Start
+     <font color="#0093AF">
+      A Quick Start
+     </font>
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="Ch1_Objects.html">
-     <font color="maroon">
+     <font color="#0093AF">
       Objects
      </font>
     </a>
@@ -432,6 +434,13 @@ title="Print to PDF"
   <a class="reference internal nav-link" href="#sequences">
    Sequences
   </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#generating-propagators-from-sequences">
+     Generating propagators from sequences
+    </a>
+   </li>
+  </ul>
  </li>
 </ul>
 
@@ -473,6 +482,13 @@ title="Print to PDF"
   <a class="reference internal nav-link" href="#sequences">
    Sequences
   </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#generating-propagators-from-sequences">
+     Generating propagators from sequences
+    </a>
+   </li>
+  </ul>
  </li>
 </ul>
 
@@ -486,15 +502,15 @@ title="Print to PDF"
                 
   <section class="tex2jax_ignore mathjax_ignore" id="font-color-0093af-propagators-and-sequences">
 <h1><font  color = "#0093AF"> Propagators and Sequences<a class="headerlink" href="#font-color-0093af-propagators-and-sequences" title="Permalink to this headline">#</a></h1>
-<p>Propagators are responsible for moving the density matrix, <span class="math notranslate nohighlight">\(\hat{\rho}(t)\)</span> forward in time in magnetic resonance simulations. For a constant Liouvillian, the propagator, <span class="math notranslate nohighlight">\(\hat{\hat{U}}(t,t+\Delta t)\)</span> is given by
-\begin{equation}
+<p>Propagators are responsible for moving the density matrix, <span class="math notranslate nohighlight">\(\hat{\rho}(t)\)</span> forward in time in magnetic resonance simulations. For a constant Liouvillian, the propagator, <span class="math notranslate nohighlight">\(\hat{\hat{U}}(t,t+\Delta t)\)</span> is given by</p>
+<p>\begin{equation}
 \hat{\hat{U}}(t,t+\Delta t)=\exp(\hat{\hat{L}}(t)\Delta t)
-\end{equation}
-such that
-\begin{equation}
+\end{equation}</p>
+<p>such that</p>
+<p>\begin{equation}
 \hat{\rho}(t+\Delta t)=\hat{\hat{U}}(t,t+\Delta t)\hat{\rho}(t)
-\end{equation}
-Of course, the Liouvillian is often not constant, either due to rotor spinning or a pulse sequence. In this case, the propagator is constructed as a product of piecewise constant propagators.</p>
+\end{equation}</p>
+<p>Of course, the Liouvillian is often not constant, either due to rotor spinning or a pulse sequence. In this case, the propagator is constructed as a product of piecewise constant propagators.</p>
 <p>\begin{equation}
 U(t_0,t_n)=U(t_{n-1},t_{n})*U(t_{n-2},t_{n-1)})…U(t_1,t_2)*U(t_0,t_1)
 \end{equation}</p>
@@ -604,7 +620,7 @@ Constructed from the following Liouvillian:
 		array([[-50000.,  50000.],
 		       [ 50000., -50000.]])
 	
-&lt;SLEEPY.Propagator.Propagator object at 0x7fc2799e63c8&gt;
+&lt;SLEEPY.Propagator.Propagator object at 0x7ff148d34668&gt;
 </pre></div>
 </div>
 </div>
@@ -617,7 +633,7 @@ Constructed from the following Liouvillian:
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/Users/albertsmith/Documents/GitHub/SLEEPY/Propagator.py:234: UserWarning: 
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/Users/albertsmith/Documents/GitHub/SLEEPY/Propagator.py:241: UserWarning: 
 First propagator ends at 5.555555555555556e-06 but second propagator starts at 0.0
   warnings.warn(f&#39;\nFirst propagator ends at {U.tf%self.taur} but second propagator starts at {self.t0%U.taur}&#39;)
 </pre></div>
@@ -627,9 +643,15 @@ First propagator ends at 5.555555555555556e-06 but second propagator starts at 0
 <p>As with the Hamiltonian and Liouvillian, propagators can also be plotted:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#U0.plot(mode=&#39;abs&#39;)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">U0</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">mode</span><span class="o">=</span><span class="s1">&#39;abs&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;AxesSubplot:&gt;
+</pre></div>
+</div>
+<img alt="../_images/Ch1_Propagation_15_1.png" src="../_images/Ch1_Propagation_15_1.png" />
 </div>
 </div>
 <section id="special-propagators">
@@ -638,9 +660,15 @@ First propagator ends at 5.555555555555556e-06 but second propagator starts at 0
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">Ueye</span><span class="o">=</span><span class="n">L</span><span class="o">.</span><span class="n">Ueye</span><span class="p">()</span>
-<span class="c1">#Ueye.plot(mode=&#39;re&#39;)</span>
+<span class="n">Ueye</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">mode</span><span class="o">=</span><span class="s1">&#39;re&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;AxesSubplot:&gt;
+</pre></div>
+</div>
+<img alt="../_images/Ch1_Propagation_18_1.png" src="../_images/Ch1_Propagation_18_1.png" />
 </div>
 </div>
 <p>A <span class="math notranslate nohighlight">\(\delta\)</span>-pulse propagator needs to be provided with a channel (‘13C’,’1H’, etc.) or a spin-index (0,1,2). The spin-index will apply the pulse just to one spin, even if there are other spins of the same nucleus type. Obviously this is unphysical, but can be useful for creating selective pulses without actually fully simulating them.</p>
@@ -648,9 +676,15 @@ First propagator ends at 5.555555555555556e-06 but second propagator starts at 0
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">Ud</span><span class="o">=</span><span class="n">L</span><span class="o">.</span><span class="n">Udelta</span><span class="p">(</span><span class="s1">&#39;13C&#39;</span><span class="p">,</span><span class="n">phi</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span><span class="n">phase</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span>  <span class="c1">#pi/2 y-pulse on 13C</span>
-<span class="c1">#Ud.plot(mode=&#39;re&#39;)</span>
+<span class="n">Ud</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">mode</span><span class="o">=</span><span class="s1">&#39;re&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;AxesSubplot:&gt;
+</pre></div>
+</div>
+<img alt="../_images/Ch1_Propagation_20_1.png" src="../_images/Ch1_Propagation_20_1.png" />
 </div>
 </div>
 </section>
@@ -659,7 +693,7 @@ First propagator ends at 5.555555555555556e-06 but second propagator starts at 0
 <h2>Sequences<a class="headerlink" href="#sequences" title="Permalink to this headline">#</a></h2>
 <p>Of course, we would also like to be able to apply pulses for our propagators. This is achieved with the sequence object, which is also generated from the Liouvillian.</p>
 <p>Sequences are used to create propagators, although in some cases, propagators are only calculated internally within rho when used with a sequence.</p>
-<p>We initialize a sequence by calling L.Sequence(). Usually, when we add channels to the sequence, we define a time-axis while doing so, which will then define the length of the sequence. However, it is possible to use the sequence to just define the amplitude of a continuously applied field. In this case, under spinning, the sequence length then becomes one rotor period by default. If no spinning is used, then this case requires initializing the sequency with a length (<code class="docutils literal notranslate"><span class="pre">Dt=1e-3</span></code> would, for example, make a 1 ms sequence).</p>
+<p>We initialize a sequence by calling L.Sequence(). Usually, when we add channels to the sequence, we define a time-axis while doing so, which will then define the length of the sequence. However, it is possible to use the sequence to just define the amplitude and phase of a continuously applied field (or even just a delay). In this case, under spinning, the sequence length then becomes one rotor period by default. If no spinning is used, then this case requires initializing the sequency with a length (<code class="docutils literal notranslate"><span class="pre">Dt=1e-3</span></code> would, for example, make a 1 ms sequence).</p>
 <p>Once a sequence is defined, we add channels to it. Channels may be added the usual way, by specifying the nucleus, but they may also be added to a specific spin by index.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -702,7 +736,102 @@ First propagator ends at 5.555555555555556e-06 but second propagator starts at 0
 <img alt="../_images/Ch1_Propagation_27_1.png" src="../_images/Ch1_Propagation_27_1.png" />
 </div>
 </div>
-<p>Note that this setup lets us easily create shaped pulses by just providing a time axis and an amplitude.</p>
+<p>Note that this setup lets us easily create shaped pulses by just providing a time axis and a time-dependent amplitude.</p>
+<section id="generating-propagators-from-sequences">
+<h3>Generating propagators from sequences<a class="headerlink" href="#generating-propagators-from-sequences" title="Permalink to this headline">#</a></h3>
+<p>A propagator is generated from a sequence by calling seq.U(). By default, the resulting propagator will have t0 at ex.current_time, and Dt will be the length of the sequence (seq.Dt). However, both t0 and Dt may be user defined when calling seq.U. Additionally, t0_seq may also be defined. This results in a propagator that starts partway through the sequence. Note that for a cyclic sequence (the default sequence type: can be changed by calling <code class="docutils literal notranslate"><span class="pre">L.Sequence(cyclic=False)</span></code>), t0_seq defaults to the end of the last call to the sequence, but otherwise defaults to 0. Then, we can interupt a sequence, for example, for detection, without having to actively re-synchronize it.</p>
+<p>We can observe this behavior below. We start with a 5 μs sequence, such that no <span class="math notranslate nohighlight">\(^1\)</span>H pulses are applied. We obtain a propagator without off-diagonal terms in the imaginary part except due to exchange, since the system only has a heteronuclear dipole coupling.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">U0</span><span class="o">=</span><span class="n">seq</span><span class="o">.</span><span class="n">U</span><span class="p">(</span><span class="n">Dt</span><span class="o">=</span><span class="mf">5e-6</span><span class="p">)</span>
+<span class="n">U0</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;AxesSubplot:&gt;
+</pre></div>
+</div>
+<img alt="../_images/Ch1_Propagation_30_1.png" src="../_images/Ch1_Propagation_30_1.png" />
+</div>
+</div>
+<p>However, now if we generate another 5 μs sequence, we obtain a very different propagator, because both t0 and t0_seq have been set forward by 5 μs. We can check t0_seq before and after generating U1 to see how this works.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Before: </span><span class="si">{</span><span class="n">seq</span><span class="o">.</span><span class="n">t0_seq</span><span class="o">*</span><span class="mf">1e6</span><span class="si">:</span><span class="s1">.2f</span><span class="si">}</span><span class="s1"> microseconds&#39;</span><span class="p">)</span>
+<span class="n">U1</span><span class="o">=</span><span class="n">seq</span><span class="o">.</span><span class="n">U</span><span class="p">(</span><span class="n">Dt</span><span class="o">=</span><span class="mf">5e-6</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;After: </span><span class="si">{</span><span class="n">seq</span><span class="o">.</span><span class="n">t0_seq</span><span class="o">*</span><span class="mf">1e6</span><span class="si">:</span><span class="s1">.2f</span><span class="si">}</span><span class="s1"> microseconds&#39;</span><span class="p">)</span>
+<span class="n">U1</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Before: 5.00 microseconds
+After: 10.00 microseconds
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;AxesSubplot:&gt;
+</pre></div>
+</div>
+<img alt="../_images/Ch1_Propagation_32_2.png" src="../_images/Ch1_Propagation_32_2.png" />
+</div>
+</div>
+<p>We complete the sequence, and do one more check of t0_seq, which should now be set back to 0. We also check that multiplying all the propagators together works, since they were generated one after another to cover a rotor cycle.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">U2</span><span class="o">=</span><span class="n">seq</span><span class="o">.</span><span class="n">U</span><span class="p">(</span><span class="n">Dt</span><span class="o">=</span><span class="n">seq</span><span class="o">.</span><span class="n">Dt</span><span class="o">-</span><span class="n">U0</span><span class="o">.</span><span class="n">Dt</span><span class="o">-</span><span class="n">U1</span><span class="o">.</span><span class="n">Dt</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">seq</span><span class="o">.</span><span class="n">t0_seq</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.0
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">U2</span><span class="o">*</span><span class="n">U1</span><span class="o">*</span><span class="n">U0</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Propagator with length of 16.667 microseconds (t0=0.000,tf=16.667)
+Constructed from the following Liouvillian:
+	Liouvillian under the following conditions:
+		2-spin system (1H,13C)
+		B0 = 14.092 T (600.000 MHz 1H frequency)
+		rotor angle = 54.736 degrees
+		rotor frequency = 60.0 kHz
+		Temperature = 298 K
+		Powder Average: JCP59 with 99 angles
+	
+	The individual Hamiltonians have the following interactions
+		Hamiltonian #0
+			dipole between spins 0,1 with arguments:
+				(delta=44000.00)
+			CSA on spin 1 with arguments: (delta=100.00,eta=1.00)
+			CS on spin 0 with arguments: (ppm=10.00)
+		
+		Hamiltonian #1
+			CSA on spin 1 with arguments: (delta=100.00,eta=1.00)
+			CS on spin 0 with arguments: (ppm=10.00)
+			dipole between spins 0,1 with arguments:
+				(delta=44000.00,euler=[0.00,30.00,0.00])
+		
+		
+	Hamiltonians are coupled by exchange matrix:
+		array([[-50000.,  50000.],
+		       [ 50000., -50000.]])
+	
+&lt;SLEEPY.Propagator.Propagator object at 0x7ff1289a8198&gt;
+</pre></div>
+</div>
+</div>
+</div>
+<p>We will later see that sequences can be a powerful tool for performing more complicated calculations. For example, if we want to calculate spinning sidebands, we need to interupt the rotor period to detect (detecting once a rotor period folds all sidebands back onto the main peak). However, we would have to then generate propagators for different parts of the rotor period and multiply them many times, always in the right sequence. While not so hard to code, the operation is very slow. The rho.DetProp function, which will be introduced in the next section, on the other hand may be combined with a sequence (possibly an empty one), to perform this operation in the eigenbases of the propagators to rapidly obtain a spectrum. This power comes from the flexibility of sequences, as compared to propagators, which are only valid starting always at the same point in the rotor period.</p>
+</section>
 </section>
 </section>
 
