@@ -50,10 +50,12 @@ const thebe_selector_input = "pre"
 const thebe_selector_output = ".output, .cell_output"
 </script>
     <script async="async" src="_static/sphinx-thebe.js"></script>
+    <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="Dynamics in Solids" href="Ch3_DynamicsSolids.html" />
-    <link rel="prev" title="SLEEPY basics" href="Ch1_SLEEPY_basics.html" />
+    <link rel="prev" title="The Density Matrix" href="Chapter1/Ch1_rho.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
     
@@ -109,7 +111,7 @@ const thebe_selector_output = ".output, .cell_output"
         <ul class="nav bd-sidenav bd-sidenav__home-link">
             <li class="toctree-l1">
                 <a class="reference internal" href="intro.html">
-                    Welcome to the pyDIFRATE tutorial
+                    Welcome to the SLEEPY tutorial
                 </a>
             </li>
         </ul>
@@ -128,12 +130,61 @@ const thebe_selector_output = ".output, .cell_output"
  </span>
 </p>
 <ul class="current nav bd-sidenav">
- <li class="toctree-l1">
+ <li class="toctree-l1 has-children">
   <a class="reference internal" href="Ch1_SLEEPY_basics.html">
    <font color="maroon">
     SLEEPY basics
    </font>
   </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
+  <label for="toctree-checkbox-1">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="Chapter1/Ch1_basics.html">
+     <font color="#0093AF">
+      A Quick Start
+     </font>
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="Chapter1/Ch1_Objects.html">
+     <font color="#0093AF">
+      Objects
+     </font>
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="Chapter1/Ch1_expsys.html">
+     <font color="#0093AF">
+      Experimental Settings and Spin-System Definition
+     </font>
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="Chapter1/Ch1_Liouvillian.html">
+     <font color="#0093AF">
+      Hamiltonians and Liouvillians
+     </font>
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="Chapter1/Ch1_Propagation.html">
+     <font color="#0093AF">
+      Propagators and Sequences
+     </font>
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="Chapter1/Ch1_rho.html">
+     <font color="#0093AF">
+      The Density Matrix
+     </font>
+    </a>
+   </li>
+  </ul>
  </li>
  <li class="toctree-l1 current active">
   <a class="current reference internal" href="#">
@@ -344,6 +395,13 @@ title="Print to PDF"
                 
   <section class="tex2jax_ignore mathjax_ignore" id="font-color-maroon-solution-nmr-font">
 <h1><font color="maroon">Solution NMR</font><a class="headerlink" href="#font-color-maroon-solution-nmr-font" title="Permalink to this headline">#</a></h1>
+<p>We next consider examples from solution-state NMR. These are primarily relatively simple examples, since the driving mechanism of relaxation is the chemical shift under exchange conditions. Some of the problems can even be solved by hand, but they will serve as a good start to using SLEEPY. We will also simulate T<span class="math notranslate nohighlight">\(_1\)</span> relaxation, although using hopping on a tetrahedral grid in place of explicit tumbling.</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="Chapter2/Ch2_exchange1D.html"><span class="doc std std-doc"> Exchange in 1D spectra</span></a></p></li>
+<li><p><a class="reference internal" href="Chapter2/Ch2_EXSY.html"><span class="doc std std-doc"> Exchange Spectroscopy (EXSY)</span></a></p></li>
+<li><p><a class="reference internal" href="Chapter2/Ch2_BMRD.html"><span class="doc std std-doc">Bloch-McConnell Relaxation Dispersion</span></a></p></li>
+<li><p><a class="reference internal" href="Chapter2/Ch2_CEST.html"><span class="doc std std-doc">Chemical Exchange Saturation Transfer (CEST)</span></a></p></li>
+</ul>
 </section>
 
     <script type="text/x-thebe-config">
@@ -373,11 +431,11 @@ title="Print to PDF"
                 
     <!-- Previous / next buttons -->
 <div class='prev-next-area'>
-    <a class='left-prev' id="prev-link" href="Ch1_SLEEPY_basics.html" title="previous page">
+    <a class='left-prev' id="prev-link" href="Chapter1/Ch1_rho.html" title="previous page">
         <i class="fas fa-angle-left"></i>
         <div class="prev-next-info">
             <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title"><font color="maroon">SLEEPY basics</font></p>
+            <p class="prev-next-title"><font  color = "#0093AF"> The Density Matrix</p>
         </div>
     </a>
     <a class='right-next' id="next-link" href="Ch3_DynamicsSolids.html" title="next page">

@@ -177,6 +177,13 @@ const thebe_selector_output = ".output, .cell_output"
      </font>
     </a>
    </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="Ch1_rho.html">
+     <font color="#0093AF">
+      The Density Matrix
+     </font>
+    </a>
+   </li>
   </ul>
  </li>
  <li class="toctree-l1">
@@ -414,6 +421,11 @@ title="Print to PDF"
     <nav id="bd-toc-nav" aria-label="Page">
         <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#setup">
+   Setup
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#example-13-c-r-1-rho">
    Example:
    <span class="math notranslate nohighlight">
@@ -444,6 +456,11 @@ title="Print to PDF"
                         </div>
                         <nav aria-label="Page">
                             <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#setup">
+   Setup
+  </a>
+ </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#example-13-c-r-1-rho">
    Example:
@@ -478,6 +495,8 @@ title="Print to PDF"
 <li><p>Rho (rho): Rho is the density matrix, which defines the state of the spin-system. In SLEEPY, rho also contains the detection operator, so that simply calling rho (<code class="docutils literal notranslate"><span class="pre">rho()</span></code>) will perform a detection operation for the current state of the density matrix. Rho records all detection operations and stores the results in <code class="docutils literal notranslate"><span class="pre">rho.I</span></code>, which is a 2D matrix (the first dimension runs over possible multiple detection operators, the second dimension runs over all detection calls). A special function, <code class="docutils literal notranslate"><span class="pre">rho.DetProp</span></code> takes a sequence or propagator and executes multiple detection and propagation steps (this function usually operates in the eigenbasis, making this calculation much faster than simply looping over propagation and detection operations). The Rho ‘plot’ function will plot either time-domain or Fourier transformed spectra (<code class="docutils literal notranslate"><span class="pre">FT=True</span></code>).</p></li>
 </ul>
 <p>Note that SLEEPY is intended to be <em>interactive</em>, so each of these objects will provide a description of itself if its variable name is typed at the command line, or included in a “print” call. Furthermore, except for ExpSys, each object has a “plot” function, that gives a graphical representation of the object or a plot of data in the object.</p>
+<section id="setup">
+<h2>Setup<a class="headerlink" href="#setup" title="Permalink to this headline">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">os</span>
@@ -489,6 +508,7 @@ title="Print to PDF"
 </div>
 </div>
 </div>
+</section>
 <section id="example-13-c-r-1-rho">
 <h2>Example: <span class="math notranslate nohighlight">\(^{13}\)</span>C <span class="math notranslate nohighlight">\(R_{1\rho}\)</span><a class="headerlink" href="#example-13-c-r-1-rho" title="Permalink to this headline">#</a></h2>
 <div class="cell docutils container">
@@ -529,7 +549,7 @@ title="Print to PDF"
  &lt;AxesSubplot:xlabel=&#39;t / $\\mu$s&#39;, ylabel=&#39;$v_1$ / kHz&#39;&gt;]
 </pre></div>
 </div>
-<img alt="../_images/Ch1_basics_6_1.png" src="../_images/Ch1_basics_6_1.png" />
+<img alt="../_images/Ch1_basics_7_1.png" src="../_images/Ch1_basics_7_1.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -549,7 +569,7 @@ title="Print to PDF"
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/Ch1_basics_7_0.png" src="../_images/Ch1_basics_7_0.png" />
+<img alt="../_images/Ch1_basics_8_0.png" src="../_images/Ch1_basics_8_0.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -616,7 +636,7 @@ Current time is 16666.667 microseconds
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;AxesSubplot:xlabel=&#39;t / ms&#39;, ylabel=&#39;&lt;$^{13}C_x$&gt;&#39;&gt;
 </pre></div>
 </div>
-<img alt="../_images/Ch1_basics_11_1.png" src="../_images/Ch1_basics_11_1.png" />
+<img alt="../_images/Ch1_basics_12_1.png" src="../_images/Ch1_basics_12_1.png" />
 </div>
 </div>
 </section>

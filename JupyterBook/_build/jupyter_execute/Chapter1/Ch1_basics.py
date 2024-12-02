@@ -14,6 +14,8 @@
 # 
 # Note that SLEEPY is intended to be *interactive*, so each of these objects will provide a description of itself if its variable name is typed at the command line, or included in a "print" call. Furthermore, except for ExpSys, each object has a "plot" function, that gives a graphical representation of the object or a plot of data in the object.
 
+# ## Setup
+
 # In[1]:
 
 
