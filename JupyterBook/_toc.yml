@@ -16,8 +16,13 @@ parts:
     - file: Chapter1/Ch1_expsys
     - file: Chapter1/Ch1_Liouvillian
     - file: Chapter1/Ch1_Propagation
-    - file: Chapter1/Ch1_rho
+    - file: Chapter1/Ch1_rho  
   - file: Ch2_SolutionNMR
+    sections:
+    - file: Chapter2/Ch2_exchange1D
+    - file: Chapter2/Ch2_EXSY
+    - file: Chapter2/Ch2_BMRD
+    - file: Chapter2/Ch2_CEST
   - file: Ch3_DynamicsSolids
   - file: Ch4_DNP
   - file: Ch5_ParamagneticEffects
