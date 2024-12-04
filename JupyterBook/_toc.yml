@@ -24,5 +24,11 @@ parts:
     - file: Chapter2/Ch2_BMRD
     - file: Chapter2/Ch2_CEST
   - file: Ch3_DynamicsSolids
+    sections:
+    - file: Chapter3/Ch3_R1p
+    - file: Chapter3/Ch3_REDOR
+    - file: Chapter3/Ch3_DIPSHIFT
+    - file: Chapter3/Ch3_T1_NOE
+    - file: Chapter3/Ch3_RECRR
   - file: Ch4_DNP
   - file: Ch5_ParamagneticEffects
