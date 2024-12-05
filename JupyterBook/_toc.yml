@@ -12,6 +12,7 @@ parts:
   - file: Ch1_SLEEPY_basics
     sections:
     - file: Chapter1/Ch1_basics
+    - file: Chapter1/Ch1_ShortExamples
     - file: Chapter1/Ch1_Objects
     - file: Chapter1/Ch1_expsys
     - file: Chapter1/Ch1_Liouvillian
