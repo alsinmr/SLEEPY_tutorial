@@ -37,7 +37,7 @@ _=ex1.set_inter(Type='CS',i=0,ppm=5)
 
 L=sl.Liouvillian((ex0,ex1))           #Builds the two different Hamiltonians and exports them to Liouville space
 
-tc=1     #Correlation time (10 s)
+tc=1     #Correlation time (1 s)
 p1=0.75  #Population of state 1
 p2=1-p1  #Population of state 2
 
@@ -46,82 +46,199 @@ L.kex=sl.Tools.twoSite_kex(tc=tc,p1=p1)
 _=L.add_relax(Type='T2',i=0,T2=.01)
 
 
-# We can check the correlation time and equilibrium populations based on eigenvalue decomposition of the exchange matrix
+# ## Run as a 2D experiment
+# First, we'll just calculate one 2D spectrum, and then later check how the spectrum evolves as a function of a delay time. We need an initial density matrix, $S_x$, a detection matrix, $S^+$, and propagators for evolution times, $\pi$/2 pulses, and a delay for the exchange process. We start with generating the propagators and density matrices.
+# 
+# SLEEPY has a function in Tools, the TwoD_Builder, for executing and processing two-dimensional experiements. TwoD_Builder requires an initial density matrix, a Sequence for the indirect dimension evolution, the direction dimension evolution, and transfer periods between the dimensions. For the transfer, one needs a sequence to convert the X component, and one for the Y component (States acquisition). THe sequences for the direct/indirect dimension may just be delays.
 
 # In[4]:
 
 
-d,v=np.linalg.eig(L.kex) #d is eigenvalues, v is eigenvectors
-i=np.argsort(d)  # One element should be zero, the other negative
-tc_k=-1/d[i[0]]
-peq=v[:,i[1]]
-peq/=peq.sum()
-print(f'The correlation time is {tc_k:.1f} s, and the equilibrium populations are ({peq[0]:.2f},{peq[1]:.2f})')
+rho=sl.Rho(rho0='S0x',detect='S0p')
+# L.Udelta('13C',np.pi/2,np.pi/2)*rho
+
+Dt=1/(2*10*150)  #Delay for a spectrum about twice as broad as the chemical shift difference
+seq=L.Sequence(Dt=Dt)  #Sequence for indirect and direct dimensions
+seq_trX=L.Sequence()  #X-component of transfer
+seq_trY=L.Sequence()  #Y-component of transfer
+
+v1=50000     #pi/2 pulse field strength
+tpi2=1/v1/4  #pi/2 pulse length
+dly=5
+t=[0,tpi2,dly,dly+tpi2] #pi/2 pulse, 1 second delay, pi/2 pulse
+seq_trX.add_channel('13C',t=t,v1=[v1,0,v1],phase=[-np.pi/2,0,np.pi/2]) #Convert x to z, delay, convert z to x
+seq_trY.add_channel('13C',t=t,v1=[v1,0,v1],phase=[0,0,np.pi/2]) #Convert y to z, delay, convert z to x
 
 
-# ## Run as a 2D experiment
-# First, we'll just calculate one 2D spectrum, and then later check how the spectrum evolves as a function of a delay time. We need an initial density matrix, $S_x$, a detection matrix, $S^+$, and propagators for evolution times, $\pi$/2 pulses, and a delay for the exchange process. We start with generating the propagators and density matrices.
+twoD=sl.Tools.TwoD_Builder(rho,seq_dir=seq,seq_in=seq,seq_trX=seq_trX,seq_trY=seq_trY)
+twoD(32,64)
+
+ax=twoD.plot()
+ax.set_xlabel(r'$\delta$($^{13}$C) / kHz')
+_=ax.set_ylabel(r'$\delta$($^{13}$C) / kHz')
+ax.figure.set_size_inches([7,7])
+
+
+# ## Sweep the delay time to observe buildup
+# We just repeat the above code except with different lengths for Udelay. We slice through the larger peak in order to see the growth of the second peak
 
 # In[5]:
 
 
-rho=sl.Rho(rho0='S0x',detect='S0p')
+i_dir=[16,48]
+i_in=[32,96]
 
-#Pulse sequences for pi/2 pulses
-v1=50000
-tpi2=1/v1/4
-pi2x=L.Sequence() 
-pi2y=L.Sequence()
-pi2my=L.Sequence()
-pi2x.add_channel('13C',t=[0,tpi2],v1=v1,phase=0)      #Here we add the pi/2 pulse on x
-pi2y.add_channel('13C',t=[0,tpi2],v1=v1,phase=np.pi/2) #Here we add the pi/2 pulse on y
-pi2my.add_channel('13C',t=[0,tpi2],v1=v1,phase=-np.pi/2) #Here we add the pi/2 pulse on -y
+delays=np.linspace(0.1,3,12)
+fig,ax=plt.subplots(3,4)
+ax=ax.flatten()
+sm=None
+I=list()
+sm=0
+for a,delay in zip(ax,delays):
+    t=[0,tpi2,delay,delay+tpi2] #pi/2 pulse, 1 second delay, pi/2 pulse
+    seq_trX.clear()
+    seq_trY.clear()
+    seq_trX.add_channel('13C',t=t,v1=[v1,0,v1],phase=[-np.pi/2,0,np.pi/2]) #Convert x to z, delay, convert z to x
+    seq_trY.add_channel('13C',t=t,v1=[v1,0,v1],phase=[0,0,np.pi/2]) #Convert y to z, delay, convert z to x
 
-Upi2x=pi2x.U()  #Get the propagators for the pulse sequence
-Upi2y=pi2y.U()
-Upi2my=pi2my.U()
+    twoD=sl.Tools.TwoD_Builder(rho,seq_dir=seq,seq_in=seq,seq_trX=seq_trX,seq_trY=seq_trY)
+    twoD(32,64).proc()
+    
+    a.plot(twoD.v_in/1e3,twoD.Sreal[i_dir[0]].real)
+    sm=max(a.get_ylim()[1],sm)
+    
+    I.append([twoD.Sreal[i_dir[0],i_in[0]].real,twoD.Sreal[i_dir[1],i_in[1]].real,
+             twoD.Sreal[i_dir[0],i_in[1]].real,twoD.Sreal[i_dir[1],i_in[0]].real])
 
-Dt=1/(2*10*150)  #For a 10 ppm shift difference, this should be enough to easily capture both peaks in the spectrum 
-Uevol=L.U(Dt=Dt)  #Propagator for the evolution time
-# We could also use L.Sequence(Dt=Dt).U() above, for an empty sequence
-Udelay=L.U(Dt=5) #Get the propagator for the delay (Here set to 5 seconds, i.e. full exchange)
+I=np.array(I)
+
+for a,delay in zip(ax,delays):
+    a.set_ylim([-sm*.1,sm])
+    a.text(0,sm*.5,r'$\tau$'+f' = {delay:.1f} s')
+    a.set_yticklabels('')
+    if a.is_last_row():
+        a.set_xlabel(r'$\delta$($^{13}$C) / kHz')
+    if a.is_first_col():
+        a.set_ylabel('I / a.u.')
+        
+
+        
+fig.set_size_inches([9,7])
+fig.tight_layout()
 
 
-# ## Execute the sequence
-# We need to capture both an indirect and direct dimension, with both real and imaginary components. We'll loop over the indirect dimension, and capture the direct dimension with Rho.DetProp
+# ## Plot trajectory of the individual peaks
+# Each peak represents the probability of starting in some state and ending in another state after the delay time, $\tau$
 
 # In[6]:
 
 
+I=np.array(I)
+
+
+# In[7]:
+
+
+ax=plt.subplots()[1]
+ax.plot(delays,I)
+ax.set_xlabel(r'$\tau$ / s')
+ax.set_ylabel('I / a.u.')
+ax.set_yticklabels('')
+ax.legend((r'$p_1\rightarrow p_1$',r'$p_2\rightarrow p_2$',r'$p_1\rightarrow p_2$',r'$p_2\rightarrow p_1$'))
+
+
+# ## Spectra as a function of exchange rate
+# We can't use EXSY for faster motions, because the peaks don't stay separated. We can observe this behavior here. We just copy the setup from above for the 3D spectra and run it with varying correlation times
+
+# In[8]:
+
+
+tc0=np.logspace(-1,-6,6)
+p1=0.5  #Population of state 1
+p2=1-p1  #Population of state 2
+
+fig=plt.figure()
+ax=[fig.add_subplot(2,3,k+1,projection='3d') for k in range(6)]
+I=list()
+for a,tc in zip(ax,tc0):
+    L.kex=sl.Tools.twoSite_kex(tc=tc,p1=p1)
+    
+    twoD=sl.Tools.TwoD_Builder(rho,seq_dir=seq,seq_in=seq,seq_trX=seq_trX,seq_trY=seq_trY)
+    twoD(32,64).proc()
+    
+    #Plot the result
+    twoD.plot(ax=a)
+    a.text(1,-1,a.get_zlim()[1]*1.3,r'$\tau_c = $'+f'{tc:.1e} s')
+    
+fig.set_size_inches(10,8)
+fig.tight_layout()
+for a in ax:a.set_zticklabels('')
+
+
+# Now we do the same as above, but without having symmetric exchange, i.e. $p_1\ne p_2$.
+
+# In[9]:
+
+
+tc0=np.logspace(-1,-6,6)
+p1=0.75  #Population of state 1
+p2=1-p1  #Population of state 2
+
+fig=plt.figure()
+ax=[fig.add_subplot(2,3,k+1,projection='3d') for k in range(6)]
+I=list()
+for a,tc in zip(ax,tc0):
+    L.kex=sl.Tools.twoSite_kex(tc=tc,p1=p1)
+    
+    twoD=sl.Tools.TwoD_Builder(rho,seq_dir=seq,seq_in=seq,seq_trX=seq_trX,seq_trY=seq_trY)
+    twoD(32,64).proc()
+    
+    #Plot the result
+    twoD.plot(ax=a)
+    a.text(1,-1,a.get_zlim()[1]*1.3,r'$\tau_c = $'+f'{tc:.1e} s')
+    
+fig.set_size_inches(10,8)
+fig.tight_layout()
+for a in ax:a.set_zticklabels('')
+
+
+# ## Explicit execution and processing of the 2D sequence
+# Above, we have used a built-in class for executing and processing 2D spectra in SLEEPY, however, it may be informative to once execute the whole processing manually.
+
+# ### Acquisition
+
+# In[10]:
+
+
+# Start from L that has already been generated
+L.kex=sl.Tools.twoSite_kex(tc=1,p1=0.75)
+
+rho=sl.Rho(rho0='S0x',detect='S0p')
+
+Uevol=seq.U()
+
 RE=list()
 IM=list()
-n=32
+n=64
 for k in range(n):
-    rho.clear()  #Clear all data in rho
     #First capture the real part
+    rho.clear()  #Clear all data in rho
     Uevol**k*rho  #This applies the evolution operator k times
-    Upi2my*rho     #This flips the x magnetization up to z
-    Udelay*rho     #This applies the delay for exchange to occur
-    Upi2y*rho    #The flips the z magnetization back to x
-    #You can write these all in one line instead: Upi2y*Udelay*Upi2my*Uevol**k*rho
-    rho.DetProp(Uevol,n=n) #Detect the transverse (S0p) magnetization
+    seq_trX*rho
+    rho.DetProp(Uevol,n=n)
     RE.append(rho.I[0])
-    #Now capture the imaginary part
-    rho.clear()
-    Uevol**k*rho
-    Upi2x*rho #Flip the y magnetization up to z
-    Udelay*rho
-    Upi2y*rho #Flip z magnetization back to x
+    
+    #Then capture the imaginary part
+    rho.clear()  #Clear all data in rho
+    Uevol**k*rho  #This applies the evolution operator k times
+    seq_trY*rho
     rho.DetProp(Uevol,n=n)
     IM.append(rho.I[0])
 
 
-# ## Fourier transform and plot the results
-# We just extract the real part from the spectrum.
-# 
-# SLEEPY has built-in functions for processing 1D spectra, but 2D processing must still be performed by the user.
+# ### Processing
 
-# In[7]:
+# In[11]:
 
 
 RE,IM=np.array(RE,dtype=complex),np.array(IM,dtype=complex) #Turn lists into arrays
@@ -137,13 +254,7 @@ RE=(RE.T*apod).T
 IM=IM*apod
 IM=(IM.T*apod).T
 
-
-# Hypercomplex processing
-
-# In[8]:
-
-
-nft=n*32
+nft=n*2
 FT_RE=np.fft.fft(RE,n=nft,axis=1).real.astype(complex)
 FT_IM=np.fft.fft(IM,n=nft,axis=1).real.astype(complex)
 spec=np.fft.fftshift(np.fft.fft(FT_RE+1j*FT_IM,n=nft,axis=0),axes=[0,1])
@@ -153,251 +264,21 @@ v*=1e6/ex0.v0[0]   #convert to ppm
 vx,vy=np.meshgrid(v,v)  #meshgrid for plotting
 
 
-# Plotting
+# ### Plotting
 
-# In[9]:
+# In[12]:
 
 
 from matplotlib import cm
 fig=plt.figure()
 ax=fig.add_subplot(111,projection='3d')
-ax.plot_surface(vx,vy,spec.real,cmap=cm.coolwarm,linewidth=0,color='None')
+ax.plot_surface(vx,vy,spec.real,cmap='coolwarm',linewidth=0,color='None')
 ax.set_xlabel(r'$\delta_1 (^{13}$C) / ppm')
 ax.set_ylabel(r'$\delta_2 (^{13}$C) / ppm')
 ax.invert_xaxis()
 ax.invert_yaxis()
 
 fig.set_size_inches([8,8])
-
-
-# ## Sweep the delay time to observe buildup
-# We just repeat the above code except with different lengths for Udelay. We slice through the larger peak in order to see the growth of the second peak
-
-# In[10]:
-
-
-delays=np.linspace(0,3,13)[:-1]
-fig,ax=plt.subplots(3,4)
-ax=ax.flatten()
-sm=None
-I=list()
-for a,delay in zip(ax,delays):
-    Udelay=L.U(Dt=delay)
-    #Propagation
-    RE=list()
-    IM=list()
-    for k in range(n):
-        rho.clear()
-        #First capture the real part
-        Uevol**k*rho  #This applies the evolution operator k times
-        Upi2my*rho     #This flips the x magnetization up to z
-        Udelay*rho     #This applies the delay for exchange to occur
-        Upi2y*rho    #The flips the z magnetization back to x
-        rho.DetProp(Uevol,n=n) #Detect the transverse (S0p) magnetization
-        RE.append(rho.I[0])
-        #Now capture the imaginary part
-        rho.clear()
-        Uevol**k*rho
-        Upi2x*rho #Flip the y magnetization up to z
-        Udelay*rho
-        Upi2y*rho #Flip z magnetization back to x
-        rho.DetProp(Uevol,n=n)
-        IM.append(rho.I[0])
-    
-    #Calculate spectrum
-    RE,IM=np.array(RE,dtype=complex),np.array(IM,dtype=complex)
-    RE[:,0]/=2
-    RE[0,:]/=2
-    IM[:,0]/=2
-    IM[0,:]/=2
-    RE=RE*apod
-    RE=(RE.T*apod).T
-    IM=IM*apod
-    IM=(IM.T*apod).T
-    spec=np.fft.fftshift(np.fft.fft(np.fft.fft(RE,n=nft,axis=1).real.astype(complex)+                                    1j*np.fft.fft(IM,n=nft,axis=1),n=nft,axis=0),axes=[0,1])
-    v=1/(2*Dt)*np.linspace(-1,1,spec.shape[0])  #Frequency axis
-    v-=(v[1]-v[0])/2  
-    v*=1e6/ex0.v0[0]   #convert to ppm
-    
-    #Plot the result
-    integral=spec[:,100:400].sum(1).real
-    if sm is None:
-        sm=integral.max()
-    
-    a.plot(v,integral)
-    if a.is_last_row() if hasattr(a,'is_last_row') else a.get_subplotspec().is_last_row():
-        a.set_xlabel(r'$\delta (^{13}$C) / ppm')
-    if a.is_first_col() if hasattr(a,'is_first_col') else a.get_subplotspec().is_first_col():
-        a.set_ylabel('I / a.u.')
-    a.set_ylim([-sm*.3,sm*1.1])
-    a.text(-10,-sm*.25,r'$\tau$'+f' = {delay:.1f} s')
-    a.set_yticklabels('')
-    
-    I.append([spec[100:400][:,100:400].real.sum(),spec[600:900][:,600:900].real.sum(),
-              spec[100:400][:,600:900].real.sum(),spec[600:900][:,100:400].real.sum()])  #Collect individual peak intensities
-I=np.array(I).T   #Collection of individual peak intensities
-fig.set_size_inches([9,7])
-fig.tight_layout()
-
-
-# ## Plot trajectory of the individual peaks
-# Each peak represents the probability of starting in some state and ending in another state after the delay time, $\tau$
-
-# In[11]:
-
-
-ax=plt.subplots()[1]
-ax.plot(delays,I.T)
-ax.set_xlabel(r'$\tau$ / s')
-ax.set_ylabel('I / a.u.')
-ax.set_yticklabels('')
-ax.legend((r'$p_1\rightarrow p_1$',r'$p_2\rightarrow p_2$',r'$p_1\rightarrow p_2$',r'$p_2\rightarrow p_1$'))
-
-
-# ## Spectra as a function of exchange rate
-# We can't use EXSY for faster motions, because the peaks don't stay separated. We can observe this behavior here. We just copy the setup from above for the 3D spectra and run it with varying correlation times
-
-# In[12]:
-
-
-tc0=np.logspace(-1,-6,6)
-p1=0.5  #Population of state 1
-p2=1-p1  #Population of state 2
-
-fig=plt.figure()
-ax=[fig.add_subplot(2,3,k+1,projection='3d') for k in range(6)]
-I=list()
-for a,tc in zip(ax,tc0):
-    L.kex=1/(2*tc)*(np.array([[-1,1],[1,-1]])+(p1-p2)*np.array([[1,1],[-1,-1]]))
-    
-    Upi2x=pi2x.U()  #Get the propagators for the pulse sequence
-    Upi2y=pi2y.U()
-    Upi2my=pi2my.U()
-    
-    Udelay=L.U(Dt=tc0[0]*5)
-    Uevol=L.U(Dt=Dt)  #Propagator for the evolution time
-    
-    #Propagation
-    RE=list()
-    IM=list()
-    for k in range(n):
-        rho.clear()
-        #First capture the real part
-        Uevol**k*rho  #This applies the evolution operator k times
-        Upi2my*rho     #This flips the x magnetization up to z
-        Udelay*rho     #This applies the delay for exchange to occur
-        Upi2y*rho    #The flips the z magnetization back to x
-        rho.DetProp(Uevol,n=n) #Detect the transverse (S0p) magnetization
-        RE.append(rho.I[0])
-        #Now capture the imaginary part
-        rho.clear()
-        Uevol**k*rho
-        Upi2x*rho #Flip the y magnetization up to z
-        Udelay*rho
-        Upi2y*rho #Flip z magnetization back to x
-        rho.DetProp(Uevol,n=n)
-        IM.append(rho.I[0])
-    
-    #Calculate spectrum
-    RE,IM=np.array(RE,dtype=complex),np.array(IM,dtype=complex)
-    RE[:,0]/=2
-    RE[0,:]/=2
-    IM[:,0]/=2
-    IM[0,:]/=2
-    RE=RE*apod
-    RE=(RE.T*apod).T
-    IM=IM*apod
-    IM=(IM.T*apod).T
-    spec=np.fft.fftshift(np.fft.fft(np.fft.fft(RE,n=nft,axis=1).real+                                    1j*np.fft.fft(IM,n=nft,axis=1),n=nft,axis=0).real,axes=[0,1])
-    v=1/(2*Dt)*np.linspace(-1,1,spec.shape[0])  #Frequency axis
-    v-=(v[1]-v[0])/2  
-    v*=1e6/ex0.v0[0]   #convert to ppm
-    
-    #Plot the result
-    a.plot_surface(vx,vy,spec.real,cmap=cm.coolwarm,linewidth=0,color='None')
-    a.set_xlabel(r'$\delta_1 (^{13}$C) / ppm',fontsize=8)
-    a.set_ylabel(r'$\delta_2 (^{13}$C) / ppm',fontsize=8)
-    a.tick_params(axis='both', which='major', labelsize=8)
-    a.invert_xaxis()
-    a.invert_yaxis()
-    a.text(10,-10,a.get_zlim()[1]*1.3,r'$\tau_c = $'+f'{tc:.1e} s')
-    
-fig.set_size_inches(8,6)
-fig.tight_layout()
-for a in ax:a.set_zticklabels('')
-
-
-# Now we do the same as above, but without having symmetric exchange, i.e. $p_1\ne p_2$.
-
-# In[13]:
-
-
-tc0=np.logspace(-1,-6,6)
-p1=0.75  #Population of state 1
-p2=1-p1  #Population of state 2
-
-fig=plt.figure()
-ax=[fig.add_subplot(2,3,k+1,projection='3d') for k in range(6)]
-I=list()
-for a,tc in zip(ax,tc0):
-    L.kex=1/(2*tc)*(np.array([[-1,1],[1,-1]])+(p1-p2)*np.array([[1,1],[-1,-1]]))
-    
-    Upi2x=pi2x.U()  #Get the propagators for the pulse sequence
-    Upi2y=pi2y.U()
-    Upi2my=pi2my.U()
-    
-    Udelay=L.U(Dt=tc0[0]*5)
-    Uevol=L.U(Dt=Dt)  #Propagator for the evolution time
-    
-    #Propagation
-    RE=list()
-    IM=list()
-    for k in range(n):
-        rho.clear()
-        #First capture the real part
-        Uevol**k*rho  #This applies the evolution operator k times
-        Upi2my*rho     #This flips the x magnetization up to z
-        Udelay*rho     #This applies the delay for exchange to occur
-        Upi2y*rho    #The flips the z magnetization back to x
-        rho.DetProp(Uevol,n=n) #Detect the transverse (S0p) magnetization
-        RE.append(rho.I[0])
-        #Now capture the imaginary part
-        rho.clear()
-        Uevol**k*rho
-        Upi2x*rho #Flip the y magnetization up to z
-        Udelay*rho
-        Upi2y*rho #Flip z magnetization back to x
-        rho.DetProp(Uevol,n=n)
-        IM.append(rho.I[0])
-    
-    #Calculate spectrum
-    RE,IM=np.array(RE,dtype=complex),np.array(IM,dtype=complex)
-    RE[:,0]/=2
-    RE[0,:]/=2
-    IM[:,0]/=2
-    IM[0,:]/=2
-    RE=RE*apod
-    RE=(RE.T*apod).T
-    IM=IM*apod
-    IM=(IM.T*apod).T
-    spec=np.fft.fftshift(np.fft.fft(np.fft.fft(RE,n=nft,axis=1).real+                                    1j*(np.fft.fft(IM,n=nft,axis=1).real),n=nft,axis=0),axes=[0,1])
-    v=1/(2*Dt)*np.linspace(-1,1,spec.shape[0])  #Frequency axis
-    v-=(v[1]-v[0])/2  
-    v*=1e6/ex0.v0[0]   #convert to ppm
-    
-    #Plot the result
-    a.plot_surface(vx,vy,spec.real,cmap=cm.coolwarm,linewidth=0,color='None')
-    a.set_xlabel(r'$\delta_1 (^{13}$C) / ppm',fontsize=8)
-    a.set_ylabel(r'$\delta_2 (^{13}$C) / ppm',fontsize=8)
-    a.tick_params(axis='both', which='major', labelsize=8)
-    a.invert_xaxis()
-    a.invert_yaxis()
-    a.text(10,-10,a.get_zlim()[1]*1.3,r'$\tau_c = $'+f'{tc:.1e} s')
-    
-
-fig.set_size_inches(8,6)
-fig.tight_layout()
-for a in ax:a.set_zticklabels('')
 
 
 # In[ ]:
