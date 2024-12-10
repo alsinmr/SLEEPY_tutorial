@@ -150,9 +150,9 @@ const thebe_selector_output = ".output, .cell_output"
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="../Chapter1/Ch1_Objects.html">
+    <a class="reference internal" href="../Chapter1/Ch1_ShortExamples.html">
      <font color="#0093AF">
-      Objects
+      Short Examples
      </font>
     </a>
    </li>
@@ -228,19 +228,76 @@ const thebe_selector_output = ".output, .cell_output"
    </li>
   </ul>
  </li>
- <li class="toctree-l1">
+ <li class="toctree-l1 has-children">
   <a class="reference internal" href="../Ch3_DynamicsSolids.html">
    <font color="maroon">
     Dynamics in Solids
    </font>
   </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/>
+  <label for="toctree-checkbox-3">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../Chapter3/Ch3_R1p.html">
+     <font color="#0093AF">
+      R
+      <span class="math notranslate nohighlight">
+       \(_{1\rho}\)
+      </span>
+      relaxation
+     </font>
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../Chapter3/Ch3_REDOR.html">
+     <font color="#0093AF">
+      REDOR
+     </font>
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../Chapter3/Ch3_DIPSHIFT.html">
+     <font color="#0093AF">
+      DIPSHIFT
+     </font>
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../Chapter3/Ch3_T1_NOE.html">
+     <font color="#0093AF">
+      T
+      <span class="math notranslate nohighlight">
+       \(_1\)
+      </span>
+      and NOE
+     </font>
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../Chapter3/Ch3_RECRR.html">
+     <font color="#0093AF">
+      Correlation-time dependence of a pulse-sequence: RECRR
+     </font>
+    </a>
+   </li>
+  </ul>
  </li>
- <li class="toctree-l1">
+ <li class="toctree-l1 has-children">
   <a class="reference internal" href="../Ch4_DNP.html">
    <font color="maroon">
     Dynamic Nuclear Polarization
    </font>
   </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/>
+  <label for="toctree-checkbox-4">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul class="simple">
+  </ul>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../Ch5_ParamagneticEffects.html">
@@ -567,13 +624,21 @@ title="Print to PDF"
 <p>In solution NMR, if a two-site exchange process leads to modulation of chemical shift, it is in some cases possible to calculate the rate of exchange (<span class="math notranslate nohighlight">\(k_{ex}=k_{1\rightarrow2}+k_{2\rightarrow1}\)</span>), the change in chemical shift (<span class="math notranslate nohighlight">\(\Delta\omega=\Omega_1-\Omega_2\)</span>) and also the populations of the two sites (<span class="math notranslate nohighlight">\(p_1/p_2=k_{2\rightarrow1}/k_{1\rightarrow2}\)</span>), based on a series of <span class="math notranslate nohighlight">\(R_{1\rho}\)</span> measurements. However, this depends on the rate of exchange and also the strength of the spin-lock. If the exchange is too fast, it is impossible to separate the populations from the change in chemical shift, obtaining only the product <span class="math notranslate nohighlight">\(p_1p_2\Delta\omega_{12}^2\)</span>.</p>
 <p>Furthermore, if only on-resonance <span class="math notranslate nohighlight">\(R_{1\rho}\)</span> experiments are applied, it is impossible to determine whether the larger population has the larger or smaller chemical shift, whereas this can be resolved using off-resonant <span class="math notranslate nohighlight">\(R_{1\rho}\)</span> experiments. We will investigate this with simulation, and also compare to the formula provided by Miloushev and Palmer.</p>
 <p>Note that this experiment is also valid in solids, but we must also consider reorientational dynamics.</p>
+<p><a href="https://githubtocolab.com/alsinmr/SLEEPY_tutorial/blob/main/ColabNotebooks/Chapter2/Ch2_BMRD.ipynb" target="_blank"><img src="https://colab.research.google.com/assets/colab-badge.svg"></a></p>
 <section id="setup">
 <h2>Setup<a class="headerlink" href="#setup" title="Permalink to this headline">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">os</span>
-<span class="n">os</span><span class="o">.</span><span class="n">chdir</span><span class="p">(</span><span class="s1">&#39;../../../&#39;</span><span class="p">)</span>
-<span class="kn">import</span> <span class="nn">SLEEPY</span> <span class="k">as</span> <span class="nn">sl</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># SETUP pyDR</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="n">os</span><span class="o">.</span><span class="n">chdir</span><span class="p">(</span><span class="s1">&#39;../..&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">SLEEPY</span> <span class="k">as</span> <span class="nn">sl</span>
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
 </pre></div>
@@ -710,10 +775,10 @@ R_{1\rho}^{ex}=\frac{\sin^2\beta_ep_1p_2\Delta\omega_{12}^2k_{ex}}{\omega_e^2+k_
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>785.3981633974482 -2356.194490192345 125.0 -375.0
 </pre></div>
 </div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x7fc08820eda0&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x7fe9d217b9d0&gt;
 </pre></div>
 </div>
-<img alt="../_images/Ch2_BMRD_11_2.png" src="../_images/Ch2_BMRD_11_2.png" />
+<img alt="../_images/Ch2_BMRD_13_2.png" src="../_images/Ch2_BMRD_13_2.png" />
 </div>
 </div>
 <section id="what-happens-if-we-vary-the-populations-and-delta-omega-12-2-but-leave-p-1p-2-delta-omega-2-fixed">
@@ -750,7 +815,7 @@ R_{1\rho}^{ex}=\frac{\sin^2\beta_ep_1p_2\Delta\omega_{12}^2k_{ex}}{\omega_e^2+k_
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/Ch2_BMRD_13_0.png" src="../_images/Ch2_BMRD_13_0.png" />
+<img alt="../_images/Ch2_BMRD_15_0.png" src="../_images/Ch2_BMRD_15_0.png" />
 </div>
 </div>
 <p>As we can see above, all relaxation curves are nearly identical, showing that we cannot separate the populations from the change in chemical shift.</p>
@@ -781,7 +846,7 @@ R_{1\rho}^{ex}=\frac{\sin^2\beta_ep_1p_2\Delta\omega_{12}^2k_{ex}}{\omega_e^2+k_
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/Ch2_BMRD_15_0.png" src="../_images/Ch2_BMRD_15_0.png" />
+<img alt="../_images/Ch2_BMRD_17_0.png" src="../_images/Ch2_BMRD_17_0.png" />
 </div>
 </div>
 <p>For slower exchange, the third term in the denominator becomes important, yielding differences in relaxation depending on the population.</p>
@@ -811,7 +876,7 @@ R_{1\rho}^{ex}=\frac{\sin^2\beta_ep_1p_2\Delta\omega_{12}^2k_{ex}}{\omega_e^2+k_
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/Ch2_BMRD_17_0.png" src="../_images/Ch2_BMRD_17_0.png" />
+<img alt="../_images/Ch2_BMRD_19_0.png" src="../_images/Ch2_BMRD_19_0.png" />
 </div>
 </div>
 <p>The stronger field slows down the relaxation considerably, but furthermore, no longer can we separate <span class="math notranslate nohighlight">\(p_1p_2\)</span> from <span class="math notranslate nohighlight">\(\Delta\Omega_{12}\)</span>. This becomes critical in solid-state NMR, where we need to be able to apply low fields while retaining a spin-lock. This can become problematic due to other large, anisotropic interactions, such that we need to spin quickly and decrease the <span class="math notranslate nohighlight">\(^1\)</span>H concentration to avoid higher order effects.</p>
@@ -841,10 +906,10 @@ R_{1\rho}^{ex}=\frac{\sin^2\beta_ep_1p_2\Delta\omega_{12}^2k_{ex}}{\omega_e^2+k_
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&lt;matplotlib.lines.Line2D at 0x7fc0c9025a90&gt;]
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&lt;matplotlib.lines.Line2D at 0x7fe9f08084f0&gt;]
 </pre></div>
 </div>
-<img alt="../_images/Ch2_BMRD_20_1.png" src="../_images/Ch2_BMRD_20_1.png" />
+<img alt="../_images/Ch2_BMRD_22_1.png" src="../_images/Ch2_BMRD_22_1.png" />
 </div>
 </div>
 <p>Application of off-resonance fields results in an effective field that is larger than the applied field (<span class="math notranslate nohighlight">\(\omega_{e}^2=\omega_1^2+\Delta\Omega^2\)</span>). The larger effective field results in slower relaxation. However, if the exchange is sufficiently slow, it also matters how large the effective field is relative to each of the two resonance frequencies, resulting in different relaxation behavior depending on if the off-resonance field is above or below the mean frequency (<span class="math notranslate nohighlight">\(\Omega=p_1\Omega_1+p_2\Omega_2\)</span>).</p>
@@ -902,7 +967,7 @@ R_{1\rho}^{ex}=\frac{\sin^2\beta_ep_1p_2\Delta\omega_{12}^2k_{ex}}{\omega_e^2+k_
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/Ch2_BMRD_22_0.png" src="../_images/Ch2_BMRD_22_0.png" />
+<img alt="../_images/Ch2_BMRD_24_0.png" src="../_images/Ch2_BMRD_24_0.png" />
 </div>
 </div>
 <p>Then, we see that relaxation is faster when the off-resonant field is applied towards the chemical shift corresponding to the smaller population. In this case, we are less off-resonant relative to the two chemical shifts, resulting in smaller effective fields and less relaxation.</p>
@@ -957,7 +1022,7 @@ R_{1\rho}^{ex}=\frac{\sin^2\beta_ep_1p_2\Delta\omega_{12}^2k_{ex}}{\omega_e^2+k_
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/Ch2_BMRD_24_0.png" src="../_images/Ch2_BMRD_24_0.png" />
+<img alt="../_images/Ch2_BMRD_26_0.png" src="../_images/Ch2_BMRD_26_0.png" />
 </div>
 </div>
 </section>

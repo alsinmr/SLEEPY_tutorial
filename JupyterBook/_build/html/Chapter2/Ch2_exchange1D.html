@@ -150,9 +150,9 @@ const thebe_selector_output = ".output, .cell_output"
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="../Chapter1/Ch1_Objects.html">
+    <a class="reference internal" href="../Chapter1/Ch1_ShortExamples.html">
      <font color="#0093AF">
-      Objects
+      Short Examples
      </font>
     </a>
    </li>
@@ -228,19 +228,76 @@ const thebe_selector_output = ".output, .cell_output"
    </li>
   </ul>
  </li>
- <li class="toctree-l1">
+ <li class="toctree-l1 has-children">
   <a class="reference internal" href="../Ch3_DynamicsSolids.html">
    <font color="maroon">
     Dynamics in Solids
    </font>
   </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/>
+  <label for="toctree-checkbox-3">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../Chapter3/Ch3_R1p.html">
+     <font color="#0093AF">
+      R
+      <span class="math notranslate nohighlight">
+       \(_{1\rho}\)
+      </span>
+      relaxation
+     </font>
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../Chapter3/Ch3_REDOR.html">
+     <font color="#0093AF">
+      REDOR
+     </font>
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../Chapter3/Ch3_DIPSHIFT.html">
+     <font color="#0093AF">
+      DIPSHIFT
+     </font>
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../Chapter3/Ch3_T1_NOE.html">
+     <font color="#0093AF">
+      T
+      <span class="math notranslate nohighlight">
+       \(_1\)
+      </span>
+      and NOE
+     </font>
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../Chapter3/Ch3_RECRR.html">
+     <font color="#0093AF">
+      Correlation-time dependence of a pulse-sequence: RECRR
+     </font>
+    </a>
+   </li>
+  </ul>
  </li>
- <li class="toctree-l1">
+ <li class="toctree-l1 has-children">
   <a class="reference internal" href="../Ch4_DNP.html">
    <font color="maroon">
     Dynamic Nuclear Polarization
    </font>
   </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/>
+  <label for="toctree-checkbox-4">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul class="simple">
+  </ul>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../Ch5_ParamagneticEffects.html">
@@ -456,6 +513,11 @@ title="Print to PDF"
     <nav id="bd-toc-nav" aria-label="Page">
         <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#setup">
+   Setup
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#build-the-system">
    Build the system
   </a>
@@ -505,6 +567,11 @@ title="Print to PDF"
                         <nav aria-label="Page">
                             <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#setup">
+   Setup
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#build-the-system">
    Build the system
   </a>
@@ -546,17 +613,28 @@ title="Print to PDF"
                 
   <section class="tex2jax_ignore mathjax_ignore" id="font-color-0093af-exchange-in-1d-spectra">
 <h1><font  color = "#0093AF"> Exchange in 1D spectra<a class="headerlink" href="#font-color-0093af-exchange-in-1d-spectra" title="Permalink to this headline">#</a></h1>
+<p><a href="https://githubtocolab.com/alsinmr/SLEEPY_tutorial/blob/main/ColabNotebooks/Chapter2/Ch2_exchange1D.ipynb" target="_blank"><img src="https://colab.research.google.com/assets/colab-badge.svg"></a></p>
+<section id="setup">
+<h2>Setup<a class="headerlink" href="#setup" title="Permalink to this headline">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">os</span>
-<span class="n">os</span><span class="o">.</span><span class="n">chdir</span><span class="p">(</span><span class="s1">&#39;../../../&#39;</span><span class="p">)</span>
-<span class="kn">import</span> <span class="nn">SLEEPY</span> <span class="k">as</span> <span class="nn">sl</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># SETUP pyDR</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="n">os</span><span class="o">.</span><span class="n">chdir</span><span class="p">(</span><span class="s1">&#39;../..&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">SLEEPY</span> <span class="k">as</span> <span class="nn">sl</span>
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
 </pre></div>
 </div>
 </div>
 </div>
+</section>
 <section id="build-the-system">
 <h2>Build the system<a class="headerlink" href="#build-the-system" title="Permalink to this headline">#</a></h2>
 <p>The first step is to build the system, which will have a single nucleus, with two different chemical shifts.</p>
@@ -637,7 +715,7 @@ k_{12} &amp; k_{21}+i\Omega_2
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;AxesSubplot:xlabel=&#39;$\\nu$ / Hz&#39;, ylabel=&#39;I / a.u.&#39;&gt;
 </pre></div>
 </div>
-<img alt="../_images/Ch2_exchange1D_11_1.png" src="../_images/Ch2_exchange1D_11_1.png" />
+<img alt="../_images/Ch2_exchange1D_14_1.png" src="../_images/Ch2_exchange1D_14_1.png" />
 </div>
 </div>
 </section>
@@ -671,7 +749,7 @@ k_{12} &amp; k_{21}+i\Omega_2
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/Ch2_exchange1D_13_0.png" src="../_images/Ch2_exchange1D_13_0.png" />
+<img alt="../_images/Ch2_exchange1D_16_0.png" src="../_images/Ch2_exchange1D_16_0.png" />
 </div>
 </div>
 </section>
@@ -727,7 +805,7 @@ Below coalescence</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/Ch2_exchange1D_15_0.png" src="../_images/Ch2_exchange1D_15_0.png" />
+<img alt="../_images/Ch2_exchange1D_18_0.png" src="../_images/Ch2_exchange1D_18_0.png" />
 </div>
 </div>
 <p>Above, we see that the peak to the left gradually vanishes, and the peak to the right shifts left. However, the second peak does not disappear at a well-defined condition, it just becomes gradually smaller.</p>

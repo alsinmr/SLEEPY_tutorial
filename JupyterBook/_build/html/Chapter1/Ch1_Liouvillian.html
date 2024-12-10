@@ -150,9 +150,9 @@ const thebe_selector_output = ".output, .cell_output"
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="Ch1_Objects.html">
+    <a class="reference internal" href="Ch1_ShortExamples.html">
      <font color="#0093AF">
-      Objects
+      Short Examples
      </font>
     </a>
    </li>
@@ -177,28 +177,127 @@ const thebe_selector_output = ".output, .cell_output"
      </font>
     </a>
    </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="Ch1_rho.html">
+     <font color="#0093AF">
+      The Density Matrix
+     </font>
+    </a>
+   </li>
   </ul>
  </li>
- <li class="toctree-l1">
+ <li class="toctree-l1 has-children">
   <a class="reference internal" href="../Ch2_SolutionNMR.html">
    <font color="maroon">
     Solution NMR
    </font>
   </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/>
+  <label for="toctree-checkbox-2">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../Chapter2/Ch2_exchange1D.html">
+     <font color="#0093AF">
+      Exchange in 1D spectra
+     </font>
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../Chapter2/Ch2_EXSY.html">
+     <font color="#0093AF">
+      Exchange Spectroscopy (EXSY)
+     </font>
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../Chapter2/Ch2_BMRD.html">
+     <font color="#0093AF">
+      Bloch-McConnell Relaxation Dispersion
+     </font>
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../Chapter2/Ch2_CEST.html">
+     <font color="#0093AF">
+      Chemical Exchange Saturation Transfer (CEST)
+     </font>
+    </a>
+   </li>
+  </ul>
  </li>
- <li class="toctree-l1">
+ <li class="toctree-l1 has-children">
   <a class="reference internal" href="../Ch3_DynamicsSolids.html">
    <font color="maroon">
     Dynamics in Solids
    </font>
   </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/>
+  <label for="toctree-checkbox-3">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../Chapter3/Ch3_R1p.html">
+     <font color="#0093AF">
+      R
+      <span class="math notranslate nohighlight">
+       \(_{1\rho}\)
+      </span>
+      relaxation
+     </font>
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../Chapter3/Ch3_REDOR.html">
+     <font color="#0093AF">
+      REDOR
+     </font>
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../Chapter3/Ch3_DIPSHIFT.html">
+     <font color="#0093AF">
+      DIPSHIFT
+     </font>
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../Chapter3/Ch3_T1_NOE.html">
+     <font color="#0093AF">
+      T
+      <span class="math notranslate nohighlight">
+       \(_1\)
+      </span>
+      and NOE
+     </font>
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../Chapter3/Ch3_RECRR.html">
+     <font color="#0093AF">
+      Correlation-time dependence of a pulse-sequence: RECRR
+     </font>
+    </a>
+   </li>
+  </ul>
  </li>
- <li class="toctree-l1">
+ <li class="toctree-l1 has-children">
   <a class="reference internal" href="../Ch4_DNP.html">
    <font color="maroon">
     Dynamic Nuclear Polarization
    </font>
   </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/>
+  <label for="toctree-checkbox-4">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul class="simple">
+  </ul>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../Ch5_ParamagneticEffects.html">
@@ -532,6 +631,7 @@ title="Print to PDF"
                 
   <section class="tex2jax_ignore mathjax_ignore" id="font-color-0093af-hamiltonians-and-liouvillians">
 <h1><font  color = "#0093AF"> Hamiltonians and Liouvillians<a class="headerlink" href="#font-color-0093af-hamiltonians-and-liouvillians" title="Permalink to this headline">#</a></h1>
+<p><a href="https://githubtocolab.com/alsinmr/SLEEPY_tutorial/blob/main/ColabNotebooks/Chapter1/Ch1_Liouvillian.ipynb" target="_blank"><img src="https://colab.research.google.com/assets/colab-badge.svg"></a></p>
 <section id="setup">
 <h2>Setup<a class="headerlink" href="#setup" title="Permalink to this headline">#</a></h2>
 <div class="cell docutils container">
@@ -595,7 +695,7 @@ title="Print to PDF"
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;AxesSubplot:&gt;
 </pre></div>
 </div>
-<img alt="../_images/Ch1_Liouvillian_10_1.png" src="../_images/Ch1_Liouvillian_10_1.png" />
+<img alt="../_images/Ch1_Liouvillian_11_1.png" src="../_images/Ch1_Liouvillian_11_1.png" />
 </div>
 </div>
 <p>The Hamiltonian is built from the 5 rotating components of the Hamiltonian. If we have <span class="math notranslate nohighlight">\(n_\gamma\)</span> steps per rotor period, and we’re at the kth step, this is done as follows:</p>
@@ -637,7 +737,7 @@ title="Print to PDF"
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;AxesSubplot:&gt;
 </pre></div>
 </div>
-<img alt="../_images/Ch1_Liouvillian_14_1.png" src="../_images/Ch1_Liouvillian_14_1.png" />
+<img alt="../_images/Ch1_Liouvillian_15_1.png" src="../_images/Ch1_Liouvillian_15_1.png" />
 </div>
 </div>
 </section>
@@ -689,7 +789,7 @@ Type: larmor on spin 1
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;AxesSubplot:&gt;
 </pre></div>
 </div>
-<img alt="../_images/Ch1_Liouvillian_20_1.png" src="../_images/Ch1_Liouvillian_20_1.png" />
+<img alt="../_images/Ch1_Liouvillian_21_1.png" src="../_images/Ch1_Liouvillian_21_1.png" />
 </div>
 </div>
 </section>
@@ -744,7 +844,7 @@ Type: larmor on spin 1
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;AxesSubplot:&gt;
 </pre></div>
 </div>
-<img alt="../_images/Ch1_Liouvillian_27_1.png" src="../_images/Ch1_Liouvillian_27_1.png" />
+<img alt="../_images/Ch1_Liouvillian_28_1.png" src="../_images/Ch1_Liouvillian_28_1.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -757,7 +857,7 @@ Type: larmor on spin 1
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;AxesSubplot:&gt;
 </pre></div>
 </div>
-<img alt="../_images/Ch1_Liouvillian_28_1.png" src="../_images/Ch1_Liouvillian_28_1.png" />
+<img alt="../_images/Ch1_Liouvillian_29_1.png" src="../_images/Ch1_Liouvillian_29_1.png" />
 </div>
 </div>
 </section>
@@ -800,7 +900,7 @@ Type: larmor on spin 1
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;AxesSubplot:&gt;
 </pre></div>
 </div>
-<img alt="../_images/Ch1_Liouvillian_35_1.png" src="../_images/Ch1_Liouvillian_35_1.png" />
+<img alt="../_images/Ch1_Liouvillian_36_1.png" src="../_images/Ch1_Liouvillian_36_1.png" />
 </div>
 </div>
 </section>
@@ -829,7 +929,7 @@ Type: larmor on spin 1
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;AxesSubplot:&gt;
 </pre></div>
 </div>
-<img alt="../_images/Ch1_Liouvillian_40_1.png" src="../_images/Ch1_Liouvillian_40_1.png" />
+<img alt="../_images/Ch1_Liouvillian_41_1.png" src="../_images/Ch1_Liouvillian_41_1.png" />
 </div>
 </div>
 <p>However, on its own, this isn’t very useful because the two dipole orientations are not exchanging. For this, we must also include the exchange matrix, of the form:</p>
@@ -863,7 +963,7 @@ k_{01}&amp;-k_{10}
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;AxesSubplot:&gt;
 </pre></div>
 </div>
-<img alt="../_images/Ch1_Liouvillian_44_1.png" src="../_images/Ch1_Liouvillian_44_1.png" />
+<img alt="../_images/Ch1_Liouvillian_45_1.png" src="../_images/Ch1_Liouvillian_45_1.png" />
 </div>
 </div>
 <p>Finally, we show the total Liouvillian, including exchange.</p>
@@ -877,7 +977,7 @@ k_{01}&amp;-k_{10}
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;AxesSubplot:&gt;
 </pre></div>
 </div>
-<img alt="../_images/Ch1_Liouvillian_46_1.png" src="../_images/Ch1_Liouvillian_46_1.png" />
+<img alt="../_images/Ch1_Liouvillian_47_1.png" src="../_images/Ch1_Liouvillian_47_1.png" />
 </div>
 </div>
 <p>In the next section, we discuss the generation of propagators from the Liouvillian.</p>

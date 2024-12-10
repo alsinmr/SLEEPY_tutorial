@@ -150,9 +150,9 @@ const thebe_selector_output = ".output, .cell_output"
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="../Chapter1/Ch1_Objects.html">
+    <a class="reference internal" href="../Chapter1/Ch1_ShortExamples.html">
      <font color="#0093AF">
-      Objects
+      Short Examples
      </font>
     </a>
    </li>
@@ -285,12 +285,19 @@ const thebe_selector_output = ".output, .cell_output"
    </li>
   </ul>
  </li>
- <li class="toctree-l1">
+ <li class="toctree-l1 has-children">
   <a class="reference internal" href="../Ch4_DNP.html">
    <font color="maroon">
     Dynamic Nuclear Polarization
    </font>
   </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/>
+  <label for="toctree-checkbox-4">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul class="simple">
+  </ul>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../Ch5_ParamagneticEffects.html">
@@ -556,11 +563,19 @@ title="Print to PDF"
                 
   <section class="tex2jax_ignore mathjax_ignore" id="font-color-0093af-redor">
 <h1><font  color = "#0093AF"> REDOR<a class="headerlink" href="#font-color-0093af-redor" title="Permalink to this headline">#</a></h1>
+<p><a href="https://githubtocolab.com/alsinmr/SLEEPY_tutorial/blob/main/ColabNotebooks/Chapter3/Ch3_REDOR.ipynb" target="_blank"><img src="https://colab.research.google.com/assets/colab-badge.svg"></a></p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">os</span>
-<span class="n">os</span><span class="o">.</span><span class="n">chdir</span><span class="p">(</span><span class="s1">&#39;../../../&#39;</span><span class="p">)</span>
-<span class="kn">import</span> <span class="nn">SLEEPY</span> <span class="k">as</span> <span class="nn">sl</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># SETUP pyDR</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="n">os</span><span class="o">.</span><span class="n">chdir</span><span class="p">(</span><span class="s1">&#39;../..&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">SLEEPY</span> <span class="k">as</span> <span class="nn">sl</span>
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
 <span class="kn">from</span> <span class="nn">time</span> <span class="kn">import</span> <span class="n">time</span>
@@ -608,7 +623,7 @@ title="Print to PDF"
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/Ch3_REDOR_3_0.png" src="../_images/Ch3_REDOR_3_0.png" />
+<img alt="../_images/Ch3_REDOR_5_0.png" src="../_images/Ch3_REDOR_5_0.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -649,7 +664,7 @@ title="Print to PDF"
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/Ch3_REDOR_6_0.png" src="../_images/Ch3_REDOR_6_0.png" />
+<img alt="../_images/Ch3_REDOR_8_0.png" src="../_images/Ch3_REDOR_8_0.png" />
 </div>
 </div>
 <section id="reducible-sequence">
@@ -711,7 +726,7 @@ title="Print to PDF"
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;AxesSubplot:xlabel=&#39;t / ms&#39;, ylabel=&#39;&lt;$^{15}N_x$&gt;&#39;&gt;
 </pre></div>
 </div>
-<img alt="../_images/Ch3_REDOR_11_1.png" src="../_images/Ch3_REDOR_11_1.png" />
+<img alt="../_images/Ch3_REDOR_13_1.png" src="../_images/Ch3_REDOR_13_1.png" />
 </div>
 </div>
 </section>
@@ -794,7 +809,7 @@ log10(tc /s) = -3.0, 316 seconds elapsed
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/Ch3_REDOR_14_0.png" src="../_images/Ch3_REDOR_14_0.png" />
+<img alt="../_images/Ch3_REDOR_16_0.png" src="../_images/Ch3_REDOR_16_0.png" />
 </div>
 </div>
 </section>

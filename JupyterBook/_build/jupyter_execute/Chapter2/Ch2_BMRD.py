@@ -9,13 +9,21 @@
 #     
 # Note that this experiment is also valid in solids, but we must also consider reorientational dynamics.
 
+# <a href="https://githubtocolab.com/alsinmr/SLEEPY_tutorial/blob/main/ColabNotebooks/Chapter2/Ch2_BMRD.ipynb" target="_blank"><img src="https://colab.research.google.com/assets/colab-badge.svg"></a>
+
 # ## Setup
 
-# In[1]:
+# In[ ]:
 
 
+# SETUP pyDR
 import os
-os.chdir('../../../')
+os.chdir('../..')
+
+
+# In[2]:
+
+
 import SLEEPY as sl
 import numpy as np
 import matplotlib.pyplot as plt

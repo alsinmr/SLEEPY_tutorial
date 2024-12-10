@@ -54,7 +54,7 @@ const thebe_selector_output = ".output, .cell_output"
     <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Solution NMR" href="../Ch2_SolutionNMR.html" />
+    <link rel="next" title="The Density Matrix" href="Ch1_rho.html" />
     <link rel="prev" title="Hamiltonians and Liouvillians" href="Ch1_Liouvillian.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
@@ -150,9 +150,9 @@ const thebe_selector_output = ".output, .cell_output"
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="Ch1_Objects.html">
+    <a class="reference internal" href="Ch1_ShortExamples.html">
      <font color="#0093AF">
-      Objects
+      Short Examples
      </font>
     </a>
    </li>
@@ -177,28 +177,127 @@ const thebe_selector_output = ".output, .cell_output"
      </font>
     </a>
    </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="Ch1_rho.html">
+     <font color="#0093AF">
+      The Density Matrix
+     </font>
+    </a>
+   </li>
   </ul>
  </li>
- <li class="toctree-l1">
+ <li class="toctree-l1 has-children">
   <a class="reference internal" href="../Ch2_SolutionNMR.html">
    <font color="maroon">
     Solution NMR
    </font>
   </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/>
+  <label for="toctree-checkbox-2">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../Chapter2/Ch2_exchange1D.html">
+     <font color="#0093AF">
+      Exchange in 1D spectra
+     </font>
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../Chapter2/Ch2_EXSY.html">
+     <font color="#0093AF">
+      Exchange Spectroscopy (EXSY)
+     </font>
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../Chapter2/Ch2_BMRD.html">
+     <font color="#0093AF">
+      Bloch-McConnell Relaxation Dispersion
+     </font>
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../Chapter2/Ch2_CEST.html">
+     <font color="#0093AF">
+      Chemical Exchange Saturation Transfer (CEST)
+     </font>
+    </a>
+   </li>
+  </ul>
  </li>
- <li class="toctree-l1">
+ <li class="toctree-l1 has-children">
   <a class="reference internal" href="../Ch3_DynamicsSolids.html">
    <font color="maroon">
     Dynamics in Solids
    </font>
   </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/>
+  <label for="toctree-checkbox-3">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../Chapter3/Ch3_R1p.html">
+     <font color="#0093AF">
+      R
+      <span class="math notranslate nohighlight">
+       \(_{1\rho}\)
+      </span>
+      relaxation
+     </font>
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../Chapter3/Ch3_REDOR.html">
+     <font color="#0093AF">
+      REDOR
+     </font>
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../Chapter3/Ch3_DIPSHIFT.html">
+     <font color="#0093AF">
+      DIPSHIFT
+     </font>
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../Chapter3/Ch3_T1_NOE.html">
+     <font color="#0093AF">
+      T
+      <span class="math notranslate nohighlight">
+       \(_1\)
+      </span>
+      and NOE
+     </font>
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../Chapter3/Ch3_RECRR.html">
+     <font color="#0093AF">
+      Correlation-time dependence of a pulse-sequence: RECRR
+     </font>
+    </a>
+   </li>
+  </ul>
  </li>
- <li class="toctree-l1">
+ <li class="toctree-l1 has-children">
   <a class="reference internal" href="../Ch4_DNP.html">
    <font color="maroon">
     Dynamic Nuclear Polarization
    </font>
   </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/>
+  <label for="toctree-checkbox-4">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul class="simple">
+  </ul>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../Ch5_ParamagneticEffects.html">
@@ -502,6 +601,7 @@ title="Print to PDF"
                 
   <section class="tex2jax_ignore mathjax_ignore" id="font-color-0093af-propagators-and-sequences">
 <h1><font  color = "#0093AF"> Propagators and Sequences<a class="headerlink" href="#font-color-0093af-propagators-and-sequences" title="Permalink to this headline">#</a></h1>
+<p><a href="https://githubtocolab.com/alsinmr/SLEEPY_tutorial/blob/main/ColabNotebooks/Chapter1/Ch1_Propagation.ipynb" target="_blank"><img src="https://colab.research.google.com/assets/colab-badge.svg"></a></p>
 <p>Propagators are responsible for moving the density matrix, <span class="math notranslate nohighlight">\(\hat{\rho}(t)\)</span> forward in time in magnetic resonance simulations. For a constant Liouvillian, the propagator, <span class="math notranslate nohighlight">\(\hat{\hat{U}}(t,t+\Delta t)\)</span> is given by</p>
 <div class="math notranslate nohighlight">
 \[
@@ -528,9 +628,16 @@ U(t_0,t_n)=U(t_{n-1},t_{n})*U(t_{n-2},t_{n-1)})...U(t_1,t_2)*U(t_0,t_1)
 <h2>Setup<a class="headerlink" href="#setup" title="Permalink to this headline">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">os</span>
-<span class="n">os</span><span class="o">.</span><span class="n">chdir</span><span class="p">(</span><span class="s1">&#39;../../../&#39;</span><span class="p">)</span>
-<span class="kn">import</span> <span class="nn">SLEEPY</span> <span class="k">as</span> <span class="nn">sl</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># SETUP pyDR</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="n">os</span><span class="o">.</span><span class="n">chdir</span><span class="p">(</span><span class="s1">&#39;../..&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">SLEEPY</span> <span class="k">as</span> <span class="nn">sl</span>
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 </pre></div>
 </div>
@@ -629,7 +736,7 @@ Constructed from the following Liouvillian:
 		array([[-50000.,  50000.],
 		       [ 50000., -50000.]])
 	
-&lt;SLEEPY.Propagator.Propagator object at 0x7ff148d34668&gt;
+&lt;SLEEPY.Propagator.Propagator object at 0x7fe9f04f3c50&gt;
 </pre></div>
 </div>
 </div>
@@ -660,7 +767,7 @@ First propagator ends at 5.555555555555556e-06 but second propagator starts at 0
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;AxesSubplot:&gt;
 </pre></div>
 </div>
-<img alt="../_images/Ch1_Propagation_15_1.png" src="../_images/Ch1_Propagation_15_1.png" />
+<img alt="../_images/Ch1_Propagation_17_1.png" src="../_images/Ch1_Propagation_17_1.png" />
 </div>
 </div>
 <section id="special-propagators">
@@ -677,7 +784,7 @@ First propagator ends at 5.555555555555556e-06 but second propagator starts at 0
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;AxesSubplot:&gt;
 </pre></div>
 </div>
-<img alt="../_images/Ch1_Propagation_18_1.png" src="../_images/Ch1_Propagation_18_1.png" />
+<img alt="../_images/Ch1_Propagation_20_1.png" src="../_images/Ch1_Propagation_20_1.png" />
 </div>
 </div>
 <p>A <span class="math notranslate nohighlight">\(\delta\)</span>-pulse propagator needs to be provided with a channel (‘13C’,’1H’, etc.) or a spin-index (0,1,2). The spin-index will apply the pulse just to one spin, even if there are other spins of the same nucleus type. Obviously this is unphysical, but can be useful for creating selective pulses without actually fully simulating them.</p>
@@ -693,7 +800,7 @@ First propagator ends at 5.555555555555556e-06 but second propagator starts at 0
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;AxesSubplot:&gt;
 </pre></div>
 </div>
-<img alt="../_images/Ch1_Propagation_20_1.png" src="../_images/Ch1_Propagation_20_1.png" />
+<img alt="../_images/Ch1_Propagation_22_1.png" src="../_images/Ch1_Propagation_22_1.png" />
 </div>
 </div>
 </section>
@@ -724,7 +831,7 @@ First propagator ends at 5.555555555555556e-06 but second propagator starts at 0
  &lt;AxesSubplot:xlabel=&#39;t / $\\mu$s&#39;, ylabel=&#39;$v_1$ / kHz&#39;&gt;]
 </pre></div>
 </div>
-<img alt="../_images/Ch1_Propagation_25_1.png" src="../_images/Ch1_Propagation_25_1.png" />
+<img alt="../_images/Ch1_Propagation_27_1.png" src="../_images/Ch1_Propagation_27_1.png" />
 </div>
 </div>
 <p>Alternatively, we may use pulses. We may overwrite the existing channels, or just create a new sequence (here we overwrite the <span class="math notranslate nohighlight">\(^{13}\)</span>C channel by calling it without any arguments (the default for v1 is 0). Note that the ‘add_channel’ function returns itself, so we can string together multiple calls to seq.</p>
@@ -742,7 +849,7 @@ First propagator ends at 5.555555555555556e-06 but second propagator starts at 0
  &lt;AxesSubplot:xlabel=&#39;t / $\\mu$s&#39;, ylabel=&#39;$v_1$ / kHz&#39;&gt;]
 </pre></div>
 </div>
-<img alt="../_images/Ch1_Propagation_27_1.png" src="../_images/Ch1_Propagation_27_1.png" />
+<img alt="../_images/Ch1_Propagation_29_1.png" src="../_images/Ch1_Propagation_29_1.png" />
 </div>
 </div>
 <p>Note that this setup lets us easily create shaped pulses by just providing a time axis and a time-dependent amplitude.</p>
@@ -761,7 +868,7 @@ First propagator ends at 5.555555555555556e-06 but second propagator starts at 0
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;AxesSubplot:&gt;
 </pre></div>
 </div>
-<img alt="../_images/Ch1_Propagation_30_1.png" src="../_images/Ch1_Propagation_30_1.png" />
+<img alt="../_images/Ch1_Propagation_32_1.png" src="../_images/Ch1_Propagation_32_1.png" />
 </div>
 </div>
 <p>However, now if we generate another 5 μs sequence, we obtain a very different propagator, because both t0 and t0_seq have been set forward by 5 μs, so now the propagator contains a <span class="math notranslate nohighlight">\(\pi\)</span>-pulse on <span class="math notranslate nohighlight">\(^1\)</span>H. We can check t0_seq before and after generating U1 to see how this works.</p>
@@ -775,14 +882,14 @@ First propagator ends at 5.555555555555556e-06 but second propagator starts at 0
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Before: 5.00 microseconds
-After: 10.00 microseconds
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Before: 5.0 microseconds
+After: 1e+01 microseconds
 </pre></div>
 </div>
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;AxesSubplot:&gt;
 </pre></div>
 </div>
-<img alt="../_images/Ch1_Propagation_32_2.png" src="../_images/Ch1_Propagation_32_2.png" />
+<img alt="../_images/Ch1_Propagation_34_2.png" src="../_images/Ch1_Propagation_34_2.png" />
 </div>
 </div>
 <p>We complete the sequence, and do one more check of t0_seq, which should now be set back to 0. We also check that multiplying all the propagators together works, since they were generated one after another to cover a rotor cycle.</p>
@@ -790,11 +897,6 @@ After: 10.00 microseconds
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">U2</span><span class="o">=</span><span class="n">seq</span><span class="o">.</span><span class="n">U</span><span class="p">(</span><span class="n">Dt</span><span class="o">=</span><span class="n">seq</span><span class="o">.</span><span class="n">Dt</span><span class="o">-</span><span class="n">U0</span><span class="o">.</span><span class="n">Dt</span><span class="o">-</span><span class="n">U1</span><span class="o">.</span><span class="n">Dt</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">seq</span><span class="o">.</span><span class="n">t0_seq</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.0
 </pre></div>
 </div>
 </div>
@@ -834,7 +936,7 @@ Constructed from the following Liouvillian:
 		array([[-50000.,  50000.],
 		       [ 50000., -50000.]])
 	
-&lt;SLEEPY.Propagator.Propagator object at 0x7ff1289a8198&gt;
+&lt;SLEEPY.Propagator.Propagator object at 0x7fe9e13190b8&gt;
 </pre></div>
 </div>
 </div>
@@ -878,10 +980,10 @@ Constructed from the following Liouvillian:
             <p class="prev-next-title"><font  color = "#0093AF"> Hamiltonians and Liouvillians</p>
         </div>
     </a>
-    <a class='right-next' id="next-link" href="../Ch2_SolutionNMR.html" title="next page">
+    <a class='right-next' id="next-link" href="Ch1_rho.html" title="next page">
     <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title"><font color="maroon">Solution NMR</font></p>
+        <p class="prev-next-title"><font  color = "#0093AF"> The Density Matrix</p>
     </div>
     <i class="fas fa-angle-right"></i>
     </a>

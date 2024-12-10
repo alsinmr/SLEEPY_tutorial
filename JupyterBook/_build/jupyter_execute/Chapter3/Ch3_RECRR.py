@@ -3,17 +3,25 @@
 
 # # <font  color = "#0093AF"> Correlation-time dependence of a pulse-sequence: RECRR
 
-# In[1]:
+# <a href="https://githubtocolab.com/alsinmr/SLEEPY_tutorial/blob/main/ColabNotebooks/Chapter3/Ch3_RECRR.ipynb" target="_blank"><img src="https://colab.research.google.com/assets/colab-badge.svg"></a>
+
+# In[ ]:
 
 
+# SETUP pyDR
 import os
-os.chdir('../../../')
+os.chdir('../..')
+
+
+# In[23]:
+
+
 import SLEEPY as sl
 import numpy as np
 import matplotlib.pyplot as plt
 
 
-# In[2]:
+# In[24]:
 
 
 ex0=sl.ExpSys(v0H=600,Nucs=['15N','1H'],vr=16000,pwdavg=sl.PowderAvg()[5],n_gamma=50)
@@ -25,7 +33,7 @@ L=sl.Liouvillian(ex0,ex1)
 L.kex=sl.Tools.twoSite_kex(tc=200e-6)
 
 
-# In[3]:
+# In[25]:
 
 
 Ux=L.Sequence().add_channel('15N',v1=25000).U()
@@ -38,7 +46,7 @@ rho=sl.Rho('15Nx','15Nx')
 rho,Ux,Umx,Upiy,Upimy=rho.ReducedSetup(Ux,Umx,Upiy,Upimy)
 
 
-# In[4]:
+# In[26]:
 
 
 rho.clear()
@@ -46,7 +54,7 @@ rho.DetProp(Ux,n=400)
 rho.plot()
 
 
-# In[5]:
+# In[27]:
 
 
 rho.clear()
@@ -61,7 +69,7 @@ for k in range(100):
 rho.plot()
 
 
-# In[6]:
+# In[29]:
 
 
 tc0=np.logspace(-6,-3,25)
@@ -86,7 +94,7 @@ for tc in tc0:
     R1p_RECRR.append((1-rho.I[0][-1])/rho.t)
 
 
-# In[7]:
+# In[31]:
 
 
 ax=plt.subplots()[1]
@@ -94,7 +102,7 @@ ax.semilogx(tc0,R1p_cw)
 ax.semilogx(tc0,R1p_RECRR)
 
 
-# In[8]:
+# In[35]:
 
 
 L.kex=sl.Tools.twoSite_kex(tc=10**-4)

@@ -3,13 +3,21 @@
 
 # # <font  color = "#0093AF"> Experimental Settings and Spin-System Definition
 
+# <a href="https://githubtocolab.com/alsinmr/SLEEPY_tutorial/blob/main/ColabNotebooks/Chapter1/Ch1_expsys.ipynb" target="_blank"><img src="https://colab.research.google.com/assets/colab-badge.svg"></a>
+
 # ## Setup
+
+# In[ ]:
+
+
+# SETUP pyDR
+import os
+os.chdir('../..')
+
 
 # In[1]:
 
 
-import os
-os.chdir('../../../')
 import SLEEPY as sl
 import numpy as np
 
@@ -63,7 +71,7 @@ ex=sl.ExpSys(v0H=600,Nucs=['1H','13C'])
 # - ZF: Electron zero-field (still missing)
 # 
 
-# In[4]:
+# In[61]:
 
 
 delta=sl.Tools.dipole_coupling(.109,'1H','13C')  #Calculate H-C dipole for 1.05 Angstrom distance
@@ -148,7 +156,7 @@ ex.pwdavg
 
 # The powder average can also be plotted. By default, this plots the $\alpha$ and $\beta$ angles, but can be switched to $\beta$ and $\gamma$ angles by setting beta_gamma to True
 
-# In[9]:
+# In[10]:
 
 
 ex.pwdavg.plot()
@@ -168,7 +176,7 @@ ex.pwdavg.plot()
 # 
 # 
 
-# In[10]:
+# In[38]:
 
 
 ex.Op[0].x  #Example: x operator for the 0th spin
@@ -180,7 +188,7 @@ ex.Op[0].x  #Example: x operator for the 0th spin
 # 
 # So, ex.Op[0].T[1][0] returns $T_{1,-1}^{(0)}$, that is the rank $m=-1$ component of the rank-1 tensor for spin 0.
 
-# In[11]:
+# In[47]:
 
 
 ex.Op[0].T[1][0] #eg m=-1 component of the rank-1 tensor for spin 0
@@ -188,7 +196,7 @@ ex.Op[0].T[1][0] #eg m=-1 component of the rank-1 tensor for spin 0
 
 # However, what we usually need for building Hamiltonians is the rank-2 spherical tensors. For 1-spin tensors, these are obtained first by changing the mode of the spherical tensor to 'B0_LF', for example:
 
-# In[12]:
+# In[50]:
 
 
 ex.Op[0].T.set_mode('B0_LF')
@@ -197,7 +205,7 @@ ex.Op[0].T[2]
 
 # For spin-spin interactions, we need to multiply the spin-operators together and also define whether both spins are in the rotating frame or lab frame. For example, if the first spin is in the lab frame and second in the rotating frame, we use:
 
-# In[13]:
+# In[58]:
 
 
 T2spin=ex.Op[0].T*ex.Op[1].T
@@ -207,14 +215,14 @@ T2spin[2]
 
 # If both spins are in the rotating frame, then we need to define if this is a homonuclear ('homo') or heteronuclear ('het') interaction. If we compare the results, we see that off-diagonal terms emerge for the homonuclear interaction, but not for the heternuclear interaction.
 
-# In[14]:
+# In[59]:
 
 
 T2spin.set_mode('homo')
 T2spin[2]
 
 
-# In[15]:
+# In[60]:
 
 
 T2spin.set_mode('het')

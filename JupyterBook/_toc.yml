@@ -32,4 +32,9 @@ parts:
     - file: Chapter3/Ch3_T1_NOE
     - file: Chapter3/Ch3_RECRR
   - file: Ch4_DNP
+    sections:
+    - file: Chapter4/Ch4_SolidEffect
+    - file: Chapter4/Ch4_CrossEffect
+    - file: Chapter4/Ch4_OverhauserEffect
+    - file: Chapter4/Ch4_NOVEL
   - file: Ch5_ParamagneticEffects

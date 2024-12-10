@@ -3,6 +3,8 @@
 
 # # <font  color = "#0093AF"> Propagators and Sequences
 
+# <a href="https://githubtocolab.com/alsinmr/SLEEPY_tutorial/blob/main/ColabNotebooks/Chapter1/Ch1_Propagation.ipynb" target="_blank"><img src="https://colab.research.google.com/assets/colab-badge.svg"></a>
+
 # Propagators are responsible for moving the density matrix, $\hat{\rho}(t)$ forward in time in magnetic resonance simulations. For a constant Liouvillian, the propagator, $\hat{\hat{U}}(t,t+\Delta t)$ is given by
 # 
 # $$
@@ -31,16 +33,22 @@
 
 # ## Setup
 
-# In[1]:
+# In[ ]:
 
 
+# SETUP pyDR
 import os
-os.chdir('../../../')
+os.chdir('../..')
+
+
+# In[2]:
+
+
 import SLEEPY as sl
 import numpy as np
 
 
-# In[2]:
+# In[3]:
 
 
 ex=sl.ExpSys(v0H=600,Nucs=['1H','13C'],vr=60000) 
@@ -98,7 +106,7 @@ print(f'U1: t0={U1.t0*1e6:.3f} us, tf={U1.tf*1e6:.3f} us, Dt={U1.Dt*1e6:.3f}')
 
 # Note that while the first propagator has t0=0, the second starts at 5.556 $\mu$s, when the previous propagator ended. This happens because when U0 was created, ex.current_time was updated to match the end of U0. Then, we can easily take their product without have problems with mis-matched starting and ending times. When we do so, we get a propagator with length of one rotor period.
 
-# In[5]:
+# In[9]:
 
 
 U1*U0
@@ -106,7 +114,7 @@ U1*U0
 
 # Note that if we multiply U0 by itself, we get a warning, since the end of U0 is not the same time as the beginning of U0 (relative to the rotor period)
 
-# In[6]:
+# In[12]:
 
 
 _=U0*U0
@@ -114,7 +122,7 @@ _=U0*U0
 
 # As with the Hamiltonian and Liouvillian, propagators can also be plotted:
 
-# In[7]:
+# In[14]:
 
 
 U0.plot(mode='abs')
@@ -124,7 +132,7 @@ U0.plot(mode='abs')
 
 # The Liouvillian can also produce propagators for $\delta$-pulses (i.e. pulses with zero length) and an identity propagator. Both types have zero length, and they can be multiplied with propagators ending at any time (they do acquire an initial time, but this is not checked when multiplying these types of propagators). The identity propagator does not have any effect on other propagators or density matrices, but is occasionally useful as a kind of propagator pre-allocation.
 
-# In[8]:
+# In[15]:
 
 
 Ueye=L.Ueye()
@@ -135,7 +143,7 @@ Ueye.plot(mode='re')
 # 
 # The default flip angle for the $\delta$-pulse is a $\pi$-pulse with an 'x' phase, but adjusting phi (flip angle) and phase, any $\delta$-pulse may be obtained.
 
-# In[9]:
+# In[16]:
 
 
 Ud=L.Udelta('13C',phi=np.pi/2,phase=np.pi/2)  #pi/2 y-pulse on 13C
@@ -152,7 +160,7 @@ Ud.plot(mode='re')
 # 
 # Once a sequence is defined, we add channels to it. Channels may be added the usual way, by specifying the nucleus, but they may also be added to a specific spin by index.
 
-# In[10]:
+# In[17]:
 
 
 seq=L.Sequence()
@@ -160,7 +168,7 @@ seq=L.Sequence()
 
 # We start with a sequence that has no time axis, just a constant field applied to $^{13}$C, applied in the *y*-direction. We use `seq.plot()` to visualize the result.
 
-# In[11]:
+# In[18]:
 
 
 seq.add_channel('13C',v1=25000,phase=np.pi/2)
@@ -169,7 +177,7 @@ seq.plot()
 
 # Alternatively, we may use pulses. We may overwrite the existing channels, or just create a new sequence (here we overwrite the $^{13}$C channel by calling it without any arguments (the default for v1 is 0). Note that the 'add_channel' function returns itself, so we can string together multiple calls to seq.
 
-# In[12]:
+# In[19]:
 
 
 v1=150000
@@ -185,7 +193,7 @@ seq.add_channel('13C').add_channel('1H',t=t,v1=[0,v1,0,v1]).plot()
 # 
 # We can observe this behavior below. We start with a 5 μs sequence, such that no $^1$H pulses are applied. We obtain a propagator without off-diagonal terms in the imaginary part except due to exchange, since the system only has a heteronuclear dipole coupling.
 
-# In[13]:
+# In[20]:
 
 
 U0=seq.U(Dt=5e-6)
@@ -194,7 +202,7 @@ U0.plot()
 
 # However, now if we generate another 5 μs sequence, we obtain a very different propagator, because both t0 and t0_seq have been set forward by 5 μs, so now the propagator contains a $\pi$-pulse on $^1$H. We can check t0_seq before and after generating U1 to see how this works.
 
-# In[14]:
+# In[21]:
 
 
 print(f'Before: {seq.t0_seq*1e6:.2f} microseconds')
@@ -205,14 +213,14 @@ U1.plot()
 
 # We complete the sequence, and do one more check of t0_seq, which should now be set back to 0. We also check that multiplying all the propagators together works, since they were generated one after another to cover a rotor cycle.
 
-# In[15]:
+# In[22]:
 
 
 U2=seq.U(Dt=seq.Dt-U0.Dt-U1.Dt)
 print(seq.t0_seq)
 
 
-# In[16]:
+# In[23]:
 
 
 U2*U1*U0

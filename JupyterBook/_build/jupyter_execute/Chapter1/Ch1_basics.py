@@ -3,6 +3,8 @@
 
 # # <font  color = "#0093AF"> A Quick Start
 
+# <a href="https://githubtocolab.com/alsinmr/SLEEPY_tutorial/blob/main/ColabNotebooks/Chapter1/Ch1_basics.ipynb" target="_blank"><img src="https://colab.research.google.com/assets/colab-badge.svg"></a>
+
 # We will go through the various objects in this chapter in detail, but in this section we will just do a quick summary. Note that we will usually use consistent variable names for each type of object. These names are given in () after each class name 
 # 
 # - ExpSys (ex): Describes basic details of the experiment and spin-system. This includes magnetic field, nuclei in the system, spinning frequency if included, temperature, powder average, spin-field and spin-spin interactions, etc.
@@ -16,11 +18,17 @@
 
 # ## Setup
 
-# In[1]:
+# In[ ]:
 
 
+# SETUP pyDR
 import os
-os.chdir('../../../')
+os.chdir('../..')
+
+
+# In[18]:
+
+
 import SLEEPY as sl
 import numpy as np
 import matplotlib.pyplot as plt
@@ -28,7 +36,7 @@ import matplotlib.pyplot as plt
 
 # ## Example: $^{13}$C $R_{1\rho}$
 
-# In[2]:
+# In[4]:
 
 
 # 600 MHz, H-C system, MAS at 60 kHz, 49 powder angles (JPC59), 50 steps per rotor period
@@ -38,7 +46,7 @@ ex1=ex0.copy() #Copy the above setup
 _=ex1.set_inter('dipole',i0=0,i1=1,delta=44000,euler=[0,30*np.pi/180,0]) #Reorient the dipole coupling by 30 degrees
 
 
-# In[3]:
+# In[16]:
 
 
 # Liouvillian, with ex0 and ex1 included
@@ -48,7 +56,7 @@ tc=5e-6
 L.kex=1/(2*tc)*np.array([[-1,1],[1,-1]])
 
 
-# In[4]:
+# In[7]:
 
 
 #Generate a pulse-sequence from L
@@ -59,7 +67,7 @@ seq.add_channel('13C',t=[0,L.taur],v1=45000,phase=0)
 seq.plot()
 
 
-# In[5]:
+# In[24]:
 
 
 # Graphical representation of L, combined with the applied field
@@ -75,7 +83,7 @@ fig.set_size_inches([10,5])
 fig.tight_layout()
 
 
-# In[6]:
+# In[34]:
 
 
 # Create a density matrix, with initial state and detection matrix
@@ -83,7 +91,7 @@ fig.tight_layout()
 rho=sl.Rho(rho0='13Cz',detect='13Cx')
 
 
-# In[7]:
+# In[35]:
 
 
 #13C pi/2 delta pulse along y
@@ -92,7 +100,7 @@ Upi2y=L.Udelta('13C',phi=np.pi/2,phase=np.pi/2)
 Upi2y*rho
 
 
-# In[8]:
+# In[36]:
 
 
 # Apply the sequence to rho 1000 times, detecting at each step
@@ -100,7 +108,7 @@ Upi2y*rho
 rho.DetProp(seq,n=1000)
 
 
-# In[9]:
+# In[37]:
 
 
 # Plot the resulting time-dependent magnetization

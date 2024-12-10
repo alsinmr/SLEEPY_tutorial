@@ -3,11 +3,21 @@
 
 # # <font  color = "#0093AF"> Exchange in 1D spectra
 
-# In[1]:
+# <a href="https://githubtocolab.com/alsinmr/SLEEPY_tutorial/blob/main/ColabNotebooks/Chapter2/Ch2_exchange1D.ipynb" target="_blank"><img src="https://colab.research.google.com/assets/colab-badge.svg"></a>
+
+# ## Setup
+
+# In[ ]:
 
 
+# SETUP pyDR
 import os
-os.chdir('../../../')
+os.chdir('../..')
+
+
+# In[3]:
+
+
 import SLEEPY as sl
 import numpy as np
 import matplotlib.pyplot as plt
@@ -133,7 +143,7 @@ for tc,a in zip(tc0,ax):
 # 
 # On the other hand, if $k_{12}\ne k_{21}$, then no well-defined coalescence condition exists.
 
-# In[7]:
+# In[11]:
 
 
 p1=0.75

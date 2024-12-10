@@ -150,9 +150,9 @@ const thebe_selector_output = ".output, .cell_output"
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="Ch1_Objects.html">
+    <a class="reference internal" href="Ch1_ShortExamples.html">
      <font color="#0093AF">
-      Objects
+      Short Examples
      </font>
     </a>
    </li>
@@ -186,26 +186,118 @@ const thebe_selector_output = ".output, .cell_output"
    </li>
   </ul>
  </li>
- <li class="toctree-l1">
+ <li class="toctree-l1 has-children">
   <a class="reference internal" href="../Ch2_SolutionNMR.html">
    <font color="maroon">
     Solution NMR
    </font>
   </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/>
+  <label for="toctree-checkbox-2">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../Chapter2/Ch2_exchange1D.html">
+     <font color="#0093AF">
+      Exchange in 1D spectra
+     </font>
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../Chapter2/Ch2_EXSY.html">
+     <font color="#0093AF">
+      Exchange Spectroscopy (EXSY)
+     </font>
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../Chapter2/Ch2_BMRD.html">
+     <font color="#0093AF">
+      Bloch-McConnell Relaxation Dispersion
+     </font>
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../Chapter2/Ch2_CEST.html">
+     <font color="#0093AF">
+      Chemical Exchange Saturation Transfer (CEST)
+     </font>
+    </a>
+   </li>
+  </ul>
  </li>
- <li class="toctree-l1">
+ <li class="toctree-l1 has-children">
   <a class="reference internal" href="../Ch3_DynamicsSolids.html">
    <font color="maroon">
     Dynamics in Solids
    </font>
   </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/>
+  <label for="toctree-checkbox-3">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../Chapter3/Ch3_R1p.html">
+     <font color="#0093AF">
+      R
+      <span class="math notranslate nohighlight">
+       \(_{1\rho}\)
+      </span>
+      relaxation
+     </font>
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../Chapter3/Ch3_REDOR.html">
+     <font color="#0093AF">
+      REDOR
+     </font>
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../Chapter3/Ch3_DIPSHIFT.html">
+     <font color="#0093AF">
+      DIPSHIFT
+     </font>
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../Chapter3/Ch3_T1_NOE.html">
+     <font color="#0093AF">
+      T
+      <span class="math notranslate nohighlight">
+       \(_1\)
+      </span>
+      and NOE
+     </font>
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../Chapter3/Ch3_RECRR.html">
+     <font color="#0093AF">
+      Correlation-time dependence of a pulse-sequence: RECRR
+     </font>
+    </a>
+   </li>
+  </ul>
  </li>
- <li class="toctree-l1">
+ <li class="toctree-l1 has-children">
   <a class="reference internal" href="../Ch4_DNP.html">
    <font color="maroon">
     Dynamic Nuclear Polarization
    </font>
   </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/>
+  <label for="toctree-checkbox-4">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul class="simple">
+  </ul>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../Ch5_ParamagneticEffects.html">
@@ -433,6 +525,11 @@ title="Print to PDF"
     </a>
    </li>
    <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#build-the-system">
+     Build the system
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
     <a class="reference internal nav-link" href="#initialize-rho">
      Initialize rho
     </a>
@@ -491,6 +588,11 @@ title="Print to PDF"
     </a>
    </li>
    <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#build-the-system">
+     Build the system
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
     <a class="reference internal nav-link" href="#initialize-rho">
      Initialize rho
     </a>
@@ -529,19 +631,30 @@ title="Print to PDF"
                 
   <section class="tex2jax_ignore mathjax_ignore" id="font-color-0093af-the-density-matrix">
 <h1><font  color = "#0093AF"> The Density Matrix<a class="headerlink" href="#font-color-0093af-the-density-matrix" title="Permalink to this headline">#</a></h1>
+<p><a href="https://githubtocolab.com/alsinmr/SLEEPY_tutorial/blob/main/ColabNotebooks/Chapter1/Ch1_rho.ipynb" target="_blank"><img src="https://colab.research.google.com/assets/colab-badge.svg"></a></p>
 <p>The final core object of the SLEEPY module is the density matrix object, Rho (<span class="math notranslate nohighlight">\(\hat{\rho})\)</span>. Rho is initialized with an initial state of the spin-system. It also contains the detection operator or operators, which must also be specified at initialization. Rho also stores the signal resulting from detection operations, and contains functions for plotting the resulting 1D time-domain and frequency-domain signals.</p>
 <section id="setup">
 <h2>Setup<a class="headerlink" href="#setup" title="Permalink to this headline">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">os</span>
-<span class="n">os</span><span class="o">.</span><span class="n">chdir</span><span class="p">(</span><span class="s1">&#39;../../../&#39;</span><span class="p">)</span>
-<span class="kn">import</span> <span class="nn">SLEEPY</span> <span class="k">as</span> <span class="nn">sl</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># SETUP pyDR</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="n">os</span><span class="o">.</span><span class="n">chdir</span><span class="p">(</span><span class="s1">&#39;../..&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">SLEEPY</span> <span class="k">as</span> <span class="nn">sl</span>
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 </pre></div>
 </div>
 </div>
 </div>
+</section>
+<section id="build-the-system">
+<h2>Build the system<a class="headerlink" href="#build-the-system" title="Permalink to this headline">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Generate an experimental system and a Liouvillian</span>
@@ -600,7 +713,7 @@ title="Print to PDF"
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/Ch1_rho_12_0.png" src="../_images/Ch1_rho_12_0.png" />
+<img alt="../_images/Ch1_rho_15_0.png" src="../_images/Ch1_rho_15_0.png" />
 </div>
 </div>
 <p>Note, U isn’t actually calculated until it’s need, so the above step is fast, but below is much slower.</p>
@@ -625,10 +738,10 @@ title="Print to PDF"
 rho0: 1Hx
 detect[0]: 1Hx
 detect[1]: 13Cx
-Current time is 1000.000 microseconds
+Current time is 1200.000 microseconds
 2 time points have been recorded
 
-&lt;SLEEPY.Rho.Rho object at 0x7fa820538ef0&gt;
+&lt;SLEEPY.Rho.Rho object at 0x7fa749daadc0&gt;
 </pre></div>
 </div>
 </div>
@@ -642,8 +755,8 @@ Current time is 1000.000 microseconds
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1Hx : 1.00+0.00j, (0.18-1.6e-17j)
-13Cx : 0.00+0.00j, (0.18+1.5e-17j)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1Hx : 1.00+0.00j, (0.25-2.1e-17j)
+13Cx : 0.00+0.00j, (0.25-1.2e-17j)
 </pre></div>
 </div>
 </div>
@@ -659,8 +772,8 @@ Current time is 1000.000 microseconds
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1Hx : 1.00+0.00j, (0.18+6.4e-18j)
-13Cx : 0.00+0.00j, (0.18+3.2e-18j)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1Hx : 1.00+0.00j, (0.25-2.1e-17j)
+13Cx : 0.00+0.00j, (0.25-7.1e-18j)
 </pre></div>
 </div>
 </div>
@@ -699,7 +812,7 @@ detect[1]: 13Cx
 Current time is 1000.000 microseconds
 150 time points have been recorded
 
-&lt;SLEEPY.Rho.Rho object at 0x7fa820538ef0&gt;
+&lt;SLEEPY.Rho.Rho object at 0x7fa749daadc0&gt;
 </pre></div>
 </div>
 </div>
@@ -714,7 +827,7 @@ Current time is 1000.000 microseconds
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;AxesSubplot:xlabel=&#39;t / ms&#39;, ylabel=&#39;&lt;Op&gt;&#39;&gt;
 </pre></div>
 </div>
-<img alt="../_images/Ch1_rho_24_1.png" src="../_images/Ch1_rho_24_1.png" />
+<img alt="../_images/Ch1_rho_27_1.png" src="../_images/Ch1_rho_27_1.png" />
 </div>
 </div>
 <p>Another good application of this approach is to simulate spinning sidebands. We use a blank sequence in this case.</p>
@@ -738,7 +851,7 @@ detect[0]: 13Cp
 Current time is 200000.000 microseconds
 20000 time points have been recorded
 
-&lt;SLEEPY.Rho.Rho object at 0x7fa8303224a8&gt;
+&lt;SLEEPY.Rho.Rho object at 0x7f794869d160&gt;
 </pre></div>
 </div>
 </div>
@@ -753,7 +866,7 @@ Current time is 200000.000 microseconds
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;AxesSubplot:xlabel=&#39;$\\nu$ / Hz&#39;, ylabel=&#39;I / a.u.&#39;&gt;
 </pre></div>
 </div>
-<img alt="../_images/Ch1_rho_27_1.png" src="../_images/Ch1_rho_27_1.png" />
+<img alt="../_images/Ch1_rho_30_1.png" src="../_images/Ch1_rho_30_1.png" />
 </div>
 </div>
 <p>Aside from reducing coding, DetProp has also executed a few computational speedups. First, it has identified that only 4 of the 32 spin-states would actually be accessed in this simulation, so it reduces the size of the matrix being propagated significantly. Second, it has performed the propagation in the eigenbasis. Note that because we have 20 steps per rotor period, 20 different eigenbases have been used, each corresponding to a different starting point in the rotor period. That is, we take 20 steps through the first rotor period. However, starting from each of those 20 steps, we then take rotor-period length steps, which can be propagated in the eigenbasis, vastly accelerating the computation time through the 20000 total timesteps (or 1000 steps per each starting point in the rotor period.</p>

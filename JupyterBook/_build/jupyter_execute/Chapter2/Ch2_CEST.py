@@ -3,15 +3,23 @@
 
 # # <font  color = "#0093AF"> Chemical Exchange Saturation Transfer (CEST)
 
+# <a href="https://githubtocolab.com/alsinmr/SLEEPY_tutorial/blob/main/ColabNotebooks/Chapter2/Ch2_CEST.ipynb" target="_blank"><img src="https://colab.research.google.com/assets/colab-badge.svg"></a>
+
 # In this notebook, we investigate the CEST experiment, first assuming only isotropic interactions (solution-state), and then also including influence from CSA.
 
 # ## Setup
 
-# In[1]:
+# In[ ]:
 
 
+# SETUP pyDR
 import os
-os.chdir('../../../')
+os.chdir('../..')
+
+
+# In[2]:
+
+
 import SLEEPY as sl
 import numpy as np
 import matplotlib.pyplot as plt

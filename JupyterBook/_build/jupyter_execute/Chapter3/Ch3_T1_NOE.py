@@ -3,18 +3,25 @@
 
 # # <font  color = "#0093AF"> T$_1$ and NOE
 
-# In[1]:
+# <a href="https://githubtocolab.com/alsinmr/SLEEPY_tutorial/blob/main/ColabNotebooks/Chapter3/Ch3_T1_NOE.ipynb" target="_blank"><img src="https://colab.research.google.com/assets/colab-badge.svg"></a>
+
+# In[ ]:
 
 
+# SETUP pyDR
 import os
-os.chdir('../../../')
-import SLEEPY as sl
-import numpy as np
-import matplotlib.pyplot as plt
-from time import time
+os.chdir('../..')
 
 
 # In[2]:
+
+
+import SLEEPY as sl
+import numpy as np
+import matplotlib.pyplot as plt
+
+
+# In[5]:
 
 
 ex0=sl.ExpSys(v0H=600,Nucs='13C',vr=0,LF=True,pwdavg=sl.PowderAvg())
@@ -32,13 +39,13 @@ rho=sl.Rho('Thermal','13Cz')
 rho.DetProp(seq,n=1000)
 
 
-# In[3]:
+# In[6]:
 
 
 rho.plot()
 
 
-# In[4]:
+# In[5]:
 
 
 ex0=sl.ExpSys(v0H=600,Nucs=['13C','1H'],vr=0,LF=True,pwdavg=sl.PowderAvg()[0])
@@ -58,31 +65,31 @@ rho=sl.Rho('Thermal',['1Hz','13Cz'])
 rho.DetProp(seq,n=50000)
 
 
-# In[5]:
+# In[6]:
 
 
 rho.plot(axis='s')
 
 
-# In[6]:
+# In[8]:
 
 
 L[0].L(step=0)@L[0].rho_eq(step=0)
 
 
-# In[7]:
+# In[10]:
 
 
 U=L.Sequence(Dt=1e-3).U()
 
 
-# In[8]:
+# In[11]:
 
 
 a,b=np.linalg.eig(U[0])
 
 
-# In[9]:
+# In[15]:
 
 
 b[:,14]/L.rho_eq(step=0)

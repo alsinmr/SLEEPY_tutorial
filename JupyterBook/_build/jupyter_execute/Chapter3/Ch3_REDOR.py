@@ -3,11 +3,19 @@
 
 # # <font  color = "#0093AF"> REDOR
 
+# <a href="https://githubtocolab.com/alsinmr/SLEEPY_tutorial/blob/main/ColabNotebooks/Chapter3/Ch3_REDOR.ipynb" target="_blank"><img src="https://colab.research.google.com/assets/colab-badge.svg"></a>
+
+# In[ ]:
+
+
+# SETUP pyDR
+import os
+os.chdir('../..')
+
+
 # In[1]:
 
 
-import os
-os.chdir('../../../')
 import SLEEPY as sl
 import numpy as np
 import matplotlib.pyplot as plt

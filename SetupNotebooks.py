@@ -162,8 +162,8 @@ def write_colab_setup(f):
      "metadata": {},
      "outputs": [],
      "source": [
-      "# SETUP pyDR\\n",
-      "!git clone https://github.com/alsinmr/pyDR.git"
+      "# SETUP SLEEPY\\n",
+      "!git clone https://github.com/alsinmr/SLEEPY.git"
      ]
     }""")
     
@@ -213,13 +213,15 @@ def add_links(f,filename):
     None.
 
     """
+    chapter=filename.split('Chapters/Chapter')[1].split('/')[0]
+    filename=os.path.split(filename)[1]
     f.write("""{
      "cell_type": "markdown",
      "id": "759eab0e",
      "metadata": {},
      "source": [""")
     f.write(f"""
-      "<a href=\\"https://githubtocolab.com/alsinmr/pyDR_tutorial/blob/main/ColabNotebooks/{filename}\\" target=\\"_blank\\"><img src=\\"https://colab.research.google.com/assets/colab-badge.svg\\"></a>"
+      "<a href=\\"https://githubtocolab.com/alsinmr/SLEEPY_tutorial/blob/main/ColabNotebooks/Chapter{chapter}/{filename}\\" target=\\"_blank\\"><img src=\\"https://colab.research.google.com/assets/colab-badge.svg\\"></a>"
      """)
     # f.write(f"""
     #         "\\n\\n<a href=\\"https://github.com/alsinmr/pyDR_tutorial/raw/main/{filename}\\" target=\\"_blank\\"><img src=\\"Download-button.png\\" width=\\"100\\"></a>"
@@ -227,10 +229,10 @@ def add_links(f,filename):
     f.write("""
             ]\n}""")
         
-def copy2colab(filename):
+def copy2colab(chapter,filename):
     cr=CellReader(filename)
     first=True
-    with open(os.path.join('ColabNotebooks',filename),'w') as f:
+    with open(os.path.join('ColabNotebooks',f'Chapter{chapter}',os.path.split(filename)[1]),'w') as f:
         for line in cr.header:
             f.write(line)
         for cell in cr:
@@ -238,7 +240,7 @@ def copy2colab(filename):
                 break
             elif len(cr.get_source()) and '(hidden on colab)' in cr.get_source()[0]:
                 pass
-            elif len(cr.get_source()) and 'SETUP pyDR' in cr.get_source()[0]:
+            elif len(cr.get_source()) and 'SETUP SLEEPY' in cr.get_source()[0]:
                 f.write('\n' if first else ',\n')
                 write_colab_setup(f)
             else:
@@ -250,10 +252,10 @@ def copy2colab(filename):
             f.write(line)
     cr.__exit__()
     
-def copy2JupyterBook(filename):
+def copy2JupyterBook(chapter,filename):
     cr=CellReader(filename)
     first=True
-    with open(os.path.join('JupyterBook',filename),'w') as f:
+    with open(os.path.join('JupyterBook',f'Chapter{chapter}',os.path.split(filename)[1]),'w') as f:
         for line in cr.header:
             f.write(line)
         for k,cell in enumerate(cr):
@@ -261,7 +263,7 @@ def copy2JupyterBook(filename):
                 break
             elif len(cr.get_source()) and '(hidden on webpage)' in cr.get_source()[0]:
                 pass
-            elif len(cr.get_source()) and 'SETUP pyDR' in cr.get_source()[0]:
+            elif len(cr.get_source()) and 'SETUP SLEEPY' in cr.get_source()[0]:
                 f.write('\n' if first else ',\n')
                 write_book_setup(f)
             else:
@@ -282,7 +284,7 @@ def copy2JupyterBook(filename):
 if __name__=='__main__':
     from SetupNotebooks import *
     
-    directory='/Users/albertsmith/Documents/GitHub/pyDR_tutorial'
+    directory='/Users/albertsmith/Documents/GitHub/SLEEPY_tutorial'
     if not(os.path.exists(directory)):
         directory=directory.replace('GitHub','GitHub.nosync')
     
@@ -295,14 +297,17 @@ if __name__=='__main__':
                 file_record[key]=int(value)
             
     with open('file_record.txt','w') as f:
-        for filename in os.listdir(directory):
-            if len(filename)>6 and filename[-6:]=='.ipynb':
-                mt=int(os.path.getmtime(filename))
-                if not(filename in file_record and mt==file_record[filename]):
-                    #new or modified notebooks get copied
-                    copy2colab(filename)
-                    copy2JupyterBook(filename)
-                
-                f.write(f'{filename}\t{mt}\n')
+        for chapter in range(1,4):
+            print(f'Chapter: {chapter}')
+            for filename in os.listdir(os.path.join(directory,'Chapters',f'Chapter{chapter}')):
+                filename=os.path.join(directory,'Chapters',f'Chapter{chapter}',filename)
+                if '.ipynb' in filename and filename[-6:]=='.ipynb':
+                    mt=int(os.path.getmtime(filename))
+                    if not(filename in file_record and mt==file_record[os.path.split(filename)[1]]):
+                        #new or modified notebooks get copied
+                        copy2colab(chapter,filename)
+                        copy2JupyterBook(chapter,filename)
+                    
+                    f.write(f'{filename}\t{mt}\n')
         
         

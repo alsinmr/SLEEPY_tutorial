@@ -3,15 +3,23 @@
 
 # # <font  color = "#0093AF"> Short Examples
 
+# <a href="https://githubtocolab.com/alsinmr/SLEEPY_tutorial/blob/main/ColabNotebooks/Chapter1/Ch1_ShortExamples.ipynb" target="_blank"><img src="https://colab.research.google.com/assets/colab-badge.svg"></a>
+
 # The following notebook shows some simulations that can be done in just a few lines of code. These are intended to simply familiarize you with the basics of setting up SLEEPY simulations.
 
 # ## Setup
 
-# In[1]:
+# In[ ]:
 
 
+# SETUP pyDR
 import os
-os.chdir('../../../')
+os.chdir('../..')
+
+
+# In[2]:
+
+
 import SLEEPY as sl
 import numpy as np
 
@@ -19,7 +27,7 @@ import numpy as np
 # ## 1D Spectrum in Exchange
 # Two peaks, separated by 10 ppm, with a correlation time of exchange of 1 ms.
 
-# In[2]:
+# In[25]:
 
 
 ex0=sl.ExpSys(600,Nucs='13C')
@@ -38,7 +46,7 @@ _=rho.plot(FT=True,axis='ppm')
 # ## $T_1$ relaxation in solid-state NMR
 # $^{13}$C $T_1$ relaxation in solid-state NMR, due to a 30$^\circ$ reorientation of the H–C dipole coupling, occuring with a correlation time of 1 ns.
 
-# In[3]:
+# In[20]:
 
 
 ex0=sl.ExpSys(600,Nucs=['13C','1H'],vr=10000,LF=True)  #T1 occurs only due to terms in the lab frame
@@ -57,7 +65,7 @@ _=rho.plot(axis='s')
 # ## $T_{1\rho}$ relaxation
 # $^{13}$C $T_{1\rho}$ relaxation in solid-state NMR, due to a 15$^\circ$ reorientation of the H–C dipole coupling, occuring with a correlation time of 100 ns.
 
-# In[4]:
+# In[21]:
 
 
 ex0=sl.ExpSys(600,Nucs=['13C','1H'],vr=10000)
@@ -78,7 +86,7 @@ _=rho.plot()
 # 
 # In this simple example, we'll just monitor the total z-magnetization, although in the real experiment we would rather integrate the peak with high population (also possible in SLEEPY, but requires acquiring the full direct dimension).
 
-# In[5]:
+# In[44]:
 
 
 ex0=sl.ExpSys(600,Nucs='13C')
@@ -109,7 +117,7 @@ ax.set_xlabel(r'$\nu_{off}$ / kHz')
 # 
 # We'll run the simulation as a function of temperature, where lower temperatures yield a higher shift (and more signal). Note that realistically, we wouldn't expect the electron relaxation times to remain fixed with the varying temperature.
 
-# In[6]:
+# In[54]:
 
 
 ax=None
@@ -129,11 +137,27 @@ for T in [50,100,200,400]:
 
 # ## Spinning side-bands (one liner)
 # The last simulation is a little bit just for fun, but also to demonstrate some of the convenience of the SLEEPY simulation setup. We simulate $^{13}$C spinning sidebands resulting from chemical shift anisotropy. However, we set up the whole simulation in a single line of code and plot the result.
+# 
+# Compare to Herzfeld/Berger.$^1$
+# [1] J. Herzfeld, A.E. Berger. *[J.Chem. Phys.](https://doi.org/10.1063/1.440136)* **1980**, 73, 6021-6030.
+
+# In[3]:
+
+
+119.05*sl.Tools.NucInfo('1H')/sl.Tools.NucInfo('31P')
+
 
 # In[7]:
 
 
+22110/119.05*2/3
+
+
+# In[62]:
+
+
 _=sl.Rho('13Cx','13Cp').DetProp(
-    sl.ExpSys(600,Nucs='13C',vr=5000).set_inter('CSA',i=0,delta=180,eta=.5).Liouvillian().Sequence(),
+    sl.ExpSys(119.05,Nucs='13C',vr=2060).set_inter('CSA',i=0,delta=123,eta=.5).\
+    Liouvillian().Sequence(),
     n=4096,n_per_seq=16).plot(FT=True,axis='ppm')
 

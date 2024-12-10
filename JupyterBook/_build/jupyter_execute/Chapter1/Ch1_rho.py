@@ -3,20 +3,30 @@
 
 # # <font  color = "#0093AF"> The Density Matrix
 
+# <a href="https://githubtocolab.com/alsinmr/SLEEPY_tutorial/blob/main/ColabNotebooks/Chapter1/Ch1_rho.ipynb" target="_blank"><img src="https://colab.research.google.com/assets/colab-badge.svg"></a>
+
 # The final core object of the SLEEPY module is the density matrix object, Rho ($\hat{\rho})$. Rho is initialized with an initial state of the spin-system. It also contains the detection operator or operators, which must also be specified at initialization. Rho also stores the signal resulting from detection operations, and contains functions for plotting the resulting 1D time-domain and frequency-domain signals.
 
 # ## Setup
 
+# In[ ]:
+
+
+# SETUP pyDR
+import os
+os.chdir('../..')
+
+
 # In[1]:
 
 
-import os
-os.chdir('../../../')
 import SLEEPY as sl
 import numpy as np
 
 
-# In[2]:
+# ## Build the system
+
+# In[3]:
 
 
 # Generate an experimental system and a Liouvillian
@@ -31,7 +41,7 @@ L=sl.Liouvillian(ex,ex1,kex=sl.Tools.twoSite_kex(3e-6)) #Here, we produce the ex
 
 # ## Initialize rho
 
-# In[3]:
+# In[4]:
 
 
 # rho must be initialized with rho0, and one or more detection operators. 
@@ -61,7 +71,7 @@ rho=sl.Rho(rho0='1Hx',detect=['1Hx','13Cx'])
 
 # rho works more or less like one would expect with a propagator: we can just multiply rho by the propagator to propagate rho forward in time. We'll set up a cross-polarization sequence as example.
 
-# In[4]:
+# In[47]:
 
 
 seq=L.Sequence(Dt=1e-3)
@@ -85,7 +95,7 @@ U=seq.U()
 # rho()
 # ```
 
-# In[5]:
+# In[48]:
 
 
 (U*rho())()
@@ -93,7 +103,7 @@ U=seq.U()
 
 # Now we can check rho.I before and after CP.
 
-# In[6]:
+# In[49]:
 
 
 print(f'1Hx : {rho.I[0][0]:.2f}, {rho.I[0][1]:.2}')
@@ -102,7 +112,7 @@ print(f'13Cx : {rho.I[1][0]:.2f}, {rho.I[1][1]:.2}')
 
 # We may also multiply the sequence by rho. First, we fully clear rho, to go back to the initial conditions. When multiply a sequence by rho, the sequence uses its default length (seq.Dt) to produce a propagator, which is what actually gets multiplied by rho. This takes a little less code, but if the resulting propagator is discarded in this approach, so cannot be reused (depending on the pulse program, this may or may not matter to the user).
 
-# In[7]:
+# In[50]:
 
 
 rho.clear()
@@ -129,14 +139,14 @@ print(f'13Cx : {rho.I[1][0]:.2f}, {rho.I[1][1]:.2}')
 # 
 # Note that we choose 150 steps to match with the number of time points in the sequence.
 
-# In[8]:
+# In[51]:
 
 
 rho.clear()
 rho.DetProp(seq,n=150,n_per_seq=150)
 
 
-# In[9]:
+# In[52]:
 
 
 rho.plot()
@@ -144,7 +154,7 @@ rho.plot()
 
 # Another good application of this approach is to simulate spinning sidebands. We use a blank sequence in this case.
 
-# In[10]:
+# In[7]:
 
 
 rho=sl.Rho(rho0='13Cx',detect='13Cp')
@@ -153,7 +163,7 @@ rho.DetProp(seq,n=20000,n_per_seq=20)
 #8 steps per sequence gives us a spectral with 8 times the rotor frequency
 
 
-# In[11]:
+# In[8]:
 
 
 rho.plot(FT=True,apodize=False)

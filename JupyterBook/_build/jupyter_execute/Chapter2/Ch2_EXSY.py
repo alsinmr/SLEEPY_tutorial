@@ -3,15 +3,23 @@
 
 # # <font  color = "#0093AF"> Exchange Spectroscopy (EXSY)
 
+# <a href="https://githubtocolab.com/alsinmr/SLEEPY_tutorial/blob/main/ColabNotebooks/Chapter2/Ch2_EXSY.ipynb" target="_blank"><img src="https://colab.research.google.com/assets/colab-badge.svg"></a>
+
 # In the previous example, we simulated exchange in a 1D spectrum. Here, we perform the 2D EXSY experiment, under exchange conditions. We will then look how it results in a 2D EXSY spectrum, and how that spectrum changes as a function of a mixing time.
 
 # ## Setup
 
-# In[1]:
+# In[ ]:
 
 
+# SETUP pyDR
 import os
-os.chdir('../../../')
+os.chdir('../..')
+
+
+# In[2]:
+
+
 import SLEEPY as sl
 import numpy as np
 import matplotlib.pyplot as plt
@@ -51,7 +59,7 @@ _=L.add_relax(Type='T2',i=0,T2=.01)
 # 
 # SLEEPY has a function in Tools, the TwoD_Builder, for executing and processing two-dimensional experiements. TwoD_Builder requires an initial density matrix, a Sequence for the indirect dimension evolution, the direction dimension evolution, and transfer periods between the dimensions. For the transfer, one needs a sequence to convert the X component, and one for the Y component (States acquisition). THe sequences for the direct/indirect dimension may just be delays.
 
-# In[4]:
+# In[6]:
 
 
 rho=sl.Rho(rho0='S0x',detect='S0p')
@@ -82,7 +90,7 @@ ax.figure.set_size_inches([7,7])
 # ## Sweep the delay time to observe buildup
 # We just repeat the above code except with different lengths for Udelay. We slice through the larger peak in order to see the growth of the second peak
 
-# In[5]:
+# In[7]:
 
 
 i_dir=[16,48]
@@ -130,13 +138,13 @@ fig.tight_layout()
 # ## Plot trajectory of the individual peaks
 # Each peak represents the probability of starting in some state and ending in another state after the delay time, $\tau$
 
-# In[6]:
+# In[8]:
 
 
 I=np.array(I)
 
 
-# In[7]:
+# In[9]:
 
 
 ax=plt.subplots()[1]
@@ -150,7 +158,7 @@ ax.legend((r'$p_1\rightarrow p_1$',r'$p_2\rightarrow p_2$',r'$p_1\rightarrow p_2
 # ## Spectra as a function of exchange rate
 # We can't use EXSY for faster motions, because the peaks don't stay separated. We can observe this behavior here. We just copy the setup from above for the 3D spectra and run it with varying correlation times
 
-# In[8]:
+# In[13]:
 
 
 tc0=np.logspace(-1,-6,6)
@@ -177,7 +185,7 @@ for a in ax:a.set_zticklabels('')
 
 # Now we do the same as above, but without having symmetric exchange, i.e. $p_1\ne p_2$.
 
-# In[9]:
+# In[15]:
 
 
 tc0=np.logspace(-1,-6,6)
@@ -207,7 +215,7 @@ for a in ax:a.set_zticklabels('')
 
 # ### Acquisition
 
-# In[10]:
+# In[20]:
 
 
 # Start from L that has already been generated
@@ -238,7 +246,7 @@ for k in range(n):
 
 # ### Processing
 
-# In[11]:
+# In[21]:
 
 
 RE,IM=np.array(RE,dtype=complex),np.array(IM,dtype=complex) #Turn lists into arrays
@@ -266,7 +274,7 @@ vx,vy=np.meshgrid(v,v)  #meshgrid for plotting
 
 # ### Plotting
 
-# In[12]:
+# In[22]:
 
 
 from matplotlib import cm

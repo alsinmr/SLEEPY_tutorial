@@ -157,13 +157,6 @@ const thebe_selector_output = ".output, .cell_output"
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="Ch1_Objects.html">
-     <font color="#0093AF">
-      Objects
-     </font>
-    </a>
-   </li>
-   <li class="toctree-l2">
     <a class="reference internal" href="Ch1_expsys.html">
      <font color="#0093AF">
       Experimental Settings and Spin-System Definition
@@ -292,12 +285,19 @@ const thebe_selector_output = ".output, .cell_output"
    </li>
   </ul>
  </li>
- <li class="toctree-l1">
+ <li class="toctree-l1 has-children">
   <a class="reference internal" href="../Ch4_DNP.html">
    <font color="maroon">
     Dynamic Nuclear Polarization
    </font>
   </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/>
+  <label for="toctree-checkbox-4">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul class="simple">
+  </ul>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../Ch5_ParamagneticEffects.html">
@@ -577,6 +577,7 @@ title="Print to PDF"
                 
   <section class="tex2jax_ignore mathjax_ignore" id="font-color-0093af-a-quick-start">
 <h1><font  color = "#0093AF"> A Quick Start<a class="headerlink" href="#font-color-0093af-a-quick-start" title="Permalink to this headline">#</a></h1>
+<p><a href="https://githubtocolab.com/alsinmr/SLEEPY_tutorial/blob/main/ColabNotebooks/Chapter1/Ch1_basics.ipynb" target="_blank"><img src="https://colab.research.google.com/assets/colab-badge.svg"></a></p>
 <p>We will go through the various objects in this chapter in detail, but in this section we will just do a quick summary. Note that we will usually use consistent variable names for each type of object. These names are given in () after each class name</p>
 <ul class="simple">
 <li><p>ExpSys (ex): Describes basic details of the experiment and spin-system. This includes magnetic field, nuclei in the system, spinning frequency if included, temperature, powder average, spin-field and spin-spin interactions, etc.</p></li>
@@ -591,9 +592,16 @@ title="Print to PDF"
 <h2>Setup<a class="headerlink" href="#setup" title="Permalink to this headline">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">os</span>
-<span class="n">os</span><span class="o">.</span><span class="n">chdir</span><span class="p">(</span><span class="s1">&#39;../../../&#39;</span><span class="p">)</span>
-<span class="kn">import</span> <span class="nn">SLEEPY</span> <span class="k">as</span> <span class="nn">sl</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># SETUP pyDR</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="n">os</span><span class="o">.</span><span class="n">chdir</span><span class="p">(</span><span class="s1">&#39;../..&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">SLEEPY</span> <span class="k">as</span> <span class="nn">sl</span>
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
 </pre></div>
@@ -624,6 +632,12 @@ title="Print to PDF"
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;Axes: &gt;
+</pre></div>
+</div>
+<img alt="../_images/Ch1_basics_8_1.png" src="../_images/Ch1_basics_8_1.png" />
+</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -637,11 +651,11 @@ title="Print to PDF"
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&lt;AxesSubplot:ylabel=&#39;$v_1$ / kHz&#39;&gt;,
- &lt;AxesSubplot:xlabel=&#39;t / $\\mu$s&#39;, ylabel=&#39;$v_1$ / kHz&#39;&gt;]
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&lt;Axes: ylabel=&#39;$v_1$ / kHz&#39;&gt;,
+ &lt;Axes: xlabel=&#39;t / $\\mu$s&#39;, ylabel=&#39;$v_1$ / kHz&#39;&gt;]
 </pre></div>
 </div>
-<img alt="../_images/Ch1_basics_7_1.png" src="../_images/Ch1_basics_7_1.png" />
+<img alt="../_images/Ch1_basics_9_1.png" src="../_images/Ch1_basics_9_1.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -661,7 +675,7 @@ title="Print to PDF"
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/Ch1_basics_8_0.png" src="../_images/Ch1_basics_8_0.png" />
+<img alt="../_images/Ch1_basics_10_0.png" src="../_images/Ch1_basics_10_0.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -689,7 +703,7 @@ detect[0]: 13Cx
 Current time is 0.000 microseconds
 0 time points have been recorded
 
-&lt;SLEEPY.Rho.Rho object at 0x7fabb853cac8&gt;
+&lt;SLEEPY.Rho.Rho object at 0x15425fd90&gt;
 </pre></div>
 </div>
 </div>
@@ -712,7 +726,7 @@ detect[0]: 13Cx
 Current time is 16666.667 microseconds
 1000 time points have been recorded
 
-&lt;SLEEPY.Rho.Rho object at 0x7fabb853cac8&gt;
+&lt;SLEEPY.Rho.Rho object at 0x15425fd90&gt;
 </pre></div>
 </div>
 </div>
@@ -725,10 +739,10 @@ Current time is 16666.667 microseconds
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;AxesSubplot:xlabel=&#39;t / ms&#39;, ylabel=&#39;&lt;$^{13}C_x$&gt;&#39;&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;Axes: xlabel=&#39;t / ms&#39;, ylabel=&#39;&lt;$^{13}C_x$&gt;&#39;&gt;
 </pre></div>
 </div>
-<img alt="../_images/Ch1_basics_12_1.png" src="../_images/Ch1_basics_12_1.png" />
+<img alt="../_images/Ch1_basics_14_1.png" src="../_images/Ch1_basics_14_1.png" />
 </div>
 </div>
 </section>
