@@ -24,6 +24,8 @@ parts:
     - file: Chapter2/Ch2_EXSY
     - file: Chapter2/Ch2_BMRD
     - file: Chapter2/Ch2_CEST
+    - file: Chapter2/Ch2_T1_NOE
+    - file: Chapter2/Ch2_TROSY
   - file: Ch3_DynamicsSolids
     sections:
     - file: Chapter3/Ch3_R1p
