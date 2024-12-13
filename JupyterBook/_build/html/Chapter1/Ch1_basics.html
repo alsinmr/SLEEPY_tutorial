@@ -226,6 +226,23 @@ const thebe_selector_output = ".output, .cell_output"
      </font>
     </a>
    </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../Chapter2/Ch2_T1_NOE.html">
+     <font color="#0093AF">
+      <span class="math notranslate nohighlight">
+       \(T_1\)
+      </span>
+      , Nuclear Overhauser Effect in Solution NMR
+     </font>
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../Chapter2/Ch2_TROSY.html">
+     <font color="#0093AF">
+      TROSY effects
+     </font>
+    </a>
+   </li>
   </ul>
  </li>
  <li class="toctree-l1 has-children">
@@ -583,11 +600,11 @@ title="Print to PDF"
 <li><p>ExpSys (ex): Describes basic details of the experiment and spin-system. This includes magnetic field, nuclei in the system, spinning frequency if included, temperature, powder average, spin-field and spin-spin interactions, etc.</p></li>
 <li><p>Liouvillian (L): Contains the Liouvillian, which has coherent terms originating from interactions in ExpSys, but also can contain relaxation terms, and potentially includes exchange processes that modulate interactions, defined by including two or more ExpSys in exchange.</p></li>
 <li><p>Hamiltonian (H): Contains the Hamiltonian, although the user can bypass the Hamiltonian and generate the Liouvillian directly (Hamiltonians are contained within the Liouvillian).</p></li>
-<li><p>Sequence (seq): Generated from a Liouvillian, and allows the user to define time-dependent, multi-channel pulse sequences. Sequences can be used directly with the density matrix, or can be used to generator propagators.</p></li>
-<li><p>Propagator (U): Propagates the density matrix forward in time. Propagators can be generated from a sequence, in which case they will include rf-pulses in the sequence, or from the Liouvillian directly, in which case no rf irradiation is included. Identity propagators and <span class="math notranslate nohighlight">\(\delta\)</span>-pulses are available from the Liouvillian. Propagators may be multiplied together or by the density matrix. They may also be raised to integer powers (in solid-state NMR, they must then be exactly one rotor period).</p></li>
-<li><p>Rho (rho): Rho is the density matrix, which defines the state of the spin-system. In SLEEPY, rho also contains the detection operator, so that simply calling rho (<code class="docutils literal notranslate"><span class="pre">rho()</span></code>) will perform a detection operation for the current state of the density matrix. Rho records all detection operations and stores the results in <code class="docutils literal notranslate"><span class="pre">rho.I</span></code>, which is a 2D matrix (the first dimension runs over possible multiple detection operators, the second dimension runs over all detection calls). A special function, <code class="docutils literal notranslate"><span class="pre">rho.DetProp</span></code> takes a sequence or propagator and executes multiple detection and propagation steps (this function usually operates in the eigenbasis, making this calculation much faster than simply looping over propagation and detection operations). The Rho ‘plot’ function will plot either time-domain or Fourier transformed spectra (<code class="docutils literal notranslate"><span class="pre">FT=True</span></code>).</p></li>
+<li><p>Sequence (seq): Generated from a Liouvillian, and allows the user to define time-dependent, multi-channel pulse sequences. Sequences can be used directly with the density matrix, or can be used to generate propagators.</p></li>
+<li><p>Propagator (U): Propagates the density matrix forward in time. Propagators can be generated from a sequence, in which case they will include rf-pulses in the sequence, or from the Liouvillian directly, in which case no rf irradiation is included. Identity propagators and <span class="math notranslate nohighlight">\(\delta\)</span>-pulses are available from the Liouvillian. Propagators may be multiplied together or the density matrix may be multiplied with propagators. They may also be raised to integer powers (in solid-state NMR, they must then be exactly one rotor period).</p></li>
+<li><p>Rho (rho): Rho is the density matrix, which defines the state of the spin-system. In SLEEPY, rho also contains the detection operator, so that simply calling rho (<code class="docutils literal notranslate"><span class="pre">rho()</span></code>) will perform a detection operation for the current state of the density matrix. Rho records all detection operations and stores the results in <code class="docutils literal notranslate"><span class="pre">rho.I</span></code>, which is a 2D matrix (the first dimension runs over possible multiple detection operators, the second dimension runs over all detection calls). A special function, <code class="docutils literal notranslate"><span class="pre">rho.DetProp</span></code> takes a sequence or propagator and executes multiple detection and propagation steps. DetProp usually operates in the eigenbasis, making this calculation much faster than simply looping over propagation and detection operations, and will also look for other shortcuts to accelerate calculations. The Rho ‘plot’ function will plot either time-domain or Fourier transformed spectra (<code class="docutils literal notranslate"><span class="pre">FT=True</span></code>).</p></li>
 </ul>
-<p>Note that SLEEPY is intended to be <em>interactive</em>, so each of these objects will provide a description of itself if its variable name is typed at the command line, or included in a “print” call. Furthermore, except for ExpSys, each object has a “plot” function, that gives a graphical representation of the object or a plot of data in the object.</p>
+<p>Note that SLEEPY is intended to be <em>interactive</em>, so each of these objects will provide a description of itself if its variable name is typed at the command line, or included in a “print” call. Furthermore, each object has a “plot” function (or “plot_inter” for ExpSys), that gives a graphical representation of the object or a plot of data in the object. Objects may be investigated by the user and many of their attributes provide useful information.</p>
 <section id="setup">
 <h2>Setup<a class="headerlink" href="#setup" title="Permalink to this headline">#</a></h2>
 <div class="cell docutils container">
@@ -611,17 +628,20 @@ title="Print to PDF"
 </section>
 <section id="example-13-c-r-1-rho">
 <h2>Example: <span class="math notranslate nohighlight">\(^{13}\)</span>C <span class="math notranslate nohighlight">\(R_{1\rho}\)</span><a class="headerlink" href="#example-13-c-r-1-rho" title="Permalink to this headline">#</a></h2>
+<p>Below, we will construct a simulation for <span class="math notranslate nohighlight">\(R_{1\rho}\)</span> relaxation. The first step is to define the spins in the system, their interactions, and the experimental conditions. Since we want a dynamic system, we define two systems, which differ by the orientation of the dipole coupling.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># 600 MHz, H-C system, MAS at 60 kHz, 49 powder angles (JPC59), 50 steps per rotor period</span>
 <span class="n">ex0</span><span class="o">=</span><span class="n">sl</span><span class="o">.</span><span class="n">ExpSys</span><span class="p">(</span><span class="n">v0H</span><span class="o">=</span><span class="mi">600</span><span class="p">,</span><span class="n">Nucs</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;13C&#39;</span><span class="p">,</span><span class="s1">&#39;1H&#39;</span><span class="p">],</span><span class="n">vr</span><span class="o">=</span><span class="mi">60000</span><span class="p">,</span><span class="n">pwdavg</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span><span class="n">n_gamma</span><span class="o">=</span><span class="mi">50</span><span class="p">)</span>
 <span class="n">ex0</span><span class="o">.</span><span class="n">set_inter</span><span class="p">(</span><span class="s1">&#39;dipole&#39;</span><span class="p">,</span><span class="n">i0</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">i1</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">delta</span><span class="o">=</span><span class="mi">44000</span><span class="p">)</span> <span class="c1">#One-bond H-C dipole coupling</span>
 <span class="n">ex1</span><span class="o">=</span><span class="n">ex0</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span> <span class="c1">#Copy the above setup</span>
-<span class="n">_</span><span class="o">=</span><span class="n">ex1</span><span class="o">.</span><span class="n">set_inter</span><span class="p">(</span><span class="s1">&#39;dipole&#39;</span><span class="p">,</span><span class="n">i0</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">i1</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">delta</span><span class="o">=</span><span class="mi">44000</span><span class="p">,</span><span class="n">euler</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">30</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">/</span><span class="mi">180</span><span class="p">,</span><span class="mi">0</span><span class="p">])</span> <span class="c1">#Reorient the dipole coupling by 30 degrees</span>
+<span class="c1">#Reorient the dipole coupling by 30 degrees</span>
+<span class="n">_</span><span class="o">=</span><span class="n">ex1</span><span class="o">.</span><span class="n">set_inter</span><span class="p">(</span><span class="s1">&#39;dipole&#39;</span><span class="p">,</span><span class="n">i0</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">i1</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">delta</span><span class="o">=</span><span class="mi">44000</span><span class="p">,</span><span class="n">euler</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">30</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">/</span><span class="mi">180</span><span class="p">,</span><span class="mi">0</span><span class="p">])</span> 
 </pre></div>
 </div>
 </div>
 </div>
+<p>We the build a Liouvillian out of the two spin-systems, and add an exchange matrix to it.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Liouvillian, with ex0 and ex1 included</span>
@@ -632,13 +652,8 @@ title="Print to PDF"
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;Axes: &gt;
-</pre></div>
 </div>
-<img alt="../_images/Ch1_basics_8_1.png" src="../_images/Ch1_basics_8_1.png" />
-</div>
-</div>
+<p>We generate a sequence, in this case just a constant field. We specify the time axis, although in fact for a constant field, we can also omit this, in which case we get a sequence with the default length of one rotor period.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#Generate a pulse-sequence from L</span>
@@ -651,17 +666,17 @@ title="Print to PDF"
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&lt;Axes: ylabel=&#39;$v_1$ / kHz&#39;&gt;,
- &lt;Axes: xlabel=&#39;t / $\\mu$s&#39;, ylabel=&#39;$v_1$ / kHz&#39;&gt;]
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&lt;AxesSubplot:ylabel=&#39;$v_1$ / kHz&#39;&gt;,
+ &lt;AxesSubplot:xlabel=&#39;t / $\\mu$s&#39;, ylabel=&#39;$v_1$ / kHz&#39;&gt;]
 </pre></div>
 </div>
-<img alt="../_images/Ch1_basics_9_1.png" src="../_images/Ch1_basics_9_1.png" />
+<img alt="../_images/Ch1_basics_12_1.png" src="../_images/Ch1_basics_12_1.png" />
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Graphical representation of L, combined with the applied field</span>
-<span class="c1"># Abs, and also separated into real and imaginary components</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Graphical representation of L, where the applied field is included by defining seq</span>
+<span class="c1"># Plotted as the absolute value, but also separated into real and imaginary components.</span>
 <span class="n">fig</span><span class="p">,</span><span class="n">ax</span><span class="o">=</span><span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">3</span><span class="p">)</span>
 <span class="n">L</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">seq</span><span class="o">=</span><span class="n">seq</span><span class="p">,</span><span class="n">mode</span><span class="o">=</span><span class="s1">&#39;abs&#39;</span><span class="p">,</span><span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="n">colorbar</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 <span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Absolute Value&#39;</span><span class="p">)</span>
@@ -675,9 +690,10 @@ title="Print to PDF"
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/Ch1_basics_10_0.png" src="../_images/Ch1_basics_10_0.png" />
+<img alt="../_images/Ch1_basics_13_0.png" src="../_images/Ch1_basics_13_0.png" />
 </div>
 </div>
+<p>We create the density matrix and detection operator. Here we initialize it along the z-axis, just to show as an example how to make a <span class="math notranslate nohighlight">\(\delta\)</span>-pulse below and apply it to the matrix.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create a density matrix, with initial state and detection matrix</span>
@@ -703,11 +719,12 @@ detect[0]: 13Cx
 Current time is 0.000 microseconds
 0 time points have been recorded
 
-&lt;SLEEPY.Rho.Rho object at 0x15425fd90&gt;
+&lt;SLEEPY.Rho.Rho object at 0x7f78d17742e0&gt;
 </pre></div>
 </div>
 </div>
 </div>
+<p>Above, we see the description of the density matrix, which is updated as it is propagated (see below).</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Apply the sequence to rho 1000 times, detecting at each step</span>
@@ -726,11 +743,12 @@ detect[0]: 13Cx
 Current time is 16666.667 microseconds
 1000 time points have been recorded
 
-&lt;SLEEPY.Rho.Rho object at 0x15425fd90&gt;
+&lt;SLEEPY.Rho.Rho object at 0x7f78d17742e0&gt;
 </pre></div>
 </div>
 </div>
 </div>
+<p>Finally, we plot the resulting <span class="math notranslate nohighlight">\(R_{1\rho}\)</span> decay curve. Note that we may also Fourier-transform the results, although that does not make much sense to do for <span class="math notranslate nohighlight">\(R_{1\rho}\)</span>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Plot the resulting time-dependent magnetization</span>
@@ -739,10 +757,10 @@ Current time is 16666.667 microseconds
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;Axes: xlabel=&#39;t / ms&#39;, ylabel=&#39;&lt;$^{13}C_x$&gt;&#39;&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;AxesSubplot:xlabel=&#39;t / ms&#39;, ylabel=&#39;&lt;$^{13}C_x$&gt;&#39;&gt;
 </pre></div>
 </div>
-<img alt="../_images/Ch1_basics_14_1.png" src="../_images/Ch1_basics_14_1.png" />
+<img alt="../_images/Ch1_basics_20_1.png" src="../_images/Ch1_basics_20_1.png" />
 </div>
 </div>
 </section>

@@ -28,7 +28,7 @@ import matplotlib.pyplot as plt
 # ## Build the system
 # The first step is to build the system, which will have a single nucleus, with two different chemical shifts.
 
-# In[2]:
+# In[3]:
 
 
 ex0=sl.ExpSys(Nucs='13C',v0H=600)    #We need a description of the experiment for both states (ex0, ex1)
@@ -40,7 +40,7 @@ _=ex1.set_inter(Type='CS',i=0,ppm=5)
 # ## Add the exchange process
 # First, export this sytem into Liouville space, allowing us to introduce an exchange process. Then we'll define a correlation time and population 1 and population 2. From this we can build the exchange matrix and append it to the Liouvillian. We also add some $T_2$ relaxation to destroy transverse magnetization during the delay period for exchange and produce some broadening.
 
-# In[3]:
+# In[4]:
 
 
 L=sl.Liouvillian((ex0,ex1))           #Builds the two different Hamiltonians and exports them to Liouville space
@@ -59,7 +59,7 @@ _=L.add_relax(Type='T2',i=0,T2=.01)
 # 
 # SLEEPY has a function in Tools, the TwoD_Builder, for executing and processing two-dimensional experiements. TwoD_Builder requires an initial density matrix, a Sequence for the indirect dimension evolution, the direction dimension evolution, and transfer periods between the dimensions. For the transfer, one needs a sequence to convert the X component, and one for the Y component (States acquisition). THe sequences for the direct/indirect dimension may just be delays.
 
-# In[6]:
+# In[5]:
 
 
 rho=sl.Rho(rho0='S0x',detect='S0p')

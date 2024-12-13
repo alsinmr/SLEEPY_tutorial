@@ -33,7 +33,7 @@ import matplotlib.pyplot as plt
 
 # ## Build the system
 
-# In[6]:
+# In[3]:
 
 
 ex=sl.ExpSys(v0H=400,Nucs=['15N','1H'],vr=0)
@@ -50,7 +50,7 @@ L=sl.Liouvillian(*ex,kex=kex)
 
 # ## 1D spectrum
 
-# In[8]:
+# In[4]:
 
 
 rho=sl.Rho('15Nx','15Np')
@@ -62,7 +62,7 @@ _=rho.plot(FT=True)
 
 # We obtain two peaks, separated by the J-coupling, one being notably larger than the other, where relaxation effects from the $^{15}$N CSA and H–N dipole coupling cancel. Note that since the CSA scales with field, the cancelation effect is also field dependent. We calculate the spectrum maximum as a function of field to demonstrate.
 
-# In[9]:
+# In[5]:
 
 
 sl.Defaults['verbose']=False #Suppress output for loop
@@ -95,7 +95,7 @@ ax.set_ylabel('Spectrum Max [a.u.]')
 # ## With and without decoupling
 # We can also compare what happens to the spectrum without and with decoupling. We go a little ways away from the optimal field so we can actually see all peaks.
 
-# In[10]:
+# In[6]:
 
 
 ex=sl.ExpSys(B0=18,Nucs=['15N','1H'],vr=0)
@@ -129,7 +129,7 @@ _=ax.legend(('w/o decoupling','w/ decoupling'))
 
 # When measuring $T_1$ in solution NMR, one must take care to account for multiexponential $T_1$ relaxation. To obtain $T_1$ relaxation from exchange, we need to perform our calculations in the lab frame, so we set up a new ExpSys
 
-# In[3]:
+# In[16]:
 
 
 ex0=sl.ExpSys(v0H=1200,Nucs=['15N','1H'],vr=0,LF=True)
@@ -153,7 +153,7 @@ _=rho.plot(axis='s')
 
 # We observe a strongly bi-exponential behavior, corresponding to relaxation of the $\hat{S}_z\hat{I}_\alpha$ and $\hat{S}_z\hat{I}_\beta$ states. We can saturate the $^1$H to recovery monoexponential behavior. However, because this calculation is in the lab frame, we cannot irradiate based on the usual approach. This is because the applied RF is not static in the lab frame, but rather oscillates as in the real experiment, complicating its application in simulation. SLEEPY has a special tool for adding cw-irradation in the lab frame
 
-# In[3]:
+# In[8]:
 
 
 rho.clear()
@@ -167,7 +167,7 @@ _=rho.plot(axis='s')
 
 # Here, we should make a note of limitation of SLEEPY. If we initialize the system with "Thermal" while using "DynamicThermal" relaxation, the system should not evolve unless we apply pulses, since the system is already at thermal equilibrium. For example, see the code below:
 
-# In[4]:
+# In[9]:
 
 
 L.kex=sl.Tools.nSite_sym(n=4,tc=1e-9) #Defaults to the magic angle, which will average the couplings
@@ -182,9 +182,10 @@ _=rho.plot(axis='s')
 
 # However, if we adjust the correlation time to correspond to a faster motion, we find this is no longer the case.
 
-# In[5]:
+# In[22]:
 
 
+# L.clear_relax()
 L.kex=sl.Tools.nSite_sym(n=4,tc=1e-11) #Defaults to the magic angle, which will average the couplings
 L.add_relax('DynamicThermal')
 

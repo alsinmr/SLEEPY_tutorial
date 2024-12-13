@@ -668,7 +668,10 @@ title="Print to PDF"
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/Ch2_TROSY_9_0.png" src="../_images/Ch2_TROSY_9_0.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>State-space reduction: 64-&gt;8
+</pre></div>
+</div>
+<img alt="../_images/Ch2_TROSY_9_1.png" src="../_images/Ch2_TROSY_9_1.png" />
 </div>
 </div>
 <p>We obtain two peaks, separated by the J-coupling, one being notably larger than the other, where relaxation effects from the <span class="math notranslate nohighlight">\(^{15}\)</span>N CSA and H–N dipole coupling cancel. Note that since the CSA scales with field, the cancelation effect is also field dependent. We calculate the spectrum maximum as a function of field to demonstrate.</p>
@@ -815,7 +818,8 @@ Completed
 <p>However, if we adjust the correlation time to correspond to a faster motion, we find this is no longer the case.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">L</span><span class="o">.</span><span class="n">kex</span><span class="o">=</span><span class="n">sl</span><span class="o">.</span><span class="n">Tools</span><span class="o">.</span><span class="n">nSite_sym</span><span class="p">(</span><span class="n">n</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span><span class="n">tc</span><span class="o">=</span><span class="mf">1e-11</span><span class="p">)</span> <span class="c1">#Defaults to the magic angle, which will average the couplings</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># L.clear_relax()</span>
+<span class="n">L</span><span class="o">.</span><span class="n">kex</span><span class="o">=</span><span class="n">sl</span><span class="o">.</span><span class="n">Tools</span><span class="o">.</span><span class="n">nSite_sym</span><span class="p">(</span><span class="n">n</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span><span class="n">tc</span><span class="o">=</span><span class="mf">1e-11</span><span class="p">)</span> <span class="c1">#Defaults to the magic angle, which will average the couplings</span>
 <span class="n">L</span><span class="o">.</span><span class="n">add_relax</span><span class="p">(</span><span class="s1">&#39;DynamicThermal&#39;</span><span class="p">)</span>
 
 <span class="n">rho</span><span class="o">=</span><span class="n">sl</span><span class="o">.</span><span class="n">Rho</span><span class="p">(</span><span class="s1">&#39;Thermal&#39;</span><span class="p">,[</span><span class="s1">&#39;15Nz&#39;</span><span class="p">,</span><span class="s1">&#39;1Hz&#39;</span><span class="p">])</span>
@@ -827,10 +831,10 @@ Completed
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/Users/albertsmith/Documents/GitHub/SLEEPY/Rho.py:1264: UserWarning: Evolution time is more than 12 orders of magnitude different than largest Liouvillian term:
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/Users/albertsmith/Documents/GitHub/SLEEPY/Rho.py:1265: UserWarning: Evolution time is more than 12 orders of magnitude different than largest Liouvillian term:
 Numerical error possible
   warnings.warn(&#39;Evolution time is more than 12 orders of magnitude different than largest Liouvillian term:\nNumerical error possible&#39;)
-/Users/albertsmith/Documents/GitHub/SLEEPY/Rho.py:1264: UserWarning: Evolution time is more than 12 orders of magnitude different than largest Liouvillian term:
+/Users/albertsmith/Documents/GitHub/SLEEPY/Rho.py:1265: UserWarning: Evolution time is more than 12 orders of magnitude different than largest Liouvillian term:
 Numerical error possible
   warnings.warn(&#39;Evolution time is more than 12 orders of magnitude different than largest Liouvillian term:\nNumerical error possible&#39;)
 </pre></div>

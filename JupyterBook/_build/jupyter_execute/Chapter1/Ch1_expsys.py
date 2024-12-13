@@ -15,11 +15,12 @@ import os
 os.chdir('../..')
 
 
-# In[1]:
+# In[2]:
 
 
 import SLEEPY as sl
 import numpy as np
+import matplotlib.pyplot as plt
 
 
 # ## Defining nuclei and experimental conditions
@@ -28,15 +29,15 @@ import numpy as np
 # 
 # - v0H: The magnetic field strength, given as the $^1$H frequency in MHz (required, unless B0 provided)
 # - B0: The magnetic field strength in Tesla (required, unless v0H provided)
-# - Nucs: List of nuclei, with mass number followed by atomic symbol ('1H','13C','2H', etc.). Electrons may also be included via 'e-'. Specifying 'e1' would give an electron with spin 1, and 'e3/2' or 'e1.5' would produce an electron with spin-3/2.
-# - T_K: Temperature in Kelvin. Only used if relaxation to thermal equilibrium is used (thermalization), or the density matrix (rho) is initialized with the "thermal" option.
+# - Nucs: List of nuclei, with mass number followed by atomic symbol ('1H','13C','2H', etc.). Electrons may also be included via 'e-'. To obtain a high-spin electron, start with e and follow with the spin. For example, specifying 'e1' would give an electron with spin 1, and 'e3/2' or 'e1.5' would produce an electron with spin-3/2.
+# - T_K: Temperature in Kelvin. Only used if relaxation to thermal equilibrium is used (thermalization), or the density matrix (rho) is initialized with the "thermal" option. Default is 298 K.
 # - vr: Spinning frequency in Hz (only used if anisotropic interactions provided). Default is 10000
 # - rotor_angle: Rotor angle, in radians. Default is the magic angle
-# - n_gamma: Number of gamma angles calculated per rotor period. For string-specified powder averages, this is also the number of gamma angles in the powder average. Default is 100
+# - n_gamma: Number of gamma angles calculated per rotor period. For string-specified powder averages (i.e. not JCP59 or grid), this is also the number of gamma angles in the powder average. Default is 100
 # - pwdavg: Type of powder average. Type sl.PowderAvg.list_powder_types to see options (Most powder averages from SIMPSON). If an integer is provided, then this yields the JCP59 powder average, with higher integers yielding more angles. Defaults is 3 (JCP59 with 99 angles)
-# - LF: Specifiy whether each spin should be simulating in the lab frame. Can be provided as a single boolean, e.g. False sets all spins in the rotating frame, or as a list the same length as Nucs, which puts some spins in the lab frame and some in the rotating frame (useful, e.g. for DNP experiments such as solid-effect, where the electron should be in the rotating frame, but the nucleus in the lab frame).
+# - LF: Specifiy whether each spin should be simulated in the lab frame. Can be provided as a single boolean, e.g. False sets all spins in the rotating frame, or as a list the same length as Nucs, which puts some spins in the lab frame and some in the rotating frame (useful, e.g. for DNP experiments such as solid-effect/cross-effect where the electrons should be in the rotating frame, but the nucleus in the lab frame).
 
-# In[2]:
+# In[3]:
 
 
 ex=sl.ExpSys(v0H=600,Nucs=['1H','13C'],vr=10000,T_K=298,
@@ -44,11 +45,17 @@ ex=sl.ExpSys(v0H=600,Nucs=['1H','13C'],vr=10000,T_K=298,
              pwdavg=3,LF=[False,False])
 
 
-# Typing `ex` at the command line will return a description of the spin-system.
+# Typing `ex` at the command line will return a description of the experimental setup.
+
+# In[4]:
+
+
+ex
+
 
 # Note that we have used the default values, so the same system may be obtained while omitting all the defaults:
 
-# In[3]:
+# In[5]:
 
 
 ex=sl.ExpSys(v0H=600,Nucs=['1H','13C'])
@@ -63,29 +70,47 @@ ex=sl.ExpSys(v0H=600,Nucs=['1H','13C'])
 # 
 # - dipole: Specify delta (the full anisotropy in Hz, which is 2x the definition used by SIMPSON). Optionally specify an asymmetry, eta (unitless) and the euler angles, euler as a 3-element (alpha,beta,gamma) list in radians.
 # - J: Specify J in Hz.
-# - CS: Isotropic chemical shift, specify in ppm.
-# - CSA: Chemical shift anisotropy. Specify delta in ppm. eta and the euler angles are optional.
+# - CS: Isotropic chemical shift, specify in ppm (use `ppm=...`) or in Hz (use `Hz=...`). 
+# - CSA: Chemical shift anisotropy. Specify delta in ppm (`delta=...`) or in Hz (`deltaHz=...`). eta and the euler angles are optional.
 # - hyperfine: Specify Axx, Ayy, and Azz. If all entries are equal, will be treated as an isotropic interaction. "euler" may be optionally provided.
-# - quadrupole: Specify delta in Hz (CHECK THIS INPUT). Optionally specify eta and euler
+# - quadrupole: Specify delta in Hz. Note that this is not the peak-to-peak splitting, but rather the tensor anisotropy (as is always the case in SLEEPY). Optionally specify eta and euler
 # - g: Electron g-tensor. Specify gxx, gyy, and gzz, and optionally euler.
-# - ZF: Electron zero-field (still missing)
-# 
+# - ZeroField: Electron zero-field. Specify D and optionally E (both in Hz), and optionally euler.
 
-# In[61]:
+# In[6]:
 
 
+ex=sl.ExpSys(v0H=600,Nucs=['1H','13C'],pwdavg='rep678')
 delta=sl.Tools.dipole_coupling(.109,'1H','13C')  #Calculate H-C dipole for 1.05 Angstrom distance
-ex.set_inter('dipole',i0=0,i1=1,delta=delta) #H-C dipole coupling
+ex.set_inter('dipole',i0=0,i1=1,delta=delta,euler=[0,np.pi/4,0]) #H-C dipole coupling
 ex.set_inter('CSA',i=1,delta=100,eta=1) #13C CSA
 _=ex.set_inter('CS',i=0,ppm=10) #1H isotropic chemical shift
 
 
-# Note that when setting an interaction, ex returns itself. This lets us string together multiple commands, for example, the following line will achieve the same interactions as above. Note that if an interaction is defined twice for the same spin or spins, the former definition will be overwritten.
+# We can view the shape of the tensors with the "plot_inter" function. Note that this results in a scatter plot, where the number of points is determined by the powder average. What is shown is the magnitude (as distance from the origin) and phase (as color). For the $n=0$ component, only real values are possible, so we only see positive (red) and negative (blue).
+
+# In[8]:
+
+
+fig=plt.figure(figsize=[15,8])
+ax=[fig.add_subplot(1,5,k+1,projection='3d') for k in range(5)]
+for k,a in enumerate(ax):ex.plot_inter(0,n=k-2,ax=a)
+
+
+# Note, if we try to plot an isotropic term, we just obtain a sphere.
+
+# In[11]:
+
+
+ex.plot_inter(2,n=0)
+
+
+# When setting an interaction, ex returns itself. This lets us string together multiple commands, for example, the following line will achieve the same interactions as above. Note that if an interaction is defined twice for the same spin or spins, the former definition will be overwritten.
 
 # In[5]:
 
 
-_=ex.set_inter('dipole',i0=0,i1=1,delta=delta).set_inter('CSA',i=1,delta=100,eta=1).    set_inter('CS',i=0,ppm=10)
+_=ex.set_inter('dipole',i0=0,i1=1,delta=delta,euler=[0,np.pi/4,0]).set_inter('CSA',i=1,delta=100,eta=1).    set_inter('CS',i=0,ppm=10)
 
 
 # If we just type 'ex' at the command line, we will obtain a description of the experimental system
@@ -138,7 +163,7 @@ ex
 # - pwdavg.beta : beta angles
 # - pwdavg.gamma : gamma angles
 # - pwdavg.weight : weight to use when summing the powder average
-# - pwdavg.gamma_encoded : Boolean, determines whether averaging over gamma is skipped (cannot be set except at initialization, or when running pwdavg.set_pwd_type
+# - pwdavg.gamma_encoded : Boolean, determines whether averaging over gamma is skipped (cannot be set except at initialization, or when running pwdavg.set_pwd_type)
 
 # In[7]:
 
@@ -156,7 +181,7 @@ ex.pwdavg
 
 # The powder average can also be plotted. By default, this plots the $\alpha$ and $\beta$ angles, but can be switched to $\beta$ and $\gamma$ angles by setting beta_gamma to True
 
-# In[10]:
+# In[13]:
 
 
 ex.pwdavg.plot()
@@ -165,18 +190,20 @@ ex.pwdavg.plot()
 # ## The Spin Operators
 
 # The spin operators are used to build the Hamiltonian for a given spin system. They are found in ex.Op, although one can also create a spin-operators from sl.SpinOp, with a list of spins as input. ex.Op contains basic information about the operators:
+# 
 # - ex.Op.N: Number of spins
 # - ex.Op.S: Spin number
 # - ex.Op.Mult: Multiplicity of each spin (2*S+1)
-# - ex.Hlabels/ex.Llabels: Latex labels for each spin state in Hilbert and Liouville space
+# - ex.Hlabels/ex.Llabels: $\LaTeX$ labels for each spin state in Hilbert and Liouville space
 # - ex.state_index: List of states of each spin in the density matrix (used for spin-exchange)
+# 
 # To access the spin matrices themselves, we first provide an index to go the desired spin, and then choose the spin matrix that we want:
 # 
 # Possible matrices: x, y, z, alpha, beta, m ($I^-$), p ($I^+$), eye (identity matrix)
 # 
 # 
 
-# In[38]:
+# In[14]:
 
 
 ex.Op[0].x  #Example: x operator for the 0th spin
@@ -227,4 +254,12 @@ T2spin[2]
 
 T2spin.set_mode('het')
 T2spin[2]
+
+
+# SLEEPY uses the full set of spherical tensors (`T`) when operating in the lab frame, but just the rank-2, $m=0$ component in the rotating frame (and this is not usually inserted with the spherical components).
+
+# In[ ]:
+
+
+
 

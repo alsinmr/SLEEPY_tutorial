@@ -5,6 +5,8 @@
 
 # <a href="https://githubtocolab.com/alsinmr/SLEEPY_tutorial/blob/main/ColabNotebooks/Chapter1/Ch1_Liouvillian.ipynb" target="_blank"><img src="https://colab.research.google.com/assets/colab-badge.svg"></a>
 
+# Evolution of the spin-system is determined by the Liouvillian, which consists of one or more Hamiltonians, relaxation terms, and exchange terms. SLEEPY operates in Liouville space, but the Hamiltonians are also calculated and can be accessed by the user.
+
 # ## Setup
 
 # In[1]:
@@ -43,7 +45,7 @@ H=ex.Hamiltonian() #Create the Hamiltonian
 H[0].H(0)
 
 
-# Note that we have set up in the lab frame, explaining why the Hamiltonian is so dense. In the rotating frame, this will not be the case.
+# Note that we have run the set up in the lab frame, explaining why the Hamiltonian is so dense. In the rotating frame, this will not be the case.
 # 
 # We may also visualize the Hamiltonian, using H.plot. Plotting may be performed for a given element of the powder average, or if not specified (but required)
 
@@ -53,12 +55,12 @@ H[0].H(0)
 H[5].plot() #Plot the Hamiltonian for the 5th element of the powder average
 
 
-# The Hamiltonian is built from the 5 rotating components of the Hamiltonian. If we have $n_\gamma$ steps per rotor period, and we're at the kth step, this is done as follows:
+# The full Hamiltonian is built from the 5 rotating components of the Hamiltonian. If we have $n_\gamma$ steps per rotor period, and we're at the kth step, this is done as follows:
 # 
 # $$
 # \begin{eqnarray}
-# \phi&=&\exp(2\pi i k/n_\gamma) \nonumber \\
-# \hat{H}&=&\phi^{-n}*\hat{H}_n
+# \phi_k&=&\exp(2\pi i k/n_\gamma) \nonumber \\
+# \hat{H}_k&=&\sum\limits_{n=-2}^2{\phi_k^{-n}*\hat{H}_n}
 # \end{eqnarray}
 # $$
 # 
@@ -159,9 +161,9 @@ L[0].plot('L-1') #n=-1 component of the coherent Liouvillian
 
 # ### Adding relaxation
 
-# $T_1$ and $T_2$ relaxation are available in SLEEPY, along with "Spin-Diffusion" which just introduces a uniform signal decay in x,y, and z directions. As implemented $T_1$ *only* decays along $z$, which is unphysical, so it is important to also add some $T_2$ relaxation when using $T_1$. By default, $T_1$ acts along $z$, and $T_2$ along x and y. However, it is possible to specify "orientation-specific" (OS) relaxation, which will adjust $T_1$ relaxation to occur on the eigenstates of a given spin, and $T_2$ acts on coherences between eigenstates of the spin. This option is more computationally expensive. However, for spins that are strongly tilted away from $z$, using the default relaxation will "mix" the $T_1$ and $T_2$ behavior, so that $T_1$ may appear much shorter than specified. 
+# $T_1$ and $T_2$ relaxation are available in SLEEPY, along with "Spin-Diffusion" which just introduces signal decay with $T_1=2*T_2$. As implemented in SLEEPY, the $T_1$ option *only* decays along $z$, which is unphysical, so it is important to also add some $T_2$ relaxation when using $T_1$. By default, $T_1$ acts along $z$, and $T_2$ along x and y. However, it is possible to specify "orientation-specific" (OS) relaxation, which will adjust $T_1$ relaxation to occur on the eigenstates of a given spin, and $T_2$ acts on coherences between eigenstates of the spin. This option is more computationally expensive. However, for spins that are strongly tilted away from $z$, using the default relaxation will "mix" the $T_1$ and $T_2$ behavior, so that $T_1$ may appear much shorter than specified. 
 # 
-# We may also include recovery of magnetization to thermal equilibrium (noting that in this case, ex.T_K becomes relevant). If orientation-specific relaxation is included, this is specified when the relaxation is added. Otherwise, it is specified after all relaxation is included. Relaxation is removed by running L.clear_relax. If, for example, $T_1$ relaxation is added to a spin twice without clearing the first entry, then the relaxation rates will add together, so it is important not to forget to clear existing relaxation.
+# We may also include recovery of magnetization to thermal equilibrium (noting that in this case, ex.T_K becomes relevant). If orientation-specific relaxation is included, this is specified when the relaxation is added. Otherwise, it is specified after all relaxation is included. Relaxation is removed by running `L.clear_relax()`. If, for example, $T_1$ relaxation is added to a spin twice without clearing the first entry, then the relaxation rates will add together, so it is important not to forget to clear existing relaxation.
 
 # In[13]:
 
@@ -196,9 +198,9 @@ L.plot('Lrelax',mode='abs')
 
 # ### Exchange
 
-# Importantly, SLEEPY allows us to simulate magnetic resonance under exchange conditions. This is achieved by defining two or more experimental system objects, with different interaction conditions. In this example, we just change the orientation of the dipole coupling, representing some kind of hopping motion.
+# Importantly, SLEEPY allows us to simulate magnetic resonance under exchange conditions. This is achieved by defining two or more experimental system objects, with different interaction conditions. In this example, we just change the orientation of the dipole coupling, representing a hopping motion.
 # 
-# Since the resulting Liouvillian comes from multiple experimental systems, we must use sl.Liouvillian, rather than generating it directly from ex.
+# Since the resulting Liouvillian comes from multiple experimental systems (`ex0,ex1`), we must use sl.Liouvillian, rather than generating it directly from ex.
 
 # In[16]:
 
@@ -209,7 +211,7 @@ ex1.set_inter('dipole',i0=0,i1=1,delta=44000,euler=[0,30*np.pi/180,0]) #30 degre
 L=sl.Liouvillian(ex,ex1)
 
 
-# We can plot the resulting Liouvillian, to see that it now has larger dimension, corresponding to the two sets of conditions.
+# We can plot the resulting Liouvillian, to see that it now has larger dimension, corresponding to the two experimental systems that were input.
 
 # In[17]:
 

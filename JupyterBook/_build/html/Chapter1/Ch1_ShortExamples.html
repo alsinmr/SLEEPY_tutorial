@@ -225,6 +225,23 @@ const thebe_selector_output = ".output, .cell_output"
      </font>
     </a>
    </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../Chapter2/Ch2_T1_NOE.html">
+     <font color="#0093AF">
+      <span class="math notranslate nohighlight">
+       \(T_1\)
+      </span>
+      , Nuclear Overhauser Effect in Solution NMR
+     </font>
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../Chapter2/Ch2_TROSY.html">
+     <font color="#0093AF">
+      TROSY effects
+     </font>
+    </a>
+   </li>
   </ul>
  </li>
  <li class="toctree-l1 has-children">
@@ -798,47 +815,23 @@ State-space reduction: 16-&gt;2
 <section id="spinning-side-bands-one-liner">
 <h2>Spinning side-bands (one liner)<a class="headerlink" href="#spinning-side-bands-one-liner" title="Permalink to this headline">#</a></h2>
 <p>The last simulation is a little bit just for fun, but also to demonstrate some of the convenience of the SLEEPY simulation setup. We simulate <span class="math notranslate nohighlight">\(^{13}\)</span>C spinning sidebands resulting from chemical shift anisotropy. However, we set up the whole simulation in a single line of code and plot the result.</p>
-<p>Compare to Herzfeld/Berger.<span class="math notranslate nohighlight">\(^1\)</span>
+<p>Compare to Herzfeld/Berger figure 2c.<span class="math notranslate nohighlight">\(^1\)</span>
 [1] J. Herzfeld, A.E. Berger. <em><a class="reference external" href="https://doi.org/10.1063/1.440136">J.Chem. Phys.</a></em> <strong>1980</strong>, 73, 6021-6030.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="mf">119.05</span><span class="o">*</span><span class="n">sl</span><span class="o">.</span><span class="n">Tools</span><span class="o">.</span><span class="n">NucInfo</span><span class="p">(</span><span class="s1">&#39;1H&#39;</span><span class="p">)</span><span class="o">/</span><span class="n">sl</span><span class="o">.</span><span class="n">Tools</span><span class="o">.</span><span class="n">NucInfo</span><span class="p">(</span><span class="s1">&#39;31P&#39;</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>293.8215587018381
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="mi">22110</span><span class="o">/</span><span class="mf">119.05</span><span class="o">*</span><span class="mi">2</span><span class="o">/</span><span class="mi">3</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>123.81352372952541
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">_</span><span class="o">=</span><span class="n">sl</span><span class="o">.</span><span class="n">Rho</span><span class="p">(</span><span class="s1">&#39;13Cx&#39;</span><span class="p">,</span><span class="s1">&#39;13Cp&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">DetProp</span><span class="p">(</span>
-    <span class="n">sl</span><span class="o">.</span><span class="n">ExpSys</span><span class="p">(</span><span class="mf">119.05</span><span class="p">,</span><span class="n">Nucs</span><span class="o">=</span><span class="s1">&#39;13C&#39;</span><span class="p">,</span><span class="n">vr</span><span class="o">=</span><span class="mi">2060</span><span class="p">)</span><span class="o">.</span><span class="n">set_inter</span><span class="p">(</span><span class="s1">&#39;CSA&#39;</span><span class="p">,</span><span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">delta</span><span class="o">=</span><span class="mi">123</span><span class="p">,</span><span class="n">eta</span><span class="o">=</span><span class="mf">.5</span><span class="p">)</span><span class="o">.</span>\
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">_</span><span class="o">=</span><span class="n">sl</span><span class="o">.</span><span class="n">Rho</span><span class="p">(</span><span class="s1">&#39;31Px&#39;</span><span class="p">,</span><span class="s1">&#39;31Pp&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">DetProp</span><span class="p">(</span>
+    <span class="n">sl</span><span class="o">.</span><span class="n">ExpSys</span><span class="p">(</span><span class="n">B0</span><span class="o">=</span><span class="mf">6.9009</span><span class="p">,</span><span class="n">Nucs</span><span class="o">=</span><span class="s1">&#39;31P&#39;</span><span class="p">,</span><span class="n">vr</span><span class="o">=</span><span class="mi">2060</span><span class="p">)</span><span class="o">.</span><span class="n">set_inter</span><span class="p">(</span><span class="s1">&#39;CSA&#39;</span><span class="p">,</span><span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">delta</span><span class="o">=-</span><span class="mi">104</span><span class="p">,</span><span class="n">eta</span><span class="o">=</span><span class="mf">.56</span><span class="p">)</span><span class="o">.</span>\
     <span class="n">Liouvillian</span><span class="p">()</span><span class="o">.</span><span class="n">Sequence</span><span class="p">(),</span>
-    <span class="n">n</span><span class="o">=</span><span class="mi">4096</span><span class="p">,</span><span class="n">n_per_seq</span><span class="o">=</span><span class="mi">16</span><span class="p">)</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">FT</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">axis</span><span class="o">=</span><span class="s1">&#39;ppm&#39;</span><span class="p">)</span>
+    <span class="n">n</span><span class="o">=</span><span class="mi">4096</span><span class="p">,</span><span class="n">n_per_seq</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">FT</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">axis</span><span class="o">=</span><span class="s1">&#39;kHz&#39;</span><span class="p">,</span><span class="n">apodize</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>State-space reduction: 4-&gt;1
-Prop: 16 steps per every 1 rotor period
+Prop: 20 steps per every 1 rotor period
 </pre></div>
 </div>
-<img alt="../_images/Ch1_ShortExamples_19_1.png" src="../_images/Ch1_ShortExamples_19_1.png" />
+<img alt="../_images/Ch1_ShortExamples_17_1.png" src="../_images/Ch1_ShortExamples_17_1.png" />
 </div>
 </div>
 </section>

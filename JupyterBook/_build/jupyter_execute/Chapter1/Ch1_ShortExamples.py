@@ -17,7 +17,7 @@ import os
 os.chdir('../..')
 
 
-# In[2]:
+# In[3]:
 
 
 import SLEEPY as sl
@@ -138,26 +138,14 @@ for T in [50,100,200,400]:
 # ## Spinning side-bands (one liner)
 # The last simulation is a little bit just for fun, but also to demonstrate some of the convenience of the SLEEPY simulation setup. We simulate $^{13}$C spinning sidebands resulting from chemical shift anisotropy. However, we set up the whole simulation in a single line of code and plot the result.
 # 
-# Compare to Herzfeld/Berger.$^1$
+# Compare to Herzfeld/Berger figure 2c.$^1$
 # [1] J. Herzfeld, A.E. Berger. *[J.Chem. Phys.](https://doi.org/10.1063/1.440136)* **1980**, 73, 6021-6030.
 
-# In[3]:
+# In[41]:
 
 
-119.05*sl.Tools.NucInfo('1H')/sl.Tools.NucInfo('31P')
-
-
-# In[7]:
-
-
-22110/119.05*2/3
-
-
-# In[62]:
-
-
-_=sl.Rho('13Cx','13Cp').DetProp(
-    sl.ExpSys(119.05,Nucs='13C',vr=2060).set_inter('CSA',i=0,delta=123,eta=.5).\
+_=sl.Rho('31Px','31Pp').DetProp(
+    sl.ExpSys(B0=6.9009,Nucs='31P',vr=2060).set_inter('CSA',i=0,delta=-104,eta=.56).\
     Liouvillian().Sequence(),
-    n=4096,n_per_seq=16).plot(FT=True,axis='ppm')
+    n=4096,n_per_seq=20).plot(FT=True,axis='kHz',apodize=True)
 
