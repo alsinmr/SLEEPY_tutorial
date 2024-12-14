@@ -2,7 +2,7 @@
 
 ## What is an object?
 ### Functional versus object-oriented programming paradigms
-Most people are familiar with basic programs that work with data and functions (functional programming paradigm). For example, we might have a density matrix (let's call it rho, as used in SLEEPY). In the functional paradigm, rho would be a matrix (or vector). If you wanted to propagate rho, you would need a propagator, U (also a matrix), and you would need to calculate
+Most people are familiar with basic programs that work with data and functions (functional programming paradigm). For example, we might have a density matrix (let's call it rho, as used in SLEEPY). In the functional paradigm, rho would be a matrix (or vector). If you wanted to propagate rho, you would need a propagator, U (also a matrix), and you would need to calculate:
 ```
 rho_new = U @ rho
 ```
