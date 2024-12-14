@@ -5,16 +5,14 @@
 
 # <a href="https://githubtocolab.com/alsinmr/SLEEPY_tutorial/blob/main/ColabNotebooks/Chapter2/Ch2_CEST.ipynb" target="_blank"><img src="https://colab.research.google.com/assets/colab-badge.svg"></a>
 
-# In this notebook, we investigate the CEST experiment, first assuming only isotropic interactions (solution-state), and then also including influence from CSA.
+# In the CEST experiment, one often has chemical exchange, but with one very small population, such that its chemical shift is difficult or impossible to observe directly. However, if we were to apply a low-power saturating field when magnetization is in the z-direction, it is possible to saturate the magnetization when on-resonant with the invisible peak.
 
 # ## Setup
 
-# In[1]:
+# In[ ]:
 
 
-# SETUP pyDR
-import os
-os.chdir('../..')
+# SETUP SLEEPY
 
 
 # In[2]:
@@ -27,7 +25,7 @@ import matplotlib.pyplot as plt
 
 # ## Build the spin system
 
-# In[6]:
+# In[3]:
 
 
 ex0=sl.ExpSys(v0H=600,Nucs='13C',T_K=298) #We need a description of the experiment for both states (ex0, ex1)
@@ -37,9 +35,9 @@ _=ex1.set_inter(Type='CS',i=0,ppm=7)
 
 
 # ## Build the Liouvillian
-# For CEST to work, we need to be able saturate the spins, which requires $T_2$ relaxation. For a more realistic behavior, we also include $T_1$ recovery of the magnetization, which can inhibit the saturation.
+# For CEST to work, we need to be able saturate the spins, which requires $T_2$ relaxation. For a more realistic behavior, we also include $T_1$ recovery of the magnetization, which can inhibit the saturation. Finally, we will allow the magnetization to recover towards its thermal equilibrium.
 
-# In[7]:
+# In[4]:
 
 
 L=sl.Liouvillian((ex0,ex1))  #Builds the two different Hamiltonians and exports them to Liouville space
@@ -57,7 +55,7 @@ _=L.add_relax(Type='recovery') #This brings the spins back into thermal equilibr
 # ## Calculate the required propagators
 # We'll simulate this system by starting with magnetization along the z-axis and saturating at some frequency. After the saturation period, we'll apply a $\pi/2$ pulse along the y-axis to get x-magnetization. This will be allowed to evolve, and Fourier transformed. We can then integrate the main peak to determine the amount of saturation that has occured.
 
-# In[8]:
+# In[5]:
 
 
 Usat=list()   #We'll pre-calculate the propagators for saturation
@@ -77,7 +75,7 @@ Uevol=L.U(Dt=Dt)  #Propagator for evolving the spin system
 # ## Run the sequence, with sweep over $\nu_1$
 # First, we generate the initial magnetization and the detection operator. Then, at each value of $\nu_1$, we reset the detection operator, followed by saturation (U taken out of Usat), apply the $\pi/2$ pulse (Upi2), and finally detect with Uevol. We store the Fourier-transformed signal in spec.
 
-# In[10]:
+# In[6]:
 
 
 rho=sl.Rho(rho0='13Cz',detect='13Cp')
@@ -91,8 +89,10 @@ for U in Usat:
 
 # ## Plot one of the spectra
 # In order to see the usefulness of this techique, we once plot the spectrum to show that the weaker peak is nearly invisible. We just take the last spectrum that is still stored in rho. The second peak is weakly visible if we zoom in around 5 ppm (but would be quite difficult to see in a real spectrum).
+# 
+# Note that later we integrate the spectrum by selecting a range of points in the spectrum. In this case, it may be useful to set `axis='points'` to more easily determine what range of points to use.
 
-# In[11]:
+# In[12]:
 
 
 ax=rho.plot(FT=True,axis='ppm')
@@ -100,9 +100,9 @@ _=ax.set_yticklabels('')
 
 
 # ## Integrate spectrum for all values of $\nu_1$ and plot results
-# We will just integrate over the strong peak
+# We will just integrate over the strong peak and plot the peak intensity
 
-# In[12]:
+# In[13]:
 
 
 spec=np.array(spec)   #Convert to a numpy array
@@ -157,7 +157,7 @@ for tc in tc0:
     I.append(spec[:,400:620].sum(1))  #Integrate over the main peak
 
 
-# Plot the results
+# We plot the results below, where we see that the saturation behavior depends strongly on the exchange rate. Note that if the exchange is too fast or too slow, the CEST experiment is no longer as effective.
 
 # In[15]:
 
@@ -175,49 +175,6 @@ for a,I0,tc in zip(ax,I,tc0):
     a.set_yticklabels('')
     a.set_ylim([0,a.get_ylim()[1]])
     a.text(20,a.get_ylim()[1]*.05,r'$\tau_c$'+f' = \n{tc:.1e} s')
-fig.set_size_inches([8,6])
-fig.tight_layout()
-
-
-# ## Does coalescence occur for the same correlation time in CEST as in 1D spectra?
-# We set up the same system, but just calculate a 1D spectrum
-
-# In[16]:
-
-
-p1=0.95  #Population of state 1
-p2=1-p1  #Population of state 2
-
-tc0=np.logspace(0,-5.5,12)
-spec=list()
-for tc in tc0:
-    kex=1/(2*tc)*(np.array([[-1,1],[1,-1]])+(p1-p2)*np.array([[1,1],[-1,-1]]))   #Exchange matrix
-    L.kex=kex    #Add exchange to the Liouvillian
-    Uevol=L.U(Dt=Dt)  #Propagator for evolving the spin system
-
-    rho=sl.Rho(rho0='13Cx',detect='13Cp')
-    rho.DetProp(Uevol,n=1024)
-    spec.append(rho.FT[0].real)
-
-
-# Plot the results
-
-# In[17]:
-
-
-fig,ax=plt.subplots(3,4)
-ax=ax.reshape(ax.size)
-
-for a,spec0,tc in zip(ax,spec,tc0):
-    a.plot(rho.v_axis*1e6/ex0.v0[0],spec0)
-    if a.is_last_row():
-        a.set_xlabel(r'$\delta (^{13}$C) / ppm')
-    if a.is_first_col():
-        a.set_ylabel('I / a.u.')
-    a.invert_xaxis()
-    a.set_yticklabels('')
-    a.set_ylim([0,spec0.max()*p2/p1*1.1])
-    a.text(20,a.get_ylim()[1]*.75,r'$\tau_c$'+f' = \n{tc:.1e} s')
 fig.set_size_inches([8,6])
 fig.tight_layout()
 

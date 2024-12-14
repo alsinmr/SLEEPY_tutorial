@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# # <font  color = "#0093AF"> Quadrupolar exchange
+# # <font  color = "#0093AF"> Quadrupolar phenomena
 
 # <a href="https://githubtocolab.com/alsinmr/SLEEPY_tutorial/blob/main/ColabNotebooks/Chapter3/Ch3_Quad.ipynb" target="_blank"><img src="https://colab.research.google.com/assets/colab-badge.svg"></a>
 
@@ -11,12 +11,10 @@
 
 # ## Setup
 
-# In[1]:
+# In[ ]:
 
 
-# SETUP pyDR
-import os
-os.chdir('../..')
+# SETUP SLEEPY
 
 
 # In[2]:
@@ -85,57 +83,34 @@ rho.apod_pars['LB']=500
 rho.plot(FT=True,apodize=True,ax=ax[1])
 
 
-# ## How does coupling depend on spin?
+# ## Second order quadrupolar broadening in the lab frame
+# Half-integer spins produce a narrow peak in the middle of the quadrupolar spectrum. However, this peak is broadened by the second-order quadrupole coupling. Simulating this broadening presents a challenge for most simulation packages, because it is a rank-4 tensor, making its transformation under rotation more complicated than the rank-2 tensors that most simulation packages are setup to handle. However, if the quadrupolar interaction is simulated in the lab frame, the second order quadrupole coupling arises naturally. We demonstrate here, with one simulation in the rotating frame, and one in the lab frame.
 
-# In[6]:
-
-
-ex=sl.ExpSys(v0H=600,Nucs='2H',vr=0,pwdavg='bcr400',LF=True).set_inter('quadrupole',i=0,delta=170e3*.15)
-ax=plt.subplots()[1]
-
-for S in [1,3/2,2,5/2,3]:
-    ex.Op=sl.SpinOp([S]) #Manually replace the spin-operators to get a higher spin-system with same gamma
-    seq=ex.Liouvillian().Sequence(Dt=5e-6)
-    rho=sl.Rho('2Hx','2Hp')
-    rho.DetProp(seq,n=4096)
-    rho.apod_pars['WDW']='em'
-    rho.apod_pars['LB']=500
-    rho.downmix()
-    rho.plot(FT=True,apodize=True,ax=ax)
+# In[30]:
 
 
-# In[7]:
+exRF=sl.ExpSys(250,Nucs='17O',vr=100000).set_inter('quadrupole',i=0,delta=50000)
+seqRF=exRF.Liouvillian().Sequence()
+rhoRF=sl.Rho('17Ox','17Op')
+rhoRF.DetProp(seqRF,n=8192,n_per_seq=8)
+
+exLF=sl.ExpSys(250,Nucs='17O',vr=100000,LF=True).set_inter('quadrupole',i=0,delta=50000)
+seqLF=exLF.Liouvillian().Sequence()
+rhoLF=sl.Rho('17Ox','17Op')
+_=rhoLF.DetProp(seqLF,n=8192,n_per_seq=8)
 
 
-170e3*.15*np.sqrt(2/3)
+# In[31]:
 
 
-# In[10]:
-
-
-ex=sl.ExpSys(v0H=600,Nucs='2H',vr=0,pwdavg='bcr400').set_inter('quadrupole',i=0,delta=170e3*.1)
-seq=ex.Liouvillian().Sequence(Dt=5e-6)
-rho=sl.Rho('2Hx','2Hp')
-rho.DetProp(seq,n=4096)
-rho.plot(FT=True)
-
-
-# In[76]:
-
-
-12750/17000
-
-
-# In[9]:
-
-
-get_ipython().run_line_magic('matplotlib', 'notebook')
-
-
-# In[11]:
-
-
-25500+12750
+ax=plt.subplots(1,2,figsize=[8,4])[1]
+rhoRF.plot(FT=True,axis='kHz',ax=ax[0])
+rhoRF.plot(FT=True,axis='kHz',ax=ax[1])
+rhoLF.downmix()
+rhoLF.plot(FT=True,axis='kHz',ax=ax[0])
+rhoLF.plot(FT=True,axis='kHz',ax=ax[1])
+ax[1].set_xlim([1,-1])
+ax[1].set_ylim([rhoLF.FT.real.min()*1.1,rhoLF.FT.real.max()*1.5])
 
 
 # In[ ]:

@@ -9,15 +9,13 @@
 
 # ## Setup
 
-# In[1]:
+# In[ ]:
 
 
-# SETUP pyDR
-import os
-os.chdir('../..')
+# SETUP SLEEPY
 
 
-# In[2]:
+# In[3]:
 
 
 import SLEEPY as sl
@@ -28,7 +26,7 @@ import matplotlib.pyplot as plt
 # ## Build the system
 # The first step is to build the system, which will have a single nucleus, with two different chemical shifts.
 
-# In[3]:
+# In[4]:
 
 
 ex0=sl.ExpSys(Nucs='13C',v0H=600)    #We need a description of the experiment for both states (ex0, ex1)
@@ -38,9 +36,9 @@ _=ex1.set_inter(Type='CS',i=0,ppm=5)
 
 
 # ## Add the exchange process
-# First, export this sytem into Liouville space, allowing us to introduce an exchange process. Then we'll define a correlation time and population 1 and population 2. From this we can build the exchange matrix and append it to the Liouvillian. We also add some $T_2$ relaxation to destroy transverse magnetization during the delay period for exchange and produce some broadening.
+# First, we export the system into Liouville space, allowing us to introduce an exchange process. Then we'll define a correlation time and population 1 and population 2. From this we can build the exchange matrix and append it to the Liouvillian. We also add some $T_2$ relaxation to destroy transverse magnetization during the delay period for exchange and produce some broadening.
 
-# In[4]:
+# In[5]:
 
 
 L=sl.Liouvillian((ex0,ex1))           #Builds the two different Hamiltonians and exports them to Liouville space
@@ -57,9 +55,11 @@ _=L.add_relax(Type='T2',i=0,T2=.01)
 # ## Run as a 2D experiment
 # First, we'll just calculate one 2D spectrum, and then later check how the spectrum evolves as a function of a delay time. We need an initial density matrix, $S_x$, a detection matrix, $S^+$, and propagators for evolution times, $\pi$/2 pulses, and a delay for the exchange process. We start with generating the propagators and density matrices.
 # 
-# SLEEPY has a function in Tools, the TwoD_Builder, for executing and processing two-dimensional experiements. TwoD_Builder requires an initial density matrix, a Sequence for the indirect dimension evolution, the direction dimension evolution, and transfer periods between the dimensions. For the transfer, one needs a sequence to convert the X component, and one for the Y component (States acquisition). THe sequences for the direct/indirect dimension may just be delays.
+# SLEEPY has a function in Tools, the TwoD_Builder, for executing and processing two-dimensional experiements. TwoD_Builder requires an initial density matrix, a Sequence for the indirect dimension evolution, the direction dimension evolution, and transfer periods between the dimensions. For the transfer, one needs a sequence to convert the X component, and one for the Y component (States acquisition$^1$). The sequences for the direct/indirect dimension may just be delays, and can be the same sequence.
+# 
+# [1] D.J. States, R.A. Haberkorn, D.J. Ruben. *[J. Magn. Reson.](https://doi.org/10.1016/0022-2364(82)90279-7)*, **1969**, 48, 286-292.
 
-# In[5]:
+# In[6]:
 
 
 rho=sl.Rho(rho0='S0x',detect='S0p')
@@ -77,7 +77,6 @@ t=[0,tpi2,dly,dly+tpi2] #pi/2 pulse, 1 second delay, pi/2 pulse
 seq_trX.add_channel('13C',t=t,v1=[v1,0,v1],phase=[-np.pi/2,0,np.pi/2]) #Convert x to z, delay, convert z to x
 seq_trY.add_channel('13C',t=t,v1=[v1,0,v1],phase=[0,0,np.pi/2]) #Convert y to z, delay, convert z to x
 
-
 twoD=sl.Tools.TwoD_Builder(rho,seq_dir=seq,seq_in=seq,seq_trX=seq_trX,seq_trY=seq_trY)
 twoD(32,64)
 
@@ -88,7 +87,7 @@ ax.figure.set_size_inches([7,7])
 
 
 # ## Sweep the delay time to observe buildup
-# We just repeat the above code except with different lengths for Udelay. We slice through the larger peak in order to see the growth of the second peak
+# In order to observe the diagonal peaks decay, and the off-diagonal peaks build up, we repeat the above code except with different lengths for the delay. We slice through the larger peak in order to see the growth of the second peak
 
 # In[7]:
 
@@ -136,15 +135,15 @@ fig.tight_layout()
 
 
 # ## Plot trajectory of the individual peaks
-# Each peak represents the probability of starting in some state and ending in another state after the delay time, $\tau$
+# Each curve represents the probability of starting in some state and ending in another state after the delay time, $\tau$
 
-# In[8]:
+# In[10]:
 
 
 I=np.array(I)
 
 
-# In[9]:
+# In[11]:
 
 
 ax=plt.subplots()[1]
@@ -158,7 +157,7 @@ ax.legend((r'$p_1\rightarrow p_1$',r'$p_2\rightarrow p_2$',r'$p_1\rightarrow p_2
 # ## Spectra as a function of exchange rate
 # We can't use EXSY for faster motions, because the peaks don't stay separated. We can observe this behavior here. We just copy the setup from above for the 3D spectra and run it with varying correlation times
 
-# In[13]:
+# In[12]:
 
 
 tc0=np.logspace(-1,-6,6)
@@ -185,7 +184,7 @@ for a in ax:a.set_zticklabels('')
 
 # Now we do the same as above, but without having symmetric exchange, i.e. $p_1\ne p_2$.
 
-# In[15]:
+# In[13]:
 
 
 tc0=np.logspace(-1,-6,6)
@@ -215,7 +214,7 @@ for a in ax:a.set_zticklabels('')
 
 # ### Acquisition
 
-# In[20]:
+# In[14]:
 
 
 # Start from L that has already been generated
@@ -246,7 +245,7 @@ for k in range(n):
 
 # ### Processing
 
-# In[21]:
+# In[15]:
 
 
 RE,IM=np.array(RE,dtype=complex),np.array(IM,dtype=complex) #Turn lists into arrays
@@ -274,7 +273,7 @@ vx,vy=np.meshgrid(v,v)  #meshgrid for plotting
 
 # ### Plotting
 
-# In[22]:
+# In[17]:
 
 
 from matplotlib import cm
@@ -286,7 +285,7 @@ ax.set_ylabel(r'$\delta_2 (^{13}$C) / ppm')
 ax.invert_xaxis()
 ax.invert_yaxis()
 
-fig.set_size_inches([8,8])
+fig.set_size_inches([7,7])
 
 
 # In[ ]:

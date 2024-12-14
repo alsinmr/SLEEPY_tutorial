@@ -158,6 +158,13 @@ const thebe_selector_output = ".output, .cell_output"
     </a>
    </li>
    <li class="toctree-l2">
+    <a class="reference internal" href="../Chapter1/Ch1_Objects.html">
+     <font color="#0093AF">
+      Objects
+     </font>
+    </a>
+   </li>
+   <li class="toctree-l2">
     <a class="reference internal" href="../Chapter1/Ch1_expsys.html">
      <font color="#0093AF">
       Experimental Settings and Spin-System Definition
@@ -632,13 +639,12 @@ title="Print to PDF"
   <section class="tex2jax_ignore mathjax_ignore" id="font-color-0093af-exchange-in-1d-spectra">
 <h1><font  color = "#0093AF"> Exchange in 1D spectra<a class="headerlink" href="#font-color-0093af-exchange-in-1d-spectra" title="Permalink to this headline">#</a></h1>
 <p><a href="https://githubtocolab.com/alsinmr/SLEEPY_tutorial/blob/main/ColabNotebooks/Chapter2/Ch2_exchange1D.ipynb" target="_blank"><img src="https://colab.research.google.com/assets/colab-badge.svg"></a></p>
+<p>One of the most basic examples of measuring dynamics is broadening driven by an exchange process that influences the chemical shift of the system. To simulate this in SLEEPY, we must simply build two spin systems with a nucleus with modulated chemical shift, and couple the systems with an exchange matrix.</p>
 <section id="setup">
 <h2>Setup<a class="headerlink" href="#setup" title="Permalink to this headline">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># SETUP pyDR</span>
-<span class="kn">import</span> <span class="nn">os</span>
-<span class="n">os</span><span class="o">.</span><span class="n">chdir</span><span class="p">(</span><span class="s1">&#39;../..&#39;</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># SETUP SLEEPY</span>
 </pre></div>
 </div>
 </div>
@@ -651,23 +657,11 @@ title="Print to PDF"
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">ModuleNotFoundError</span><span class="g g-Whitespace">                       </span>Traceback (most recent call last)
-<span class="nn">&lt;ipython-input-2-6d82bc1f9ac1&gt;</span> in <span class="ni">&lt;module&gt;</span><span class="nt">()</span>
-<span class="ne">----&gt; </span><span class="mi">1</span> <span class="kn">import</span> <span class="nn">SLEEPY</span> <span class="k">as</span> <span class="nn">sl</span>
-<span class="g g-Whitespace">      </span><span class="mi">2</span> <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="g g-Whitespace">      </span><span class="mi">3</span> <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
-
-<span class="ne">ModuleNotFoundError</span>: No module named &#39;SLEEPY&#39;
-</pre></div>
-</div>
-</div>
 </div>
 </section>
 <section id="build-the-system">
 <h2>Build the system<a class="headerlink" href="#build-the-system" title="Permalink to this headline">#</a></h2>
-<p>The first step is to build the system, which will have a single nucleus, with two different chemical shifts.</p>
+<p>The first step is to build the system, which will have a single nucleus. The first copy of the system has a chemical shift of -5 ppm, and a second copy is made with a shift of +5 ppm.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ex0</span><span class="o">=</span><span class="n">sl</span><span class="o">.</span><span class="n">ExpSys</span><span class="p">(</span><span class="n">Nucs</span><span class="o">=</span><span class="s1">&#39;13C&#39;</span><span class="p">,</span><span class="n">v0H</span><span class="o">=</span><span class="mi">600</span><span class="p">)</span>    <span class="c1">#We need a description of the experiment for both states (ex0, ex1)</span>
@@ -681,7 +675,7 @@ title="Print to PDF"
 </section>
 <section id="add-the-exchange-process-symmetric-exchange">
 <h2>Add the exchange process (symmetric exchange)<a class="headerlink" href="#add-the-exchange-process-symmetric-exchange" title="Permalink to this headline">#</a></h2>
-<p>First, export this sytem into Liouville space, allowing us to introduce an exchange process. Then we’ll define a correlation time and population 1 and population 2. Here we start assuming the populations, <span class="math notranslate nohighlight">\(p_1\)</span> and <span class="math notranslate nohighlight">\(p_2\)</span> are equal</p>
+<p>First, we export this sytem into Liouville space, allowing us to introduce an exchange process. Then we’ll define a correlation time and population 1 and population 2. Here we start assuming the populations, <span class="math notranslate nohighlight">\(p_1\)</span> and <span class="math notranslate nohighlight">\(p_2\)</span> are equal</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">L</span><span class="o">=</span><span class="n">sl</span><span class="o">.</span><span class="n">Liouvillian</span><span class="p">((</span><span class="n">ex0</span><span class="p">,</span><span class="n">ex1</span><span class="p">))</span>           <span class="c1">#Builds the two different Hamiltonians and exports them to Liouville space</span>
@@ -691,7 +685,7 @@ title="Print to PDF"
 <span class="n">p2</span><span class="o">=</span><span class="mi">1</span><span class="o">-</span><span class="n">p1</span>  <span class="c1">#Population of state 2</span>
 
 <span class="n">kex</span><span class="o">=</span><span class="mi">1</span><span class="o">/</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">tc</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">],[</span><span class="mi">1</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">]])</span><span class="o">+</span><span class="p">(</span><span class="n">p1</span><span class="o">-</span><span class="n">p2</span><span class="p">)</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">],[</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">]]))</span>
-<span class="c1">#This can also be obtained from kex=sl.Tools.twoSite_kex(tc=tc,p1=p1)</span>
+<span class="c1">#The above matrix can also be obtained from kex=sl.Tools.twoSite_kex(tc=tc,p1=p1)</span>
 <span class="n">L</span><span class="o">.</span><span class="n">kex</span><span class="o">=</span><span class="n">kex</span>
 </pre></div>
 </div>
@@ -700,15 +694,18 @@ title="Print to PDF"
 </section>
 <section id="run-as-a-1d-experiment">
 <h2>Run as a 1D Experiment<a class="headerlink" href="#run-as-a-1d-experiment" title="Permalink to this headline">#</a></h2>
-<p>We’ll start the magnetization on <span class="math notranslate nohighlight">\(S_x\)</span> and observe <span class="math notranslate nohighlight">\(S^+\)</span>. We need a propagator from the Liouville matrix.</p>
+<p>We’ll start the magnetization on <span class="math notranslate nohighlight">\(S_x\)</span> and observe <span class="math notranslate nohighlight">\(S^+\)</span> (detecting <span class="math notranslate nohighlight">\(S^+\)</span> gives us the real and imaginary components of the signal). To acquire the signal, we need a propagator or sequence from the Liouvillian.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">rho</span><span class="o">=</span><span class="n">sl</span><span class="o">.</span><span class="n">Rho</span><span class="p">(</span><span class="n">rho0</span><span class="o">=</span><span class="s1">&#39;13Cx&#39;</span><span class="p">,</span><span class="n">detect</span><span class="o">=</span><span class="s1">&#39;13Cp&#39;</span><span class="p">)</span>
 <span class="c1">#For a 10 ppm shift difference, Dt should be short enough to capture both peaks in the spectrum</span>
+<span class="c1">#For 600 MHz 1H frequency, 10 ppm is approximately 10*150 Hz. </span>
+<span class="c1">#The 2 makes this twice as broad as the peak difference</span>
 <span class="n">Dt</span><span class="o">=</span><span class="mi">1</span><span class="o">/</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="mi">10</span><span class="o">*</span><span class="mi">150</span><span class="p">)</span>
 <span class="c1"># Empty sequence</span>
 <span class="n">seq</span><span class="o">=</span><span class="n">L</span><span class="o">.</span><span class="n">Sequence</span><span class="p">(</span><span class="n">Dt</span><span class="o">=</span><span class="n">Dt</span><span class="p">)</span>  <span class="c1">#For solution NMR, Dt must be specified</span>
 
+<span class="c1"># Repeat the sequency 1024 times</span>
 <span class="n">_</span><span class="o">=</span><span class="n">rho</span><span class="o">.</span><span class="n">DetProp</span><span class="p">(</span><span class="n">seq</span><span class="p">,</span><span class="n">n</span><span class="o">=</span><span class="mi">1024</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -726,31 +723,43 @@ title="Print to PDF"
 \hat{\hat{L}}_{red.}=
 \begin{pmatrix}
 -k_{12}+i\Omega_1 &amp; k_{21} \\
-k_{12} &amp; k_{21}+i\Omega_2
+k_{12} &amp; -k_{21}+i\Omega_2
 \end{pmatrix}
 \end{equation}
 \end{split}\]</div>
 <p>This sub-matrix of <span class="math notranslate nohighlight">\(\hat{\hat{L}}\)</span> corresponds to the <span class="math notranslate nohighlight">\(\hat{S}^+\)</span> terms that are being detected. While we also start out with <span class="math notranslate nohighlight">\(\hat{S}^-\)</span>, they don’t exchange with the <span class="math notranslate nohighlight">\(\hat{S}^+\)</span> terms, and are also not detected, so we don’t need to actually calculate them.</p>
-</section>
-<section id="plot-the-results">
-<h2>Plot the results<a class="headerlink" href="#plot-the-results" title="Permalink to this headline">#</a></h2>
-<p>In this timescale, we still obtain two peaks, but that are strongly broadened by the exchange process. We can sweep the correlation time to observe the coalescence of the peaks.</p>
+<p>This is shown graphically below (the block indexing is, unfortunately, arbitrary: we just try different block indices until we find the desired states).</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">rho</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">FT</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">L</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">block</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">mode</span><span class="o">=</span><span class="s1">&#39;re&#39;</span><span class="p">,</span><span class="n">colorbar</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Real (exchange matrix)&#39;</span><span class="p">)</span>
+<span class="n">_</span><span class="o">=</span><span class="n">L</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">block</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">mode</span><span class="o">=</span><span class="s1">&#39;im&#39;</span><span class="p">,</span><span class="n">colorbar</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Imaginary (Frequency)&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;AxesSubplot:xlabel=&#39;$\\nu$ / Hz&#39;, ylabel=&#39;I / a.u.&#39;&gt;
+<img alt="../_images/Ch2_exchange1D_13_0.png" src="../_images/Ch2_exchange1D_13_0.png" />
+<img alt="../_images/Ch2_exchange1D_13_1.png" src="../_images/Ch2_exchange1D_13_1.png" />
+</div>
+</div>
+</section>
+<section id="plot-the-results">
+<h2>Plot the results<a class="headerlink" href="#plot-the-results" title="Permalink to this headline">#</a></h2>
+<p>We can get the resulting spectrum under exchange conditions from rho by using the <code class="docutils literal notranslate"><span class="pre">rho.plot()</span></code> command. Setting FT to true gives the Fourier-transformed spectrum.</p>
+<p>In this timescale, we still obtain two peaks, but that are strongly broadened by the exchange process. We can sweep the correlation time to observe the coalescence of the peaks.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">_</span><span class="o">=</span><span class="n">rho</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">FT</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 </pre></div>
 </div>
-<img alt="../_images/Ch2_exchange1D_14_1.png" src="../_images/Ch2_exchange1D_14_1.png" />
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/Ch2_exchange1D_16_0.png" src="../_images/Ch2_exchange1D_16_0.png" />
 </div>
 </div>
 </section>
 <section id="sweep-through-a-range-of-correlation-times-to-observe-coalescence">
 <h2>Sweep through a range of correlation times to observe coalescence<a class="headerlink" href="#sweep-through-a-range-of-correlation-times-to-observe-coalescence" title="Permalink to this headline">#</a></h2>
+<p>In this example, we vary the timescale of exchange, from fast exchange where we obtain a relatively sharp peak, through coalescence, and to slow exchange where we again obtain two narrow peaks.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sl</span><span class="o">.</span><span class="n">Defaults</span><span class="p">[</span><span class="s1">&#39;verbose&#39;</span><span class="p">]</span><span class="o">=</span><span class="kc">False</span>  <span class="c1">#If SLEEPY outputs get annoying, you can turn them off</span>
@@ -766,7 +775,7 @@ k_{12} &amp; k_{21}+i\Omega_2
     <span class="n">rho</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">FT</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">ax</span><span class="o">=</span><span class="n">a</span><span class="p">)</span>
     <span class="n">sm</span><span class="o">=</span><span class="nb">max</span><span class="p">(</span><span class="n">sm</span><span class="p">,</span><span class="n">a</span><span class="o">.</span><span class="n">get_ylim</span><span class="p">()[</span><span class="mi">1</span><span class="p">])</span> <span class="c1">#Find maximum axis limit</span>
 
-<span class="c1">#make the plots nicers (this is just python, no sleepy functions)</span>
+<span class="c1">#make the plots nicers (this is just python, no SLEEPY functions)</span>
 <span class="k">for</span> <span class="n">tc</span><span class="p">,</span><span class="n">a</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">tc0</span><span class="p">,</span><span class="n">ax</span><span class="p">):</span>
     <span class="n">a</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span><span class="n">sm</span><span class="p">])</span>
     <span class="k">if</span> <span class="ow">not</span><span class="p">(</span><span class="n">a</span><span class="o">.</span><span class="n">is_last_row</span><span class="p">()):</span>
@@ -779,9 +788,13 @@ k_{12} &amp; k_{21}+i\Omega_2
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/Ch2_exchange1D_16_0.png" src="../_images/Ch2_exchange1D_16_0.png" />
+<img alt="../_images/Ch2_exchange1D_19_0.png" src="../_images/Ch2_exchange1D_19_0.png" />
 </div>
 </div>
+<div class="math notranslate nohighlight">
+\[
+\lambda^2+k^2+(\Delta\Omega/2)^2+\lambda(k+i\Delta\Omega/2)+\lambda(k-i\Delta\Omega/2)-k^2
+\]</div>
 </section>
 <section id="repeat-with-asymmetric-exchange">
 <h2>Repeat with asymmetric exchange<a class="headerlink" href="#repeat-with-asymmetric-exchange" title="Permalink to this headline">#</a></h2>
@@ -796,14 +809,28 @@ k &amp; -k-i\Delta\Omega/2
 \end{pmatrix}
 \end{equation}
 \end{split}\]</div>
-<p>In this case, the eigenvalues are
-$<span class="math notranslate nohighlight">\(
+<p>In this case, the eigenvalues are obtained from the roots of the determinant of the Liouvillian</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{eqnarray}
+0&amp;=&amp;\det\left[
+\begin{pmatrix}
+-k+i\Delta\Omega/2-\lambda &amp; k \\
+k &amp; -k-i\Delta\Omega/2-\lambda
+\end{pmatrix}\right] \\
+0&amp;=&amp;\lambda^2+k^2+(\Delta\Omega/2)^2+\lambda(k+i\Delta\Omega/2)+\lambda(k-i\Delta\Omega/2)-k^2 \\
+0&amp;=&amp;\lambda^2+2k\lambda+\frac{\Delta\Omega}{2}
+\end{eqnarray}
+\end{split}\]</div>
+<p>Here, we may apply the quadratic equation</p>
+<div class="math notranslate nohighlight">
+\[
 \begin{equation}
 \lambda=-k\pm\sqrt{k^2-\frac14\Delta\Omega^2}
 \end{equation}
-\)</span>$
-Below coalescence</p>
-<p>On the other hand, if <span class="math notranslate nohighlight">\(k_{12}\ne k_{21}\)</span>, then no well-defined coalescence condition exists.</p>
+\]</div>
+<p>Then, when the term in the square-root is negative, we obtain complex eigenvalues, corresponding to two separate oscillation frequencies, and <span class="math notranslate nohighlight">\(T_2\)</span>=1/k. When the square-root is positive, then no observable frequency difference arises, but two different decay rates are present (although as <span class="math notranslate nohighlight">\(k\)</span> becomes larger, only the smaller rate contributes significantly to the spectrum).</p>
+<p>On the other hand, if <span class="math notranslate nohighlight">\(k_{12}\ne k_{21}\)</span>, then no well-defined coalescence condition exists. We simulate this case below, as a function of exchange rate.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">p1</span><span class="o">=</span><span class="mf">0.75</span>
@@ -835,7 +862,7 @@ Below coalescence</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/Ch2_exchange1D_18_0.png" src="../_images/Ch2_exchange1D_18_0.png" />
+<img alt="../_images/Ch2_exchange1D_22_0.png" src="../_images/Ch2_exchange1D_22_0.png" />
 </div>
 </div>
 <p>Above, we see that the peak to the left gradually vanishes, and the peak to the right shifts left. However, the second peak does not disappear at a well-defined condition, it just becomes gradually smaller.</p>

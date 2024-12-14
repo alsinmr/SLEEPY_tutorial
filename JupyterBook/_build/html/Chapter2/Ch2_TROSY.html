@@ -158,6 +158,13 @@ const thebe_selector_output = ".output, .cell_output"
     </a>
    </li>
    <li class="toctree-l2">
+    <a class="reference internal" href="../Chapter1/Ch1_Objects.html">
+     <font color="#0093AF">
+      Objects
+     </font>
+    </a>
+   </li>
+   <li class="toctree-l2">
     <a class="reference internal" href="../Chapter1/Ch1_expsys.html">
      <font color="#0093AF">
       Experimental Settings and Spin-System Definition
@@ -612,17 +619,15 @@ title="Print to PDF"
   <section class="tex2jax_ignore mathjax_ignore" id="font-color-0093af-trosy-effects">
 <h1><font  color = "#0093AF"> TROSY effects<a class="headerlink" href="#font-color-0093af-trosy-effects" title="Permalink to this headline">#</a></h1>
 <p><a href="https://githubtocolab.com/alsinmr/SLEEPY_tutorial/blob/main/ColabNotebooks/Chapter2/Ch2_TROSY.ipynb" target="_blank"><img src="https://colab.research.google.com/assets/colab-badge.svg"></a></p>
-<p>TROSY (Transverse Relaxation Optimized SPectroscopy)<span class="math notranslate nohighlight">\(^1\)</span> is an important experiment in solution-NMR, which takes advantage of different relaxation rates of doublets in the <span class="math notranslate nohighlight">\(^1\)</span>H or <span class="math notranslate nohighlight">\(^{15}\)</span>N dimensions, due to the H–N J coupling.</p>
-<p>The effect arises from the constructive or deconstructive effects of motion on relaxation due to the <span class="math notranslate nohighlight">\(^{15}\)</span>N chemical shift anisotropy (or <span class="math notranslate nohighlight">\(^1\)</span>H CSA) and the H–N dipole coupling. For one side of the doublet, relaxation is additive from the CSA and dipole, but on the other side it is subtractive, resulting in one fast-relaxing peak and one slow-relaxing peak.</p>
-<p>Here, we will assume these two interactions are parallel. This is not entirely accurate (being tilted from each other by about 23<span class="math notranslate nohighlight">\(^\circ\)</span>, but it allows us to average the couplings to zero with a simple, tetrahedral hopping motion.</p>
+<p>TROSY (Transverse Relaxation Optimized SPectroscopy)<span class="math notranslate nohighlight">\(^1\)</span> is an important experiment in solution-NMR, which takes advantage of different relaxation rates of doublets coming from the H–N J-coupling in the <span class="math notranslate nohighlight">\(^1\)</span>H or <span class="math notranslate nohighlight">\(^{15}\)</span>N dimensions.</p>
+<p>The effect arises from the constructive or deconstructive effects of motion on relaxation due to the <span class="math notranslate nohighlight">\(^{15}\)</span>N chemical shift anisotropy (or <span class="math notranslate nohighlight">\(^1\)</span>H CSA) and the H–N dipole coupling. For one peak of the doublet, relaxation is additive from the CSA and dipole, but on the other peak it is subtractive, resulting in one fast-relaxing peak and one slow-relaxing peak.</p>
+<p>Here, we will assume the tensors for these two interactions are parallel. This is not entirely accurate (being tilted from each other by about 23<span class="math notranslate nohighlight">\(^\circ\)</span>, but it allows us to average the couplings to zero, mimicking tumbling in solution, with a simple, tetrahedral hopping motion.</p>
 <p>[1] K. Pervushin, R. Riek, G. Wider, K. Wüthrich. <em><a class="reference external" href="https://doi.org/10.1073/pnas.94.23.12366">Proc. Natl. Acad. Sci. USA.</a></em> <strong>1997</strong>, 94, 12366</p>
 <section id="setup">
 <h2>Setup<a class="headerlink" href="#setup" title="Permalink to this headline">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># SETUP pyDR</span>
-<span class="kn">import</span> <span class="nn">os</span>
-<span class="n">os</span><span class="o">.</span><span class="n">chdir</span><span class="p">(</span><span class="s1">&#39;../..&#39;</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># SETUP SLEEPY</span>
 </pre></div>
 </div>
 </div>
@@ -635,25 +640,16 @@ title="Print to PDF"
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">ModuleNotFoundError</span><span class="g g-Whitespace">                       </span>Traceback (most recent call last)
-<span class="nn">&lt;ipython-input-2-6d82bc1f9ac1&gt;</span> in <span class="ni">&lt;module&gt;</span><span class="nt">()</span>
-<span class="ne">----&gt; </span><span class="mi">1</span> <span class="kn">import</span> <span class="nn">SLEEPY</span> <span class="k">as</span> <span class="nn">sl</span>
-<span class="g g-Whitespace">      </span><span class="mi">2</span> <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="g g-Whitespace">      </span><span class="mi">3</span> <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
-
-<span class="ne">ModuleNotFoundError</span>: No module named &#39;SLEEPY&#39;
-</pre></div>
-</div>
-</div>
 </div>
 </section>
 <section id="build-the-system">
 <h2>Build the system<a class="headerlink" href="#build-the-system" title="Permalink to this headline">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ex</span><span class="o">=</span><span class="n">sl</span><span class="o">.</span><span class="n">ExpSys</span><span class="p">(</span><span class="n">v0H</span><span class="o">=</span><span class="mi">400</span><span class="p">,</span><span class="n">Nucs</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;15N&#39;</span><span class="p">,</span><span class="s1">&#39;1H&#39;</span><span class="p">],</span><span class="n">vr</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># By default, we get a powder average when including anisotropic terms.</span>
+<span class="c1"># However, we don&#39;t need it for mimicking tumbling, </span>
+<span class="c1"># so we set it explicitly to a 1-element powder average</span>
+<span class="n">ex</span><span class="o">=</span><span class="n">sl</span><span class="o">.</span><span class="n">ExpSys</span><span class="p">(</span><span class="n">v0H</span><span class="o">=</span><span class="mi">400</span><span class="p">,</span><span class="n">Nucs</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;15N&#39;</span><span class="p">,</span><span class="s1">&#39;1H&#39;</span><span class="p">],</span><span class="n">vr</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">pwdavg</span><span class="o">=</span><span class="s1">&#39;alpha0beta0&#39;</span><span class="p">)</span>
 <span class="n">delta</span><span class="o">=</span><span class="n">sl</span><span class="o">.</span><span class="n">Tools</span><span class="o">.</span><span class="n">dipole_coupling</span><span class="p">(</span><span class="mf">.102</span><span class="p">,</span><span class="s1">&#39;1H&#39;</span><span class="p">,</span><span class="s1">&#39;15N&#39;</span><span class="p">)</span>
 <span class="n">ex</span><span class="o">.</span><span class="n">set_inter</span><span class="p">(</span><span class="s1">&#39;dipole&#39;</span><span class="p">,</span><span class="n">i0</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">i1</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">delta</span><span class="o">=</span><span class="n">delta</span><span class="p">)</span>
 <span class="n">ex</span><span class="o">.</span><span class="n">set_inter</span><span class="p">(</span><span class="s1">&#39;CSA&#39;</span><span class="p">,</span><span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">delta</span><span class="o">=</span><span class="mi">113</span><span class="p">)</span>
@@ -687,7 +683,7 @@ title="Print to PDF"
 <img alt="../_images/Ch2_TROSY_9_1.png" src="../_images/Ch2_TROSY_9_1.png" />
 </div>
 </div>
-<p>We obtain two peaks, separated by the J-coupling, one being notably larger than the other, where relaxation effects from the <span class="math notranslate nohighlight">\(^{15}\)</span>N CSA and H–N dipole coupling cancel. Note that since the CSA scales with field, the cancelation effect is also field dependent. We calculate the spectrum maximum as a function of field to demonstrate.</p>
+<p>We obtain two peaks, separated by the J-coupling, one being notably larger and narrower than the other, where relaxation effects from the <span class="math notranslate nohighlight">\(^{15}\)</span>N CSA and H–N dipole coupling cancel. Note that since the CSA scales with field, the cancelation effect is also field dependent. We calculate the spectrum maximum as a function of field, and record the spectrum maximum to demonstrate.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sl</span><span class="o">.</span><span class="n">Defaults</span><span class="p">[</span><span class="s1">&#39;verbose&#39;</span><span class="p">]</span><span class="o">=</span><span class="kc">False</span> <span class="c1">#Suppress output for loop</span>
@@ -710,15 +706,12 @@ title="Print to PDF"
 <span class="n">ax</span><span class="o">=</span><span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()[</span><span class="mi">1</span><span class="p">]</span>
 <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">B0_0</span><span class="p">,</span><span class="n">I</span><span class="p">)</span>
 <span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;B$_0$ / T&#39;</span><span class="p">)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Spectrum Max [a.u.]&#39;</span><span class="p">)</span>
+<span class="n">_</span><span class="o">=</span><span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Spectrum Max [a.u.]&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Text(0, 0.5, &#39;Spectrum Max [a.u.]&#39;)
-</pre></div>
-</div>
-<img alt="../_images/Ch2_TROSY_11_1.png" src="../_images/Ch2_TROSY_11_1.png" />
+<img alt="../_images/Ch2_TROSY_11_0.png" src="../_images/Ch2_TROSY_11_0.png" />
 </div>
 </div>
 <p>We see the max occuring at ~24 T, as predicted by Fernández and Wider (23.5 T).<span class="math notranslate nohighlight">\(^1\)</span></p>
@@ -729,7 +722,7 @@ title="Print to PDF"
 <p>We can also compare what happens to the spectrum without and with decoupling. We go a little ways away from the optimal field so we can actually see all peaks.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ex</span><span class="o">=</span><span class="n">sl</span><span class="o">.</span><span class="n">ExpSys</span><span class="p">(</span><span class="n">B0</span><span class="o">=</span><span class="mi">18</span><span class="p">,</span><span class="n">Nucs</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;15N&#39;</span><span class="p">,</span><span class="s1">&#39;1H&#39;</span><span class="p">],</span><span class="n">vr</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ex</span><span class="o">=</span><span class="n">sl</span><span class="o">.</span><span class="n">ExpSys</span><span class="p">(</span><span class="n">B0</span><span class="o">=</span><span class="mi">15</span><span class="p">,</span><span class="n">Nucs</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;15N&#39;</span><span class="p">,</span><span class="s1">&#39;1H&#39;</span><span class="p">],</span><span class="n">vr</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">pwdavg</span><span class="o">=</span><span class="s1">&#39;alpha0beta0&#39;</span><span class="p">)</span>
 <span class="n">delta</span><span class="o">=</span><span class="n">sl</span><span class="o">.</span><span class="n">Tools</span><span class="o">.</span><span class="n">dipole_coupling</span><span class="p">(</span><span class="mf">.102</span><span class="p">,</span><span class="s1">&#39;1H&#39;</span><span class="p">,</span><span class="s1">&#39;15N&#39;</span><span class="p">)</span>
 <span class="n">ex</span><span class="o">.</span><span class="n">set_inter</span><span class="p">(</span><span class="s1">&#39;dipole&#39;</span><span class="p">,</span><span class="n">i0</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">i1</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">delta</span><span class="o">=</span><span class="n">delta</span><span class="p">)</span>
 <span class="n">ex</span><span class="o">.</span><span class="n">set_inter</span><span class="p">(</span><span class="s1">&#39;CSA&#39;</span><span class="p">,</span><span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">delta</span><span class="o">=</span><span class="mi">113</span><span class="p">)</span>
@@ -766,7 +759,7 @@ title="Print to PDF"
 <p>When measuring <span class="math notranslate nohighlight">\(T_1\)</span> in solution NMR, one must take care to account for multiexponential <span class="math notranslate nohighlight">\(T_1\)</span> relaxation. To obtain <span class="math notranslate nohighlight">\(T_1\)</span> relaxation from exchange, we need to perform our calculations in the lab frame, so we set up a new ExpSys</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ex0</span><span class="o">=</span><span class="n">sl</span><span class="o">.</span><span class="n">ExpSys</span><span class="p">(</span><span class="n">v0H</span><span class="o">=</span><span class="mi">1200</span><span class="p">,</span><span class="n">Nucs</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;15N&#39;</span><span class="p">,</span><span class="s1">&#39;1H&#39;</span><span class="p">],</span><span class="n">vr</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">LF</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ex0</span><span class="o">=</span><span class="n">sl</span><span class="o">.</span><span class="n">ExpSys</span><span class="p">(</span><span class="n">v0H</span><span class="o">=</span><span class="mi">1200</span><span class="p">,</span><span class="n">Nucs</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;15N&#39;</span><span class="p">,</span><span class="s1">&#39;1H&#39;</span><span class="p">],</span><span class="n">vr</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">LF</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">pwdavg</span><span class="o">=</span><span class="s1">&#39;alpha0beta90&#39;</span><span class="p">)</span>
 <span class="n">delta</span><span class="o">=</span><span class="n">sl</span><span class="o">.</span><span class="n">Tools</span><span class="o">.</span><span class="n">dipole_coupling</span><span class="p">(</span><span class="mf">.102</span><span class="p">,</span><span class="s1">&#39;1H&#39;</span><span class="p">,</span><span class="s1">&#39;15N&#39;</span><span class="p">)</span>
 <span class="n">ex0</span><span class="o">.</span><span class="n">set_inter</span><span class="p">(</span><span class="s1">&#39;dipole&#39;</span><span class="p">,</span><span class="n">i0</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">i1</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">delta</span><span class="o">=</span><span class="n">delta</span><span class="p">)</span>
 <span class="n">ex0</span><span class="o">.</span><span class="n">set_inter</span><span class="p">(</span><span class="s1">&#39;CSA&#39;</span><span class="p">,</span><span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">delta</span><span class="o">=</span><span class="mi">113</span><span class="p">)</span>
@@ -790,7 +783,7 @@ title="Print to PDF"
 <img alt="../_images/Ch2_TROSY_18_0.png" src="../_images/Ch2_TROSY_18_0.png" />
 </div>
 </div>
-<p>We observe a strongly bi-exponential behavior, corresponding to relaxation of the <span class="math notranslate nohighlight">\(\hat{S}_z\hat{I}_\alpha\)</span> and <span class="math notranslate nohighlight">\(\hat{S}_z\hat{I}_\beta\)</span> states. We can saturate the <span class="math notranslate nohighlight">\(^1\)</span>H to recovery monoexponential behavior. However, because this calculation is in the lab frame, we cannot irradiate based on the usual approach. This is because the applied RF is not static in the lab frame, but rather oscillates as in the real experiment, complicating its application in simulation. SLEEPY has a special tool for adding cw-irradation in the lab frame</p>
+<p>We observe a strongly bi-exponential behavior, corresponding to relaxation of the <span class="math notranslate nohighlight">\(\hat{S}_z\hat{I}_\alpha\)</span> and <span class="math notranslate nohighlight">\(\hat{S}_z\hat{I}_\beta\)</span> states. We can saturate the <span class="math notranslate nohighlight">\(^1\)</span>H to recover monoexponential behavior. However, because this calculation is in the lab frame, we cannot apply rf-fields as easily. This is because the applied RF is not static in the lab frame, but rather oscillates as in the real experiment, complicating its application in simulation. SLEEPY has a special tool, <code class="docutils literal notranslate"><span class="pre">LFrf</span></code>,  for adding cw-irradation in the lab frame. This class takes a sequence (which just specifies the field strength and nucleus), and returns a propagator with the corresponding applied field. We do not currently support time-dependent sequences for lab-frame irradiation.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">rho</span><span class="o">.</span><span class="n">clear</span><span class="p">()</span>
@@ -802,7 +795,11 @@ title="Print to PDF"
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>LF calculation: |██████████████████████████████| 100% complete
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>LF calculation: |------------------------------| 0% complete
+
+LF calculation: |██████████████████████████████| 100% complete
+
+LF calculation: |██████████████████████████████| 100% complete
 Completed
 </pre></div>
 </div>
@@ -810,52 +807,6 @@ Completed
 </div>
 </div>
 <p>The decay curve becomes monoexponential. Note the equilibrium value’s absolute value is also slightly decreased, due to an unfavorable NOE condition at 1 ns for H–N NOE.</p>
-<p>Here, we should make a note of limitation of SLEEPY. If we initialize the system with “Thermal” while using “DynamicThermal” relaxation, the system should not evolve unless we apply pulses, since the system is already at thermal equilibrium. For example, see the code below:</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">L</span><span class="o">.</span><span class="n">kex</span><span class="o">=</span><span class="n">sl</span><span class="o">.</span><span class="n">Tools</span><span class="o">.</span><span class="n">nSite_sym</span><span class="p">(</span><span class="n">n</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span><span class="n">tc</span><span class="o">=</span><span class="mf">1e-9</span><span class="p">)</span> <span class="c1">#Defaults to the magic angle, which will average the couplings</span>
-<span class="n">L</span><span class="o">.</span><span class="n">add_relax</span><span class="p">(</span><span class="s1">&#39;DynamicThermal&#39;</span><span class="p">)</span> <span class="c1">#Dynamic thermal needs updated after adjusting kex</span>
-
-<span class="n">rho</span><span class="o">=</span><span class="n">sl</span><span class="o">.</span><span class="n">Rho</span><span class="p">(</span><span class="s1">&#39;Thermal&#39;</span><span class="p">,[</span><span class="s1">&#39;15Nz&#39;</span><span class="p">,</span><span class="s1">&#39;1Hz&#39;</span><span class="p">])</span>
-<span class="n">seq</span><span class="o">=</span><span class="n">L</span><span class="o">.</span><span class="n">Sequence</span><span class="p">(</span><span class="n">Dt</span><span class="o">=</span><span class="mf">.5</span><span class="p">)</span>
-
-<span class="n">rho</span><span class="o">.</span><span class="n">DetProp</span><span class="p">(</span><span class="n">seq</span><span class="p">,</span><span class="n">n</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
-<span class="n">_</span><span class="o">=</span><span class="n">rho</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="s1">&#39;s&#39;</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<img alt="../_images/Ch2_TROSY_23_0.png" src="../_images/Ch2_TROSY_23_0.png" />
-</div>
-</div>
-<p>However, if we adjust the correlation time to correspond to a faster motion, we find this is no longer the case.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># L.clear_relax()</span>
-<span class="n">L</span><span class="o">.</span><span class="n">kex</span><span class="o">=</span><span class="n">sl</span><span class="o">.</span><span class="n">Tools</span><span class="o">.</span><span class="n">nSite_sym</span><span class="p">(</span><span class="n">n</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span><span class="n">tc</span><span class="o">=</span><span class="mf">1e-11</span><span class="p">)</span> <span class="c1">#Defaults to the magic angle, which will average the couplings</span>
-<span class="n">L</span><span class="o">.</span><span class="n">add_relax</span><span class="p">(</span><span class="s1">&#39;DynamicThermal&#39;</span><span class="p">)</span>
-
-<span class="n">rho</span><span class="o">=</span><span class="n">sl</span><span class="o">.</span><span class="n">Rho</span><span class="p">(</span><span class="s1">&#39;Thermal&#39;</span><span class="p">,[</span><span class="s1">&#39;15Nz&#39;</span><span class="p">,</span><span class="s1">&#39;1Hz&#39;</span><span class="p">])</span>
-<span class="n">seq</span><span class="o">=</span><span class="n">L</span><span class="o">.</span><span class="n">Sequence</span><span class="p">(</span><span class="n">Dt</span><span class="o">=</span><span class="mf">.5</span><span class="p">)</span>
-
-<span class="n">rho</span><span class="o">.</span><span class="n">DetProp</span><span class="p">(</span><span class="n">seq</span><span class="p">,</span><span class="n">n</span><span class="o">=</span><span class="mi">500</span><span class="p">)</span>
-<span class="n">_</span><span class="o">=</span><span class="n">rho</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="s1">&#39;s&#39;</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/Users/albertsmith/Documents/GitHub/SLEEPY/Rho.py:1265: UserWarning: Evolution time is more than 12 orders of magnitude different than largest Liouvillian term:
-Numerical error possible
-  warnings.warn(&#39;Evolution time is more than 12 orders of magnitude different than largest Liouvillian term:\nNumerical error possible&#39;)
-/Users/albertsmith/Documents/GitHub/SLEEPY/Rho.py:1265: UserWarning: Evolution time is more than 12 orders of magnitude different than largest Liouvillian term:
-Numerical error possible
-  warnings.warn(&#39;Evolution time is more than 12 orders of magnitude different than largest Liouvillian term:\nNumerical error possible&#39;)
-</pre></div>
-</div>
-<img alt="../_images/Ch2_TROSY_25_1.png" src="../_images/Ch2_TROSY_25_1.png" />
-</div>
-</div>
-<p>Now, we observe some slow evolution away from the starting values. The issue is that we have some terms as large as 1x10<span class="math notranslate nohighlight">\(^{11}\)</span> s<span class="math notranslate nohighlight">\(^{-1}\)</span>, but evolution is occuring on a time scale about 12 orders of magnitude slower. So, this is numerical error, brought about by large differences in order-of-magnitude. This error should be fairly exceptional; we provide a warning when the total evolution time and the largest term in the Hamiltonian have a product of more than 10<span class="math notranslate nohighlight">\(^{12}\)</span>.</p>
 </section>
 </section>
 

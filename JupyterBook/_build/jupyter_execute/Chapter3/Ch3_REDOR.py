@@ -5,15 +5,13 @@
 
 # <a href="https://githubtocolab.com/alsinmr/SLEEPY_tutorial/blob/main/ColabNotebooks/Chapter3/Ch3_REDOR.ipynb" target="_blank"><img src="https://colab.research.google.com/assets/colab-badge.svg"></a>
 
+# In[ ]:
+
+
+# SETUP SLEEPY
+
+
 # In[1]:
-
-
-# SETUP pyDR
-import os
-os.chdir('../..')
-
-
-# In[2]:
 
 
 import SLEEPY as sl

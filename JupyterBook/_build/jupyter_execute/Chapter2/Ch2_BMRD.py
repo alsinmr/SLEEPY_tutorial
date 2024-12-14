@@ -5,20 +5,20 @@
 #     
 # In solution NMR, if a two-site exchange process leads to modulation of chemical shift, it is in some cases possible to calculate the rate of exchange ($k_{ex}=k_{1\rightarrow2}+k_{2\rightarrow1}$), the change in chemical shift ($\Delta\omega=\Omega_1-\Omega_2$) and also the populations of the two sites ($p_1/p_2=k_{2\rightarrow1}/k_{1\rightarrow2}$), based on a series of $R_{1\rho}$ measurements. However, this depends on the rate of exchange and also the strength of the spin-lock. If the exchange is too fast, it is impossible to separate the populations from the change in chemical shift, obtaining only the product $p_1p_2\Delta\omega_{12}^2$.
 #     
-# Furthermore, if only on-resonance $R_{1\rho}$ experiments are applied, it is impossible to determine whether the larger population has the larger or smaller chemical shift, whereas this can be resolved using off-resonant $R_{1\rho}$ experiments. We will investigate this with simulation, and also compare to the formula provided by Miloushev and Palmer.
+# Furthermore, if only on-resonance $R_{1\rho}$ experiments are applied, it is impossible to determine whether the larger population has the larger or smaller chemical shift, whereas this can be resolved using off-resonant $R_{1\rho}$ experiments. We will investigate this with simulation, and also compare to the formula provided by Miloushev and Palmer.$^1$
 #     
-# Note that this experiment is also valid in solids, but we must also consider reorientational dynamics.
+# Note that this experiment is also valid in solids, but then we must also consider reorientational dynamics.
+#     
+# [1] V.Z. Miloushev, A.G. Palmer. [*J. Magn. Reson.*](https://doi.org/10.1021/cr030413t) **2015**, 177, 221-227
 
 # <a href="https://githubtocolab.com/alsinmr/SLEEPY_tutorial/blob/main/ColabNotebooks/Chapter2/Ch2_BMRD.ipynb" target="_blank"><img src="https://colab.research.google.com/assets/colab-badge.svg"></a>
 
 # ## Setup
 
-# In[1]:
+# In[ ]:
 
 
-# SETUP pyDR
-import os
-os.chdir('../..')
+# SETUP SLEEPY
 
 
 # In[2]:
@@ -29,7 +29,8 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 
-# Miloushev and Palmer provide us with the relevant formula$^1$:
+# ## Theoretical Background
+# Miloushev and Palmer provide us with the relevant formula:
 # 
 # $$
 # \begin{equation}
@@ -50,8 +51,6 @@ import matplotlib.pyplot as plt
 # \sin^2\beta_e&=&\frac{\omega_1^2}{\omega_1^2+\Omega^2}
 # \end{eqnarray}
 # $$
-# 
-# [1] V.Z. Miloushev, A.G. Palmer. [*J. Magn. Reson.*](https://doi.org/10.1021/cr030413t) **2015**, 177, 221-227
 
 # In the above formula, the relative sizes of the three terms in the denominator determine the availability of information from $R_{1\rho}$ experiments. For example, if either the field strength is set to high, or $k_{ex}$ is 
 # too large, the third term can be neglected, yielding
@@ -74,7 +73,7 @@ import matplotlib.pyplot as plt
 # 
 # In the simulations below, we will test some of these behaviors. First, we define a function that can calculate the above formula, which we can use to compare to simulated results.
 
-# In[2]:
+# In[9]:
 
 
 def R1p_fun(kex,v1,CS1,CS2,p1):
@@ -98,13 +97,12 @@ def R1p_fun(kex,v1,CS1,CS2,p1):
     den1=omega_e2_1*omega_e2_2/omega_e2 #Denominator (1st term)
     den2=kex**2 #Denominator (2nd term)
     den3=x*(1+2*kex**2*(p1*omega_e2_1+p2*omega_e2_2)/(omega_e2_1*omega_e2_2+omega_e2*kex**2))
-    print(Omega1,Omega2,CS1,CS2)
     return num/(den1+den2-den3)
 
 
 # ## Define parameters, define the spin-system
 
-# In[3]:
+# In[10]:
 
 
 p1=0.75  #Population 1
@@ -121,7 +119,7 @@ _=ex1.set_inter(Type='CS',i=0,Hz=-DelOmega12*p1)
 
 # ## Build the Liouvillian, add the exchange matrix
 
-# In[4]:
+# In[11]:
 
 
 L=sl.Liouvillian((ex0,ex1))  #Builds the two different Hamiltonians and exports them to Liouville space
@@ -133,7 +131,7 @@ print(f'The mean chemical shift is {ex0.CS[0]["Hz"]*p1+ex1.CS[0]["Hz"]*p2:.2f} H
 
 # ## Create a propagator with on-resonant spin-lock, calculate $R_{1\rho}$ relaxation
 
-# In[5]:
+# In[12]:
 
 
 seq=L.Sequence(Dt=.0003)
@@ -148,7 +146,7 @@ rho.DetProp(U,n=n)
 ax=rho.plot(axis='ms')
 R1p=R1p_fun(kex=kex,v1=v1,CS1=ex0.CS[0]['Hz'],CS2=ex1.CS[0]['Hz'],p1=p1)
 ax.plot(rho.t_axis*1e3,np.exp(-R1p*rho.t_axis),color='grey',linestyle=':')
-ax.legend(('Simulated','Calculated'))
+_=ax.legend(('Simulated','Calculated'))
 
 
 # ### What happens if we vary the populations and $\Delta\omega_{12}^2$, but leave $p_1p_2\Delta\Omega^2$ fixed?
@@ -156,7 +154,7 @@ ax.legend(('Simulated','Calculated'))
 # 
 # We claim above that for fast exchange, we cannot separate experimentally $p_1$ and $p_2$ from $\Delta\Omega_{12}$. We verify this by fixing the product $p_1p_2\Delta\Omega_{12}^2$, but varying $p_1$.
 
-# In[6]:
+# In[13]:
 
 
 kex=30000
@@ -189,10 +187,10 @@ _=ax.set_title(r'$\tau_c$ = '+f'{tc:.1e} s'+r', '+'$p_1p_2(\Delta\Omega_{12})^2$
 # 
 # On the other hand, if exchange is slower, the curves will separate as we vary the populations. We slow $k_{ex}$ down to 800 s$^{-1}$
 
-# In[7]:
+# In[14]:
 
 
-kex=1000
+kex=800
 tc=1/kex
 ax=plt.subplots()[1]
 for p1 in p10:
@@ -218,7 +216,7 @@ _=ax.set_title(r'$\tau_c$ = '+f'{tc:.1e} s'+r', '+'$p_1p_2(\Delta\Omega_{12})^2$
 # 
 # In the last example, we increase $\nu_1$ to 5 kHz, but leave the exchange rate fixed. Relaxation also slows down, so we acquire more points.
 
-# In[8]:
+# In[15]:
 
 
 v1=5000
@@ -242,11 +240,13 @@ ax.figure.set_size_inches([8,6])
 _=ax.set_title(r'$\tau_c$ = '+f'{tc:.1e} s'+r', '+'$p_1p_2(\Delta\Omega_{12})^2$ fixed')
 
 
-# The stronger field slows down the relaxation considerably, but furthermore, no longer can we separate $p_1p_2$ from $\Delta\Omega_{12}$. This becomes critical in solid-state NMR, where we need to be able to apply low fields while retaining a spin-lock. This can become problematic due to other large, anisotropic interactions, such that we need to spin quickly and decrease the $^1$H concentration to avoid higher order effects.
+# The stronger field slows down the relaxation considerably, but furthermore, we can no longer separate $p_1p_2$ from $\Delta\Omega_{12}$. This becomes critical in solid-state NMR, where we need to be able to apply low fields while retaining a spin-lock. This can become problematic due to other large, anisotropic interactions, such that we need to spin quickly and decrease the $^1$H concentration to avoid higher order effects.
 
-# Next, we determine the behavior of relaxation as a function of offset frequency. First, we calculate a spectrum to see where peaks actually appear (and also mark where peaks should be in the absence of exchange).
+# In the case of slow exchange, with a sufficiently low spin-lock field strength, we can separate the population from $\Delta\Omega_{12}$. However, we cannot say with an on-resonant spin-lock whether the larger population corresponds to the larger or smaller chemical shift. Then, we must apply an off-resonant spin-lock.
+# 
+# Therefore, we determine the behavior of relaxation as a function of offset frequency. First, we calculate a spectrum to see where peaks actually appear (and also mark where peaks should be in the absence of exchange).
 
-# In[9]:
+# In[16]:
 
 
 ax=plt.subplots()[1]
@@ -272,7 +272,7 @@ ax.plot(ex1.CS[0]['Hz']*np.ones(2),ax.get_ylim(),color='black',linestyle=':')
 
 # Application of off-resonance fields results in an effective field that is larger than the applied field ($\omega_{e}^2=\omega_1^2+\Delta\Omega^2$). The larger effective field results in slower relaxation. However, if the exchange is sufficiently slow, it also matters how large the effective field is relative to each of the two resonance frequencies, resulting in different relaxation behavior depending on if the off-resonance field is above or below the mean frequency ($\Omega=p_1\Omega_1+p_2\Omega_2$).
 
-# In[10]:
+# In[17]:
 
 
 v1=500
@@ -329,7 +329,7 @@ fig.tight_layout()
 # 
 # In the final example, we go back to the fast-exchange regime, and observe that going off-resonance no longer helps distinguish which population corresponds to the higher or lower chemical shift.
 
-# In[11]:
+# In[18]:
 
 
 kex=20000

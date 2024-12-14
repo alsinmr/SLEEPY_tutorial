@@ -18,15 +18,13 @@
 
 # ## Setup
 
-# In[1]:
+# In[ ]:
 
 
-# SETUP pyDR
-import os
-os.chdir('../..')
+# SETUP SLEEPY
 
 
-# In[2]:
+# In[4]:
 
 
 import SLEEPY as sl
