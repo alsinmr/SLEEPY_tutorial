@@ -9,12 +9,10 @@
 
 # ## Setup
 
-# In[1]:
+# In[ ]:
 
 
-# SETUP pyDR
-import os
-os.chdir('../..')
+# SETUP SLEEPY
 
 
 # In[2]:
@@ -27,7 +25,7 @@ import numpy as np
 # ## 1D Spectrum in Exchange
 # Two peaks, separated by 10 ppm, with a correlation time of exchange of 1 ms.
 
-# In[25]:
+# In[3]:
 
 
 ex0=sl.ExpSys(600,Nucs='13C')
@@ -46,7 +44,7 @@ _=rho.plot(FT=True,axis='ppm')
 # ## $T_1$ relaxation in solid-state NMR
 # $^{13}$C $T_1$ relaxation in solid-state NMR, due to a 30$^\circ$ reorientation of the H–C dipole coupling, occuring with a correlation time of 1 ns.
 
-# In[20]:
+# In[4]:
 
 
 ex0=sl.ExpSys(600,Nucs=['13C','1H'],vr=10000,LF=True)  #T1 occurs only due to terms in the lab frame
@@ -65,7 +63,7 @@ _=rho.plot(axis='s')
 # ## $T_{1\rho}$ relaxation
 # $^{13}$C $T_{1\rho}$ relaxation in solid-state NMR, due to a 15$^\circ$ reorientation of the H–C dipole coupling, occuring with a correlation time of 100 ns.
 
-# In[21]:
+# In[5]:
 
 
 ex0=sl.ExpSys(600,Nucs=['13C','1H'],vr=10000)
@@ -74,7 +72,7 @@ ex0.set_inter('dipole',i0=0,i1=1,delta=44000)
 ex1.set_inter('dipole',i0=0,i1=1,delta=44000,euler=[0,30*np.pi/180,0])
 
 L=sl.Liouvillian(ex0,ex1,kex=sl.Tools.twoSite_kex(tc=1e-7))
-seq=L.Sequence() #Defaults to 1 rotor period
+seq=L.Sequence().add_channel('13C',v1=25000) #Defaults to 1 rotor period
 
 rho=sl.Rho('13Cx','13Cx')
 rho.DetProp(seq,n=1500) #100 ms
@@ -139,6 +137,7 @@ for T in [50,100,200,400]:
 # The last simulation is a little bit just for fun, but also to demonstrate some of the convenience of the SLEEPY simulation setup. We simulate $^{13}$C spinning sidebands resulting from chemical shift anisotropy. However, we set up the whole simulation in a single line of code and plot the result.
 # 
 # Compare to Herzfeld/Berger figure 2c.$^1$
+# 
 # [1] J. Herzfeld, A.E. Berger. *[J.Chem. Phys.](https://doi.org/10.1063/1.440136)* **1980**, 73, 6021-6030.
 
 # In[41]:

@@ -158,6 +158,13 @@ const thebe_selector_output = ".output, .cell_output"
     </a>
    </li>
    <li class="toctree-l2">
+    <a class="reference internal" href="../Chapter1/Ch1_Objects.html">
+     <font color="#0093AF">
+      Objects
+     </font>
+    </a>
+   </li>
+   <li class="toctree-l2">
     <a class="reference internal" href="../Chapter1/Ch1_expsys.html">
      <font color="#0093AF">
       Experimental Settings and Spin-System Definition
@@ -577,11 +584,6 @@ title="Print to PDF"
    Investigate CEST as a function of exchange rate
   </a>
  </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#does-coalescence-occur-for-the-same-correlation-time-in-cest-as-in-1d-spectra">
-   Does coalescence occur for the same correlation time in CEST as in 1D spectra?
-  </a>
- </li>
 </ul>
 
     </nav>
@@ -648,11 +650,6 @@ title="Print to PDF"
    Investigate CEST as a function of exchange rate
   </a>
  </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#does-coalescence-occur-for-the-same-correlation-time-in-cest-as-in-1d-spectra">
-   Does coalescence occur for the same correlation time in CEST as in 1D spectra?
-  </a>
- </li>
 </ul>
 
                         </nav>
@@ -666,14 +663,12 @@ title="Print to PDF"
   <section class="tex2jax_ignore mathjax_ignore" id="font-color-0093af-chemical-exchange-saturation-transfer-cest">
 <h1><font  color = "#0093AF"> Chemical Exchange Saturation Transfer (CEST)<a class="headerlink" href="#font-color-0093af-chemical-exchange-saturation-transfer-cest" title="Permalink to this headline">#</a></h1>
 <p><a href="https://githubtocolab.com/alsinmr/SLEEPY_tutorial/blob/main/ColabNotebooks/Chapter2/Ch2_CEST.ipynb" target="_blank"><img src="https://colab.research.google.com/assets/colab-badge.svg"></a></p>
-<p>In this notebook, we investigate the CEST experiment, first assuming only isotropic interactions (solution-state), and then also including influence from CSA.</p>
+<p>In the CEST experiment, one often has chemical exchange, but with one very small population, such that its chemical shift is difficult or impossible to observe directly. However, if we were to apply a low-power saturating field when magnetization is in the z-direction, it is possible to saturate the magnetization when on-resonant with the invisible peak.</p>
 <section id="setup">
 <h2>Setup<a class="headerlink" href="#setup" title="Permalink to this headline">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># SETUP pyDR</span>
-<span class="kn">import</span> <span class="nn">os</span>
-<span class="n">os</span><span class="o">.</span><span class="n">chdir</span><span class="p">(</span><span class="s1">&#39;../..&#39;</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># SETUP SLEEPY</span>
 </pre></div>
 </div>
 </div>
@@ -683,18 +678,6 @@ title="Print to PDF"
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">SLEEPY</span> <span class="k">as</span> <span class="nn">sl</span>
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">ModuleNotFoundError</span><span class="g g-Whitespace">                       </span>Traceback (most recent call last)
-<span class="nn">&lt;ipython-input-2-6d82bc1f9ac1&gt;</span> in <span class="ni">&lt;module&gt;</span><span class="nt">()</span>
-<span class="ne">----&gt; </span><span class="mi">1</span> <span class="kn">import</span> <span class="nn">SLEEPY</span> <span class="k">as</span> <span class="nn">sl</span>
-<span class="g g-Whitespace">      </span><span class="mi">2</span> <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="g g-Whitespace">      </span><span class="mi">3</span> <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
-
-<span class="ne">ModuleNotFoundError</span>: No module named &#39;SLEEPY&#39;
 </pre></div>
 </div>
 </div>
@@ -715,7 +698,7 @@ title="Print to PDF"
 </section>
 <section id="build-the-liouvillian">
 <h2>Build the Liouvillian<a class="headerlink" href="#build-the-liouvillian" title="Permalink to this headline">#</a></h2>
-<p>For CEST to work, we need to be able saturate the spins, which requires <span class="math notranslate nohighlight">\(T_2\)</span> relaxation. For a more realistic behavior, we also include <span class="math notranslate nohighlight">\(T_1\)</span> recovery of the magnetization, which can inhibit the saturation.</p>
+<p>For CEST to work, we need to be able saturate the spins, which requires <span class="math notranslate nohighlight">\(T_2\)</span> relaxation. For a more realistic behavior, we also include <span class="math notranslate nohighlight">\(T_1\)</span> recovery of the magnetization, which can inhibit the saturation. Finally, we will allow the magnetization to recover towards its thermal equilibrium.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">L</span><span class="o">=</span><span class="n">sl</span><span class="o">.</span><span class="n">Liouvillian</span><span class="p">((</span><span class="n">ex0</span><span class="p">,</span><span class="n">ex1</span><span class="p">))</span>  <span class="c1">#Builds the two different Hamiltonians and exports them to Liouville space</span>
@@ -775,6 +758,7 @@ title="Print to PDF"
 <section id="plot-one-of-the-spectra">
 <h2>Plot one of the spectra<a class="headerlink" href="#plot-one-of-the-spectra" title="Permalink to this headline">#</a></h2>
 <p>In order to see the usefulness of this techique, we once plot the spectrum to show that the weaker peak is nearly invisible. We just take the last spectrum that is still stored in rho. The second peak is weakly visible if we zoom in around 5 ppm (but would be quite difficult to see in a real spectrum).</p>
+<p>Note that later we integrate the spectrum by selecting a range of points in the spectrum. In this case, it may be useful to set <code class="docutils literal notranslate"><span class="pre">axis='points'</span></code> to more easily determine what range of points to use.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ax</span><span class="o">=</span><span class="n">rho</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">FT</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">axis</span><span class="o">=</span><span class="s1">&#39;ppm&#39;</span><span class="p">)</span>
@@ -789,7 +773,7 @@ title="Print to PDF"
 </section>
 <section id="integrate-spectrum-for-all-values-of-nu-1-and-plot-results">
 <h2>Integrate spectrum for all values of <span class="math notranslate nohighlight">\(\nu_1\)</span> and plot results<a class="headerlink" href="#integrate-spectrum-for-all-values-of-nu-1-and-plot-results" title="Permalink to this headline">#</a></h2>
-<p>We will just integrate over the strong peak</p>
+<p>We will just integrate over the strong peak and plot the peak intensity</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">spec</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">spec</span><span class="p">)</span>   <span class="c1">#Convert to a numpy array</span>
@@ -851,7 +835,7 @@ title="Print to PDF"
 </div>
 </div>
 </div>
-<p>Plot the results</p>
+<p>We plot the results below, where we see that the saturation behavior depends strongly on the exchange rate. Note that if the exchange is too fast or too slow, the CEST experiment is no longer as effective.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span><span class="n">ax</span><span class="o">=</span><span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">)</span>
@@ -874,54 +858,6 @@ title="Print to PDF"
 </div>
 <div class="cell_output docutils container">
 <img alt="../_images/Ch2_CEST_21_0.png" src="../_images/Ch2_CEST_21_0.png" />
-</div>
-</div>
-</section>
-<section id="does-coalescence-occur-for-the-same-correlation-time-in-cest-as-in-1d-spectra">
-<h2>Does coalescence occur for the same correlation time in CEST as in 1D spectra?<a class="headerlink" href="#does-coalescence-occur-for-the-same-correlation-time-in-cest-as-in-1d-spectra" title="Permalink to this headline">#</a></h2>
-<p>We set up the same system, but just calculate a 1D spectrum</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">p1</span><span class="o">=</span><span class="mf">0.95</span>  <span class="c1">#Population of state 1</span>
-<span class="n">p2</span><span class="o">=</span><span class="mi">1</span><span class="o">-</span><span class="n">p1</span>  <span class="c1">#Population of state 2</span>
-
-<span class="n">tc0</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">logspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="o">-</span><span class="mf">5.5</span><span class="p">,</span><span class="mi">12</span><span class="p">)</span>
-<span class="n">spec</span><span class="o">=</span><span class="nb">list</span><span class="p">()</span>
-<span class="k">for</span> <span class="n">tc</span> <span class="ow">in</span> <span class="n">tc0</span><span class="p">:</span>
-    <span class="n">kex</span><span class="o">=</span><span class="mi">1</span><span class="o">/</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">tc</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">],[</span><span class="mi">1</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">]])</span><span class="o">+</span><span class="p">(</span><span class="n">p1</span><span class="o">-</span><span class="n">p2</span><span class="p">)</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">],[</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">]]))</span>   <span class="c1">#Exchange matrix</span>
-    <span class="n">L</span><span class="o">.</span><span class="n">kex</span><span class="o">=</span><span class="n">kex</span>    <span class="c1">#Add exchange to the Liouvillian</span>
-    <span class="n">Uevol</span><span class="o">=</span><span class="n">L</span><span class="o">.</span><span class="n">U</span><span class="p">(</span><span class="n">Dt</span><span class="o">=</span><span class="n">Dt</span><span class="p">)</span>  <span class="c1">#Propagator for evolving the spin system</span>
-
-    <span class="n">rho</span><span class="o">=</span><span class="n">sl</span><span class="o">.</span><span class="n">Rho</span><span class="p">(</span><span class="n">rho0</span><span class="o">=</span><span class="s1">&#39;13Cx&#39;</span><span class="p">,</span><span class="n">detect</span><span class="o">=</span><span class="s1">&#39;13Cp&#39;</span><span class="p">)</span>
-    <span class="n">rho</span><span class="o">.</span><span class="n">DetProp</span><span class="p">(</span><span class="n">Uevol</span><span class="p">,</span><span class="n">n</span><span class="o">=</span><span class="mi">1024</span><span class="p">)</span>
-    <span class="n">spec</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">rho</span><span class="o">.</span><span class="n">FT</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">real</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-<p>Plot the results</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span><span class="n">ax</span><span class="o">=</span><span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">)</span>
-<span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">ax</span><span class="o">.</span><span class="n">size</span><span class="p">)</span>
-
-<span class="k">for</span> <span class="n">a</span><span class="p">,</span><span class="n">spec0</span><span class="p">,</span><span class="n">tc</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">ax</span><span class="p">,</span><span class="n">spec</span><span class="p">,</span><span class="n">tc0</span><span class="p">):</span>
-    <span class="n">a</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">rho</span><span class="o">.</span><span class="n">v_axis</span><span class="o">*</span><span class="mf">1e6</span><span class="o">/</span><span class="n">ex0</span><span class="o">.</span><span class="n">v0</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="n">spec0</span><span class="p">)</span>
-    <span class="k">if</span> <span class="n">a</span><span class="o">.</span><span class="n">is_last_row</span><span class="p">():</span>
-        <span class="n">a</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;$\delta (^</span><span class="si">{13}</span><span class="s1">$C) / ppm&#39;</span><span class="p">)</span>
-    <span class="k">if</span> <span class="n">a</span><span class="o">.</span><span class="n">is_first_col</span><span class="p">():</span>
-        <span class="n">a</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;I / a.u.&#39;</span><span class="p">)</span>
-    <span class="n">a</span><span class="o">.</span><span class="n">invert_xaxis</span><span class="p">()</span>
-    <span class="n">a</span><span class="o">.</span><span class="n">set_yticklabels</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="p">)</span>
-    <span class="n">a</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span><span class="n">spec0</span><span class="o">.</span><span class="n">max</span><span class="p">()</span><span class="o">*</span><span class="n">p2</span><span class="o">/</span><span class="n">p1</span><span class="o">*</span><span class="mf">1.1</span><span class="p">])</span>
-    <span class="n">a</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="mi">20</span><span class="p">,</span><span class="n">a</span><span class="o">.</span><span class="n">get_ylim</span><span class="p">()[</span><span class="mi">1</span><span class="p">]</span><span class="o">*</span><span class="mf">.75</span><span class="p">,</span><span class="sa">r</span><span class="s1">&#39;$\tau_c$&#39;</span><span class="o">+</span><span class="sa">f</span><span class="s1">&#39; = </span><span class="se">\n</span><span class="si">{</span><span class="n">tc</span><span class="si">:</span><span class="s1">.1e</span><span class="si">}</span><span class="s1"> s&#39;</span><span class="p">)</span>
-<span class="n">fig</span><span class="o">.</span><span class="n">set_size_inches</span><span class="p">([</span><span class="mi">8</span><span class="p">,</span><span class="mi">6</span><span class="p">])</span>
-<span class="n">fig</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<img alt="../_images/Ch2_CEST_25_0.png" src="../_images/Ch2_CEST_25_0.png" />
 </div>
 </div>
 </section>

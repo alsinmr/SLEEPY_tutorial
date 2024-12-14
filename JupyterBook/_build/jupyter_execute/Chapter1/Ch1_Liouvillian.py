@@ -9,7 +9,7 @@
 
 # ## Setup
 
-# In[1]:
+# In[3]:
 
 
 import os
@@ -26,7 +26,7 @@ import numpy as np
 # 
 # We start with building 'ex'.
 
-# In[2]:
+# In[4]:
 
 
 ex=sl.ExpSys(v0H=600,Nucs=['1H','13C'],vr=60000,LF=True)  #For this example, we'll work in the lab frame
@@ -39,7 +39,7 @@ H=ex.Hamiltonian() #Create the Hamiltonian
 
 # ### Access and plot the Hamiltonian
 
-# In[3]:
+# In[5]:
 
 
 H[0].H(0)
@@ -49,7 +49,7 @@ H[0].H(0)
 # 
 # We may also visualize the Hamiltonian, using H.plot. Plotting may be performed for a given element of the powder average, or if not specified (but required)
 
-# In[4]:
+# In[6]:
 
 
 H[5].plot() #Plot the Hamiltonian for the 5th element of the powder average
@@ -66,7 +66,7 @@ H[5].plot() #Plot the Hamiltonian for the 5th element of the powder average
 # 
 # The rotating components are obtained via the Hn function, where n (-2,-1,0,1,2) must be provided. For example, for the fifth element of the powder average, if we want the $n=-1$ component, we would call:
 
-# In[5]:
+# In[7]:
 
 
 H[5].Hn(-1)
@@ -74,7 +74,7 @@ H[5].Hn(-1)
 
 # This may also be plotted. Note there are different plotting modes: 're','im','abs', 'log', and 'spy', which are real, imaginary, absolute value, log of absolute value, and spy, which is binary, i.e. zero or not zero.
 
-# In[6]:
+# In[12]:
 
 
 H[5].plot('H-1',mode='re')
@@ -190,7 +190,7 @@ _=L.add_relax('T2',i=1,T2=.5,OS=True) #Add T2 relaxation to spin 0
 
 # We can visualize the result with the plot function.
 
-# In[15]:
+# In[16]:
 
 
 L.plot('Lrelax',mode='abs')
@@ -202,7 +202,7 @@ L.plot('Lrelax',mode='abs')
 # 
 # Since the resulting Liouvillian comes from multiple experimental systems (`ex0,ex1`), we must use sl.Liouvillian, rather than generating it directly from ex.
 
-# In[16]:
+# In[17]:
 
 
 ex1=ex.copy() #We can copy an existing ex, so that to start, all parameters match
@@ -213,7 +213,7 @@ L=sl.Liouvillian(ex,ex1)
 
 # We can plot the resulting Liouvillian, to see that it now has larger dimension, corresponding to the two experimental systems that were input.
 
-# In[17]:
+# In[18]:
 
 
 L.plot()
@@ -233,7 +233,7 @@ L.plot()
 # 
 # Exchange matrices should always be mass conserving, i.e., the columns should sum to 0. Usually, they should also satisfy detailed balance, i.e., $k_{m,n}/k_{n,m}=p_n/p_m$ where $p_n$ are equilibrium populations.
 
-# In[18]:
+# In[19]:
 
 
 L.kex=[[-1e3,1e3],[1e3,-1e3]]  #Symmetric exchange between two sites
@@ -243,7 +243,7 @@ L.kex=[[-1e3,1e3],[1e3,-1e3]]  #Symmetric exchange between two sites
 # 
 # Below, we show the exchange component of the Liouvillian
 
-# In[19]:
+# In[20]:
 
 
 L.plot('Lex',mode='re')
@@ -251,7 +251,7 @@ L.plot('Lex',mode='re')
 
 # Finally, we show the total Liouvillian, including exchange.
 
-# In[20]:
+# In[21]:
 
 
 L.plot()

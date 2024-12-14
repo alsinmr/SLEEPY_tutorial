@@ -55,7 +55,7 @@ const thebe_selector_output = ".output, .cell_output"
     <link rel="shortcut icon" href="../_static/favicon.png"/>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Experimental Settings and Spin-System Definition" href="Ch1_expsys.html" />
+    <link rel="next" title="Objects" href="Ch1_Objects.html" />
     <link rel="prev" title="A Quick Start" href="Ch1_basics.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
@@ -154,6 +154,13 @@ const thebe_selector_output = ".output, .cell_output"
     <a class="current reference internal" href="#">
      <font color="#0093AF">
       Short Examples
+     </font>
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="Ch1_Objects.html">
+     <font color="#0093AF">
+      Objects
      </font>
     </a>
    </li>
@@ -649,9 +656,7 @@ title="Print to PDF"
 <h2>Setup<a class="headerlink" href="#setup" title="Permalink to this headline">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># SETUP pyDR</span>
-<span class="kn">import</span> <span class="nn">os</span>
-<span class="n">os</span><span class="o">.</span><span class="n">chdir</span><span class="p">(</span><span class="s1">&#39;../..&#39;</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># SETUP SLEEPY</span>
 </pre></div>
 </div>
 </div>
@@ -660,17 +665,6 @@ title="Print to PDF"
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">SLEEPY</span> <span class="k">as</span> <span class="nn">sl</span>
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">ModuleNotFoundError</span><span class="g g-Whitespace">                       </span>Traceback (most recent call last)
-<span class="nn">&lt;ipython-input-2-dda2b7067621&gt;</span> in <span class="ni">&lt;module&gt;</span><span class="nt">()</span>
-<span class="ne">----&gt; </span><span class="mi">1</span> <span class="kn">import</span> <span class="nn">SLEEPY</span> <span class="k">as</span> <span class="nn">sl</span>
-<span class="g g-Whitespace">      </span><span class="mi">2</span> <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-
-<span class="ne">ModuleNotFoundError</span>: No module named &#39;SLEEPY&#39;
 </pre></div>
 </div>
 </div>
@@ -738,7 +732,7 @@ title="Print to PDF"
 <span class="n">ex1</span><span class="o">.</span><span class="n">set_inter</span><span class="p">(</span><span class="s1">&#39;dipole&#39;</span><span class="p">,</span><span class="n">i0</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">i1</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">delta</span><span class="o">=</span><span class="mi">44000</span><span class="p">,</span><span class="n">euler</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">30</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">/</span><span class="mi">180</span><span class="p">,</span><span class="mi">0</span><span class="p">])</span>
 
 <span class="n">L</span><span class="o">=</span><span class="n">sl</span><span class="o">.</span><span class="n">Liouvillian</span><span class="p">(</span><span class="n">ex0</span><span class="p">,</span><span class="n">ex1</span><span class="p">,</span><span class="n">kex</span><span class="o">=</span><span class="n">sl</span><span class="o">.</span><span class="n">Tools</span><span class="o">.</span><span class="n">twoSite_kex</span><span class="p">(</span><span class="n">tc</span><span class="o">=</span><span class="mf">1e-7</span><span class="p">))</span>
-<span class="n">seq</span><span class="o">=</span><span class="n">L</span><span class="o">.</span><span class="n">Sequence</span><span class="p">()</span> <span class="c1">#Defaults to 1 rotor period</span>
+<span class="n">seq</span><span class="o">=</span><span class="n">L</span><span class="o">.</span><span class="n">Sequence</span><span class="p">()</span><span class="o">.</span><span class="n">add_channel</span><span class="p">(</span><span class="s1">&#39;13C&#39;</span><span class="p">,</span><span class="n">v1</span><span class="o">=</span><span class="mi">25000</span><span class="p">)</span> <span class="c1">#Defaults to 1 rotor period</span>
 
 <span class="n">rho</span><span class="o">=</span><span class="n">sl</span><span class="o">.</span><span class="n">Rho</span><span class="p">(</span><span class="s1">&#39;13Cx&#39;</span><span class="p">,</span><span class="s1">&#39;13Cx&#39;</span><span class="p">)</span>
 <span class="n">rho</span><span class="o">.</span><span class="n">DetProp</span><span class="p">(</span><span class="n">seq</span><span class="p">,</span><span class="n">n</span><span class="o">=</span><span class="mi">1500</span><span class="p">)</span> <span class="c1">#100 ms</span>
@@ -747,7 +741,7 @@ title="Print to PDF"
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>State-space reduction: 32-&gt;8
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>State-space reduction: 32-&gt;16
 </pre></div>
 </div>
 <img alt="../_images/Ch1_ShortExamples_11_1.png" src="../_images/Ch1_ShortExamples_11_1.png" />
@@ -828,8 +822,8 @@ State-space reduction: 16-&gt;2
 <section id="spinning-side-bands-one-liner">
 <h2>Spinning side-bands (one liner)<a class="headerlink" href="#spinning-side-bands-one-liner" title="Permalink to this headline">#</a></h2>
 <p>The last simulation is a little bit just for fun, but also to demonstrate some of the convenience of the SLEEPY simulation setup. We simulate <span class="math notranslate nohighlight">\(^{13}\)</span>C spinning sidebands resulting from chemical shift anisotropy. However, we set up the whole simulation in a single line of code and plot the result.</p>
-<p>Compare to Herzfeld/Berger figure 2c.<span class="math notranslate nohighlight">\(^1\)</span>
-[1] J. Herzfeld, A.E. Berger. <em><a class="reference external" href="https://doi.org/10.1063/1.440136">J.Chem. Phys.</a></em> <strong>1980</strong>, 73, 6021-6030.</p>
+<p>Compare to Herzfeld/Berger figure 2c.<span class="math notranslate nohighlight">\(^1\)</span></p>
+<p>[1] J. Herzfeld, A.E. Berger. <em><a class="reference external" href="https://doi.org/10.1063/1.440136">J.Chem. Phys.</a></em> <strong>1980</strong>, 73, 6021-6030.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">_</span><span class="o">=</span><span class="n">sl</span><span class="o">.</span><span class="n">Rho</span><span class="p">(</span><span class="s1">&#39;31Px&#39;</span><span class="p">,</span><span class="s1">&#39;31Pp&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">DetProp</span><span class="p">(</span>
@@ -884,10 +878,10 @@ Prop: 20 steps per every 1 rotor period
             <p class="prev-next-title"><font  color = "#0093AF"> A Quick Start</p>
         </div>
     </a>
-    <a class='right-next' id="next-link" href="Ch1_expsys.html" title="next page">
+    <a class='right-next' id="next-link" href="Ch1_Objects.html" title="next page">
     <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title"><font  color = "#0093AF"> Experimental Settings and Spin-System Definition</p>
+        <p class="prev-next-title"><font color="#0093AF">Objects</font></p>
     </div>
     <i class="fas fa-angle-right"></i>
     </a>

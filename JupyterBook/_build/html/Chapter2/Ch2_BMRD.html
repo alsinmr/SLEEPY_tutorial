@@ -158,6 +158,13 @@ const thebe_selector_output = ".output, .cell_output"
     </a>
    </li>
    <li class="toctree-l2">
+    <a class="reference internal" href="../Chapter1/Ch1_Objects.html">
+     <font color="#0093AF">
+      Objects
+     </font>
+    </a>
+   </li>
+   <li class="toctree-l2">
     <a class="reference internal" href="../Chapter1/Ch1_expsys.html">
      <font color="#0093AF">
       Experimental Settings and Spin-System Definition
@@ -536,6 +543,11 @@ title="Print to PDF"
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#theoretical-background">
+   Theoretical Background
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#define-parameters-define-the-spin-system">
    Define parameters, define the spin-system
   </a>
@@ -594,6 +606,11 @@ title="Print to PDF"
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#theoretical-background">
+   Theoretical Background
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#define-parameters-define-the-spin-system">
    Define parameters, define the spin-system
   </a>
@@ -640,16 +657,15 @@ title="Print to PDF"
   <section class="tex2jax_ignore mathjax_ignore" id="font-color-0093af-bloch-mcconnell-relaxation-dispersion">
 <h1><font  color = "#0093AF"> Bloch-McConnell Relaxation Dispersion<a class="headerlink" href="#font-color-0093af-bloch-mcconnell-relaxation-dispersion" title="Permalink to this headline">#</a></h1>
 <p>In solution NMR, if a two-site exchange process leads to modulation of chemical shift, it is in some cases possible to calculate the rate of exchange (<span class="math notranslate nohighlight">\(k_{ex}=k_{1\rightarrow2}+k_{2\rightarrow1}\)</span>), the change in chemical shift (<span class="math notranslate nohighlight">\(\Delta\omega=\Omega_1-\Omega_2\)</span>) and also the populations of the two sites (<span class="math notranslate nohighlight">\(p_1/p_2=k_{2\rightarrow1}/k_{1\rightarrow2}\)</span>), based on a series of <span class="math notranslate nohighlight">\(R_{1\rho}\)</span> measurements. However, this depends on the rate of exchange and also the strength of the spin-lock. If the exchange is too fast, it is impossible to separate the populations from the change in chemical shift, obtaining only the product <span class="math notranslate nohighlight">\(p_1p_2\Delta\omega_{12}^2\)</span>.</p>
-<p>Furthermore, if only on-resonance <span class="math notranslate nohighlight">\(R_{1\rho}\)</span> experiments are applied, it is impossible to determine whether the larger population has the larger or smaller chemical shift, whereas this can be resolved using off-resonant <span class="math notranslate nohighlight">\(R_{1\rho}\)</span> experiments. We will investigate this with simulation, and also compare to the formula provided by Miloushev and Palmer.</p>
-<p>Note that this experiment is also valid in solids, but we must also consider reorientational dynamics.</p>
+<p>Furthermore, if only on-resonance <span class="math notranslate nohighlight">\(R_{1\rho}\)</span> experiments are applied, it is impossible to determine whether the larger population has the larger or smaller chemical shift, whereas this can be resolved using off-resonant <span class="math notranslate nohighlight">\(R_{1\rho}\)</span> experiments. We will investigate this with simulation, and also compare to the formula provided by Miloushev and Palmer.<span class="math notranslate nohighlight">\(^1\)</span></p>
+<p>Note that this experiment is also valid in solids, but then we must also consider reorientational dynamics.</p>
+<p>[1] V.Z. Miloushev, A.G. Palmer. <a class="reference external" href="https://doi.org/10.1021/cr030413t"><em>J. Magn. Reson.</em></a> <strong>2015</strong>, 177, 221-227</p>
 <p><a href="https://githubtocolab.com/alsinmr/SLEEPY_tutorial/blob/main/ColabNotebooks/Chapter2/Ch2_BMRD.ipynb" target="_blank"><img src="https://colab.research.google.com/assets/colab-badge.svg"></a></p>
 <section id="setup">
 <h2>Setup<a class="headerlink" href="#setup" title="Permalink to this headline">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># SETUP pyDR</span>
-<span class="kn">import</span> <span class="nn">os</span>
-<span class="n">os</span><span class="o">.</span><span class="n">chdir</span><span class="p">(</span><span class="s1">&#39;../..&#39;</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># SETUP SLEEPY</span>
 </pre></div>
 </div>
 </div>
@@ -662,20 +678,11 @@ title="Print to PDF"
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">ModuleNotFoundError</span><span class="g g-Whitespace">                       </span>Traceback (most recent call last)
-<span class="nn">&lt;ipython-input-2-6d82bc1f9ac1&gt;</span> in <span class="ni">&lt;module&gt;</span><span class="nt">()</span>
-<span class="ne">----&gt; </span><span class="mi">1</span> <span class="kn">import</span> <span class="nn">SLEEPY</span> <span class="k">as</span> <span class="nn">sl</span>
-<span class="g g-Whitespace">      </span><span class="mi">2</span> <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="g g-Whitespace">      </span><span class="mi">3</span> <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
-
-<span class="ne">ModuleNotFoundError</span>: No module named &#39;SLEEPY&#39;
-</pre></div>
 </div>
-</div>
-</div>
-<p>Miloushev and Palmer provide us with the relevant formula<span class="math notranslate nohighlight">\(^1\)</span>:</p>
+</section>
+<section id="theoretical-background">
+<h2>Theoretical Background<a class="headerlink" href="#theoretical-background" title="Permalink to this headline">#</a></h2>
+<p>Miloushev and Palmer provide us with the relevant formula:</p>
 <div class="math notranslate nohighlight">
 \[
 \begin{equation}
@@ -695,7 +702,6 @@ k_{ex}&amp;=&amp;k_{1\rightarrow2}+k_{2\rightarrow1} \\
 \sin^2\beta_e&amp;=&amp;\frac{\omega_1^2}{\omega_1^2+\Omega^2}
 \end{eqnarray}
 \end{split}\]</div>
-<p>[1] V.Z. Miloushev, A.G. Palmer. <a class="reference external" href="https://doi.org/10.1021/cr030413t"><em>J. Magn. Reson.</em></a> <strong>2015</strong>, 177, 221-227</p>
 <p>In the above formula, the relative sizes of the three terms in the denominator determine the availability of information from <span class="math notranslate nohighlight">\(R_{1\rho}\)</span> experiments. For example, if either the field strength is set to high, or <span class="math notranslate nohighlight">\(k_{ex}\)</span> is
 too large, the third term can be neglected, yielding</p>
 <div class="math notranslate nohighlight">
@@ -736,7 +742,6 @@ R_{1\rho}^{ex}=\frac{\sin^2\beta_ep_1p_2\Delta\omega_{12}^2k_{ex}}{\omega_e^2+k_
     <span class="n">den1</span><span class="o">=</span><span class="n">omega_e2_1</span><span class="o">*</span><span class="n">omega_e2_2</span><span class="o">/</span><span class="n">omega_e2</span> <span class="c1">#Denominator (1st term)</span>
     <span class="n">den2</span><span class="o">=</span><span class="n">kex</span><span class="o">**</span><span class="mi">2</span> <span class="c1">#Denominator (2nd term)</span>
     <span class="n">den3</span><span class="o">=</span><span class="n">x</span><span class="o">*</span><span class="p">(</span><span class="mi">1</span><span class="o">+</span><span class="mi">2</span><span class="o">*</span><span class="n">kex</span><span class="o">**</span><span class="mi">2</span><span class="o">*</span><span class="p">(</span><span class="n">p1</span><span class="o">*</span><span class="n">omega_e2_1</span><span class="o">+</span><span class="n">p2</span><span class="o">*</span><span class="n">omega_e2_2</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="n">omega_e2_1</span><span class="o">*</span><span class="n">omega_e2_2</span><span class="o">+</span><span class="n">omega_e2</span><span class="o">*</span><span class="n">kex</span><span class="o">**</span><span class="mi">2</span><span class="p">))</span>
-    <span class="nb">print</span><span class="p">(</span><span class="n">Omega1</span><span class="p">,</span><span class="n">Omega2</span><span class="p">,</span><span class="n">CS1</span><span class="p">,</span><span class="n">CS2</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">num</span><span class="o">/</span><span class="p">(</span><span class="n">den1</span><span class="o">+</span><span class="n">den2</span><span class="o">-</span><span class="n">den3</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -797,18 +802,12 @@ R_{1\rho}^{ex}=\frac{\sin^2\beta_ep_1p_2\Delta\omega_{12}^2k_{ex}}{\omega_e^2+k_
 <span class="n">ax</span><span class="o">=</span><span class="n">rho</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="s1">&#39;ms&#39;</span><span class="p">)</span>
 <span class="n">R1p</span><span class="o">=</span><span class="n">R1p_fun</span><span class="p">(</span><span class="n">kex</span><span class="o">=</span><span class="n">kex</span><span class="p">,</span><span class="n">v1</span><span class="o">=</span><span class="n">v1</span><span class="p">,</span><span class="n">CS1</span><span class="o">=</span><span class="n">ex0</span><span class="o">.</span><span class="n">CS</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="s1">&#39;Hz&#39;</span><span class="p">],</span><span class="n">CS2</span><span class="o">=</span><span class="n">ex1</span><span class="o">.</span><span class="n">CS</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="s1">&#39;Hz&#39;</span><span class="p">],</span><span class="n">p1</span><span class="o">=</span><span class="n">p1</span><span class="p">)</span>
 <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">rho</span><span class="o">.</span><span class="n">t_axis</span><span class="o">*</span><span class="mf">1e3</span><span class="p">,</span><span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">R1p</span><span class="o">*</span><span class="n">rho</span><span class="o">.</span><span class="n">t_axis</span><span class="p">),</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;grey&#39;</span><span class="p">,</span><span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;:&#39;</span><span class="p">)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">((</span><span class="s1">&#39;Simulated&#39;</span><span class="p">,</span><span class="s1">&#39;Calculated&#39;</span><span class="p">))</span>
+<span class="n">_</span><span class="o">=</span><span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">((</span><span class="s1">&#39;Simulated&#39;</span><span class="p">,</span><span class="s1">&#39;Calculated&#39;</span><span class="p">))</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>785.3981633974482 -2356.194490192345 125.0 -375.0
-</pre></div>
-</div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x7fe9d217b9d0&gt;
-</pre></div>
-</div>
-<img alt="../_images/Ch2_BMRD_13_2.png" src="../_images/Ch2_BMRD_13_2.png" />
+<img alt="../_images/Ch2_BMRD_13_0.png" src="../_images/Ch2_BMRD_13_0.png" />
 </div>
 </div>
 <section id="what-happens-if-we-vary-the-populations-and-delta-omega-12-2-but-leave-p-1p-2-delta-omega-2-fixed">
@@ -852,7 +851,7 @@ R_{1\rho}^{ex}=\frac{\sin^2\beta_ep_1p_2\Delta\omega_{12}^2k_{ex}}{\omega_e^2+k_
 <p>On the other hand, if exchange is slower, the curves will separate as we vary the populations. We slow <span class="math notranslate nohighlight">\(k_{ex}\)</span> down to 800 s<span class="math notranslate nohighlight">\(^{-1}\)</span></p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">kex</span><span class="o">=</span><span class="mi">1000</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">kex</span><span class="o">=</span><span class="mi">800</span>
 <span class="n">tc</span><span class="o">=</span><span class="mi">1</span><span class="o">/</span><span class="n">kex</span>
 <span class="n">ax</span><span class="o">=</span><span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()[</span><span class="mi">1</span><span class="p">]</span>
 <span class="k">for</span> <span class="n">p1</span> <span class="ow">in</span> <span class="n">p10</span><span class="p">:</span>
@@ -909,8 +908,9 @@ R_{1\rho}^{ex}=\frac{\sin^2\beta_ep_1p_2\Delta\omega_{12}^2k_{ex}}{\omega_e^2+k_
 <img alt="../_images/Ch2_BMRD_19_0.png" src="../_images/Ch2_BMRD_19_0.png" />
 </div>
 </div>
-<p>The stronger field slows down the relaxation considerably, but furthermore, no longer can we separate <span class="math notranslate nohighlight">\(p_1p_2\)</span> from <span class="math notranslate nohighlight">\(\Delta\Omega_{12}\)</span>. This becomes critical in solid-state NMR, where we need to be able to apply low fields while retaining a spin-lock. This can become problematic due to other large, anisotropic interactions, such that we need to spin quickly and decrease the <span class="math notranslate nohighlight">\(^1\)</span>H concentration to avoid higher order effects.</p>
-<p>Next, we determine the behavior of relaxation as a function of offset frequency. First, we calculate a spectrum to see where peaks actually appear (and also mark where peaks should be in the absence of exchange).</p>
+<p>The stronger field slows down the relaxation considerably, but furthermore, we can no longer separate <span class="math notranslate nohighlight">\(p_1p_2\)</span> from <span class="math notranslate nohighlight">\(\Delta\Omega_{12}\)</span>. This becomes critical in solid-state NMR, where we need to be able to apply low fields while retaining a spin-lock. This can become problematic due to other large, anisotropic interactions, such that we need to spin quickly and decrease the <span class="math notranslate nohighlight">\(^1\)</span>H concentration to avoid higher order effects.</p>
+<p>In the case of slow exchange, with a sufficiently low spin-lock field strength, we can separate the population from <span class="math notranslate nohighlight">\(\Delta\Omega_{12}\)</span>. However, we cannot say with an on-resonant spin-lock whether the larger population corresponds to the larger or smaller chemical shift. Then, we must apply an off-resonant spin-lock.</p>
+<p>Therefore, we determine the behavior of relaxation as a function of offset frequency. First, we calculate a spectrum to see where peaks actually appear (and also mark where peaks should be in the absence of exchange).</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ax</span><span class="o">=</span><span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()[</span><span class="mi">1</span><span class="p">]</span>
@@ -936,7 +936,7 @@ R_{1\rho}^{ex}=\frac{\sin^2\beta_ep_1p_2\Delta\omega_{12}^2k_{ex}}{\omega_e^2+k_
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&lt;matplotlib.lines.Line2D at 0x7fe9f08084f0&gt;]
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&lt;matplotlib.lines.Line2D at 0x7fba41659580&gt;]
 </pre></div>
 </div>
 <img alt="../_images/Ch2_BMRD_22_1.png" src="../_images/Ch2_BMRD_22_1.png" />
