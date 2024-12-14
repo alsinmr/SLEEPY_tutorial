@@ -190,7 +190,7 @@ def write_book_setup(f):
      "metadata": {},
      "outputs": [],
      "source": [
-      "# SETUP pyDR\\n",
+      "# SETUP SLEEPY\\n",
       "import os\\n",
       "os.chdir('../..')"
      ]
@@ -265,7 +265,7 @@ def copy2JupyterBook(chapter,filename):
                 pass
             elif len(cr.get_source()) and 'SETUP SLEEPY' in cr.get_source()[0]:
                 f.write('\n' if first else ',\n')
-                write_book_setup(f)
+                # write_book_setup(f)
             else:
                 f.write('\n' if first else ',\n')
                 write_cell(f,cell)
