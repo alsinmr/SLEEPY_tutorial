@@ -5,7 +5,7 @@
 
 # <a href="https://githubtocolab.com/alsinmr/SLEEPY_tutorial/blob/main/ColabNotebooks/Chapter3/Ch3_T1_NOE.ipynb" target="_blank"><img src="https://colab.research.google.com/assets/colab-badge.svg"></a>
 
-# In[ ]:
+# In[1]:
 
 
 # SETUP pyDR
