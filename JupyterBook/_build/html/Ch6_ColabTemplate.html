@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>Getting Started &#8212; SLEEPY Tutorial</title>
+    <title>SLEEPY Colab Template &#8212; SLEEPY Tutorial</title>
     
   <!-- Loaded before other Sphinx assets -->
   <link href="_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
@@ -53,8 +53,7 @@ const thebe_selector_output = ".output, .cell_output"
     <link rel="shortcut icon" href="_static/favicon.png"/>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="SLEEPY basics" href="Ch1_SLEEPY_basics.html" />
-    <link rel="prev" title="Relax with SLEEPY!" href="intro.html" />
+    <link rel="prev" title="Paramagnetic Effects" href="Ch5_ParamagneticEffects.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
     
@@ -114,9 +113,9 @@ const thebe_selector_output = ".output, .cell_output"
                 </a>
             </li>
         </ul>
-        <ul class="current nav bd-sidenav">
- <li class="toctree-l1 current active">
-  <a class="current reference internal" href="#">
+        <ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="GettingStarted.html">
    <font color="maroon">
     Getting Started
    </font>
@@ -128,7 +127,7 @@ const thebe_selector_output = ".output, .cell_output"
   Tutorial
  </span>
 </p>
-<ul class="nav bd-sidenav">
+<ul class="current nav bd-sidenav">
  <li class="toctree-l1 has-children">
   <a class="reference internal" href="Ch1_SLEEPY_basics.html">
    <font color="maroon">
@@ -336,8 +335,8 @@ const thebe_selector_output = ".output, .cell_output"
    </font>
   </a>
  </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="Ch6_ColabTemplate.html">
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
    <font color="maroon">
     SLEEPY Colab Template
    </font>
@@ -394,6 +393,35 @@ title="Toggle navigation"
         
     </div>
     <div class="header-article__right">
+<div class="menu-dropdown menu-dropdown-launch-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Launch interactive content">
+      <i class="fas fa-rocket"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://mybinder.org/v2/gh/alsinmr/SLEEPY_tutorial/master?urlpath=tree/JupyterBook/Ch6_ColabTemplate.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Launch on Binder"
+>
+  
+
+<span class="headerbtn__icon-container">
+  
+    <img src="_static/images/logo_binder.svg">
+  </span>
+<span class="headerbtn__text-container">Binder</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
 <button onclick="toggleFullScreen()"
   class="headerbtn"
   data-toggle="tooltip"
@@ -433,7 +461,7 @@ title="Source repository"
       </li>
       
       <li>
-        <a href="https://github.com/alsinmr/SLEEPY_tutorial//issues/new?title=Issue%20on%20page%20%2FGettingStarted.html&body=Your%20issue%20content%20here."
+        <a href="https://github.com/alsinmr/SLEEPY_tutorial//issues/new?title=Issue%20on%20page%20%2FCh6_ColabTemplate.html&body=Your%20issue%20content%20here."
    class="headerbtn"
    data-toggle="tooltip"
 data-placement="left"
@@ -461,7 +489,7 @@ title="Open an issue"
   <div class="menu-dropdown__content">
     <ul>
       <li>
-        <a href="_sources/GettingStarted.md"
+        <a href="_sources/Ch6_ColabTemplate.ipynb"
    class="headerbtn"
    data-toggle="tooltip"
 data-placement="left"
@@ -472,7 +500,7 @@ title="Download source file"
 <span class="headerbtn__icon-container">
   <i class="fas fa-file"></i>
   </span>
-<span class="headerbtn__text-container">.md</span>
+<span class="headerbtn__text-container">.ipynb</span>
 </a>
 
       </li>
@@ -521,25 +549,13 @@ title="Print to PDF"
     <nav id="bd-toc-nav" aria-label="Page">
         <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#local-installation">
-   Local Installation
+  <a class="reference internal nav-link" href="#setup">
+   Setup
   </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#requirements">
-     Requirements
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#recommended-installations">
-     Recommended Installations
-    </a>
-   </li>
-  </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#google-colab">
-   Google Colab
+  <a class="reference internal nav-link" href="#run-the-simulation">
+   Run the simulation
   </a>
  </li>
 </ul>
@@ -551,7 +567,7 @@ title="Print to PDF"
         <div class="col pl-md-3 pl-lg-5 content-container">
             <!-- Table of contents that is only displayed when printing the page -->
             <div id="jb-print-docs-body" class="onlyprint">
-                <h1><font color="maroon">Getting Started</font></h1>
+                <h1><font  color = "maroon"> SLEEPY Colab Template</h1>
                 <!-- Table of contents -->
                 <div id="print-main-content">
                     <div id="jb-print-toc">
@@ -562,25 +578,13 @@ title="Print to PDF"
                         <nav aria-label="Page">
                             <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#local-installation">
-   Local Installation
+  <a class="reference internal nav-link" href="#setup">
+   Setup
   </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#requirements">
-     Requirements
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#recommended-installations">
-     Recommended Installations
-    </a>
-   </li>
-  </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#google-colab">
-   Google Colab
+  <a class="reference internal nav-link" href="#run-the-simulation">
+   Run the simulation
   </a>
  </li>
 </ul>
@@ -593,36 +597,59 @@ title="Print to PDF"
                 
               <div>
                 
-  <section class="tex2jax_ignore mathjax_ignore" id="font-color-maroon-getting-started-font">
-<h1><font color="maroon">Getting Started</font><a class="headerlink" href="#font-color-maroon-getting-started-font" title="Permalink to this headline">#</a></h1>
-<p>There are currently two possiblities for running SLEEPY: with a local Python installation, or online via <a class="reference external" href="https://colab.research.google.com/">Google Colab</a>. A local installation of SLEEPY may be run in <a class="reference external" href="https://jupyter.org/">Jupyter notebooks</a>, as a script, or in a Python/iPython terminal. Here we provide a few notes for a local installation or for running in Google Colab.</p>
-<section id="local-installation">
-<h2>Local Installation<a class="headerlink" href="#local-installation" title="Permalink to this headline">#</a></h2>
-<p>SLEEPY does not currently exist for installation via <a class="reference external" href="https://pypi.org/">pip</a> or <a class="reference external" href="https://docs.conda.io/en/latest/">conda</a>, and instead is downloaded from GitHub, with its containing folder added to the system path (or placed with other Python modules). The required modules must be installed separately by the user.</p>
-<p><a class="reference external" href="https://github.com/alsinmr/SLEEPY/"><strong>SLEEPY on GitHub</strong></a></p>
-<p>Versions listed tested for pyDR, although most recent module versions should work.</p>
-<section id="requirements">
-<h3>Requirements<a class="headerlink" href="#requirements" title="Permalink to this headline">#</a></h3>
-<ul class="simple">
-<li><p>Python 3 (3.7.3)</p></li>
-<li><p>numpy (1.19.2)</p></li>
-<li><p>matplotlib (3.4.2)</p></li>
-<li><p>scipy (1.5.2)</p></li>
-</ul>
+  <section class="tex2jax_ignore mathjax_ignore" id="font-color-maroon-sleepy-colab-template">
+<h1><font  color = "maroon"> SLEEPY Colab Template<a class="headerlink" href="#font-color-maroon-sleepy-colab-template" title="Permalink to this headline">#</a></h1>
+<p>Provides the basic SLEEPY setup in Google Colab, along with some suggestions on getting started.</p>
+<p><a href="https://githubtocolab.com/alsinmr/SLEEPY_tutorial/ColabTemplate.ipynb" target="_blank"><img src="https://colab.research.google.com/assets/colab-badge.svg"></a></p>
+<section id="setup">
+<h2>Setup<a class="headerlink" href="#setup" title="Permalink to this headline">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># SETUP SLEEPY</span>
+<span class="o">!</span>git clone https://alsinmr.github.io/SLEEPY
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">SLEEPY</span> <span class="k">as</span> <span class="nn">sl</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+</pre></div>
+</div>
+</div>
+</div>
 </section>
-<section id="recommended-installations">
-<h3>Recommended Installations<a class="headerlink" href="#recommended-installations" title="Permalink to this headline">#</a></h3>
-<ul class="simple">
-<li><p><a class="reference external" href="https://jupyter.org/">Jupyter notebooks</a>: Neat code organization based in a web browser</p></li>
-</ul>
-<p>If you’re starting from scratch, you may consider installing <a class="reference external" href="https://anaconda.org">Anaconda</a>, which will install Python 3, numpy, matplotlib, scipy, and Jupyter Notebooks for you.</p>
-<p>Once set up, any of the webpages with code in the tutorial can be downloaded with the button in the upper right (pick .ipynb) and run locally.</p>
-</section>
-</section>
-<section id="google-colab">
-<h2>Google Colab<a class="headerlink" href="#google-colab" title="Permalink to this headline">#</a></h2>
-<p>Colab has the advantage that there is no local installation requirement, with the basic Python modules already setup. The notebooks that we provide include a few lines at the beginning that download SLEEPY and import it.</p>
-<p>For all notebooks in the tutorial, there is a button near the top that redirects you to Google Colab, where you can then edit and execute contents of the notebook: <a href="https://githubtocolab.com/alsinmr/SLEEPY_tutorial/ColabTemplate.ipynb" target="_blank"><img src="https://colab.research.google.com/assets/colab-badge.svg"></a></p>
+<section id="run-the-simulation">
+<h2>Run the simulation<a class="headerlink" href="#run-the-simulation" title="Permalink to this headline">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Experimental system settings (use two or more for exchange)</span>
+<span class="n">ex0</span><span class="o">=</span><span class="n">sl</span><span class="o">.</span><span class="n">ExpSys</span><span class="p">(</span><span class="n">v0H</span><span class="o">=...</span><span class="p">,</span><span class="n">Nucs</span><span class="o">=</span><span class="p">[</span><span class="o">...</span><span class="p">,</span><span class="o">...</span><span class="p">],</span><span class="n">vr</span><span class="o">=</span><span class="mi">60000</span><span class="p">)</span>
+<span class="n">ex0</span><span class="o">.</span><span class="n">set_inter</span><span class="p">(</span><span class="s1">&#39;...&#39;</span><span class="p">,</span><span class="n">i0</span><span class="o">=...</span><span class="p">,</span><span class="n">i1</span><span class="o">=..</span><span class="p">,</span><span class="o">...</span><span class="p">)</span>
+<span class="n">ex1</span><span class="o">=</span><span class="n">ex0</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+
+<span class="c1"># Build the Liouvillian</span>
+<span class="n">L</span><span class="o">=</span><span class="n">sl</span><span class="o">.</span><span class="n">Liouvillian</span><span class="p">(</span><span class="n">ex0</span><span class="p">,</span><span class="n">ex1</span><span class="p">,</span><span class="n">kex</span><span class="o">=</span><span class="n">sl</span><span class="o">.</span><span class="n">Tools</span><span class="o">.</span><span class="n">twoSite_kex</span><span class="p">(</span><span class="o">...</span><span class="p">))</span>
+
+<span class="c1"># Add a sequence</span>
+<span class="n">seq</span><span class="o">=</span><span class="n">L</span><span class="o">.</span><span class="n">Sequence</span><span class="p">()</span>
+<span class="c1"># Add a channel</span>
+<span class="n">seq</span><span class="o">.</span><span class="n">add_channel</span><span class="p">(</span><span class="s1">&#39;...&#39;</span><span class="p">,</span><span class="n">t</span><span class="o">=...</span><span class="p">,</span><span class="n">v1</span><span class="o">=...</span><span class="p">,</span><span class="n">phase</span><span class="o">=...</span><span class="p">,</span><span class="n">voff</span><span class="o">=...</span><span class="p">)</span>
+
+<span class="c1"># Density matrix</span>
+<span class="n">rho</span><span class="o">=</span><span class="n">sl</span><span class="o">.</span><span class="n">Rho</span><span class="p">(</span><span class="n">rho0</span><span class="o">=</span><span class="s1">&#39;...&#39;</span><span class="p">,</span><span class="n">detect</span><span class="o">=</span><span class="s1">&#39;...&#39;</span><span class="p">)</span>
+
+<span class="c1"># Run the simulation</span>
+<span class="n">rho</span><span class="o">.</span><span class="n">DetProp</span><span class="p">(</span><span class="n">seq</span><span class="p">,</span><span class="n">n</span><span class="o">=...</span><span class="p">,</span><span class="n">n_per_seq</span><span class="o">=...</span><span class="p">)</span>
+
+<span class="c1"># Plot the results</span>
+<span class="n">rho</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">FT</span><span class="o">=...</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
 </section>
 </section>
 
@@ -653,19 +680,12 @@ title="Print to PDF"
                 
     <!-- Previous / next buttons -->
 <div class='prev-next-area'>
-    <a class='left-prev' id="prev-link" href="intro.html" title="previous page">
+    <a class='left-prev' id="prev-link" href="Ch5_ParamagneticEffects.html" title="previous page">
         <i class="fas fa-angle-left"></i>
         <div class="prev-next-info">
             <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title">Relax with SLEEPY!</p>
+            <p class="prev-next-title"><font color="maroon">Paramagnetic Effects</font></p>
         </div>
-    </a>
-    <a class='right-next' id="next-link" href="Ch1_SLEEPY_basics.html" title="next page">
-    <div class="prev-next-info">
-        <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title"><font color="maroon">SLEEPY basics</font></p>
-    </div>
-    <i class="fas fa-angle-right"></i>
     </a>
 </div>
             </footer>

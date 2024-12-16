@@ -40,3 +40,4 @@ parts:
     - file: Chapter4/Ch4_OverhauserEffect
     - file: Chapter4/Ch4_NOVEL
   - file: Ch5_ParamagneticEffects
+  - file: Ch6_ColabTemplate

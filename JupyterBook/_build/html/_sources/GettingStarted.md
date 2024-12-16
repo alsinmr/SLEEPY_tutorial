@@ -19,11 +19,11 @@ Versions listed tested for pyDR, although most recent module versions should wor
 ### Recommended Installations
 * [Jupyter notebooks](https://jupyter.org/): Neat code organization based in a web browser
 
-If you're starting from scratch, you may consider installing [Anaconda](https://anaconda.org), which will install Python 3, numpy, matplotlib, scipy, and Jupyter Notebooks for you. The remaining packages (MDAnalysis, etc.) may then be installed with conda (or less ideally, with pip). ChimeraX is not installed with Python, but has its own installer (you will need to tell pyDR where ChimeraX is installed, use pyDR.chimeraX.chimeraX_funs.set_chimera_path).
+If you're starting from scratch, you may consider installing [Anaconda](https://anaconda.org), which will install Python 3, numpy, matplotlib, scipy, and Jupyter Notebooks for you. 
 
 Once set up, any of the webpages with code in the tutorial can be downloaded with the button in the upper right (pick .ipynb) and run locally. 
 
 ## Google Colab
 Colab has the advantage that there is no local installation requirement, with the basic Python modules already setup. The notebooks that we provide include a few lines at the beginning that download SLEEPY and import it.
 
-For all notebooks in the tutorial, there is a button near the top that redirects you to Google Colab, where you can then edit and execute contents of the notebook: ![](https://colab.research.google.com/assets/colab-badge.svg)
+For all notebooks in the tutorial, there is a button near the top that redirects you to Google Colab, where you can then edit and execute contents of the notebook: <a href="https://githubtocolab.com/alsinmr/SLEEPY_tutorial/ColabTemplate.ipynb" target="_blank"><img src="https://colab.research.google.com/assets/colab-badge.svg"></a>
