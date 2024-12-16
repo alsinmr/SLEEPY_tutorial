@@ -50,13 +50,9 @@ const thebe_selector_input = "pre"
 const thebe_selector_output = ".output, .cell_output"
 </script>
     <script async="async" src="_static/sphinx-thebe.js"></script>
-    <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <link rel="shortcut icon" href="_static/favicon.png"/>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="R\(_{1ρ}\) relaxation" href="Chapter3/Ch3_R1p.html" />
-    <link rel="prev" title="TROSY effects" href="Chapter2/Ch2_TROSY.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
     
@@ -130,7 +126,7 @@ const thebe_selector_output = ".output, .cell_output"
   Tutorial
  </span>
 </p>
-<ul class="current nav bd-sidenav">
+<ul class="nav bd-sidenav">
  <li class="toctree-l1 has-children">
   <a class="reference internal" href="Ch1_SLEEPY_basics.html">
    <font color="maroon">
@@ -253,13 +249,13 @@ const thebe_selector_output = ".output, .cell_output"
    </li>
   </ul>
  </li>
- <li class="toctree-l1 current active has-children">
-  <a class="current reference internal" href="#">
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="Ch3_DynamicsSolids.html">
    <font color="maroon">
     Dynamics in Solids
    </font>
   </a>
-  <input checked="" class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/>
+  <input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/>
   <label for="toctree-checkbox-3">
    <i class="fas fa-chevron-down">
    </i>
@@ -396,35 +392,6 @@ title="Toggle navigation"
         
     </div>
     <div class="header-article__right">
-<div class="menu-dropdown menu-dropdown-launch-buttons">
-  <button class="headerbtn menu-dropdown__trigger"
-      aria-label="Launch interactive content">
-      <i class="fas fa-rocket"></i>
-  </button>
-  <div class="menu-dropdown__content">
-    <ul>
-      <li>
-        <a href="https://mybinder.org/v2/gh/alsinmr/SLEEPY_tutorial/master?urlpath=tree/JupyterBook/Ch3_DynamicsSolids.ipynb"
-   class="headerbtn"
-   data-toggle="tooltip"
-data-placement="left"
-title="Launch on Binder"
->
-  
-
-<span class="headerbtn__icon-container">
-  
-    <img src="_static/images/logo_binder.svg">
-  </span>
-<span class="headerbtn__text-container">Binder</span>
-</a>
-
-      </li>
-      
-    </ul>
-  </div>
-</div>
-
 <button onclick="toggleFullScreen()"
   class="headerbtn"
   data-toggle="tooltip"
@@ -464,7 +431,7 @@ title="Source repository"
       </li>
       
       <li>
-        <a href="https://github.com/alsinmr/SLEEPY_tutorial//issues/new?title=Issue%20on%20page%20%2FCh3_DynamicsSolids.html&body=Your%20issue%20content%20here."
+        <a href="https://github.com/alsinmr/SLEEPY_tutorial//issues/new?title=Issue%20on%20page%20%2F_Ch3_DynamicsSolids.html&body=Your%20issue%20content%20here."
    class="headerbtn"
    data-toggle="tooltip"
 data-placement="left"
@@ -492,7 +459,7 @@ title="Open an issue"
   <div class="menu-dropdown__content">
     <ul>
       <li>
-        <a href="_sources/Ch3_DynamicsSolids.ipynb"
+        <a href="_sources/_Ch3_DynamicsSolids.md"
    class="headerbtn"
    data-toggle="tooltip"
 data-placement="left"
@@ -503,7 +470,7 @@ title="Download source file"
 <span class="headerbtn__icon-container">
   <i class="fas fa-file"></i>
   </span>
-<span class="headerbtn__text-container">.ipynb</span>
+<span class="headerbtn__text-container">.md</span>
 </a>
 
       </li>
@@ -557,14 +524,12 @@ title="Print to PDF"
 <h1><font color="maroon">Dynamics in Solids</font><a class="headerlink" href="#font-color-maroon-dynamics-in-solids-font" title="Permalink to this headline">#</a></h1>
 <p>SLEEPY was originally developed for simulating relaxation in solids. For good reason: relaxation is orientation dependent in solids, so that the orientationally-averaged rate constants that may more easily calculated are not always sufficient to understand more complex processes occuring in solids. Slow (μs-ms) reorientational motion that is masked in solution NMR is present in solids and plays an important role in behavior of various experiments. Text</p>
 <ul class="simple">
-<li><p><a class="reference internal" href="Chapter3/Ch3_R1p.html"><span class="doc std std-doc"><span class="math notranslate nohighlight">\(R_{1\rho}\)</span> relaxation</span></a></p></li>
-<li><p><a class="reference internal" href="Chapter3/Ch3_REDOR.html"><span class="doc std std-doc">REDOR</span></a></p></li>
-<li><p><a class="reference internal" href="Chapter3/Ch3_DIPSHIFT.html"><span class="doc std std-doc">DIPSHIFT</span></a></p></li>
-<li><p><a class="reference internal" href="Chapter3/Ch3_RECRR.html"><span class="doc std std-doc">Correlation-time dependence of a pulse-sequence: RECRR</span></a></p></li>
-<li><p><a class="reference internal" href="Chapter3/Ch3_T1_NOE.html"><span class="doc std std-doc"><span class="math notranslate nohighlight">\(T_1\)</span> and NOE</span></a></p></li>
+<li><p><a class="reference internal" href="Chapter3/Ch3_R1p.html"><span class="doc std std-doc"> R_{1ρ} relaxation</span></a></p></li>
+<li><p><a class="reference internal" href="Chapter3/Ch3_REDOR.html"><span class="doc std std-doc"> REDOR</span></a></p></li>
+<li><p><a class="reference internal" href="Chapter3/Ch3_DIPSHIFT.html"><span class="doc std std-doc"> DIPSHIFT</span></a></p></li>
+<li><p><a class="reference internal" href="Chapter3/Ch3_RECRR.html"><span class="doc std std-doc"> Correlation-time dependence of a pulse-sequence: RECRR</span></a></p></li>
+<li><p><a class="reference internal" href="Chapter3/Ch3_T1_NOE.html"><span class="doc std std-doc"> T_1 and NOE</span></a></p></li>
 </ul>
-<div class="toctree-wrapper compound">
-</div>
 </section>
 
     <script type="text/x-thebe-config">
@@ -594,20 +559,6 @@ title="Print to PDF"
                 
     <!-- Previous / next buttons -->
 <div class='prev-next-area'>
-    <a class='left-prev' id="prev-link" href="Chapter2/Ch2_TROSY.html" title="previous page">
-        <i class="fas fa-angle-left"></i>
-        <div class="prev-next-info">
-            <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title"><font  color = "#0093AF"> TROSY effects</p>
-        </div>
-    </a>
-    <a class='right-next' id="next-link" href="Chapter3/Ch3_R1p.html" title="next page">
-    <div class="prev-next-info">
-        <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title"><font  color = "#0093AF"> R<span class="math notranslate nohighlight">\(_{1ρ}\)</span> relaxation</p>
-    </div>
-    <i class="fas fa-angle-right"></i>
-    </a>
 </div>
             </footer>
         </div>

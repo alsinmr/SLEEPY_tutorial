@@ -1,6 +1,6 @@
 # <font color="maroon">Getting Started</font>
 
-There are currently two possiblities for running SLEEPY: with a local Python installation, or online via [Google Colab](https://colab.research.google.com/). A local installation of SLEEPY may be run in [Jupyter notebooks](https://jupyter.org/), as a script, or in a Python/iPython terminal. Here we provide a few notes for a local installation or for running in Google Colab.
+There are currently two possiblities for running SLEEPY: with a local Python installation, or online via [Google Colab](https://githubtocolab.com/alsinmr/SLEEPY_tutorial/blob/main/ColabTemplate.ipynb). A local installation of SLEEPY may be run in [Jupyter notebooks](https://jupyter.org/), as a script, or in a Python/iPython terminal. Here we provide a few notes for a local installation or for running in Google Colab.
 
 
 ## Local Installation
