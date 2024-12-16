@@ -110,7 +110,7 @@ const thebe_selector_output = ".output, .cell_output"
         <ul class="nav bd-sidenav bd-sidenav__home-link">
             <li class="toctree-l1">
                 <a class="reference internal" href="../intro.html">
-                    Welcome to the SLEEPY tutorial
+                    Relax with SLEEPY!
                 </a>
             </li>
         </ul>
@@ -268,7 +268,7 @@ const thebe_selector_output = ".output, .cell_output"
      <font color="#0093AF">
       R
       <span class="math notranslate nohighlight">
-       \(_{1\rho}\)
+       \(_{1ρ}\)
       </span>
       relaxation
      </font>
@@ -319,7 +319,14 @@ const thebe_selector_output = ".output, .cell_output"
    <i class="fas fa-chevron-down">
    </i>
   </label>
-  <ul class="simple">
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../Chapter4/Ch4_SolidEffect.html">
+     <font color="#0093AF">
+      Solid Effect
+     </font>
+    </a>
+   </li>
   </ul>
  </li>
  <li class="toctree-l1">
@@ -635,7 +642,7 @@ title="Print to PDF"
 </pre></div>
 </div>
 <p>We can do this because <code class="docutils literal notranslate"><span class="pre">rho</span></code> and <code class="docutils literal notranslate"><span class="pre">U</span></code> are objects. <code class="docutils literal notranslate"><span class="pre">rho</span></code> has a function, “DetProp”, which performes the detection and propagation functions in sequence <em>n</em> times. The detection matrix is stored inside the <code class="docutils literal notranslate"><span class="pre">rho</span></code> object, because we really only need it to detect the density matrix in rho, so there is no reason to carry it around as a separate variable. The function to propagate <code class="docutils literal notranslate"><span class="pre">rho</span></code> by <code class="docutils literal notranslate"><span class="pre">U</span></code> is also stored internally. Indeed, we can even just type <code class="docutils literal notranslate"><span class="pre">U*rho</span></code> to propagate with <code class="docutils literal notranslate"><span class="pre">U</span></code> one time, where objects allow defining the meaning of mathematical symbols; here, this means multiply the propagator matrix by rho and store the new result in rho, where this can include an internal loop over different elements of a powder average. <code class="docutils literal notranslate"><span class="pre">rho</span></code> also stores intensities resulting from detection internally, rather than requiring assigment to an external variable (above, we used <code class="docutils literal notranslate"><span class="pre">I</span></code>), and that also allows <code class="docutils literal notranslate"><span class="pre">rho</span></code> to perform signal processing internally. The “plot” function then creates a figure with the Fourier transformed (optionally apodized) data.</p>
-<p>Usage of objects, then, greatly simplifies the coding required by the user to create complex simulations. On the other hand, the objects give the user direct access to all of the data that was used to create the simulation. This makes SLEEPY much less of “black-box” (uh), so that one may investigate the components going into a simulation.</p>
+<p>Usage of objects, then, greatly simplifies the coding required by the user to create complex simulations. On the other hand, the objects give the user direct access to all of the data that was used to create the simulation. This makes SLEEPY much less of a (uh) “black-box”, so that one may investigate the components going into a simulation.</p>
 </section>
 </section>
 <section id="objects-in-sleepy">
