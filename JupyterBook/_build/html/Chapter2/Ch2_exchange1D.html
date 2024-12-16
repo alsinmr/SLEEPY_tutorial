@@ -270,7 +270,7 @@ const thebe_selector_output = ".output, .cell_output"
      <font color="#0093AF">
       R
       <span class="math notranslate nohighlight">
-       \(_{1\rho}\)
+       \(_{1ρ}\)
       </span>
       relaxation
      </font>
@@ -321,7 +321,14 @@ const thebe_selector_output = ".output, .cell_output"
    <i class="fas fa-chevron-down">
    </i>
   </label>
-  <ul class="simple">
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../Chapter4/Ch4_SolidEffect.html">
+     <font color="#0093AF">
+      Solid Effect
+     </font>
+    </a>
+   </li>
   </ul>
  </li>
  <li class="toctree-l1">
@@ -791,13 +798,6 @@ k_{12} &amp; -k_{21}+i\Omega_2
 <img alt="../_images/Ch2_exchange1D_19_0.png" src="../_images/Ch2_exchange1D_19_0.png" />
 </div>
 </div>
-<div class="math notranslate nohighlight">
-\[
-\lambda^2+k^2+(\Delta\Omega/2)^2+\lambda(k+i\Delta\Omega/2)+\lambda(k-i\Delta\Omega/2)-k^2
-\]</div>
-</section>
-<section id="repeat-with-asymmetric-exchange">
-<h2>Repeat with asymmetric exchange<a class="headerlink" href="#repeat-with-asymmetric-exchange" title="Permalink to this headline">#</a></h2>
 <p>In symmetic exchange, we can obtain the peak positions and linewidths by diagonalizing the following equation:</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}
@@ -831,6 +831,9 @@ k &amp; -k-i\Delta\Omega/2-\lambda
 \]</div>
 <p>Then, when the term in the square-root is negative, we obtain complex eigenvalues, corresponding to two separate oscillation frequencies, and <span class="math notranslate nohighlight">\(T_2\)</span>=1/k. When the square-root is positive, then no observable frequency difference arises, but two different decay rates are present (although as <span class="math notranslate nohighlight">\(k\)</span> becomes larger, only the smaller rate contributes significantly to the spectrum).</p>
 <p>On the other hand, if <span class="math notranslate nohighlight">\(k_{12}\ne k_{21}\)</span>, then no well-defined coalescence condition exists. We simulate this case below, as a function of exchange rate.</p>
+</section>
+<section id="repeat-with-asymmetric-exchange">
+<h2>Repeat with asymmetric exchange<a class="headerlink" href="#repeat-with-asymmetric-exchange" title="Permalink to this headline">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">p1</span><span class="o">=</span><span class="mf">0.75</span>

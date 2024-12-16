@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# # <font  color = "#0093AF"> R$_{1\rho}$ relaxation
+# # <font  color = "#0093AF"> R$_{1ρ}$ relaxation
 # Measurement of $R_{1\rho}$ in solid-state NMR is a powerful means of characterizing μs to ms dynamics. We may simulate it as the result of stochastic reorientation of anisotropic tensors, such as dipole and chemical shift anisotropies
 
 # <a href="https://githubtocolab.com/alsinmr/SLEEPY_tutorial/blob/main/ColabNotebooks/Chapter3/Ch3_R1p.ipynb" target="_blank"><img src="https://colab.research.google.com/assets/colab-badge.svg"></a>
@@ -204,7 +204,7 @@ ax.set_xlabel(r'$\nu_1$ / kHz')
 ax.set_ylabel(r'$R_{1\rho}$ / s$^{-1}$')
 
 
-# We see increased relaxation rate constants at low applied fields, due to chemical shift modulation, and at high fields due to reorientational motion of the $^{15}$N CSA and H–N dipole coupling. Note that the timescale dependence of the two relaxation mechanisms are different. This experiment is particularly interesting because while being essentially the same experiment, we investigate two different mechanisms of relaxation just based on the field-strength setting.
+# We see increased relaxation rate constants at low applied fields, due to chemical shift modulation, and at high fields due to reorientational motion of the $^{15}$N CSA and H–N dipole coupling. Note that the timescale dependence of the two relaxation mechanisms is different. This experiment is particularly interesting because while being essentially the same experiment, we investigate two different mechanisms of relaxation just based on the field-strength setting.
 
 # In[ ]:
 

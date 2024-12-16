@@ -1,31 +1,64 @@
 # <font color="#0093AF">Objects</font>
 
-## What is an object?
-### Functional versus object-oriented programming paradigms
-Most people are familiar with basic programs that work with data and functions (functional programming paradigm). For example, we might have a density matrix (let's call it rho, as used in SLEEPY). In the functional paradigm, rho would be a matrix (or vector). If you wanted to propagate rho, you would need a propagator, U (also a matrix), and you would need to calculate:
-```
-rho_new = U @ rho
-```
-Furthermore, you would need to repeat the calculation for all elements of a powder average, and have a separate rho and propagator for every element of the powder average. You would potentially also need to multiply rho_new by a detection operator to obtain signal after each propagation step. The propagator itself would likely originate from a propagator function applied to the Hamiltonian or Liouvillian, along with a specified timestep. Simple calculations rapidly become tedious in this paradigm. 
+## Functional versus object-oriented programming paradigms
+### What is functional programming?
+Most people are familiar with basic programs that work with data and functions (functional programming paradigm). In functional programming, we have data and functions, and typically one calls a function with data, and new data is returned. For example, suppose we have a density matrix, `rho`, and a propagator, 'U'. We would then likely have a function to propagate the density matrix, e.g. `prop`. Then we would call:
 
-On the other hand, we can work with *objects* (object-oriented programming paradigm). An object contains data, but may also contain code that may be applied to that data. For example, in SLEEPY, rho is not a matrix, but rather an object. It does, indeed, contain a matrix internally that corresponds to the density matrix at a given time. But, it also contains also kinds of other useful information and code. For example, rho also contains the detection matrix or matrices. So, any time one wants to detect signal, one simply executes
 ```
-rho()
+rho_new=prop(rho,U)
 ```
-The () indicates the "call" function of an object. The call function could be anything, but in case of rho, it multiplies the internally stored density matrix with the detection operators and stores the results internally. This can also be a challenge if one is used to functional programming, where functions usually return the result of the calculation. For an object, a function may return the result of a calculation, but it may also simply modify data inside the object. In SLEEPY, when a function only modifies internal data, then usually the object itself is returned. This allows the user to string together multiple object functions in a single line.
 
-The rho object also defines how it interacts with a propagator. For example, we may execute:
-```
-U*rho
-```
-This propagates the density matrix by the propagator, just like the operation above (`rho_new=U@rho`), but now the propagation is stored internally. If we have a powder average, the propagator object (U) stores matrices for all elements of the powder average, and rho also stores matrices for every element of the powder average. `U*rho` then multiplies all powder elements internally, without requiring the user to do anything special. Once propagation and detection is performed over multiple propagation steps, the signal is stored in rho.I. rho also contains plotting functions, for example,
-```
-rho.plot()
-rho.plot(FT=True)
-```
-returns plots of the time domain and Fourier transformed signals.
+We would also need other functions, for example, a detection matrix and detection function, which would yield signal intensity at some time. Here we assume the signal is stored in a vector, `I`. which we have indexed here with `k`.
 
-### Complications of object-oriented programming
+```
+I[k]=detect(rho,det_mat)
+```
+
+Detection and propagation normally would be performed in a *for* loop. 
+
+```
+N=1024
+I=np.zero(1024)
+for k in range(N):
+	I[k]=detect(rho,det_mat)
+	rho=prop(rho,U)
+```
+
+Afterwards, we process the signal, and also calculate a frequency axis. In numpy, this might look like:
+
+```
+I[0]/=2
+S=np.fft.fftshift(np.fft.fft(I,len(I)*2))
+Dt=1e-4
+v=1/(2*Dt)*np.linspace(-1,1,len(I)*2)
+v-=(v[1]-v[0])/2
+```
+
+Finally, we would plot the result.
+
+```
+ax=plt.sublots()[1]
+ax.plot(v,np.real(S))
+ax.set_xlabel(r'$\nu$ / Hz')
+```
+
+This is a perfectly reasonable way to program, and powerful simulation programs are based on this principle. In [SPINEVOLUTION](https://spinevolution.com) and [SIMPSON](https://inano.au.dk/about/research-centers-and-projects/nmr/software/simpson), one writes scripts that are input into the program and a file is returned. In these cases, it is less relevant to the user whether objects or functions are used. In [SPINACH](https://spindynamics.org/wiki/index.php?title=Main_Page), one works more interactively and writes code rather than input scripts, and uses the appropriate SPINACH functions to generate output data and figures.
+
+Simulating in SLEEPY is intended to be more interactive than all of these, such that we have direct access to the data being used to run the simulation. A key piece of making this possible, but still manageable for the average user is the application of object-oriented programming.
+
+### What is an object?
+Object-oriented programming is based on classes and objects. An object stores both data and functions, and allows one to precisely define how certain types of data are handled (the class defines the object. You can have multiple objects of the same class, each with different data inside). By organizing data with classes, it's easier for the programmer to control what you can and cannot do with the data, reducing mistakes, and we can also provide most of the functions that make sense to apply to a given set of data within the object itself. For example, suppose we have the detection matrix, density operator and propagator from above. In SLEEPY, the steps above can be performed by executing:
+```
+rho.DetProp(U,n=1024).plot(FT=True)
+```
+We can do this because `rho` and `U` are objects. `rho` has a function, "DetProp", which performes the detection and propagation functions in sequence *n* times. The detection matrix is stored inside the `rho` object, because we really only need it to detect the density matrix in rho, so there is no reason to carry it around as a separate variable. The function to propagate `rho` by `U` is also stored internally. Indeed, we can even just type `U*rho` to propagate with `U` one time, where objects allow defining the meaning of mathematical symbols; here, this means multiply the propagator matrix by rho and store the new result in rho, where this can include an internal loop over different elements of a powder average. `rho` also stores intensities resulting from detection internally, rather than requiring assigment to an external variable (above, we used `I`), and that also allows `rho` to perform signal processing internally. The "plot" function then creates a figure with the Fourier transformed (optionally apodized) data. 
+
+Usage of objects, then, greatly simplifies the coding required by the user to create complex simulations. On the other hand, the objects give the user direct access to all of the data that was used to create the simulation. This makes SLEEPY much less of "black-box" (uh), so that one may investigate the components going into a simulation.
+
+## Objects in SLEEPY
+The key components of SLEEPY are then all objects. This includes the Experimental System (ExpSys), the Hamiltonian (Hamiltonian), the Liouvillian (Liouvillian), the density matrix (Rho), the powder average (PwdAvg), propagators (Propagator), and pulse sequences (Sequence), as well as other more internal components. Each of these objects will describe itself if typed at a python command line (e.g. iPython, Jupyter Notebook, Google Colab, etc.), and also contains a plotting function to show the critical stored data.
+
+## Complications of object-oriented programming
 An object has various *attributes*. Some of these attributes are variables. Some are functions. Some are functions that look like variables (that is, they act like variables, but are obtained via an internal calculation). Some attributes can be edited by the user, but others can't. The object itself may sometimes be indexed, and sometimes it can be called, but not always. 
 
-Compared to functional programming (esp. in programming languages like MatLab), where we almost always put data into the function and get data out, and the original data is unmodified, it can be a little less clear what is going on. This is the trade-off for the flexibility of object-oriented programs. Our advice is to start with the tutorial examples, and also just use SLEEPY in a Jupyter Notebook or iPython console, and just see what happens. Once you have the hang of it, you should find that you can simulate dynamic systems with much less effort than with a functional paradigm. We hope, also, that the access that SLEEPY gives you to pieces of the simulation is informative and helpful in understanding more about how dynamics simulations are done.
+Compared to functional programming (esp. in programming languages like MatLab), where we almost always put data into the function and get data out, with the original data is unmodified, it can be a little less clear what is going on in object-oriented programming. This is the trade-off for the flexibility of object-oriented programs. Our advice is to start with the tutorial examples, and try SLEEPY in a Jupyter Notebook or iPython console, and see what happens. Once you have the hang of it, you should find that you can simulate dynamic systems with much less effort than with a functional paradigm. We hope, also, that the access that SLEEPY gives you to pieces of the simulation is informative and helpful in understanding more about how dynamics simulations are done.

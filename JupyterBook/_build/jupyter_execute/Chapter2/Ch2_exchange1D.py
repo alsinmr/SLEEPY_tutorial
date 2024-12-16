@@ -136,11 +136,6 @@ for tc,a in zip(tc0,ax):
     a.text(-10,sm*.9,r'$\tau_c$'+f' = {tc:.0e} s')
 
 
-# $$
-# \lambda^2+k^2+(\Delta\Omega/2)^2+\lambda(k+i\Delta\Omega/2)+\lambda(k-i\Delta\Omega/2)-k^2
-# $$
-
-# ## Repeat with asymmetric exchange
 # In symmetic exchange, we can obtain the peak positions and linewidths by diagonalizing the following equation:
 # 
 # $$
@@ -178,6 +173,8 @@ for tc,a in zip(tc0,ax):
 # Then, when the term in the square-root is negative, we obtain complex eigenvalues, corresponding to two separate oscillation frequencies, and $T_2$=1/k. When the square-root is positive, then no observable frequency difference arises, but two different decay rates are present (although as $k$ becomes larger, only the smaller rate contributes significantly to the spectrum).
 # 
 # On the other hand, if $k_{12}\ne k_{21}$, then no well-defined coalescence condition exists. We simulate this case below, as a function of exchange rate.
+
+# ## Repeat with asymmetric exchange
 
 # In[11]:
 
