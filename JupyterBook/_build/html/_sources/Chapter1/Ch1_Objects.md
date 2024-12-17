@@ -2,13 +2,13 @@
 
 ## Functional versus object-oriented programming paradigms
 ### What is functional programming?
-Many scientists are familiar with basic programs that work with data and functions (functional programming paradigm). In functional programming, we have data and functions, and typically one calls a function with data, and new data is returned. For example, suppose we have a density matrix, `rho`, and a propagator, 'U'. We would then likely have a function to propagate the density matrix, e.g. `prop`. Then we would call:
+Many scientists are familiar with basic programs that work with data and functions (functional programming). In functional programming, we have data and functions, and typically one calls a function with data, and new data is returned. For example, suppose we have a density matrix, `rho`, and a propagator, 'U'. We would then likely have a function to propagate the density matrix, e.g. `prop`. Then we would call:
 
 ```
 rho_new=prop(rho,U)
 ```
 
-We would also need other functions, for example, a detection matrix and detection function, which would yield signal intensity at some time. Here we assume the signal is stored in a vector, `I`. which we have indexed here with `k`.
+We would also need other functions, for example, a detection matrix and detection function, which would yield signal intensity at some time. Here we store the signal in a vector, `I`. which we have indexed here with `k`.
 
 ```
 I[k]=detect(rho,det_mat)
@@ -20,11 +20,11 @@ Detection and propagation normally would be performed in a *for* loop.
 N=1024
 I=np.zero(1024)
 for k in range(N):
-	I[k]=detect(rho,det_mat)
-	rho=prop(rho,U)
+  I[k]=detect(rho,det_mat)
+  rho=prop(rho,U)
 ```
 
-Afterwards, we process the signal, and also calculate a frequency axis. In numpy, this might look like:
+Afterwards, we process the signal, and also calculate a frequency axis. Using Python's Numpy module (np), this might look like:
 
 ```
 I[0]/=2
@@ -42,12 +42,12 @@ ax.plot(v,np.real(S))
 ax.set_xlabel(r'$\nu$ / Hz')
 ```
 
-This is a perfectly reasonable way to program, and powerful simulation programs are based on this principle. In [SPINEVOLUTION](https://spinevolution.com) and [SIMPSON](https://inano.au.dk/about/research-centers-and-projects/nmr/software/simpson), one writes files that are input into the program and a file is returned. In these cases, it is less relevant to the user whether objects or functions are used, since the user is not doing any direct coding, just following a format for the input file to communicate the desired simulation to the program. In [SPINACH](https://spindynamics.org/wiki/index.php?title=Main_Page), one is writing the Matlab script (i.e. program) directly, and uses the appropriate SPINACH functions in combination with MATLAB functionality to generate output data and figures in the MATLAB workspace.
+This is a perfectly reasonable way to program, and powerful simulation programs are based on this principle. In [SPINEVOLUTION](https://spinevolution.com) and [SIMPSON](https://inano.au.dk/about/research-centers-and-projects/nmr/software/simpson), one writes files that are input into the program and a file is returned. In these cases, it is less relevant to the user whether objects or functions are used, since the user is not doing any direct coding, just creating input files that follow a specific format to communicate the desired simulation to the program. In [SPINACH](https://spindynamics.org/wiki/index.php?title=Main_Page), one is writing the Matlab script (i.e. program) directly, and uses the appropriate SPINACH functions in combination with MATLAB functionality to generate output data and figures in the MATLAB workspace.
 
- Similar to SPINACH, one directly codes Python scripts to use SLEEPY. However, simulating in SLEEPY is intended to be more interactive than its predecessors. One creates objects, which in an interactive Python console (e.g. Jupyter notebook) remain in the computer memory and can be probed by the user, applied to a simulation, and recycled as desired. One also has access to the various arrays and matrices being used to run the simulation and calculate the results. A key component of making this possible, but still manageable for the average user to run a simulation, is the application of object-oriented programming.
+ Similar to SPINACH, one directly codes Python scripts to use SLEEPY. However, simulating in SLEEPY is intended to be interactive (whereas SPINACH forces you to put your simulations inside a function, limiting access to internal variables). One creates *objects*, which in an interactive Python console (e.g. iPython or Jupyter notebook) remain in the computer memory and can be probed by the user, applied to a simulation, and recycled as desired. One also has access to the various arrays and matrices being used to run the simulation and calculate the results. A key component of making this possible, but still manageable for the average user to run a simulation, is the application of object-oriented programming.
 
 ### What is an object?
-[Object-oriented programming](https://en.wikipedia.org/wiki/Object-oriented_programming) is based on [classes](https://en.wikipedia.org/wiki/Class_(computer_programming)) and [objects](https://en.wikipedia.org/wiki/Object_(computer_science)). An object stores both data and functions, and allows one to precisely define how certain types of data are handled (the class defines the object. You can have multiple objects created from the same class, each with different data inside). By organizing data with classes, it's easier for the programmer to control what you can and cannot do with the data, reducing mistakes, and we can also provide most of the functions that make sense to apply to a given set of data within the object itself. For example, suppose we have the detection matrix, density operator and propagator from above. In SLEEPY, the steps above can be performed by executing:
+[Object-oriented programming](https://en.wikipedia.org/wiki/Object-oriented_programming) is based on [classes](https://en.wikipedia.org/wiki/Class_(computer_programming)) and [objects](https://en.wikipedia.org/wiki/Object_(computer_science)). An object stores both data and functions, and allows one to precisely define how certain types of data are handled (the class defines the object. You can have multiple objects created from the same class, each with different data inside). By organizing data with objects, it's easier for the programmer to control what the user can and cannot do with the data, reducing mistakes, and the programmer can also provide functions to that make sense to apply to a given set of data. Since the functions and data are both within the object, the user does not need to be particularly careful about putting the right data into the function. For example, suppose we have the detection matrix, density operator and propagator from above. In SLEEPY, the steps above can be performed by executing:
 ```
 rho.DetProp(U,n=1024).plot(FT=True)
 ```
@@ -56,9 +56,9 @@ We can do this because `rho` and `U` are objects. `rho` has a function, "DetProp
 Usage of objects, then, greatly simplifies the coding required by the user to create complex simulations. On the other hand, the objects give the user direct access to all of the data that was used to create the simulation. This makes SLEEPY much less of a (uh) "black-box", so that one may investigate the components going into a simulation.
 
 ## Objects in SLEEPY
-The key components of SLEEPY are then all objects. This includes the Experimental System (ExpSys), the Hamiltonian (Hamiltonian), the Liouvillian (Liouvillian), the density matrix (Rho), the powder average (PwdAvg), propagators (Propagator), and pulse sequences (Sequence), as well as other more internal components. Each of these objects will describe itself if typed at a python command line (e.g. iPython, Jupyter Notebook, Google Colab, etc.), and also contains a plotting function to show the critical stored data.
+The key components of SLEEPY are all objects. This includes the Experimental System (ExpSys), the Hamiltonian (Hamiltonian), the Liouvillian (Liouvillian), the density matrix (Rho), the powder average (PwdAvg), propagators (Propagator), and pulse sequences (Sequence), as well as other more internal components. Each of these objects will return a description of itself if typed at a Python command line or called with `print(object)`, and also contains a plotting function to show features of the stored data.
 
 ## Complications of object-oriented programming
-An object has various *attributes*. Some of these attributes are variables. Some are functions. Some are functions that look like variables (that is, they act like variables, but are obtained via an internal calculation). Some functions return data, but others just modify the data stored inside the object. Some attributes can be edited by the user, but others can't. The object itself may sometimes be indexed, and sometimes it can be called, but not always. 
+An object has various *attributes*. Some of these attributes are data. Some are functions. Some are functions that look like data (that is, they are returned as data, but are obtained via an internal calculation). Some functions return data, but others just modify the data stored inside the object. Some attributes can be edited by the user, but others can't. The object itself may sometimes be indexed (e.g. `L[5]`), and sometimes it can be called (e.g. `rho()`), but not always. 
 
 Compared to functional programming (esp. in programming languages like MatLab), where we almost always put data into the function and get data out, with the original data is unmodified, it can be a little less clear what is going on in object-oriented programming. This is the trade-off for the flexibility of object-oriented programs. Our advice is to start with the tutorial examples, and try SLEEPY in a Jupyter Notebook or iPython console, and see what happens. Once you have the hang of it, you should find that you can simulate dynamic systems with much less effort than with a functional paradigm. We hope, also, that the access that SLEEPY gives you to pieces of the simulation is informative and helpful in understanding more about how dynamics simulations are done.
