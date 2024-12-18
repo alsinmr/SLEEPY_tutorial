@@ -158,7 +158,7 @@ for k,tc in enumerate(tc0):
     L.kex=sl.Tools.twoSite_kex(tc=tc)
     for v1 in v10:
         seq.add_channel('15N',v1=v1)
-        R1p[v1][k]=rho.extract_decay_rates(seq,pwdavg=True)
+        R1p[v1][k]=rho.extract_decay_rates(seq)
     if np.mod(k,10)==0:
         print(f'log10(tc)={np.log10(tc):.1f}, {time()-t0:.0f} seconds elapsed')
 

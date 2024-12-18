@@ -8,8 +8,9 @@
 # - [$R_{1\rho}$ relaxation](Chapter3/Ch3_R1p.ipynb)
 # - [REDOR](Chapter3/Ch3_REDOR.ipynb)
 # - [DIPSHIFT](Chapter3/Ch3_DIPSHIFT.ipynb)
-# - [Correlation-time dependence of a pulse-sequence: RECRR](Chapter3/Ch3_RECRR.ipynb)
+# - [Relaxation in Complex Sequences: RECRR](Chapter3/Ch3_RECRR.ipynb)
 # - [$T_1$ and NOE](Chapter3/Ch3_T1_NOE.ipynb)
+# - [Quadrupolar phenomena](Chapter3/Ch3_Quad.ipynb)
 
 # In[ ]:
 

@@ -307,6 +307,13 @@ const thebe_selector_output = ".output, .cell_output"
      </font>
     </a>
    </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="Ch3_Quad.html">
+     <font color="#0093AF">
+      Quadrupolar phenomena
+     </font>
+    </a>
+   </li>
   </ul>
  </li>
  <li class="toctree-l1 has-children">
@@ -868,7 +875,7 @@ State-space reduction: 32-&gt;16
     <span class="n">L</span><span class="o">.</span><span class="n">kex</span><span class="o">=</span><span class="n">sl</span><span class="o">.</span><span class="n">Tools</span><span class="o">.</span><span class="n">twoSite_kex</span><span class="p">(</span><span class="n">tc</span><span class="o">=</span><span class="n">tc</span><span class="p">)</span>
     <span class="k">for</span> <span class="n">v1</span> <span class="ow">in</span> <span class="n">v10</span><span class="p">:</span>
         <span class="n">seq</span><span class="o">.</span><span class="n">add_channel</span><span class="p">(</span><span class="s1">&#39;15N&#39;</span><span class="p">,</span><span class="n">v1</span><span class="o">=</span><span class="n">v1</span><span class="p">)</span>
-        <span class="n">R1p</span><span class="p">[</span><span class="n">v1</span><span class="p">][</span><span class="n">k</span><span class="p">]</span><span class="o">=</span><span class="n">rho</span><span class="o">.</span><span class="n">extract_decay_rates</span><span class="p">(</span><span class="n">seq</span><span class="p">,</span><span class="n">pwdavg</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="n">R1p</span><span class="p">[</span><span class="n">v1</span><span class="p">][</span><span class="n">k</span><span class="p">]</span><span class="o">=</span><span class="n">rho</span><span class="o">.</span><span class="n">extract_decay_rates</span><span class="p">(</span><span class="n">seq</span><span class="p">)</span>
     <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">mod</span><span class="p">(</span><span class="n">k</span><span class="p">,</span><span class="mi">10</span><span class="p">)</span><span class="o">==</span><span class="mi">0</span><span class="p">:</span>
         <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;log10(tc)=</span><span class="si">{</span><span class="n">np</span><span class="o">.</span><span class="n">log10</span><span class="p">(</span><span class="n">tc</span><span class="p">)</span><span class="si">:</span><span class="s1">.1f</span><span class="si">}</span><span class="s1">, </span><span class="si">{</span><span class="n">time</span><span class="p">()</span><span class="o">-</span><span class="n">t0</span><span class="si">:</span><span class="s1">.0f</span><span class="si">}</span><span class="s1"> seconds elapsed&#39;</span><span class="p">)</span>
 </pre></div>
