@@ -293,9 +293,8 @@ const thebe_selector_output = ".output, .cell_output"
    <li class="toctree-l2">
     <a class="reference internal" href="../Chapter3/Ch3_T1_NOE.html">
      <font color="#0093AF">
-      T
       <span class="math notranslate nohighlight">
-       \(_1\)
+       \(T_1\)
       </span>
       and NOE
      </font>
@@ -304,7 +303,7 @@ const thebe_selector_output = ".output, .cell_output"
    <li class="toctree-l2">
     <a class="reference internal" href="../Chapter3/Ch3_RECRR.html">
      <font color="#0093AF">
-      Correlation-time dependence of a pulse-sequence: RECRR
+      Relaxation in complex sequences: RECRR
      </font>
     </a>
    </li>
@@ -735,7 +734,7 @@ title="Print to PDF"
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">rho</span><span class="p">()</span>
 </pre></div>
 </div>
-<p>When executed, this will store the product of the currect propagator with the detection operator or operators, into the matrix rho.I. This matrix is always 2D, with the first dimension corresponding to the detection matrices (so, there may only be one element in the first dimension), and the second dimension corresponding to the detection calls (usually yielding a time-axis). When rho is called, it will also store the current time of the propagator, which is determined by the sum of times from all propagators which rho was multiplied with up until that point (<code class="docutils literal notranslate"><span class="pre">rho.t_axis</span></code>). For systems with a powder average, rho also contains rho.Ipwd, which is a 3D matrix where the first dimension runs down the powder average, the second down the detection operators, and the third down the detection calls. Note that rho.I and rho.Ipwd sorted such that <code class="docutils literal notranslate"><span class="pre">rho.t_axis</span></code> is ascending (if possible).</p>
+<p>When executed, this will store the product of the currect propagator with the detection operator or operators, into the matrix rho.I. This matrix is always 2D, with the first dimension corresponding to the detection matrices (so, there may only be one element in the first dimension), and the second dimension corresponding to the detection calls (usually yielding a time-axis). When rho is called, it will also store the current time of the density matrix, which is determined by the sum of the lengths of all propagators which rho was multiplied with up until that point (<code class="docutils literal notranslate"><span class="pre">rho.t_axis</span></code>). For systems with a powder average, rho also contains rho.Ipwd, which is a 3D matrix where the first dimension runs down the powder average, the second down the detection operators, and the third down the detection calls. Note that rho.I and rho.Ipwd sorted such that <code class="docutils literal notranslate"><span class="pre">rho.t_axis</span></code> is ascending (if possible).</p>
 </section>
 <section id="interaction-of-rho-with-propagators-and-sequences">
 <h2>Interaction of rho with propagators and sequences<a class="headerlink" href="#interaction-of-rho-with-propagators-and-sequences" title="Permalink to this headline">#</a></h2>
@@ -909,7 +908,7 @@ Current time is 200000.000 microseconds
 </div>
 </div>
 <p>Aside from reducing coding, DetProp has also executed a few computational speedups. First, it has identified that only 4 of the 32 spin-states would actually be accessed in this simulation, so it reduces the size of the matrix being propagated significantly. Second, it has performed the propagation in the eigenbasis. Note that because we have 20 steps per rotor period, 20 different eigenbases have been used, each corresponding to a different starting point in the rotor period. That is, we take 20 steps through the first rotor period. However, starting from each of those 20 steps, we then take rotor-period length steps, which can be propagated in the eigenbasis, vastly accelerating the computation time through the 20000 total timesteps (or 1000 steps per each starting point in the rotor period.</p>
-<p>A final note: rho automatically returns a Fourier transformed signal, rho.FT. If rho.apodize=False, then this signal will only be zero-filled, otherwise it will also be apodized. rho.apod_pars contains information on the window function and parameters, following Bruker Topspin convention. The ‘SI’ parameter is set by default to None in rho.apod_pars, and will be internally set to twice the number of time domain signals. LB is also None and defaults to 5/(acquisition time<span class="math notranslate nohighlight">\(*\pi\)</span>)</p>
+<p>A final note: rho automatically returns a Fourier transformed signal, rho.FT. If rho.apodize=False, then this signal will only be zero-filled (to twice the original length), otherwise it will also be apodized. rho.apod_pars contains information on the window function and parameters, following Bruker Topspin convention. The ‘SI’ parameter is set by default to None in rho.apod_pars, and will be internally set to twice the number of time domain signals. LB is also None and defaults to 5/(acquisition time<span class="math notranslate nohighlight">\(*\pi\)</span>)</p>
 </section>
 
     <script type="text/x-thebe-config">

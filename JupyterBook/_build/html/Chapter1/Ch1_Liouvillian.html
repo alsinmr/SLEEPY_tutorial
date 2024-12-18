@@ -293,9 +293,8 @@ const thebe_selector_output = ".output, .cell_output"
    <li class="toctree-l2">
     <a class="reference internal" href="../Chapter3/Ch3_T1_NOE.html">
      <font color="#0093AF">
-      T
       <span class="math notranslate nohighlight">
-       \(_1\)
+       \(T_1\)
       </span>
       and NOE
      </font>
@@ -304,7 +303,7 @@ const thebe_selector_output = ".output, .cell_output"
    <li class="toctree-l2">
     <a class="reference internal" href="../Chapter3/Ch3_RECRR.html">
      <font color="#0093AF">
-      Correlation-time dependence of a pulse-sequence: RECRR
+      Relaxation in complex sequences: RECRR
      </font>
     </a>
    </li>
@@ -903,8 +902,9 @@ Type: larmor on spin 1
 </section>
 <section id="adding-relaxation">
 <h3>Adding relaxation<a class="headerlink" href="#adding-relaxation" title="Permalink to this headline">#</a></h3>
-<p><span class="math notranslate nohighlight">\(T_1\)</span> and <span class="math notranslate nohighlight">\(T_2\)</span> relaxation are available in SLEEPY, along with “Spin-Diffusion” which just introduces signal decay with <span class="math notranslate nohighlight">\(T_1=2*T_2\)</span>. As implemented in SLEEPY, the <span class="math notranslate nohighlight">\(T_1\)</span> option <em>only</em> decays along <span class="math notranslate nohighlight">\(z\)</span>, which is unphysical, so it is important to also add some <span class="math notranslate nohighlight">\(T_2\)</span> relaxation when using <span class="math notranslate nohighlight">\(T_1\)</span>. By default, <span class="math notranslate nohighlight">\(T_1\)</span> acts along <span class="math notranslate nohighlight">\(z\)</span>, and <span class="math notranslate nohighlight">\(T_2\)</span> along x and y. However, it is possible to specify “orientation-specific” (OS) relaxation, which will adjust <span class="math notranslate nohighlight">\(T_1\)</span> relaxation to occur on the eigenstates of a given spin, and <span class="math notranslate nohighlight">\(T_2\)</span> acts on coherences between eigenstates of the spin. This option is more computationally expensive. However, for spins that are strongly tilted away from <span class="math notranslate nohighlight">\(z\)</span>, using the default relaxation will “mix” the <span class="math notranslate nohighlight">\(T_1\)</span> and <span class="math notranslate nohighlight">\(T_2\)</span> behavior, so that <span class="math notranslate nohighlight">\(T_1\)</span> may appear much shorter than specified.</p>
+<p><span class="math notranslate nohighlight">\(T_1\)</span> and <span class="math notranslate nohighlight">\(T_2\)</span> relaxation are available in SLEEPY, along with “Spin-Diffusion” which just introduces signal decay with <span class="math notranslate nohighlight">\(T_1=T_2\)</span> (see Ernst et al. for spin-diffusion relaxation operator<span class="math notranslate nohighlight">\(^1\)</span>). As implemented in SLEEPY, the <span class="math notranslate nohighlight">\(T_1\)</span> option <em>only</em> decays along <span class="math notranslate nohighlight">\(z\)</span>, which is unphysical, so it is important to also add some <span class="math notranslate nohighlight">\(T_2\)</span> relaxation when using <span class="math notranslate nohighlight">\(T_1\)</span>. By default, <span class="math notranslate nohighlight">\(T_1\)</span> acts along <span class="math notranslate nohighlight">\(z\)</span>, and <span class="math notranslate nohighlight">\(T_2\)</span> along x and y. However, it is possible to specify “orientation-specific” (<code class="docutils literal notranslate"><span class="pre">OS=True</span></code>) relaxation, which will adjust <span class="math notranslate nohighlight">\(T_1\)</span> relaxation to occur on the eigenstates of a given spin, and <span class="math notranslate nohighlight">\(T_2\)</span> acts on coherences between eigenstates of the spin. This option is more computationally expensive. However, for spins that are strongly tilted away from <span class="math notranslate nohighlight">\(z\)</span>, using the default relaxation will “mix” the <span class="math notranslate nohighlight">\(T_1\)</span> and <span class="math notranslate nohighlight">\(T_2\)</span> behavior, so that <span class="math notranslate nohighlight">\(T_1\)</span> may appear much shorter than specified.</p>
 <p>We may also include recovery of magnetization to thermal equilibrium (noting that in this case, ex.T_K becomes relevant). If orientation-specific relaxation is included, this is specified when the relaxation is added. Otherwise, it is specified after all relaxation is included. Relaxation is removed by running <code class="docutils literal notranslate"><span class="pre">L.clear_relax()</span></code>. If, for example, <span class="math notranslate nohighlight">\(T_1\)</span> relaxation is added to a spin twice without clearing the first entry, then the relaxation rates will add together, so it is important not to forget to clear existing relaxation.</p>
+<p>[1] M. Ernst, H. Zimmerman, B.H. Meier. <em><a class="reference external" href="https://doi.org/10.1016/S0009-2614(99)01423-2">Chem. Phys. Lett.</a></em>, <strong>2000</strong>, 317, 581-588.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">L</span><span class="o">.</span><span class="n">clear_relax</span><span class="p">()</span>

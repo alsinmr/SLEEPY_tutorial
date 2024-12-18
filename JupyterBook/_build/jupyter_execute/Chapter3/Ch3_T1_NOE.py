@@ -1,9 +1,11 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# # <font  color = "#0093AF"> T$_1$ and NOE
+# # <font  color = "#0093AF"> $T_1$ and NOE
 
 # <a href="https://githubtocolab.com/alsinmr/SLEEPY_tutorial/blob/main/ColabNotebooks/Chapter3/Ch3_T1_NOE.ipynb" target="_blank"><img src="https://colab.research.google.com/assets/colab-badge.svg"></a>
+
+# SLEEPY can simulate $T_1$ relaxation due to exchange dynamics, but requires being run in the lab frame. Modulation of a CSA will relaxation one spin, whereas modulation of a dipole coupling will also bring about a polarization transfer (Nuclear overhauser effect).
 
 # In[ ]:
 
