@@ -694,6 +694,7 @@ title="Print to PDF"
 <span class="n">Upimy</span><span class="o">=</span><span class="n">L</span><span class="o">.</span><span class="n">Udelta</span><span class="p">(</span><span class="s1">&#39;15N&#39;</span><span class="p">,</span><span class="n">phase</span><span class="o">=</span><span class="mi">3</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span>
 
 <span class="n">R1p</span><span class="o">=</span><span class="n">sl</span><span class="o">.</span><span class="n">Rho</span><span class="p">(</span><span class="s1">&#39;15Nx&#39;</span><span class="p">,</span><span class="s1">&#39;15Nx&#39;</span><span class="p">)</span>
+<span class="n">R1p</span><span class="o">.</span><span class="n">Reduce</span><span class="o">=</span><span class="kc">False</span>
 
 <span class="n">R1p</span><span class="p">,</span><span class="n">Ux</span><span class="p">,</span><span class="n">Umx</span><span class="p">,</span><span class="n">Upiy</span><span class="p">,</span><span class="n">Upimy</span><span class="o">=</span><span class="n">R1p</span><span class="o">.</span><span class="n">ReducedSetup</span><span class="p">(</span><span class="n">Ux</span><span class="p">,</span><span class="n">Umx</span><span class="p">,</span><span class="n">Upiy</span><span class="p">,</span><span class="n">Upimy</span><span class="p">)</span>
 <span class="n">RECRR</span><span class="o">=</span><span class="n">R1p</span><span class="o">.</span><span class="n">copy_reduced</span><span class="p">()</span>
@@ -756,7 +757,7 @@ title="Print to PDF"
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x7fa2c870b160&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x7fee106fa2b0&gt;
 </pre></div>
 </div>
 <img alt="../_images/Ch3_RECRR_16_1.png" src="../_images/Ch3_RECRR_16_1.png" />

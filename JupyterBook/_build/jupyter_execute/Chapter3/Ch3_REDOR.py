@@ -35,7 +35,7 @@
 # SETUP SLEEPY
 
 
-# In[74]:
+# In[2]:
 
 
 import SLEEPY as sl
@@ -47,7 +47,7 @@ from time import time
 # # Build the system
 # We construct a system undergoing 3-site symmetric exchange, in order to obtain a residual dipole coupling without asymmetry ($\eta$=0).
 
-# In[75]:
+# In[3]:
 
 
 ex0=sl.ExpSys(v0H=600,Nucs=['15N','1H'],vr=60000,pwdavg=sl.PowderAvg('bcr20'),n_gamma=30)
@@ -65,7 +65,7 @@ L=sl.Liouvillian(ex,kex=kex)
 # ## Generate and plot pulse sequences
 # First half, refocusing, second half
 
-# In[59]:
+# In[4]:
 
 
 v1=150e3 #100 kHz pulse
@@ -81,7 +81,7 @@ center=L.Sequence().add_channel('15N',t=[0,L.taur/2-tp/2,L.taur/2+tp/2,L.taur],
 rho=sl.Rho('15Nx','15Nx')
 
 
-# In[60]:
+# In[5]:
 
 
 fig,ax=plt.subplots(2,3)
@@ -94,7 +94,7 @@ fig.tight_layout()
 
 # ## Propagation
 
-# In[61]:
+# In[6]:
 
 
 Ucenter=center.U()
@@ -102,7 +102,7 @@ Ufirst=first.U()
 Usecond=second.U()
 
 
-# In[62]:
+# In[7]:
 
 
 rho=sl.Rho('15Nx','15Nx')
@@ -118,7 +118,7 @@ for k in range(32):
 print(time()-t0)
 
 
-# In[41]:
+# In[8]:
 
 
 ax=rho.plot()
@@ -127,7 +127,7 @@ ax=rho.plot()
 # ### Reducible sequence
 # The above sequence is computationally expensive, requiring a basis set of 48 elements. If we consider that we're mainly interested in the $S^+$ operator of the $^{15}$N spin, then its worth noting that the $^{15}$N $\pi$-pulse in the middle of the sequence converts $S^+$ into $S^-$, $S^\alpha$, and $S^\beta$, so that if we could get rid of it, we could use a basis set 1/4 as big (12 elements). Since there is no isotropic $^{15}$N shift included, we can switch the channel of the middle pulse to $^1$H. An alternative approach would be to use a $\delta$-pulse on $^{15}$N, although the basis set would then only be reduced to 24 elements, since $S^+$ would still be converted to $S^-$
 
-# In[63]:
+# In[9]:
 
 
 centerH=L.Sequence().add_channel('1H',t=[0,L.taur/2-tp/2,L.taur/2+tp/2,L.taur],v1=[0,v1,0])
@@ -137,7 +137,7 @@ rho=sl.Rho('15Np','15Nx')
 rho,f,s,c,Ueye=rho.ReducedSetup(first,second,centerH,L.Ueye())
 
 
-# In[64]:
+# In[10]:
 
 
 Ufirst=f.U()
@@ -145,13 +145,7 @@ Usecond=s.U()
 Ucenter=c.U()
 
 
-# In[72]:
-
-
-U1.L._PropCache.
-
-
-# In[65]:
+# In[11]:
 
 
 U1=Ueye
@@ -166,7 +160,7 @@ for k in range(32):
 print(time()-t0)
 
 
-# In[22]:
+# In[12]:
 
 
 rho.plot()
@@ -175,7 +169,7 @@ rho.plot()
 # ## Sweep the correlation time
 # We now re-run the above setup, but while varying the correlation time to watch the transition between seeing only the averaged dipole coupling to seeing the rigid-limit coupling.
 
-# In[11]:
+# In[13]:
 
 
 rho_list=[]
@@ -212,7 +206,7 @@ for tc in np.logspace(-6,-3,8):
     print(f'log10(tc /s) = {np.log10(tc):.1f}, {time()-t0:.0f} seconds elapsed')
 
 
-# In[12]:
+# In[14]:
 
 
 fig,ax=plt.subplots(2,4)
@@ -231,9 +225,3 @@ fig.tight_layout()
 
 
 # We observe above that when the correlation time is shorter than about 100 $\mu$s, we see the fulling averaged coupling, and when the correlation time is longer than about 1 ms, we obtain the rigid-limit value. In between, oscillations are damped due to dynamics being on the timescale of the coupling.
-
-# In[ ]:
-
-
-
-

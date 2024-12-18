@@ -25,7 +25,7 @@
 # SETUP SLEEPY
 
 
-# In[102]:
+# In[2]:
 
 
 import SLEEPY as sl
@@ -35,7 +35,7 @@ import matplotlib.pyplot as plt
 
 # ## Build the system and Liouvillian
 
-# In[103]:
+# In[3]:
 
 
 ex0=sl.ExpSys(v0H=600,Nucs=['15N','1H'],vr=16000,pwdavg=sl.PowderAvg(),n_gamma=50)
@@ -54,7 +54,7 @@ L.kex=sl.Tools.twoSite_kex(tc=200e-6)
 # 
 # Density matrix for $R_{1\rho}$ and RECRR sequences are also constructed, including a basis set reduction for propagators and density matrices.
 
-# In[104]:
+# In[4]:
 
 
 Ux=L.Sequence().add_channel('15N',v1=25000).U()
@@ -63,6 +63,7 @@ Upiy=L.Udelta('15N',phase=np.pi/2)
 Upimy=L.Udelta('15N',phase=3*np.pi/2)
 
 R1p=sl.Rho('15Nx','15Nx')
+R1p.Reduce=False
 
 R1p,Ux,Umx,Upiy,Upimy=R1p.ReducedSetup(Ux,Umx,Upiy,Upimy)
 RECRR=R1p.copy_reduced()
@@ -73,7 +74,7 @@ RECRR=R1p.copy_reduced()
 # ## Propagation and plotting
 # We start with the standard $R_{1\rho}$ experiment
 
-# In[105]:
+# In[5]:
 
 
 r1p,A=R1p.extract_decay_rates(Ux,mode='avg')
@@ -87,7 +88,7 @@ _=R1p.plot()
 # 
 # We also calculate the RECRR sequence. Since additional rotor periods must be inserted into each of four spin-lock blocks, we cannot use the `DetProp` function. We do accelerate the calculation by building up the $x$ and $-x$ spin locks at each loop step, instead of recalculating `Ux**k` and `Umx**k` at every step.
 
-# In[106]:
+# In[6]:
 
 
 Umx0=Umx
@@ -104,7 +105,7 @@ _=RECRR.plot()
 
 # Indeed, oscillations at the beginning of the decay curve have been almost entirely removed. However, it is worth noting that the decay rate at the beginning of the curve appears to be faster than with the standard $R_{1\rho}$ experiment. We overlay the two curves, scaling the RECRR curve to match the beginning of the non-coherent decay of the $R_{1\rho}$ curve.
 
-# In[107]:
+# In[7]:
 
 
 ax=R1p.plot()
@@ -121,7 +122,7 @@ ax.legend((r'$R_{1\rho}$','RECRR'))
 # 
 # We plot the $R_{1\rho}$ curves at the top, and RECRR curves at the bottom. We calculate the $R_{1\rho}$ decay without oscillation as well (dashed lines). This curve is also overlayed over the RECRR curve with a scaling factor. We do this to show that the relaxation at longer times is very similar to the $R_{1\rho}$ behavior. For slower motion, it takes longer for the two curves to line up, since we are further into the sequence before the interference between motion and phase changes vanishes.
 
-# In[108]:
+# In[8]:
 
 
 fig,ax0=plt.subplots(2,5,figsize=[12,5])

@@ -15,7 +15,7 @@
 # SETUP SLEEPY
 
 
-# In[4]:
+# In[2]:
 
 
 import SLEEPY as sl
@@ -28,7 +28,7 @@ import matplotlib.pyplot as plt
 # 
 # Note that adding explicit relaxation (via L.add_relax) does not require a lab-frame calculation.
 
-# In[5]:
+# In[3]:
 
 
 # By default, we get a powder average when including anisotropic terms.
@@ -47,7 +47,7 @@ seq=L.Sequence(Dt=.1)
 
 # ## Simulate $T_1$ relaxation of $^1$H and $^{15}$N
 
-# In[6]:
+# In[4]:
 
 
 rho=sl.Rho('Thermal',['15Nz','1Hz'])
@@ -59,14 +59,10 @@ rho.plot(axis='s')
 
 # ## Relaxing towards thermal equilibrium
 
-# In[7]:
-
-
-L.add_relax('DynamicThermal')
-rho=sl.Rho('zero',['15Nz','1Hz'])
-rho.DetProp(seq,n=100)
-rho.plot(axis='s')
-
+# ### L.add_relax('DynamicThermal')
+# rho=sl.Rho('zero',['15Nz','1Hz'])
+# rho.DetProp(seq,n=100)
+# rho.plot(axis='s')
 
 # "DynamicThermal" works by calculating the full Liouvillian (referred to here as $\hat{\hat{L}}_0$) and equilibrium density matrix, $\hat{\rho}_{eq}$. Then, a correction term is calculated, such that:
 # 
