@@ -14,7 +14,7 @@
 # SETUP SLEEPY
 
 
-# In[4]:
+# In[2]:
 
 
 import SLEEPY as sl
@@ -25,7 +25,7 @@ import matplotlib.pyplot as plt
 # ## Build the system
 # We build an H–N system, with dipole coupling and $^{15}$N CSA. The system is constructed before and after a 25$^\circ$ hop.
 
-# In[27]:
+# In[3]:
 
 
 delta=sl.Tools.dipole_coupling(.102,'1H','15N')
@@ -50,7 +50,7 @@ rho=sl.Rho('15Nx','15Nx')
 # ### View the tensors
 # Below, we view the CSA before and after the hop.
 
-# In[28]:
+# In[4]:
 
 
 fig=plt.figure(figsize=[8,4])
@@ -62,13 +62,13 @@ ex1.plot_inter(-1,ax=ax[1])
 # ### Run the sequence and plot
 # We run the sequence, and plot the results.
 
-# In[29]:
+# In[5]:
 
 
 _=rho.DetProp(seq,n=6000)
 
 
-# In[30]:
+# In[6]:
 
 
 ax=rho.plot()
@@ -80,7 +80,7 @@ _=ax.set_ylim([0,1])
 # 
 # We may investigate this by actively separating components when the $^1$H is in the α and β states. Here, we must construct our detection matrices explicitly from matrices.
 
-# In[33]:
+# In[7]:
 
 
 rho=sl.Rho('15Nx',[ex0.Op[0].x@ex0.Op[1].alpha,ex0.Op[0].x@ex0.Op[1].beta])
@@ -91,7 +91,7 @@ _=ax.legend((r'H$^\alpha$',r'H$^\beta$'))
 
 # Indeed, we see two very different decay curves, corresponding to the two different components. However, this is actually somewhat unrealistic in solid-state NMR, where $^1$H spin-diffusion periodically inverts the $^1$H spins. We may add this effect by flipping the $^1$H with a rate of 50 s$^{-1}$, to see how the two curves re-converge. Here, we plot the average curve plus the two $^1$H states separately.
 
-# In[36]:
+# In[8]:
 
 
 L.add_relax('SpinDiffusion',i=1,k=50)
@@ -105,7 +105,7 @@ _=ax.legend(('Average',r'H$^\alpha$',r'H$^\beta$'))
 # ### Field-strength dependence
 # We may also observe how the decay rates depend on the applied field strength. Below, we apply field strengths of 10, 20, 30, 40, and 50 kHz, where we expect faster relaxation, the closer we are to the MAS frequency (60 kHz).
 
-# In[37]:
+# In[9]:
 
 
 rho=[]

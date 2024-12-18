@@ -588,6 +588,13 @@ title="Print to PDF"
   <a class="reference internal nav-link" href="#relaxing-towards-thermal-equilibrium">
    Relaxing towards thermal equilibrium
   </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#l-add-relax-dynamicthermal">
+     L.add_relax(‘DynamicThermal’)
+    </a>
+   </li>
+  </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#obtaining-the-noe-enhancement">
@@ -644,6 +651,13 @@ title="Print to PDF"
   <a class="reference internal nav-link" href="#relaxing-towards-thermal-equilibrium">
    Relaxing towards thermal equilibrium
   </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#l-add-relax-dynamicthermal">
+     L.add_relax(‘DynamicThermal’)
+    </a>
+   </li>
+  </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#obtaining-the-noe-enhancement">
@@ -727,22 +741,11 @@ title="Print to PDF"
 </section>
 <section id="relaxing-towards-thermal-equilibrium">
 <h2>Relaxing towards thermal equilibrium<a class="headerlink" href="#relaxing-towards-thermal-equilibrium" title="Permalink to this headline">#</a></h2>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">L</span><span class="o">.</span><span class="n">add_relax</span><span class="p">(</span><span class="s1">&#39;DynamicThermal&#39;</span><span class="p">)</span>
-<span class="n">rho</span><span class="o">=</span><span class="n">sl</span><span class="o">.</span><span class="n">Rho</span><span class="p">(</span><span class="s1">&#39;zero&#39;</span><span class="p">,[</span><span class="s1">&#39;15Nz&#39;</span><span class="p">,</span><span class="s1">&#39;1Hz&#39;</span><span class="p">])</span>
-<span class="n">rho</span><span class="o">.</span><span class="n">DetProp</span><span class="p">(</span><span class="n">seq</span><span class="p">,</span><span class="n">n</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
-<span class="n">rho</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="s1">&#39;s&#39;</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;AxesSubplot:xlabel=&#39;t / s&#39;, ylabel=&#39;&lt;Op&gt;&#39;&gt;
-</pre></div>
-</div>
-<img alt="../_images/Ch2_T1_NOE_12_1.png" src="../_images/Ch2_T1_NOE_12_1.png" />
-</div>
-</div>
+<section id="l-add-relax-dynamicthermal">
+<h3>L.add_relax(‘DynamicThermal’)<a class="headerlink" href="#l-add-relax-dynamicthermal" title="Permalink to this headline">#</a></h3>
+<p>rho=sl.Rho(‘zero’,[‘15Nz’,’1Hz’])
+rho.DetProp(seq,n=100)
+rho.plot(axis=’s’)</p>
 <p>“DynamicThermal” works by calculating the full Liouvillian (referred to here as <span class="math notranslate nohighlight">\(\hat{\hat{L}}_0\)</span>) and equilibrium density matrix, <span class="math notranslate nohighlight">\(\hat{\rho}_{eq}\)</span>. Then, a correction term is calculated, such that:</p>
 <div class="math notranslate nohighlight">
 \[
@@ -795,6 +798,7 @@ title="Print to PDF"
 <img alt="../_images/Ch2_T1_NOE_17_3.png" src="../_images/Ch2_T1_NOE_17_3.png" />
 </div>
 </div>
+</section>
 </section>
 <section id="obtaining-the-noe-enhancement">
 <h2>Obtaining the NOE enhancement<a class="headerlink" href="#obtaining-the-noe-enhancement" title="Permalink to this headline">#</a></h2>
