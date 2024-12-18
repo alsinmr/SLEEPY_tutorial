@@ -33,6 +33,7 @@ parts:
     - file: Chapter3/Ch3_DIPSHIFT
     - file: Chapter3/Ch3_T1_NOE
     - file: Chapter3/Ch3_RECRR
+    - file: Chapter3/Ch3_Quad
   - file: Ch4_DNP
     sections:
     - file: Chapter4/Ch4_SolidEffect
