@@ -44,7 +44,7 @@ import matplotlib.pyplot as plt
 from time import time
 
 
-# # Build the system
+# ## Build the system
 # We construct a system undergoing 3-site symmetric exchange, in order to obtain a residual dipole coupling without asymmetry ($\eta$=0).
 
 # In[3]:
@@ -163,13 +163,13 @@ print(time()-t0)
 # In[12]:
 
 
-rho.plot()
+_=rho.plot()
 
 
 # ## Sweep the correlation time
 # We now re-run the above setup, but while varying the correlation time to watch the transition between seeing only the averaged dipole coupling to seeing the rigid-limit coupling.
 
-# In[13]:
+# In[14]:
 
 
 rho_list=[]
@@ -178,15 +178,7 @@ t0=time()
 for tc in np.logspace(-6,-3,8):
     L.kex=sl.Tools.nSite_sym(n=3,tc=tc)
 
-    t=[0,L.taur/2-tp,L.taur/2,L.taur-tp,L.taur]
-    first=L.Sequence().add_channel('1H',t=t,v1=[0,v1,0,v1],phase=[0,0,0,np.pi/2])
-    t=[0,tp,L.taur/2,L.taur/2+tp,L.taur]
-    second=L.Sequence().add_channel('1H',t=t,v1=[v1,0,v1,0],phase=[0,0,np.pi/2,0])
-    centerH=L.Sequence().add_channel('1H',t=[0,L.taur/2-tp/2,L.taur/2+tp/2,L.taur],v1=[0,v1,0])
-
-    rho_list.append(sl.Rho('15Np','15Nx'))
-
-    rho_list[-1],f,s,c,Ueye=rho_list[-1].ReducedSetup(first,second,centerH,L.Ueye())
+    rho_list.append(rho.copy_reduced())
 
     Ufirst=f.U()
     Usecond=s.U()
@@ -206,7 +198,7 @@ for tc in np.logspace(-6,-3,8):
     print(f'log10(tc /s) = {np.log10(tc):.1f}, {time()-t0:.0f} seconds elapsed')
 
 
-# In[14]:
+# In[15]:
 
 
 fig,ax=plt.subplots(2,4)

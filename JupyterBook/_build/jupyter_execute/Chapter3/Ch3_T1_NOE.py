@@ -45,7 +45,7 @@ rho.DetProp(seq,n=1000)
 rho.plot()
 
 
-# In[114]:
+# In[10]:
 
 
 ex0=sl.ExpSys(v0H=600,Nucs=['13C','1H'],vr=0,LF=True,pwdavg=sl.PowderAvg()[10])
@@ -54,7 +54,7 @@ ex1=ex0.copy()
 ex1.set_inter('dipole',i0=0,i1=1,delta=sl.Tools.dipole_coupling(.109,'1H','13C'),euler=[0,45*np.pi/180,0])
 
 L=sl.Liouvillian(ex0,ex1)
-L.kex=sl.Tools.twoSite_kex(1e-12)
+L.kex=sl.Tools.twoSite_kex(1e-9)
 
 L.add_relax('DynamicThermal')
 
@@ -67,28 +67,29 @@ rho=sl.Rho('Thermal',['1Hz','13Cz'])
 rho.DetProp(U,n=50000)
 
 
-# In[115]:
+# In[11]:
 
 
 rho.plot(axis='s')
 
 
-# In[99]:
+# In[12]:
 
 
 rho._detect[0]@((np.linalg.pinv(L[0].L(0))@L[0].L(0))@L.rho_eq(sub1=True))
 
 
-# In[41]:
+# In[15]:
 
 
 n=np.argmax(U._eig[0][0].real)
 v=U._eig[0][1]
 vi=np.linalg.pinv(v)
 mat=np.atleast_2d(v[:,n]).T@np.atleast_2d(vi[n])
+# mat=np.atleast_2d(vi[n]).T@np.atleast_2d(v[:,n])
 
 
-# In[42]:
+# In[16]:
 
 
 (rho._detect[0]@(mat@rho._rho0[0]))

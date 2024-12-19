@@ -604,7 +604,7 @@ detect[0]: 13Cz
 Current time is 10000000.000 microseconds
 1000 time points have been recorded
 
-&lt;SLEEPY.Rho.Rho object at 0x7f8a592485b0&gt;
+&lt;SLEEPY.Rho.Rho object at 0x7f9f1885ab00&gt;
 </pre></div>
 </div>
 </div>
@@ -630,7 +630,7 @@ Current time is 10000000.000 microseconds
 <span class="n">ex1</span><span class="o">.</span><span class="n">set_inter</span><span class="p">(</span><span class="s1">&#39;dipole&#39;</span><span class="p">,</span><span class="n">i0</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">i1</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">delta</span><span class="o">=</span><span class="n">sl</span><span class="o">.</span><span class="n">Tools</span><span class="o">.</span><span class="n">dipole_coupling</span><span class="p">(</span><span class="mf">.109</span><span class="p">,</span><span class="s1">&#39;1H&#39;</span><span class="p">,</span><span class="s1">&#39;13C&#39;</span><span class="p">),</span><span class="n">euler</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">45</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">/</span><span class="mi">180</span><span class="p">,</span><span class="mi">0</span><span class="p">])</span>
 
 <span class="n">L</span><span class="o">=</span><span class="n">sl</span><span class="o">.</span><span class="n">Liouvillian</span><span class="p">(</span><span class="n">ex0</span><span class="p">,</span><span class="n">ex1</span><span class="p">)</span>
-<span class="n">L</span><span class="o">.</span><span class="n">kex</span><span class="o">=</span><span class="n">sl</span><span class="o">.</span><span class="n">Tools</span><span class="o">.</span><span class="n">twoSite_kex</span><span class="p">(</span><span class="mf">1e-12</span><span class="p">)</span>
+<span class="n">L</span><span class="o">.</span><span class="n">kex</span><span class="o">=</span><span class="n">sl</span><span class="o">.</span><span class="n">Tools</span><span class="o">.</span><span class="n">twoSite_kex</span><span class="p">(</span><span class="mf">1e-9</span><span class="p">)</span>
 
 <span class="n">L</span><span class="o">.</span><span class="n">add_relax</span><span class="p">(</span><span class="s1">&#39;DynamicThermal&#39;</span><span class="p">)</span>
 
@@ -652,7 +652,7 @@ detect[1]: 13Cz
 Current time is 500000000.000 microseconds
 50000 time points have been recorded
 
-&lt;SLEEPY.Rho.Rho object at 0x7f8a0e7141c0&gt;
+&lt;SLEEPY.Rho.Rho object at 0x7f9ec8bd2438&gt;
 </pre></div>
 </div>
 </div>
@@ -664,16 +664,10 @@ Current time is 500000000.000 microseconds
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/Users/albertsmith/Documents/GitHub.nosync/SLEEPY/Rho.py:1267: UserWarning: Dynamic thermal may not be stable with exchange rates and relaxation matrix separated by more than 10 orders of magnitude
-  warnings.warn(&#39;Dynamic thermal may not be stable with exchange rates and relaxation matrix separated by more than 10 orders of magnitude&#39;)
-/Users/albertsmith/Documents/GitHub.nosync/SLEEPY/Rho.py:1267: UserWarning: Dynamic thermal may not be stable with exchange rates and relaxation matrix separated by more than 10 orders of magnitude
-  warnings.warn(&#39;Dynamic thermal may not be stable with exchange rates and relaxation matrix separated by more than 10 orders of magnitude&#39;)
-</pre></div>
-</div>
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;AxesSubplot:xlabel=&#39;t / s&#39;, ylabel=&#39;&lt;Op&gt;&#39;&gt;
 </pre></div>
 </div>
-<img alt="../_images/Ch3_T1_NOE_8_2.png" src="../_images/Ch3_T1_NOE_8_2.png" />
+<img alt="../_images/Ch3_T1_NOE_8_1.png" src="../_images/Ch3_T1_NOE_8_1.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -683,7 +677,7 @@ Current time is 500000000.000 microseconds
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(2.745649944372181e-23+2.0069756583066677e-27j)
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(4.831451995963613e-05+1.108187085972349e-12j)
 </pre></div>
 </div>
 </div>
@@ -694,6 +688,7 @@ Current time is 500000000.000 microseconds
 <span class="n">v</span><span class="o">=</span><span class="n">U</span><span class="o">.</span><span class="n">_eig</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span>
 <span class="n">vi</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">pinv</span><span class="p">(</span><span class="n">v</span><span class="p">)</span>
 <span class="n">mat</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">atleast_2d</span><span class="p">(</span><span class="n">v</span><span class="p">[:,</span><span class="n">n</span><span class="p">])</span><span class="o">.</span><span class="n">T</span><span class="nd">@np</span><span class="o">.</span><span class="n">atleast_2d</span><span class="p">(</span><span class="n">vi</span><span class="p">[</span><span class="n">n</span><span class="p">])</span>
+<span class="c1"># mat=np.atleast_2d(vi[n]).T@np.atleast_2d(v[:,n])</span>
 </pre></div>
 </div>
 </div>
@@ -705,7 +700,7 @@ Current time is 500000000.000 microseconds
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(4.6098570604780065e-05-1.5298573018699566e-13j)
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(4.8556788146192353e-05+3.7950953443146093e-13j)
 </pre></div>
 </div>
 </div>
