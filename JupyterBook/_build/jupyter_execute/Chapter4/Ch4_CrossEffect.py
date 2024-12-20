@@ -1,18 +1,26 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# In[1]:
+# # <font  color = "#0093AF"> Cross-Effect
+
+# <a href="https://githubtocolab.com/alsinmr/SLEEPY_tutorial/blob/main/ColabNotebooks/Chapter4/Ch4_CrossEffect.ipynb" target="_blank"><img src="https://colab.research.google.com/assets/colab-badge.svg"></a>
+
+# ## Setup
+
+# In[ ]:
 
 
-import os
-os.chdir('../../../')
+# SETUP SLEEPY
+
+
+# In[4]:
+
+
 import SLEEPY as sl
 import numpy as np
 import matplotlib.pyplot as plt
 from time import time
 
-
-# <a href="https://githubtocolab.com/alsinmr/SLEEPY_tutorial/blob/main/ColabNotebooks/Chapter4/Ch4_CrossEffect.ipynb" target="_blank"><img src="https://colab.research.google.com/assets/colab-badge.svg"></a>
 
 # In[2]:
 
