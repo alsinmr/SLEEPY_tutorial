@@ -333,6 +333,13 @@ const thebe_selector_output = ".output, .cell_output"
      </font>
     </a>
    </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="Ch4_NOVEL.html">
+     <font color="#0093AF">
+      NOVEL
+     </font>
+    </a>
+   </li>
   </ul>
  </li>
  <li class="toctree-l1">
@@ -556,19 +563,85 @@ title="Print to PDF"
     <nav id="bd-toc-nav" aria-label="Page">
         <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#setup">
+   Setup
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#example-1-modulation-of-the-isotropic-hyperfine-j">
    Example 1: Modulation of the Isotropic Hyperfine (J)
   </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#build-the-system">
+     Build the system
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#propagate-and-plot">
+     Propagate and plot
+    </a>
+   </li>
+  </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#example-2-reorientation-of-the-dipolar-hyperfine">
    Example 2: Reorientation of the Dipolar Hyperfine
   </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#edit-the-interactions">
+     Edit the interactions
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id1">
+     Propagate and plot
+    </a>
+   </li>
+  </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#example-3-overhauser-effect-buildup-with-saturating-field">
    Example 3: Overhauser Effect buildup with Saturating field
   </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id2">
+     Build the system
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#propagate-without-microwaves">
+     Propagate without microwaves
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#lab-frame-irradiation">
+     Lab frame irradiation
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id3">
+     Propagate and plot
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#predict-enhancement-from-rate-constants">
+     Predict enhancement from rate constants
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#include-powder-average">
+     Include powder average
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#predicted-enhancement">
+     Predicted enhancement
+    </a>
+   </li>
+  </ul>
  </li>
 </ul>
 
@@ -590,19 +663,85 @@ title="Print to PDF"
                         <nav aria-label="Page">
                             <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#setup">
+   Setup
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#example-1-modulation-of-the-isotropic-hyperfine-j">
    Example 1: Modulation of the Isotropic Hyperfine (J)
   </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#build-the-system">
+     Build the system
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#propagate-and-plot">
+     Propagate and plot
+    </a>
+   </li>
+  </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#example-2-reorientation-of-the-dipolar-hyperfine">
    Example 2: Reorientation of the Dipolar Hyperfine
   </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#edit-the-interactions">
+     Edit the interactions
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id1">
+     Propagate and plot
+    </a>
+   </li>
+  </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#example-3-overhauser-effect-buildup-with-saturating-field">
    Example 3: Overhauser Effect buildup with Saturating field
   </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id2">
+     Build the system
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#propagate-without-microwaves">
+     Propagate without microwaves
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#lab-frame-irradiation">
+     Lab frame irradiation
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id3">
+     Propagate and plot
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#predict-enhancement-from-rate-constants">
+     Predict enhancement from rate constants
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#include-powder-average">
+     Include powder average
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#predicted-enhancement">
+     Predicted enhancement
+    </a>
+   </li>
+  </ul>
  </li>
 </ul>
 
@@ -614,21 +753,22 @@ title="Print to PDF"
                 
               <div>
                 
-  <p><a href="https://githubtocolab.com/alsinmr/SLEEPY_tutorial/blob/main/DNP/OverHauserEffect.ipynb"><img src="https://colab.research.google.com/assets/colab-badge.svg" ></a></p>
-<p><a href="https://githubtocolab.com/alsinmr/SLEEPY_tutorial/blob/main/ColabNotebooks/Chapter4/Ch4_OverHauserEffect.ipynb" target="_blank"><img src="https://colab.research.google.com/assets/colab-badge.svg"></a></p>
-<p><a class="reference external" href="https://githubtocolab.com/alsinmr/SLEEPY_tutorial/blob/main/DNP/OverHauserEffect.ipynb">Open in Google Colab</a></p>
-<section class="tex2jax_ignore mathjax_ignore" id="font-color-0093af-overhauser-effect">
+  <section class="tex2jax_ignore mathjax_ignore" id="font-color-0093af-overhauser-effect">
 <h1><font  color = "#0093AF"> Overhauser Effect<a class="headerlink" href="#font-color-0093af-overhauser-effect" title="Permalink to this headline">#</a></h1>
+<p><a href="https://githubtocolab.com/alsinmr/SLEEPY_tutorial/blob/main/ColabNotebooks/Chapter4/Ch4_OverHauserEffect.ipynb" target="_blank"><img src="https://colab.research.google.com/assets/colab-badge.svg"></a></p>
 <p>The Overhauser effect is the original DNP experiment, demonstrated on a conducting metal, and commonly used in solution-state DNP. However, it is also possible to obtain the Overhauser effect from non-conducting electrons such as in Trityl or BDPA. In this case, the effect comes from either modulation of the isotropic or dipolar part of the Hyperfine coupling</p>
+<section id="setup">
+<h2>Setup<a class="headerlink" href="#setup" title="Permalink to this headline">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">sys</span>
-<span class="k">if</span> <span class="s1">&#39;google.colab&#39;</span> <span class="ow">in</span> <span class="n">sys</span><span class="o">.</span><span class="n">modules</span><span class="p">:</span>
-    <span class="o">!</span>git clone https://github.com/alsinmr/SLEEPY.git
-<span class="k">else</span><span class="p">:</span>
-    <span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;/Users/albertsmith/Documents/GitHub.nosync/&#39;</span><span class="p">)</span>
-    <span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;/Users/albertsmith/Documents/GitHub/&#39;</span><span class="p">)</span>
-<span class="kn">import</span> <span class="nn">SLEEPY</span> <span class="k">as</span> <span class="nn">sl</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># SETUP SLEEPY</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">SLEEPY</span> <span class="k">as</span> <span class="nn">sl</span>
 <span class="kn">from</span> <span class="nn">SLEEPY.LFrf</span> <span class="kn">import</span> <span class="n">LFrf</span>
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
@@ -636,10 +776,13 @@ title="Print to PDF"
 </div>
 </div>
 </div>
+</section>
 <section id="example-1-modulation-of-the-isotropic-hyperfine-j">
 <h2>Example 1: Modulation of the Isotropic Hyperfine (J)<a class="headerlink" href="#example-1-modulation-of-the-isotropic-hyperfine-j" title="Permalink to this headline">#</a></h2>
 <p>In the first example, we include a scalar and dipolar component to the coupling. However, we only modulate the scalar part. This is achieved by adding different “Aiso” to ex0 and ex1. The two Hamiltonians are then coupled together with the exchange matrix produced by <code class="docutils literal notranslate"><span class="pre">sl.Tools.twoSite_kex</span></code>, where <code class="docutils literal notranslate"><span class="pre">tc</span></code> specifies the correlation time resulting from the exchange matrix.</p>
 <p>Increasing the change between <code class="docutils literal notranslate"><span class="pre">Aiso</span></code> and <code class="docutils literal notranslate"><span class="pre">Aiso1</span></code> will accelerate the transfer. Modifying <code class="docutils literal notranslate"><span class="pre">tc</span></code> will also change the rate, although the current value (1 ps) is nearly optimum.</p>
+<section id="build-the-system">
+<h3>Build the system<a class="headerlink" href="#build-the-system" title="Permalink to this headline">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ex0</span><span class="o">=</span><span class="n">sl</span><span class="o">.</span><span class="n">ExpSys</span><span class="p">(</span><span class="n">v0H</span><span class="o">=</span><span class="mi">212</span><span class="p">,</span><span class="n">Nucs</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;1H&#39;</span><span class="p">,</span><span class="s1">&#39;e&#39;</span><span class="p">],</span><span class="n">LF</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">vr</span><span class="o">=</span><span class="mi">5000</span><span class="p">,</span><span class="n">n_gamma</span><span class="o">=</span><span class="mi">30</span><span class="p">)</span>
@@ -653,77 +796,55 @@ title="Print to PDF"
 
 <span class="n">L</span><span class="o">=</span><span class="n">sl</span><span class="o">.</span><span class="n">Liouvillian</span><span class="p">(</span><span class="n">ex0</span><span class="p">,</span><span class="n">ex1</span><span class="p">)</span>
 <span class="n">L</span><span class="o">.</span><span class="n">kex</span><span class="o">=</span><span class="n">sl</span><span class="o">.</span><span class="n">Tools</span><span class="o">.</span><span class="n">twoSite_kex</span><span class="p">(</span><span class="n">tc</span><span class="o">=</span><span class="mf">1e-12</span><span class="p">)</span>
-
-<span class="n">seq</span><span class="o">=</span><span class="n">L</span><span class="o">.</span><span class="n">Sequence</span><span class="p">()</span>
-
-<span class="n">rho</span><span class="o">=</span><span class="n">sl</span><span class="o">.</span><span class="n">Rho</span><span class="p">(</span><span class="s1">&#39;ez&#39;</span><span class="p">,[</span><span class="s1">&#39;1Hz&#39;</span><span class="p">,</span><span class="s1">&#39;ez&#39;</span><span class="p">])</span>
-
-<span class="n">rho</span><span class="o">.</span><span class="n">DetProp</span><span class="p">(</span><span class="n">seq</span><span class="p">,</span><span class="n">n</span><span class="o">=</span><span class="mi">20000</span><span class="p">)</span>
-
-<span class="n">rho</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="s1">&#39;s&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/Users/albertsmith/Documents/GitHub/SLEEPY/Rho.py:1264: UserWarning: Evolution time is more than 12 orders of magnitude different than largest Liouvillian term:
-Numerical error possible
-  warnings.warn(&#39;Evolution time is more than 12 orders of magnitude different than largest Liouvillian term:\nNumerical error possible&#39;)
-/Users/albertsmith/Documents/GitHub/SLEEPY/Rho.py:1264: UserWarning: Evolution time is more than 12 orders of magnitude different than largest Liouvillian term:
-Numerical error possible
-  warnings.warn(&#39;Evolution time is more than 12 orders of magnitude different than largest Liouvillian term:\nNumerical error possible&#39;)
-</pre></div>
-</div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;AxesSubplot:xlabel=&#39;t / s&#39;, ylabel=&#39;&lt;Op&gt;&#39;&gt;
-</pre></div>
-</div>
-<img alt="../_images/Ch4_OverHauserEffect_8_2.png" src="../_images/Ch4_OverHauserEffect_8_2.png" />
 </div>
 </div>
 </section>
+<section id="propagate-and-plot">
+<h3>Propagate and plot<a class="headerlink" href="#propagate-and-plot" title="Permalink to this headline">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">seq</span><span class="o">=</span><span class="n">L</span><span class="o">.</span><span class="n">Sequence</span><span class="p">()</span>
+<span class="n">rho</span><span class="o">=</span><span class="n">sl</span><span class="o">.</span><span class="n">Rho</span><span class="p">(</span><span class="s1">&#39;ez&#39;</span><span class="p">,[</span><span class="s1">&#39;1Hz&#39;</span><span class="p">,</span><span class="s1">&#39;ez&#39;</span><span class="p">])</span>
+<span class="n">rho</span><span class="o">.</span><span class="n">DetProp</span><span class="p">(</span><span class="n">seq</span><span class="p">,</span><span class="n">n</span><span class="o">=</span><span class="mi">20000</span><span class="p">)</span>
+<span class="n">rho</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="s1">&#39;s&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;AxesSubplot:xlabel=&#39;t / s&#39;, ylabel=&#39;&lt;Op&gt;&#39;&gt;
+</pre></div>
+</div>
+<img alt="../_images/Ch4_OverHauserEffect_11_1.png" src="../_images/Ch4_OverHauserEffect_11_1.png" />
+</div>
+</div>
+<p>Observe that the relaxation is a pure transfer from modulation of the isotropic part of the hyperfine coupling. No magnetization is lost.</p>
+</section>
+</section>
 <section id="example-2-reorientation-of-the-dipolar-hyperfine">
 <h2>Example 2: Reorientation of the Dipolar Hyperfine<a class="headerlink" href="#example-2-reorientation-of-the-dipolar-hyperfine" title="Permalink to this headline">#</a></h2>
+<p>In the second example, we leave the isotropic component fixed, and reorient the dipolar component of the hyperfine coupling.</p>
+<section id="edit-the-interactions">
+<h3>Edit the interactions<a class="headerlink" href="#edit-the-interactions" title="Permalink to this headline">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ex1</span><span class="o">.</span><span class="n">set_inter</span><span class="p">(</span><span class="s1">&#39;hyperfine&#39;</span><span class="p">,</span><span class="n">i0</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">i1</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">Axx</span><span class="o">=</span><span class="n">Adip</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">+</span><span class="n">Aiso0</span><span class="p">,</span><span class="n">Ayy</span><span class="o">=</span><span class="n">Adip</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">+</span><span class="n">Aiso0</span><span class="p">,</span><span class="n">Azz</span><span class="o">=</span><span class="n">Adip</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">+</span><span class="n">Aiso0</span><span class="p">,</span><span class="n">euler</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">/</span><span class="mi">4</span><span class="p">,</span><span class="mi">0</span><span class="p">])</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ex1</span><span class="o">.</span><span class="n">set_inter</span><span class="p">(</span><span class="s1">&#39;hyperfine&#39;</span><span class="p">,</span><span class="n">i0</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">i1</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+              <span class="n">Axx</span><span class="o">=</span><span class="n">Adip</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">+</span><span class="n">Aiso0</span><span class="p">,</span><span class="n">Ayy</span><span class="o">=</span><span class="n">Adip</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">+</span><span class="n">Aiso0</span><span class="p">,</span><span class="n">Azz</span><span class="o">=</span><span class="n">Adip</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">+</span><span class="n">Aiso0</span><span class="p">,</span>
+              <span class="n">euler</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">/</span><span class="mi">4</span><span class="p">,</span><span class="mi">0</span><span class="p">])</span>
 
 <span class="n">L</span><span class="o">=</span><span class="n">sl</span><span class="o">.</span><span class="n">Liouvillian</span><span class="p">(</span><span class="n">ex0</span><span class="p">,</span><span class="n">ex1</span><span class="p">)</span>
 <span class="n">L</span><span class="o">.</span><span class="n">kex</span><span class="o">=</span><span class="n">sl</span><span class="o">.</span><span class="n">Tools</span><span class="o">.</span><span class="n">twoSite_kex</span><span class="p">(</span><span class="n">tc</span><span class="o">=</span><span class="mf">1e-12</span><span class="p">)</span>
-
-<span class="n">seq</span><span class="o">=</span><span class="n">L</span><span class="o">.</span><span class="n">Sequence</span><span class="p">()</span>
-
-<span class="n">rho</span><span class="o">=</span><span class="n">sl</span><span class="o">.</span><span class="n">Rho</span><span class="p">(</span><span class="s1">&#39;ez&#39;</span><span class="p">,[</span><span class="s1">&#39;1Hz&#39;</span><span class="p">,</span><span class="s1">&#39;ez&#39;</span><span class="p">])</span>
-
-<span class="n">rho</span><span class="o">.</span><span class="n">DetProp</span><span class="p">(</span><span class="n">seq</span><span class="p">,</span><span class="n">n</span><span class="o">=</span><span class="mi">20000</span><span class="p">)</span>
-
-<span class="n">rho</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="s1">&#39;s&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/Users/albertsmith/Documents/GitHub/SLEEPY/Rho.py:1264: UserWarning: Evolution time is more than 12 orders of magnitude different than largest Liouvillian term:
-Numerical error possible
-  warnings.warn(&#39;Evolution time is more than 12 orders of magnitude different than largest Liouvillian term:\nNumerical error possible&#39;)
-/Users/albertsmith/Documents/GitHub/SLEEPY/Rho.py:1264: UserWarning: Evolution time is more than 12 orders of magnitude different than largest Liouvillian term:
-Numerical error possible
-  warnings.warn(&#39;Evolution time is more than 12 orders of magnitude different than largest Liouvillian term:\nNumerical error possible&#39;)
-</pre></div>
 </div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;AxesSubplot:xlabel=&#39;t / s&#39;, ylabel=&#39;&lt;Op&gt;&#39;&gt;
-</pre></div>
-</div>
-<img alt="../_images/Ch4_OverHauserEffect_10_2.png" src="../_images/Ch4_OverHauserEffect_10_2.png" />
-</div>
-</div>
-<p>We see sharp contrasts between the two Overhauser effect mechanisms. When the scalar coupling is modulated, the total magnetization is conserved: it is simply transferred between the electron and nucleus until the magnetization is equilibrated. On the other hand, reorientation of the dipolar component both transfers magnetization between electron and nucleus, but also gradually destroys the total magnetization. We also notice that the sign of the transfer changes. We can also simulate both mechanisms simultaneously (we reduce the size of the dipolar modulation to make the two effects occur on a similar timescale).</p>
+</section>
+<section id="id1">
+<h3>Propagate and plot<a class="headerlink" href="#id1" title="Permalink to this headline">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ex1</span><span class="o">.</span><span class="n">set_inter</span><span class="p">(</span><span class="s1">&#39;hyperfine&#39;</span><span class="p">,</span><span class="n">i0</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">i1</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">Axx</span><span class="o">=</span><span class="n">Adip</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">+</span><span class="n">Aiso1</span><span class="p">,</span><span class="n">Ayy</span><span class="o">=</span><span class="n">Adip</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">+</span><span class="n">Aiso1</span><span class="p">,</span><span class="n">Azz</span><span class="o">=</span><span class="n">Adip</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">+</span><span class="n">Aiso1</span><span class="p">,</span><span class="n">euler</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">/</span><span class="mi">16</span><span class="p">,</span><span class="mi">0</span><span class="p">])</span>
-
-<span class="n">L</span><span class="o">=</span><span class="n">sl</span><span class="o">.</span><span class="n">Liouvillian</span><span class="p">(</span><span class="n">ex0</span><span class="p">,</span><span class="n">ex1</span><span class="p">)</span>
-<span class="n">L</span><span class="o">.</span><span class="n">kex</span><span class="o">=</span><span class="n">sl</span><span class="o">.</span><span class="n">Tools</span><span class="o">.</span><span class="n">twoSite_kex</span><span class="p">(</span><span class="n">tc</span><span class="o">=</span><span class="mf">1e-12</span><span class="p">)</span>
-
-<span class="n">seq</span><span class="o">=</span><span class="n">L</span><span class="o">.</span><span class="n">Sequence</span><span class="p">()</span>
-
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">seq</span><span class="o">=</span><span class="n">L</span><span class="o">.</span><span class="n">Sequence</span><span class="p">()</span>
 <span class="n">rho</span><span class="o">=</span><span class="n">sl</span><span class="o">.</span><span class="n">Rho</span><span class="p">(</span><span class="s1">&#39;ez&#39;</span><span class="p">,[</span><span class="s1">&#39;1Hz&#39;</span><span class="p">,</span><span class="s1">&#39;ez&#39;</span><span class="p">])</span>
 <span class="n">rho</span><span class="o">.</span><span class="n">DetProp</span><span class="p">(</span><span class="n">seq</span><span class="p">,</span><span class="n">n</span><span class="o">=</span><span class="mi">20000</span><span class="p">)</span>
 <span class="n">rho</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="s1">&#39;s&#39;</span><span class="p">)</span>
@@ -731,26 +852,44 @@ Numerical error possible
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/Users/albertsmith/Documents/GitHub/SLEEPY/Rho.py:1264: UserWarning: Evolution time is more than 12 orders of magnitude different than largest Liouvillian term:
-Numerical error possible
-  warnings.warn(&#39;Evolution time is more than 12 orders of magnitude different than largest Liouvillian term:\nNumerical error possible&#39;)
-/Users/albertsmith/Documents/GitHub/SLEEPY/Rho.py:1264: UserWarning: Evolution time is more than 12 orders of magnitude different than largest Liouvillian term:
-Numerical error possible
-  warnings.warn(&#39;Evolution time is more than 12 orders of magnitude different than largest Liouvillian term:\nNumerical error possible&#39;)
-</pre></div>
-</div>
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;AxesSubplot:xlabel=&#39;t / s&#39;, ylabel=&#39;&lt;Op&gt;&#39;&gt;
 </pre></div>
 </div>
-<img alt="../_images/Ch4_OverHauserEffect_12_2.png" src="../_images/Ch4_OverHauserEffect_12_2.png" />
+<img alt="../_images/Ch4_OverHauserEffect_17_1.png" src="../_images/Ch4_OverHauserEffect_17_1.png" />
+</div>
+</div>
+<p>We see sharp contrasts between the two Overhauser effect mechanisms. When the scalar coupling is modulated, the total magnetization is conserved: it is simply transferred between the electron and nucleus until the magnetization is equilibrated. On the other hand, reorientation of the dipolar component both transfers magnetization between electron and nucleus, but also gradually destroys the total magnetization. We also notice that the sign of the transfer changes. We can simulate both mechanisms simultaneously (we reduce the size of the dipolar modulation to make the two effects occur on a similar timescale).</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ex1</span><span class="o">.</span><span class="n">set_inter</span><span class="p">(</span><span class="s1">&#39;hyperfine&#39;</span><span class="p">,</span><span class="n">i0</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">i1</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+              <span class="n">Axx</span><span class="o">=</span><span class="n">Adip</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">+</span><span class="n">Aiso1</span><span class="p">,</span><span class="n">Ayy</span><span class="o">=</span><span class="n">Adip</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">+</span><span class="n">Aiso1</span><span class="p">,</span><span class="n">Azz</span><span class="o">=</span><span class="n">Adip</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">+</span><span class="n">Aiso1</span><span class="p">,</span>
+              <span class="n">euler</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">/</span><span class="mi">16</span><span class="p">,</span><span class="mi">0</span><span class="p">])</span>
+<span class="n">L</span><span class="o">=</span><span class="n">sl</span><span class="o">.</span><span class="n">Liouvillian</span><span class="p">(</span><span class="n">ex0</span><span class="p">,</span><span class="n">ex1</span><span class="p">)</span>
+<span class="n">L</span><span class="o">.</span><span class="n">kex</span><span class="o">=</span><span class="n">sl</span><span class="o">.</span><span class="n">Tools</span><span class="o">.</span><span class="n">twoSite_kex</span><span class="p">(</span><span class="n">tc</span><span class="o">=</span><span class="mf">1e-12</span><span class="p">)</span>
+
+<span class="n">seq</span><span class="o">=</span><span class="n">L</span><span class="o">.</span><span class="n">Sequence</span><span class="p">()</span>
+<span class="n">rho</span><span class="o">=</span><span class="n">sl</span><span class="o">.</span><span class="n">Rho</span><span class="p">(</span><span class="s1">&#39;ez&#39;</span><span class="p">,[</span><span class="s1">&#39;1Hz&#39;</span><span class="p">,</span><span class="s1">&#39;ez&#39;</span><span class="p">])</span>
+<span class="n">rho</span><span class="o">.</span><span class="n">DetProp</span><span class="p">(</span><span class="n">seq</span><span class="p">,</span><span class="n">n</span><span class="o">=</span><span class="mi">20000</span><span class="p">)</span>
+<span class="n">rho</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="s1">&#39;s&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;AxesSubplot:xlabel=&#39;t / s&#39;, ylabel=&#39;&lt;Op&gt;&#39;&gt;
+</pre></div>
+</div>
+<img alt="../_images/Ch4_OverHauserEffect_19_1.png" src="../_images/Ch4_OverHauserEffect_19_1.png" />
 </div>
 </div>
 <p>Then, the sign of the transfer turns positive, indicating the scalar mechanism, but the dipolar mechanism is also present and gradually destroys the magnetization. Note that in the real experiment, we would have a <em>much</em> faster electron relaxation, which would effectively decouple it from the <span class="math notranslate nohighlight">\(^1\)</span>H relaxation. However, if the electron is saturated, then during it’s recovery, the <span class="math notranslate nohighlight">\(^1\)</span>H would become polarized. We demonstrate this effect next.</p>
 </section>
+</section>
 <section id="example-3-overhauser-effect-buildup-with-saturating-field">
 <h2>Example 3: Overhauser Effect buildup with Saturating field<a class="headerlink" href="#example-3-overhauser-effect-buildup-with-saturating-field" title="Permalink to this headline">#</a></h2>
 <p>This last calculation requires a few special features of SLEEPY, because the Overhauser effect only occurs in the lab frame, so we must also irradiate the electron in the lab frame. It also requires recovery to thermal equilibrium, which is implemented differently under dynamic conditions than if using explicit <span class="math notranslate nohighlight">\(T_1\)</span> (non-Lindblad implementation).</p>
-<p>Should be considered experimental at the moment, although the approach certainly appears to work. I will first do the calculation with just one powder orientation to see if we can calculate the enhancment from the rate constants as usually expected.</p>
+<p>Some caution should be taken with the ‘DynamicThermal’ method (see <span class="xref myst"><span class="math notranslate nohighlight">\(T_1\)</span> tests</span>). We check here first that thermal equilibrium is obtained correctly for this system, before we apply microwave irradiation to the electron.</p>
+<section id="id2">
+<h3>Build the system<a class="headerlink" href="#id2" title="Permalink to this headline">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ex0</span><span class="o">=</span><span class="n">sl</span><span class="o">.</span><span class="n">ExpSys</span><span class="p">(</span><span class="n">v0H</span><span class="o">=</span><span class="mi">212</span><span class="p">,</span><span class="n">Nucs</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;1H&#39;</span><span class="p">,</span><span class="s1">&#39;e&#39;</span><span class="p">],</span><span class="n">LF</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">vr</span><span class="o">=</span><span class="mi">5000</span><span class="p">,</span><span class="n">n_gamma</span><span class="o">=</span><span class="mi">30</span><span class="p">,</span><span class="n">pwdavg</span><span class="o">=</span><span class="n">sl</span><span class="o">.</span><span class="n">PowderAvg</span><span class="p">(</span><span class="n">q</span><span class="o">=</span><span class="mi">2</span><span class="p">)[</span><span class="mi">10</span><span class="p">],</span><span class="n">T_K</span><span class="o">=</span><span class="mi">80</span><span class="p">)</span>
@@ -768,16 +907,39 @@ Numerical error possible
 
 <span class="n">gavg</span><span class="o">=</span><span class="p">(</span><span class="mf">2.0027</span><span class="o">+</span><span class="mf">2.0031</span><span class="o">+</span><span class="mf">2.0034</span><span class="p">)</span><span class="o">/</span><span class="mi">3</span>
 <span class="n">ge</span><span class="o">=</span><span class="n">sl</span><span class="o">.</span><span class="n">Constants</span><span class="p">[</span><span class="s1">&#39;ge&#39;</span><span class="p">]</span>
-
-<span class="n">seq</span><span class="o">=</span><span class="n">L</span><span class="o">.</span><span class="n">Sequence</span><span class="p">()</span><span class="o">.</span><span class="n">add_channel</span><span class="p">(</span><span class="s1">&#39;e&#39;</span><span class="p">,</span><span class="n">v1</span><span class="o">=</span><span class="mf">5e6</span><span class="p">,</span><span class="n">voff</span><span class="o">=</span><span class="n">ex0</span><span class="o">.</span><span class="n">v0</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">*</span><span class="p">(</span><span class="n">gavg</span><span class="o">-</span><span class="n">ge</span><span class="p">)</span><span class="o">/</span><span class="n">ge</span><span class="p">)</span>  <span class="c1">#10 MHz irradiating field</span>
-
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="propagate-without-microwaves">
+<h3>Propagate without microwaves<a class="headerlink" href="#propagate-without-microwaves" title="Permalink to this headline">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">seq</span><span class="o">=</span><span class="n">L</span><span class="o">.</span><span class="n">Sequence</span><span class="p">()</span>
+<span class="n">rho</span><span class="o">=</span><span class="n">sl</span><span class="o">.</span><span class="n">Rho</span><span class="p">(</span><span class="s1">&#39;zero&#39;</span><span class="p">,[</span><span class="s1">&#39;ez&#39;</span><span class="p">,</span><span class="s1">&#39;1Hz&#39;</span><span class="p">])</span>
+<span class="n">rho</span><span class="o">.</span><span class="n">DetProp</span><span class="p">(</span><span class="n">seq</span><span class="p">,</span><span class="n">n</span><span class="o">=</span><span class="mi">20000</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">=</span><span class="n">rho</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="s1">&#39;s&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">rho</span><span class="o">.</span><span class="n">t_axis</span><span class="p">[[</span><span class="mi">0</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">]],</span><span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span><span class="o">*</span><span class="n">ex0</span><span class="o">.</span><span class="n">Peq</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">,</span><span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;:&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">rho</span><span class="o">.</span><span class="n">t_axis</span><span class="p">[[</span><span class="mi">0</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">]],</span><span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span><span class="o">*</span><span class="n">ex0</span><span class="o">.</span><span class="n">Peq</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;grey&#39;</span><span class="p">,</span><span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&lt;matplotlib.lines.Line2D at 0x7f8cf9ece940&gt;]
+</pre></div>
+</div>
+<img alt="../_images/Ch4_OverHauserEffect_26_1.png" src="../_images/Ch4_OverHauserEffect_26_1.png" />
+</div>
+</div>
+<p>We get good performance here from the ‘DynamicThermal’ method. Now we observe the Overhauser effect enhancement by irradiating the electron such that it saturates, driving enhancement on the <span class="math notranslate nohighlight">\(^1\)</span>H</p>
+</section>
+<section id="lab-frame-irradiation">
+<h3>Lab frame irradiation<a class="headerlink" href="#lab-frame-irradiation" title="Permalink to this headline">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">seq</span><span class="o">=</span><span class="n">L</span><span class="o">.</span><span class="n">Sequence</span><span class="p">()</span><span class="o">.</span><span class="n">add_channel</span><span class="p">(</span><span class="s1">&#39;e&#39;</span><span class="p">,</span><span class="n">v1</span><span class="o">=</span><span class="mf">5e6</span><span class="p">,</span><span class="n">voff</span><span class="o">=</span><span class="n">ex0</span><span class="o">.</span><span class="n">v0</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">*</span><span class="p">(</span><span class="n">gavg</span><span class="o">-</span><span class="n">ge</span><span class="p">)</span><span class="o">/</span><span class="n">ge</span><span class="p">)</span>  <span class="c1">#10 MHz irradiating field</span>
 <span class="n">U</span><span class="o">=</span><span class="n">LFrf</span><span class="p">(</span><span class="n">seq</span><span class="p">)</span><span class="o">.</span><span class="n">U</span><span class="p">()</span>
-
-<span class="n">rho</span><span class="o">=</span><span class="n">sl</span><span class="o">.</span><span class="n">Rho</span><span class="p">(</span><span class="s1">&#39;Thermal&#39;</span><span class="p">,[</span><span class="s1">&#39;ez&#39;</span><span class="p">,</span><span class="s1">&#39;1Hz&#39;</span><span class="p">])</span>
-
-<span class="n">rho</span><span class="o">.</span><span class="n">DetProp</span><span class="p">(</span><span class="n">U</span><span class="p">,</span><span class="n">n</span><span class="o">=</span><span class="mi">20000</span><span class="p">)</span>
-
-<span class="n">rho</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="s1">&#39;s&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -786,33 +948,48 @@ Numerical error possible
 Completed
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/Users/albertsmith/Documents/GitHub/SLEEPY/Rho.py:1264: UserWarning: Evolution time is more than 12 orders of magnitude different than largest Liouvillian term:
-Numerical error possible
-  warnings.warn(&#39;Evolution time is more than 12 orders of magnitude different than largest Liouvillian term:\nNumerical error possible&#39;)
-/Users/albertsmith/Documents/GitHub/SLEEPY/Rho.py:1264: UserWarning: Evolution time is more than 12 orders of magnitude different than largest Liouvillian term:
-Numerical error possible
-  warnings.warn(&#39;Evolution time is more than 12 orders of magnitude different than largest Liouvillian term:\nNumerical error possible&#39;)
-</pre></div>
-</div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;AxesSubplot:xlabel=&#39;t / s&#39;, ylabel=&#39;&lt;Op&gt;&#39;&gt;
-</pre></div>
-</div>
-<img alt="../_images/Ch4_OverHauserEffect_16_3.png" src="../_images/Ch4_OverHauserEffect_16_3.png" />
 </div>
 </div>
+</section>
+<section id="id3">
+<h3>Propagate and plot<a class="headerlink" href="#id3" title="Permalink to this headline">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Enhancement: </span><span class="si">{</span><span class="n">rho</span><span class="o">.</span><span class="n">I</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">real</span><span class="o">/</span><span class="n">ex0</span><span class="o">.</span><span class="n">Peq</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">:</span><span class="s1">.1f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">rho</span><span class="o">=</span><span class="n">sl</span><span class="o">.</span><span class="n">Rho</span><span class="p">(</span><span class="s1">&#39;Thermal&#39;</span><span class="p">,[</span><span class="s1">&#39;ez&#39;</span><span class="p">,</span><span class="s1">&#39;1Hz&#39;</span><span class="p">])</span>
+<span class="c1"># This extracts the final polarization</span>
+<span class="c1"># normalize to thermal polarization</span>
+<span class="n">e</span><span class="o">=</span><span class="p">(</span><span class="n">U</span><span class="o">**</span><span class="n">np</span><span class="o">.</span><span class="n">inf</span><span class="o">*</span><span class="n">rho</span><span class="p">)()</span><span class="o">.</span><span class="n">I</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">real</span><span class="o">/</span><span class="n">ex0</span><span class="o">.</span><span class="n">Peq</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+
+<span class="c1"># Clear, run the buildup</span>
+<span class="n">rho</span><span class="o">.</span><span class="n">clear</span><span class="p">()</span>
+<span class="n">rho</span><span class="o">.</span><span class="n">DetProp</span><span class="p">(</span><span class="n">U</span><span class="p">,</span><span class="n">n</span><span class="o">=</span><span class="mi">20000</span><span class="p">)</span>
+<span class="n">rho</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="s1">&#39;s&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Enhancement: -89.1
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;AxesSubplot:xlabel=&#39;t / s&#39;, ylabel=&#39;&lt;Op&gt;&#39;&gt;
+</pre></div>
+</div>
+<img alt="../_images/Ch4_OverHauserEffect_31_1.png" src="../_images/Ch4_OverHauserEffect_31_1.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Enhancement: </span><span class="si">{</span><span class="n">e</span><span class="si">:</span><span class="s1">.0f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Enhancement: -89
 </pre></div>
 </div>
 </div>
 </div>
 <p>Now, we attempt to extract the <span class="math notranslate nohighlight">\(^1\)</span>H T<span class="math notranslate nohighlight">\(_1\)</span> and transfer rate, <span class="math notranslate nohighlight">\(\Gamma_{IS}\)</span>, and use these rates to predict the enhancement and compare to our result</p>
+</section>
+<section id="predict-enhancement-from-rate-constants">
+<h3>Predict enhancement from rate constants<a class="headerlink" href="#predict-enhancement-from-rate-constants" title="Permalink to this headline">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">L</span><span class="o">.</span><span class="n">clear_relax</span><span class="p">()</span>
@@ -840,6 +1017,9 @@ Numerical error possible
 </div>
 </div>
 <p>Indeed, the enhancment is well-predicted from rate constants, suggesting also that the simulation is correctly constructed. Finally, we re-run the simulation with a powder average (and also a more realistic power level).</p>
+</section>
+<section id="include-powder-average">
+<h3>Include powder average<a class="headerlink" href="#include-powder-average" title="Permalink to this headline">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ex0</span><span class="o">=</span><span class="n">sl</span><span class="o">.</span><span class="n">ExpSys</span><span class="p">(</span><span class="n">v0H</span><span class="o">=</span><span class="mi">212</span><span class="p">,</span><span class="n">Nucs</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;1H&#39;</span><span class="p">,</span><span class="s1">&#39;e&#39;</span><span class="p">],</span><span class="n">LF</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">vr</span><span class="o">=</span><span class="mi">5000</span><span class="p">,</span><span class="n">n_gamma</span><span class="o">=</span><span class="mi">30</span><span class="p">,</span><span class="n">T_K</span><span class="o">=</span><span class="mi">80</span><span class="p">,</span><span class="n">pwdavg</span><span class="o">=</span><span class="n">sl</span><span class="o">.</span><span class="n">PowderAvg</span><span class="p">(</span><span class="n">q</span><span class="o">=</span><span class="mi">2</span><span class="p">))</span>
@@ -875,18 +1055,10 @@ Numerical error possible
 Completed
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/Users/albertsmith/Documents/GitHub/SLEEPY/Rho.py:1264: UserWarning: Evolution time is more than 12 orders of magnitude different than largest Liouvillian term:
-Numerical error possible
-  warnings.warn(&#39;Evolution time is more than 12 orders of magnitude different than largest Liouvillian term:\nNumerical error possible&#39;)
-/Users/albertsmith/Documents/GitHub/SLEEPY/Rho.py:1264: UserWarning: Evolution time is more than 12 orders of magnitude different than largest Liouvillian term:
-Numerical error possible
-  warnings.warn(&#39;Evolution time is more than 12 orders of magnitude different than largest Liouvillian term:\nNumerical error possible&#39;)
-</pre></div>
-</div>
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;AxesSubplot:xlabel=&#39;t / s&#39;, ylabel=&#39;&lt;Op&gt;&#39;&gt;
 </pre></div>
 </div>
-<img alt="../_images/Ch4_OverHauserEffect_21_3.png" src="../_images/Ch4_OverHauserEffect_21_3.png" />
+<img alt="../_images/Ch4_OverHauserEffect_38_2.png" src="../_images/Ch4_OverHauserEffect_38_2.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -896,11 +1068,14 @@ Numerical error possible
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Enhancement: -91.8
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Enhancement: -91.9
 </pre></div>
 </div>
 </div>
 </div>
+</section>
+<section id="predicted-enhancement">
+<h3>Predicted enhancement<a class="headerlink" href="#predicted-enhancement" title="Permalink to this headline">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">L</span><span class="o">.</span><span class="n">clear_relax</span><span class="p">()</span>
@@ -927,6 +1102,7 @@ Numerical error possible
 </div>
 </div>
 </div>
+</section>
 </section>
 </section>
 

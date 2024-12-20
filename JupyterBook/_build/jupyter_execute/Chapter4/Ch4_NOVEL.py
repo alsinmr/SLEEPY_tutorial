@@ -1,17 +1,25 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# In[1]:
+# # <font  color = "#0093AF"> NOVEL
+
+# <a href="https://githubtocolab.com/alsinmr/SLEEPY_tutorial/blob/main/ColabNotebooks/Chapter4/Ch4_NOVEL.ipynb" target="_blank"><img src="https://colab.research.google.com/assets/colab-badge.svg"></a>
+
+# ## Setup
+
+# In[ ]:
 
 
-import os
-os.chdir('../../../')
+# SETUP SLEEPY
+
+
+# In[3]:
+
+
 import SLEEPY as sl
 import numpy as np
 import matplotlib.pyplot as plt
 
-
-# <a href="https://githubtocolab.com/alsinmr/SLEEPY_tutorial/blob/main/ColabNotebooks/Chapter4/Ch4_NOVEL.ipynb" target="_blank"><img src="https://colab.research.google.com/assets/colab-badge.svg"></a>
 
 # In[2]:
 
