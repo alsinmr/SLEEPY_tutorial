@@ -6,6 +6,6 @@ We next consider examples from solution-state NMR. These are primarily relativel
 - [](Chapter2/Ch2_EXSY.ipynb)
 - [](Chapter2/Ch2_BMRD.ipynb)
 - [](Chapter2/Ch2_CEST.ipynb)
-- [](Chapter2/Ch2_T1_NOE.ipynb)
-- [](Chapter2/Ch2_T1_limits.ipynb)
+- [$T_1$, Nuclear Overhauser Effect](Chapter2/Ch2_T1_NOE.ipynb)
+- [$T_1$ Tests](Chapter2/Ch2_T1_limits.ipynb)
 - [](Chapter2/Ch2_TROSY.ipynb)
