@@ -782,7 +782,9 @@ title="Print to PDF"
   <section class="tex2jax_ignore mathjax_ignore" id="font-color-0093af-overhauser-effect">
 <h1><font  color = "#0093AF"> Overhauser Effect<a class="headerlink" href="#font-color-0093af-overhauser-effect" title="Permalink to this headline">#</a></h1>
 <p><a href="https://githubtocolab.com/alsinmr/SLEEPY_tutorial/blob/main/ColabNotebooks/Chapter4/Ch4_OverhauserEffect.ipynb" target="_blank"><img src="https://colab.research.google.com/assets/colab-badge.svg"></a></p>
-<p>The Overhauser effect is the original DNP experiment, demonstrated on a conducting metal, and commonly used in solution-state DNP. However, it is also possible to obtain the Overhauser effect from non-conducting electrons such as in Trityl or BDPA. In this case, the effect comes from either modulation of the isotropic or dipolar part of the Hyperfine coupling</p>
+<p>The Overhauser effect is the original DNP experiment,<span class="math notranslate nohighlight">\(^1\)</span> demonstrated on a conducting metal,<span class="math notranslate nohighlight">\(^2\)</span> and often used in solution-state DNP. However, it is also possible to obtain the Overhauser effect from non-conducting electrons such as in Trityl or BDPA. In this case, the effect comes from either modulation of the isotropic or dipolar part of the Hyperfine coupling. Here, we introduce these modulations, and see the effect they have on the transfer of polarization between the electron and the nucleus.</p>
+<p>[1] A.W. Overhauser. <em><a class="reference external" href="https://doi.org/10.1103/PhysRev.92.411">Phys. Rev.</a></em>, <strong>1953</strong>, 92, 411-415</p>
+<p>[2] T.R. Carver, C.P. Schlichter. <em><a class="reference external" href="https://doi.org/10.1103/PhysRev.92.212.2">Phys. Rev.</a></em>, <strong>1953</strong>, 92, 212-213.</p>
 <section id="setup">
 <h2>Setup<a class="headerlink" href="#setup" title="Permalink to this headline">#</a></h2>
 <div class="cell docutils container">
@@ -806,7 +808,8 @@ title="Print to PDF"
 <section id="example-1-modulation-of-the-isotropic-hyperfine-j">
 <h2>Example 1: Modulation of the Isotropic Hyperfine (J)<a class="headerlink" href="#example-1-modulation-of-the-isotropic-hyperfine-j" title="Permalink to this headline">#</a></h2>
 <p>In the first example, we include a scalar and dipolar component to the coupling. However, we only modulate the scalar part. This is achieved by adding different “Aiso” to ex0 and ex1. The two Hamiltonians are then coupled together with the exchange matrix produced by <code class="docutils literal notranslate"><span class="pre">sl.Tools.twoSite_kex</span></code>, where <code class="docutils literal notranslate"><span class="pre">tc</span></code> specifies the correlation time resulting from the exchange matrix.</p>
-<p>Increasing the change between <code class="docutils literal notranslate"><span class="pre">Aiso</span></code> and <code class="docutils literal notranslate"><span class="pre">Aiso1</span></code> will accelerate the transfer. Modifying <code class="docutils literal notranslate"><span class="pre">tc</span></code> will also change the rate, although the current value (1 ps) is nearly optimum.</p>
+<p>Increasing the change between <code class="docutils literal notranslate"><span class="pre">Aiso</span></code> and <code class="docutils literal notranslate"><span class="pre">Aiso1</span></code> will accelerate the transfer. Modifying <code class="docutils literal notranslate"><span class="pre">tc</span></code> will also change the rate, although the current value (1 ps) is nearly optimum for fast transfer.</p>
+<p>Note that for the Overhauser effect, we require the full set of non-secular interactions in the lab frame, not just the pseudosecular terms tilting the nucleus that are required for cross-effect and solid-effect. Therefore, all spins are calculated in the lab frame.</p>
 <section id="build-the-system">
 <h3>Build the system<a class="headerlink" href="#build-the-system" title="Permalink to this headline">#</a></h3>
 <div class="cell docutils container">
@@ -845,7 +848,7 @@ title="Print to PDF"
 <img alt="../_images/Ch4_OverhauserEffect_11_1.png" src="../_images/Ch4_OverhauserEffect_11_1.png" />
 </div>
 </div>
-<p>Observe that the relaxation is a pure transfer from modulation of the isotropic part of the hyperfine coupling. No magnetization is lost.</p>
+<p>We observe that the relaxation is a pure transfer from modulation of the isotropic part of the hyperfine coupling. No magnetization is lost.</p>
 </section>
 </section>
 <section id="example-2-reorientation-of-the-dipolar-hyperfine">
@@ -907,12 +910,12 @@ title="Print to PDF"
 <img alt="../_images/Ch4_OverhauserEffect_19_1.png" src="../_images/Ch4_OverhauserEffect_19_1.png" />
 </div>
 </div>
-<p>Then, the sign of the transfer turns positive, indicating the scalar mechanism, but the dipolar mechanism is also present and gradually destroys the magnetization. Note that in the real experiment, we would have a <em>much</em> faster electron relaxation, which would effectively decouple it from the <span class="math notranslate nohighlight">\(^1\)</span>H relaxation. However, if the electron is saturated, then during it’s recovery, the <span class="math notranslate nohighlight">\(^1\)</span>H would become polarized. We demonstrate this effect next.</p>
+<p>Then, the sign of the transfer turns positive, indicating the scalar mechanism, but the dipolar mechanism is also present and gradually destroys the magnetization. Note that in the real experiment, we would have a <em>much</em> faster electron relaxation, which would effectively decouple it from the <span class="math notranslate nohighlight">\(^1\)</span>H relaxation, and provide a constant source of polarization to transfer to many <span class="math notranslate nohighlight">\(^1\)</span>H. However, if the electron is saturated, then during its recovery, the <span class="math notranslate nohighlight">\(^1\)</span>H would become polarized. We demonstrate this effect next.</p>
 </section>
 </section>
 <section id="example-3-overhauser-effect-buildup-with-saturating-field">
 <h2>Example 3: Overhauser Effect buildup with Saturating field<a class="headerlink" href="#example-3-overhauser-effect-buildup-with-saturating-field" title="Permalink to this headline">#</a></h2>
-<p>This last calculation requires a few special features of SLEEPY, because the Overhauser effect only occurs in the lab frame, so we must also irradiate the electron in the lab frame. It also requires recovery to thermal equilibrium, which is implemented differently under dynamic conditions than if using explicit <span class="math notranslate nohighlight">\(T_1\)</span> (non-Lindblad implementation).</p>
+<p>This last calculation requires a few special features of SLEEPY, because the Overhauser effect only occurs in the lab frame, so we must also irradiate the electron in the lab frame. It also requires recovery to thermal equilibrium, which is implemented differently under dynamic conditions than if using explicit <span class="math notranslate nohighlight">\(T_1\)</span> (i.e. here we use a non-Lindblad implementation).</p>
 <p>Some caution should be taken with the ‘DynamicThermal’ method (see <span class="xref myst"><span class="math notranslate nohighlight">\(T_1\)</span> tests</span>). We check here first that thermal equilibrium is obtained correctly for this system, before we apply microwave irradiation to the electron.</p>
 <section id="id2">
 <h3>Build the system<a class="headerlink" href="#id2" title="Permalink to this headline">#</a></h3>
@@ -940,6 +943,7 @@ title="Print to PDF"
 </section>
 <section id="propagate-without-microwaves">
 <h3>Propagate without microwaves<a class="headerlink" href="#propagate-without-microwaves" title="Permalink to this headline">#</a></h3>
+<p>We start without magnetization in the system and allow it to evolve to thermal equilibrium. We mark the expected thermal polarization of the electron and nucleus with dashed lines on the plot.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">seq</span><span class="o">=</span><span class="n">L</span><span class="o">.</span><span class="n">Sequence</span><span class="p">()</span>
@@ -952,19 +956,20 @@ title="Print to PDF"
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&lt;matplotlib.lines.Line2D at 0x7f8cf9ece940&gt;]
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&lt;matplotlib.lines.Line2D at 0x7fec2c1456a0&gt;]
 </pre></div>
 </div>
 <img alt="../_images/Ch4_OverhauserEffect_26_1.png" src="../_images/Ch4_OverhauserEffect_26_1.png" />
 </div>
 </div>
-<p>We get good performance here from the ‘DynamicThermal’ method. Now we observe the Overhauser effect enhancement by irradiating the electron such that it saturates, driving enhancement on the <span class="math notranslate nohighlight">\(^1\)</span>H</p>
+<p>We get good performance here from the ‘DynamicThermal’ method. Now we observe the Overhauser effect enhancement by irradiating the electron such that it saturates, leading to enhancement on the <span class="math notranslate nohighlight">\(^1\)</span>H.</p>
 </section>
 <section id="lab-frame-irradiation">
 <h3>Lab frame irradiation<a class="headerlink" href="#lab-frame-irradiation" title="Permalink to this headline">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">seq</span><span class="o">=</span><span class="n">L</span><span class="o">.</span><span class="n">Sequence</span><span class="p">()</span><span class="o">.</span><span class="n">add_channel</span><span class="p">(</span><span class="s1">&#39;e&#39;</span><span class="p">,</span><span class="n">v1</span><span class="o">=</span><span class="mf">5e6</span><span class="p">,</span><span class="n">voff</span><span class="o">=</span><span class="n">ex0</span><span class="o">.</span><span class="n">v0</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">*</span><span class="p">(</span><span class="n">gavg</span><span class="o">-</span><span class="n">ge</span><span class="p">)</span><span class="o">/</span><span class="n">ge</span><span class="p">)</span>  <span class="c1">#10 MHz irradiating field</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Note that we have to be careful to get the electron on-resonance</span>
+<span class="n">seq</span><span class="o">=</span><span class="n">L</span><span class="o">.</span><span class="n">Sequence</span><span class="p">()</span><span class="o">.</span><span class="n">add_channel</span><span class="p">(</span><span class="s1">&#39;e&#39;</span><span class="p">,</span><span class="n">v1</span><span class="o">=</span><span class="mf">5e6</span><span class="p">,</span><span class="n">voff</span><span class="o">=</span><span class="n">ex0</span><span class="o">.</span><span class="n">v0</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">*</span><span class="p">(</span><span class="n">gavg</span><span class="o">-</span><span class="n">ge</span><span class="p">)</span><span class="o">/</span><span class="n">ge</span><span class="p">)</span>  <span class="c1">#5 MHz irradiating field</span>
 <span class="n">U</span><span class="o">=</span><span class="n">LFrf</span><span class="p">(</span><span class="n">seq</span><span class="p">)</span><span class="o">.</span><span class="n">U</span><span class="p">()</span>
 </pre></div>
 </div>
@@ -1042,13 +1047,13 @@ Completed
 </div>
 </div>
 </div>
-<p>Indeed, the enhancment is well-predicted from rate constants, suggesting also that the simulation is correctly constructed. Finally, we re-run the simulation with a powder average (and also a more realistic power level).</p>
+<p>We confirm that the nuclear enhancement can be predicted from the nuclear <span class="math notranslate nohighlight">\(T_1\)</span> (<code class="docutils literal notranslate"><span class="pre">R1H</span></code>) and the electron-nuclear cross relaxation rate (<code class="docutils literal notranslate"><span class="pre">Gamma</span></code>).</p>
 </section>
 <section id="include-powder-average">
 <h3>Include powder average<a class="headerlink" href="#include-powder-average" title="Permalink to this headline">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ex0</span><span class="o">=</span><span class="n">sl</span><span class="o">.</span><span class="n">ExpSys</span><span class="p">(</span><span class="n">v0H</span><span class="o">=</span><span class="mi">212</span><span class="p">,</span><span class="n">Nucs</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;1H&#39;</span><span class="p">,</span><span class="s1">&#39;e&#39;</span><span class="p">],</span><span class="n">LF</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">vr</span><span class="o">=</span><span class="mi">5000</span><span class="p">,</span><span class="n">n_gamma</span><span class="o">=</span><span class="mi">30</span><span class="p">,</span><span class="n">T_K</span><span class="o">=</span><span class="mi">80</span><span class="p">,</span><span class="n">pwdavg</span><span class="o">=</span><span class="n">sl</span><span class="o">.</span><span class="n">PowderAvg</span><span class="p">(</span><span class="n">q</span><span class="o">=</span><span class="mi">2</span><span class="p">))</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ex0</span><span class="o">=</span><span class="n">sl</span><span class="o">.</span><span class="n">ExpSys</span><span class="p">(</span><span class="n">v0H</span><span class="o">=</span><span class="mi">212</span><span class="p">,</span><span class="n">Nucs</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;1H&#39;</span><span class="p">,</span><span class="s1">&#39;e&#39;</span><span class="p">],</span><span class="n">LF</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">vr</span><span class="o">=</span><span class="mi">5000</span><span class="p">,</span><span class="n">n_gamma</span><span class="o">=</span><span class="mi">30</span><span class="p">,</span><span class="n">T_K</span><span class="o">=</span><span class="mi">80</span><span class="p">,</span><span class="n">pwdavg</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
 <span class="n">ex0</span><span class="o">.</span><span class="n">set_inter</span><span class="p">(</span><span class="s1">&#39;g&#39;</span><span class="p">,</span><span class="n">i</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">gxx</span><span class="o">=</span><span class="mf">2.0027</span><span class="p">,</span><span class="n">gyy</span><span class="o">=</span><span class="mf">2.0031</span><span class="p">,</span><span class="n">gzz</span><span class="o">=</span><span class="mf">2.0034</span><span class="p">)</span>
 <span class="n">Adip</span><span class="o">=</span><span class="p">[</span><span class="o">-</span><span class="mf">1e6</span><span class="p">,</span><span class="o">-</span><span class="mf">1e6</span><span class="p">,</span><span class="mf">2e6</span><span class="p">]</span>
 <span class="n">Aiso0</span><span class="o">=</span><span class="mf">.75e6</span>
@@ -1068,7 +1073,7 @@ Completed
 
 <span class="n">U</span><span class="o">=</span><span class="n">LFrf</span><span class="p">(</span><span class="n">seq</span><span class="p">)</span><span class="o">.</span><span class="n">U</span><span class="p">()</span>
 
-<span class="n">rho</span><span class="o">=</span><span class="n">sl</span><span class="o">.</span><span class="n">Rho</span><span class="p">(</span><span class="s1">&#39;Thermal&#39;</span><span class="p">,[</span><span class="s1">&#39;1Hz&#39;</span><span class="p">,</span><span class="s1">&#39;ez&#39;</span><span class="p">])</span>
+<span class="n">rho</span><span class="o">=</span><span class="n">sl</span><span class="o">.</span><span class="n">Rho</span><span class="p">(</span><span class="s1">&#39;Thermal&#39;</span><span class="p">,[</span><span class="s1">&#39;ez&#39;</span><span class="p">,</span><span class="s1">&#39;1Hz&#39;</span><span class="p">])</span>
 
 <span class="n">rho</span><span class="o">.</span><span class="n">DetProp</span><span class="p">(</span><span class="n">U</span><span class="p">,</span><span class="n">n</span><span class="o">=</span><span class="mi">20000</span><span class="p">)</span>
 
@@ -1089,7 +1094,7 @@ Completed
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Enhancement: </span><span class="si">{</span><span class="n">rho</span><span class="o">.</span><span class="n">I</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">real</span><span class="o">/</span><span class="n">ex0</span><span class="o">.</span><span class="n">Peq</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">:</span><span class="s1">.1f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Enhancement: </span><span class="si">{</span><span class="n">rho</span><span class="o">.</span><span class="n">I</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">real</span><span class="o">/</span><span class="n">ex0</span><span class="o">.</span><span class="n">Peq</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">:</span><span class="s1">.1f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -1128,6 +1133,7 @@ Completed
 </div>
 </div>
 </div>
+<p>Note that small deviations from the expected enhancement arise from incomplete saturation of the electron.</p>
 </section>
 </section>
 </section>

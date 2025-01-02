@@ -50,6 +50,8 @@ const thebe_selector_input = "pre"
 const thebe_selector_output = ".output, .cell_output"
 </script>
     <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <link rel="shortcut icon" href="../_static/favicon.png"/>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
@@ -591,6 +593,47 @@ title="Print to PDF"
    Setup
   </a>
  </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#build-the-system">
+   Build the system
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#stop-transfer-after-maximum-reached">
+     Stop transfer after maximum reached
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#recycle-the-sequence">
+     Recycle the sequence
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#use-longer-relaxation-delay-5-t-1e">
+     Use longer relaxation delay (5*
+     <span class="math notranslate nohighlight">
+      \(T_{1e}\)
+     </span>
+     )
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#optimize-relaxation-delay-for-fast-relaxing-nuclei">
+     Optimize relaxation delay for fast-relaxing nuclei
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#re-optimize-spin-lock-length">
+     Re-optimize spin-lock length
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#buildup-with-varying-spin-lock-length">
+     Buildup with varying spin-lock length
+    </a>
+   </li>
+  </ul>
+ </li>
 </ul>
 
     </nav>
@@ -615,6 +658,47 @@ title="Print to PDF"
    Setup
   </a>
  </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#build-the-system">
+   Build the system
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#stop-transfer-after-maximum-reached">
+     Stop transfer after maximum reached
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#recycle-the-sequence">
+     Recycle the sequence
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#use-longer-relaxation-delay-5-t-1e">
+     Use longer relaxation delay (5*
+     <span class="math notranslate nohighlight">
+      \(T_{1e}\)
+     </span>
+     )
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#optimize-relaxation-delay-for-fast-relaxing-nuclei">
+     Optimize relaxation delay for fast-relaxing nuclei
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#re-optimize-spin-lock-length">
+     Re-optimize spin-lock length
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#buildup-with-varying-spin-lock-length">
+     Buildup with varying spin-lock length
+    </a>
+   </li>
+  </ul>
+ </li>
 </ul>
 
                         </nav>
@@ -628,6 +712,8 @@ title="Print to PDF"
   <section class="tex2jax_ignore mathjax_ignore" id="font-color-0093af-novel">
 <h1><font  color = "#0093AF"> NOVEL<a class="headerlink" href="#font-color-0093af-novel" title="Permalink to this headline">#</a></h1>
 <p><a href="https://githubtocolab.com/alsinmr/SLEEPY_tutorial/blob/main/ColabNotebooks/Chapter4/Ch4_NOVEL.ipynb" target="_blank"><img src="https://colab.research.google.com/assets/colab-badge.svg"></a></p>
+<p>Nuclear Overhauser effect Via Electron spin-Locking (NOVEL)<span class="math notranslate nohighlight">\(^1\)</span> is a DNP transfer mechanism which occurs by matching a spin-lock applied to electrons to the nuclear Larmor frequency. The sequence needs to be repeated many times to build up bulk nuclear polarization. Here we set up the transfer, and investigate some simple improvements to make the transfer more efficient.</p>
+<p>[1] A. Henstra, P. Dirksen, J. Schmidt, W.Th. Wenckebach. <em><a class="reference external" href="https://doi.org/10.1016/0022-2364(88)90190-4">J. Magn. Reson.</a></em>, <strong>1988</strong>, 77, 389-393.</p>
 <section id="setup">
 <h2>Setup<a class="headerlink" href="#setup" title="Permalink to this headline">#</a></h2>
 <div class="cell docutils container">
@@ -646,111 +732,375 @@ title="Print to PDF"
 </div>
 </div>
 </div>
+</section>
+<section id="build-the-system">
+<h2>Build the system<a class="headerlink" href="#build-the-system" title="Permalink to this headline">#</a></h2>
+<p>We build an electron-nuclear system, noting that the nucleus needs to be in the lab frame, since the pseudosecular hyperfine coupling drives NOVEL transfer. We start monitoring magnetization during the NOVEL sequence (a <span class="math notranslate nohighlight">\(pi/2\)</span>-pulse followed by a spin-lock).</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ex</span><span class="o">=</span><span class="n">sl</span><span class="o">.</span><span class="n">ExpSys</span><span class="p">(</span><span class="n">v0H</span><span class="o">=</span><span class="mi">14</span><span class="p">,</span><span class="n">Nucs</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;1H&#39;</span><span class="p">,</span><span class="s1">&#39;e&#39;</span><span class="p">],</span><span class="n">vr</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">LF</span><span class="o">=</span><span class="p">[</span><span class="kc">True</span><span class="p">,</span><span class="kc">False</span><span class="p">],</span><span class="n">T_K</span><span class="o">=</span><span class="mi">80</span><span class="p">,</span><span class="n">pwdavg</span><span class="o">=</span><span class="n">sl</span><span class="o">.</span><span class="n">PowderAvg</span><span class="p">()[</span><span class="mi">10</span><span class="p">])</span>
-<span class="n">ex</span><span class="o">.</span><span class="n">set_inter</span><span class="p">(</span><span class="s1">&#39;hyperfine&#39;</span><span class="p">,</span><span class="n">i0</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">i1</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">Axx</span><span class="o">=-</span><span class="mf">1e4</span><span class="p">,</span><span class="n">Ayy</span><span class="o">=-</span><span class="mf">1e4</span><span class="p">,</span><span class="n">Azz</span><span class="o">=</span><span class="mf">2e4</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ex</span><span class="o">=</span><span class="n">sl</span><span class="o">.</span><span class="n">ExpSys</span><span class="p">(</span><span class="n">v0H</span><span class="o">=</span><span class="mi">212</span><span class="p">,</span><span class="n">Nucs</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;1H&#39;</span><span class="p">,</span><span class="s1">&#39;e&#39;</span><span class="p">],</span><span class="n">vr</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">LF</span><span class="o">=</span><span class="p">[</span><span class="kc">True</span><span class="p">,</span><span class="kc">False</span><span class="p">],</span><span class="n">T_K</span><span class="o">=</span><span class="mi">80</span><span class="p">,</span><span class="n">pwdavg</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">delta</span><span class="o">=</span><span class="mf">4e5</span>
+<span class="n">ex</span><span class="o">.</span><span class="n">set_inter</span><span class="p">(</span><span class="s1">&#39;hyperfine&#39;</span><span class="p">,</span><span class="n">i0</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">i1</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">Axx</span><span class="o">=-</span><span class="n">delta</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span><span class="n">Ayy</span><span class="o">=-</span><span class="n">delta</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span><span class="n">Azz</span><span class="o">=</span><span class="n">delta</span><span class="p">)</span>
 
 <span class="n">L</span><span class="o">=</span><span class="n">ex</span><span class="o">.</span><span class="n">Liouvillian</span><span class="p">()</span>
-<span class="n">L</span><span class="o">.</span><span class="n">add_relax</span><span class="p">(</span><span class="s1">&#39;T1&#39;</span><span class="p">,</span><span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">T1</span><span class="o">=</span><span class="mf">.1</span><span class="p">,</span><span class="n">OS</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">Thermal</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-<span class="n">L</span><span class="o">.</span><span class="n">add_relax</span><span class="p">(</span><span class="s1">&#39;T2&#39;</span><span class="p">,</span><span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">T2</span><span class="o">=</span><span class="mf">.005</span><span class="p">,</span><span class="n">OS</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-<span class="n">L</span><span class="o">.</span><span class="n">add_relax</span><span class="p">(</span><span class="s1">&#39;T1&#39;</span><span class="p">,</span><span class="n">i</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">T1</span><span class="o">=</span><span class="mf">.0014</span><span class="p">,</span><span class="n">OS</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">Thermal</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-<span class="n">L</span><span class="o">.</span><span class="n">add_relax</span><span class="p">(</span><span class="s1">&#39;T2&#39;</span><span class="p">,</span><span class="n">i</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">T2</span><span class="o">=</span><span class="mf">10e-6</span><span class="p">,</span><span class="n">OS</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 
-<span class="n">v1</span><span class="o">=</span><span class="mf">14e6</span>
+<span class="c1"># Note that because the nuclear quantization axis is tilted away from z, </span>
+<span class="c1"># it is important to set OS=True</span>
+<span class="n">L</span><span class="o">.</span><span class="n">add_relax</span><span class="p">(</span><span class="n">Type</span><span class="o">=</span><span class="s1">&#39;T2&#39;</span><span class="p">,</span><span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">T2</span><span class="o">=</span><span class="mf">5e-3</span><span class="p">,</span><span class="n">OS</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">L</span><span class="o">.</span><span class="n">add_relax</span><span class="p">(</span><span class="n">Type</span><span class="o">=</span><span class="s1">&#39;T2&#39;</span><span class="p">,</span><span class="n">i</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">T2</span><span class="o">=</span><span class="mf">.890e-6</span><span class="p">,</span><span class="n">OS</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">L</span><span class="o">.</span><span class="n">add_relax</span><span class="p">(</span><span class="n">Type</span><span class="o">=</span><span class="s1">&#39;T1&#39;</span><span class="p">,</span><span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">T1</span><span class="o">=</span><span class="mf">13.7</span><span class="p">,</span><span class="n">OS</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">Thermal</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">L</span><span class="o">.</span><span class="n">add_relax</span><span class="p">(</span><span class="n">Type</span><span class="o">=</span><span class="s1">&#39;T1&#39;</span><span class="p">,</span><span class="n">i</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">T1</span><span class="o">=</span><span class="mf">1.4e-3</span><span class="p">,</span><span class="n">OS</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">Thermal</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="n">v1</span><span class="o">=</span><span class="mf">212e6</span>
 <span class="n">pi2</span><span class="o">=</span><span class="mi">1</span><span class="o">/</span><span class="n">v1</span><span class="o">/</span><span class="mi">4</span>
-<span class="n">SL</span><span class="o">=</span><span class="mf">5e-6</span>
-<span class="n">RD</span><span class="o">=</span><span class="mf">.5e-3</span>
+<span class="n">SL</span><span class="o">=</span><span class="mf">2e-5</span>
 
-<span class="n">seq</span><span class="o">=</span><span class="n">L</span><span class="o">.</span><span class="n">Sequence</span><span class="p">()</span><span class="o">.</span><span class="n">add_channel</span><span class="p">(</span><span class="s1">&#39;e&#39;</span><span class="p">,</span><span class="n">t</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="n">pi2</span><span class="p">,</span><span class="n">pi2</span><span class="o">+</span><span class="n">SL</span><span class="p">,</span><span class="mi">2</span><span class="o">*</span><span class="n">pi2</span><span class="o">+</span><span class="n">SL</span><span class="p">,</span><span class="n">RD</span><span class="p">],</span><span class="n">v1</span><span class="o">=</span><span class="p">[</span><span class="n">v1</span><span class="p">,</span><span class="n">v1</span><span class="p">,</span><span class="n">v1</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span><span class="n">phase</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">,</span><span class="mi">0</span><span class="p">])</span>
+<span class="n">seq</span><span class="o">=</span><span class="n">L</span><span class="o">.</span><span class="n">Sequence</span><span class="p">()</span><span class="o">.</span><span class="n">add_channel</span><span class="p">(</span><span class="s1">&#39;e&#39;</span><span class="p">,</span><span class="n">t</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="n">pi2</span><span class="p">,</span><span class="n">pi2</span><span class="o">+</span><span class="n">SL</span><span class="p">],</span><span class="n">v1</span><span class="o">=</span><span class="p">[</span><span class="n">v1</span><span class="p">,</span><span class="n">v1</span><span class="p">],</span><span class="n">phase</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">/</span><span class="mi">2</span><span class="p">])</span>
 
 <span class="n">rho</span><span class="o">=</span><span class="n">sl</span><span class="o">.</span><span class="n">Rho</span><span class="p">(</span><span class="s1">&#39;Thermal&#39;</span><span class="p">,[</span><span class="s1">&#39;1Hz&#39;</span><span class="p">,</span><span class="s1">&#39;ez&#39;</span><span class="p">,</span><span class="s1">&#39;ey&#39;</span><span class="p">])</span>
-<span class="n">rho</span><span class="o">.</span><span class="n">DetProp</span><span class="p">(</span><span class="n">seq</span><span class="p">,</span><span class="n">n</span><span class="o">=</span><span class="mi">1000</span><span class="p">)</span>
-
-<span class="n">rho</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="s1">&#39;s&#39;</span><span class="p">)</span>
+<span class="n">rho</span><span class="o">.</span><span class="n">DetProp</span><span class="p">(</span><span class="n">seq</span><span class="p">,</span><span class="n">n</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span><span class="n">n_per_seq</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
+<span class="n">rho</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="s1">&#39;us&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;AxesSubplot:xlabel=&#39;t / s&#39;, ylabel=&#39;&lt;Op&gt;&#39;&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;AxesSubplot:xlabel=&#39;t / $\\mu$s&#39;, ylabel=&#39;&lt;Op&gt;&#39;&gt;
 </pre></div>
 </div>
-<img alt="../_images/Ch4_NOVEL_5_1.png" src="../_images/Ch4_NOVEL_5_1.png" />
+<img alt="../_images/Ch4_NOVEL_8_1.png" src="../_images/Ch4_NOVEL_8_1.png" />
+</div>
+</div>
+<p>We monitor electron <em>z</em>- and <em>y</em>-magnetization, where an initial <span class="math notranslate nohighlight">\(\pi\)</span>/2-pulse on the electron converts all electron <em>z</em>-magnetization to <em>y</em>-magnetization. That magnetization is then transferred to the nucleus. However, it also decays primarily due to the electron <span class="math notranslate nohighlight">\(T_2\)</span> relaxation. Then, we see that the length of the transfer could be optimized to minimize this loss, by setting the transfer time near to where the maximum nuclear polarization occurs. We add a recycle delay (<code class="docutils literal notranslate"><span class="pre">RD</span></code>) to see what happens to the magnetization after the transfer.</p>
+<section id="stop-transfer-after-maximum-reached">
+<h3>Stop transfer after maximum reached<a class="headerlink" href="#stop-transfer-after-maximum-reached" title="Permalink to this headline">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">SL</span><span class="o">=</span><span class="mf">2.5e-6</span>
+<span class="n">RD</span><span class="o">=</span><span class="mf">2e-5</span>
+
+<span class="n">seq</span><span class="o">=</span><span class="n">L</span><span class="o">.</span><span class="n">Sequence</span><span class="p">()</span><span class="o">.</span><span class="n">add_channel</span><span class="p">(</span><span class="s1">&#39;e&#39;</span><span class="p">,</span><span class="n">t</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="n">pi2</span><span class="p">,</span><span class="n">pi2</span><span class="o">+</span><span class="n">SL</span><span class="p">,</span><span class="n">RD</span><span class="p">],</span><span class="n">v1</span><span class="o">=</span><span class="p">[</span><span class="n">v1</span><span class="p">,</span><span class="n">v1</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span><span class="n">phase</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span><span class="mi">0</span><span class="p">])</span>
+
+<span class="n">rho</span><span class="o">=</span><span class="n">sl</span><span class="o">.</span><span class="n">Rho</span><span class="p">(</span><span class="s1">&#39;Thermal&#39;</span><span class="p">,[</span><span class="s1">&#39;1Hz&#39;</span><span class="p">,</span><span class="s1">&#39;ez&#39;</span><span class="p">,</span><span class="s1">&#39;ey&#39;</span><span class="p">])</span>
+<span class="n">rho</span><span class="o">.</span><span class="n">DetProp</span><span class="p">(</span><span class="n">seq</span><span class="p">,</span><span class="n">n</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span><span class="n">n_per_seq</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
+<span class="n">rho</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="s1">&#39;us&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;AxesSubplot:xlabel=&#39;t / $\\mu$s&#39;, ylabel=&#39;&lt;Op&gt;&#39;&gt;
+</pre></div>
+</div>
+<img alt="../_images/Ch4_NOVEL_11_1.png" src="../_images/Ch4_NOVEL_11_1.png" />
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">seq</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Enhancement: </span><span class="si">{</span><span class="n">rho</span><span class="o">.</span><span class="n">I</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">real</span><span class="o">.</span><span class="n">max</span><span class="p">()</span><span class="o">/</span><span class="n">ex</span><span class="o">.</span><span class="n">Peq</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">:</span><span class="s1">.0f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&lt;AxesSubplot:ylabel=&#39;$v_1$ / kHz&#39;&gt;,
- &lt;AxesSubplot:xlabel=&#39;t / $\\mu$s&#39;, ylabel=&#39;$v_1$ / kHz&#39;&gt;]
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Enhancement: 100
 </pre></div>
 </div>
-<img alt="../_images/Ch4_NOVEL_6_1.png" src="../_images/Ch4_NOVEL_6_1.png" />
 </div>
 </div>
+<p>In this case, the nuclear magnetization stays at its maximum by turning off the spin-lock after the maximum is reached. Little changes on the magnetization otherwise, except a small amount of electron <span class="math notranslate nohighlight">\(T_1\)</span> recovery.</p>
+<p>While the nucleus is enhanced, we wonder if it is possible to achieve a higher enhancement with repeated transfers. Then, we need to include a delay between repeated sequences. First we try to set the recycle delay to the electron <span class="math notranslate nohighlight">\(T_1\)</span>.</p>
+</section>
+<section id="recycle-the-sequence">
+<h3>Recycle the sequence<a class="headerlink" href="#recycle-the-sequence" title="Permalink to this headline">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">rho</span><span class="o">.</span><span class="n">I</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">/</span><span class="n">ex</span><span class="o">.</span><span class="n">Peq</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">SL</span><span class="o">=</span><span class="mf">0.25e-5</span>
+<span class="n">RD</span><span class="o">=</span><span class="mf">1.4e-3</span>
+
+<span class="n">seq</span><span class="o">=</span><span class="n">L</span><span class="o">.</span><span class="n">Sequence</span><span class="p">()</span><span class="o">.</span><span class="n">add_channel</span><span class="p">(</span><span class="s1">&#39;e&#39;</span><span class="p">,</span><span class="n">t</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="n">pi2</span><span class="p">,</span><span class="n">pi2</span><span class="o">+</span><span class="n">SL</span><span class="p">,</span><span class="n">RD</span><span class="p">],</span><span class="n">v1</span><span class="o">=</span><span class="p">[</span><span class="n">v1</span><span class="p">,</span><span class="n">v1</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span><span class="n">phase</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span><span class="mi">0</span><span class="p">])</span>
+
+<span class="n">rho</span><span class="o">=</span><span class="n">sl</span><span class="o">.</span><span class="n">Rho</span><span class="p">(</span><span class="s1">&#39;Thermal&#39;</span><span class="p">,[</span><span class="s1">&#39;1Hz&#39;</span><span class="p">,</span><span class="s1">&#39;ez&#39;</span><span class="p">,</span><span class="s1">&#39;ey&#39;</span><span class="p">])</span>
+<span class="n">rho</span><span class="o">.</span><span class="n">DetProp</span><span class="p">(</span><span class="n">seq</span><span class="p">,</span><span class="n">n</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span><span class="n">n_per_seq</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
+<span class="n">rho</span><span class="o">.</span><span class="n">DetProp</span><span class="p">(</span><span class="n">seq</span><span class="p">,</span><span class="n">n</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
+
+<span class="n">ax</span><span class="o">=</span><span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="n">figsize</span><span class="o">=</span><span class="p">[</span><span class="mi">8</span><span class="p">,</span><span class="mi">4</span><span class="p">])[</span><span class="mi">1</span><span class="p">]</span>
+<span class="n">rho</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="s1">&#39;us&#39;</span><span class="p">,</span><span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlim</span><span class="p">([</span><span class="o">-</span><span class="mi">10</span><span class="p">,</span><span class="mi">1400</span><span class="p">])</span>
+<span class="n">rho</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="s1">&#39;ms&#39;</span><span class="p">,</span><span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(147.80291978123492+6.954261420263472e-09j)
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ex</span><span class="o">=</span><span class="n">sl</span><span class="o">.</span><span class="n">ExpSys</span><span class="p">(</span><span class="n">v0H</span><span class="o">=</span><span class="mi">14</span><span class="p">,</span><span class="n">Nucs</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;1H&#39;</span><span class="p">,</span><span class="s1">&#39;e&#39;</span><span class="p">],</span><span class="n">vr</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span><span class="n">LF</span><span class="o">=</span><span class="p">[</span><span class="kc">True</span><span class="p">,</span><span class="kc">False</span><span class="p">],</span><span class="n">T_K</span><span class="o">=</span><span class="mi">80</span><span class="p">,</span><span class="n">pwdavg</span><span class="o">=</span><span class="n">sl</span><span class="o">.</span><span class="n">PowderAvg</span><span class="p">()[</span><span class="mi">10</span><span class="p">])</span>
-<span class="n">ex</span><span class="o">.</span><span class="n">set_inter</span><span class="p">(</span><span class="s1">&#39;hyperfine&#39;</span><span class="p">,</span><span class="n">i0</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">i1</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">Axx</span><span class="o">=-</span><span class="mf">1e4</span><span class="p">,</span><span class="n">Ayy</span><span class="o">=-</span><span class="mf">1e4</span><span class="p">,</span><span class="n">Azz</span><span class="o">=</span><span class="mf">2e4</span><span class="p">)</span>
-
-<span class="n">L</span><span class="o">=</span><span class="n">ex</span><span class="o">.</span><span class="n">Liouvillian</span><span class="p">()</span>
-<span class="n">L</span><span class="o">.</span><span class="n">add_relax</span><span class="p">(</span><span class="s1">&#39;T1&#39;</span><span class="p">,</span><span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">T1</span><span class="o">=</span><span class="mf">.1</span><span class="p">,</span><span class="n">OS</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">Thermal</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-<span class="n">L</span><span class="o">.</span><span class="n">add_relax</span><span class="p">(</span><span class="s1">&#39;T2&#39;</span><span class="p">,</span><span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">T2</span><span class="o">=</span><span class="mf">.005</span><span class="p">,</span><span class="n">OS</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-<span class="n">L</span><span class="o">.</span><span class="n">add_relax</span><span class="p">(</span><span class="s1">&#39;T1&#39;</span><span class="p">,</span><span class="n">i</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">T1</span><span class="o">=</span><span class="mf">.0014</span><span class="p">,</span><span class="n">OS</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">Thermal</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-<span class="n">L</span><span class="o">.</span><span class="n">add_relax</span><span class="p">(</span><span class="s1">&#39;T2&#39;</span><span class="p">,</span><span class="n">i</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">T2</span><span class="o">=</span><span class="mf">10e-6</span><span class="p">,</span><span class="n">OS</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-
-<span class="n">v1</span><span class="o">=</span><span class="mf">14e6</span>
-<span class="n">pi2</span><span class="o">=</span><span class="mi">1</span><span class="o">/</span><span class="n">v1</span><span class="o">/</span><span class="mi">4</span>
-<span class="n">SL</span><span class="o">=</span><span class="mf">5e-6</span>
-<span class="n">RD</span><span class="o">=</span><span class="n">L</span><span class="o">.</span><span class="n">taur</span><span class="o">-</span><span class="n">SL</span><span class="o">-</span><span class="n">pi2</span>
-
-<span class="n">seq</span><span class="o">=</span><span class="n">L</span><span class="o">.</span><span class="n">Sequence</span><span class="p">()</span><span class="o">.</span><span class="n">add_channel</span><span class="p">(</span><span class="s1">&#39;e&#39;</span><span class="p">,</span><span class="n">t</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="n">pi2</span><span class="p">,</span><span class="n">pi2</span><span class="o">+</span><span class="n">SL</span><span class="p">,</span><span class="n">pi2</span><span class="o">+</span><span class="n">SL</span><span class="o">+</span><span class="n">RD</span><span class="p">],</span><span class="n">v1</span><span class="o">=</span><span class="p">[</span><span class="n">v1</span><span class="p">,</span><span class="n">v1</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span><span class="n">phase</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span><span class="mi">0</span><span class="p">])</span>
-
-<span class="n">rho</span><span class="o">=</span><span class="n">sl</span><span class="o">.</span><span class="n">Rho</span><span class="p">(</span><span class="s1">&#39;Thermal&#39;</span><span class="p">,[</span><span class="s1">&#39;ez&#39;</span><span class="p">,</span><span class="s1">&#39;ey&#39;</span><span class="p">,</span><span class="s1">&#39;1Hz&#39;</span><span class="p">])</span>
-<span class="n">rho</span><span class="o">.</span><span class="n">DetProp</span><span class="p">(</span><span class="n">seq</span><span class="p">,</span><span class="n">n</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span><span class="n">n_per_seq</span><span class="o">=</span><span class="mi">1000</span><span class="p">)</span>
-
-<span class="n">rho</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="s1">&#39;ms&#39;</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Prop: 1000 steps per every 1 rotor period
-</pre></div>
-</div>
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;AxesSubplot:xlabel=&#39;t / ms&#39;, ylabel=&#39;&lt;Op&gt;&#39;&gt;
 </pre></div>
 </div>
-<img alt="../_images/Ch4_NOVEL_8_2.png" src="../_images/Ch4_NOVEL_8_2.png" />
+<img alt="../_images/Ch4_NOVEL_15_1.png" src="../_images/Ch4_NOVEL_15_1.png" />
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pi2</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Enhancement: </span><span class="si">{</span><span class="n">rho</span><span class="o">.</span><span class="n">I</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">real</span><span class="o">.</span><span class="n">max</span><span class="p">()</span><span class="o">/</span><span class="n">ex</span><span class="o">.</span><span class="n">Peq</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">:</span><span class="s1">.0f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1.7857142857142856e-08
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Enhancement: 161
 </pre></div>
 </div>
 </div>
 </div>
+<p>We increase the enhancement, but still not to the theoretical max of 657. We notice that the electron z-magnetization equilibrates at a fraction of its original polarization. One option to improve the enhancement is to increase the recycle delay to give the electron more chance to recover. Here, we take 5*<span class="math notranslate nohighlight">\(T_1\)</span> to obtain nearly fully recovery.</p>
+</section>
+<section id="use-longer-relaxation-delay-5-t-1e">
+<h3>Use longer relaxation delay (5*<span class="math notranslate nohighlight">\(T_{1e}\)</span>)<a class="headerlink" href="#use-longer-relaxation-delay-5-t-1e" title="Permalink to this headline">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">SL</span><span class="o">=</span><span class="mf">0.25e-5</span>
+<span class="n">RD</span><span class="o">=</span><span class="mf">1.4e-3</span><span class="o">*</span><span class="mi">5</span>
+
+<span class="n">seq</span><span class="o">=</span><span class="n">L</span><span class="o">.</span><span class="n">Sequence</span><span class="p">()</span><span class="o">.</span><span class="n">add_channel</span><span class="p">(</span><span class="s1">&#39;e&#39;</span><span class="p">,</span><span class="n">t</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="n">pi2</span><span class="p">,</span><span class="n">pi2</span><span class="o">+</span><span class="n">SL</span><span class="p">,</span><span class="n">RD</span><span class="p">],</span><span class="n">v1</span><span class="o">=</span><span class="p">[</span><span class="n">v1</span><span class="p">,</span><span class="n">v1</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span><span class="n">phase</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span><span class="mi">0</span><span class="p">])</span>
+
+<span class="n">rho</span><span class="o">=</span><span class="n">sl</span><span class="o">.</span><span class="n">Rho</span><span class="p">(</span><span class="s1">&#39;Thermal&#39;</span><span class="p">,[</span><span class="s1">&#39;1Hz&#39;</span><span class="p">,</span><span class="s1">&#39;ez&#39;</span><span class="p">,</span><span class="s1">&#39;ey&#39;</span><span class="p">])</span>
+<span class="n">rho</span><span class="o">.</span><span class="n">DetProp</span><span class="p">(</span><span class="n">seq</span><span class="p">,</span><span class="n">n</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span><span class="n">n_per_seq</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
+<span class="n">rho</span><span class="o">.</span><span class="n">DetProp</span><span class="p">(</span><span class="n">seq</span><span class="p">,</span><span class="n">n</span><span class="o">=</span><span class="mi">200</span><span class="p">)</span>
+
+<span class="n">ax</span><span class="o">=</span><span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="n">figsize</span><span class="o">=</span><span class="p">[</span><span class="mi">8</span><span class="p">,</span><span class="mi">4</span><span class="p">])[</span><span class="mi">1</span><span class="p">]</span>
+<span class="n">rho</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="s1">&#39;us&#39;</span><span class="p">,</span><span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlim</span><span class="p">([</span><span class="o">-</span><span class="mi">10</span><span class="p">,</span><span class="mi">1400</span><span class="p">])</span>
+<span class="n">rho</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="s1">&#39;ms&#39;</span><span class="p">,</span><span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;AxesSubplot:xlabel=&#39;t / ms&#39;, ylabel=&#39;&lt;Op&gt;&#39;&gt;
+</pre></div>
+</div>
+<img alt="../_images/Ch4_NOVEL_19_1.png" src="../_images/Ch4_NOVEL_19_1.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Enhancement: </span><span class="si">{</span><span class="n">rho</span><span class="o">.</span><span class="n">I</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">real</span><span class="o">.</span><span class="n">max</span><span class="p">()</span><span class="o">/</span><span class="n">ex</span><span class="o">.</span><span class="n">Peq</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">:</span><span class="s1">.0f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Enhancement: 256
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="optimize-relaxation-delay-for-fast-relaxing-nuclei">
+<h3>Optimize relaxation delay for fast-relaxing nuclei<a class="headerlink" href="#optimize-relaxation-delay-for-fast-relaxing-nuclei" title="Permalink to this headline">#</a></h3>
+<p>The improvement is far more pronounced. Since the electron recovers full after every step, much more electron polarization is available to transfer to the nucleus. In our example here, the nuclear <span class="math notranslate nohighlight">\(T_1\)</span> is about 1000 times longer than that of the electron, so there isn’t really any compromise on the recycle delay between the electron recovering and the nucleus losing magnetization. However, in a real system, losses on the nuclei are much more pronounced, because the magnetization spreads among many protons. Let’s mimick this by shortening the nuclear T1 by a factor of 500 (if spread of polarization among the nuclei were infinitely fast, the rate of magnetization loss would be enhanced by the number of nuclei). Then, we optimize the recycle delay for this situation.</p>
+<p>Since this optimization takes some time, we go to a single crystallite. Note that if the hyperfine coupling is aligned along the <em>z</em>-axis or the <em>xy</em>-plane, the pseudosecular coupling will vanish, eliminating the NOVEL transfer. Therefore, we use the ‘alpha0beta45’ powder average, which just has one set of Euler angles (<span class="math notranslate nohighlight">\(\alpha=0^\circ\)</span>, <span class="math notranslate nohighlight">\(\beta=45^\circ\)</span>, <span class="math notranslate nohighlight">\(\gamma=0^\circ\)</span>)</p>
+<p>To get the true optimimum, we would need to include the powder average, but for sake of example, this is sufficient.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ex</span><span class="o">=</span><span class="n">sl</span><span class="o">.</span><span class="n">ExpSys</span><span class="p">(</span><span class="n">v0H</span><span class="o">=</span><span class="mi">212</span><span class="p">,</span><span class="n">Nucs</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;1H&#39;</span><span class="p">,</span><span class="s1">&#39;e&#39;</span><span class="p">],</span><span class="n">vr</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">LF</span><span class="o">=</span><span class="p">[</span><span class="kc">True</span><span class="p">,</span><span class="kc">False</span><span class="p">],</span><span class="n">T_K</span><span class="o">=</span><span class="mi">80</span><span class="p">,</span><span class="n">pwdavg</span><span class="o">=</span><span class="s1">&#39;alpha0beta45&#39;</span><span class="p">)</span>
+<span class="n">delta</span><span class="o">=</span><span class="mf">4e5</span>
+<span class="n">ex</span><span class="o">.</span><span class="n">set_inter</span><span class="p">(</span><span class="s1">&#39;hyperfine&#39;</span><span class="p">,</span><span class="n">i0</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">i1</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">Axx</span><span class="o">=-</span><span class="n">delta</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span><span class="n">Ayy</span><span class="o">=-</span><span class="n">delta</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span><span class="n">Azz</span><span class="o">=</span><span class="n">delta</span><span class="p">)</span>
+
+<span class="n">L</span><span class="o">=</span><span class="n">ex</span><span class="o">.</span><span class="n">Liouvillian</span><span class="p">()</span>
+
+<span class="n">L</span><span class="o">.</span><span class="n">add_relax</span><span class="p">(</span><span class="n">Type</span><span class="o">=</span><span class="s1">&#39;T2&#39;</span><span class="p">,</span><span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">T2</span><span class="o">=</span><span class="mf">5e-3</span><span class="p">,</span><span class="n">OS</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">L</span><span class="o">.</span><span class="n">add_relax</span><span class="p">(</span><span class="n">Type</span><span class="o">=</span><span class="s1">&#39;T2&#39;</span><span class="p">,</span><span class="n">i</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">T2</span><span class="o">=</span><span class="mf">.890e-6</span><span class="p">,</span><span class="n">OS</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">L</span><span class="o">.</span><span class="n">add_relax</span><span class="p">(</span><span class="n">Type</span><span class="o">=</span><span class="s1">&#39;T1&#39;</span><span class="p">,</span><span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">T1</span><span class="o">=</span><span class="mf">13.7</span><span class="o">/</span><span class="mi">500</span><span class="p">,</span><span class="n">OS</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">Thermal</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">L</span><span class="o">.</span><span class="n">add_relax</span><span class="p">(</span><span class="n">Type</span><span class="o">=</span><span class="s1">&#39;T1&#39;</span><span class="p">,</span><span class="n">i</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">T1</span><span class="o">=</span><span class="mf">1.4e-3</span><span class="p">,</span><span class="n">OS</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">Thermal</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="n">v1</span><span class="o">=</span><span class="mf">212e6</span>
+<span class="n">pi2</span><span class="o">=</span><span class="mi">1</span><span class="o">/</span><span class="n">v1</span><span class="o">/</span><span class="mi">4</span>
+<span class="n">SL</span><span class="o">=</span><span class="mf">0.25e-5</span>
+<span class="n">rho</span><span class="o">=</span><span class="n">sl</span><span class="o">.</span><span class="n">Rho</span><span class="p">(</span><span class="s1">&#39;Thermal&#39;</span><span class="p">,</span><span class="s1">&#39;1Hz&#39;</span><span class="p">)</span>
+
+<span class="n">RD0</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mf">0.5</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">50</span><span class="p">)</span><span class="o">*</span><span class="mf">1.4e-3</span>
+<span class="n">e</span><span class="o">=</span><span class="p">[]</span>
+
+<span class="k">for</span> <span class="n">RD</span> <span class="ow">in</span> <span class="n">RD0</span><span class="p">:</span>
+    <span class="n">seq</span><span class="o">=</span><span class="n">L</span><span class="o">.</span><span class="n">Sequence</span><span class="p">()</span><span class="o">.</span><span class="n">add_channel</span><span class="p">(</span><span class="s1">&#39;e&#39;</span><span class="p">,</span><span class="n">t</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="n">pi2</span><span class="p">,</span><span class="n">pi2</span><span class="o">+</span><span class="n">SL</span><span class="p">,</span><span class="n">RD</span><span class="p">],</span><span class="n">v1</span><span class="o">=</span><span class="p">[</span><span class="n">v1</span><span class="p">,</span><span class="n">v1</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span><span class="n">phase</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span><span class="mi">0</span><span class="p">])</span>
+    <span class="n">rho</span><span class="o">.</span><span class="n">clear</span><span class="p">()</span>
+    <span class="c1">#A sequence or propagator raised to infinity finds the equilibrium density matrix</span>
+    <span class="p">(</span><span class="n">seq</span><span class="o">**</span><span class="n">np</span><span class="o">.</span><span class="n">inf</span><span class="o">*</span><span class="n">rho</span><span class="p">)()</span>
+    <span class="n">e</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">rho</span><span class="o">.</span><span class="n">I</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">real</span><span class="o">/</span><span class="n">ex</span><span class="o">.</span><span class="n">Peq</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ax</span><span class="o">=</span><span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()[</span><span class="mi">1</span><span class="p">]</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">RD0</span><span class="o">*</span><span class="mf">1e3</span><span class="p">,</span><span class="n">e</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;RD / ms&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Enhancement&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Text(0, 0.5, &#39;Enhancement&#39;)
+</pre></div>
+</div>
+<img alt="../_images/Ch4_NOVEL_24_1.png" src="../_images/Ch4_NOVEL_24_1.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">i</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Maximum enhancement of </span><span class="si">{</span><span class="n">e</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="si">:</span><span class="s1">.0f</span><span class="si">}</span><span class="s1"> at RD=</span><span class="si">{</span><span class="n">RD0</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">*</span><span class="mf">1e3</span><span class="si">:</span><span class="s1">.1f</span><span class="si">}</span><span class="s1"> ms&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Maximum enhancement of 192 at RD=3.8 ms
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="re-optimize-spin-lock-length">
+<h3>Re-optimize spin-lock length<a class="headerlink" href="#re-optimize-spin-lock-length" title="Permalink to this headline">#</a></h3>
+<p>We return now to the longer nuclear <span class="math notranslate nohighlight">\(T_1\)</span>. A remaining question is: why can’t we actually achieve the full theoretical enhancement of 657, if the nuclear relaxation is so slow?</p>
+<p>The problem is that the while for one repetition of the NOVEL sequence, the optimal <span class="math notranslate nohighlight">\(^1H\)</span> polarization occured at about 2.5 μs. However, significant electron polarization loss has already occured for a spin-lock of that length, given the <span class="math notranslate nohighlight">\(T_2\)</span> of 0.89 μs (note under the spin-lock, the effective <span class="math notranslate nohighlight">\(T_{1\rho}\)</span> becomes twice the set value of <span class="math notranslate nohighlight">\(T_2\)</span>). So, we can also optimize the spin-lock length (using 5*<span class="math notranslate nohighlight">\(T_1\)</span> for the recycle delay).</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ex</span><span class="o">=</span><span class="n">sl</span><span class="o">.</span><span class="n">ExpSys</span><span class="p">(</span><span class="n">v0H</span><span class="o">=</span><span class="mi">212</span><span class="p">,</span><span class="n">Nucs</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;1H&#39;</span><span class="p">,</span><span class="s1">&#39;e&#39;</span><span class="p">],</span><span class="n">vr</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">LF</span><span class="o">=</span><span class="p">[</span><span class="kc">True</span><span class="p">,</span><span class="kc">False</span><span class="p">],</span><span class="n">T_K</span><span class="o">=</span><span class="mi">80</span><span class="p">,</span><span class="n">pwdavg</span><span class="o">=</span><span class="s1">&#39;alpha0beta45&#39;</span><span class="p">)</span>
+<span class="n">delta</span><span class="o">=</span><span class="mf">4e5</span>
+<span class="n">ex</span><span class="o">.</span><span class="n">set_inter</span><span class="p">(</span><span class="s1">&#39;hyperfine&#39;</span><span class="p">,</span><span class="n">i0</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">i1</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">Axx</span><span class="o">=-</span><span class="n">delta</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span><span class="n">Ayy</span><span class="o">=-</span><span class="n">delta</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span><span class="n">Azz</span><span class="o">=</span><span class="n">delta</span><span class="p">)</span>
+
+<span class="n">L</span><span class="o">=</span><span class="n">ex</span><span class="o">.</span><span class="n">Liouvillian</span><span class="p">()</span>
+
+<span class="n">L</span><span class="o">.</span><span class="n">add_relax</span><span class="p">(</span><span class="n">Type</span><span class="o">=</span><span class="s1">&#39;T2&#39;</span><span class="p">,</span><span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">T2</span><span class="o">=</span><span class="mf">5e-3</span><span class="p">,</span><span class="n">OS</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">L</span><span class="o">.</span><span class="n">add_relax</span><span class="p">(</span><span class="n">Type</span><span class="o">=</span><span class="s1">&#39;T2&#39;</span><span class="p">,</span><span class="n">i</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">T2</span><span class="o">=</span><span class="mf">.890e-6</span><span class="p">,</span><span class="n">OS</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">L</span><span class="o">.</span><span class="n">add_relax</span><span class="p">(</span><span class="n">Type</span><span class="o">=</span><span class="s1">&#39;T1&#39;</span><span class="p">,</span><span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">T1</span><span class="o">=</span><span class="mf">13.7</span><span class="p">,</span><span class="n">OS</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">Thermal</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">L</span><span class="o">.</span><span class="n">add_relax</span><span class="p">(</span><span class="n">Type</span><span class="o">=</span><span class="s1">&#39;T1&#39;</span><span class="p">,</span><span class="n">i</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">T1</span><span class="o">=</span><span class="mf">1.4e-3</span><span class="p">,</span><span class="n">OS</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">Thermal</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="n">v1</span><span class="o">=</span><span class="mf">212e6</span>
+<span class="n">pi2</span><span class="o">=</span><span class="mi">1</span><span class="o">/</span><span class="n">v1</span><span class="o">/</span><span class="mi">4</span>
+<span class="n">SL</span><span class="o">=</span><span class="mf">0.25e-5</span>
+<span class="n">RD</span><span class="o">=</span><span class="mi">5</span><span class="o">*</span><span class="mf">1.4e-3</span>
+<span class="n">rho</span><span class="o">=</span><span class="n">sl</span><span class="o">.</span><span class="n">Rho</span><span class="p">(</span><span class="s1">&#39;Thermal&#39;</span><span class="p">,</span><span class="s1">&#39;1Hz&#39;</span><span class="p">)</span>
+
+<span class="n">SL0</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mf">2.5e-6</span><span class="p">,</span><span class="mi">200</span><span class="p">)</span>
+<span class="n">e</span><span class="o">=</span><span class="p">[]</span>
+
+<span class="k">for</span> <span class="n">SL</span> <span class="ow">in</span> <span class="n">SL0</span><span class="p">:</span>
+    <span class="n">seq</span><span class="o">=</span><span class="n">L</span><span class="o">.</span><span class="n">Sequence</span><span class="p">()</span><span class="o">.</span><span class="n">add_channel</span><span class="p">(</span><span class="s1">&#39;e&#39;</span><span class="p">,</span><span class="n">t</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="n">pi2</span><span class="p">,</span><span class="n">pi2</span><span class="o">+</span><span class="n">SL</span><span class="p">,</span><span class="n">RD</span><span class="p">],</span><span class="n">v1</span><span class="o">=</span><span class="p">[</span><span class="n">v1</span><span class="p">,</span><span class="n">v1</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span><span class="n">phase</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span><span class="mi">0</span><span class="p">])</span>
+    <span class="n">rho</span><span class="o">.</span><span class="n">clear</span><span class="p">()</span>
+    <span class="c1">#A sequence or propagator raised to infinity finds the equilibrium density matrix</span>
+    <span class="p">(</span><span class="n">seq</span><span class="o">**</span><span class="n">np</span><span class="o">.</span><span class="n">inf</span><span class="o">*</span><span class="n">rho</span><span class="p">)()</span>
+    <span class="n">e</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">rho</span><span class="o">.</span><span class="n">I</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">real</span><span class="o">/</span><span class="n">ex</span><span class="o">.</span><span class="n">Peq</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ax</span><span class="o">=</span><span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()[</span><span class="mi">1</span><span class="p">]</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">SL0</span><span class="o">*</span><span class="mf">1e6</span><span class="p">,</span><span class="n">e</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Spin-lock length / $\mu$s&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Enhancement&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Text(0, 0.5, &#39;Enhancement&#39;)
+</pre></div>
+</div>
+<img alt="../_images/Ch4_NOVEL_29_1.png" src="../_images/Ch4_NOVEL_29_1.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">i</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Maximum enhancement of </span><span class="si">{</span><span class="n">e</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="si">:</span><span class="s1">.0f</span><span class="si">}</span><span class="s1"> at SL=</span><span class="si">{</span><span class="n">SL0</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">*</span><span class="mf">1e6</span><span class="si">:</span><span class="s1">.2f</span><span class="si">}</span><span class="s1"> μs&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Maximum enhancement of 574 at SL=0.23 μs
+</pre></div>
+</div>
+</div>
+</div>
+<p>Finally, we are close to the maximum enhancement. We plot the buildup of that polarization below</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">SL</span><span class="o">=</span><span class="n">SL0</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+<span class="n">seq</span><span class="o">=</span><span class="n">L</span><span class="o">.</span><span class="n">Sequence</span><span class="p">()</span><span class="o">.</span><span class="n">add_channel</span><span class="p">(</span><span class="s1">&#39;e&#39;</span><span class="p">,</span><span class="n">t</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="n">pi2</span><span class="p">,</span><span class="n">pi2</span><span class="o">+</span><span class="n">SL</span><span class="p">,</span><span class="n">RD</span><span class="p">],</span><span class="n">v1</span><span class="o">=</span><span class="p">[</span><span class="n">v1</span><span class="p">,</span><span class="n">v1</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span><span class="n">phase</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span><span class="mi">0</span><span class="p">])</span>
+<span class="n">rho</span><span class="o">.</span><span class="n">clear</span><span class="p">()</span>
+<span class="n">rho</span><span class="o">.</span><span class="n">DetProp</span><span class="p">(</span><span class="n">seq</span><span class="p">,</span><span class="n">n</span><span class="o">=</span><span class="mi">500</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">=</span><span class="n">rho</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="s1">&#39;s&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span><span class="n">rho</span><span class="o">.</span><span class="n">t_axis</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]],</span><span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span><span class="o">*</span><span class="n">ex</span><span class="o">.</span><span class="n">Peq</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;grey&#39;</span><span class="p">,</span><span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;:&#39;</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="sa">r</span><span class="s1">&#39;|e$^-$ thermal polar.|&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x7f89a9f91ba8&gt;
+</pre></div>
+</div>
+<img alt="../_images/Ch4_NOVEL_32_1.png" src="../_images/Ch4_NOVEL_32_1.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">i</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="n">rho</span><span class="o">.</span><span class="n">I</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">/</span><span class="n">rho</span><span class="o">.</span><span class="n">I</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">&gt;</span><span class="mf">0.95</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Maximum enhancement of </span><span class="si">{</span><span class="n">rho</span><span class="o">.</span><span class="n">I</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">real</span><span class="o">/</span><span class="n">ex</span><span class="o">.</span><span class="n">Peq</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">:</span><span class="s1">.0f</span><span class="si">}</span><span class="s1">, 95% of max reached at </span><span class="si">{</span><span class="n">rho</span><span class="o">.</span><span class="n">t_axis</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="si">:</span><span class="s1">.2f</span><span class="si">}</span><span class="s1"> s&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Maximum enhancement of 572, 95% of max reached at 1.79 s
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="buildup-with-varying-spin-lock-length">
+<h3>Buildup with varying spin-lock length<a class="headerlink" href="#buildup-with-varying-spin-lock-length" title="Permalink to this headline">#</a></h3>
+<p>While the enhancement is optimized, the buildup is quite slow. A shorter spin-lock is required to achieve the maximum enhancement, but this makes a very inefficient buildup at the beginning of the sequence, where we saw at the beginning of this section that the maximum enhancement came much later, at 2.5 μs. Here, we see what happens if we vary the spin-lock length, from long to short (2.5 μs to 0.2 μs), during the buildup.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">rho</span><span class="o">=</span><span class="n">sl</span><span class="o">.</span><span class="n">Rho</span><span class="p">(</span><span class="s1">&#39;Thermal&#39;</span><span class="p">,</span><span class="s1">&#39;1Hz&#39;</span><span class="p">)</span>
+
+<span class="n">SL0</span><span class="o">=</span><span class="mf">0.2e-6</span><span class="o">+</span><span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">100</span><span class="p">)</span><span class="o">*</span><span class="mi">20</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="mf">2.5e-6</span><span class="o">-</span><span class="mf">0.2e-6</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">SL</span> <span class="ow">in</span> <span class="n">SL0</span><span class="p">:</span>
+    <span class="n">seq</span><span class="o">=</span><span class="n">L</span><span class="o">.</span><span class="n">Sequence</span><span class="p">()</span><span class="o">.</span><span class="n">add_channel</span><span class="p">(</span><span class="s1">&#39;e&#39;</span><span class="p">,</span><span class="n">t</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="n">pi2</span><span class="p">,</span><span class="n">pi2</span><span class="o">+</span><span class="n">SL</span><span class="p">,</span><span class="n">RD</span><span class="p">],</span><span class="n">v1</span><span class="o">=</span><span class="p">[</span><span class="n">v1</span><span class="p">,</span><span class="n">v1</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span><span class="n">phase</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span><span class="mi">0</span><span class="p">])</span>
+    <span class="c1">#A sequence or propagator raised to infinity finds the equilibrium density matrix</span>
+    <span class="n">seq</span><span class="o">**</span><span class="mi">5</span><span class="o">*</span><span class="n">rho</span><span class="p">()</span>  <span class="c1">#Makes a total of 500*RD</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ax</span><span class="o">=</span><span class="n">rho</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="s1">&#39;s&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span><span class="n">rho</span><span class="o">.</span><span class="n">t_axis</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]],</span><span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span><span class="o">*</span><span class="n">ex</span><span class="o">.</span><span class="n">Peq</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;grey&#39;</span><span class="p">,</span><span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;:&#39;</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="sa">r</span><span class="s1">&#39;|e$^-$ thermal polar.|&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x7f89da248320&gt;
+</pre></div>
+</div>
+<img alt="../_images/Ch4_NOVEL_37_1.png" src="../_images/Ch4_NOVEL_37_1.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">i</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="n">rho</span><span class="o">.</span><span class="n">I</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">/</span><span class="n">rho</span><span class="o">.</span><span class="n">I</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">&gt;</span><span class="mf">0.95</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Maximum enhancement of </span><span class="si">{</span><span class="n">rho</span><span class="o">.</span><span class="n">I</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">real</span><span class="o">/</span><span class="n">ex</span><span class="o">.</span><span class="n">Peq</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">:</span><span class="s1">.0f</span><span class="si">}</span><span class="s1">, 95% of max reached at </span><span class="si">{</span><span class="n">rho</span><span class="o">.</span><span class="n">t_axis</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="si">:</span><span class="s1">.2f</span><span class="si">}</span><span class="s1"> s&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Maximum enhancement of 572, 95% of max reached at 0.70 s
+</pre></div>
+</div>
+</div>
+</div>
+<p>Above, we’ve caused the spin-lock length to start at 2.5 μs and end at 0.2 μs, where a decaying exponential defines the transition between the two values (the time constant of this decay has been optimized by hand, the choice of an exponential is only a guess). As we see 95% of the maximum enhancement is reached much more quickly than with a fixed spin-lock length.</p>
+</section>
 </section>
 </section>
 

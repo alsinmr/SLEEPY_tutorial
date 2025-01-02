@@ -619,13 +619,6 @@ title="Print to PDF"
   <a class="reference internal nav-link" href="#relaxing-towards-thermal-equilibrium">
    Relaxing towards thermal equilibrium
   </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#l-add-relax-dynamicthermal">
-     L.add_relax(‘DynamicThermal’)
-    </a>
-   </li>
-  </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#obtaining-the-noe-enhancement">
@@ -682,13 +675,6 @@ title="Print to PDF"
   <a class="reference internal nav-link" href="#relaxing-towards-thermal-equilibrium">
    Relaxing towards thermal equilibrium
   </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#l-add-relax-dynamicthermal">
-     L.add_relax(‘DynamicThermal’)
-    </a>
-   </li>
-  </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#obtaining-the-noe-enhancement">
@@ -768,15 +754,27 @@ title="Print to PDF"
 <img alt="../_images/Ch2_T1_NOE_9_1.png" src="../_images/Ch2_T1_NOE_9_1.png" />
 </div>
 </div>
-<p>We observe both spins start from their thermal equilibrium and decay towards zero. Note that exchange in simulations only can destroy magnetization, so that this approach always forces the magnetization towards zero. We may add a correction term in SLEEPY, that will cause the magnetization to approach thermal equilibrium rather than zero. This is included as the “DynamicThermal” option. We start the magnetization at zero and allow both spins to recover.</p>
+<p>We observe both spins start from their thermal equilibrium and decay towards zero.</p>
 </section>
 <section id="relaxing-towards-thermal-equilibrium">
 <h2>Relaxing towards thermal equilibrium<a class="headerlink" href="#relaxing-towards-thermal-equilibrium" title="Permalink to this headline">#</a></h2>
-<section id="l-add-relax-dynamicthermal">
-<h3>L.add_relax(‘DynamicThermal’)<a class="headerlink" href="#l-add-relax-dynamicthermal" title="Permalink to this headline">#</a></h3>
-<p>rho=sl.Rho(‘zero’,[‘15Nz’,’1Hz’])
-rho.DetProp(seq,n=100)
-rho.plot(axis=’s’)</p>
+<p>Note that exchange in simulations only can destroy magnetization, so that this approach always forces the magnetization towards zero. We may add a correction term in SLEEPY, that will cause the magnetization to approach thermal equilibrium rather than zero. This is included as the “DynamicThermal” option. We start the magnetization at zero and allow both spins to recover.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">L</span><span class="o">.</span><span class="n">add_relax</span><span class="p">(</span><span class="s1">&#39;DynamicThermal&#39;</span><span class="p">)</span>
+<span class="n">rho</span><span class="o">=</span><span class="n">sl</span><span class="o">.</span><span class="n">Rho</span><span class="p">(</span><span class="s1">&#39;zero&#39;</span><span class="p">,[</span><span class="s1">&#39;15Nz&#39;</span><span class="p">,</span><span class="s1">&#39;1Hz&#39;</span><span class="p">])</span>
+<span class="n">rho</span><span class="o">.</span><span class="n">DetProp</span><span class="p">(</span><span class="n">seq</span><span class="p">,</span><span class="n">n</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
+<span class="n">rho</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="s1">&#39;s&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;AxesSubplot:xlabel=&#39;t / s&#39;, ylabel=&#39;&lt;Op&gt;&#39;&gt;
+</pre></div>
+</div>
+<img alt="../_images/Ch2_T1_NOE_12_1.png" src="../_images/Ch2_T1_NOE_12_1.png" />
+</div>
+</div>
 <p>“DynamicThermal” works by calculating the full Liouvillian (referred to here as <span class="math notranslate nohighlight">\(\hat{\hat{L}}_0\)</span>) and equilibrium density matrix, <span class="math notranslate nohighlight">\(\hat{\rho}_{eq}\)</span>. Then, a correction term is calculated, such that:</p>
 <div class="math notranslate nohighlight">
 \[
@@ -800,36 +798,7 @@ rho.plot(axis=’s’)</p>
 </div>
 <p>Then, it is important to note: this correction will result in polarization on, for example, the <span class="math notranslate nohighlight">\(\hat{S}_z\)</span> term, by continually reducing the population of <span class="math notranslate nohighlight">\(\hat{S}_\beta\)</span> and increasing the population of <span class="math notranslate nohighlight">\(\hat{S}_\alpha\)</span> (this can equivalently be seen as an asymmetric transfer between the two populations). However, we also expect asymmetric transfer between, for example, the <span class="math notranslate nohighlight">\(\hat{I}^+\hat{S}_\alpha\)</span> and <span class="math notranslate nohighlight">\(\hat{I}^+\hat{S}_\beta\)</span> populations. This is what gives rise to, for example, the contact shift occuring due to fast relaxing electrons. However, both the <span class="math notranslate nohighlight">\(\hat{I}^+\hat{S}_\alpha\)</span> and <span class="math notranslate nohighlight">\(\hat{I}^+\hat{S}_\beta\)</span> terms are zero under thermal conditions, and therefore are not included in the “DynamicThermal” correction term, as we can see above where we note that the correction is calculated from the density matrix at thermal equilibrium, <span class="math notranslate nohighlight">\(\hat{\rho}_{eq}\)</span>. We will later see that we can correctly product contact and pseudo-contact shifts using Lindblad formalism,<span class="math notranslate nohighlight">\(^1\)</span> but this is obtained with a different set of settings which we will use later for paramagnetic effects.</p>
 <p>[1] C. Bengs, M. Levitt. <em><a class="reference external" href="https://doi.org/10.1016/j.jmr.2019.106645">J. Magn. Reson</a></em>. <strong>2020</strong>, 310,106645.</p>
-<p>We note that the ‘DynamicThermal’ option is susceptible to numerical error due to the small size of the correction compared to the large exchange rates possible. Below, we initiate a simulation in thermal equilibrium with a correlation time of 1 ns and a correlation time of 100 ps. In principle, no evolution should occur, but indeed the latter simulation evolves away from the starting condition. A warning is also produced by the second simulation, indicating the scaling problem may occur.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">L</span><span class="o">.</span><span class="n">kex</span><span class="o">=</span><span class="n">sl</span><span class="o">.</span><span class="n">Tools</span><span class="o">.</span><span class="n">fourSite_sym</span><span class="p">(</span><span class="n">tc</span><span class="o">=</span><span class="mf">1e-9</span><span class="p">)</span>
-<span class="n">rho</span><span class="o">=</span><span class="n">sl</span><span class="o">.</span><span class="n">Rho</span><span class="p">(</span><span class="s1">&#39;Thermal&#39;</span><span class="p">,[</span><span class="s1">&#39;15Nz&#39;</span><span class="p">,</span><span class="s1">&#39;1Hz&#39;</span><span class="p">])</span>
-<span class="n">rho</span><span class="o">.</span><span class="n">DetProp</span><span class="p">(</span><span class="n">seq</span><span class="p">,</span><span class="n">n</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
-<span class="n">rho</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="s1">&#39;s&#39;</span><span class="p">)</span>
-
-<span class="n">L</span><span class="o">.</span><span class="n">kex</span><span class="o">=</span><span class="n">sl</span><span class="o">.</span><span class="n">Tools</span><span class="o">.</span><span class="n">fourSite_sym</span><span class="p">(</span><span class="n">tc</span><span class="o">=</span><span class="mf">1e-10</span><span class="p">)</span>
-<span class="n">rho</span><span class="o">=</span><span class="n">sl</span><span class="o">.</span><span class="n">Rho</span><span class="p">(</span><span class="s1">&#39;Thermal&#39;</span><span class="p">,[</span><span class="s1">&#39;15Nz&#39;</span><span class="p">,</span><span class="s1">&#39;1Hz&#39;</span><span class="p">])</span>
-<span class="n">rho</span><span class="o">.</span><span class="n">DetProp</span><span class="p">(</span><span class="n">seq</span><span class="p">,</span><span class="n">n</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
-<span class="n">rho</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="s1">&#39;s&#39;</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/Users/albertsmith/Documents/GitHub.nosync/SLEEPY/Rho.py:1267: UserWarning: Dynamic thermal may not be stable with exchange rates and relaxation matrix separated by more than 10 orders of magnitude
-  warnings.warn(&#39;Dynamic thermal may not be stable with exchange rates and relaxation matrix separated by more than 10 orders of magnitude&#39;)
-/Users/albertsmith/Documents/GitHub.nosync/SLEEPY/Rho.py:1267: UserWarning: Dynamic thermal may not be stable with exchange rates and relaxation matrix separated by more than 10 orders of magnitude
-  warnings.warn(&#39;Dynamic thermal may not be stable with exchange rates and relaxation matrix separated by more than 10 orders of magnitude&#39;)
-</pre></div>
-</div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;AxesSubplot:xlabel=&#39;t / s&#39;, ylabel=&#39;&lt;Op&gt;&#39;&gt;
-</pre></div>
-</div>
-<img alt="../_images/Ch2_T1_NOE_17_2.png" src="../_images/Ch2_T1_NOE_17_2.png" />
-<img alt="../_images/Ch2_T1_NOE_17_3.png" src="../_images/Ch2_T1_NOE_17_3.png" />
-</div>
-</div>
-</section>
+<p>We note that the ‘DynamicThermal’ option is susceptible to numerical error due to the small size of the correction compared to the large exchange rates possible. Please see <span class="xref myst"><span class="math notranslate nohighlight">\(T_1\)</span> tests</span> for more details.</p>
 </section>
 <section id="obtaining-the-noe-enhancement">
 <h2>Obtaining the NOE enhancement<a class="headerlink" href="#obtaining-the-noe-enhancement" title="Permalink to this headline">#</a></h2>
@@ -857,7 +826,7 @@ rho.plot(axis=’s’)</p>
  &lt;AxesSubplot:xlabel=&#39;t / $\\mu$s&#39;, ylabel=&#39;$v_1$ / kHz&#39;&gt;]
 </pre></div>
 </div>
-<img alt="../_images/Ch2_T1_NOE_21_1.png" src="../_images/Ch2_T1_NOE_21_1.png" />
+<img alt="../_images/Ch2_T1_NOE_20_1.png" src="../_images/Ch2_T1_NOE_20_1.png" />
 </div>
 </div>
 <p>First, we get the propagator for the lab-frame RF. Then, we apply it to a system at thermal equilibrium, to observe it evolve away from thermal equilibrium due to the RF irradation.</p>
@@ -883,7 +852,7 @@ Completed
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;AxesSubplot:xlabel=&#39;t / s&#39;, ylabel=&#39;&lt;Op&gt;&#39;&gt;
 </pre></div>
 </div>
-<img alt="../_images/Ch2_T1_NOE_23_2.png" src="../_images/Ch2_T1_NOE_23_2.png" />
+<img alt="../_images/Ch2_T1_NOE_22_2.png" src="../_images/Ch2_T1_NOE_22_2.png" />
 </div>
 </div>
 </section>

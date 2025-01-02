@@ -30,7 +30,7 @@ import matplotlib.pyplot as plt
 # ## Build the system
 # We start with a reference peak-to-peak width (`DelPP`) of 167 kHz, and scale it with order parameters of 0.15 and 0.3.
 
-# In[15]:
+# In[3]:
 
 
 ex0=sl.ExpSys(v0H=600,Nucs='2H',vr=0,pwdavg='bcr400')
@@ -89,7 +89,7 @@ _=rho.plot(FT=True,apodize=True,ax=ax[1])
 # ## Second order quadrupolar broadening in the lab frame
 # Half-integer spins produce a narrow peak in the middle of the quadrupolar spectrum. However, this peak is broadened by the second-order quadrupole coupling. Simulating this broadening presents a challenge for most simulation packages, because it is a rank-4 tensor, making its transformation under rotation different than the rank-2 tensors that most simulation packages are setup to handle. However, if the quadrupolar interaction is simulated in the lab frame, the second order quadrupole coupling arises naturally. We demonstrate here, with one simulation in the rotating frame, and one in the lab frame.
 
-# In[20]:
+# In[3]:
 
 
 exRF=sl.ExpSys(250,Nucs='17O',vr=60000,pwdavg=sl.PowderAvg('bcr100',gamma_encoded=True))
@@ -105,9 +105,9 @@ rhoLF=sl.Rho('17Ox','17Op')
 _=rhoLF.DetProp(seqLF,n=16000,n_per_seq=32)
 
 
-# Note that if we observe transverse magnetization when it is in the lab frame, it will oscillate with the 
+# Note that if we observe transverse magnetization when it is in the lab frame, it will oscillate near the Larmor frequency of the spin. The center frequency of the spectrum will then be incorrect. This may be corrected by downmixing the signal before plotting (`rho.downmix()`).
 
-# In[4]:
+# In[14]:
 
 
 ax=plt.subplots(1,2,figsize=[8,4])[1]
@@ -116,13 +116,13 @@ rhoRF.plot(FT=True,apodize=True,axis='kHz',ax=ax[1])
 rhoLF.downmix()
 rhoLF.plot(FT=True,apodize=True,axis='kHz',ax=ax[0])
 rhoLF.plot(FT=True,apodize=True,axis='kHz',ax=ax[1])
-ax[1].set_xlim([6,-6])
+ax[1].set_xlim([12,-12])
 _=ax[1].set_ylim([-50,200])
 
 
 # A benefit of high-field magnets is that they narrow the second-order quadrupole broadening. We demonstrate that here, by comparing the spectrum from 250 MHz to that using a 1.2 GHz magnet.
 
-# In[17]:
+# In[15]:
 
 
 exHF=sl.ExpSys(1200,Nucs='17O',vr=60000,LF=True,pwdavg=sl.PowderAvg('bcr100',gamma_encoded=True))
@@ -133,13 +133,13 @@ rhoHF.DetProp(seqHF,n=16000,n_per_seq=32)
 _=rhoHF.downmix()
 
 
-# In[19]:
+# In[18]:
 
 
 ax=rhoHF.plot(FT=True,apodize=True,axis='kHz')
 rhoLF.plot(FT=True,apodize=True,axis='kHz',ax=ax)
-ax.legend(['250 MHz','1.2 GHz'])
-_=ax.set_xlim([6,-6])
+ax.legend(['1.2 GHz','250 MHz'])
+_=ax.set_xlim([12,-12])
 
 
 # In[ ]:

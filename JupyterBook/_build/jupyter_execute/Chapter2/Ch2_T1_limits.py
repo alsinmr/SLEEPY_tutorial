@@ -32,7 +32,7 @@ import pyDR
 
 # We mimick a tumbling motion by hopping around the 'rep10' power average. Note that tumbling is currently only implemented for colinear tensors without asymmetry (we don't include a gamma average, so this yield vector tumbling, not tensor tumbling).
 
-# In[20]:
+# In[3]:
 
 
 # Since we use a tumbling model, we only need a single angle in the powder average
@@ -49,7 +49,7 @@ seq=L.Sequence(Dt=.1)
 
 # We plot the full Liouvillian below, just to give an idea what the exchange looks like.
 
-# In[9]:
+# In[4]:
 
 
 ax=L.plot()
@@ -57,9 +57,9 @@ ax.figure.set_size_inches([8,8])
 
 
 # ### Sweep the correlation time
-# We don't use explicit propagation. Instead, we extract the decay rates using `rho.extract_decay_rates` to find the $T_1$ decay. We also calculate the signal at equilibrium. This is done by raising the density matrix to an infinite power (internally, we don't really use infinity- this just triggers an algorithm to calculate the equilibrium position)
+# We don't use explicit propagation. Instead, we extract the decay rates using `rho.extract_decay_rates` to find the $T_1$ decay. We also calculate the signal at equilibrium. This is done by raising the density matrix to an infinite power (internally, we don't really use infinity- this just triggers an algorithm to calculate the equilibrium density matrix)
 
-# In[25]:
+# In[5]:
 
 
 tc0=np.logspace(-5,-13,80)
@@ -73,7 +73,7 @@ for tc in tc0:
 
 # ### Plot the results
 
-# In[26]:
+# In[6]:
 
 
 ax=plt.subplots(1,1,figsize=[4,4])[1]
@@ -96,7 +96,7 @@ ax.legend(('Simulation','Analytic'))
 
 # ### Add the relaxation
 
-# In[91]:
+# In[7]:
 
 
 _=L.add_relax('DynamicThermal')
@@ -106,7 +106,7 @@ _=L.add_relax('DynamicThermal')
 
 # We just have to add the recovery mechanism (above), and repeat the calculation. Note we initialize at thermal equilibrium, and invert the $^{15}$N magnetization at the beginning, to be able to observe decay. This is because the function `rho.extract_decay_rates` always assumes decay towards zero. Therefore, we can't start at zero, and we can't start at thermal equilibrium. This also means that the decay is twice as fast as if it were going towards zero, thus we divide by two.
 
-# In[66]:
+# In[8]:
 
 
 tc0=np.logspace(-5,-13,80)
@@ -125,7 +125,7 @@ for tc in tc0:
 
 # ### Plot the results
 
-# In[68]:
+# In[10]:
 
 
 ax=plt.subplots(1,2,figsize=[9,4])[1]
@@ -148,7 +148,7 @@ _=ax[1].legend(('Simulation','Theoretical'))
 
 # Below, we plot a simulation below and above the failure threshold.
 
-# In[76]:
+# In[11]:
 
 
 ax=plt.subplots(1,2,figsize=[9,4])[1]
@@ -175,7 +175,7 @@ ax[1].set_title(fr'$\tau_c$ = {tc*1e12:.0f} ps')
 # We see that for the shorter correlation time, thermal equilibrium is not achieved (dashed/dotted lines indicate the thermal equilibrium for the two spins).
 
 # ## Better "DynamicThermal" performance for smaller systems
-# The validity of dynamic thermal is better for smaller exchange systems, probably due to less numerical error buildup. Here, we consider a system in two-site exchange. We need to include a powder average to compare to the analytical formulas (since these are valid only for orientationally averaged relaxation). We also need to include a scaling factor, $1-S^2$, for the relaxation, where $S^2$ can be calculated from the angle of the two-site hop:
+# The validity of dynamic thermal is better for smaller exchange systems, due to less numerical error buildup. Here, we consider a system in two-site exchange. We need to include a powder average to compare to the analytical formulas (since these are valid only for orientationally averaged relaxation). We also need to include a scaling factor, $1-S^2$, for the relaxation, where $S^2$ can be calculated from the angle of the two-site hop:
 # 
 # $$
 # \begin{equation}
@@ -183,7 +183,7 @@ ax[1].set_title(fr'$\tau_c$ = {tc*1e12:.0f} ps')
 # \end{equation}
 # $$
 
-# In[93]:
+# In[12]:
 
 
 phi=np.pi/4
@@ -200,7 +200,7 @@ L.add_relax('DynamicThermal')
 seq=L.Sequence(Dt=.1)
 
 
-# In[82]:
+# In[13]:
 
 
 tc0=np.logspace(-5,-13,80)
@@ -217,7 +217,7 @@ for tc in tc0:
     Ieq.append((U**np.inf*rho)().I[:,0].real)
 
 
-# In[90]:
+# In[15]:
 
 
 ax=plt.subplots(1,2,figsize=[9,4])[1]
@@ -227,7 +227,7 @@ ax[0].semilogx(nmr.tc,nmr.rhoz.T*(1-S2),color='black',linestyle=':',linewidth=3)
 ax[1].semilogx(tc0,np.array(Ieq))
 ax[1].semilogx([tc0[0],tc0[-1]],ex0.Peq[0]*np.ones(2),linestyle=':',color='black')
 ax[1].semilogx([tc0[0],tc0[-1]],ex0.Peq[1]*np.ones(2),linestyle='--',color='grey')
-ax[1].set_ylim([ex0.Peq[0]*2,ex0.Peq[1]*2])
+ax[1].set_ylim([ex0.Peq[0]*2,ex0.Peq[1]*1.2])
 
 for a in ax:a.set_xlabel(r'$\tau_c$ / s')
 ax[0].set_ylabel(r'$R_1$ / s')

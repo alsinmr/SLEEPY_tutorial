@@ -696,13 +696,14 @@ title="Print to PDF"
   <section class="tex2jax_ignore mathjax_ignore" id="font-color-0093af-solid-effect">
 <h1><font  color = "#0093AF"> Solid Effect<a class="headerlink" href="#font-color-0093af-solid-effect" title="Permalink to this headline">#</a></h1>
 <p><a href="https://githubtocolab.com/alsinmr/SLEEPY_tutorial/blob/main/ColabNotebooks/Chapter4/Ch4_SolidEffect.ipynb" target="_blank"><img src="https://colab.research.google.com/assets/colab-badge.svg"></a></p>
-<p>The solid-effect is a two-spin mechanism of transfering polarization from electrons to nuclei. It is active when the electron is irradiated with an offset equal to the nuclear Larmor frequency:</p>
+<p>The solid-effect<span class="math notranslate nohighlight">\(^1\)</span> is a two-spin mechanism of transfering polarization from electrons to nuclei. It is active when the electron is irradiated with an offset equal to the nuclear Larmor frequency:</p>
 <div class="math notranslate nohighlight">
 \[
 \begin{equation}
 \omega_{rf}=\omega_{0e}\pm\omega_{0H}
 \end{equation}
 \]</div>
+<p>[1] C.D. Jeffries <em><a class="reference external" href="https://doi.org/10.1103/PhysRev.106.164">Phys. Rev.</a></em>, <strong>1957</strong>, 106, 164-165.</p>
 <section id="setup">
 <h2>Setup<a class="headerlink" href="#setup" title="Permalink to this headline">#</a></h2>
 <div class="cell docutils container">
@@ -823,6 +824,8 @@ title="Print to PDF"
 <span class="n">ex_cr</span><span class="o">.</span><span class="n">set_inter</span><span class="p">(</span><span class="s1">&#39;g&#39;</span><span class="p">,</span><span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">gxx</span><span class="o">=</span><span class="mf">2.0027</span><span class="p">,</span><span class="n">gyy</span><span class="o">=</span><span class="mf">2.0031</span><span class="p">,</span><span class="n">gzz</span><span class="o">=</span><span class="mf">2.0034</span><span class="p">,</span><span class="n">euler</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">])</span>
 
 <span class="n">L</span><span class="o">=</span><span class="n">ex_cr</span><span class="o">.</span><span class="n">Liouvillian</span><span class="p">()</span>
+<span class="c1"># Note that because the nuclear quantization axis is tilted away from z, </span>
+<span class="c1"># it is important to set OS=True</span>
 <span class="n">L</span><span class="o">.</span><span class="n">add_relax</span><span class="p">(</span><span class="n">Type</span><span class="o">=</span><span class="s1">&#39;T2&#39;</span><span class="p">,</span><span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">T2</span><span class="o">=</span><span class="mf">.890e-6</span><span class="p">,</span><span class="n">OS</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 <span class="n">L</span><span class="o">.</span><span class="n">add_relax</span><span class="p">(</span><span class="n">Type</span><span class="o">=</span><span class="s1">&#39;T2&#39;</span><span class="p">,</span><span class="n">i</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">T2</span><span class="o">=</span><span class="mf">5e-3</span><span class="p">,</span><span class="n">OS</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 <span class="n">L</span><span class="o">.</span><span class="n">add_relax</span><span class="p">(</span><span class="n">Type</span><span class="o">=</span><span class="s1">&#39;T1&#39;</span><span class="p">,</span><span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">T1</span><span class="o">=</span><span class="mf">1.4e-3</span><span class="p">,</span><span class="n">OS</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">Thermal</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
@@ -868,7 +871,7 @@ title="Print to PDF"
 </div>
 <section id="sweep-electron-t-1">
 <h3>Sweep electron <span class="math notranslate nohighlight">\(T_1\)</span><a class="headerlink" href="#sweep-electron-t-1" title="Permalink to this headline">#</a></h3>
-<p>Note that if you set the electron <span class="math notranslate nohighlight">\(T_1\)</span> short than half the electron <span class="math notranslate nohighlight">\(T_2\)</span>, this calculation may diverge.</p>
+<p>Note that if you set the electron <span class="math notranslate nohighlight">\(T_1\)</span> shorter than half the electron <span class="math notranslate nohighlight">\(T_2\)</span>, this calculation may diverge.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">T1e0</span><span class="o">=</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mf">1e-1</span><span class="p">,</span><span class="mf">1e-2</span><span class="p">,</span><span class="mf">1e-3</span><span class="p">,</span><span class="mf">1e-4</span><span class="p">,</span><span class="mf">1e-5</span><span class="p">]</span>
@@ -903,7 +906,7 @@ title="Print to PDF"
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x7f7799e86fd0&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x7fc251964438&gt;
 </pre></div>
 </div>
 <img alt="../_images/Ch4_SolidEffect_26_1.png" src="../_images/Ch4_SolidEffect_26_1.png" />

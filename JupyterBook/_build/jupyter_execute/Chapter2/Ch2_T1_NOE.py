@@ -55,14 +55,19 @@ rho.DetProp(seq,n=100)
 rho.plot(axis='s')
 
 
-# We observe both spins start from their thermal equilibrium and decay towards zero. Note that exchange in simulations only can destroy magnetization, so that this approach always forces the magnetization towards zero. We may add a correction term in SLEEPY, that will cause the magnetization to approach thermal equilibrium rather than zero. This is included as the "DynamicThermal" option. We start the magnetization at zero and allow both spins to recover.
+# We observe both spins start from their thermal equilibrium and decay towards zero.
 
 # ## Relaxing towards thermal equilibrium
+# Note that exchange in simulations only can destroy magnetization, so that this approach always forces the magnetization towards zero. We may add a correction term in SLEEPY, that will cause the magnetization to approach thermal equilibrium rather than zero. This is included as the "DynamicThermal" option. We start the magnetization at zero and allow both spins to recover.
 
-# ### L.add_relax('DynamicThermal')
-# rho=sl.Rho('zero',['15Nz','1Hz'])
-# rho.DetProp(seq,n=100)
-# rho.plot(axis='s')
+# In[5]:
+
+
+L.add_relax('DynamicThermal')
+rho=sl.Rho('zero',['15Nz','1Hz'])
+rho.DetProp(seq,n=100)
+rho.plot(axis='s')
+
 
 # "DynamicThermal" works by calculating the full Liouvillian (referred to here as $\hat{\hat{L}}_0$) and equilibrium density matrix, $\hat{\rho}_{eq}$. Then, a correction term is calculated, such that:
 # 
@@ -78,7 +83,7 @@ rho.plot(axis='s')
 # 
 # The correction term is inserted into the Liouvillian such that it only interacts with the identity in the density matrix. Remember, the density matrix is extended to a vector in Liouville space. However, take for example, a 2-spin-1/2 system. The 4x4 identity matrix is stretched into a 16 element vector, with elements at the 0th, 5th, 10th, and 15th position. In this system, we have four states in exchange, so that yields elements at positions: 0,5,10,15,16,21,26,31,32,37,42,47,48,53,58,63. We can see how this works in the plot below, where the columns corresponding to the listed positions are each occupied by the product $\hat{\hat{L}}_0\cdot\hat{\rho}_{eq}$
 
-# In[8]:
+# In[6]:
 
 
 _=L.plot('Lrelax')
@@ -88,21 +93,7 @@ _=L.plot('Lrelax')
 # 
 # [1] C. Bengs, M. Levitt. *[J. Magn. Reson](https://doi.org/10.1016/j.jmr.2019.106645)*. **2020**, 310,106645.
 
-# We note that the 'DynamicThermal' option is susceptible to numerical error due to the small size of the correction compared to the large exchange rates possible. Below, we initiate a simulation in thermal equilibrium with a correlation time of 1 ns and a correlation time of 100 ps. In principle, no evolution should occur, but indeed the latter simulation evolves away from the starting condition. A warning is also produced by the second simulation, indicating the scaling problem may occur.
-
-# In[9]:
-
-
-L.kex=sl.Tools.fourSite_sym(tc=1e-9)
-rho=sl.Rho('Thermal',['15Nz','1Hz'])
-rho.DetProp(seq,n=100)
-rho.plot(axis='s')
-
-L.kex=sl.Tools.fourSite_sym(tc=1e-10)
-rho=sl.Rho('Thermal',['15Nz','1Hz'])
-rho.DetProp(seq,n=100)
-rho.plot(axis='s')
-
+# We note that the 'DynamicThermal' option is susceptible to numerical error due to the small size of the correction compared to the large exchange rates possible. Please see [$T_1$ tests](Chapter2/Ch2_T1_limits.ipynb) for more details.
 
 # ## Obtaining the NOE enhancement
 
