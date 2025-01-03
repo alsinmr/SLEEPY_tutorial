@@ -158,7 +158,6 @@ def write_colab_setup(f):
     f.write("""{
      "cell_type": "code",
      "execution_count": 0,
-     "id": "759eab0f",
      "metadata": {},
      "outputs": [],
      "source": [
@@ -239,6 +238,16 @@ def add_links(f,filename):
     #         """)
     f.write("""
             ]\n}""")
+            
+def add_image(f):
+    f.write("""{
+     "cell_type": "markdown",
+     "metadata": {},
+     "source": [
+     "<img src=\\"https://raw.githubusercontent.com/alsinmr/SLEEPY_tutorial/033b817f027ebdcd6493a1f42ab9fdec290dbee8/JupyterBook/favicon.png\\" alt=\\"sleepy eyes\\" style=\\"width:50px;\\">"
+     ]
+    },""")
+
         
 def copy2colab(chapter,filename):
     cr=CellReader(filename)
@@ -246,6 +255,7 @@ def copy2colab(chapter,filename):
     with open(os.path.join('ColabNotebooks',f'Chapter{chapter}',os.path.split(filename)[1]),'w') as f:
         for line in cr.header:
             f.write(line)
+        add_image(f)
         for cell in cr:
             if cell is None:
                 break
