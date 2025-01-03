@@ -198,7 +198,6 @@ def write_book_setup(f):
     f.write("""{
      "cell_type": "code",
      "execution_count": 0,
-     "id": "759eab0f",
      "metadata": {},
      "outputs": [],
      "source": [
@@ -227,7 +226,6 @@ def add_links(f,filename):
     filename=os.path.split(filename)[1]
     f.write("""{
      "cell_type": "markdown",
-     "id": "759eab0e",
      "metadata": {},
      "source": [""")
     f.write(f"""
@@ -244,7 +242,7 @@ def add_image(f):
      "cell_type": "markdown",
      "metadata": {},
      "source": [
-     "<img src=\\"https://raw.githubusercontent.com/alsinmr/SLEEPY_tutorial/033b817f027ebdcd6493a1f42ab9fdec290dbee8/JupyterBook/favicon.png\\" alt=\\"sleepy eyes\\" style=\\"width:50px;\\">"
+     "<img src=\\"https://raw.githubusercontent.com/alsinmr/SLEEPY_tutorial/033b817f027ebdcd6493a1f42ab9fdec290dbee8/JupyterBook/favicon.png\\"  width=50>"
      ]
     },""")
 
