@@ -21,6 +21,7 @@
 /Users/albertsmith/Documents/GitHub.nosync/SLEEPY_tutorial/Chapters/Chapter4/Ch4_CrossEffect.ipynb	1735923507
 /Users/albertsmith/Documents/GitHub.nosync/SLEEPY_tutorial/Chapters/Chapter4/Ch4_NOVEL.ipynb	1735838521
 /Users/albertsmith/Documents/GitHub.nosync/SLEEPY_tutorial/Chapters/Chapter4/Ch4_SolidEffect.ipynb	1735923507
-/Users/albertsmith/Documents/GitHub.nosync/SLEEPY_tutorial/Chapters/Chapter5/Ch5_PseudoContactShift.ipynb	1735927215
+/Users/albertsmith/Documents/GitHub.nosync/SLEEPY_tutorial/Chapters/Chapter5/Ch5_PseudoContactShift.ipynb	1735940816
 /Users/albertsmith/Documents/GitHub.nosync/SLEEPY_tutorial/Chapters/Chapter5/Ch5_ContactShift.ipynb	1735923507
-/Users/albertsmith/Documents/GitHub.nosync/SLEEPY_tutorial/Chapters/Chapter5/PseudoContactShift.ipynb	1735923507
+/Users/albertsmith/Documents/GitHub.nosync/SLEEPY_tutorial/Chapters/Chapter5/PseudoContactShift.ipynb	1735937085
+/Users/albertsmith/Documents/GitHub.nosync/SLEEPY_tutorial/Chapters/Chapter6/Ch6_RelaxationOptions.ipynb	1735941159

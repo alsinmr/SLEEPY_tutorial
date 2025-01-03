@@ -318,7 +318,7 @@ if __name__=='__main__':
                 file_record[key]=int(value)
             
     with open('file_record.txt','w') as f:
-        for chapter in range(1,6):
+        for chapter in range(1,7):
             print(f'Chapter: {chapter}')
             for filename in os.listdir(os.path.join(directory,'Chapters',f'Chapter{chapter}')):
                 filename=os.path.join(directory,'Chapters',f'Chapter{chapter}',filename)
