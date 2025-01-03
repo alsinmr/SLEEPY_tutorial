@@ -368,12 +368,33 @@ const thebe_selector_output = ".output, .cell_output"
    </li>
   </ul>
  </li>
- <li class="toctree-l1">
+ <li class="toctree-l1 has-children">
   <a class="reference internal" href="../Ch5_ParamagneticEffects.html">
    <font color="maroon">
     Paramagnetic Effects
    </font>
   </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" type="checkbox"/>
+  <label for="toctree-checkbox-5">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../Chapter5/Ch5_ContactShift.html">
+     <font color="#0093AF">
+      Contact shift
+     </font>
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../Chapter5/Ch5_PseudoContactShift.html">
+     <font color="#0093AF">
+      Paramagnetic Effects: Pseudo-Contact Shift
+     </font>
+    </a>
+   </li>
+  </ul>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../Ch6_ColabTemplate.html">
@@ -626,6 +647,11 @@ title="Print to PDF"
    </li>
   </ul>
  </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#simulating-solid-effect-without-relaxation">
+   Simulating Solid-Effect without relaxation
+  </a>
+ </li>
 </ul>
 
     </nav>
@@ -682,6 +708,11 @@ title="Print to PDF"
     </a>
    </li>
   </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#simulating-solid-effect-without-relaxation">
+   Simulating Solid-Effect without relaxation
+  </a>
  </li>
 </ul>
 
@@ -750,6 +781,13 @@ title="Print to PDF"
 </div>
 </div>
 </div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">L</span><span class="o">.</span><span class="n">clear_cache</span>
+</pre></div>
+</div>
+</div>
+</div>
 <p>Note that SLEEPY’s “on-resonance” electron has a g-value of 2.0023193 (<code class="docutils literal notranslate"><span class="pre">sl.Constants['ge']</span></code>). That means that the trityl g-tensor is fairly far away from being on-resonant already, such that we need to offset the applied microwave frequency by the difference between these, plus or minus the <span class="math notranslate nohighlight">\(^1\)</span>H Larmor frequency</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -761,7 +799,7 @@ title="Print to PDF"
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The offset is 156.85033759862856
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The offset is 156.8503306522459
 </pre></div>
 </div>
 </div>
@@ -797,7 +835,7 @@ title="Print to PDF"
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/Ch4_SolidEffect_15_0.png" src="../_images/Ch4_SolidEffect_15_0.png" />
+<img alt="../_images/Ch4_SolidEffect_16_0.png" src="../_images/Ch4_SolidEffect_16_0.png" />
 </div>
 </div>
 <p>We can compare this to the thermal polarization of the <span class="math notranslate nohighlight">\(^1\)</span>H to observe a significant enhancement.</p>
@@ -850,7 +888,7 @@ title="Print to PDF"
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Prop: 100 steps per every 1 rotor period
 </pre></div>
 </div>
-<img alt="../_images/Ch4_SolidEffect_19_1.png" src="../_images/Ch4_SolidEffect_19_1.png" />
+<img alt="../_images/Ch4_SolidEffect_20_1.png" src="../_images/Ch4_SolidEffect_20_1.png" />
 </div>
 </div>
 <p>We see that the solid-effect condition is hit twice per rotor period (left plot),leading to a gradual build up of the polarization (right plot). Note that changing the index on the powder average (e.g. <code class="docutils literal notranslate"><span class="pre">sl.PowderAvg(q=2)[25]</span></code>) will change the locations in the rotor period that transfer occurs.</p>
@@ -909,7 +947,7 @@ title="Print to PDF"
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x7fc251964438&gt;
 </pre></div>
 </div>
-<img alt="../_images/Ch4_SolidEffect_26_1.png" src="../_images/Ch4_SolidEffect_26_1.png" />
+<img alt="../_images/Ch4_SolidEffect_27_1.png" src="../_images/Ch4_SolidEffect_27_1.png" />
 </div>
 </div>
 <p>We see that a shorter electron <span class="math notranslate nohighlight">\(T_1\)</span> yields a larger enhancement, since the electron must recover its magnetization when transferred to the nucleus. If it becomes too short, it interferes with the transfer itself.</p>
@@ -953,11 +991,46 @@ title="Print to PDF"
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x7f77a9a0c630&gt;
 </pre></div>
 </div>
-<img alt="../_images/Ch4_SolidEffect_30_1.png" src="../_images/Ch4_SolidEffect_30_1.png" />
+<img alt="../_images/Ch4_SolidEffect_31_1.png" src="../_images/Ch4_SolidEffect_31_1.png" />
 </div>
 </div>
 <p>In contrast to the electron, increasing the nuclear <span class="math notranslate nohighlight">\(T_1\)</span> increases the DNP enhancement.</p>
 </section>
+</section>
+<section id="simulating-solid-effect-without-relaxation">
+<h2>Simulating Solid-Effect without relaxation<a class="headerlink" href="#simulating-solid-effect-without-relaxation" title="Permalink to this headline">#</a></h2>
+<p>In the last simulation, we show that relaxation is critical in achieving polarization buildup. We reproduce the first simulation in this section, but do not apply any relaxation. What we observe is that although the solid-effect conditions are met during the rotor period, over the course of many rotor periods, the magnetization gained by the nucleus is periodically transferred back to the electron so that no net magnetization is achieved.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ex_cr</span><span class="o">=</span><span class="n">sl</span><span class="o">.</span><span class="n">ExpSys</span><span class="p">(</span><span class="n">v0H</span><span class="o">=</span><span class="mi">211</span><span class="p">,</span><span class="n">Nucs</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;e-&#39;</span><span class="p">,</span><span class="s1">&#39;1H&#39;</span><span class="p">],</span><span class="n">LF</span><span class="o">=</span><span class="p">[</span><span class="kc">False</span><span class="p">,</span><span class="kc">True</span><span class="p">],</span><span class="n">vr</span><span class="o">=</span><span class="mi">5000</span><span class="p">,</span><span class="n">T_K</span><span class="o">=</span><span class="mi">80</span><span class="p">,</span><span class="n">pwdavg</span><span class="o">=</span><span class="n">sl</span><span class="o">.</span><span class="n">PowderAvg</span><span class="p">(</span><span class="n">q</span><span class="o">=</span><span class="mi">2</span><span class="p">)[</span><span class="mi">10</span><span class="p">])</span>
+<span class="n">ex_cr</span><span class="o">.</span><span class="n">set_inter</span><span class="p">(</span><span class="s1">&#39;hyperfine&#39;</span><span class="p">,</span><span class="n">i0</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">i1</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">Axx</span><span class="o">=-</span><span class="mi">100000</span><span class="p">,</span><span class="n">Ayy</span><span class="o">=-</span><span class="mi">100000</span><span class="p">,</span><span class="n">Azz</span><span class="o">=</span><span class="mi">200000</span><span class="p">)</span>
+<span class="n">ex_cr</span><span class="o">.</span><span class="n">set_inter</span><span class="p">(</span><span class="s1">&#39;g&#39;</span><span class="p">,</span><span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">gxx</span><span class="o">=</span><span class="mf">2.0027</span><span class="p">,</span><span class="n">gyy</span><span class="o">=</span><span class="mf">2.0031</span><span class="p">,</span><span class="n">gzz</span><span class="o">=</span><span class="mf">2.0034</span><span class="p">,</span><span class="n">euler</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">])</span>
+
+<span class="n">L</span><span class="o">=</span><span class="n">ex_cr</span><span class="o">.</span><span class="n">Liouvillian</span><span class="p">()</span>
+
+<span class="n">seq</span><span class="o">=</span><span class="n">L</span><span class="o">.</span><span class="n">Sequence</span><span class="p">()</span>
+<span class="n">_</span><span class="o">=</span><span class="n">seq</span><span class="o">.</span><span class="n">add_channel</span><span class="p">(</span><span class="n">channel</span><span class="o">=</span><span class="s1">&#39;e-&#39;</span><span class="p">,</span><span class="n">v1</span><span class="o">=</span><span class="mf">1e6</span><span class="p">,</span><span class="n">voff</span><span class="o">=</span><span class="n">voff</span><span class="p">)</span>
+<span class="n">rho</span><span class="o">=</span><span class="n">sl</span><span class="o">.</span><span class="n">Rho</span><span class="p">(</span><span class="s1">&#39;Thermal&#39;</span><span class="p">,</span><span class="s1">&#39;1Hz&#39;</span><span class="p">)</span>
+
+<span class="n">fig</span><span class="p">,</span><span class="n">ax</span><span class="o">=</span><span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="n">figsize</span><span class="o">=</span><span class="p">[</span><span class="mi">10</span><span class="p">,</span><span class="mi">4</span><span class="p">])</span>
+<span class="n">rho</span><span class="o">.</span><span class="n">DetProp</span><span class="p">(</span><span class="n">seq</span><span class="p">,</span><span class="n">n</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span><span class="n">n_per_seq</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
+<span class="n">rho</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="n">axis</span><span class="o">=</span><span class="s1">&#39;us&#39;</span><span class="p">)</span>
+<span class="n">rho</span><span class="o">.</span><span class="n">clear</span><span class="p">()</span>
+<span class="n">U</span><span class="o">=</span><span class="n">seq</span><span class="o">.</span><span class="n">U</span><span class="p">()</span><span class="o">**</span><span class="mi">100</span>
+<span class="n">rho</span><span class="o">.</span><span class="n">DetProp</span><span class="p">(</span><span class="n">U</span><span class="p">,</span><span class="n">n</span><span class="o">=</span><span class="mi">3000</span><span class="p">)</span>
+<span class="n">rho</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span><span class="n">axis</span><span class="o">=</span><span class="s1">&#39;s&#39;</span><span class="p">)</span>
+<span class="n">fig</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>11
+Prop: 100 steps per every 1 rotor period
+</pre></div>
+</div>
+<img alt="../_images/Ch4_SolidEffect_35_1.png" src="../_images/Ch4_SolidEffect_35_1.png" />
+</div>
+</div>
 </section>
 </section>
 

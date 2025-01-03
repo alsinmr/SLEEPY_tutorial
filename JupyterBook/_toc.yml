@@ -42,4 +42,7 @@ parts:
     - file: Chapter4/Ch4_OverhauserEffect
     - file: Chapter4/Ch4_NOVEL
   - file: Ch5_ParamagneticEffects
+    sections:
+    - file: Chapter5/Ch5_ContactShift
+    - file: Chapter5/Ch5_PseudoContactShift
   - file: Ch6_ColabTemplate

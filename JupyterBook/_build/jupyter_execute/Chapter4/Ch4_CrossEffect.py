@@ -15,15 +15,13 @@
 # 
 # Enhancement on the nucleus is induced if the polarization of the two electrons is different. This is achieved by applying a saturating field to the electrons, such that one becomes more saturated than the other.
 # 
-# Most orientations of electron pairs in the sample do not match the above condition, however, magic angle spinning will bring most crystallites through the cross-effect matching condition at some point in the rotor period,$^3$ allowing it to nonetheless be an effective mechanism of enhancement. However, MAS will also cause both electrons to get saturated at various points during the rotor period, and also electron-electron transfer without the nucleus becomes possible if the two electrons have the same resonance frequency at some point during the rotor period. 
-# 
-# We investigate the various complications of cross effect here, along with the role of electron relaxation for this transfer.
+# Most orientations of electron pairs in the sample do not match the above condition, however, magic angle spinning will bring most crystallites through the cross-effect matching condition at some point in the rotor period,$^3$ allowing cross effect to be an effective mechanism of enhancement. However, MAS will cause both electrons to get saturated at various points during the rotor period, and electron-electron transfer without involving the nucleus occurs when the two electrons have the same resonance frequency at some point during the rotor period. We investigate these various processes here.
 # 
 # [1] A.V. Kessenikh, V.L. Luschikov, A.A. Manenkov, Y. Taran. *Sov. Phys. Solid State*, **1963**, 6, 321-329
 # 
-# [2] C.F. Hwang, D.A. Hill. *[Phys. Rev. Lett.](https://doi.org/10.1103/PhysRevLett.19.1011)*, **1967**, 19, 1011-1014.
+# [2] C.F. Hwang, D.A. Hill. [*Phys. Rev. Lett.*](https://doi.org/10.1103/PhysRevLett.19.1011), **1967**, 19, 1011-1014.
 # 
-# [3] K.R. Thurber, R. Tycko. *[J. Chem. Phys.](https://doi.org/10.1063/1.4747449)*, **2012**, 137, 084508.
+# [3] K.R. Thurber, R. Tycko. [*J. Chem. Phys.*](https://doi.org/10.1063/1.4747449), **2012**, 137, 084508.
 
 # ## Setup
 
@@ -33,7 +31,7 @@
 # SETUP SLEEPY
 
 
-# In[2]:
+# In[156]:
 
 
 import SLEEPY as sl
@@ -42,271 +40,222 @@ import matplotlib.pyplot as plt
 from time import time
 
 
-# ## $^1$H Magnetization without and with e- irradiation
+# ## Calculate a spectrum of one crystallite under MAS
 
-# ### Calculate a spectrum of one electron under MAS
+# Something important to understand about cross-effect (and simulating it) is that by spinning the sample at a frequency much slower than the variation of the electron resonance frequency, we sample different resonance frequencies during one rotor period. In our example here, the electron covers a range of frequencies about 600 MHz broad. Then, MAS does not achieve averaging of the frequencies, but rather results in a broad spectrum of frequencies for single orientations.
+# 
+# A few important points: 
+# 
+# 1. In reality, the sampling of frequencies by MAS is continuous, but in simulation it is discretized. Then, narrow conditions may be missed in simulation that would be briefly met in reality. This can be dealt with by increasing the number of gamma angles, or by decreasing $T_2$ which should broaden conditions.
+# 
+# 2. A spectrum with many frequencies results from a single crystallite under MAS, although it is not phaseable. This is because different frequencies are sampled at different times during the rotor period, where the magnetization is not always starting along the x-axis, thus resulting in a varying phase.
+# 
+# 3. To obtain the full breadth of the spectrum, we spin faster than typical DNP experiments, and then sample many times in the rotor period (faster spinning allows us to sample less in one rotor period, yielding a faster simulation).
 
-# We would like to know roughly where to irradiate for effective cross effect. We can capture a large portion of the spectrum from a single crystal orientation, because the offset of the electron from its center frequency is much larger than the rotor frequency. However, when a given frequency is sampled, the magnetization is not usually starting on x, so that the signal cannot be phased. Note that we increase the MAS frequency to get a broader spectral width with fewer steps in the rotor period.
-
-# In[14]:
-
-
-# Center electron g-tensor on ge
-gxx,gyy,gzz=2.0022,2.0059,2.0098
-gxx,gyy,gzz=2.0022,2.0059,2.014
-gavg=(gxx+gyy+gzz)/3
-ge=sl.Constants['ge']
-# Adjust the center of the spectrum to be at ge
-gxx,gyy,gzz=[g-gavg+ge for g in [gxx,gyy,gzz]]
+# In[157]:
 
 
-# In[16]:
+# This is a trick to adjust the electron carrier frequency
+# to be centered on the middle of the g-tensor
+gxx,gyy,gzz=2.0021,2.0061,2.0094
+sl.Constants['ge']=(gxx+gyy+gzz)/3
 
 
-ex=sl.ExpSys(v0H=250,Nucs=['e-'],LF=[False],vr=100000,T_K=80,pwdavg=sl.PowderAvg('alpha0beta45')[0])
+# In[27]:
+
+
+ex=sl.ExpSys(v0H=250,Nucs='e-',LF=False,vr=100000,T_K=80,pwdavg='alpha0beta45',n_gamma=200)
 ex.set_inter('g',i=0,gxx=gxx,gyy=gyy,gzz=gzz,euler=[0,0,0])
 
 L=ex.Liouvillian()
-L.add_relax('T2',i=0,T2=5e-6,OS=True)
+L.add_relax('T2',i=0,T2=50e-6,OS=True)
 L.add_relax('T1',i=0,T1=250e-6,OS=True,Thermal=True)
 
 seq=L.Sequence()
 
 rho=sl.Rho('ex','ep')
-rho.DetProp(seq,n=12000,n_per_seq=12000)
+rho.DetProp(seq,n=10000,n_per_seq=10000)
 
-rho.plot(FT=True,axis='MHz')
+_=rho.plot(FT=True,axis='MHz')
 
 
-# Then, we irradiate a little off the center, at -50 MHz.
+# Then, we obtain a broad spectrum from the single orientation, but its phase is random. We can plot the power spectrum to get a better view (there is no built-in function for this, but it is trivial to obtain, since the Fourier-transformed spectrum is in `rho.FT`). Note that this does not yield the static spectrum; this would require an average over $\beta$-angles.
+
+# In[168]:
+
+
+ax=plt.subplots()[1]
+rho.apodize=True
+rho.apod_pars['LB']=200000
+ax.plot(rho.v_axis*1e6,np.abs(rho.FT[0]))
+ax.set_xlabel(r'\nu / MHz')
+
+
+# ## Cross-effect events as a function of the rotor cycle
 
 # ### Build the System
 
-# In[82]:
+# It is also important to put the nucleus, but not the electrons, in the lab frame for cross-effect to occur. Some broadening on the electrons is also important, since the cross-effect condition is otherwise too narrow and will be missed during the rotor period.
+# 
+# In the first simulation, we will just look at one rotor period to observe the cross-effect transfer. Note that $T_2$ relaxation added to the nucleus should be applied with the orientation-specific option (`OS=True`), since the nucleus is tipped away from the z-axis. If this is not used, some of the $T_2$ relaxation will be applied to the nuclear polarization.
+# 
+# Note that we take some parameters from Thurber and Tycko.$^1$
+# 
+# [1] K.R. Thurber, R. Tycko. [*J. Chem. Phys.*](https://doi.org/10.1063/1.4747449), **2012**, 137, 084508.
+
+# In[138]:
 
 
-ex=sl.ExpSys(v0H=250,Nucs=['e-','e-','1H'],LF=[False,False,True],vr=5000,T_K=80,pwdavg=sl.PowderAvg(q=2)[3])
-delta=2e6
-ex.set_inter('hyperfine',i0=0,i1=2,Axx=-delta/2,Ayy=-delta/2,Azz=delta,euler=[0,0,0])
-# ex.set_inter('hyperfine',i0=0,i1=2,Axx=-delta/2,Ayy=-delta/2,Azz=delta,euler=[0,np.pi/2*.8,0])
-ex.set_inter('g',i=1,gxx=gxx,gyy=gyy,gzz=gzz,euler=[0,0,0])
-ex.set_inter('g',i=0,gxx=gxx,gyy=gyy,gzz=gzz,euler=[0,np.pi/2*.8,0])
+# Note that I have adjusted n_gamma large enough that the enhancement does
+# not change with further increases
+ex=sl.ExpSys(v0H=250,Nucs=['e-','e-','1H'],LF=[False,False,True],
+             vr=5000,T_K=80,pwdavg='alpha0beta45',n_gamma=1000)
+delta=18e6
+ex.set_inter('hyperfine',i0=0,i1=2,Axx=-delta/2,Ayy=-delta/2,Azz=delta)
+ex.set_inter('g',i=0,gxx=gxx,gyy=gyy,gzz=gzz,euler=[0,0,0])
+ex.set_inter('g',i=1,gxx=gxx,gyy=gyy,gzz=gzz,euler=[0,75*np.pi/180,0])
 ex.set_inter('dipole',i0=0,i1=1,delta=sl.Tools.dipole_coupling(1.33,'e-','e-'),euler=[0,77*np.pi/180,0])
 
 L=ex.Liouvillian()
-L.add_relax('T2',i=0,T2=5e-6,OS=True)
-L.add_relax('T2',i=1,T2=5e-6,OS=True)
-L.add_relax('T1',i=0,T1=250e-5,OS=True,Thermal=True)
-L.add_relax('T1',i=1,T1=250e-5,OS=True,Thermal=True)
-L.add_relax('T2',i=2,T2=5e-3,OS=True)
-_=L.add_relax('T1',i=2,T1=3,OS=True,Thermal=True)
+
+L.add_relax('T2',i=0,T2=4e-6)
+L.add_relax('T2',i=1,T2=4e-6)
+_=L.add_relax('T2',i=2,T2=0.2e-3,OS=True)
 
 
-# In[83]:
+# ### Run the simulation
+
+# In[139]:
 
 
-seq=L.Sequence().add_channel(1,v1=1e6,voff=-0e6)
+seq=L.Sequence().add_channel('e',v1=500e3,voff=-50e6)
 
+ON=sl.Rho('ez',['S0z','S1z','1Hz'])
+_=ON.DetProp(seq,n=1000,n_per_seq=1000)
+
+
+# ### Plot the results
+
+# In[140]:
+
+
+ax=plt.subplots(2,2,figsize=[9,9])[1].flatten()
+ON.plot(axis='us',det_num=2,ax=ax[0])
+ON.plot(axis='us',det_num=[0,1],ax=ax[1])
+i=np.argmax(np.abs(np.diff(ON.I[2]))) #Find the largest change in the nuclear polarization
+ON.plot(axis='us',det_num=[0,1],ax=ax[2])
+w=10
+h=.05
+ax[2].set_xlim(ON.t_axis[[i-w,i+w]]*1e6)
+ax[2].set_ylim(ON.I[0][i].real+np.array([-h,h]))
+ON.plot(axis='us',det_num=[0,1],ax=ax[3])
+ax[3].set_xlim(ON.t_axis[[i-w,i+w]]*1e6)
+ax[3].set_ylim(ON.I[1][i].real+np.array([-h,h]))
+
+for a,title in zip(ax,[r'$^1$H','e-',r'e$_0$ (zoom)',r'e$_1$ (zoom)']):
+    a.set_ylim(a.get_ylim())
+    a.set_title(title)
+    a.plot(ON.t_axis[i]*1e6*np.ones(2),a.get_ylim(),color='grey',linestyle=':')
+ax[0].figure.tight_layout()
+
+
+# In the above plots, we can see where cross effect occurs based on where the $^1$H polarization changes (upper left). The largest such event is marked by a dashed line in all plots. In the upper right plot, we see the behavior of the two electrons. The first event in this plot is partial saturation of $\langle S_{1z}\rangle$. This is followed closely by an exchange of magnetization between the two electrons, where $\omega_{e1}=\omega_{e2}$. Next, saturation of $\langle S_{0z}\rangle$ occurs, followed by the first cross effect event, marked by a dashed line. This event is zoomed in on in the lower two plots. A second cross-effect event occurs next. The final event is further saturation of $\langle S_{1z}\rangle$.
+# 
+# We can continue with this system, adding $T_1$ relaxation to the spins, and propagating over many rotor periods to see the net buildup of polarization.
+
+# ## Polarization build up over many rotor cycles
+
+# ### Add $T_1$ relaxation
+# Don't forget to use `OS=True` to ensure correct relaxation of the mixed nuclear states. We also need thermal recovery for DNP enhancement to occur (`Thermal=True`).
+
+# In[141]:
+
+
+L.add_relax('T1',i=0,T1=250e-6,OS=True,Thermal=True)
+L.add_relax('T1',i=1,T1=250e-6,OS=True,Thermal=True)
+_=L.add_relax('T1',i=2,T1=10,OS=True,Thermal=True)
+
+
+# ### Run the simulation
+
+# In[142]:
+
+
+seq=L.Sequence().add_channel('e',v1=500e3,voff=-150e6)
 ON=sl.Rho('Thermal',['S0z','S1z','1Hz'])
-ON.DetProp(seq**10,n=5000)
-ON.plot(axis='s')
+_=ON.DetProp(seq,n=500)
 
 
-# A significant nuclear enhancement is achieved. However, if we remove the electron saturation, the $^1$H magnetization nonetheless evolves away from thermal equilibrium, reducing its magnetization. Then, if the enhancement were determined experimentally by recording an "On-" signal and an "Off-" signal, the apparent enhancement (On/Off) would be higher than the real enhancement. We calculate the Off-signal below, and calculate the real and apparent enhancements.
+# ### Plot the results
 
-# In[84]:
+# In[169]:
+
+
+ON.plot(det_num=2)
+
+
+# In[170]:
+
+
+print(f'Enhancement: {ON.I[-1][-1].real/ex.Peq[-1]:.0f}')
+
+
+# A significant nuclear enhancement is achieved. However, it is interesting to note what happens if the electron saturation is removed, since the cross-effect condition is still met during the rotor cycle, even without microwaves.
+
+# In[145]:
 
 
 seq=L.Sequence()
+OFF=sl.Rho('Thermal',['S0z','S1z','1Hz'])
+_=OFF.DetProp(seq,n=500)
+
+
+# In[146]:
+
+
+OFF.plot(det_num=2)
+
+
+# In[149]:
+
+
+print(f'Apparent enhancement: {ON.I[-1][-1].real/OFF.I[-1][-1].real:.0f}')
+
+
+# The $^1$H polarization is depleted when no microwave irradiation is applied. 
+# 
+# Then, if the enhancement is determined by comparing on and off signal, we will significantly overestimate the enhancement. This effect can be understood by noting that even without microwave irradiation, the cross effect condition is periodically met, and if the electrons are not at their own thermal equilibrium at that point, then polarization can be lost from the nucleus.
+
+# In[150]:
+
 
 OFF=sl.Rho('Thermal',['S0z','S1z','1Hz'])
-OFF.DetProp(seq**100,n=500)
-ax=OFF.plot(axis='s',det_num=2)
-_=ax.set_ylim([0,ex.Peq[2]*1.05])
+_=OFF.DetProp(seq,n=1000,n_per_seq=1000)
 
 
-# In[85]:
+# ## One rotor cycle without microwaves
+
+# In[154]:
 
 
-print(f'Apparent enhancement: {(ON.I[-1][-1]/OFF.I[-1][-1]).real:.0f}')
-print(f'Real enhancement: {(ON.I[-1][-1]/ex.Peq[-1]).real:.0f}')
+ax=plt.subplots(2,2,figsize=[9,9])[1].flatten()
+OFF.plot(axis='us',det_num=2,ax=ax[0])
+OFF.plot(axis='us',det_num=[0,1],ax=ax[1])
+i=np.argmax(np.abs(np.diff(OFF.I[2]))) #Find the largest change in the nuclear polarization
+OFF.plot(axis='us',det_num=[0,1],ax=ax[2])
+w=10
+h=.001
+ax[2].set_xlim(OFF.t_axis[[i-w,i+w]]*1e6)
+ax[2].set_ylim(OFF.I[0][i].real+np.array([-h,h]))
+OFF.plot(axis='us',det_num=[0,1],ax=ax[3])
+ax[3].set_xlim(OFF.t_axis[[i-w,i+w]]*1e6)
+ax[3].set_ylim(OFF.I[1][i].real+np.array([-h,h]))
+
+for a,title in zip(ax,[r'$^1$H','e-',r'e$_0$ (zoom)',r'e$_1$ (zoom)']):
+    a.set_ylim(a.get_ylim())
+    a.set_title(title)
+    a.plot(OFF.t_axis[i]*1e6*np.ones(2),a.get_ylim(),color='grey',linestyle=':')
+ax[0].figure.tight_layout()
 
 
-# In[86]:
-
-
-seq=L.Sequence().add_channel('e-',v1=0*1e6,voff=-0e6)
-rho=sl.Rho('Thermal',['S0z','S1z','1Hz'])
-rho.DetProp(seq,n=100,n_per_seq=100)
-ax=plt.subplots(1,3,figsize=[8,3],sharex=True)[1]
-rho.plot(ax=ax[0],det_num=2)
-
-i=np.argmax(np.abs(np.diff(rho.I[2]))) #Search for the maximum difference in 1H polarization
-print(f'Maximum change in 1H polarization: {rho.t_axis[i]*1e6:.0f} μs')
-rho.plot(ax=ax[1],det_num=0)
-# ax[1].set_ylim(rho.I[0][i].real*np.array([.99,1.01]))
-# ax[1].set_xlim([rho.t_axis[i-5],rho.t_axis[i+5]])
-
-rho.plot(ax=ax[2],det_num=1)
-# ax[2].set_ylim(rho.I[1][i].real*np.array([.99,1.01]))
-
-
-# In[24]:
-
-
-get_ipython().run_line_magic('matplotlib', 'notebook')
-
-
-# In[14]:
-
-
-fig=plt.figure()
-ax=[fig.add_subplot(10,5,k+1) for k in range(len(ON.Ipwd))]
-for k,a in enumerate(ax):
-    a.plot(ON.t_axis[::100],ON.Ipwd[k][-1][::100].real)
-    a.set_ylim([ON.Ipwd[:,-1].real.min(),ON.Ipwd[:,-1].real.max()])
-    if a.is_first_col():
-        a.set_ylabel(r'P($^1$H)')
-    else:
-        a.set_yticklabels([])
-    if a.is_last_row():
-        a.set_xlabel('t / s')
-    else:
-        a.set_xticklabels([])
-fig.set_size_inches([8,12])
-fig.tight_layout()
-
-
-# In[22]:
-
-
-ex=sl.ExpSys(v0H=250,Nucs=['e-','e-','1H'],LF=[False,False,True],vr=5000,T_K=80,pwdavg=sl.PowderAvg(q=2)[45])
-ex.set_inter('hyperfine',i0=1,i1=2,Axx=-1000000,Ayy=-1000000,Azz=2000000,euler=[0,0,0])
-ex.set_inter('hyperfine',i0=0,i1=2,Axx=-1000000,Ayy=-1000000,Azz=2000000,euler=[0,np.pi/2,0])
-ex.set_inter('g',i=0,gxx=2.0022,gyy=2.0059,gzz=2.0098,euler=[0,0,0])
-ex.set_inter('g',i=1,gxx=2.0022,gyy=2.0059,gzz=2.0098,euler=[0,np.pi/2,0])
-ex.set_inter('dipole',i0=0,i1=1,delta=sl.Tools.dipole_coupling(1.33,'e-','e-'),euler=[0,77*np.pi/180,0])
-
-L=ex.Liouvillian()
-L.add_relax('T2',i=0,T2=5e-6)
-L.add_relax('T2',i=1,T2=5e-6)
-L.add_relax('T1',i=0,T1=250e-6)
-L.add_relax('T1',i=1,T1=250e-6)
-L.add_relax('T2',i=2,T2=5e-3)
-L.add_relax('T1',i=2,T1=3)
-L.add_relax('recovery',OS=True)
-
-seq=L.Sequence().add_channel('e-',v1=1e6,voff=-250e6)
-
-fig,ax=plt.subplots(1,3,sharex=True)
-
-Op=ex.Op
-
-rho=sl.Rho('Thermal',['S0z','S1z',Op[0].p@Op[2].m+Op[0].m@Op[2].p,
-                      Op[1].p@Op[2].m+Op[1].m@Op[2].p,'1Hz'])
-rho.clear()
-rho.DetProp(seq,n=300,n_per_seq=100)
-rho.plot(axis='us',ax=ax[0],det_num=[0,1])
-rho.plot(axis='us',ax=ax[1],det_num=[2,3])
-rho.plot(axis='us',ax=ax[2],det_num=4)
-fig.set_size_inches([9,3.5])
-fig.tight_layout()
-
-
-# In[23]:
-
-
-ex=sl.ExpSys(v0H=250,Nucs=['e-','e-','1H'],LF=[False,False,True],vr=5000,T_K=80,pwdavg=sl.PowderAvg(q=2)[45])
-ex.set_inter('hyperfine',i0=1,i1=2,Axx=-1000000,Ayy=-1000000,Azz=2000000,euler=[0,0,0])
-ex.set_inter('hyperfine',i0=0,i1=2,Axx=-1000000,Ayy=-1000000,Azz=2000000,euler=[0,np.pi/2,0])
-ex.set_inter('g',i=0,gxx=2.0022,gyy=2.0059,gzz=2.0098,euler=[0,0,0])
-ex.set_inter('g',i=1,gxx=2.0022,gyy=2.0059,gzz=2.0098,euler=[0,np.pi/2,0])
-ex.set_inter('dipole',i0=0,i1=1,delta=sl.Tools.dipole_coupling(1.33,'e-','e-'),euler=[0,77*np.pi/180,0])
-
-L=ex.Liouvillian()
-L.add_relax('T2',i=0,T2=5e-6,OS=True)
-L.add_relax('T2',i=1,T2=5e-6,OS=True)
-L.add_relax('T1',i=0,T1=250e-6,OS=True,Thermal=True)
-L.add_relax('T1',i=1,T1=250e-6,OS=True,Thermal=True)
-L.add_relax('T2',i=2,T2=5e-3,OS=True)
-L.add_relax('T1',i=2,T1=3,OS=True,Thermal=True)
-
-seq=L.Sequence().add_channel('e-',v1=1e6,voff=-250e6)
-
-fig,ax=plt.subplots(1,3,sharex=True)
-
-Op=ex.Op
-
-rho=sl.Rho('Thermal',['S0z','S1z',Op[0].p@Op[2].m+Op[0].m@Op[2].p,
-                      Op[1].p@Op[2].m+Op[1].m@Op[2].p,'1Hz'])
-rho.clear()
-rho.DetProp(seq,n=300,n_per_seq=100)
-rho.plot(axis='us',ax=ax[0],det_num=[0,1])
-rho.plot(axis='us',ax=ax[1],det_num=[2,3])
-rho.plot(axis='us',ax=ax[2],det_num=4)
-fig.set_size_inches([9,3.5])
-fig.tight_layout()
-
-
-# In[64]:
-
-
-ex=sl.ExpSys(v0H=250,Nucs=['e-','e-','1H'],LF=[False,False,True],vr=5000,T_K=80,
-             pwdavg=sl.PowderAvg(q=2)[10],rotor_angle=np.arccos(np.sqrt(1/3)))
-ex.set_inter('hyperfine',i0=1,i1=2,Axx=-1000000,Ayy=-1000000,Azz=2000000,euler=[0,0,0])
-ex.set_inter('hyperfine',i0=0,i1=2,Axx=-1000000,Ayy=-1000000,Azz=2000000,euler=[0,np.pi/2,0])
-ex.set_inter('g',i=0,gxx=2.0022,gyy=2.0059,gzz=2.0098,euler=[0,0,0])
-ex.set_inter('g',i=1,gxx=2.0022,gyy=2.0059,gzz=2.0098,euler=[0,np.pi/2,0])
-ex.set_inter('dipole',i0=0,i1=1,delta=sl.Tools.dipole_coupling(1.33,'e-','e-'),euler=[0,77*np.pi/180,0])
-
-Dt=1e-3 if ex.vr==0 else None
-
-L=ex.Liouvillian()
-L.add_relax('T2',i=0,T2=5e-6)
-L.add_relax('T2',i=1,T2=5e-6)
-L.add_relax('T1',i=0,T1=250e-6)
-L.add_relax('T1',i=1,T1=250e-6)
-L.add_relax('T2',i=2,T2=5e-3)
-L.add_relax('T1',i=2,T1=3)
-L.add_relax('Thermal')
-
-Op=ex.Op
-rho=sl.Rho('Thermal',['S0z','S1z',Op[0].p@Op[1].m@Op[2].p+Op[0].m@Op[1].p@Op[2].p,
-                      1000*Op[0].z@Op[1].z,Op[0].z+Op[1].z+Op[2].z,'1Hz'])
-
-voff=-100e6
-seq=L.Sequence(Dt).add_channel('e-',v1=1e6,voff=voff)
-
-fig,ax=plt.subplots(2,3,sharex=True)
-print(np.abs(np.linalg.eig(seq.U(Dt)[0])[0]).max())
-
-
-
-rho.clear()
-rho.DetProp(seq,n=300,n_per_seq=100)
-rho.downmix()
-rho.plot(axis='us',ax=ax[0,0],det_num=[0,1,4])
-rho.plot(axis='us',ax=ax[0,1],det_num=[2,3])
-rho.plot(axis='us',ax=ax[0,2],det_num=-1)
-fig.set_size_inches([9,3.5])
-fig.tight_layout()
-
-seq=L.Sequence(Dt).add_channel('e-',v1=0*1e6,voff=voff)
-print(np.abs(np.linalg.eig(seq.U(Dt)[0])[0]).max())
-
-rho.clear()
-rho.DetProp(seq,n=300,n_per_seq=100)
-rho.downmix()
-rho.plot(axis='us',ax=ax[1,0],det_num=[0,1,4])
-rho.plot(axis='us',ax=ax[1,1],det_num=[2,3])
-rho.plot(axis='us',ax=ax[1,2],det_num=-1)
-fig.set_size_inches([9,5])
-for a in ax[0]:a.set_xlabel('')
-fig.tight_layout()
-
-
-# In[ ]:
-
-
-
-
+# Above, we see that although no saturating field is applied to the electron, the electron polarization still varies throughout the rotor period. This is partly because the thermal equilibrium for the electron polarization changes throughout the rotor period, which is observed as slow variation of the electron polarization (it is important to use `OS=True` and `Thermal=True` to obtain this behavior), and secondly because when the electrons having matching frequencies, they exchange polarization. Then, due to different electron polarizations, the nucleus will lose polarization when the cross effect condition is matched.

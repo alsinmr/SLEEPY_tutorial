@@ -53,7 +53,7 @@ const thebe_selector_output = ".output, .cell_output"
     <link rel="shortcut icon" href="_static/favicon.png"/>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="prev" title="Paramagnetic Effects" href="Ch5_ParamagneticEffects.html" />
+    <link rel="prev" title="Paramagnetic Effects: Pseudo-Contact Shift" href="Chapter5/Ch5_PseudoContactShift.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
     
@@ -242,6 +242,16 @@ const thebe_selector_output = ".output, .cell_output"
     </a>
    </li>
    <li class="toctree-l2">
+    <a class="reference internal" href="Chapter2/Ch2_T1_limits.html">
+     <font color="#0093AF">
+      <span class="math notranslate nohighlight">
+       \(T_1\)
+      </span>
+      limits
+     </font>
+    </a>
+   </li>
+   <li class="toctree-l2">
     <a class="reference internal" href="Chapter2/Ch2_TROSY.html">
      <font color="#0093AF">
       TROSY effects
@@ -290,9 +300,8 @@ const thebe_selector_output = ".output, .cell_output"
    <li class="toctree-l2">
     <a class="reference internal" href="Chapter3/Ch3_T1_NOE.html">
      <font color="#0093AF">
-      T
       <span class="math notranslate nohighlight">
-       \(_1\)
+       \(T_1\)
       </span>
       and NOE
      </font>
@@ -301,7 +310,14 @@ const thebe_selector_output = ".output, .cell_output"
    <li class="toctree-l2">
     <a class="reference internal" href="Chapter3/Ch3_RECRR.html">
      <font color="#0093AF">
-      Correlation-time dependence of a pulse-sequence: RECRR
+      Relaxation in complex sequences: RECRR
+     </font>
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="Chapter3/Ch3_Quad.html">
+     <font color="#0093AF">
+      Quadrupolar phenomena
      </font>
     </a>
    </li>
@@ -326,14 +342,56 @@ const thebe_selector_output = ".output, .cell_output"
      </font>
     </a>
    </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="Chapter4/Ch4_CrossEffect.html">
+     <font color="#0093AF">
+      Cross-Effect
+     </font>
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="Chapter4/Ch4_OverhauserEffect.html">
+     <font color="#0093AF">
+      Overhauser Effect
+     </font>
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="Chapter4/Ch4_NOVEL.html">
+     <font color="#0093AF">
+      NOVEL
+     </font>
+    </a>
+   </li>
   </ul>
  </li>
- <li class="toctree-l1">
+ <li class="toctree-l1 has-children">
   <a class="reference internal" href="Ch5_ParamagneticEffects.html">
    <font color="maroon">
     Paramagnetic Effects
    </font>
   </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" type="checkbox"/>
+  <label for="toctree-checkbox-5">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="Chapter5/Ch5_ContactShift.html">
+     <font color="#0093AF">
+      Contact shift
+     </font>
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="Chapter5/Ch5_PseudoContactShift.html">
+     <font color="#0093AF">
+      Paramagnetic Effects: Pseudo-Contact Shift
+     </font>
+    </a>
+   </li>
+  </ul>
  </li>
  <li class="toctree-l1 current active">
   <a class="current reference internal" href="#">
@@ -629,22 +687,47 @@ title="Print to PDF"
 <span class="n">ex0</span><span class="o">=</span><span class="n">sl</span><span class="o">.</span><span class="n">ExpSys</span><span class="p">(</span><span class="n">v0H</span><span class="o">=...</span><span class="p">,</span><span class="n">Nucs</span><span class="o">=</span><span class="p">[</span><span class="o">...</span><span class="p">,</span><span class="o">...</span><span class="p">],</span><span class="n">vr</span><span class="o">=</span><span class="mi">60000</span><span class="p">)</span>
 <span class="n">ex0</span><span class="o">.</span><span class="n">set_inter</span><span class="p">(</span><span class="s1">&#39;...&#39;</span><span class="p">,</span><span class="n">i0</span><span class="o">=...</span><span class="p">,</span><span class="n">i1</span><span class="o">=..</span><span class="p">,</span><span class="o">...</span><span class="p">)</span>
 <span class="n">ex1</span><span class="o">=</span><span class="n">ex0</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
-
-<span class="c1"># Build the Liouvillian</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Build the Liouvillian</span>
 <span class="n">L</span><span class="o">=</span><span class="n">sl</span><span class="o">.</span><span class="n">Liouvillian</span><span class="p">(</span><span class="n">ex0</span><span class="p">,</span><span class="n">ex1</span><span class="p">,</span><span class="n">kex</span><span class="o">=</span><span class="n">sl</span><span class="o">.</span><span class="n">Tools</span><span class="o">.</span><span class="n">twoSite_kex</span><span class="p">(</span><span class="o">...</span><span class="p">))</span>
-
-<span class="c1"># Add a sequence</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Add a sequence</span>
 <span class="n">seq</span><span class="o">=</span><span class="n">L</span><span class="o">.</span><span class="n">Sequence</span><span class="p">()</span>
 <span class="c1"># Add a channel</span>
 <span class="n">seq</span><span class="o">.</span><span class="n">add_channel</span><span class="p">(</span><span class="s1">&#39;...&#39;</span><span class="p">,</span><span class="n">t</span><span class="o">=...</span><span class="p">,</span><span class="n">v1</span><span class="o">=...</span><span class="p">,</span><span class="n">phase</span><span class="o">=...</span><span class="p">,</span><span class="n">voff</span><span class="o">=...</span><span class="p">)</span>
-
-<span class="c1"># Density matrix</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Density matrix</span>
 <span class="n">rho</span><span class="o">=</span><span class="n">sl</span><span class="o">.</span><span class="n">Rho</span><span class="p">(</span><span class="n">rho0</span><span class="o">=</span><span class="s1">&#39;...&#39;</span><span class="p">,</span><span class="n">detect</span><span class="o">=</span><span class="s1">&#39;...&#39;</span><span class="p">)</span>
-
-<span class="c1"># Run the simulation</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Run the simulation</span>
 <span class="n">rho</span><span class="o">.</span><span class="n">DetProp</span><span class="p">(</span><span class="n">seq</span><span class="p">,</span><span class="n">n</span><span class="o">=...</span><span class="p">,</span><span class="n">n_per_seq</span><span class="o">=...</span><span class="p">)</span>
-
-<span class="c1"># Plot the results</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Plot the results</span>
 <span class="n">rho</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">FT</span><span class="o">=...</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -680,11 +763,11 @@ title="Print to PDF"
                 
     <!-- Previous / next buttons -->
 <div class='prev-next-area'>
-    <a class='left-prev' id="prev-link" href="Ch5_ParamagneticEffects.html" title="previous page">
+    <a class='left-prev' id="prev-link" href="Chapter5/Ch5_PseudoContactShift.html" title="previous page">
         <i class="fas fa-angle-left"></i>
         <div class="prev-next-info">
             <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title"><font color="maroon">Paramagnetic Effects</font></p>
+            <p class="prev-next-title"><font  color = "#0093AF"> Paramagnetic Effects: Pseudo-Contact Shift</p>
         </div>
     </a>
 </div>

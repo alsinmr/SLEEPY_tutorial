@@ -368,12 +368,33 @@ const thebe_selector_output = ".output, .cell_output"
    </li>
   </ul>
  </li>
- <li class="toctree-l1">
+ <li class="toctree-l1 has-children">
   <a class="reference internal" href="../Ch5_ParamagneticEffects.html">
    <font color="maroon">
     Paramagnetic Effects
    </font>
   </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" type="checkbox"/>
+  <label for="toctree-checkbox-5">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../Chapter5/Ch5_ContactShift.html">
+     <font color="#0093AF">
+      Contact shift
+     </font>
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../Chapter5/Ch5_PseudoContactShift.html">
+     <font color="#0093AF">
+      Paramagnetic Effects: Pseudo-Contact Shift
+     </font>
+    </a>
+   </li>
+  </ul>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../Ch6_ColabTemplate.html">
@@ -710,7 +731,7 @@ title="Print to PDF"
 <li><p>vr: Spinning frequency in Hz (only used if anisotropic interactions provided). Default is 10000</p></li>
 <li><p>rotor_angle: Rotor angle, in radians. Default is the magic angle</p></li>
 <li><p>n_gamma: Number of gamma angles calculated per rotor period. For string-specified powder averages (i.e. not JCP59 or grid), this is also the number of gamma angles in the powder average. Default is 100</p></li>
-<li><p>pwdavg: Type of powder average. Type sl.PowderAvg.list_powder_types to see options (Most powder averages from SIMPSON). If an integer is provided, then this yields the JCP59 powder average, with higher integers yielding more angles. Defaults is 3 (JCP59 with 99 angles)</p></li>
+<li><p>pwdavg: Type of powder average. Type sl.PowderAvg.list_powder_types to see options (Most powder averages from SIMPSON). If an integer is provided, then this yields the JCP59 powder average, with higher integers yielding more angles. Default is 3 (JCP59 with 99 angles). Note that if ‘alpha0beta0’,’alpha0beta90’, or ‘alpha0beta45’ are used, then the powder average will automatically switch to gamma_encoded mode, since we assume the user only wants one angle (otherwise, gamma_encoded defaults to False). This behavior can be overridden by the user simply by setting gamma_encoded.</p></li>
 <li><p>LF: Specifiy whether each spin should be simulated in the lab frame. Can be provided as a single boolean, e.g. False sets all spins in the rotating frame, or as a list the same length as Nucs, which puts some spins in the lab frame and some in the rotating frame (useful, e.g. for DNP experiments such as solid-effect/cross-effect where the electrons should be in the rotating frame, but the nucleus in the lab frame).</p></li>
 </ul>
 <div class="cell docutils container">

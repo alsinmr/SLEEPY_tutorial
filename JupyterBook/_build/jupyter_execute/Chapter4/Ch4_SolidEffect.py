@@ -23,7 +23,7 @@
 # SETUP SLEEPY
 
 
-# In[16]:
+# In[2]:
 
 
 import SLEEPY as sl
@@ -34,7 +34,7 @@ import matplotlib.pyplot as plt
 # ## Build spin system
 # The solid-effect relies on terms in the Hamiltonian that tilt the nuclear spin away from the z-axis. That is, the nucleus must be treated in the lab frame. On the other hand, we need to irradiate the electron, so we would rather leave it in the rotating frame. Then, we set the frames for the spins individually.
 
-# In[17]:
+# In[3]:
 
 
 ex=sl.ExpSys(v0H=211,Nucs=['e-','1H'],LF=[False,True],vr=5000,T_K=80,pwdavg=2)
@@ -48,7 +48,7 @@ _=ex.set_inter('g',i=0,gxx=2.0027,gyy=2.0031,gzz=2.0034,euler=[0,0,0])
 # 
 # [1] A.A. Smith, B. Corzilius, A.B. Barnes, T. Maly, R.G. Griffin. *[J. Chem. Phys.](https://doi.org/10.1063/1.3670019)*, **2012**, 136, 015101.
 
-# In[18]:
+# In[4]:
 
 
 L=ex.Liouvillian()
@@ -59,9 +59,15 @@ _=L.add_relax(Type='T1',i=1,T1=13.7,OS=True,Thermal=True)
 # _=L.add_relax(Type='recovery')
 
 
+# In[ ]:
+
+
+L.clear_cache
+
+
 # Note that SLEEPY's "on-resonance" electron has a g-value of 2.0023193 (`sl.Constants['ge']`). That means that the trityl g-tensor is fairly far away from being on-resonant already, such that we need to offset the applied microwave frequency by the difference between these, plus or minus the $^1$H Larmor frequency
 
-# In[19]:
+# In[8]:
 
 
 Dele=(2.0031-sl.Constants['ge'])*sl.Constants['mub']*ex.B0  #Offset from 'ge'
@@ -225,3 +231,36 @@ ax.legend([fr'$T_1$ = {T1n} s' for T1n in T1n0],loc='upper left')
 
 
 # In contrast to the electron, increasing the nuclear $T_1$ increases the DNP enhancement.
+
+# ## Simulating Solid-Effect without relaxation
+
+# In the last simulation, we show that relaxation is critical in achieving polarization buildup. We reproduce the first simulation in this section, but do not apply any relaxation. What we observe is that although the solid-effect conditions are met during the rotor period, over the course of many rotor periods, the magnetization gained by the nucleus is periodically transferred back to the electron so that no net magnetization is achieved.
+
+# In[15]:
+
+
+ex_cr=sl.ExpSys(v0H=211,Nucs=['e-','1H'],LF=[False,True],vr=5000,T_K=80,pwdavg=sl.PowderAvg(q=2)[10])
+ex_cr.set_inter('hyperfine',i0=0,i1=1,Axx=-100000,Ayy=-100000,Azz=200000)
+ex_cr.set_inter('g',i=0,gxx=2.0027,gyy=2.0031,gzz=2.0034,euler=[0,0,0])
+
+L=ex_cr.Liouvillian()
+
+seq=L.Sequence()
+_=seq.add_channel(channel='e-',v1=1e6,voff=voff)
+rho=sl.Rho('Thermal','1Hz')
+
+fig,ax=plt.subplots(1,2,figsize=[10,4])
+rho.DetProp(seq,n=100,n_per_seq=100)
+rho.plot(ax=ax[0],axis='us')
+rho.clear()
+U=seq.U()**100
+rho.DetProp(U,n=3000)
+rho.plot(ax=ax[1],axis='s')
+fig.tight_layout()
+
+
+# In[ ]:
+
+
+
+

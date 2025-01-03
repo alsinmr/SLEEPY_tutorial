@@ -366,12 +366,33 @@ const thebe_selector_output = ".output, .cell_output"
    </li>
   </ul>
  </li>
- <li class="toctree-l1">
+ <li class="toctree-l1 has-children">
   <a class="reference internal" href="Ch5_ParamagneticEffects.html">
    <font color="maroon">
     Paramagnetic Effects
    </font>
   </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" type="checkbox"/>
+  <label for="toctree-checkbox-5">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="Chapter5/Ch5_ContactShift.html">
+     <font color="#0093AF">
+      Contact shift
+     </font>
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="Chapter5/Ch5_PseudoContactShift.html">
+     <font color="#0093AF">
+      Paramagnetic Effects: Pseudo-Contact Shift
+     </font>
+    </a>
+   </li>
+  </ul>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="Ch6_ColabTemplate.html">
@@ -561,6 +582,13 @@ title="Print to PDF"
                 
   <section class="tex2jax_ignore mathjax_ignore" id="font-color-maroon-dynamic-nuclear-polarization-font">
 <h1><font color="maroon">Dynamic Nuclear Polarization</font><a class="headerlink" href="#font-color-maroon-dynamic-nuclear-polarization-font" title="Permalink to this headline">#</a></h1>
+<p>Dynamic nuclear polarization (DNP) is a powerful method of enhancing signal in NMR by transfering electron polarization to nuclei. However, simulating DNP is not trivial since relaxation is required to achieve polarization buildup on the nuclei (without relaxation, magnetization just oscillates weakly between electron and nucleus). Furthermore, a true Overhauser effect simulation should result from dynamic modulation of interactions between the electron and nucleus, as opposed to just setting the electron-nuclear transfer rates. SLEEPY is therefore powerful in simplifying the setup of these types of simulations.</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="Chapter4/Ch4_SolidEffect.html"><span class="doc std std-doc"> Solid Effect</span></a></p></li>
+<li><p><a class="reference internal" href="Chapter4/Ch4_CrossEffect.html"><span class="doc std std-doc"> Cross-Effect</span></a></p></li>
+<li><p><a class="reference internal" href="Chapter4/Ch4_OverhauserEffect.html"><span class="doc std std-doc"> Overhauser Effect</span></a></p></li>
+<li><p><a class="reference internal" href="Chapter4/Ch4_NOVEL.html"><span class="doc std std-doc"> NOVEL</span></a></p></li>
+</ul>
 <div class="toctree-wrapper compound">
 </div>
 </section>

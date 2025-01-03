@@ -33,19 +33,39 @@ ex0=sl.ExpSys(v0H=...,Nucs=[...,...],vr=60000)
 ex0.set_inter('...',i0=...,i1=..,...)
 ex1=ex0.copy()
 
+
+# In[ ]:
+
+
 # Build the Liouvillian
 L=sl.Liouvillian(ex0,ex1,kex=sl.Tools.twoSite_kex(...))
+
+
+# In[ ]:
+
 
 # Add a sequence
 seq=L.Sequence()
 # Add a channel
 seq.add_channel('...',t=...,v1=...,phase=...,voff=...)
 
+
+# In[ ]:
+
+
 # Density matrix
 rho=sl.Rho(rho0='...',detect='...')
 
+
+# In[ ]:
+
+
 # Run the simulation
 rho.DetProp(seq,n=...,n_per_seq=...)
+
+
+# In[ ]:
+
 
 # Plot the results
 rho.plot(FT=...)
