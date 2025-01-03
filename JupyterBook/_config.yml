@@ -41,3 +41,13 @@ html:
 myst:
   linkify: false
   linkify_fuzzy_links: false
+
+launch_buttons:
+  notebook_interface        : classic  # The interface interactive links will activate ["classic", "jupyterlab"]
+  binderhub_url             : ""
+  colab_url                 : "https://colab.research.google.com" # The URL of Google Colab (https://colab.research.google.com)
+
+sphinx:
+  config:
+    html_theme_options:
+      launch_buttons: {}

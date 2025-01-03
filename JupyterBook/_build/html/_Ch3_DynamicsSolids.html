@@ -101,17 +101,9 @@ const thebe_selector_output = ".output, .cell_output"
     </a>
 </div><form class="bd-search d-flex align-items-center" action="search.html" method="get">
   <i class="icon fas fa-search"></i>
-  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search the docs ..." aria-label="Search the docs ..." autocomplete="off" >
 </form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item active">
-        
-        <ul class="nav bd-sidenav bd-sidenav__home-link">
-            <li class="toctree-l1">
-                <a class="reference internal" href="intro.html">
-                    Relax with SLEEPY!
-                </a>
-            </li>
-        </ul>
         <ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="GettingStarted.html">
@@ -236,7 +228,17 @@ const thebe_selector_output = ".output, .cell_output"
       <span class="math notranslate nohighlight">
        \(T_1\)
       </span>
-      , Nuclear Overhauser Effect in Solution NMR
+      and Nuclear Overhauser Effect
+     </font>
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="Chapter2/Ch2_T1_limits.html">
+     <font color="#0093AF">
+      <span class="math notranslate nohighlight">
+       \(T_1\)
+      </span>
+      limits
      </font>
     </a>
    </li>
@@ -289,9 +291,8 @@ const thebe_selector_output = ".output, .cell_output"
    <li class="toctree-l2">
     <a class="reference internal" href="Chapter3/Ch3_T1_NOE.html">
      <font color="#0093AF">
-      T
       <span class="math notranslate nohighlight">
-       \(_1\)
+       \(T_1\)
       </span>
       and NOE
      </font>
@@ -300,7 +301,14 @@ const thebe_selector_output = ".output, .cell_output"
    <li class="toctree-l2">
     <a class="reference internal" href="Chapter3/Ch3_RECRR.html">
      <font color="#0093AF">
-      Correlation-time dependence of a pulse-sequence: RECRR
+      Relaxation in complex sequences: RECRR
+     </font>
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="Chapter3/Ch3_Quad.html">
+     <font color="#0093AF">
+      Quadrupolar phenomena
      </font>
     </a>
    </li>
@@ -325,17 +333,66 @@ const thebe_selector_output = ".output, .cell_output"
      </font>
     </a>
    </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="Chapter4/Ch4_CrossEffect.html">
+     <font color="#0093AF">
+      Cross-Effect
+     </font>
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="Chapter4/Ch4_OverhauserEffect.html">
+     <font color="#0093AF">
+      Overhauser Effect
+     </font>
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="Chapter4/Ch4_NOVEL.html">
+     <font color="#0093AF">
+      NOVEL
+     </font>
+    </a>
+   </li>
   </ul>
  </li>
- <li class="toctree-l1">
+ <li class="toctree-l1 has-children">
   <a class="reference internal" href="Ch5_ParamagneticEffects.html">
    <font color="maroon">
     Paramagnetic Effects
    </font>
   </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" type="checkbox"/>
+  <label for="toctree-checkbox-5">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="Chapter5/Ch5_ContactShift.html">
+     <font color="#0093AF">
+      Contact shift
+     </font>
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="Chapter5/Ch5_PseudoContactShift.html">
+     <font color="#0093AF">
+      Pseudo-Contact Shift
+     </font>
+    </a>
+   </li>
+  </ul>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="Ch6_ColabTemplate.html">
+  <a class="reference internal" href="Chapter6/Ch6_RelaxationOptions.html">
+   <font color="maroon">
+    Relaxation Options
+   </font>
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="Ch7_ColabTemplate.html">
    <font color="maroon">
     SLEEPY Colab Template
    </font>
@@ -349,7 +406,7 @@ const thebe_selector_output = ".output, .cell_output"
              <!-- To handle the deprecated key -->
             
             <div class="navbar_extra_footer">
-            Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+            Theme by the <a href="https://ebp.jupyterbook.org">Executable Book Project</a>
             </div>
             
         </div>
@@ -405,51 +462,6 @@ title="Fullscreen mode"
   </span>
 
 </button>
-
-<div class="menu-dropdown menu-dropdown-repository-buttons">
-  <button class="headerbtn menu-dropdown__trigger"
-      aria-label="Source repositories">
-      <i class="fab fa-github"></i>
-  </button>
-  <div class="menu-dropdown__content">
-    <ul>
-      <li>
-        <a href="https://github.com/alsinmr/SLEEPY_tutorial/"
-   class="headerbtn"
-   data-toggle="tooltip"
-data-placement="left"
-title="Source repository"
->
-  
-
-<span class="headerbtn__icon-container">
-  <i class="fab fa-github"></i>
-  </span>
-<span class="headerbtn__text-container">repository</span>
-</a>
-
-      </li>
-      
-      <li>
-        <a href="https://github.com/alsinmr/SLEEPY_tutorial//issues/new?title=Issue%20on%20page%20%2F_Ch3_DynamicsSolids.html&body=Your%20issue%20content%20here."
-   class="headerbtn"
-   data-toggle="tooltip"
-data-placement="left"
-title="Open an issue"
->
-  
-
-<span class="headerbtn__icon-container">
-  <i class="fas fa-lightbulb"></i>
-  </span>
-<span class="headerbtn__text-container">open issue</span>
-</a>
-
-      </li>
-      
-    </ul>
-  </div>
-</div>
 
 <div class="menu-dropdown menu-dropdown-download-buttons">
   <button class="headerbtn menu-dropdown__trigger"
@@ -527,7 +539,7 @@ title="Print to PDF"
 <li><p><a class="reference internal" href="Chapter3/Ch3_R1p.html"><span class="doc std std-doc"> R_{1ρ} relaxation</span></a></p></li>
 <li><p><a class="reference internal" href="Chapter3/Ch3_REDOR.html"><span class="doc std std-doc"> REDOR</span></a></p></li>
 <li><p><a class="reference internal" href="Chapter3/Ch3_DIPSHIFT.html"><span class="doc std std-doc"> DIPSHIFT</span></a></p></li>
-<li><p><a class="reference internal" href="Chapter3/Ch3_RECRR.html"><span class="doc std std-doc"> Correlation-time dependence of a pulse-sequence: RECRR</span></a></p></li>
+<li><p><a class="reference internal" href="Chapter3/Ch3_RECRR.html"><span class="doc std std-doc"> Relaxation in complex sequences: RECRR</span></a></p></li>
 <li><p><a class="reference internal" href="Chapter3/Ch3_T1_NOE.html"><span class="doc std std-doc"> T_1 and NOE</span></a></p></li>
 </ul>
 </section>
