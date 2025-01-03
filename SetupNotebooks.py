@@ -116,7 +116,7 @@ class CellReader():
         self.f.close()
         
 
-def write_cell(f,lines:list):
+def write_cell(f,lines:list,colab=False):
     """
     Write lines to a cell for a file
 
@@ -135,6 +135,8 @@ def write_cell(f,lines:list):
 
     f.write('{\n')
     for line in lines:
+        if colab:
+            line=line.replace('<font','<img src=\\"https://raw.githubusercontent.com/alsinmr/SLEEPY_tutorial/033b817f027ebdcd6493a1f42ab9fdec290dbee8/JupyterBook/favicon.png\\"  width=40> <font')
         f.write(line)
     f.write('}')
 
@@ -253,7 +255,7 @@ def copy2colab(chapter,filename):
     with open(os.path.join('ColabNotebooks',f'Chapter{chapter}',os.path.split(filename)[1]),'w') as f:
         for line in cr.header:
             f.write(line)
-        add_image(f)
+        # add_image(f)
         for cell in cr:
             if cell is None:
                 break
@@ -264,7 +266,7 @@ def copy2colab(chapter,filename):
                 write_colab_setup(f)
             else:
                 f.write('\n' if first else ',\n')
-                write_cell(f,cell)
+                write_cell(f,cell,colab=True)
             first=False
         f.write('\n')
         for line in cr.footer:
