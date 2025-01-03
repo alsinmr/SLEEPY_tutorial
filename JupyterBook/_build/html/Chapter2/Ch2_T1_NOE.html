@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>\(T_1\), Nuclear Overhauser Effect in Solution NMR &#8212; SLEEPY Tutorial</title>
+    <title>\(T_1\) and Nuclear Overhauser Effect &#8212; SLEEPY Tutorial</title>
     
   <!-- Loaded before other Sphinx assets -->
   <link href="../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
@@ -240,7 +240,7 @@ const thebe_selector_output = ".output, .cell_output"
       <span class="math notranslate nohighlight">
        \(T_1\)
       </span>
-      , Nuclear Overhauser Effect in Solution NMR
+      and Nuclear Overhauser Effect
      </font>
     </a>
    </li>
@@ -390,14 +390,21 @@ const thebe_selector_output = ".output, .cell_output"
    <li class="toctree-l2">
     <a class="reference internal" href="../Chapter5/Ch5_PseudoContactShift.html">
      <font color="#0093AF">
-      Paramagnetic Effects: Pseudo-Contact Shift
+      Pseudo-Contact Shift
      </font>
     </a>
    </li>
   </ul>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="../Ch6_ColabTemplate.html">
+  <a class="reference internal" href="../Chapter6/Ch6_RelaxationOptions.html">
+   <font color="maroon">
+    Relaxation Options
+   </font>
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../Ch7_ColabTemplate.html">
    <font color="maroon">
     SLEEPY Colab Template
    </font>
@@ -655,7 +662,7 @@ title="Print to PDF"
         <div class="col pl-md-3 pl-lg-5 content-container">
             <!-- Table of contents that is only displayed when printing the page -->
             <div id="jb-print-docs-body" class="onlyprint">
-                <h1><font  color = "#0093AF"> T_1, Nuclear Overhauser Effect in Solution NMR</h1>
+                <h1><font  color = "#0093AF"> T_1 and Nuclear Overhauser Effect</h1>
                 <!-- Table of contents -->
                 <div id="print-main-content">
                     <div id="jb-print-toc">
@@ -712,8 +719,8 @@ title="Print to PDF"
                 
               <div>
                 
-  <section class="tex2jax_ignore mathjax_ignore" id="font-color-0093af-t-1-nuclear-overhauser-effect-in-solution-nmr">
-<h1><font  color = "#0093AF"> <span class="math notranslate nohighlight">\(T_1\)</span>, Nuclear Overhauser Effect in Solution NMR<a class="headerlink" href="#font-color-0093af-t-1-nuclear-overhauser-effect-in-solution-nmr" title="Permalink to this headline">#</a></h1>
+  <section class="tex2jax_ignore mathjax_ignore" id="font-color-0093af-t-1-and-nuclear-overhauser-effect">
+<h1><font  color = "#0093AF"> <span class="math notranslate nohighlight">\(T_1\)</span> and Nuclear Overhauser Effect<a class="headerlink" href="#font-color-0093af-t-1-and-nuclear-overhauser-effect" title="Permalink to this headline">#</a></h1>
 <p><a href="https://githubtocolab.com/alsinmr/SLEEPY_tutorial/blob/main/ColabNotebooks/Chapter2/Ch2_T1_NOE.ipynb" target="_blank"><img src="https://colab.research.google.com/assets/colab-badge.svg"></a></p>
 <p>In the following, we will mimic <span class="math notranslate nohighlight">\(T_1\)</span> relaxation and heteronuclear NOE transfer resulting from tumbling in solution. The simplest way to do this is to utilize a tetrahedral hopping motion, however, note that this only results in isotropic averaging to interactions that are initially aligned along the <span class="math notranslate nohighlight">\(z\)</span>-axis.</p>
 <section id="setup">
@@ -819,7 +826,7 @@ title="Print to PDF"
 </div>
 <p>Then, it is important to note: this correction will result in polarization on, for example, the <span class="math notranslate nohighlight">\(\hat{S}_z\)</span> term, by continually reducing the population of <span class="math notranslate nohighlight">\(\hat{S}_\beta\)</span> and increasing the population of <span class="math notranslate nohighlight">\(\hat{S}_\alpha\)</span> (this can equivalently be seen as an asymmetric transfer between the two populations). However, we also expect asymmetric transfer between, for example, the <span class="math notranslate nohighlight">\(\hat{I}^+\hat{S}_\alpha\)</span> and <span class="math notranslate nohighlight">\(\hat{I}^+\hat{S}_\beta\)</span> populations. This is what gives rise to, for example, the contact shift occuring due to fast relaxing electrons. However, both the <span class="math notranslate nohighlight">\(\hat{I}^+\hat{S}_\alpha\)</span> and <span class="math notranslate nohighlight">\(\hat{I}^+\hat{S}_\beta\)</span> terms are zero under thermal conditions, and therefore are not included in the “DynamicThermal” correction term, as we can see above where we note that the correction is calculated from the density matrix at thermal equilibrium, <span class="math notranslate nohighlight">\(\hat{\rho}_{eq}\)</span>. We will later see that we can correctly product contact and pseudo-contact shifts using Lindblad formalism,<span class="math notranslate nohighlight">\(^1\)</span> but this is obtained with a different set of settings which we will use later for paramagnetic effects.</p>
 <p>[1] C. Bengs, M. Levitt. <em><a class="reference external" href="https://doi.org/10.1016/j.jmr.2019.106645">J. Magn. Reson</a></em>. <strong>2020</strong>, 310,106645.</p>
-<p>We note that the ‘DynamicThermal’ option is susceptible to numerical error due to the small size of the correction compared to the large exchange rates possible. Please see <span class="xref myst"><span class="math notranslate nohighlight">\(T_1\)</span> tests</span> for more details.</p>
+<p>We note that the ‘DynamicThermal’ option is susceptible to numerical error due to the small size of the correction compared to the large exchange rates possible. Please see <a class="reference internal" href="Ch2_T1_limits.html"><span class="doc std std-doc"><span class="math notranslate nohighlight">\(T_1\)</span> tests</span></a> for more details.</p>
 </section>
 <section id="obtaining-the-noe-enhancement">
 <h2>Obtaining the NOE enhancement<a class="headerlink" href="#obtaining-the-noe-enhancement" title="Permalink to this headline">#</a></h2>

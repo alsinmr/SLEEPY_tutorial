@@ -15,7 +15,7 @@
 # 
 # where $A_{iso}$ is the size of the isotropic hyperfine coupling, and $P_{e-}$ is the electron polarization. Then, the size of the contact shift is dependent on temperature, since it depends on the electron polarization.
 # 
-# Correct calculation of the contact shift, and the more complex [pseudocontact shift](Chapter5/Ch5_PseudoContactShift.ipynb) requires correct thermalization of coherences, achieved in SLEEPY via Lindblad thermalization.$^1$
+# Correct calculation of the contact shift, and the more complex [pseudocontact shift](../Chapter5/Ch5_PseudoContactShift.ipynb) requires correct thermalization of coherences, achieved in SLEEPY via Lindblad thermalization.$^1$
 # 
 # [1] C. Bengs, M. Levitt. [*J. Magn. Reson.*](https://doi.org/10.1016/j.jmr.2019.106645), **2020**, 310,106645.
 

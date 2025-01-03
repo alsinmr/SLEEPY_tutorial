@@ -51,7 +51,7 @@ rho=sl.Rho(rho0='1Hx',detect=['1Hx','13Cx'])
 
 # Usually, the initial density matrix and detection operators are specified by a nucleus and a direction (x, y, z, +(p), -(m), α(alpha), or β(beta)). However, we may alternatively specify a specific spin ('S1x', for example). 'Thermal' may be specified as the initial density matrix, which will result in the thermal equilibrium for the spin system being calculated resulting from the rotor-averaged Hamiltonian at the experimental temperature (ex.T_K). Operators may also be scaled (`2*13Cp`, for example). 
 # 
-# Finally, the user may also input their own initial density matrix and detection operators as matrices. Any arbitrary matrix of the appropriate dimension (`ex.Op.Mult.prod()` x `ex.Op.Mult.prod()`) can be input. The most straightforward way to build this matrix is from the spin matrices, which are stored in ex.Op (see [ExpSys](Chapter1/Ch1_expsys.ipynb) for more details). For example, if we want to initialize in and detect a double quantum coherence between spins 0 and 1, we could construct:
+# Finally, the user may also input their own initial density matrix and detection operators as matrices. Any arbitrary matrix of the appropriate dimension (`ex.Op.Mult.prod()` x `ex.Op.Mult.prod()`) can be input. The most straightforward way to build this matrix is from the spin matrices, which are stored in ex.Op (see [ExpSys](Ch1_expsys.ipynb) for more details). For example, if we want to initialize in and detect a double quantum coherence between spins 0 and 1, we could construct:
 # 
 # ```
 # Op=ex.Op

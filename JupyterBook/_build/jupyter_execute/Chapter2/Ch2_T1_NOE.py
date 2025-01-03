@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# # <font  color = "#0093AF"> $T_1$, Nuclear Overhauser Effect in Solution NMR
+# # <font  color = "#0093AF"> $T_1$ and Nuclear Overhauser Effect
 
 # <a href="https://githubtocolab.com/alsinmr/SLEEPY_tutorial/blob/main/ColabNotebooks/Chapter2/Ch2_T1_NOE.ipynb" target="_blank"><img src="https://colab.research.google.com/assets/colab-badge.svg"></a>
 
@@ -93,7 +93,7 @@ _=L.plot('Lrelax')
 # 
 # [1] C. Bengs, M. Levitt. *[J. Magn. Reson](https://doi.org/10.1016/j.jmr.2019.106645)*. **2020**, 310,106645.
 
-# We note that the 'DynamicThermal' option is susceptible to numerical error due to the small size of the correction compared to the large exchange rates possible. Please see [$T_1$ tests](Chapter2/Ch2_T1_limits.ipynb) for more details.
+# We note that the 'DynamicThermal' option is susceptible to numerical error due to the small size of the correction compared to the large exchange rates possible. Please see [$T_1$ tests](Ch2_T1_limits.ipynb) for more details.
 
 # ## Obtaining the NOE enhancement
 

@@ -76,7 +76,7 @@ _=ax.set_ylim([0,1])
 
 
 # ### Origin of multi-exponentiality
-# Note that the signal decay is multi-exponential. This is always the case in solid-state NMR, where different orientations give rise to different decay rates. However, this curve is particularly multiexponential, due to TROSY-like effects resulting from relaxation due to both the dipole and CSA (see [TROSY]('Chapter2/Ch2_TROSY.ipynb') in chapter 2).
+# Note that the signal decay is multi-exponential. This is always the case in solid-state NMR, where different orientations give rise to different decay rates. However, this curve is particularly multiexponential, due to TROSY-like effects resulting from relaxation due to both the dipole and CSA (see [TROSY](../Chapter2/Ch2_TROSY.ipynb) in chapter 2).
 # 
 # We may investigate this by actively separating components when the $^1$H is in the α and β states. Here, we must construct our detection matrices explicitly from matrices.
 

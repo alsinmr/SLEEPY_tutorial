@@ -240,7 +240,7 @@ const thebe_selector_output = ".output, .cell_output"
       <span class="math notranslate nohighlight">
        \(T_1\)
       </span>
-      , Nuclear Overhauser Effect in Solution NMR
+      and Nuclear Overhauser Effect
      </font>
     </a>
    </li>
@@ -390,14 +390,21 @@ const thebe_selector_output = ".output, .cell_output"
    <li class="toctree-l2">
     <a class="reference internal" href="../Chapter5/Ch5_PseudoContactShift.html">
      <font color="#0093AF">
-      Paramagnetic Effects: Pseudo-Contact Shift
+      Pseudo-Contact Shift
      </font>
     </a>
    </li>
   </ul>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="../Ch6_ColabTemplate.html">
+  <a class="reference internal" href="../Chapter6/Ch6_RelaxationOptions.html">
+   <font color="maroon">
+    Relaxation Options
+   </font>
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../Ch7_ColabTemplate.html">
    <font color="maroon">
     SLEEPY Colab Template
    </font>
@@ -779,7 +786,7 @@ title="Print to PDF"
 </div>
 </div>
 <p>Usually, the initial density matrix and detection operators are specified by a nucleus and a direction (x, y, z, +(p), -(m), α(alpha), or β(beta)). However, we may alternatively specify a specific spin (‘S1x’, for example). ‘Thermal’ may be specified as the initial density matrix, which will result in the thermal equilibrium for the spin system being calculated resulting from the rotor-averaged Hamiltonian at the experimental temperature (ex.T_K). Operators may also be scaled (<code class="docutils literal notranslate"><span class="pre">2*13Cp</span></code>, for example).</p>
-<p>Finally, the user may also input their own initial density matrix and detection operators as matrices. Any arbitrary matrix of the appropriate dimension (<code class="docutils literal notranslate"><span class="pre">ex.Op.Mult.prod()</span></code> x <code class="docutils literal notranslate"><span class="pre">ex.Op.Mult.prod()</span></code>) can be input. The most straightforward way to build this matrix is from the spin matrices, which are stored in ex.Op (see <span class="xref myst">ExpSys</span> for more details). For example, if we want to initialize in and detect a double quantum coherence between spins 0 and 1, we could construct:</p>
+<p>Finally, the user may also input their own initial density matrix and detection operators as matrices. Any arbitrary matrix of the appropriate dimension (<code class="docutils literal notranslate"><span class="pre">ex.Op.Mult.prod()</span></code> x <code class="docutils literal notranslate"><span class="pre">ex.Op.Mult.prod()</span></code>) can be input. The most straightforward way to build this matrix is from the spin matrices, which are stored in ex.Op (see <a class="reference internal" href="Ch1_expsys.html"><span class="doc std std-doc">ExpSys</span></a> for more details). For example, if we want to initialize in and detect a double quantum coherence between spins 0 and 1, we could construct:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Op</span><span class="o">=</span><span class="n">ex</span><span class="o">.</span><span class="n">Op</span>
 <span class="n">DQ</span><span class="o">=</span><span class="n">Op</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">p</span><span class="nd">@Op</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">p</span><span class="o">+</span><span class="n">Op</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">m</span><span class="nd">@Op</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">m</span>
 <span class="n">rho</span><span class="o">=</span><span class="n">sl</span><span class="o">.</span><span class="n">Rho</span><span class="p">(</span><span class="n">rho0</span><span class="o">=</span><span class="n">DQ</span><span class="p">,</span><span class="n">detect</span><span class="o">=</span><span class="n">DQ</span><span class="p">)</span>

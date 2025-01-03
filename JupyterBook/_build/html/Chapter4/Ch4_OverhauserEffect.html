@@ -240,7 +240,7 @@ const thebe_selector_output = ".output, .cell_output"
       <span class="math notranslate nohighlight">
        \(T_1\)
       </span>
-      , Nuclear Overhauser Effect in Solution NMR
+      and Nuclear Overhauser Effect
      </font>
     </a>
    </li>
@@ -390,14 +390,21 @@ const thebe_selector_output = ".output, .cell_output"
    <li class="toctree-l2">
     <a class="reference internal" href="../Chapter5/Ch5_PseudoContactShift.html">
      <font color="#0093AF">
-      Paramagnetic Effects: Pseudo-Contact Shift
+      Pseudo-Contact Shift
      </font>
     </a>
    </li>
   </ul>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="../Ch6_ColabTemplate.html">
+  <a class="reference internal" href="../Chapter6/Ch6_RelaxationOptions.html">
+   <font color="maroon">
+    Relaxation Options
+   </font>
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../Ch7_ColabTemplate.html">
    <font color="maroon">
     SLEEPY Colab Template
    </font>
@@ -937,7 +944,7 @@ title="Print to PDF"
 <section id="example-3-overhauser-effect-buildup-with-saturating-field">
 <h2>Example 3: Overhauser Effect buildup with Saturating field<a class="headerlink" href="#example-3-overhauser-effect-buildup-with-saturating-field" title="Permalink to this headline">#</a></h2>
 <p>This last calculation requires a few special features of SLEEPY, because the Overhauser effect only occurs in the lab frame, so we must also irradiate the electron in the lab frame. It also requires recovery to thermal equilibrium, which is implemented differently under dynamic conditions than if using explicit <span class="math notranslate nohighlight">\(T_1\)</span> (i.e. here we use a non-Lindblad implementation).</p>
-<p>Some caution should be taken with the ‘DynamicThermal’ method (see <span class="xref myst"><span class="math notranslate nohighlight">\(T_1\)</span> tests</span>). We check here first that thermal equilibrium is obtained correctly for this system, before we apply microwave irradiation to the electron.</p>
+<p>Some caution should be taken with the ‘DynamicThermal’ method (see <a class="reference internal" href="../Chapter2/Ch2_T1_limits.html"><span class="doc std std-doc"><span class="math notranslate nohighlight">\(T_1\)</span> tests</span></a>). We check here first that thermal equilibrium is obtained correctly for this system, before we apply microwave irradiation to the electron.</p>
 <section id="id2">
 <h3>Build the system<a class="headerlink" href="#id2" title="Permalink to this headline">#</a></h3>
 <div class="cell docutils container">

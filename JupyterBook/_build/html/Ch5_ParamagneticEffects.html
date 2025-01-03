@@ -50,6 +50,8 @@ const thebe_selector_input = "pre"
 const thebe_selector_output = ".output, .cell_output"
 </script>
     <script async="async" src="_static/sphinx-thebe.js"></script>
+    <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <link rel="shortcut icon" href="_static/favicon.png"/>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
@@ -238,7 +240,7 @@ const thebe_selector_output = ".output, .cell_output"
       <span class="math notranslate nohighlight">
        \(T_1\)
       </span>
-      , Nuclear Overhauser Effect in Solution NMR
+      and Nuclear Overhauser Effect
      </font>
     </a>
    </li>
@@ -388,14 +390,21 @@ const thebe_selector_output = ".output, .cell_output"
    <li class="toctree-l2">
     <a class="reference internal" href="Chapter5/Ch5_PseudoContactShift.html">
      <font color="#0093AF">
-      Paramagnetic Effects: Pseudo-Contact Shift
+      Pseudo-Contact Shift
      </font>
     </a>
    </li>
   </ul>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="Ch6_ColabTemplate.html">
+  <a class="reference internal" href="Chapter6/Ch6_RelaxationOptions.html">
+   <font color="maroon">
+    Relaxation Options
+   </font>
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="Ch7_ColabTemplate.html">
    <font color="maroon">
     SLEEPY Colab Template
    </font>
@@ -582,6 +591,11 @@ title="Print to PDF"
                 
   <section class="tex2jax_ignore mathjax_ignore" id="font-color-maroon-paramagnetic-effects-font">
 <h1><font color="maroon">Paramagnetic Effects</font><a class="headerlink" href="#font-color-maroon-paramagnetic-effects-font" title="Permalink to this headline">#</a></h1>
+<p>Fast-relaxing electrons can have a variety of effects on NMR spectra. First, the relaxation of the electron acts a stochastic field on the nuclei, inducing paramagnetic relaxation enhancement. Second, while electron relaxation removes splittings on the nucleus resulting from hyperfine couplings, the electronic <span class="math notranslate nohighlight">\(\alpha\)</span> and <span class="math notranslate nohighlight">\(\beta\)</span> states are not equally populated, so that the nuclear resonance frequency shifts. This is known as the contact (isotropic hyperfine) and pseudo-contact (dipolar hyperfine) shift. We show how to simulate these effects here.</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="Chapter5/Ch5_ContactShift.html"><span class="doc std std-doc"> Contact shift</span></a></p></li>
+<li><p><a class="reference internal" href="Chapter5/Ch5_PseudoContactShift.html"><span class="doc std std-doc"> Pseudo-Contact Shift</span></a></p></li>
+</ul>
 <div class="toctree-wrapper compound">
 </div>
 </section>
