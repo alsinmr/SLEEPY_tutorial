@@ -1,4 +1,4 @@
-# <font color="maroon">SLEEPY basics</font>
+# <font color="#B00000">SLEEPY basics</font>
 
 The first chapter of SLEEPY begins with a simple example of a SLEEPY simulation under dynamic conditions, in order to introduce the various components of a SLEEPY simulation. We then go through an explanation of object-oriented programming, on which SLEEPY is based, and provide details of the functions of the key objects in SLEEPY.
 

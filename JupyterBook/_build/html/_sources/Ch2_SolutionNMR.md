@@ -1,4 +1,4 @@
-# <font color="maroon">Solution NMR</font>
+# <font color="#B00000">Solution NMR</font>
 
 We next consider examples from solution-state NMR. These are primarily relatively simple examples, since the driving mechanism of relaxation is the chemical shift under exchange conditions. Some of the problems can even be solved by hand, but they will serve as a good start to using SLEEPY. We will also simulate T$_1$ relaxation, although using hopping on a tetrahedral grid in place of explicit tumbling.
 
