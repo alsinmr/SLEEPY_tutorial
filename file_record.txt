@@ -24,4 +24,4 @@
 /Users/albertsmith/Documents/GitHub.nosync/SLEEPY_tutorial/Chapters/Chapter5/Ch5_PseudoContactShift.ipynb	1735981191
 /Users/albertsmith/Documents/GitHub.nosync/SLEEPY_tutorial/Chapters/Chapter5/Ch5_ContactShift.ipynb	1735981191
 /Users/albertsmith/Documents/GitHub.nosync/SLEEPY_tutorial/Chapters/Chapter5/PseudoContactShift.ipynb	1735937085
-/Users/albertsmith/Documents/GitHub.nosync/SLEEPY_tutorial/Chapters/Chapter6/Ch6_RelaxationOptions.ipynb	1736026429
+/Users/albertsmith/Documents/GitHub.nosync/SLEEPY_tutorial/Chapters/Chapter6/Ch6_RelaxationOptions.ipynb	1736026590
