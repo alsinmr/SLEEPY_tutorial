@@ -60,6 +60,8 @@
     <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'Chapter6/Ch6_RelaxationOptions';</script>
     <link rel="icon" href="../_static/favicon.png"/>
     <link rel="index" title="Index" href="../genindex.html" />
@@ -411,6 +413,33 @@
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#setup">Setup</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#simple-one-spin-relaxation">Simple one-spin relaxation</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#build-the-system">Build the system</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#propagate">Propagate</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#plot-the-results">Plot the results</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#thermalization">Thermalization</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#relaxation-in-a-tilted-frame">Relaxation in a tilted frame</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#tilted-frame-without-thermalization">Tilted frame without thermalization</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#tilted-frame-with-thermalization">Tilted frame with thermalization</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#orientation-specific-relaxation">Orientation-specific relaxation</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#thermalizing-relaxation-due-to-dynamics">Thermalizing relaxation due to dynamics</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Build the system</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#propagate-and-plot">Propagate and plot</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#with-dynamicthermal-option">With ‘DynamicThermal’ option</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#limitations-of-dynamicthermal">Limitations of ‘DynamicThermal’</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#summary">Summary</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#basic-relaxation-can-be-included-using">1. Basic relaxation can be included using:</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#if-quantization-axis-for-a-spin-is-tilted-use">2. If quantization axis for a spin is tilted, use:</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#if-the-quantization-axis-is-not-tilted-but-the-polarization-varies-use">3. If the quantization axis is not tilted, but the polarization varies, use:</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#if-relaxation-is-induced-explicitely-by-dynamics-use">4. If relaxation is induced explicitely by dynamics, use:</a></li>
+</ul>
+</li>
 </ul>
             </nav>
         </div>
@@ -425,7 +454,9 @@
   <section class="tex2jax_ignore mathjax_ignore" id="relaxation-options">
 <h1><font  color = "#B00000">Relaxation Options</font><a class="headerlink" href="#relaxation-options" title="Link to this heading">#</a></h1>
 <p><a href="https://githubtocolab.com/alsinmr/SLEEPY_tutorial/blob/main/ColabNotebooks/Chapter6/Ch6_RelaxationOptions.ipynb" target="_blank"><img src="https://colab.research.google.com/assets/colab-badge.svg"></a></p>
-<p>SLEEPY has a variety of options for introducing relaxation to spin-systems. Understanding the differences between these can be important for correctly simulating complex effects. We explain and demonstrate the various options here</p>
+<p>SLEEPY has a variety of options for introducing relaxation to spin-systems. Understanding the differences between these can be important for correctly simulating complex effects. We explain and demonstrate the various options here. To keep things simple, we’ll work with just single orientations.</p>
+<p>Most of the relaxation implemented in SLEEPY is a form of Lindblad formalism.<span class="math notranslate nohighlight">\(^1\)</span> Note that we have implemented single-spin relaxation, which does not include singlet/triplet relaxation. This may be added in a future update.</p>
+<p>[1] C. Bengs, M.H. Levitt. <a class="reference external" href="https://doi.org/10.1016/j.jmr.2019.106645"><em>J. Magn. Reson</em></a>, <strong>2020</strong>, 310, 106645.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># SETUP SLEEPY</span>
@@ -435,6 +466,588 @@
 </div>
 <section id="setup">
 <h2>Setup<a class="headerlink" href="#setup" title="Link to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">SLEEPY</span> <span class="k">as</span> <span class="nn">sl</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="simple-one-spin-relaxation">
+<h2>Simple one-spin relaxation<a class="headerlink" href="#simple-one-spin-relaxation" title="Link to this heading">#</a></h2>
+<section id="build-the-system">
+<h3>Build the system<a class="headerlink" href="#build-the-system" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ex</span><span class="o">=</span><span class="n">sl</span><span class="o">.</span><span class="n">ExpSys</span><span class="p">(</span><span class="n">v0H</span><span class="o">=</span><span class="mi">500</span><span class="p">,</span><span class="n">Nucs</span><span class="o">=</span><span class="s1">&#39;1H&#39;</span><span class="p">,</span><span class="n">T_K</span><span class="o">=</span><span class="mi">298</span><span class="p">)</span>
+<span class="n">L</span><span class="o">=</span><span class="n">ex</span><span class="o">.</span><span class="n">Liouvillian</span><span class="p">()</span>
+<span class="n">T1</span><span class="o">=</span><span class="mi">1</span>
+<span class="n">T2</span><span class="o">=</span><span class="mf">0.1</span>
+<span class="c1">#Type of relaxation, spin-index, time constant</span>
+<span class="n">L</span><span class="o">.</span><span class="n">add_relax</span><span class="p">(</span><span class="s1">&#39;T1&#39;</span><span class="p">,</span><span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">T1</span><span class="o">=</span><span class="n">T1</span><span class="p">)</span>   
+<span class="n">_</span><span class="o">=</span><span class="n">L</span><span class="o">.</span><span class="n">add_relax</span><span class="p">(</span><span class="s1">&#39;T2&#39;</span><span class="p">,</span><span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">T2</span><span class="o">=</span><span class="n">T2</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="propagate">
+<h3>Propagate<a class="headerlink" href="#propagate" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">seq</span><span class="o">=</span><span class="n">L</span><span class="o">.</span><span class="n">Sequence</span><span class="p">(</span><span class="n">Dt</span><span class="o">=</span><span class="mf">1e-3</span><span class="p">)</span>
+<span class="n">rho</span><span class="o">=</span><span class="n">sl</span><span class="o">.</span><span class="n">Rho</span><span class="p">(</span><span class="s1">&#39;1Hx+1Hz&#39;</span><span class="p">,[</span><span class="s1">&#39;1Hx&#39;</span><span class="p">,</span><span class="s1">&#39;1Hz&#39;</span><span class="p">])</span>
+<span class="n">_</span><span class="o">=</span><span class="n">rho</span><span class="o">.</span><span class="n">DetProp</span><span class="p">(</span><span class="n">seq</span><span class="p">,</span><span class="n">n</span><span class="o">=</span><span class="mi">5000</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="plot-the-results">
+<h3>Plot the results<a class="headerlink" href="#plot-the-results" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ax</span><span class="o">=</span><span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="n">figsize</span><span class="o">=</span><span class="p">[</span><span class="mi">9</span><span class="p">,</span><span class="mi">4</span><span class="p">])[</span><span class="mi">1</span><span class="p">]</span>
+<span class="n">rho</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">det_num</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">rho</span><span class="o">.</span><span class="n">t_axis</span><span class="o">*</span><span class="mf">1e3</span><span class="p">,</span><span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">rho</span><span class="o">.</span><span class="n">t_axis</span><span class="o">/</span><span class="n">T2</span><span class="p">),</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">,</span><span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;:&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlim</span><span class="p">([</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">500</span><span class="p">])</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;$T_2$ relaxation&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">legend</span><span class="p">((</span><span class="s1">&#39;Simulation&#39;</span><span class="p">,</span><span class="sa">rf</span><span class="s1">&#39;$T_2$=</span><span class="si">{</span><span class="n">T2</span><span class="o">*</span><span class="mf">1e3</span><span class="si">:</span><span class="s1">.0f</span><span class="si">}</span><span class="s1"> ms&#39;</span><span class="p">))</span>
+<span class="n">rho</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">det_num</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">axis</span><span class="o">=</span><span class="s1">&#39;s&#39;</span><span class="p">,</span><span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">rho</span><span class="o">.</span><span class="n">t_axis</span><span class="p">,</span><span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">rho</span><span class="o">.</span><span class="n">t_axis</span><span class="o">/</span><span class="n">T1</span><span class="p">),</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">,</span><span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;:&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlim</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span><span class="n">rho</span><span class="o">.</span><span class="n">t_axis</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]])</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;$T_1$ relaxation&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">legend</span><span class="p">((</span><span class="s1">&#39;Simulation&#39;</span><span class="p">,</span><span class="sa">rf</span><span class="s1">&#39;$T_1$=</span><span class="si">{</span><span class="n">T1</span><span class="si">:</span><span class="s1">.0f</span><span class="si">}</span><span class="s1"> s&#39;</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x7fa2f69e3e20&gt;
+</pre></div>
+</div>
+<img alt="../_images/c97249464ce3c8794aee954c3f970fb2a134bc79173e20b96ccdccc42869ad26.png" src="../_images/c97249464ce3c8794aee954c3f970fb2a134bc79173e20b96ccdccc42869ad26.png" />
+</div>
+</div>
+<p>Not surprisingly, we obtain perfect monoexponential relaxation, matching the input rate constants for both <span class="math notranslate nohighlight">\(T_2\)</span> and <span class="math notranslate nohighlight">\(T_1\)</span>.</p>
+<p>Note that <span class="math notranslate nohighlight">\(T_1\)</span> relaxation as implemented in SLEEPY does not produce any <span class="math notranslate nohighlight">\(T_2\)</span> relaxation. Caution should be taken to also include <span class="math notranslate nohighlight">\(T_2\)</span> relaxation such that <span class="math notranslate nohighlight">\(2\cdot T_1\ge T_2\)</span>.<span class="math notranslate nohighlight">\(^1\)</span></p>
+<p>[1] D.D. Traficante. <a class="reference external" href="https://doi.org/10.1002/cmr.1820030305"><em>Conc. Magn. Reson.</em></a>, <strong>1991</strong>, 3, 171-177.</p>
+</section>
+<section id="thermalization">
+<h3>Thermalization<a class="headerlink" href="#thermalization" title="Link to this heading">#</a></h3>
+<p>We may also force the magnetization to recover to its thermal equilibrium, by including ‘recovery’. This function works by adding terms to all non-zero off-diagonal matrix elements of the relaxation matrix so that for the <span class="math notranslate nohighlight">\(\alpha\)</span> and <span class="math notranslate nohighlight">\(\beta\)</span> states of a spin, we have that</p>
+<div class="math notranslate nohighlight">
+\[
+\begin{equation}
+\frac{p_{eq}^\alpha}{p_{eq}^\beta}=\frac{k_{\beta\rightarrow\alpha}}{k_{\alpha\rightarrow\beta}}
+\end{equation}
+\]</div>
+<p>which satisfies detailed balance. Note that we also add these terms to coherences, so that, for example, the <span class="math notranslate nohighlight">\(S^\alpha I_x\)</span> coherence transfers magnetization to the <span class="math notranslate nohighlight">\(S^\beta I_x\)</span> coherence more quickly than <span class="math notranslate nohighlight">\(S^\beta I_x\)</span> to <span class="math notranslate nohighlight">\(S^\alpha I_x\)</span>. This occurs, even though both the coherences relax to zero, although this is only to be relevant if the longitudinal relaxation of the <em>S</em>-spin is comparable to or faster than the transverse relaxation of the <em>I</em>-spin, a situation which arises primarily for electron-nuclear systems. We first demonstrate recovery for one spin, and then also show how this affects relaxation of coherences.</p>
+<p>An important note: <code class="docutils literal notranslate"><span class="pre">L.add_relax('recovery')</span></code> should only be applied after all <span class="math notranslate nohighlight">\(T_1\)</span> relaxation is introduced, since the adjustment to the relaxation matrix depends on what values of <span class="math notranslate nohighlight">\(T_1\)</span> are used. Furthermore, the thermal equilibrium depends on the temperature setting of the experiment (an optional argument of ExpSys, which defaults to 298 (K)).</p>
+<p>We now start the system without any longitudinal magnetization, since the system should recover to thermal equilibrium.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">L</span><span class="o">.</span><span class="n">add_relax</span><span class="p">(</span><span class="s1">&#39;recovery&#39;</span><span class="p">)</span>
+
+<span class="n">seq</span><span class="o">=</span><span class="n">L</span><span class="o">.</span><span class="n">Sequence</span><span class="p">(</span><span class="n">Dt</span><span class="o">=</span><span class="mf">1e-3</span><span class="p">)</span>
+<span class="n">rho</span><span class="o">=</span><span class="n">sl</span><span class="o">.</span><span class="n">Rho</span><span class="p">(</span><span class="s1">&#39;1Hx&#39;</span><span class="p">,[</span><span class="s1">&#39;1Hx&#39;</span><span class="p">,</span><span class="s1">&#39;1Hz&#39;</span><span class="p">])</span>
+<span class="n">_</span><span class="o">=</span><span class="n">rho</span><span class="o">.</span><span class="n">DetProp</span><span class="p">(</span><span class="n">seq</span><span class="p">,</span><span class="n">n</span><span class="o">=</span><span class="mi">5000</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ax</span><span class="o">=</span><span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="n">figsize</span><span class="o">=</span><span class="p">[</span><span class="mi">9</span><span class="p">,</span><span class="mi">4</span><span class="p">])[</span><span class="mi">1</span><span class="p">]</span>
+<span class="n">rho</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">det_num</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">rho</span><span class="o">.</span><span class="n">t_axis</span><span class="o">*</span><span class="mf">1e3</span><span class="p">,</span><span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">rho</span><span class="o">.</span><span class="n">t_axis</span><span class="o">/</span><span class="n">T2</span><span class="p">)</span><span class="o">*</span><span class="n">ex</span><span class="o">.</span><span class="n">Peq</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">,</span><span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;:&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlim</span><span class="p">([</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">500</span><span class="p">])</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;$T_2$ relaxation&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">legend</span><span class="p">((</span><span class="s1">&#39;Simulation&#39;</span><span class="p">,</span><span class="sa">rf</span><span class="s1">&#39;$T_2$=</span><span class="si">{</span><span class="n">T2</span><span class="o">*</span><span class="mf">1e3</span><span class="si">:</span><span class="s1">.0f</span><span class="si">}</span><span class="s1"> ms&#39;</span><span class="p">))</span>
+<span class="n">rho</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">det_num</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">axis</span><span class="o">=</span><span class="s1">&#39;s&#39;</span><span class="p">,</span><span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">rho</span><span class="o">.</span><span class="n">t_axis</span><span class="p">,(</span><span class="mi">1</span><span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">rho</span><span class="o">.</span><span class="n">t_axis</span><span class="o">/</span><span class="n">T1</span><span class="p">))</span><span class="o">*</span><span class="n">ex</span><span class="o">.</span><span class="n">Peq</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">,</span><span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;:&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlim</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span><span class="n">rho</span><span class="o">.</span><span class="n">t_axis</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]])</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;$T_1$ relaxation&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">legend</span><span class="p">((</span><span class="s1">&#39;Simulation&#39;</span><span class="p">,</span><span class="sa">rf</span><span class="s1">&#39;$T_1$=</span><span class="si">{</span><span class="n">T1</span><span class="si">:</span><span class="s1">.0f</span><span class="si">}</span><span class="s1"> s&#39;</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x7fa2cd82f1f0&gt;
+</pre></div>
+</div>
+<img alt="../_images/799eda4b8c6689a72792ec1ccff735f38e9d501182a2254b18a0cda60539dd80.png" src="../_images/799eda4b8c6689a72792ec1ccff735f38e9d501182a2254b18a0cda60539dd80.png" />
+</div>
+</div>
+<p>Now, the longitudinal magnetization starts out at zero, and recovers to the thermal equilibrium, again yielding monoexponential functions matching the input relaxation times.</p>
+</section>
+</section>
+<section id="relaxation-in-a-tilted-frame">
+<h2>Relaxation in a tilted frame<a class="headerlink" href="#relaxation-in-a-tilted-frame" title="Link to this heading">#</a></h2>
+<p>The above relaxation methods can be applied to most spin-simulations. However, what happens if the quantization axis for a spin is tilted away from the z-axis? In this case we need to use more advanced options. We first demonstrate that the above approach fails with a tilted spin, by using a strong electron-nuclear hyperfine coupling and observing its influence on the nucleus.</p>
+<p>To obtain tilting of the nucleus, we need to calculate the nucleus in the lab frame. We leave the electron in the rotating frame.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Don&#39;t forget to set vr to zero</span>
+<span class="c1">#It will default to 10 kHz if anisotropic interactions are present</span>
+<span class="n">ex</span><span class="o">=</span><span class="n">sl</span><span class="o">.</span><span class="n">ExpSys</span><span class="p">(</span><span class="n">v0H</span><span class="o">=</span><span class="mi">200</span><span class="p">,</span><span class="n">Nucs</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;1H&#39;</span><span class="p">,</span><span class="s1">&#39;e&#39;</span><span class="p">],</span><span class="n">vr</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">LF</span><span class="o">=</span><span class="p">[</span><span class="kc">True</span><span class="p">,</span><span class="kc">False</span><span class="p">],</span><span class="n">T_K</span><span class="o">=</span><span class="mi">298</span><span class="p">,</span><span class="n">pwdavg</span><span class="o">=</span><span class="s1">&#39;alpha0beta45&#39;</span><span class="p">)</span>
+<span class="n">ex</span><span class="o">.</span><span class="n">set_inter</span><span class="p">(</span><span class="s1">&#39;hyperfine&#39;</span><span class="p">,</span><span class="n">i0</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">i1</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">Axx</span><span class="o">=-</span><span class="mf">1e8</span><span class="p">,</span><span class="n">Ayy</span><span class="o">=-</span><span class="mf">1e8</span><span class="p">,</span><span class="n">Azz</span><span class="o">=</span><span class="mf">2e8</span><span class="p">)</span>
+<span class="n">L</span><span class="o">=</span><span class="n">ex</span><span class="o">.</span><span class="n">Liouvillian</span><span class="p">()</span>
+
+<span class="n">T1</span><span class="o">=</span><span class="mi">1</span>
+<span class="n">T2</span><span class="o">=</span><span class="mf">0.1</span>
+
+<span class="c1">#Type of relaxation, spin-index, time constant</span>
+<span class="n">L</span><span class="o">.</span><span class="n">add_relax</span><span class="p">(</span><span class="s1">&#39;T1&#39;</span><span class="p">,</span><span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">T1</span><span class="o">=</span><span class="n">T1</span><span class="p">)</span>   
+<span class="n">_</span><span class="o">=</span><span class="n">L</span><span class="o">.</span><span class="n">add_relax</span><span class="p">(</span><span class="s1">&#39;T2&#39;</span><span class="p">,</span><span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">T2</span><span class="o">=</span><span class="n">T2</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<section id="tilted-frame-without-thermalization">
+<h3>Tilted frame without thermalization<a class="headerlink" href="#tilted-frame-without-thermalization" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">seq</span><span class="o">=</span><span class="n">L</span><span class="o">.</span><span class="n">Sequence</span><span class="p">(</span><span class="n">Dt</span><span class="o">=</span><span class="mf">1e-3</span><span class="p">)</span>
+<span class="n">rho</span><span class="o">=</span><span class="n">sl</span><span class="o">.</span><span class="n">Rho</span><span class="p">(</span><span class="s1">&#39;1Hx+1Hz&#39;</span><span class="p">,[</span><span class="s1">&#39;1Hx&#39;</span><span class="p">,</span><span class="s1">&#39;1Hz&#39;</span><span class="p">])</span>
+<span class="n">_</span><span class="o">=</span><span class="n">rho</span><span class="o">.</span><span class="n">DetProp</span><span class="p">(</span><span class="n">seq</span><span class="p">,</span><span class="n">n</span><span class="o">=</span><span class="mi">5000</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>State-space reduction: 16-&gt;8
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ax</span><span class="o">=</span><span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="n">figsize</span><span class="o">=</span><span class="p">[</span><span class="mi">9</span><span class="p">,</span><span class="mi">4</span><span class="p">])[</span><span class="mi">1</span><span class="p">]</span>
+<span class="n">rho</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">det_num</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">rho</span><span class="o">.</span><span class="n">t_axis</span><span class="o">*</span><span class="mf">1e3</span><span class="p">,</span><span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">rho</span><span class="o">.</span><span class="n">t_axis</span><span class="o">/</span><span class="n">T2</span><span class="p">),</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">,</span><span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;:&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlim</span><span class="p">([</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">500</span><span class="p">])</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;$T_2$ relaxation&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">legend</span><span class="p">((</span><span class="s1">&#39;Simulation&#39;</span><span class="p">,</span><span class="sa">rf</span><span class="s1">&#39;$T_2$=</span><span class="si">{</span><span class="n">T2</span><span class="o">*</span><span class="mf">1e3</span><span class="si">:</span><span class="s1">.0f</span><span class="si">}</span><span class="s1"> ms&#39;</span><span class="p">))</span>
+<span class="n">rho</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">det_num</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">axis</span><span class="o">=</span><span class="s1">&#39;s&#39;</span><span class="p">,</span><span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">rho</span><span class="o">.</span><span class="n">t_axis</span><span class="p">,</span><span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">rho</span><span class="o">.</span><span class="n">t_axis</span><span class="o">/</span><span class="n">T1</span><span class="p">),</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">,</span><span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;:&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlim</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span><span class="n">rho</span><span class="o">.</span><span class="n">t_axis</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]])</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;$T_1$ relaxation&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">legend</span><span class="p">((</span><span class="s1">&#39;Simulation&#39;</span><span class="p">,</span><span class="sa">rf</span><span class="s1">&#39;$T_1$=</span><span class="si">{</span><span class="n">T1</span><span class="si">:</span><span class="s1">.0f</span><span class="si">}</span><span class="s1"> s&#39;</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x7fa2a0faf550&gt;
+</pre></div>
+</div>
+<img alt="../_images/873959f24d6a6ae5e76ba2da8e97fbf16a9324301c62f66b35e8b863c8bbb185.png" src="../_images/873959f24d6a6ae5e76ba2da8e97fbf16a9324301c62f66b35e8b863c8bbb185.png" />
+</div>
+</div>
+<p>The <span class="math notranslate nohighlight">\(T_2\)</span> relaxation has a slow component, and the <span class="math notranslate nohighlight">\(T_1\)</span> relaxation is too fast. This is because the nucleus is titled into the xy-plane, and so some <span class="math notranslate nohighlight">\(T_2\)</span> relaxation is applied to the populations, accelerating its decay. Furthermore, parts of the coherences are relaxing with <span class="math notranslate nohighlight">\(T_1\)</span>.</p>
+<p>Note that this is signal in the lab frame. We could downmix it to detect in the rotating frame, but for our purposes, this is not really necessary (<code class="docutils literal notranslate"><span class="pre">rho.downmix()</span></code>).</p>
+</section>
+<section id="tilted-frame-with-thermalization">
+<h3>Tilted frame with thermalization<a class="headerlink" href="#tilted-frame-with-thermalization" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">L</span><span class="o">.</span><span class="n">add_relax</span><span class="p">(</span><span class="s1">&#39;recovery&#39;</span><span class="p">)</span>
+
+<span class="n">seq</span><span class="o">=</span><span class="n">L</span><span class="o">.</span><span class="n">Sequence</span><span class="p">(</span><span class="n">Dt</span><span class="o">=</span><span class="mf">1e-3</span><span class="p">)</span>
+<span class="n">rho</span><span class="o">=</span><span class="n">sl</span><span class="o">.</span><span class="n">Rho</span><span class="p">(</span><span class="s1">&#39;1Hx&#39;</span><span class="p">,[</span><span class="s1">&#39;1Hx&#39;</span><span class="p">,</span><span class="s1">&#39;1Hz&#39;</span><span class="p">])</span>
+<span class="n">_</span><span class="o">=</span><span class="n">rho</span><span class="o">.</span><span class="n">DetProp</span><span class="p">(</span><span class="n">seq</span><span class="p">,</span><span class="n">n</span><span class="o">=</span><span class="mi">15000</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>State-space reduction: 16-&gt;8
+</pre></div>
+</div>
+</div>
+</div>
+<p>Mixing of <span class="math notranslate nohighlight">\(T_1\)</span> and <span class="math notranslate nohighlight">\(T_2\)</span> furthermore distorts the thermalization process, where <span class="math notranslate nohighlight">\(T_2\)</span> relaxation destroys some of the thermal magnetization.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ax</span><span class="o">=</span><span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="n">figsize</span><span class="o">=</span><span class="p">[</span><span class="mi">9</span><span class="p">,</span><span class="mi">4</span><span class="p">])[</span><span class="mi">1</span><span class="p">]</span>
+<span class="n">rho</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">det_num</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">rho</span><span class="o">.</span><span class="n">t_axis</span><span class="o">*</span><span class="mf">1e3</span><span class="p">,</span><span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">rho</span><span class="o">.</span><span class="n">t_axis</span><span class="o">/</span><span class="n">T2</span><span class="p">)</span><span class="o">*</span><span class="n">ex</span><span class="o">.</span><span class="n">Peq</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">,</span><span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;:&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlim</span><span class="p">([</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">500</span><span class="p">])</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;$T_2$ relaxation&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">legend</span><span class="p">((</span><span class="s1">&#39;Simulation&#39;</span><span class="p">,</span><span class="sa">rf</span><span class="s1">&#39;$T_2$=</span><span class="si">{</span><span class="n">T2</span><span class="o">*</span><span class="mf">1e3</span><span class="si">:</span><span class="s1">.0f</span><span class="si">}</span><span class="s1"> ms&#39;</span><span class="p">))</span>
+<span class="n">rho</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">det_num</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">axis</span><span class="o">=</span><span class="s1">&#39;s&#39;</span><span class="p">,</span><span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">rho</span><span class="o">.</span><span class="n">t_axis</span><span class="p">,(</span><span class="mi">1</span><span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">rho</span><span class="o">.</span><span class="n">t_axis</span><span class="o">/</span><span class="n">T1</span><span class="p">))</span><span class="o">*</span><span class="n">ex</span><span class="o">.</span><span class="n">Peq</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">,</span><span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;:&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlim</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span><span class="n">rho</span><span class="o">.</span><span class="n">t_axis</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]])</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;$T_1$ relaxation&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">legend</span><span class="p">((</span><span class="s1">&#39;Simulation&#39;</span><span class="p">,</span><span class="sa">rf</span><span class="s1">&#39;$T_1$=</span><span class="si">{</span><span class="n">T1</span><span class="si">:</span><span class="s1">.0f</span><span class="si">}</span><span class="s1"> s&#39;</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x7fa2cee83a00&gt;
+</pre></div>
+</div>
+<img alt="../_images/34c4d90fe8a3bc23e4f2766b07f821d1b2c4c699df04312c81851ae220ea6881.png" src="../_images/34c4d90fe8a3bc23e4f2766b07f821d1b2c4c699df04312c81851ae220ea6881.png" />
+</div>
+</div>
+<p>The equilibrated magnetization is less than expected, because the ‘recovery’ option is not fully compensating the <span class="math notranslate nohighlight">\(T_2\)</span> losses that are occuring for the nuclear populations.</p>
+</section>
+<section id="orientation-specific-relaxation">
+<h3>Orientation-specific relaxation<a class="headerlink" href="#orientation-specific-relaxation" title="Link to this heading">#</a></h3>
+<p>The relaxation used above uses a single relaxation matrix that is applied to all spins in the powder average, regardless of their orientation or position in a rotor cycle. However, since the tilting of the quantization axis of the nucleus depends on the orientation of the hyperfine coupling, correcting the relaxation above requires application of a relaxation matrix that is orientation-specific. This requires use of the <code class="docutils literal notranslate"><span class="pre">OS=True</span></code> option (OS:Orientation-Specific). For <span class="math notranslate nohighlight">\(T_1\)</span> relaxation, the <code class="docutils literal notranslate"><span class="pre">OS=True</span></code> option should be paired with the <code class="docutils literal notranslate"><span class="pre">Thermal=True</span></code> option if the system should relax to thermal equilibrium. The ‘recovery’ option should not be paired with these settings.</p>
+<p>Note, we may use <span class="math notranslate nohighlight">\(T_1\)</span> and <span class="math notranslate nohighlight">\(T_2\)</span> relaxation that is not orientation-specific, but paired with ‘recovery’ with <code class="docutils literal notranslate"><span class="pre">OS=True</span></code>. This is useful if the quantization axis is not tilted, but the polarization of a given spin varies with its orientation (e.g. an electron in the rotating frame will not tilt, but variation of the g-tensor may be large enough that the electron thermal equilibrium varies throughout the rotor period).</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">L</span><span class="o">.</span><span class="n">clear_relax</span><span class="p">()</span>  <span class="c1">#Remove existing relaxation settings</span>
+<span class="n">L</span><span class="o">.</span><span class="n">add_relax</span><span class="p">(</span><span class="s1">&#39;T1&#39;</span><span class="p">,</span><span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">T1</span><span class="o">=</span><span class="n">T1</span><span class="p">,</span><span class="n">OS</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">Thermal</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>   
+<span class="n">_</span><span class="o">=</span><span class="n">L</span><span class="o">.</span><span class="n">add_relax</span><span class="p">(</span><span class="s1">&#39;T2&#39;</span><span class="p">,</span><span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">T2</span><span class="o">=</span><span class="n">T2</span><span class="p">,</span><span class="n">OS</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">seq</span><span class="o">=</span><span class="n">L</span><span class="o">.</span><span class="n">Sequence</span><span class="p">(</span><span class="n">Dt</span><span class="o">=</span><span class="mf">1e-3</span><span class="p">)</span>
+<span class="n">rho</span><span class="o">=</span><span class="n">sl</span><span class="o">.</span><span class="n">Rho</span><span class="p">(</span><span class="s1">&#39;1Hx&#39;</span><span class="p">,[</span><span class="s1">&#39;1Hx&#39;</span><span class="p">,</span><span class="s1">&#39;1Hz&#39;</span><span class="p">])</span>
+<span class="n">_</span><span class="o">=</span><span class="n">rho</span><span class="o">.</span><span class="n">DetProp</span><span class="p">(</span><span class="n">seq</span><span class="p">,</span><span class="n">n</span><span class="o">=</span><span class="mi">15000</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>State-space reduction: 16-&gt;8
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ax</span><span class="o">=</span><span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="n">figsize</span><span class="o">=</span><span class="p">[</span><span class="mi">9</span><span class="p">,</span><span class="mi">4</span><span class="p">])[</span><span class="mi">1</span><span class="p">]</span>
+<span class="n">rho</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">det_num</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">rho</span><span class="o">.</span><span class="n">t_axis</span><span class="o">*</span><span class="mf">1e3</span><span class="p">,</span><span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">rho</span><span class="o">.</span><span class="n">t_axis</span><span class="o">/</span><span class="n">T2</span><span class="p">)</span><span class="o">*</span><span class="n">ex</span><span class="o">.</span><span class="n">Peq</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">,</span><span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;:&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlim</span><span class="p">([</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">500</span><span class="p">])</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;$T_2$ relaxation&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">legend</span><span class="p">((</span><span class="s1">&#39;Simulation&#39;</span><span class="p">,</span><span class="sa">rf</span><span class="s1">&#39;$T_2$=</span><span class="si">{</span><span class="n">T2</span><span class="o">*</span><span class="mf">1e3</span><span class="si">:</span><span class="s1">.0f</span><span class="si">}</span><span class="s1"> ms&#39;</span><span class="p">))</span>
+<span class="n">rho</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">det_num</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">axis</span><span class="o">=</span><span class="s1">&#39;s&#39;</span><span class="p">,</span><span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">rho</span><span class="o">.</span><span class="n">t_axis</span><span class="p">,(</span><span class="mi">1</span><span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">rho</span><span class="o">.</span><span class="n">t_axis</span><span class="o">/</span><span class="n">T1</span><span class="p">))</span><span class="o">*</span><span class="n">ex</span><span class="o">.</span><span class="n">Peq</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">,</span><span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;:&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlim</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span><span class="n">rho</span><span class="o">.</span><span class="n">t_axis</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]])</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;$T_1$ relaxation&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">legend</span><span class="p">((</span><span class="s1">&#39;Simulation&#39;</span><span class="p">,</span><span class="sa">rf</span><span class="s1">&#39;$T_1$=</span><span class="si">{</span><span class="n">T1</span><span class="si">:</span><span class="s1">.0f</span><span class="si">}</span><span class="s1"> s&#39;</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x7fa2a0f89100&gt;
+</pre></div>
+</div>
+<img alt="../_images/73ecf5ffdd3f2c1bcef00d7e33d28b57514c58e2db3bb9af76a49a82885afada.png" src="../_images/73ecf5ffdd3f2c1bcef00d7e33d28b57514c58e2db3bb9af76a49a82885afada.png" />
+</div>
+</div>
+<p>The desired relaxation rates are recovered. Note that some <span class="math notranslate nohighlight">\(\langle ^1H_x\rangle\)</span> will remain even at infinite time. This is due to the nuclear quantization axis lying partly in the <em>xy</em>-plane, so the magnetization aligns there at thermal equilibrium. Similarly, some oscillation is observed at the beginning of the <span class="math notranslate nohighlight">\(T_1\)</span> curve, which is coherence oscillating in the <em>z</em>-direction. These are not errors, but simply what happens with a tilted quantization axis (however, the spectrometer cannot <em>see</em> static magnetization, so the constant part of the x-signal would not actually show up in an experiment).</p>
+<p>Orientation-specific relaxation is particularly important for calculating the <a class="reference internal" href="../Chapter5/Ch5_PseudoContactShift.html"><span class="std std-doc">pseudo-contact shift</span></a>, although should also be used for DNP experiments where the nucleus is titled by the electron, especially to correct polarization leakage as observed above.</p>
+<p>Note that orientation-specific relaxation is spin-specific.</p>
+</section>
+</section>
+<section id="thermalizing-relaxation-due-to-dynamics">
+<h2>Thermalizing relaxation due to dynamics<a class="headerlink" href="#thermalizing-relaxation-due-to-dynamics" title="Link to this heading">#</a></h2>
+<p>For some calculations, we want to see how a dynamic process induces relaxation, and in other simulations, we may want to see how relaxation affects some process or how polarization is transferred. In the former case, we do not introduce any relaxation directly, but instead add an exchange process, in which case magnetization can only be destroyed. In the latter case, we may introduce recovery of the magnetization, especially in case we are interested in polarization transfer.</p>
+<p>Occasionally, we would like to see how specific dynamics processes result in polarization transfer. This is especially the case for Overhauser and Nuclear Overhauser effects. But, it is sometimes impractical to do this if polarization is only being destroyed. Therefore, we would like to thermalize these systems as well. We can do this by adding a correction term to the Liouville matrix, which is added with the ‘DynamicThermal’ option. Here we consider a simple two-spin system undergoing exchange to induce <span class="math notranslate nohighlight">\(T_1\)</span> relaxation.</p>
+<section id="id1">
+<h3>Build the system<a class="headerlink" href="#id1" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Lab frame for T1 relaxation</span>
+<span class="n">ex0</span><span class="o">=</span><span class="n">sl</span><span class="o">.</span><span class="n">ExpSys</span><span class="p">(</span><span class="mi">500</span><span class="p">,</span><span class="n">Nucs</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;15N&#39;</span><span class="p">,</span><span class="s1">&#39;1H&#39;</span><span class="p">],</span><span class="n">vr</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">LF</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">pwdavg</span><span class="o">=</span><span class="s1">&#39;alpha0beta45&#39;</span><span class="p">)</span>
+<span class="n">ex0</span><span class="o">.</span><span class="n">set_inter</span><span class="p">(</span><span class="s1">&#39;dipole&#39;</span><span class="p">,</span><span class="n">i0</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">i1</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">delta</span><span class="o">=</span><span class="mi">22000</span><span class="p">)</span>
+<span class="n">ex1</span><span class="o">=</span><span class="n">ex0</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+<span class="n">ex1</span><span class="o">.</span><span class="n">set_inter</span><span class="p">(</span><span class="s1">&#39;dipole&#39;</span><span class="p">,</span><span class="n">i0</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">i1</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">delta</span><span class="o">=</span><span class="mi">22000</span><span class="p">,</span><span class="n">euler</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">30</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">/</span><span class="mi">180</span><span class="p">,</span><span class="mi">0</span><span class="p">])</span>
+
+<span class="n">L</span><span class="o">=</span><span class="n">sl</span><span class="o">.</span><span class="n">Liouvillian</span><span class="p">(</span><span class="n">ex0</span><span class="p">,</span><span class="n">ex1</span><span class="p">,</span><span class="n">kex</span><span class="o">=</span><span class="n">sl</span><span class="o">.</span><span class="n">Tools</span><span class="o">.</span><span class="n">twoSite_kex</span><span class="p">(</span><span class="n">tc</span><span class="o">=</span><span class="mf">1e-9</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="propagate-and-plot">
+<h3>Propagate and plot<a class="headerlink" href="#propagate-and-plot" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">seq</span><span class="o">=</span><span class="n">L</span><span class="o">.</span><span class="n">Sequence</span><span class="p">(</span><span class="n">Dt</span><span class="o">=</span><span class="mf">0.1</span><span class="p">)</span>
+<span class="n">rho</span><span class="o">=</span><span class="n">sl</span><span class="o">.</span><span class="n">Rho</span><span class="p">(</span><span class="s1">&#39;15Nz+1Hz&#39;</span><span class="p">,[</span><span class="s1">&#39;15Nz&#39;</span><span class="p">,</span><span class="s1">&#39;1Hz&#39;</span><span class="p">])</span>
+<span class="n">_</span><span class="o">=</span><span class="n">rho</span><span class="o">.</span><span class="n">DetProp</span><span class="p">(</span><span class="n">seq</span><span class="p">,</span><span class="n">n</span><span class="o">=</span><span class="mi">1000</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">rho</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="s1">&#39;s&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;AxesSubplot:xlabel=&#39;t / s&#39;, ylabel=&#39;&lt;Op&gt;&#39;&gt;
+</pre></div>
+</div>
+<img alt="../_images/a1ad1eda013c09b95d0ff16910f7eb5c12143963b469128f873de8ab99b585c7.png" src="../_images/a1ad1eda013c09b95d0ff16910f7eb5c12143963b469128f873de8ab99b585c7.png" />
+</div>
+</div>
+<p>The dynamic process destroys the polarization on both spins.</p>
+</section>
+<section id="with-dynamicthermal-option">
+<h3>With ‘DynamicThermal’ option<a class="headerlink" href="#with-dynamicthermal-option" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">_</span><span class="o">=</span><span class="n">L</span><span class="o">.</span><span class="n">add_relax</span><span class="p">(</span><span class="s1">&#39;DynamicThermal&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">seq</span><span class="o">=</span><span class="n">L</span><span class="o">.</span><span class="n">Sequence</span><span class="p">(</span><span class="n">Dt</span><span class="o">=</span><span class="mf">0.1</span><span class="p">)</span>
+<span class="n">rho</span><span class="o">=</span><span class="n">sl</span><span class="o">.</span><span class="n">Rho</span><span class="p">(</span><span class="s1">&#39;zero&#39;</span><span class="p">,[</span><span class="s1">&#39;15Nz&#39;</span><span class="p">,</span><span class="s1">&#39;1Hz&#39;</span><span class="p">])</span> <span class="c1">#Start without any magnetization</span>
+<span class="n">_</span><span class="o">=</span><span class="n">rho</span><span class="o">.</span><span class="n">DetProp</span><span class="p">(</span><span class="n">seq</span><span class="p">,</span><span class="n">n</span><span class="o">=</span><span class="mi">1000</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ax</span><span class="o">=</span><span class="n">rho</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
+<span class="n">xl</span><span class="o">=</span><span class="n">ax</span><span class="o">.</span><span class="n">get_xlim</span><span class="p">()</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlim</span><span class="p">(</span><span class="n">xl</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">xl</span><span class="p">,</span><span class="n">ex0</span><span class="o">.</span><span class="n">Peq</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="mi">2</span><span class="p">),</span><span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;:&#39;</span><span class="p">,</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">xl</span><span class="p">,</span><span class="n">ex0</span><span class="o">.</span><span class="n">Peq</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="mi">2</span><span class="p">),</span><span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">,</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;grey&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&lt;matplotlib.lines.Line2D at 0x7fa2ce5f3af0&gt;]
+</pre></div>
+</div>
+<img alt="../_images/f4ef28abc6f51d43ff829ac48fb69323c8688f320fa31a383ce9f1e92a5101cd.png" src="../_images/f4ef28abc6f51d43ff829ac48fb69323c8688f320fa31a383ce9f1e92a5101cd.png" />
+</div>
+</div>
+<p>As we see, both spins arive at their thermal polarization using the ‘DynamicThermal’ option.</p>
+<p>This option may be used in particular to investigate NOE enhancements, or coupled longitudinal relaxation of spins. See <span class="math notranslate nohighlight">\(T_1\)</span> and NOE for <a class="reference internal" href="../Chapter2/Ch2_T1_NOE.html"><span class="std std-doc">solution</span></a> and <a class="reference internal" href="../Chapter3/Ch3_T1_NOE.html"><span class="std std-doc">solids</span></a>, and the DNP <a class="reference internal" href="../Chapter4/Ch4_OverhauserEffect.html"><span class="std std-doc">Overhauser Effect</span></a>.</p>
+</section>
+<section id="limitations-of-dynamicthermal">
+<h3>Limitations of ‘DynamicThermal’<a class="headerlink" href="#limitations-of-dynamicthermal" title="Link to this heading">#</a></h3>
+<p>There are some limitations to this approach, due to numerical stability for very fast motions (see <a class="reference internal" href="../Chapter2/Ch2_T1_limits.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(T_1\)</span> limits</span></a>), and also because it does not correctly achieve thermalization of the coherences. The latter limitation we demonstrate here. We create a system with a fast-relaxing electron due to dynamics, and add thermalization to it, to see if we can obtain a <a class="reference internal" href="../Chapter5/Ch5_ContactShift.html"><span class="std std-doc">contact shift</span></a> on the nucleus.</p>
+<p>We run the calculation twice, once with a 1 ns correlation time on the motion, inducing only slow electron <span class="math notranslate nohighlight">\(T_1\)</span> relaxation, and then with a 1 ps correlation time, inducing fast electron <span class="math notranslate nohighlight">\(T_1\)</span> relaxation. Only the latter will cause the proton signal to collapse into a single peak. We will then add thermalization, to see that we fail to produce the contact shift, due to incorrect thermalization of the coherences.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">gxx</span><span class="p">,</span><span class="n">gyy</span><span class="p">,</span><span class="n">gzz</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mf">2.05</span>
+<span class="n">ex0</span><span class="o">=</span><span class="n">sl</span><span class="o">.</span><span class="n">ExpSys</span><span class="p">(</span><span class="mi">200</span><span class="p">,</span><span class="n">Nucs</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;1H&#39;</span><span class="p">,</span><span class="s1">&#39;e&#39;</span><span class="p">],</span><span class="n">vr</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">T_K</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span><span class="n">LF</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">pwdavg</span><span class="o">=</span><span class="s1">&#39;alpha0beta45&#39;</span><span class="p">)</span>
+<span class="n">ex0</span><span class="o">.</span><span class="n">set_inter</span><span class="p">(</span><span class="s1">&#39;g&#39;</span><span class="p">,</span><span class="n">i</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">gxx</span><span class="o">=</span><span class="n">gxx</span><span class="p">,</span><span class="n">gyy</span><span class="o">=</span><span class="n">gyy</span><span class="p">,</span><span class="n">gzz</span><span class="o">=</span><span class="n">gzz</span><span class="p">)</span>
+<span class="n">ex0</span><span class="o">.</span><span class="n">set_inter</span><span class="p">(</span><span class="s1">&#39;hyperfine&#39;</span><span class="p">,</span><span class="n">i0</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">i1</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">Axx</span><span class="o">=</span><span class="mf">1e6</span><span class="p">,</span><span class="n">Ayy</span><span class="o">=</span><span class="mf">1e6</span><span class="p">,</span><span class="n">Azz</span><span class="o">=</span><span class="mf">1e6</span><span class="p">)</span>
+<span class="n">ex1</span><span class="o">=</span><span class="n">ex0</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+<span class="n">ex1</span><span class="o">.</span><span class="n">set_inter</span><span class="p">(</span><span class="s1">&#39;g&#39;</span><span class="p">,</span><span class="n">i</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">gxx</span><span class="o">=</span><span class="n">gxx</span><span class="p">,</span><span class="n">gyy</span><span class="o">=</span><span class="n">gyy</span><span class="p">,</span><span class="n">gzz</span><span class="o">=</span><span class="n">gzz</span><span class="p">,</span><span class="n">euler</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span><span class="mi">0</span><span class="p">])</span>
+
+<span class="n">L</span><span class="o">=</span><span class="n">sl</span><span class="o">.</span><span class="n">Liouvillian</span><span class="p">(</span><span class="n">ex0</span><span class="p">,</span><span class="n">ex1</span><span class="p">)</span>
+<span class="n">L</span><span class="o">.</span><span class="n">kex</span><span class="o">=</span><span class="n">sl</span><span class="o">.</span><span class="n">Tools</span><span class="o">.</span><span class="n">twoSite_kex</span><span class="p">(</span><span class="mf">1e-9</span><span class="p">)</span>
+
+<span class="n">seq</span><span class="o">=</span><span class="n">L</span><span class="o">.</span><span class="n">Sequence</span><span class="p">(</span><span class="n">Dt</span><span class="o">=</span><span class="mf">5e-11</span><span class="p">)</span>
+<span class="n">rho_1ns</span><span class="o">=</span><span class="n">sl</span><span class="o">.</span><span class="n">Rho</span><span class="p">(</span><span class="s1">&#39;ez&#39;</span><span class="p">,</span><span class="s1">&#39;ez&#39;</span><span class="p">)</span>
+<span class="n">_</span><span class="o">=</span><span class="n">rho_1ns</span><span class="o">.</span><span class="n">DetProp</span><span class="p">(</span><span class="n">seq</span><span class="p">,</span><span class="n">n</span><span class="o">=</span><span class="mi">15000</span><span class="p">)</span>
+
+<span class="n">L</span><span class="o">.</span><span class="n">kex</span><span class="o">=</span><span class="n">sl</span><span class="o">.</span><span class="n">Tools</span><span class="o">.</span><span class="n">twoSite_kex</span><span class="p">(</span><span class="mf">1e-12</span><span class="p">)</span>
+
+<span class="n">rho_1ps</span><span class="o">=</span><span class="n">sl</span><span class="o">.</span><span class="n">Rho</span><span class="p">(</span><span class="s1">&#39;ez&#39;</span><span class="p">,</span><span class="s1">&#39;ez&#39;</span><span class="p">)</span>
+<span class="n">_</span><span class="o">=</span><span class="n">rho_1ps</span><span class="o">.</span><span class="n">DetProp</span><span class="p">(</span><span class="n">seq</span><span class="p">,</span><span class="n">n</span><span class="o">=</span><span class="mi">15000</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ax</span><span class="o">=</span><span class="n">rho_1ns</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="s1">&#39;ns&#39;</span><span class="p">)</span>
+<span class="n">rho_1ps</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="s1">&#39;ns&#39;</span><span class="p">,</span><span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">)</span>
+<span class="n">T1_1ns</span><span class="o">=</span><span class="mf">6.5e-6</span>
+<span class="n">T1_1ps</span><span class="o">=</span><span class="mf">15.8e-9</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">rho_1ns</span><span class="o">.</span><span class="n">t_axis</span><span class="o">*</span><span class="mf">1e9</span><span class="p">,</span><span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">rho_1ns</span><span class="o">.</span><span class="n">t_axis</span><span class="o">/</span><span class="n">T1_1ns</span><span class="p">),</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">,</span><span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;:&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">rho_1ns</span><span class="o">.</span><span class="n">t_axis</span><span class="o">*</span><span class="mf">1e9</span><span class="p">,</span><span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">rho_1ns</span><span class="o">.</span><span class="n">t_axis</span><span class="o">/</span><span class="n">T1_1ps</span><span class="p">),</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;grey&#39;</span><span class="p">,</span><span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">((</span><span class="s1">&#39;1 ns motion&#39;</span><span class="p">,</span><span class="s1">&#39;1 ps motion&#39;</span><span class="p">,</span><span class="sa">rf</span><span class="s1">&#39;$\tau_c$=</span><span class="si">{</span><span class="n">T1_1ns</span><span class="o">*</span><span class="mf">1e6</span><span class="si">:</span><span class="s1">.1f</span><span class="si">}</span><span class="s1"> $\mu$s&#39;</span><span class="p">,</span><span class="sa">rf</span><span class="s1">&#39;$\tau_c$=</span><span class="si">{</span><span class="n">T1_1ps</span><span class="o">*</span><span class="mf">1e9</span><span class="si">:</span><span class="s1">.1f</span><span class="si">}</span><span class="s1"> ns&#39;</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x7fa305b0aaf0&gt;
+</pre></div>
+</div>
+<img alt="../_images/89cded74c0f06215ca8b3c8aa515f4d248d6142cebf15a0faa66ceda75d260e5.png" src="../_images/89cded74c0f06215ca8b3c8aa515f4d248d6142cebf15a0faa66ceda75d260e5.png" />
+</div>
+</div>
+<p>We induce a very slow electron <span class="math notranslate nohighlight">\(T_1\)</span> relaxation with the 1 ns motion (6.5 μs), but an electron <span class="math notranslate nohighlight">\(T_1\)</span> of 15.8 ns with the 1 ps motion. We next see how this influences the <span class="math notranslate nohighlight">\(^1\)</span>H lineshape.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">Upi2</span><span class="o">=</span><span class="n">L</span><span class="o">.</span><span class="n">Udelta</span><span class="p">(</span><span class="s1">&#39;1H&#39;</span><span class="p">,</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">L</span><span class="o">.</span><span class="n">kex</span><span class="o">=</span><span class="n">sl</span><span class="o">.</span><span class="n">Tools</span><span class="o">.</span><span class="n">twoSite_kex</span><span class="p">(</span><span class="mf">1e-9</span><span class="p">)</span>
+
+<span class="n">seq</span><span class="o">=</span><span class="n">L</span><span class="o">.</span><span class="n">Sequence</span><span class="p">(</span><span class="n">Dt</span><span class="o">=</span><span class="mf">6e-7</span><span class="p">)</span>
+<span class="n">rho_1ns</span><span class="o">=</span><span class="n">Upi2</span><span class="o">*</span><span class="n">sl</span><span class="o">.</span><span class="n">Rho</span><span class="p">(</span><span class="s1">&#39;Thermal&#39;</span><span class="p">,</span><span class="s1">&#39;1Hp&#39;</span><span class="p">)</span>
+<span class="n">_</span><span class="o">=</span><span class="n">rho_1ns</span><span class="o">.</span><span class="n">DetProp</span><span class="p">(</span><span class="n">seq</span><span class="p">,</span><span class="n">n</span><span class="o">=</span><span class="mi">1000</span><span class="p">)</span>
+
+<span class="n">L</span><span class="o">.</span><span class="n">kex</span><span class="o">=</span><span class="n">sl</span><span class="o">.</span><span class="n">Tools</span><span class="o">.</span><span class="n">twoSite_kex</span><span class="p">(</span><span class="mf">1e-12</span><span class="p">)</span>
+
+<span class="n">rho_1ps</span><span class="o">=</span><span class="n">Upi2</span><span class="o">*</span><span class="n">sl</span><span class="o">.</span><span class="n">Rho</span><span class="p">(</span><span class="s1">&#39;Thermal&#39;</span><span class="p">,</span><span class="s1">&#39;1Hp&#39;</span><span class="p">)</span>
+<span class="n">_</span><span class="o">=</span><span class="n">rho_1ps</span><span class="o">.</span><span class="n">DetProp</span><span class="p">(</span><span class="n">seq</span><span class="p">,</span><span class="n">n</span><span class="o">=</span><span class="mi">1000</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ax</span><span class="o">=</span><span class="n">rho_1ns</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">FT</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">axis</span><span class="o">=</span><span class="s1">&#39;MHz&#39;</span><span class="p">,</span><span class="n">apodize</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">rho_1ps</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">FT</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">axis</span><span class="o">=</span><span class="s1">&#39;MHz&#39;</span><span class="p">,</span><span class="n">apodize</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;AxesSubplot:xlabel=&#39;$\\nu$ / MHz&#39;, ylabel=&#39;I / a.u.&#39;&gt;
+</pre></div>
+</div>
+<img alt="../_images/526c82de0f7438ff498dfa8cd4af96949fc9eab3da66e6ccd5583ad34f9e9ae4.png" src="../_images/526c82de0f7438ff498dfa8cd4af96949fc9eab3da66e6ccd5583ad34f9e9ae4.png" />
+</div>
+</div>
+<p>For slow electron relaxation, we obtain two peaks, with different intensities due to different populations of the two electron states. For fast relaxation, the peaks merge into a single peak. This should yield a contact shift, but since the system is not thermalized, no contact shift appears.</p>
+<p>Below, we thermalize the system with ‘DynamicThermal’, but because this method does not thermalize the coherences, we still do not expect a contact shift.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">L</span><span class="o">.</span><span class="n">add_relax</span><span class="p">(</span><span class="s1">&#39;DynamicThermal&#39;</span><span class="p">)</span>
+
+<span class="n">L</span><span class="o">.</span><span class="n">kex</span><span class="o">=</span><span class="n">sl</span><span class="o">.</span><span class="n">Tools</span><span class="o">.</span><span class="n">twoSite_kex</span><span class="p">(</span><span class="mf">1e-9</span><span class="p">)</span>
+
+<span class="n">seq</span><span class="o">=</span><span class="n">L</span><span class="o">.</span><span class="n">Sequence</span><span class="p">(</span><span class="n">Dt</span><span class="o">=</span><span class="mf">5e-11</span><span class="p">)</span>
+<span class="n">rho_1ns</span><span class="o">=</span><span class="n">sl</span><span class="o">.</span><span class="n">Rho</span><span class="p">(</span><span class="s1">&#39;zero&#39;</span><span class="p">,</span><span class="s1">&#39;ez&#39;</span><span class="p">)</span>
+<span class="n">_</span><span class="o">=</span><span class="n">rho_1ns</span><span class="o">.</span><span class="n">DetProp</span><span class="p">(</span><span class="n">seq</span><span class="p">,</span><span class="n">n</span><span class="o">=</span><span class="mi">1000</span><span class="p">)</span>
+
+<span class="n">L</span><span class="o">.</span><span class="n">kex</span><span class="o">=</span><span class="n">sl</span><span class="o">.</span><span class="n">Tools</span><span class="o">.</span><span class="n">twoSite_kex</span><span class="p">(</span><span class="mf">1e-12</span><span class="p">)</span>
+
+<span class="n">rho_1ps</span><span class="o">=</span><span class="n">sl</span><span class="o">.</span><span class="n">Rho</span><span class="p">(</span><span class="s1">&#39;zero&#39;</span><span class="p">,</span><span class="s1">&#39;ez&#39;</span><span class="p">)</span>
+<span class="n">_</span><span class="o">=</span><span class="n">rho_1ps</span><span class="o">.</span><span class="n">DetProp</span><span class="p">(</span><span class="n">seq</span><span class="p">,</span><span class="n">n</span><span class="o">=</span><span class="mi">1000</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ax</span><span class="o">=</span><span class="n">rho_1ns</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="s1">&#39;ns&#39;</span><span class="p">)</span>
+<span class="n">rho_1ps</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="s1">&#39;ns&#39;</span><span class="p">,</span><span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;AxesSubplot:xlabel=&#39;t / ns&#39;, ylabel=&#39;&lt;e$_z$&gt;&#39;&gt;
+</pre></div>
+</div>
+<img alt="../_images/e3dc600740bb747898d28889e8840b9675a76d9b790602f6a9bf930b520bd719.png" src="../_images/e3dc600740bb747898d28889e8840b9675a76d9b790602f6a9bf930b520bd719.png" />
+</div>
+</div>
+<p>We observe that now the electron z-magnetization is correctly thermalized.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">L</span><span class="o">.</span><span class="n">kex</span><span class="o">=</span><span class="n">sl</span><span class="o">.</span><span class="n">Tools</span><span class="o">.</span><span class="n">twoSite_kex</span><span class="p">(</span><span class="mf">1e-9</span><span class="p">)</span>
+
+<span class="n">seq</span><span class="o">=</span><span class="n">L</span><span class="o">.</span><span class="n">Sequence</span><span class="p">(</span><span class="n">Dt</span><span class="o">=</span><span class="mf">6e-7</span><span class="p">)</span>
+<span class="n">rho_1ns</span><span class="o">=</span><span class="n">Upi2</span><span class="o">*</span><span class="n">sl</span><span class="o">.</span><span class="n">Rho</span><span class="p">(</span><span class="s1">&#39;Thermal&#39;</span><span class="p">,</span><span class="s1">&#39;1Hp&#39;</span><span class="p">)</span>
+<span class="n">_</span><span class="o">=</span><span class="n">rho_1ns</span><span class="o">.</span><span class="n">DetProp</span><span class="p">(</span><span class="n">seq</span><span class="p">,</span><span class="n">n</span><span class="o">=</span><span class="mi">1000</span><span class="p">)</span>
+
+<span class="n">L</span><span class="o">.</span><span class="n">kex</span><span class="o">=</span><span class="n">sl</span><span class="o">.</span><span class="n">Tools</span><span class="o">.</span><span class="n">twoSite_kex</span><span class="p">(</span><span class="mf">1e-12</span><span class="p">)</span>
+
+<span class="n">rho_1ps</span><span class="o">=</span><span class="n">Upi2</span><span class="o">*</span><span class="n">sl</span><span class="o">.</span><span class="n">Rho</span><span class="p">(</span><span class="s1">&#39;Thermal&#39;</span><span class="p">,</span><span class="s1">&#39;1Hp&#39;</span><span class="p">)</span>
+<span class="n">_</span><span class="o">=</span><span class="n">rho_1ps</span><span class="o">.</span><span class="n">DetProp</span><span class="p">(</span><span class="n">seq</span><span class="p">,</span><span class="n">n</span><span class="o">=</span><span class="mi">1000</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ax</span><span class="o">=</span><span class="n">rho_1ns</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">FT</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">axis</span><span class="o">=</span><span class="s1">&#39;MHz&#39;</span><span class="p">,</span><span class="n">apodize</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">rho_1ps</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">FT</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">axis</span><span class="o">=</span><span class="s1">&#39;MHz&#39;</span><span class="p">,</span><span class="n">apodize</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;AxesSubplot:xlabel=&#39;$\\nu$ / MHz&#39;, ylabel=&#39;I / a.u.&#39;&gt;
+</pre></div>
+</div>
+<img alt="../_images/526c82de0f7438ff498dfa8cd4af96949fc9eab3da66e6ccd5583ad34f9e9ae4.png" src="../_images/526c82de0f7438ff498dfa8cd4af96949fc9eab3da66e6ccd5583ad34f9e9ae4.png" />
+</div>
+</div>
+<p>However, we still do not observe a contact shift, as expected.</p>
+<p>Finally, we re-build this system with explicit electron relaxation, using Lindblad thermalization, to obtain the correct contact shift. We will explicitly input the 15.8 ns electron <span class="math notranslate nohighlight">\(T_1\)</span> that was induced by motion above.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">L</span><span class="o">=</span><span class="n">ex0</span><span class="o">.</span><span class="n">Liouvillian</span><span class="p">()</span>
+<span class="n">Upi2</span><span class="o">=</span><span class="n">L</span><span class="o">.</span><span class="n">Udelta</span><span class="p">(</span><span class="s1">&#39;1H&#39;</span><span class="p">,</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span>
+
+<span class="n">seq</span><span class="o">=</span><span class="n">L</span><span class="o">.</span><span class="n">Sequence</span><span class="p">(</span><span class="n">Dt</span><span class="o">=</span><span class="mf">6e-7</span><span class="p">)</span>
+<span class="n">L</span><span class="o">.</span><span class="n">add_relax</span><span class="p">(</span><span class="s1">&#39;T2&#39;</span><span class="p">,</span><span class="n">i</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">T2</span><span class="o">=</span><span class="n">T1_1ns</span><span class="p">,</span><span class="n">OS</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">L</span><span class="o">.</span><span class="n">add_relax</span><span class="p">(</span><span class="s1">&#39;T1&#39;</span><span class="p">,</span><span class="n">i</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">T1</span><span class="o">=</span><span class="n">T1_1ns</span><span class="p">,</span><span class="n">OS</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">Thermal</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="n">rho_1ns</span><span class="o">=</span><span class="n">Upi2</span><span class="o">*</span><span class="n">sl</span><span class="o">.</span><span class="n">Rho</span><span class="p">(</span><span class="s1">&#39;Thermal&#39;</span><span class="p">,</span><span class="s1">&#39;1Hp&#39;</span><span class="p">)</span>
+<span class="n">_</span><span class="o">=</span><span class="n">rho_1ns</span><span class="o">.</span><span class="n">DetProp</span><span class="p">(</span><span class="n">seq</span><span class="p">,</span><span class="n">n</span><span class="o">=</span><span class="mi">1000</span><span class="p">)</span>
+
+<span class="c1"># Note: we should use OS=True because we&#39;re in the LF for the electron</span>
+<span class="n">L</span><span class="o">.</span><span class="n">add_relax</span><span class="p">(</span><span class="s1">&#39;T2&#39;</span><span class="p">,</span><span class="n">i</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">T2</span><span class="o">=</span><span class="n">T1_1ps</span><span class="p">,</span><span class="n">OS</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">L</span><span class="o">.</span><span class="n">add_relax</span><span class="p">(</span><span class="s1">&#39;T1&#39;</span><span class="p">,</span><span class="n">i</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">T1</span><span class="o">=</span><span class="n">T1_1ps</span><span class="p">,</span><span class="n">OS</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">Thermal</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="n">rho_1ps</span><span class="o">=</span><span class="n">Upi2</span><span class="o">*</span><span class="n">sl</span><span class="o">.</span><span class="n">Rho</span><span class="p">(</span><span class="s1">&#39;Thermal&#39;</span><span class="p">,</span><span class="s1">&#39;1Hp&#39;</span><span class="p">)</span>
+<span class="n">_</span><span class="o">=</span><span class="n">rho_1ps</span><span class="o">.</span><span class="n">DetProp</span><span class="p">(</span><span class="n">seq</span><span class="p">,</span><span class="n">n</span><span class="o">=</span><span class="mi">1000</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ax</span><span class="o">=</span><span class="n">rho_1ns</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">FT</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">axis</span><span class="o">=</span><span class="s1">&#39;MHz&#39;</span><span class="p">,</span><span class="n">apodize</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">rho_1ps</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">FT</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">axis</span><span class="o">=</span><span class="s1">&#39;MHz&#39;</span><span class="p">,</span><span class="n">apodize</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;AxesSubplot:xlabel=&#39;$\\nu$ / MHz&#39;, ylabel=&#39;I / a.u.&#39;&gt;
+</pre></div>
+</div>
+<img alt="../_images/05746d4541d74bcc68024f739f23edd19150b0616b2a49e359dbd1f7303073f2.png" src="../_images/05746d4541d74bcc68024f739f23edd19150b0616b2a49e359dbd1f7303073f2.png" />
+</div>
+</div>
+<p>We obtain a very similar result as before, <em>however</em>, now the averaged line has been shifted towards the large peak, which is brought about by having the correct thermalization behavior.</p>
+</section>
+</section>
+<section id="summary">
+<h2>Summary<a class="headerlink" href="#summary" title="Link to this heading">#</a></h2>
+<section id="basic-relaxation-can-be-included-using">
+<h3>1. Basic relaxation can be included using:<a class="headerlink" href="#basic-relaxation-can-be-included-using" title="Link to this heading">#</a></h3>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">L</span><span class="o">.</span><span class="n">add_relax</span><span class="p">(</span><span class="s1">&#39;T1&#39;</span><span class="p">,</span><span class="n">i</span><span class="o">=...</span><span class="p">,</span><span class="n">T1</span><span class="o">=...</span><span class="p">)</span>
+<span class="n">L</span><span class="o">.</span><span class="n">add_relax</span><span class="p">(</span><span class="s1">&#39;T2&#39;</span><span class="p">,</span><span class="n">i</span><span class="o">=...</span><span class="p">,</span><span class="n">T2</span><span class="o">=...</span><span class="p">)</span>
+<span class="n">L</span><span class="o">.</span><span class="n">add_relax</span><span class="p">(</span><span class="s1">&#39;recovery&#39;</span><span class="p">)</span>  <span class="c1"># Optional for thermalization</span>
+</pre></div>
+</div>
+</section>
+<section id="if-quantization-axis-for-a-spin-is-tilted-use">
+<h3>2. If quantization axis for a spin is tilted, use:<a class="headerlink" href="#if-quantization-axis-for-a-spin-is-tilted-use" title="Link to this heading">#</a></h3>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">L</span><span class="o">.</span><span class="n">add_relax</span><span class="p">(</span><span class="s1">&#39;T1&#39;</span><span class="p">,</span><span class="n">i</span><span class="o">=...</span><span class="p">,</span><span class="n">T1</span><span class="o">=...</span><span class="p">,</span><span class="n">OS</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">Thermal</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span> <span class="c1">#Includes thermalization</span>
+<span class="n">L</span><span class="o">.</span><span class="n">add_relax</span><span class="p">(</span><span class="s1">&#39;T2&#39;</span><span class="p">,</span><span class="n">i</span><span class="o">=...</span><span class="p">,</span><span class="n">T2</span><span class="o">=...</span><span class="p">,</span><span class="n">OS</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="if-the-quantization-axis-is-not-tilted-but-the-polarization-varies-use">
+<h3>3. If the quantization axis is not tilted, but the polarization varies, use:<a class="headerlink" href="#if-the-quantization-axis-is-not-tilted-but-the-polarization-varies-use" title="Link to this heading">#</a></h3>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">L</span><span class="o">.</span><span class="n">add_relax</span><span class="p">(</span><span class="s1">&#39;T1&#39;</span><span class="p">,</span><span class="n">i</span><span class="o">=...</span><span class="p">,</span><span class="n">T1</span><span class="o">=...</span><span class="p">)</span>
+<span class="n">L</span><span class="o">.</span><span class="n">add_relax</span><span class="p">(</span><span class="s1">&#39;T2&#39;</span><span class="p">,</span><span class="n">i</span><span class="o">=...</span><span class="p">,</span><span class="n">T2</span><span class="o">=...</span><span class="p">)</span>
+<span class="n">L</span><span class="o">.</span><span class="n">add_relax</span><span class="p">(</span><span class="s1">&#39;recovery&#39;</span><span class="p">,</span><span class="n">OS</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>  <span class="c1"># Optional for thermalization</span>
+</pre></div>
+</div>
+</section>
+<section id="if-relaxation-is-induced-explicitely-by-dynamics-use">
+<h3>4. If relaxation is induced explicitely by dynamics, use:<a class="headerlink" href="#if-relaxation-is-induced-explicitely-by-dynamics-use" title="Link to this heading">#</a></h3>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">L</span><span class="o">.</span><span class="n">add_relax</span><span class="p">(</span><span class="s1">&#39;DynamicThermal&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><em>This method will not produce correct thermalization of coherences!</em></p>
+</section>
 </section>
 </section>
 
@@ -504,6 +1117,33 @@
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#setup">Setup</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#simple-one-spin-relaxation">Simple one-spin relaxation</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#build-the-system">Build the system</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#propagate">Propagate</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#plot-the-results">Plot the results</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#thermalization">Thermalization</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#relaxation-in-a-tilted-frame">Relaxation in a tilted frame</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#tilted-frame-without-thermalization">Tilted frame without thermalization</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#tilted-frame-with-thermalization">Tilted frame with thermalization</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#orientation-specific-relaxation">Orientation-specific relaxation</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#thermalizing-relaxation-due-to-dynamics">Thermalizing relaxation due to dynamics</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Build the system</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#propagate-and-plot">Propagate and plot</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#with-dynamicthermal-option">With ‘DynamicThermal’ option</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#limitations-of-dynamicthermal">Limitations of ‘DynamicThermal’</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#summary">Summary</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#basic-relaxation-can-be-included-using">1. Basic relaxation can be included using:</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#if-quantization-axis-for-a-spin-is-tilted-use">2. If quantization axis for a spin is tilted, use:</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#if-the-quantization-axis-is-not-tilted-but-the-polarization-varies-use">3. If the quantization axis is not tilted, but the polarization varies, use:</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#if-relaxation-is-induced-explicitely-by-dynamics-use">4. If relaxation is induced explicitely by dynamics, use:</a></li>
+</ul>
+</li>
 </ul>
   </nav></div>
 

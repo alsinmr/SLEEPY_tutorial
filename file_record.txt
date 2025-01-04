@@ -7,7 +7,7 @@
 /Users/albertsmith/Documents/GitHub.nosync/SLEEPY_tutorial/Chapters/Chapter2/Ch2_exchange1D.ipynb	1735981191
 /Users/albertsmith/Documents/GitHub.nosync/SLEEPY_tutorial/Chapters/Chapter2/Ch2_T1_NOE.ipynb	1735981191
 /Users/albertsmith/Documents/GitHub.nosync/SLEEPY_tutorial/Chapters/Chapter2/Ch2_CEST.ipynb	1735981191
-/Users/albertsmith/Documents/GitHub.nosync/SLEEPY_tutorial/Chapters/Chapter2/Ch2_T1_limits.ipynb	1735981191
+/Users/albertsmith/Documents/GitHub.nosync/SLEEPY_tutorial/Chapters/Chapter2/Ch2_T1_limits.ipynb	1736000753
 /Users/albertsmith/Documents/GitHub.nosync/SLEEPY_tutorial/Chapters/Chapter2/Ch2_BMRD.ipynb	1735981191
 /Users/albertsmith/Documents/GitHub.nosync/SLEEPY_tutorial/Chapters/Chapter2/Ch2_EXSY.ipynb	1735981191
 /Users/albertsmith/Documents/GitHub.nosync/SLEEPY_tutorial/Chapters/Chapter2/Ch2_TROSY.ipynb	1735981191
@@ -24,4 +24,4 @@
 /Users/albertsmith/Documents/GitHub.nosync/SLEEPY_tutorial/Chapters/Chapter5/Ch5_PseudoContactShift.ipynb	1735981191
 /Users/albertsmith/Documents/GitHub.nosync/SLEEPY_tutorial/Chapters/Chapter5/Ch5_ContactShift.ipynb	1735981191
 /Users/albertsmith/Documents/GitHub.nosync/SLEEPY_tutorial/Chapters/Chapter5/PseudoContactShift.ipynb	1735937085
-/Users/albertsmith/Documents/GitHub.nosync/SLEEPY_tutorial/Chapters/Chapter6/Ch6_RelaxationOptions.ipynb	1735983521
+/Users/albertsmith/Documents/GitHub.nosync/SLEEPY_tutorial/Chapters/Chapter6/Ch6_RelaxationOptions.ipynb	1736026429
