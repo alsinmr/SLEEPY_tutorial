@@ -4,7 +4,7 @@
 title: SLEEPY Tutorial
 author: Albert Smith
 copyright: "2025"
-logo: logo.png
+logo: logo_dark.png
 
 # Force re-execution of notebooks on each build.
 # See https://jupyterbook.org/content/execute.html
