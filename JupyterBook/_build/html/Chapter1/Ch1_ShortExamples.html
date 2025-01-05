@@ -180,7 +180,7 @@
 <li class="toctree-l2"><a class="reference internal" href="Ch1_basics.html"><font color="#0093AF">A Quick Start</font></a></li>
 <li class="toctree-l2 current active"><a class="current reference internal" href="#"><font color="#0093AF">Short Examples</font></a></li>
 <li class="toctree-l2"><a class="reference internal" href="Ch1_Objects.html"><font color="#0093AF">Objects</font></a></li>
-<li class="toctree-l2"><a class="reference internal" href="Ch1_expsys.html"><font color="#0093AF"> Experimental Settings and Spin-System Definition</font></a></li>
+<li class="toctree-l2"><a class="reference internal" href="Ch1_expsys.html"><font color="#0093AF">Experimental Settings and Spin-System Definition</font></a></li>
 <li class="toctree-l2"><a class="reference internal" href="Ch1_Liouvillian.html"><font color="#0093AF">Hamiltonians and Liouvillians</font></a></li>
 <li class="toctree-l2"><a class="reference internal" href="Ch1_Propagation.html"><font color="#0093AF">Propagators and Sequences</font></a></li>
 <li class="toctree-l2"><a class="reference internal" href="Ch1_rho.html"><font color="#0093AF">The Density Matrix</font></a></li>
@@ -433,16 +433,9 @@
   <section class="tex2jax_ignore mathjax_ignore" id="short-examples">
 <h1><font  color = "#0093AF">Short Examples</font><a class="headerlink" href="#short-examples" title="Link to this heading">#</a></h1>
 <p><a href="https://githubtocolab.com/alsinmr/SLEEPY_tutorial/blob/main/ColabNotebooks/Chapter1/Ch1_ShortExamples.ipynb" target="_blank"><img src="https://colab.research.google.com/assets/colab-badge.svg"></a></p>
-<p>The following notebook shows some simulations that can be done in just a few lines of code. These are intended to simply familiarize you with the basics of setting up SLEEPY simulations.</p>
+<p>The following notebook shows some simulations that can be done in just a few lines of code. These are intended to familiarize you with the basics of setting up SLEEPY simulations.</p>
 <section id="setup">
 <h2>Setup<a class="headerlink" href="#setup" title="Link to this heading">#</a></h2>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># SETUP SLEEPY</span>
-</pre></div>
-</div>
-</div>
-</div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">SLEEPY</span> <span class="k">as</span> <span class="nn">sl</span>
@@ -532,8 +525,8 @@
 </section>
 <section id="chemical-exchange-saturation-transfer">
 <h2>Chemical Exchange Saturation Transfer<a class="headerlink" href="#chemical-exchange-saturation-transfer" title="Link to this heading">#</a></h2>
-<p>CEST is useful when a system has a major and minor population, the minor being invisible in the spectrum. However, applying a saturating field to the minor population will still be effective in saturating the major population, so that we may sweep through a saturating field to find the minor population’s resonance frequency.</p>
-<p>In this simple example, we’ll just monitor the total z-magnetization, although in the real experiment we would rather integrate the peak with high population (also possible in SLEEPY, but requires acquiring the full direct dimension).</p>
+<p>CEST is useful when a system has a major and minor population, the minor being invisible in the spectrum. However, applying a saturating field to the minor population will still be effective in saturating the major population, so that we may sweep the frequency of the saturating field to find the minor population’s resonance frequency.</p>
+<p>In this simple example, we’ll just monitor the total z-magnetization, although in the real experiment we would integrate the peak with high population (also possible in SLEEPY, but requires acquiring the full direct dimension).</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ex0</span><span class="o">=</span><span class="n">sl</span><span class="o">.</span><span class="n">ExpSys</span><span class="p">(</span><span class="mi">600</span><span class="p">,</span><span class="n">Nucs</span><span class="o">=</span><span class="s1">&#39;13C&#39;</span><span class="p">)</span>
@@ -552,25 +545,23 @@
 
 <span class="k">for</span> <span class="n">voff</span> <span class="ow">in</span> <span class="n">voff0</span><span class="p">:</span>
     <span class="n">rho</span><span class="o">.</span><span class="n">reset</span><span class="p">()</span>
-    <span class="p">(</span><span class="n">seq</span><span class="o">.</span><span class="n">add_channel</span><span class="p">(</span><span class="s1">&#39;13C&#39;</span><span class="p">,</span><span class="n">v1</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span><span class="n">voff</span><span class="o">=</span><span class="n">voff</span><span class="p">)</span><span class="o">*</span><span class="n">rho</span><span class="p">)()</span>
+    <span class="n">seq</span><span class="o">.</span><span class="n">add_channel</span><span class="p">(</span><span class="s1">&#39;13C&#39;</span><span class="p">,</span><span class="n">v1</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span><span class="n">voff</span><span class="o">=</span><span class="n">voff</span><span class="p">)</span>
+    <span class="p">(</span><span class="n">seq</span><span class="o">*</span><span class="n">rho</span><span class="p">)()</span>
 <span class="n">ax</span><span class="o">=</span><span class="n">rho</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
 <span class="n">ax</span><span class="o">.</span><span class="n">set_xticks</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">101</span><span class="p">,</span><span class="mi">11</span><span class="p">))</span>
 <span class="n">ax</span><span class="o">.</span><span class="n">set_xticklabels</span><span class="p">(</span><span class="n">voff0</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">100</span><span class="p">,</span><span class="mi">11</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">int</span><span class="p">)]</span><span class="o">/</span><span class="mi">1000</span><span class="p">)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;$\nu_</span><span class="si">{off}</span><span class="s1">$ / kHz&#39;</span><span class="p">)</span>
+<span class="n">_</span><span class="o">=</span><span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;$\nu_</span><span class="si">{off}</span><span class="s1">$ / kHz&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Text(0.5, 0, &#39;$\\nu_{off}$ / kHz&#39;)
-</pre></div>
-</div>
-<img alt="../_images/9f1fcf888d7055331f3cdb13b16f233f6e0d4bac29ce7b239aa4c72f469fcd2f.png" src="../_images/9f1fcf888d7055331f3cdb13b16f233f6e0d4bac29ce7b239aa4c72f469fcd2f.png" />
+<img alt="../_images/39d468d8feb56c430a362baec2407ec8f81f5968f843764c06484b37f07128dd.png" src="../_images/39d468d8feb56c430a362baec2407ec8f81f5968f843764c06484b37f07128dd.png" />
 </div>
 </div>
 </section>
 <section id="contact-shift">
 <h2>Contact shift<a class="headerlink" href="#contact-shift" title="Link to this heading">#</a></h2>
-<p>The contact shift comes from the hyperfine coupling between a fast-relaxing electron and a nucleus. While the fast relaxing electron averages the splitting away, the peak itself shifts due to polarization of the electron.</p>
+<p>The contact shift comes from the hyperfine coupling between a fast-relaxing electron and a nucleus. While the fast relaxing electron averages the splitting, the peak itself shifts due to polarization of the electron.</p>
 <p>We’ll run the simulation as a function of temperature, where lower temperatures yield a higher shift (and more signal). Note that realistically, we wouldn’t expect the electron relaxation times to remain fixed with the varying temperature.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -597,13 +588,13 @@ State-space reduction: 16-&gt;2
 State-space reduction: 16-&gt;2
 </pre></div>
 </div>
-<img alt="../_images/9a20fa8731194ed15376d64f9c8bb049e150cd3025b413f46046ba9e6d923aaf.png" src="../_images/9a20fa8731194ed15376d64f9c8bb049e150cd3025b413f46046ba9e6d923aaf.png" />
+<img alt="../_images/f33a04487d29fdf3890d1cf00fdf028465f42c95728893cec1becb4ea519cc9c.png" src="../_images/f33a04487d29fdf3890d1cf00fdf028465f42c95728893cec1becb4ea519cc9c.png" />
 </div>
 </div>
 </section>
 <section id="spinning-side-bands-one-liner">
 <h2>Spinning side-bands (one liner)<a class="headerlink" href="#spinning-side-bands-one-liner" title="Link to this heading">#</a></h2>
-<p>The last simulation is a little bit just for fun, but also to demonstrate some of the convenience of the SLEEPY simulation setup. We simulate <span class="math notranslate nohighlight">\(^{13}\)</span>C spinning sidebands resulting from chemical shift anisotropy. However, we set up the whole simulation in a single line of code and plot the result.</p>
+<p>The last simulation is a little bit just for fun, but also to demonstrate some of the convenience of object-oriented programming in SLEEPY. We simulate <span class="math notranslate nohighlight">\(^{13}\)</span>C spinning sidebands resulting from chemical shift anisotropy. However, we set up the whole simulation in a single line of code and plot the result.</p>
 <p>Compare to Herzfeld/Berger figure 2c.<span class="math notranslate nohighlight">\(^1\)</span></p>
 <p>[1] J. Herzfeld, A.E. Berger. <a class="reference external" href="https://doi.org/10.1063/1.440136"><em>J.Chem. Phys.</em></a> <strong>1980</strong>, 73, 6021-6030.</p>
 <div class="cell docutils container">
@@ -620,7 +611,7 @@ State-space reduction: 16-&gt;2
 Prop: 20 steps per every 1 rotor period
 </pre></div>
 </div>
-<img alt="../_images/b8d760742afe3ae07a9cdcab7715784d71a57c152543be779cb84495e4cf1642.png" src="../_images/b8d760742afe3ae07a9cdcab7715784d71a57c152543be779cb84495e4cf1642.png" />
+<img alt="../_images/2bb6bf71aba2ded84a83427c89105f1fca23ae15658806b7d3916cbc05b35a84.png" src="../_images/2bb6bf71aba2ded84a83427c89105f1fca23ae15658806b7d3916cbc05b35a84.png" />
 </div>
 </div>
 </section>

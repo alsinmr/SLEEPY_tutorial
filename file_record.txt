@@ -1,10 +1,10 @@
-/Users/albertsmith/Documents/GitHub.nosync/SLEEPY_tutorial/Chapters/Chapter1/Ch1_Liouvillian.ipynb	1735981191
-/Users/albertsmith/Documents/GitHub.nosync/SLEEPY_tutorial/Chapters/Chapter1/Ch1_Propagation.ipynb	1735981191
-/Users/albertsmith/Documents/GitHub.nosync/SLEEPY_tutorial/Chapters/Chapter1/Ch1_ShortExamples.ipynb	1735981191
-/Users/albertsmith/Documents/GitHub.nosync/SLEEPY_tutorial/Chapters/Chapter1/Ch1_rho.ipynb	1735981191
-/Users/albertsmith/Documents/GitHub.nosync/SLEEPY_tutorial/Chapters/Chapter1/Ch1_basics.ipynb	1735981191
-/Users/albertsmith/Documents/GitHub.nosync/SLEEPY_tutorial/Chapters/Chapter1/Ch1_expsys.ipynb	1735923507
-/Users/albertsmith/Documents/GitHub.nosync/SLEEPY_tutorial/Chapters/Chapter2/Ch2_exchange1D.ipynb	1735981191
+/Users/albertsmith/Documents/GitHub.nosync/SLEEPY_tutorial/Chapters/Chapter1/Ch1_Liouvillian.ipynb	1736080351
+/Users/albertsmith/Documents/GitHub.nosync/SLEEPY_tutorial/Chapters/Chapter1/Ch1_Propagation.ipynb	1736082069
+/Users/albertsmith/Documents/GitHub.nosync/SLEEPY_tutorial/Chapters/Chapter1/Ch1_ShortExamples.ipynb	1736084367
+/Users/albertsmith/Documents/GitHub.nosync/SLEEPY_tutorial/Chapters/Chapter1/Ch1_rho.ipynb	1736084551
+/Users/albertsmith/Documents/GitHub.nosync/SLEEPY_tutorial/Chapters/Chapter1/Ch1_basics.ipynb	1736076626
+/Users/albertsmith/Documents/GitHub.nosync/SLEEPY_tutorial/Chapters/Chapter1/Ch1_expsys.ipynb	1736079443
+/Users/albertsmith/Documents/GitHub.nosync/SLEEPY_tutorial/Chapters/Chapter2/Ch2_exchange1D.ipynb	1736074525
 /Users/albertsmith/Documents/GitHub.nosync/SLEEPY_tutorial/Chapters/Chapter2/Ch2_T1_NOE.ipynb	1735981191
 /Users/albertsmith/Documents/GitHub.nosync/SLEEPY_tutorial/Chapters/Chapter2/Ch2_CEST.ipynb	1735981191
 /Users/albertsmith/Documents/GitHub.nosync/SLEEPY_tutorial/Chapters/Chapter2/Ch2_T1_limits.ipynb	1736000753

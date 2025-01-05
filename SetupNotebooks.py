@@ -196,6 +196,7 @@ def write_book_setup(f):
     #   "os.chdir('../..')"
     #  ]
     # }""")
+    return
     
     f.write("""{
      "cell_type": "code",
@@ -285,7 +286,7 @@ def copy2JupyterBook(chapter,filename):
             elif len(cr.get_source()) and '(hidden on webpage)' in cr.get_source()[0]:
                 pass
             elif len(cr.get_source()) and 'SETUP SLEEPY' in cr.get_source()[0]:
-                f.write('\n' if first else ',\n')
+                f.write('\n' if first else '\n')
                 write_book_setup(f)
             else:
                 f.write('\n' if first else ',\n')

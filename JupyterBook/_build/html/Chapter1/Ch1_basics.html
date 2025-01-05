@@ -180,7 +180,7 @@
 <li class="toctree-l2 current active"><a class="current reference internal" href="#"><font color="#0093AF">A Quick Start</font></a></li>
 <li class="toctree-l2"><a class="reference internal" href="Ch1_ShortExamples.html"><font color="#0093AF">Short Examples</font></a></li>
 <li class="toctree-l2"><a class="reference internal" href="Ch1_Objects.html"><font color="#0093AF">Objects</font></a></li>
-<li class="toctree-l2"><a class="reference internal" href="Ch1_expsys.html"><font color="#0093AF"> Experimental Settings and Spin-System Definition</font></a></li>
+<li class="toctree-l2"><a class="reference internal" href="Ch1_expsys.html"><font color="#0093AF">Experimental Settings and Spin-System Definition</font></a></li>
 <li class="toctree-l2"><a class="reference internal" href="Ch1_Liouvillian.html"><font color="#0093AF">Hamiltonians and Liouvillians</font></a></li>
 <li class="toctree-l2"><a class="reference internal" href="Ch1_Propagation.html"><font color="#0093AF">Propagators and Sequences</font></a></li>
 <li class="toctree-l2"><a class="reference internal" href="Ch1_rho.html"><font color="#0093AF">The Density Matrix</font></a></li>
@@ -428,25 +428,18 @@
   <section class="tex2jax_ignore mathjax_ignore" id="a-quick-start">
 <h1><font  color = "#0093AF">A Quick Start</font><a class="headerlink" href="#a-quick-start" title="Link to this heading">#</a></h1>
 <p><a href="https://githubtocolab.com/alsinmr/SLEEPY_tutorial/blob/main/ColabNotebooks/Chapter1/Ch1_basics.ipynb" target="_blank"><img src="https://colab.research.google.com/assets/colab-badge.svg"></a></p>
-<p>We will go through the various objects in this chapter in detail, but in this section we will just do a quick summary. Note that we will usually use consistent variable names for each type of object. These names are given in () after each class name</p>
+<p>We will go through the various objects in this chapter in detail, but in this section we will just do a quick summary. Note that we will usually use consistent variable names for each class (i.e. type of object). These names are given in () after each class name</p>
 <ul class="simple">
-<li><p>ExpSys (ex): Describes basic details of the experiment and spin-system. This includes magnetic field, nuclei in the system, spinning frequency if included, temperature, powder average, spin-field and spin-spin interactions, etc.</p></li>
+<li><p>ExpSys (ex): Describes basic details of the experiment and spin-system. This includes magnetic field, nuclei in the system, spinning frequency, temperature, powder average, spin-field and spin-spin interactions, etc.</p></li>
 <li><p>Liouvillian (L): Contains the Liouvillian, which has coherent terms originating from interactions in ExpSys, but also can contain relaxation terms, and potentially includes exchange processes that modulate interactions, defined by including two or more ExpSys in exchange.</p></li>
 <li><p>Hamiltonian (H): Contains the Hamiltonian, although the user can bypass the Hamiltonian and generate the Liouvillian directly (Hamiltonians are contained within the Liouvillian).</p></li>
 <li><p>Sequence (seq): Generated from a Liouvillian, and allows the user to define time-dependent, multi-channel pulse sequences. Sequences can be used directly with the density matrix, or can be used to generate propagators.</p></li>
-<li><p>Propagator (U): Propagates the density matrix forward in time. Propagators can be generated from a sequence, in which case they will include rf-pulses in the sequence, or from the Liouvillian directly, in which case no rf irradiation is included. Identity propagators and <span class="math notranslate nohighlight">\(\delta\)</span>-pulses are available from the Liouvillian. Propagators may be multiplied together or the density matrix may be multiplied with propagators. They may also be raised to integer powers (in solid-state NMR, they must then be exactly one rotor period).</p></li>
-<li><p>Rho (rho): Rho is the density matrix, which defines the state of the spin-system. In SLEEPY, rho also contains the detection operator, so that simply calling rho (<code class="docutils literal notranslate"><span class="pre">rho()</span></code>) will perform a detection operation for the current state of the density matrix. Rho records all detection operations and stores the results in <code class="docutils literal notranslate"><span class="pre">rho.I</span></code>, which is a 2D matrix (the first dimension runs over possible multiple detection operators, the second dimension runs over all detection calls). A special function, <code class="docutils literal notranslate"><span class="pre">rho.DetProp</span></code> takes a sequence or propagator and executes multiple detection and propagation steps. DetProp usually operates in the eigenbasis, making this calculation much faster than simply looping over propagation and detection operations, and will also look for other shortcuts to accelerate calculations. The Rho ‘plot’ function will plot either time-domain or Fourier transformed spectra (<code class="docutils literal notranslate"><span class="pre">FT=True</span></code>).</p></li>
+<li><p>Propagator (U): Propagates the density matrix forward in time. Propagators can be generated from a sequence, in which case they will include rf-pulses in the sequence, or from the Liouvillian directly, in which case no rf irradiation is included. Identity propagators and <span class="math notranslate nohighlight">\(\delta\)</span>-pulses are generated by the Liouvillian. Propagators may be multiplied together or the density matrix may be multiplied with a propagator. Propagators may also be raised to integer powers (in solid-state NMR, this requires that the propagator is exactly one rotor period).</p></li>
+<li><p>Rho (rho): Rho is the density matrix, which defines the state of the spin-system. In SLEEPY, rho also contains the detection operator, so that simply calling rho (<code class="docutils literal notranslate"><span class="pre">rho()</span></code>) will perform a detection operation for the current state of the density matrix. Rho records all detection operations and stores the results in <code class="docutils literal notranslate"><span class="pre">rho.I</span></code>, which is a 2D matrix (the first dimension runs over possible multiple detection operators, the second dimension runs over all detection calls). A special function, <code class="docutils literal notranslate"><span class="pre">rho.DetProp</span></code> takes a sequence or propagator and executes multiple detection and propagation steps. DetProp usually operates in the propagator eigenbasis, making this calculation much faster than simply looping over propagation and detection operations (it may also use multiple eigenbases if a sequence is provided for which multiple detections should occur during the rotor period). DetProp will also try to reduce the matrix sizes before calculating propagators from sequences. The Rho ‘plot’ function will plot either time-domain or Fourier transformed spectra (<code class="docutils literal notranslate"><span class="pre">FT=True</span></code>).</p></li>
 </ul>
 <p>Note that SLEEPY is intended to be <em>interactive</em>, so each of these objects will provide a description of itself if its variable name is typed at the command line, or included in a “print” call. Furthermore, each object has a “plot” function (or “plot_inter” for ExpSys), that gives a graphical representation of the object or a plot of data in the object. Objects may be investigated by the user and many of their attributes provide useful information.</p>
 <section id="setup">
 <h2>Setup<a class="headerlink" href="#setup" title="Link to this heading">#</a></h2>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># SETUP SLEEPY</span>
-</pre></div>
-</div>
-</div>
-</div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">SLEEPY</span> <span class="k">as</span> <span class="nn">sl</span>
@@ -459,7 +452,7 @@
 </section>
 <section id="example-13-c-r-1-rho">
 <h2>Example: <span class="math notranslate nohighlight">\(^{13}\)</span>C <span class="math notranslate nohighlight">\(R_{1\rho}\)</span><a class="headerlink" href="#example-13-c-r-1-rho" title="Link to this heading">#</a></h2>
-<p>Below, we will construct a simulation for <span class="math notranslate nohighlight">\(R_{1\rho}\)</span> relaxation. The first step is to define the spins in the system, their interactions, and the experimental conditions. Since we want a dynamic system, we define two systems, which differ by the orientation of the dipole coupling.</p>
+<p>Below, we will construct a simulation for <span class="math notranslate nohighlight">\(R_{1\rho}\)</span> relaxation. The first step is to define the spins in the system, their interactions, and the experimental conditions. Since we want a dynamic system, we define two systems (<code class="docutils literal notranslate"><span class="pre">ex0,ex1</span></code>), which differ by the orientation of the dipole coupling. ExpSys provides a copy function, which should ideally be used to ensure the experimental settings are consistent between the two systems (although experimental settings are always read out of the first ExpSys object).</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># 600 MHz, H-C system, MAS at 60 kHz, 49 powder angles (JPC59), 50 steps per rotor period</span>
@@ -484,7 +477,7 @@
 </div>
 </div>
 </div>
-<p>We generate a sequence, in this case just a constant field. We specify the time axis, although in fact for a constant field, we can also omit this, in which case we get a sequence with the default length of one rotor period.</p>
+<p>We generate a sequence, in this case just a constant field. We specify the time axis, although for a constant field we can also omit this, in which case we get a sequence with the default length of one rotor period. We also plot the sequence below.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#Generate a pulse-sequence from L</span>
@@ -492,18 +485,15 @@
 <span class="c1"># Add a 45 kHz pulse on the 13C channel (x), for one rotor period (this is the default, so could be omitted)</span>
 <span class="n">seq</span><span class="o">.</span><span class="n">add_channel</span><span class="p">(</span><span class="s1">&#39;13C&#39;</span><span class="p">,</span><span class="n">t</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="n">L</span><span class="o">.</span><span class="n">taur</span><span class="p">],</span><span class="n">v1</span><span class="o">=</span><span class="mi">45000</span><span class="p">,</span><span class="n">phase</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
 <span class="c1"># Plot the pulse-sequence</span>
-<span class="n">seq</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
+<span class="n">_</span><span class="o">=</span><span class="n">seq</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&lt;AxesSubplot:ylabel=&#39;$v_1$ / kHz&#39;&gt;,
- &lt;AxesSubplot:xlabel=&#39;t / $\\mu$s&#39;, ylabel=&#39;$v_1$ / kHz&#39;&gt;]
-</pre></div>
-</div>
 <img alt="../_images/48c96135d09869908678cf771250f10874f913c71a0c14b654e06d8673e02a5e.png" src="../_images/48c96135d09869908678cf771250f10874f913c71a0c14b654e06d8673e02a5e.png" />
 </div>
 </div>
+<p>We plot a graphical representation of the Liouville matrix below. If the sequence is provided when plotting <span class="math notranslate nohighlight">\(L\)</span>, the maximum field on each channel of the sequence is included in the representation.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Graphical representation of L, where the applied field is included by defining seq</span>
@@ -524,7 +514,7 @@
 <img alt="../_images/1e6b6bcf2cb7761f088ad8755f25d3a76f5e7ce2a4f6bffe9de7f9b7b009e511.png" src="../_images/1e6b6bcf2cb7761f088ad8755f25d3a76f5e7ce2a4f6bffe9de7f9b7b009e511.png" />
 </div>
 </div>
-<p>We create the density matrix and detection operator. Here we initialize it along the z-axis, just to show as an example how to make a <span class="math notranslate nohighlight">\(\delta\)</span>-pulse below and apply it to the matrix.</p>
+<p>We create the density matrix and detection operator. Here we initialize it along the z-axis, so that we can show as an example how to make a <span class="math notranslate nohighlight">\(\delta\)</span>-pulse and apply it to the matrix (normally, we would skip the <span class="math notranslate nohighlight">\(\delta\)</span>-pulse and just initialize along ‘13Cx’).</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create a density matrix, with initial state and detection matrix</span>
@@ -579,7 +569,7 @@ Current time is 16666.667 microseconds
 </div>
 </div>
 </div>
-<p>Finally, we plot the resulting <span class="math notranslate nohighlight">\(R_{1\rho}\)</span> decay curve. Note that we may also Fourier-transform the results, although that does not make much sense to do for <span class="math notranslate nohighlight">\(R_{1\rho}\)</span>.</p>
+<p>Finally, we plot the resulting <span class="math notranslate nohighlight">\(R_{1\rho}\)</span> decay curve (plot also has a Fourier transform option, <code class="docutils literal notranslate"><span class="pre">FT=True</span></code>).</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Plot the resulting time-dependent magnetization</span>

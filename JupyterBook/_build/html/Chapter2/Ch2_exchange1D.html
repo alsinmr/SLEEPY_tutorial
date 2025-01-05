@@ -180,7 +180,7 @@
 <li class="toctree-l2"><a class="reference internal" href="../Chapter1/Ch1_basics.html"><font color="#0093AF">A Quick Start</font></a></li>
 <li class="toctree-l2"><a class="reference internal" href="../Chapter1/Ch1_ShortExamples.html"><font color="#0093AF">Short Examples</font></a></li>
 <li class="toctree-l2"><a class="reference internal" href="../Chapter1/Ch1_Objects.html"><font color="#0093AF">Objects</font></a></li>
-<li class="toctree-l2"><a class="reference internal" href="../Chapter1/Ch1_expsys.html"><font color="#0093AF"> Experimental Settings and Spin-System Definition</font></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Chapter1/Ch1_expsys.html"><font color="#0093AF">Experimental Settings and Spin-System Definition</font></a></li>
 <li class="toctree-l2"><a class="reference internal" href="../Chapter1/Ch1_Liouvillian.html"><font color="#0093AF">Hamiltonians and Liouvillians</font></a></li>
 <li class="toctree-l2"><a class="reference internal" href="../Chapter1/Ch1_Propagation.html"><font color="#0093AF">Propagators and Sequences</font></a></li>
 <li class="toctree-l2"><a class="reference internal" href="../Chapter1/Ch1_rho.html"><font color="#0093AF">The Density Matrix</font></a></li>
@@ -438,13 +438,6 @@
 <h2>Setup<a class="headerlink" href="#setup" title="Link to this heading">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># SETUP SLEEPY</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">SLEEPY</span> <span class="k">as</span> <span class="nn">sl</span>
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
@@ -522,17 +515,24 @@ k_{12} &amp; -k_{21}+i\Omega_2
 \end{equation}
 \end{split}\]</div>
 <p>This sub-matrix of <span class="math notranslate nohighlight">\(\hat{\hat{L}}\)</span> corresponds to the <span class="math notranslate nohighlight">\(\hat{S}^+\)</span> terms that are being detected. While we also start out with <span class="math notranslate nohighlight">\(\hat{S}^-\)</span>, they don’t exchange with the <span class="math notranslate nohighlight">\(\hat{S}^+\)</span> terms, and are also not detected, so we don’t need to actually calculate them.</p>
-<p>This is shown graphically below (the block indexing is, unfortunately, arbitrary: we just try different block indices until we find the desired states).</p>
+<p>This is shown graphically below. To obtain only the simulated block, we need to provide ‘rho’ to the <code class="docutils literal notranslate"><span class="pre">L.plot</span></code> function.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">L</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">block</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">mode</span><span class="o">=</span><span class="s1">&#39;re&#39;</span><span class="p">,</span><span class="n">colorbar</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Real (exchange matrix)&#39;</span><span class="p">)</span>
-<span class="n">_</span><span class="o">=</span><span class="n">L</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">block</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">mode</span><span class="o">=</span><span class="s1">&#39;im&#39;</span><span class="p">,</span><span class="n">colorbar</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Imaginary (Frequency)&#39;</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">L</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">rho</span><span class="o">=</span><span class="n">rho</span><span class="p">,</span><span class="n">mode</span><span class="o">=</span><span class="s1">&#39;re&#39;</span><span class="p">)</span>
+<span class="n">L</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">rho</span><span class="o">=</span><span class="n">rho</span><span class="p">,</span><span class="n">mode</span><span class="o">=</span><span class="s1">&#39;im&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/5e91266d5a1e478b2883c0dfeb695edaa5a92c6351f8b7bb6cd1878683e93663.png" src="../_images/5e91266d5a1e478b2883c0dfeb695edaa5a92c6351f8b7bb6cd1878683e93663.png" />
-<img alt="../_images/94794b814f3c125a13b3e9e2a10ac8ac0bc7254ffe2d9b0b0d6c1a642d2b2286.png" src="../_images/94794b814f3c125a13b3e9e2a10ac8ac0bc7254ffe2d9b0b0d6c1a642d2b2286.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>State-space reduction: 8-&gt;2
+State-space reduction: 8-&gt;2
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;AxesSubplot:&gt;
+</pre></div>
+</div>
+<img alt="../_images/4681f176e98d3db04dd6002c71c52f07c6c4395c65afbcbf4d7c81d72b381e69.png" src="../_images/4681f176e98d3db04dd6002c71c52f07c6c4395c65afbcbf4d7c81d72b381e69.png" />
+<img alt="../_images/325daa253622007460930410db9186bc5e522cc99061e4ba0cd2c115715b82f9.png" src="../_images/325daa253622007460930410db9186bc5e522cc99061e4ba0cd2c115715b82f9.png" />
 </div>
 </div>
 </section>

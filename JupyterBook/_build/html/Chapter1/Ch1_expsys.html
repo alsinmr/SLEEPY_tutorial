@@ -180,7 +180,7 @@
 <li class="toctree-l2"><a class="reference internal" href="Ch1_basics.html"><font color="#0093AF">A Quick Start</font></a></li>
 <li class="toctree-l2"><a class="reference internal" href="Ch1_ShortExamples.html"><font color="#0093AF">Short Examples</font></a></li>
 <li class="toctree-l2"><a class="reference internal" href="Ch1_Objects.html"><font color="#0093AF">Objects</font></a></li>
-<li class="toctree-l2 current active"><a class="current reference internal" href="#"><font color="#0093AF"> Experimental Settings and Spin-System Definition</font></a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#"><font color="#0093AF">Experimental Settings and Spin-System Definition</font></a></li>
 <li class="toctree-l2"><a class="reference internal" href="Ch1_Liouvillian.html"><font color="#0093AF">Hamiltonians and Liouvillians</font></a></li>
 <li class="toctree-l2"><a class="reference internal" href="Ch1_Propagation.html"><font color="#0093AF">Propagators and Sequences</font></a></li>
 <li class="toctree-l2"><a class="reference internal" href="Ch1_rho.html"><font color="#0093AF">The Density Matrix</font></a></li>
@@ -402,7 +402,7 @@
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1><font  color = "#0093AF"> Experimental Settings and Spin-System Definition</h1>
+    <h1><font  color = "#0093AF">Experimental Settings and Spin-System Definition</font></h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -430,17 +430,10 @@
                 <article class="bd-article">
                   
   <section class="tex2jax_ignore mathjax_ignore" id="experimental-settings-and-spin-system-definition">
-<h1><font  color = "#0093AF"> Experimental Settings and Spin-System Definition<a class="headerlink" href="#experimental-settings-and-spin-system-definition" title="Link to this heading">#</a></h1>
+<h1><font  color = "#0093AF">Experimental Settings and Spin-System Definition</font><a class="headerlink" href="#experimental-settings-and-spin-system-definition" title="Link to this heading">#</a></h1>
 <p><a href="https://githubtocolab.com/alsinmr/SLEEPY_tutorial/blob/main/ColabNotebooks/Chapter1/Ch1_expsys.ipynb" target="_blank"><img src="https://colab.research.google.com/assets/colab-badge.svg"></a></p>
 <section id="setup">
 <h2>Setup<a class="headerlink" href="#setup" title="Link to this heading">#</a></h2>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># SETUP SLEEPY</span>
-</pre></div>
-</div>
-</div>
-</div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">SLEEPY</span> <span class="k">as</span> <span class="nn">sl</span>
@@ -462,7 +455,7 @@
 <li><p>vr: Spinning frequency in Hz (only used if anisotropic interactions provided). Default is 10000</p></li>
 <li><p>rotor_angle: Rotor angle, in radians. Default is the magic angle</p></li>
 <li><p>n_gamma: Number of gamma angles calculated per rotor period. For string-specified powder averages (i.e. not JCP59 or grid), this is also the number of gamma angles in the powder average. Default is 100</p></li>
-<li><p>pwdavg: Type of powder average. Type sl.PowderAvg.list_powder_types to see options (Most powder averages from SIMPSON). If an integer is provided, then this yields the JCP59 powder average, with higher integers yielding more angles. Default is 3 (JCP59 with 99 angles). Note that if ‘alpha0beta0’,’alpha0beta90’, or ‘alpha0beta45’ are used, then the powder average will automatically switch to gamma_encoded mode, since we assume the user only wants one angle (otherwise, gamma_encoded defaults to False). This behavior can be overridden by the user simply by setting gamma_encoded.</p></li>
+<li><p>pwdavg: Type of powder average. Type sl.PowderAvg.list_powder_types to see options (Most powder averages are taken from <a class="reference external" href="https://inano.au.dk/about/research-centers-and-projects/nmr/software/simpson">SIMPSON</a>). If an integer is provided, then this yields the <a class="reference external" href="https://doi.org/10.1063/1.1680590">JCP59</a> powder average, with higher integers yielding more angles. Default is 3 (JCP59 with 99 angles). Note that if ‘alpha0beta0’,’alpha0beta90’, or ‘alpha0beta45’ are used, then the powder average will automatically switch to gamma_encoded mode, so that only one angle is simulated (otherwise, gamma_encoded defaults to False). This behavior can be overridden by the user simply by setting gamma_encoded.</p></li>
 <li><p>LF: Specifiy whether each spin should be simulated in the lab frame. Can be provided as a single boolean, e.g. False sets all spins in the rotating frame, or as a list the same length as Nucs, which puts some spins in the lab frame and some in the rotating frame (useful, e.g. for DNP experiments such as solid-effect/cross-effect where the electrons should be in the rotating frame, but the nucleus in the lab frame).</p></li>
 </ul>
 <div class="cell docutils container">
@@ -490,7 +483,7 @@ Temperature = 298 K
 Powder Average: JCP59 with 99 angles
 Interactions:
 
-&lt;SLEEPY.ExpSys.ExpSys object at 0x7f969a557d30&gt;
+&lt;SLEEPY.ExpSys.ExpSys object at 0x7ff1aa01c370&gt;
 </pre></div>
 </div>
 </div>
@@ -532,7 +525,7 @@ Interactions:
 </div>
 </div>
 </div>
-<p>We can view the shape of the tensors with the “plot_inter” function. Note that this results in a scatter plot, where the number of points is determined by the powder average. What is shown is the magnitude (as distance from the origin) and phase (as color). For the <span class="math notranslate nohighlight">\(n=0\)</span> component, only real values are possible, so we only see positive (red) and negative (blue).</p>
+<p>We can view the shape of a tensor with the “plot_inter” function. Note that this results in a scatter plot, where the number of points is determined by the powder average. What is shown is the magnitude (as distance from the origin) and phase (as color). For the <span class="math notranslate nohighlight">\(n=0\)</span> component, only real values are possible, so we only see positive (red) and negative (blue).</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="o">=</span><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">[</span><span class="mi">15</span><span class="p">,</span><span class="mi">8</span><span class="p">])</span>
@@ -542,7 +535,7 @@ Interactions:
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/3b3e576893e369661c38127302dae7a676cfb40ebc77c88eca40c4120c373acb.png" src="../_images/3b3e576893e369661c38127302dae7a676cfb40ebc77c88eca40c4120c373acb.png" />
+<img alt="../_images/6ec1144f3d90a9334298973a43bb5115053a3bfad707efb4c86352711eab8da1.png" src="../_images/6ec1144f3d90a9334298973a43bb5115053a3bfad707efb4c86352711eab8da1.png" />
 </div>
 </div>
 <p>Note, if we try to plot an isotropic term, we just obtain a sphere.</p>
@@ -568,7 +561,7 @@ Interactions:
 </div>
 </div>
 </div>
-<p>If we just type ‘ex’ at the command line, we will obtain a description of the experimental system</p>
+<p>If we type ‘ex’ at the command line, we will obtain a description of the experimental system</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ex</span>
@@ -581,14 +574,14 @@ B0 = 14.092 T (600.000 MHz 1H frequency)
 rotor angle = 54.736 degrees
 rotor frequency = 10.0 kHz
 Temperature = 298 K
-Powder Average: JCP59 with 99 angles
+Powder Average: rep678 with 67800 angles
 Interactions:
 	dipole between spins 0,1 with arguments:
-		(delta=52194.25)
+		(delta=46656.37,euler=[0.00,45.00,0.00])
 	CSA on spin 1 with arguments: (delta=100.00,eta=1.00)
 	CS on spin 0 with arguments: (ppm=10.00)
 
-&lt;SLEEPY.ExpSys.ExpSys object at 0x7f8d8023f130&gt;
+&lt;SLEEPY.ExpSys.ExpSys object at 0x7ff1a9b775b0&gt;
 </pre></div>
 </div>
 </div>
@@ -617,7 +610,7 @@ Interactions:
 </ul>
 <p>Finally, it contains important objects</p>
 <ul class="simple">
-<li><p>ex.pwdavg: Powder average object for the spin-system. Note, if all interactions are isotropic, when a Liouvillian or Hamiltonian is created, the powder average will be replaced with a 1-element powder-average.</p></li>
+<li><p>ex.pwdavg: Powder average object for the spin-system. Note, if all interactions are isotropic, when a Liouvillian or Hamiltonian is created, the powder average will be replaced with a 1-element powder-average</p></li>
 <li><p>ex.Op: Spin-operator object, which contains the spin-operators for the spin-system</p></li>
 </ul>
 </section>
@@ -641,7 +634,7 @@ Interactions:
 </ul>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ex</span><span class="o">.</span><span class="n">pwdavg</span><span class="o">.</span><span class="n">set_powder_type</span><span class="p">(</span><span class="s1">&#39;rep256&#39;</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">_</span><span class="o">=</span><span class="n">ex</span><span class="o">.</span><span class="n">pwdavg</span><span class="o">.</span><span class="n">set_powder_type</span><span class="p">(</span><span class="s1">&#39;rep256&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -657,7 +650,7 @@ Interactions:
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Powder Average
 Type:	rep256 with 25600 angles
 
-&lt;SLEEPY.PowderAvg.PowderAvg object at 0x7f8d927e1460&gt;
+&lt;SLEEPY.PowderAvg.PowderAvg object at 0x7ff1a9f922b0&gt;
 </pre></div>
 </div>
 </div>
@@ -673,7 +666,7 @@ Type:	rep256 with 25600 angles
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;Axes3DSubplot:xlabel=&#39;x&#39;, ylabel=&#39;y&#39;&gt;
 </pre></div>
 </div>
-<img alt="../_images/ed1305da9be747c5da60fc961c81fc0ce9ecae594289e5ffc79816ff9b238e92.png" src="../_images/ed1305da9be747c5da60fc961c81fc0ce9ecae594289e5ffc79816ff9b238e92.png" />
+<img alt="../_images/f52db45a8a99789d2cdffbe19d8feb665ba0c0750c39ecda3f6db55017e2f221.png" src="../_images/f52db45a8a99789d2cdffbe19d8feb665ba0c0750c39ecda3f6db55017e2f221.png" />
 </div>
 </div>
 </section>
@@ -714,10 +707,14 @@ Type:	rep256 with 25600 angles
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[-0. +0.j, -0. +0.j, -0. +0.j, -0. +0.j],
-       [-0. +0.j, -0. +0.j, -0. +0.j, -0. +0.j],
-       [-0.5+0.j, -0. +0.j, -0. +0.j, -0. +0.j],
-       [-0. +0.j, -0.5+0.j, -0. +0.j, -0. +0.j]])
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[-0.        +0.j, -0.        +0.j, -0.70710678+0.j,
+        -0.        +0.j],
+       [-0.        +0.j, -0.        +0.j, -0.        +0.j,
+        -0.70710678+0.j],
+       [-0.        +0.j, -0.        +0.j, -0.        +0.j,
+        -0.        +0.j],
+       [-0.        +0.j, -0.        +0.j, -0.        +0.j,
+        -0.        +0.j]])
 </pre></div>
 </div>
 </div>
@@ -870,7 +867,7 @@ Type:	rep256 with 25600 angles
 </div>
 </div>
 </div>
-<p>SLEEPY uses the full set of spherical tensors (<code class="docutils literal notranslate"><span class="pre">T</span></code>) when operating in the lab frame, but just the rank-2, <span class="math notranslate nohighlight">\(m=0\)</span> component in the rotating frame (and this is not usually inserted with the spherical components).</p>
+<p>SLEEPY uses the full set of rank-2 spherical tensors (<code class="docutils literal notranslate"><span class="pre">T</span></code>) when operating in the lab frame, but just the rank-2, <span class="math notranslate nohighlight">\(m=0\)</span> component in the rotating frame (rotating frame Hamiltonians are usually defined with the cartesian spin-operators in SLEEPY, although one could use the spherical tensors).</p>
 </section>
 </section>
 

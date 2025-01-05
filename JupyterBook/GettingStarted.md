@@ -8,7 +8,7 @@ SLEEPY does not currently exist for installation via [pip](https://pypi.org/) or
 
 [**SLEEPY on GitHub**](https://github.com/alsinmr/SLEEPY/)
 
-Versions listed tested for SLEEPY, although any recent module version should work.
+Versions listed have been tested for SLEEPY, although any recent module version should work.
 
 ### Requirements
 * Python 3 (3.7.3)
