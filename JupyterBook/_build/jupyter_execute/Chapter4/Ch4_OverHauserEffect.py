@@ -1,23 +1,17 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# # <font  color = "#0093AF"> Overhauser Effect
+# # <font  color = "#0093AF">Overhauser Effect</font>
 
-# <a href="https://githubtocolab.com/alsinmr/SLEEPY_tutorial/blob/main/ColabNotebooks/Chapter4/Ch4_OverhauserEffect.ipynb" target="_blank"><img src="https://colab.research.google.com/assets/colab-badge.svg"></a>
+# <a href="https://githubtocolab.com/alsinmr/SLEEPY_tutorial/blob/main/ColabNotebooks/Chapter4/Ch4_OverHauserEffect.ipynb" target="_blank"><img src="https://colab.research.google.com/assets/colab-badge.svg"></a>
 
 # The Overhauser effect is the original DNP experiment,$^1$ demonstrated on a conducting metal,$^2$ and often used in solution-state DNP. However, it is also possible to obtain the Overhauser effect from non-conducting electrons such as in Trityl or BDPA. In this case, the effect comes from either modulation of the isotropic or dipolar part of the Hyperfine coupling. Here, we introduce these modulations, and see the effect they have on the transfer of polarization between the electron and the nucleus.
 # 
-# [1] A.W. Overhauser. *[Phys. Rev.](https://doi.org/10.1103/PhysRev.92.411)*, **1953**, 92, 411-415
+# [1] A.W. Overhauser. [*Phys. Rev.*](https://doi.org/10.1103/PhysRev.92.411), **1953**, 92, 411-415
 # 
-# [2] T.R. Carver, C.P. Schlichter. *[Phys. Rev.](https://doi.org/10.1103/PhysRev.92.212.2)*, **1953**, 92, 212-213.
+# [2] T.R. Carver, C.P. Schlichter. [*Phys. Rev.*](https://doi.org/10.1103/PhysRev.92.212.2), **1953**, 92, 212-213.
 
 # ## Setup
-
-# In[ ]:
-
-
-# SETUP SLEEPY
-
 
 # In[3]:
 

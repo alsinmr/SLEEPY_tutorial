@@ -1,0 +1,1592 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>Dipolar Assisted Rotary Resonance &#8212; SLEEPY Tutorial</title>
+    
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=5115cc725059bd94278eecd172e13a965bf8f5a9" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.b7bb847fb20b106c3d81b95245e65545.min.css" />
+    
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <link rel="shortcut icon" href="../_static/favicon.png"/>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
+<!-- Checkboxes to toggle the left sidebar -->
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
+<label class="overlay overlay-navbar" for="__navigation">
+    <div class="visually-hidden">Toggle navigation sidebar</div>
+</label>
+<!-- Checkboxes to toggle the in-page toc -->
+<input type="checkbox" class="sidebar-toggle" name="__page-toc" id="__page-toc" aria-label="Toggle in-page Table of Contents">
+<label class="overlay overlay-pagetoc" for="__page-toc">
+    <div class="visually-hidden">Toggle in-page Table of Contents</div>
+</label>
+<!-- Headers at the top -->
+<div class="announcement header-item noprint"></div>
+<div class="header header-item noprint"></div>
+
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<!-- Sidebar -->
+<div class="bd-sidebar noprint" id="site-navigation">
+    <div class="bd-sidebar__content">
+        <div class="bd-sidebar__top"><div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../index.html">
+      
+        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+        
+      
+      
+      <img src="../_static/logo_dark.png" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">SLEEPY Tutorial</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../intro.html">
+                    Relax with SLEEPY!
+                </a>
+            </li>
+        </ul>
+        <ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../GettingStarted.html">
+   <font color="#B00000">
+    Getting Started
+   </font>
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Tutorial
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../Ch1_SLEEPY_basics.html">
+   <font color="#B00000">
+    SLEEPY basics
+   </font>
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
+  <label for="toctree-checkbox-1">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../Chapter1/Ch1_basics.html">
+     <font color="#0093AF">
+      A Quick Start
+     </font>
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../Chapter1/Ch1_ShortExamples.html">
+     <font color="#0093AF">
+      Short Examples
+     </font>
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../Chapter1/Ch1_Objects.html">
+     <font color="#0093AF">
+      Objects
+     </font>
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../Chapter1/Ch1_expsys.html">
+     <font color="#0093AF">
+      Experimental Settings and Spin-System Definition
+     </font>
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../Chapter1/Ch1_Liouvillian.html">
+     <font color="#0093AF">
+      Hamiltonians and Liouvillians
+     </font>
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../Chapter1/Ch1_Propagation.html">
+     <font color="#0093AF">
+      Propagators and Sequences
+     </font>
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../Chapter1/Ch1_rho.html">
+     <font color="#0093AF">
+      The Density Matrix
+     </font>
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../Ch2_SolutionNMR.html">
+   <font color="#B00000">
+    Solution NMR
+   </font>
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/>
+  <label for="toctree-checkbox-2">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../Chapter2/Ch2_exchange1D.html">
+     <font color="#0093AF">
+      Exchange in 1D spectra
+     </font>
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../Chapter2/Ch2_EXSY.html">
+     <font color="#0093AF">
+      Exchange Spectroscopy (EXSY)
+     </font>
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../Chapter2/Ch2_BMRD.html">
+     <font color="#0093AF">
+      Bloch-McConnell Relaxation Dispersion
+     </font>
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../Chapter2/Ch2_CEST.html">
+     <font color="#0093AF">
+      Chemical Exchange Saturation Transfer (CEST)
+     </font>
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../Chapter2/Ch2_T1_NOE.html">
+     <font color="#0093AF">
+      <span class="math notranslate nohighlight">
+       \(T_1\)
+      </span>
+      and Nuclear Overhauser Effect
+     </font>
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../Chapter2/Ch2_T1_limits.html">
+     <font color="#0093AF">
+      <span class="math notranslate nohighlight">
+       \(T_1\)
+      </span>
+      limits
+     </font>
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../Chapter2/Ch2_TROSY.html">
+     <font color="#0093AF">
+      TROSY effects
+     </font>
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../Ch3_DynamicsSolids.html">
+   <font color="#B00000">
+    Solid-state NMR
+   </font>
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/>
+  <label for="toctree-checkbox-3">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="Ch3_R1p.html">
+     <font color="#0093AF">
+      R
+      <span class="math notranslate nohighlight">
+       \(_{1ρ}\)
+      </span>
+      relaxation
+     </font>
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="Ch3_REDOR.html">
+     <font color="#0093AF">
+      REDOR
+     </font>
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="Ch3_DIPSHIFT.html">
+     <font color="#0093AF">
+      DIPSHIFT
+     </font>
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="Ch3_T1_NOE.html">
+     <font color="#0093AF">
+      <span class="math notranslate nohighlight">
+       \(T_1\)
+      </span>
+      and NOE
+     </font>
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="Ch3_RECRR.html">
+     <font color="#0093AF">
+      Relaxation in complex sequences: RECRR
+     </font>
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="Ch3_Quad.html">
+     <font color="#0093AF">
+      Quadrupolar phenomena
+     </font>
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../Ch4_DNP.html">
+   <font color="#B00000">
+    Dynamic Nuclear Polarization
+   </font>
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/>
+  <label for="toctree-checkbox-4">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../Chapter4/Ch4_SolidEffect.html">
+     <font color="#0093AF">
+      Solid Effect
+     </font>
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../Chapter4/Ch4_CrossEffect.html">
+     <font color="#0093AF">
+      Cross-Effect
+     </font>
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../Chapter4/Ch4_NOVEL.html">
+     <font color="#0093AF">
+      NOVEL
+     </font>
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../Ch5_ParamagneticEffects.html">
+   <font color="#B00000">
+    Paramagnetic Effects
+   </font>
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" type="checkbox"/>
+  <label for="toctree-checkbox-5">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../Chapter5/Ch5_PRE.html">
+     <font color="#0093AF">
+      Paramagnetic Relaxation Enhancement
+     </font>
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../Chapter5/Ch5_ContactShift.html">
+     <font color="#0093AF">
+      Contact shift
+     </font>
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../Chapter5/Ch5_PseudoContactShift.html">
+     <font color="#0093AF">
+      Pseudo-Contact Shift
+     </font>
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../Chapter6/Ch6_RelaxationOptions.html">
+   <font color="#B00000">
+    Relaxation Options
+   </font>
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../Ch7_ColabTemplate.html">
+   <font color="#B00000">
+    SLEEPY Colab Template
+   </font>
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav></div>
+        <div class="bd-sidebar__bottom">
+             <!-- To handle the deprecated key -->
+            
+            <div class="navbar_extra_footer">
+            Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+            </div>
+            
+        </div>
+    </div>
+    <div id="rtd-footer-container"></div>
+</div>
+
+
+          
+
+
+          
+<!-- A tiny helper pixel to detect if we've scrolled -->
+<div class="sbt-scroll-pixel-helper"></div>
+<!-- Main content -->
+<div class="col py-0 content-container">
+    
+    <div class="header-article row sticky-top noprint">
+        
+
+
+
+<div class="col py-1 d-flex header-article-main">
+    <div class="header-article__left">
+        
+        <label for="__navigation"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="right"
+title="Toggle navigation"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-bars"></i>
+  </span>
+
+</label>
+
+        
+    </div>
+    <div class="header-article__right">
+<div class="menu-dropdown menu-dropdown-launch-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Launch interactive content">
+      <i class="fas fa-rocket"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+    </ul>
+  </div>
+</div>
+
+<button onclick="toggleFullScreen()"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="bottom"
+title="Fullscreen mode"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+<div class="menu-dropdown menu-dropdown-repository-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Source repositories">
+      <i class="fab fa-github"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://github.com/alsinmr/SLEEPY_tutorial/"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Source repository"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="headerbtn__text-container">repository</span>
+</a>
+
+      </li>
+      
+      <li>
+        <a href="https://github.com/alsinmr/SLEEPY_tutorial//issues/new?title=Issue%20on%20page%20%2FChapter3/Ch3_DARR.html&body=Your%20issue%20content%20here."
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Open an issue"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="headerbtn__text-container">open issue</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<div class="menu-dropdown menu-dropdown-download-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Download this page">
+      <i class="fas fa-download"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="../_sources/Chapter3/Ch3_DARR.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Download source file"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="headerbtn__text-container">.ipynb</span>
+</a>
+
+      </li>
+      
+      <li>
+        
+<button onclick="printPdf(this)"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="left"
+title="Print to PDF"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="headerbtn__text-container">.pdf</span>
+</button>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+<label for="__page-toc"
+  class="headerbtn headerbtn-page-toc"
+  
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-list"></i>
+  </span>
+
+</label>
+
+    </div>
+</div>
+
+<!-- Table of contents -->
+<div class="col-md-3 bd-toc show noprint">
+    <div class="tocsection onthispage pt-5 pb-3">
+        <i class="fas fa-list"></i> Contents
+    </div>
+    <nav id="bd-toc-nav" aria-label="Page">
+        <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#setup">
+   Setup
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#a-static-experiments">
+   A. Static Experiments
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#transfer-between-coupled-spins-with-same-resonance-frequency">
+     1) Transfer between coupled spins with same resonance frequency
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#transfer-between-coupled-spins-with-different-resonance-frequency">
+     2) Transfer between coupled spins with different resonance frequency
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#transfer-between-coupled-spins-with-different-resonance-frequency-coupled-to-a-flipping-1h">
+     3) Transfer between coupled spins with different resonance frequency, coupled to a flipping
+     <span class="math notranslate nohighlight">
+      \(^1\)
+     </span>
+     H
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#b-magic-angle-spinning-experiments">
+   B. Magic-Angle Spinning Experiments
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#transfer-when-two-spins-are-separated-by-the-rotor-frequency">
+     1) Transfer when two spins are separated by the rotor frequency
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#transfer-between-spins-away-from-rotary-resonance-broadened-by-t-2">
+     2) Transfer between spins away from rotary resonance, broadened by T
+     <span class="math notranslate nohighlight">
+      \(_2\)
+     </span>
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#transfer-between-spins-away-from-rotary-resonance-broadened-by-coupled-1h">
+     3) Transfer between spins away from rotary resonance, broadened by coupled
+     <span class="math notranslate nohighlight">
+      \(^1\)
+     </span>
+     H
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#transfer-between-spins-not-on-rotary-resonance-broadened-by-irradiation-of-protons">
+     Transfer between spins not on rotary resonance, broadened by irradiation of protons.
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+    </nav>
+</div>
+    </div>
+    <div class="article row">
+        <div class="col pl-md-3 pl-lg-5 content-container">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1><font  color = "#0093AF">Dipolar Assisted Rotary Resonance</font></h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#setup">
+   Setup
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#a-static-experiments">
+   A. Static Experiments
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#transfer-between-coupled-spins-with-same-resonance-frequency">
+     1) Transfer between coupled spins with same resonance frequency
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#transfer-between-coupled-spins-with-different-resonance-frequency">
+     2) Transfer between coupled spins with different resonance frequency
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#transfer-between-coupled-spins-with-different-resonance-frequency-coupled-to-a-flipping-1h">
+     3) Transfer between coupled spins with different resonance frequency, coupled to a flipping
+     <span class="math notranslate nohighlight">
+      \(^1\)
+     </span>
+     H
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#b-magic-angle-spinning-experiments">
+   B. Magic-Angle Spinning Experiments
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#transfer-when-two-spins-are-separated-by-the-rotor-frequency">
+     1) Transfer when two spins are separated by the rotor frequency
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#transfer-between-spins-away-from-rotary-resonance-broadened-by-t-2">
+     2) Transfer between spins away from rotary resonance, broadened by T
+     <span class="math notranslate nohighlight">
+      \(_2\)
+     </span>
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#transfer-between-spins-away-from-rotary-resonance-broadened-by-coupled-1h">
+     3) Transfer between spins away from rotary resonance, broadened by coupled
+     <span class="math notranslate nohighlight">
+      \(^1\)
+     </span>
+     H
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#transfer-between-spins-not-on-rotary-resonance-broadened-by-irradiation-of-protons">
+     Transfer between spins not on rotary resonance, broadened by irradiation of protons.
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            <main id="main-content" role="main">
+                
+              <div>
+                
+  <section class="tex2jax_ignore mathjax_ignore" id="font-color-0093af-dipolar-assisted-rotary-resonance-font">
+<h1><font  color = "#0093AF">Dipolar Assisted Rotary Resonance</font><a class="headerlink" href="#font-color-0093af-dipolar-assisted-rotary-resonance-font" title="Permalink to this headline">#</a></h1>
+<p><a href="https://githubtocolab.com/alsinmr/SLEEPY_tutorial/blob/main/ColabNotebooks/Chapter3/Ch3_DARR.ipynb" target="_blank"><img src="https://colab.research.google.com/assets/colab-badge.svg"></a></p>
+<p>While SLEEPY is mainly intended for predicting relaxation behavior or the influence of relaxation on a spin-system, some NMR experiments rely on spin-diffusion within the dense <span class="math notranslate nohighlight">\(^1\)</span>H network to induce broadening on heteronuclei which then allows spin-diffusion among the heteronuclei. The prime examples of this is the Proton-Driven Spin-
+Diffusion experiment (PDSD) and the Dipolar Assisted Rotational Resonance (DARR) experiments.</p>
+<p>DARR is the homonuclear (<span class="math notranslate nohighlight">\(^{13}\)</span>C-<span class="math notranslate nohighlight">\(^{13}\)</span>C) transfer of longitudinal magnetization, enabled by broadening of the Rotary Resonance (R<span class="math notranslate nohighlight">\(^2\)</span>) condition. Broadening of the <span class="math notranslate nohighlight">\(R^2\)</span> condition is achieved via reintroduction of a heteronuclear dipole coupling (<span class="math notranslate nohighlight">\(^1\)</span>H-<span class="math notranslate nohighlight">\(^{13}\)</span>C) to the homonuclear spins by satisfying the Rotary Resonance Recoupling (R<span class="math notranslate nohighlight">\(^3\)</span>) condition.</p>
+<p>We will achieve a DARR transfer by artificially broadening the <span class="math notranslate nohighlight">\(^1H\)</span> line using relaxation settings in SLEEPY. Note that it is also possible to introduce a large number of <span class="math notranslate nohighlight">\(^1\)</span>H spins (10) which will also give rise to the required broadening. The latter approach has been demonstrated in <a class="reference external" href="https://spinevolution.com/">SpinEvolution</a> by Veshtort and Griffin.</p>
+<p>We will take several steps to piece together the DARR experiment.</p>
+<p><strong>A. Static experiments</strong></p>
+<ol class="simple">
+<li><p>Simulate <span class="math notranslate nohighlight">\(^{13}\)</span>C–<span class="math notranslate nohighlight">\(^{13}\)</span>C transfer occuring via homonuclear dipole couplings, where the two spins have the same resonance frequency (resonant transfer).</p></li>
+<li><p>Simulate <span class="math notranslate nohighlight">\(^{13}\)</span>C–<span class="math notranslate nohighlight">\(^{13}\)</span>C transfer occuring via homonuclear dipole couplings, where the two spins have different resonance frequencies and have an intrinsic linewidth due to <span class="math notranslate nohighlight">\(T_2\)</span>.</p></li>
+<li><p>Simulate <span class="math notranslate nohighlight">\(^{13}\)</span>C–<span class="math notranslate nohighlight">\(^{13}\)</span>C transfer occuring via homonuclear dipole couplings, where the two spins have different resonance frequencies and have an intrinsic linewidth induced by coupling to <span class="math notranslate nohighlight">\(^1\)</span>H.
+<strong>B. Experiments under MAS</strong></p></li>
+<li><p>Simulate <span class="math notranslate nohighlight">\(^{13}\)</span>C–<span class="math notranslate nohighlight">\(^{13}\)</span>C transfer occuring via homonuclear dipole couplings, where the two spins are separated by the rotor frequency.</p></li>
+<li><p>Simulate <span class="math notranslate nohighlight">\(^{13}\)</span>C–<span class="math notranslate nohighlight">\(^{13}\)</span>C transfer occuring via homonuclear dipole couplings, where the two spins have resonance frequencies not separated by the rotor frequency, but have an intrinsic linewidth due to <span class="math notranslate nohighlight">\(T_2\)</span>.</p></li>
+<li><p>Simulate <span class="math notranslate nohighlight">\(^{13}\)</span>C–<span class="math notranslate nohighlight">\(^{13}\)</span>C transfer occuring via homonuclear dipole couplings, where the two spins have resonance frequencies not separated by the rotor frequency, but have an intrinsic linewidth induced by coupling to <span class="math notranslate nohighlight">\(^1\)</span>H.</p></li>
+<li><p>Simulate <span class="math notranslate nohighlight">\(^{13}\)</span>C–<span class="math notranslate nohighlight">\(^{13}\)</span>C transfer occuring via homonuclear dipole couplings, where the two spins have resonance frequencies not separated by the rotor frequency, but have an intrinsic linewidth induced by coupling to <span class="math notranslate nohighlight">\(^1\)</span>H, which is broadened by satisfying the DARR condition.</p></li>
+</ol>
+<p><strong>References</strong></p>
+<p><em>DARR:</em></p>
+<p>K. Takegoshi, S. Nakamura, T. Terao. <a class="reference external" href="http://dx.doi.org/10.1016/S0009-2614%2801%2900791-6"><em>Chem. Phys. Lett.</em></a>, <strong>2001</strong>, 344, 631-637.</p>
+<p>K. Takegoshi, S. Nakamura, T. Terao. <a class="reference external" href="https://doi.org/10.1063/1.1534105"><em>J. Chem. Phys.</em></a>, <strong>2003</strong>, 118, 2325-2341.</p>
+<p><em>Simulating DARR</em></p>
+<p>M. Veshtort, R.G. Griffin. <a class="reference external" href="https://doi.org/10.1063/1.3635374"><em>J. Chem. Phys.</em></a>, <strong>2011</strong>, 135, 134509.</p>
+<p><em>Rotary Resonance Recoupling:</em></p>
+<p>T.G. Oas, R.G. Griffin, M.H. Levitt. <a class="reference external" href="https://doi.org/10.1063/1.455191"><em>J. Chem. Phys.</em></a> <strong>1988</strong>, 89, 692-695.</p>
+<p><em>Rotational Resonance:</em></p>
+<p>D.P. Raleigh, M.H. Levitt, R.G. Griffin. <a class="reference external" href="https://doi.org/10.1016/0009-2614(88)85051-6"><em>Chem. Phys. Lett.</em></a>, <strong>1988</strong>, 146, 71-76.</p>
+<p>E.R. Andrew, S. Clough. L.F. Farnell, T.D. Gledhill, I. Roberts. <a class="reference external" href="https://doi.org/10.1016/0031-9163(66)91274-1"><em>Phys. Letters</em></a>, <strong>1966</strong>, 21, 505-506.</p>
+<p>E.R. Andrew, A. Bradbury, R.G. Eades, V.T. Wynn. <a class="reference external" href="https://doi.org/10.1016/0031-9163(63)90123-9"><em>Phys. Letters</em></a>, <strong>1963</strong>, 4, 99.</p>
+<section id="setup">
+<h2>Setup<a class="headerlink" href="#setup" title="Permalink to this headline">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">SLEEPY</span> <span class="k">as</span> <span class="nn">sl</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="a-static-experiments">
+<h2>A. Static Experiments<a class="headerlink" href="#a-static-experiments" title="Permalink to this headline">#</a></h2>
+<section id="transfer-between-coupled-spins-with-same-resonance-frequency">
+<h3>1) Transfer between coupled spins with same resonance frequency<a class="headerlink" href="#transfer-between-coupled-spins-with-same-resonance-frequency" title="Permalink to this headline">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#C-C dipole, 2.5 Angstrom distance</span>
+<span class="n">dCC</span><span class="o">=</span><span class="n">sl</span><span class="o">.</span><span class="n">Tools</span><span class="o">.</span><span class="n">dipole_coupling</span><span class="p">(</span><span class="mf">.25</span><span class="p">,</span><span class="s1">&#39;13C&#39;</span><span class="p">,</span><span class="s1">&#39;13C&#39;</span><span class="p">,)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;delta(C–C) = </span><span class="si">{</span><span class="n">dCC</span><span class="si">:</span><span class="s1">.1f</span><span class="si">}</span><span class="s1"> Hz&#39;</span><span class="p">)</span>
+
+<span class="c1"># Build the spin-system (two nuclei, no MAS, dipole coupled with no chemical shift)</span>
+<span class="n">ex</span><span class="o">=</span><span class="n">sl</span><span class="o">.</span><span class="n">ExpSys</span><span class="p">(</span><span class="n">v0H</span><span class="o">=</span><span class="mi">600</span><span class="p">,</span><span class="n">Nucs</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;13C&#39;</span><span class="p">,</span><span class="s1">&#39;13C&#39;</span><span class="p">],</span><span class="n">vr</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">pwdavg</span><span class="o">=</span><span class="n">sl</span><span class="o">.</span><span class="n">PowderAvg</span><span class="p">(</span><span class="s1">&#39;zcw232&#39;</span><span class="p">))</span>
+<span class="n">ex</span><span class="o">.</span><span class="n">set_inter</span><span class="p">(</span><span class="s1">&#39;dipole&#39;</span><span class="p">,</span><span class="n">i0</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">i1</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">delta</span><span class="o">=</span><span class="n">dCC</span><span class="p">)</span>
+
+<span class="c1"># Liouvillian</span>
+<span class="n">L</span><span class="o">=</span><span class="n">ex</span><span class="o">.</span><span class="n">Liouvillian</span><span class="p">()</span>
+
+<span class="c1"># Pulse sequence (no sequence- just a time step)</span>
+<span class="n">Dt</span><span class="o">=</span><span class="mi">1</span><span class="o">/</span><span class="mi">50000</span> <span class="c1">#20 microsecond timestep (we&#39;ll use 10 kHz MAS later with 5 steps per rotor cycle)</span>
+<span class="n">seq</span><span class="o">=</span><span class="n">L</span><span class="o">.</span><span class="n">Sequence</span><span class="p">()</span><span class="o">.</span><span class="n">add_channel</span><span class="p">(</span><span class="s1">&#39;13C&#39;</span><span class="p">,</span><span class="n">t</span><span class="o">=</span><span class="n">Dt</span><span class="p">)</span>
+
+<span class="c1"># Initial density matrix/detection operator for spectrum</span>
+<span class="n">rho_spec</span><span class="o">=</span><span class="n">sl</span><span class="o">.</span><span class="n">Rho</span><span class="p">(</span><span class="n">rho0</span><span class="o">=</span><span class="s1">&#39;13Cx&#39;</span><span class="p">,</span><span class="n">detect</span><span class="o">=</span><span class="s1">&#39;13Cp&#39;</span><span class="p">)</span>
+
+<span class="c1"># Initial density matrix/detection operator for transverse magnetization transfer</span>
+<span class="n">rho_zz</span><span class="o">=</span><span class="n">sl</span><span class="o">.</span><span class="n">Rho</span><span class="p">(</span><span class="n">rho0</span><span class="o">=</span><span class="s1">&#39;S0z&#39;</span><span class="p">,</span><span class="n">detect</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;S0z&#39;</span><span class="p">,</span><span class="s1">&#39;S1z&#39;</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>delta(C–C) = 972.6 Hz
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">rho_spec</span><span class="o">.</span><span class="n">clear</span><span class="p">()</span>
+<span class="n">_</span><span class="o">=</span><span class="n">rho_spec</span><span class="o">.</span><span class="n">DetProp</span><span class="p">(</span><span class="n">seq</span><span class="p">,</span><span class="n">n</span><span class="o">=</span><span class="mi">5000</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>State-space reduction: 16-&gt;4
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ax</span><span class="o">=</span><span class="n">rho_spec</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">FT</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">apodize</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlim</span><span class="p">([</span><span class="o">-</span><span class="mi">1000</span><span class="p">,</span><span class="mi">1000</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(-1000.0, 1000.0)
+</pre></div>
+</div>
+<img alt="../_images/Ch3_DARR_9_1.png" src="../_images/Ch3_DARR_9_1.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">rho_zz</span><span class="o">.</span><span class="n">clear</span><span class="p">()</span>
+<span class="n">rho_zz</span><span class="o">.</span><span class="n">DetProp</span><span class="p">(</span><span class="n">seq</span><span class="p">,</span><span class="n">n</span><span class="o">=</span><span class="mi">600</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>State-space reduction: 16-&gt;6
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Density Matrix/Detection Operator
+rho0: S0z
+detect[0]: S0z
+detect[1]: S1z
+Current time is 12000.000 microseconds
+600 time points have been recorded
+
+&lt;SLEEPY.Rho.Rho object at 0x7fdc883a26d8&gt;
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">rho_zz</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;AxesSubplot:xlabel=&#39;t / ms&#39;, ylabel=&#39;&lt;Op&gt;&#39;&gt;
+</pre></div>
+</div>
+<img alt="../_images/Ch3_DARR_11_1.png" src="../_images/Ch3_DARR_11_1.png" />
+</div>
+</div>
+<p>Above, we see the spectrum, which has a characteristic Pake-pattern, resulting from the dipole coupling between the two spins. Because the two spins have identical resonance frequencies, they mix, allowing the transfer of z-magnetization from one spin (<span class="math notranslate nohighlight">\(S_{0z}\)</span>) to the other spin (<span class="math notranslate nohighlight">\(S_{1z}\)</span>).</p>
+<p>We can investigate the Hamiltonian driving this transfer more closely by plotting it.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">_</span><span class="o">=</span><span class="n">L</span><span class="o">.</span><span class="n">H</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">mode</span><span class="o">=</span><span class="s1">&#39;re&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/Ch3_DARR_13_0.png" src="../_images/Ch3_DARR_13_0.png" />
+</div>
+</div>
+<p>Spin magnetization transfers because the <span class="math notranslate nohighlight">\(|1/2,-1/2\rangle\)</span> and <span class="math notranslate nohighlight">\(|-1/2,1/2\rangle\)</span> states mix. This may also be observed in the Liouvillian, made easier to see by zooming in on the correct set of states:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span><span class="n">ax</span><span class="o">=</span><span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">L</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="n">mode</span><span class="o">=</span><span class="s1">&#39;abs&#39;</span><span class="p">,</span><span class="n">colorbar</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">L</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">block</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span><span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span><span class="n">mode</span><span class="o">=</span><span class="s1">&#39;abs&#39;</span><span class="p">,</span><span class="n">colorbar</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">_</span><span class="o">=</span><span class="n">fig</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/Ch3_DARR_15_0.png" src="../_images/Ch3_DARR_15_0.png" />
+</div>
+</div>
+<p>We see in the reduced space that <span class="math notranslate nohighlight">\(S_1^\alpha S_2^\beta\)</span> is driven into the zero- and double-quantum coherences by the dipole coupling, and subsequently arrives in <span class="math notranslate nohighlight">\(S_1^\beta S_2^\alpha\)</span>, which is a transfer of magnetization from spin 1 to spin 2.</p>
+</section>
+<section id="transfer-between-coupled-spins-with-different-resonance-frequency">
+<h3>2) Transfer between coupled spins with different resonance frequency<a class="headerlink" href="#transfer-between-coupled-spins-with-different-resonance-frequency" title="Permalink to this headline">#</a></h3>
+<p>In the next step, we consider what happens if the two spins are separate by a few ppm (10 ppm, resulting in a 10x150=1500 Hz separation).</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># We keep working with the previous spin-system, so we just need to add the chemical shifts</span>
+<span class="n">ex</span><span class="o">.</span><span class="n">set_inter</span><span class="p">(</span><span class="s1">&#39;CS&#39;</span><span class="p">,</span><span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">ppm</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+<span class="n">ex</span><span class="o">.</span><span class="n">set_inter</span><span class="p">(</span><span class="s1">&#39;CS&#39;</span><span class="p">,</span><span class="n">i</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">ppm</span><span class="o">=-</span><span class="mi">5</span><span class="p">)</span>
+
+<span class="c1"># The following components need to be rebuilt for the new edited spin-system</span>
+<span class="c1"># Liouvillian</span>
+<span class="n">L</span><span class="o">=</span><span class="n">ex</span><span class="o">.</span><span class="n">Liouvillian</span><span class="p">()</span>
+
+<span class="c1"># Pulse sequence (no sequence- just a time step)</span>
+<span class="n">Dt</span><span class="o">=</span><span class="mi">1</span><span class="o">/</span><span class="mi">50000</span> <span class="c1">#20 microsecond timestep (we&#39;ll use 10 kHz MAS later with 5 steps per rotor cycle)</span>
+<span class="n">seq</span><span class="o">=</span><span class="n">L</span><span class="o">.</span><span class="n">Sequence</span><span class="p">()</span><span class="o">.</span><span class="n">add_channel</span><span class="p">(</span><span class="s1">&#39;13C&#39;</span><span class="p">,</span><span class="n">t</span><span class="o">=</span><span class="n">Dt</span><span class="p">)</span>
+
+<span class="c1"># Initial density matrix/detection operator for spectrum</span>
+<span class="n">rho_spec</span><span class="o">=</span><span class="n">sl</span><span class="o">.</span><span class="n">Rho</span><span class="p">(</span><span class="n">rho0</span><span class="o">=</span><span class="s1">&#39;13Cx&#39;</span><span class="p">,</span><span class="n">detect</span><span class="o">=</span><span class="s1">&#39;13Cp&#39;</span><span class="p">)</span>
+
+<span class="c1"># Initial density matrix/detection operator for transverse magnetization transfer</span>
+<span class="n">rho_zz</span><span class="o">=</span><span class="n">sl</span><span class="o">.</span><span class="n">Rho</span><span class="p">(</span><span class="n">rho0</span><span class="o">=</span><span class="s1">&#39;S0z&#39;</span><span class="p">,</span><span class="n">detect</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;S0z&#39;</span><span class="p">,</span><span class="s1">&#39;S1z&#39;</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">rho_spec</span><span class="o">.</span><span class="n">clear</span><span class="p">()</span>
+<span class="n">_</span><span class="o">=</span><span class="n">rho_spec</span><span class="o">.</span><span class="n">DetProp</span><span class="p">(</span><span class="n">seq</span><span class="p">,</span><span class="n">n</span><span class="o">=</span><span class="mi">5000</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>State-space reduction: 16-&gt;4
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ax</span><span class="o">=</span><span class="n">rho_spec</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">FT</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">apodize</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">axis</span><span class="o">=</span><span class="s1">&#39;ppm&#39;</span><span class="p">)</span>
+<span class="n">_</span><span class="o">=</span><span class="n">ax</span><span class="o">.</span><span class="n">set_xlim</span><span class="p">([</span><span class="o">-</span><span class="mi">15</span><span class="p">,</span><span class="mi">15</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/Ch3_DARR_21_0.png" src="../_images/Ch3_DARR_21_0.png" />
+</div>
+</div>
+<p>Now, we observe to separated Pake-patterns, separated by roughly 10 ppm.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">rho_zz</span><span class="o">.</span><span class="n">clear</span><span class="p">()</span>
+<span class="n">_</span><span class="o">=</span><span class="n">rho_zz</span><span class="o">.</span><span class="n">DetProp</span><span class="p">(</span><span class="n">seq</span><span class="p">,</span><span class="n">n</span><span class="o">=</span><span class="mi">6000</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>State-space reduction: 16-&gt;6
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">_</span><span class="o">=</span><span class="n">rho_zz</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/Ch3_DARR_24_0.png" src="../_images/Ch3_DARR_24_0.png" />
+</div>
+</div>
+<p>The separation in resonance frequency quenches the transfer between spins. This can be understood by observing the impact on the Hamiltonian. While the dipole coupling is not gone, it is now smaller than the difference in chemical shift, so that the states no longer mix.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">_</span><span class="o">=</span><span class="n">L</span><span class="p">[</span><span class="mi">50</span><span class="p">]</span><span class="o">.</span><span class="n">H</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">mode</span><span class="o">=</span><span class="s1">&#39;re&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/Ch3_DARR_26_0.png" src="../_images/Ch3_DARR_26_0.png" />
+</div>
+</div>
+<p>However, what would happen if some <span class="math notranslate nohighlight">\(T_2\)</span> broadening is introduced to the two spins, such that there is a small amount of overlap?</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">L</span><span class="o">.</span><span class="n">add_relax</span><span class="p">(</span><span class="n">Type</span><span class="o">=</span><span class="s1">&#39;T2&#39;</span><span class="p">,</span><span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">T2</span><span class="o">=</span><span class="mf">.002</span><span class="p">)</span>
+<span class="n">L</span><span class="o">.</span><span class="n">add_relax</span><span class="p">(</span><span class="n">Type</span><span class="o">=</span><span class="s1">&#39;T2&#39;</span><span class="p">,</span><span class="n">i</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">T2</span><span class="o">=</span><span class="mf">.002</span><span class="p">)</span>
+
+<span class="n">seq</span><span class="o">=</span><span class="n">L</span><span class="o">.</span><span class="n">Sequence</span><span class="p">()</span><span class="o">.</span><span class="n">add_channel</span><span class="p">(</span><span class="s1">&#39;13C&#39;</span><span class="p">,</span><span class="n">t</span><span class="o">=</span><span class="mi">100</span><span class="o">*</span><span class="n">Dt</span><span class="p">)</span> <span class="c1"># Transfer is a lot slower, so take bigger steps</span>
+
+<span class="n">rho_zz</span><span class="o">.</span><span class="n">clear</span><span class="p">()</span>
+<span class="n">_</span><span class="o">=</span><span class="n">rho_zz</span><span class="o">.</span><span class="n">DetProp</span><span class="p">(</span><span class="n">seq</span><span class="p">,</span><span class="n">n</span><span class="o">=</span><span class="mi">500</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>State-space reduction: 16-&gt;6
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">rho_zz</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="s1">&#39;ms&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;AxesSubplot:xlabel=&#39;t / ms&#39;, ylabel=&#39;&lt;Op&gt;&#39;&gt;
+</pre></div>
+</div>
+<img alt="../_images/Ch3_DARR_29_1.png" src="../_images/Ch3_DARR_29_1.png" />
+</div>
+</div>
+<p>As we see, the transfer is reintroduced, although it is considerably slower, and no longer coherent.</p>
+</section>
+<section id="transfer-between-coupled-spins-with-different-resonance-frequency-coupled-to-a-flipping-1h">
+<h3>3) Transfer between coupled spins with different resonance frequency, coupled to a flipping <span class="math notranslate nohighlight">\(^1\)</span>H<a class="headerlink" href="#transfer-between-coupled-spins-with-different-resonance-frequency-coupled-to-a-flipping-1h" title="Permalink to this headline">#</a></h3>
+<p>We often refer to <span class="math notranslate nohighlight">\(^{13}C\)</span>-<span class="math notranslate nohighlight">\(^{13}C\)</span> transfer without a field applied to <span class="math notranslate nohighlight">\(^1\)</span>H as Proton-Driven Spin-Diffusion (PDSD). But what does this transfer have to do with protons? It turns out that the broadening required for the transfer may be provided indirectly by a coupling to <span class="math notranslate nohighlight">\(^1\)</span>H that undergoes flipping.</p>
+<p>For this experiment, then, we need to add another spin. We’ll add a one-bond H–C dipole coupling to one of the two <span class="math notranslate nohighlight">\(^{13}\)</span>C. We start without flipping on the <span class="math notranslate nohighlight">\(^1H\)</span>, but then introduce it in a subsequent step.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">dHC</span><span class="o">=</span><span class="n">sl</span><span class="o">.</span><span class="n">Tools</span><span class="o">.</span><span class="n">dipole_coupling</span><span class="p">(</span><span class="mf">.11</span><span class="p">,</span><span class="s1">&#39;1H&#39;</span><span class="p">,</span><span class="s1">&#39;13C&#39;</span><span class="p">)</span>
+
+<span class="c1"># Build the spin-system (two nuclei, no MAS, dipole coupled with no chemical shift)</span>
+<span class="n">ex</span><span class="o">=</span><span class="n">sl</span><span class="o">.</span><span class="n">ExpSys</span><span class="p">(</span><span class="n">v0H</span><span class="o">=</span><span class="mi">600</span><span class="p">,</span><span class="n">Nucs</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;13C&#39;</span><span class="p">,</span><span class="s1">&#39;13C&#39;</span><span class="p">,</span><span class="s1">&#39;1H&#39;</span><span class="p">],</span><span class="n">vr</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">pwdavg</span><span class="o">=</span><span class="n">sl</span><span class="o">.</span><span class="n">PowderAvg</span><span class="p">(</span><span class="s1">&#39;zcw232&#39;</span><span class="p">))</span>
+<span class="n">ex</span><span class="o">.</span><span class="n">set_inter</span><span class="p">(</span><span class="s1">&#39;dipole&#39;</span><span class="p">,</span><span class="n">i0</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">i1</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">delta</span><span class="o">=</span><span class="n">dCC</span><span class="p">)</span>
+<span class="n">ex</span><span class="o">.</span><span class="n">set_inter</span><span class="p">(</span><span class="s1">&#39;dipole&#39;</span><span class="p">,</span><span class="n">i0</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">i1</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span><span class="n">delta</span><span class="o">=</span><span class="n">dHC</span><span class="p">,</span><span class="n">euler</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">/</span><span class="mi">4</span><span class="p">,</span><span class="mi">0</span><span class="p">])</span> 
+<span class="c1">#Couplings usually shouldn&#39;t be colinear</span>
+
+<span class="c1"># Liouvillian</span>
+<span class="n">L</span><span class="o">=</span><span class="n">ex</span><span class="o">.</span><span class="n">Liouvillian</span><span class="p">()</span>
+
+<span class="c1"># Pulse sequence (no sequence- just a time step)</span>
+<span class="n">Dt</span><span class="o">=</span><span class="mi">1</span><span class="o">/</span><span class="mi">50000</span> <span class="c1">#20 microsecond timestep (we&#39;ll use 10 kHz MAS later with 5 steps per rotor cycle)</span>
+<span class="n">seq</span><span class="o">=</span><span class="n">L</span><span class="o">.</span><span class="n">Sequence</span><span class="p">()</span><span class="o">.</span><span class="n">add_channel</span><span class="p">(</span><span class="s1">&#39;13C&#39;</span><span class="p">,</span><span class="n">t</span><span class="o">=</span><span class="n">Dt</span><span class="p">)</span>
+
+<span class="c1"># Initial density matrix/detection operator for spectrum</span>
+<span class="n">rho_spec</span><span class="o">=</span><span class="n">sl</span><span class="o">.</span><span class="n">Rho</span><span class="p">(</span><span class="n">rho0</span><span class="o">=</span><span class="s1">&#39;13Cx&#39;</span><span class="p">,</span><span class="n">detect</span><span class="o">=</span><span class="s1">&#39;13Cp&#39;</span><span class="p">)</span>
+
+<span class="c1"># Initial density matrix/detection operator for transverse magnetization transfer</span>
+<span class="n">rho_zz</span><span class="o">=</span><span class="n">sl</span><span class="o">.</span><span class="n">Rho</span><span class="p">(</span><span class="n">rho0</span><span class="o">=</span><span class="s1">&#39;S0z&#39;</span><span class="p">,</span><span class="n">detect</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;S0z&#39;</span><span class="p">,</span><span class="s1">&#39;S1z&#39;</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">seq</span><span class="o">=</span><span class="n">L</span><span class="o">.</span><span class="n">Sequence</span><span class="p">()</span><span class="o">.</span><span class="n">add_channel</span><span class="p">(</span><span class="s1">&#39;13C&#39;</span><span class="p">,</span><span class="n">t</span><span class="o">=</span><span class="n">Dt</span><span class="p">)</span> <span class="c1"># Transfer is a lot slower, so take bigger steps</span>
+
+<span class="n">rho_spec</span><span class="o">.</span><span class="n">clear</span><span class="p">()</span>
+<span class="n">rho_spec</span><span class="o">.</span><span class="n">DetProp</span><span class="p">(</span><span class="n">seq</span><span class="p">,</span><span class="n">n</span><span class="o">=</span><span class="mi">15000</span><span class="p">)</span>
+
+<span class="n">rho_zz</span><span class="o">.</span><span class="n">clear</span><span class="p">()</span>
+<span class="n">_</span><span class="o">=</span><span class="n">rho_zz</span><span class="o">.</span><span class="n">DetProp</span><span class="p">(</span><span class="n">seq</span><span class="p">,</span><span class="n">n</span><span class="o">=</span><span class="mi">500</span><span class="o">*</span><span class="mi">100</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>State-space reduction: 64-&gt;8
+State-space reduction: 64-&gt;12
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">rho_spec</span><span class="o">.</span><span class="n">apod_pars</span><span class="p">[</span><span class="s1">&#39;LB&#39;</span><span class="p">]</span><span class="o">=</span><span class="mi">1000</span>
+<span class="n">_</span><span class="o">=</span><span class="n">rho_spec</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">FT</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">apodize</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/Ch3_DARR_34_0.png" src="../_images/Ch3_DARR_34_0.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">_</span><span class="o">=</span><span class="n">rho_zz</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/Ch3_DARR_35_0.png" src="../_images/Ch3_DARR_35_0.png" />
+</div>
+</div>
+<p>The <span class="math notranslate nohighlight">\(^1\)</span>H dipole coupling alone is insufficient to drive a transfer, but if the <span class="math notranslate nohighlight">\(^1\)</span>H undergoes flipping due to spin diffusion, then the transfer occurs.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">L</span><span class="o">.</span><span class="n">add_relax</span><span class="p">(</span><span class="n">Type</span><span class="o">=</span><span class="s1">&#39;SpinDiffusion&#39;</span><span class="p">,</span><span class="n">i</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span><span class="n">k</span><span class="o">=</span><span class="mi">300</span><span class="p">)</span> <span class="c1">#Spin-diffusion on 1H</span>
+
+<span class="n">rho_spec</span><span class="o">.</span><span class="n">clear</span><span class="p">()</span>
+<span class="n">rho_spec</span><span class="o">.</span><span class="n">DetProp</span><span class="p">(</span><span class="n">seq</span><span class="p">,</span><span class="n">n</span><span class="o">=</span><span class="mi">15000</span><span class="p">)</span>
+
+<span class="n">rho_zz</span><span class="o">.</span><span class="n">clear</span><span class="p">()</span>
+<span class="n">_</span><span class="o">=</span><span class="n">rho_zz</span><span class="o">.</span><span class="n">DetProp</span><span class="p">(</span><span class="n">seq</span><span class="p">,</span><span class="n">n</span><span class="o">=</span><span class="mi">50000</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>State-space reduction: 64-&gt;8
+State-space reduction: 64-&gt;12
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">_</span><span class="o">=</span><span class="n">rho_spec</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">FT</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">apodize</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/Ch3_DARR_38_0.png" src="../_images/Ch3_DARR_38_0.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">_</span><span class="o">=</span><span class="n">rho_zz</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/Ch3_DARR_39_0.png" src="../_images/Ch3_DARR_39_0.png" />
+</div>
+</div>
+</section>
+</section>
+<section id="b-magic-angle-spinning-experiments">
+<h2>B. Magic-Angle Spinning Experiments<a class="headerlink" href="#b-magic-angle-spinning-experiments" title="Permalink to this headline">#</a></h2>
+<p>Previously, we found that two dipole-coupled spins with the same chemical shift resulted in transfer of longitudinal magnetization between them. Here, we test if the same principle applies under magic angle spinning (10 kHz).</p>
+<section id="transfer-when-two-spins-are-separated-by-the-rotor-frequency">
+<h3>1) Transfer when two spins are separated by the rotor frequency<a class="headerlink" href="#transfer-when-two-spins-are-separated-by-the-rotor-frequency" title="Permalink to this headline">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Build the spin-system (two nuclei, no MAS, dipole coupled with no chemical shift)</span>
+<span class="n">ex</span><span class="o">=</span><span class="n">sl</span><span class="o">.</span><span class="n">ExpSys</span><span class="p">(</span><span class="n">v0H</span><span class="o">=</span><span class="mi">600</span><span class="p">,</span><span class="n">Nucs</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;13C&#39;</span><span class="p">,</span><span class="s1">&#39;13C&#39;</span><span class="p">],</span><span class="n">vr</span><span class="o">=</span><span class="mi">10000</span><span class="p">)</span>
+<span class="n">ex</span><span class="o">.</span><span class="n">set_inter</span><span class="p">(</span><span class="s1">&#39;dipole&#39;</span><span class="p">,</span><span class="n">i0</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">i1</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">delta</span><span class="o">=</span><span class="n">dCC</span><span class="p">)</span>
+
+<span class="c1"># Liouvillian</span>
+<span class="n">L</span><span class="o">=</span><span class="n">ex</span><span class="o">.</span><span class="n">Liouvillian</span><span class="p">()</span>
+
+<span class="c1"># Pulse sequence (no sequence- just a time step)</span>
+<span class="n">seq</span><span class="o">=</span><span class="n">L</span><span class="o">.</span><span class="n">Sequence</span><span class="p">()</span>  <span class="c1">#Sequence defaults to 1 rotor period when spinning</span>
+
+<span class="c1"># Initial density matrix/detection operator for spectrum</span>
+<span class="n">rho_spec</span><span class="o">=</span><span class="n">sl</span><span class="o">.</span><span class="n">Rho</span><span class="p">(</span><span class="n">rho0</span><span class="o">=</span><span class="s1">&#39;13Cx&#39;</span><span class="p">,</span><span class="n">detect</span><span class="o">=</span><span class="s1">&#39;13Cp&#39;</span><span class="p">)</span>
+
+<span class="c1"># Initial density matrix/detection operator for transverse magnetization transfer</span>
+<span class="n">rho_zz</span><span class="o">=</span><span class="n">sl</span><span class="o">.</span><span class="n">Rho</span><span class="p">(</span><span class="n">rho0</span><span class="o">=</span><span class="s1">&#39;S0z&#39;</span><span class="p">,</span><span class="n">detect</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;S0z&#39;</span><span class="p">,</span><span class="s1">&#39;S1z&#39;</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">rho_spec</span><span class="o">.</span><span class="n">DetProp</span><span class="p">(</span><span class="n">seq</span><span class="p">,</span><span class="n">n</span><span class="o">=</span><span class="mi">15000</span><span class="p">)</span>
+<span class="n">_</span><span class="o">=</span><span class="n">rho_zz</span><span class="o">.</span><span class="n">DetProp</span><span class="p">(</span><span class="n">seq</span><span class="p">,</span><span class="n">n</span><span class="o">=</span><span class="mi">1000</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>State-space reduction: 16-&gt;4
+State-space reduction: 16-&gt;6
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">_</span><span class="o">=</span><span class="n">rho_spec</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">FT</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">apodize</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/Ch3_DARR_45_0.png" src="../_images/Ch3_DARR_45_0.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">_</span><span class="o">=</span><span class="n">rho_zz</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/Ch3_DARR_46_0.png" src="../_images/Ch3_DARR_46_0.png" />
+</div>
+</div>
+<p>Magic angle spinning quenches the transfer by averaging the dipole coupling to zero. On the other hand, if the spins are separated by the MAS frequency (i.e. the <span class="math notranslate nohighlight">\(R^2\)</span> condition), the coupling is reintroduced</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">DelCS</span><span class="o">=</span><span class="mi">10000</span><span class="o">/</span><span class="p">(</span><span class="mi">600</span><span class="o">*</span><span class="n">sl</span><span class="o">.</span><span class="n">Tools</span><span class="o">.</span><span class="n">NucInfo</span><span class="p">(</span><span class="s1">&#39;13C&#39;</span><span class="p">)</span><span class="o">/</span><span class="n">sl</span><span class="o">.</span><span class="n">Tools</span><span class="o">.</span><span class="n">NucInfo</span><span class="p">(</span><span class="s1">&#39;1H&#39;</span><span class="p">))</span>
+<span class="n">ex</span><span class="o">.</span><span class="n">set_inter</span><span class="p">(</span><span class="s1">&#39;CS&#39;</span><span class="p">,</span><span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">ppm</span><span class="o">=</span><span class="n">DelCS</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">ex</span><span class="o">.</span><span class="n">set_inter</span><span class="p">(</span><span class="s1">&#39;CS&#39;</span><span class="p">,</span><span class="n">i</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">ppm</span><span class="o">=-</span><span class="n">DelCS</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span>
+
+<span class="c1"># Liouvillian</span>
+<span class="n">L</span><span class="o">=</span><span class="n">ex</span><span class="o">.</span><span class="n">Liouvillian</span><span class="p">()</span>
+
+<span class="c1"># Pulse sequence (no sequence- just a time step)</span>
+<span class="n">seq</span><span class="o">=</span><span class="n">L</span><span class="o">.</span><span class="n">Sequence</span><span class="p">()</span>  <span class="c1">#Sequence defaults to 1 rotor period when spinning</span>
+
+<span class="c1"># Initial density matrix/detection operator for spectrum</span>
+<span class="n">rho_spec</span><span class="o">=</span><span class="n">sl</span><span class="o">.</span><span class="n">Rho</span><span class="p">(</span><span class="n">rho0</span><span class="o">=</span><span class="s1">&#39;13Cx&#39;</span><span class="p">,</span><span class="n">detect</span><span class="o">=</span><span class="s1">&#39;13Cp&#39;</span><span class="p">)</span>
+
+<span class="c1"># Initial density matrix/detection operator for transverse magnetization transfer</span>
+<span class="n">rho_zz</span><span class="o">=</span><span class="n">sl</span><span class="o">.</span><span class="n">Rho</span><span class="p">(</span><span class="n">rho0</span><span class="o">=</span><span class="s1">&#39;S0z&#39;</span><span class="p">,</span><span class="n">detect</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;S0z&#39;</span><span class="p">,</span><span class="s1">&#39;S1z&#39;</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">_</span><span class="o">=</span><span class="n">rho_spec</span><span class="o">.</span><span class="n">DetProp</span><span class="p">(</span><span class="n">seq</span><span class="p">,</span><span class="n">n</span><span class="o">=</span><span class="mi">5000</span><span class="p">,</span><span class="n">n_per_seq</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>State-space reduction: 16-&gt;4
+Prop: 2 steps per every 1 rotor period
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">_</span><span class="o">=</span><span class="n">rho_spec</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">FT</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">apodize</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/Ch3_DARR_50_0.png" src="../_images/Ch3_DARR_50_0.png" />
+</div>
+</div>
+<p>Matching the rotational resonance condition distorts the spectrum by reintroducing the dipole coupling.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">rho_zz</span><span class="o">.</span><span class="n">clear</span><span class="p">()</span>
+<span class="n">_</span><span class="o">=</span><span class="n">rho_zz</span><span class="o">.</span><span class="n">DetProp</span><span class="p">(</span><span class="n">seq</span><span class="p">,</span><span class="n">n</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>State-space reduction: 16-&gt;6
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">rho_zz</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;AxesSubplot:xlabel=&#39;t / ms&#39;, ylabel=&#39;&lt;Op&gt;&#39;&gt;
+</pre></div>
+</div>
+<img alt="../_images/Ch3_DARR_53_1.png" src="../_images/Ch3_DARR_53_1.png" />
+</div>
+</div>
+<p>The rotational resonance condition induces a transfer, but it also distorts the spectrum, and furthermore can only be matched for one pair of spins at a time. So, we move off the rotational resonance condition.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ex</span><span class="o">.</span><span class="n">set_inter</span><span class="p">(</span><span class="s1">&#39;CS&#39;</span><span class="p">,</span><span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">ppm</span><span class="o">=-</span><span class="mi">15</span><span class="p">)</span> <span class="c1">#Shift away from rotational resonance</span>
+<span class="n">ex</span><span class="o">.</span><span class="n">set_inter</span><span class="p">(</span><span class="s1">&#39;CS&#39;</span><span class="p">,</span><span class="n">i</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">ppm</span><span class="o">=</span><span class="mi">15</span><span class="p">)</span> <span class="c1">#Shift away from rotational resonance</span>
+
+<span class="c1"># Liouvillian</span>
+<span class="n">L</span><span class="o">=</span><span class="n">ex</span><span class="o">.</span><span class="n">Liouvillian</span><span class="p">()</span>
+
+<span class="c1"># Pulse sequence (no sequence- just a time step)</span>
+<span class="n">seq</span><span class="o">=</span><span class="n">L</span><span class="o">.</span><span class="n">Sequence</span><span class="p">()</span>  <span class="c1">#Sequence defaults to 1 rotor period when spinning</span>
+
+<span class="c1"># Initial density matrix/detection operator for spectrum</span>
+<span class="n">rho_spec</span><span class="o">=</span><span class="n">sl</span><span class="o">.</span><span class="n">Rho</span><span class="p">(</span><span class="n">rho0</span><span class="o">=</span><span class="s1">&#39;13Cx&#39;</span><span class="p">,</span><span class="n">detect</span><span class="o">=</span><span class="s1">&#39;13Cp&#39;</span><span class="p">)</span>
+
+<span class="c1"># Initial density matrix/detection operator for transverse magnetization transfer</span>
+<span class="n">rho_zz</span><span class="o">=</span><span class="n">sl</span><span class="o">.</span><span class="n">Rho</span><span class="p">(</span><span class="n">rho0</span><span class="o">=</span><span class="s1">&#39;S0z&#39;</span><span class="p">,</span><span class="n">detect</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;S0z&#39;</span><span class="p">,</span><span class="s1">&#39;S1z&#39;</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">_</span><span class="o">=</span><span class="n">rho_spec</span><span class="o">.</span><span class="n">DetProp</span><span class="p">(</span><span class="n">seq</span><span class="p">,</span><span class="n">n</span><span class="o">=</span><span class="mi">5000</span><span class="p">,</span><span class="n">n_per_seq</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>State-space reduction: 16-&gt;4
+Prop: 2 steps per every 1 rotor period
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">_</span><span class="o">=</span><span class="n">rho_spec</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">FT</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">apodize</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/Ch3_DARR_57_0.png" src="../_images/Ch3_DARR_57_0.png" />
+</div>
+</div>
+<p>Away from rotational resonance, our spectrum looks nicer, but what happens to our transfer?</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">rho_zz</span><span class="o">.</span><span class="n">clear</span><span class="p">()</span>
+<span class="n">_</span><span class="o">=</span><span class="n">rho_zz</span><span class="o">.</span><span class="n">DetProp</span><span class="p">(</span><span class="n">seq</span><span class="p">,</span><span class="n">n</span><span class="o">=</span><span class="mi">1500</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>State-space reduction: 16-&gt;6
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">_</span><span class="o">=</span><span class="n">rho_zz</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/Ch3_DARR_60_0.png" src="../_images/Ch3_DARR_60_0.png" />
+</div>
+</div>
+<p>Not surprisingly, the transfer is quenched. It can be reintroduced by broadening of the <span class="math notranslate nohighlight">\(^{13}\)</span>C resonance</p>
+</section>
+<section id="transfer-between-spins-away-from-rotary-resonance-broadened-by-t-2">
+<h3>2) Transfer between spins away from rotary resonance, broadened by T<span class="math notranslate nohighlight">\(_2\)</span><a class="headerlink" href="#transfer-between-spins-away-from-rotary-resonance-broadened-by-t-2" title="Permalink to this headline">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">L</span><span class="o">.</span><span class="n">clear_relax</span><span class="p">()</span>
+<span class="n">L</span><span class="o">.</span><span class="n">add_relax</span><span class="p">(</span><span class="n">Type</span><span class="o">=</span><span class="s1">&#39;T2&#39;</span><span class="p">,</span><span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">T2</span><span class="o">=</span><span class="mf">.001</span><span class="p">)</span>
+<span class="n">_</span><span class="o">=</span><span class="n">L</span><span class="o">.</span><span class="n">add_relax</span><span class="p">(</span><span class="n">Type</span><span class="o">=</span><span class="s1">&#39;T2&#39;</span><span class="p">,</span><span class="n">i</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">T2</span><span class="o">=</span><span class="mf">.001</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">rho_zz</span><span class="o">.</span><span class="n">clear</span><span class="p">()</span>
+<span class="n">_</span><span class="o">=</span><span class="n">rho_zz</span><span class="o">.</span><span class="n">DetProp</span><span class="p">(</span><span class="n">seq</span><span class="p">,</span><span class="n">n</span><span class="o">=</span><span class="mi">15000</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>State-space reduction: 16-&gt;6
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">_</span><span class="o">=</span><span class="n">rho_zz</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/Ch3_DARR_65_0.png" src="../_images/Ch3_DARR_65_0.png" />
+</div>
+</div>
+<p>Then, can we achieve the same affect by coupling to a <span class="math notranslate nohighlight">\(^1\)</span>H?</p>
+</section>
+<section id="transfer-between-spins-away-from-rotary-resonance-broadened-by-coupled-1h">
+<h3>3) Transfer between spins away from rotary resonance, broadened by coupled <span class="math notranslate nohighlight">\(^1\)</span>H<a class="headerlink" href="#transfer-between-spins-away-from-rotary-resonance-broadened-by-coupled-1h" title="Permalink to this headline">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Build the spin-system (two nuclei, no MAS, dipole coupled with no chemical shift)</span>
+<span class="n">ex</span><span class="o">=</span><span class="n">sl</span><span class="o">.</span><span class="n">ExpSys</span><span class="p">(</span><span class="n">v0H</span><span class="o">=</span><span class="mi">600</span><span class="p">,</span><span class="n">Nucs</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;13C&#39;</span><span class="p">,</span><span class="s1">&#39;13C&#39;</span><span class="p">,</span><span class="s1">&#39;1H&#39;</span><span class="p">],</span><span class="n">vr</span><span class="o">=</span><span class="mi">10000</span><span class="p">)</span>
+<span class="n">ex</span><span class="o">.</span><span class="n">set_inter</span><span class="p">(</span><span class="s1">&#39;dipole&#39;</span><span class="p">,</span><span class="n">i0</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">i1</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">delta</span><span class="o">=</span><span class="n">dCC</span><span class="p">)</span>
+<span class="n">ex</span><span class="o">.</span><span class="n">set_inter</span><span class="p">(</span><span class="s1">&#39;dipole&#39;</span><span class="p">,</span><span class="n">i0</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">i1</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span><span class="n">delta</span><span class="o">=</span><span class="n">dHC</span><span class="p">,</span><span class="n">euler</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">/</span><span class="mi">4</span><span class="p">,</span><span class="mi">0</span><span class="p">])</span>
+<span class="n">ex</span><span class="o">.</span><span class="n">set_inter</span><span class="p">(</span><span class="s1">&#39;CS&#39;</span><span class="p">,</span><span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">ppm</span><span class="o">=</span><span class="mi">15</span><span class="p">)</span>
+<span class="n">ex</span><span class="o">.</span><span class="n">set_inter</span><span class="p">(</span><span class="s1">&#39;CS&#39;</span><span class="p">,</span><span class="n">i</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">ppm</span><span class="o">=-</span><span class="mi">15</span><span class="p">)</span>
+
+<span class="c1"># Liouvillian</span>
+<span class="n">L</span><span class="o">=</span><span class="n">ex</span><span class="o">.</span><span class="n">Liouvillian</span><span class="p">()</span>
+<span class="n">L</span><span class="o">.</span><span class="n">add_relax</span><span class="p">(</span><span class="s1">&#39;SpinDiffusion&#39;</span><span class="p">,</span><span class="n">i</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span><span class="n">k</span><span class="o">=</span><span class="mi">300</span><span class="p">)</span>
+
+<span class="c1"># Pulse sequence (no sequence- just a time step)</span>
+<span class="n">seq</span><span class="o">=</span><span class="n">L</span><span class="o">.</span><span class="n">Sequence</span><span class="p">()</span>
+
+<span class="c1"># Initial density matrix/detection operator for transverse magnetization transfer</span>
+<span class="n">rho_zz</span><span class="o">=</span><span class="n">sl</span><span class="o">.</span><span class="n">Rho</span><span class="p">(</span><span class="n">rho0</span><span class="o">=</span><span class="s1">&#39;S0z&#39;</span><span class="p">,</span><span class="n">detect</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;S0z&#39;</span><span class="p">,</span><span class="s1">&#39;S1z&#39;</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">_</span><span class="o">=</span><span class="n">rho_zz</span><span class="o">.</span><span class="n">DetProp</span><span class="p">(</span><span class="n">seq</span><span class="p">,</span><span class="n">n</span><span class="o">=</span><span class="mi">15000</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>State-space reduction: 64-&gt;12
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">_</span><span class="o">=</span><span class="n">rho_zz</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/Ch3_DARR_70_0.png" src="../_images/Ch3_DARR_70_0.png" />
+</div>
+</div>
+<p>Some transfer occurs, although it is not particularly efficient. We finally want to understand what happens if we introduce a field on the <span class="math notranslate nohighlight">\(^1\)</span>H matching the rotary resonance recoupling (R<span class="math notranslate nohighlight">\(^3\)</span>) condition</p>
+</section>
+<section id="transfer-between-spins-not-on-rotary-resonance-broadened-by-irradiation-of-protons">
+<h3>Transfer between spins not on rotary resonance, broadened by irradiation of protons.<a class="headerlink" href="#transfer-between-spins-not-on-rotary-resonance-broadened-by-irradiation-of-protons" title="Permalink to this headline">#</a></h3>
+<p>First, we observe the <span class="math notranslate nohighlight">\(^{13}\)</span>C spectrum with <span class="math notranslate nohighlight">\(^1\)</span>H cw decoupling, first away from the rotary resonance recoupling condition, and then on the condition. Lines mark the resonance frequency of the first <span class="math notranslate nohighlight">\(^{13}\)</span>C and the distance to the corresponding rotational resonance condition.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">rho_spec</span><span class="o">=</span><span class="n">sl</span><span class="o">.</span><span class="n">Rho</span><span class="p">(</span><span class="n">rho0</span><span class="o">=</span><span class="s1">&#39;13Cx&#39;</span><span class="p">,</span><span class="n">detect</span><span class="o">=</span><span class="s1">&#39;13Cp&#39;</span><span class="p">)</span>
+<span class="n">_</span><span class="o">=</span><span class="n">rho_spec</span><span class="o">.</span><span class="n">DetProp</span><span class="p">(</span><span class="n">seq</span><span class="p">,</span><span class="n">n</span><span class="o">=</span><span class="mi">5000</span><span class="p">,</span><span class="n">n_per_seq</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>State-space reduction: 64-&gt;8
+Prop: 5 steps per every 1 rotor period
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">_</span><span class="o">=</span><span class="n">rho_spec</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">FT</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">apodize</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/Ch3_DARR_75_0.png" src="../_images/Ch3_DARR_75_0.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">seq</span><span class="o">.</span><span class="n">add_channel</span><span class="p">(</span><span class="s1">&#39;1H&#39;</span><span class="p">,</span><span class="n">v1</span><span class="o">=</span><span class="mi">10000</span><span class="p">)</span>
+<span class="n">rho_spec</span><span class="o">.</span><span class="n">clear</span><span class="p">()</span>
+<span class="n">_</span><span class="o">=</span><span class="n">rho_spec</span><span class="o">.</span><span class="n">DetProp</span><span class="p">(</span><span class="n">seq</span><span class="p">,</span><span class="n">n</span><span class="o">=</span><span class="mi">25000</span><span class="p">,</span><span class="n">n_per_seq</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>State-space reduction: 64-&gt;16
+Prop: 5 steps per every 1 rotor period
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">rho_spec</span><span class="o">.</span><span class="n">apod_pars</span><span class="p">[</span><span class="s1">&#39;LB&#39;</span><span class="p">]</span><span class="o">=</span><span class="mi">200</span>
+<span class="n">ax</span><span class="o">=</span><span class="n">rho_spec</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">FT</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">apodize</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/Ch3_DARR_77_0.png" src="../_images/Ch3_DARR_77_0.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">rho_spec</span><span class="o">.</span><span class="n">apod_pars</span><span class="p">[</span><span class="s1">&#39;LB&#39;</span><span class="p">]</span><span class="o">=</span><span class="mi">500</span>
+<span class="n">ax</span><span class="o">=</span><span class="n">rho_spec</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">FT</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">apodize</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span><span class="mi">5</span><span class="p">])</span>
+<span class="n">CS</span><span class="o">=-</span><span class="mi">15</span><span class="o">*</span><span class="n">ex</span><span class="o">.</span><span class="n">v0</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">/</span><span class="mf">1e6</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="n">CS</span><span class="p">,</span><span class="n">CS</span><span class="p">],</span><span class="n">ax</span><span class="o">.</span><span class="n">get_ylim</span><span class="p">(),</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;grey&#39;</span><span class="p">,</span><span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;:&#39;</span><span class="p">)</span>
+<span class="n">_</span><span class="o">=</span><span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="n">CS</span><span class="o">+</span><span class="mi">10000</span><span class="p">,</span><span class="n">CS</span><span class="o">+</span><span class="mi">10000</span><span class="p">],</span><span class="n">ax</span><span class="o">.</span><span class="n">get_ylim</span><span class="p">(),</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;grey&#39;</span><span class="p">,</span><span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;:&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/Ch3_DARR_78_0.png" src="../_images/Ch3_DARR_78_0.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">rho_zz</span><span class="o">.</span><span class="n">clear</span><span class="p">()</span>
+<span class="n">_</span><span class="o">=</span><span class="n">rho_zz</span><span class="o">.</span><span class="n">DetProp</span><span class="p">(</span><span class="n">seq</span><span class="p">,</span><span class="n">n</span><span class="o">=</span><span class="mi">15000</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>State-space reduction: 64-&gt;24
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">_</span><span class="o">=</span><span class="n">rho_zz</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/Ch3_DARR_80_0.png" src="../_images/Ch3_DARR_80_0.png" />
+</div>
+</div>
+<p>Then, we see how broadening the C-C <span class="math notranslate nohighlight">\(R^2\)</span> condition via recoupling the H–C dipole coupling with <span class="math notranslate nohighlight">\(R^3\)</span> allows for C-C spin-diffusion to occur.</p>
+</section>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./Chapter3"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+            </main>
+            <footer class="footer-article noprint">
+                
+    <!-- Previous / next buttons -->
+<div class='prev-next-area'>
+</div>
+            </footer>
+        </div>
+    </div>
+    <div class="footer-content row">
+        <footer class="col footer"><p>
+  
+    By Albert Smith<br/>
+  
+      &copy; Copyright 2025.<br/>
+</p>
+        </footer>
+    </div>
+    
+</div>
+
+
+      </div>
+    </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
+
+
+  </body>
+</html>

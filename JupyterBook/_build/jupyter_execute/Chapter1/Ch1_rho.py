@@ -1,19 +1,13 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# # <font  color = "#0093AF"> The Density Matrix
+# # <font  color = "#0093AF">The Density Matrix</font>
 
 # <a href="https://githubtocolab.com/alsinmr/SLEEPY_tutorial/blob/main/ColabNotebooks/Chapter1/Ch1_rho.ipynb" target="_blank"><img src="https://colab.research.google.com/assets/colab-badge.svg"></a>
 
-# The final core object of the SLEEPY module is the density matrix object, Rho ($\hat{\rho})$. Rho is initialized with an initial state of the spin-system. It also contains the detection operator or operators, which must also be specified at initialization. Rho also stores the signal resulting from detection operations, and contains functions for plotting the resulting 1D time-domain and frequency-domain signals.
+# The final core object of the SLEEPY module is the density matrix object, Rho ($\hat{\rho})$. Rho is initialized with an initial state of the spin-system. It also contains the detection operator or operators, which must also be specified at initialization. Rho stores the signal resulting from detection operations, and contains functions for plotting the resulting 1D time-domain and frequency-domain signals.
 
 # ## Setup
-
-# In[ ]:
-
-
-# SETUP SLEEPY
-
 
 # In[3]:
 
@@ -24,24 +18,22 @@ import numpy as np
 
 # ## Build the system
 
-# In[4]:
+# In[61]:
 
 
 # Generate an experimental system and a Liouvillian
-ex=sl.ExpSys(v0H=600,Nucs=['1H','13C'],vr=5000,n_gamma=30,pwdavg=2)
-ex.set_inter('dipole',i0=0,i1=1,delta=44000).set_inter('CSA',i=1,delta=100,eta=1).    set_inter('CS',i=0,ppm=10) #Add a dipole, CSA to 13C, and CS to 1H
+ex=sl.ExpSys(v0H=600,Nucs=['1H','13C'],vr=5000,n_gamma=30)
+ex.set_inter('dipole',i0=0,i1=1,delta=44000).set_inter('CSA',i=1,delta=100,eta=1).\
+    set_inter('CS',i=0,ppm=10) #Add a dipole, CSA to 13C, and CS to 1H
 
-ex1=ex.copy() #Copy the above
-ex1.set_inter('dipole',i0=0,i1=1,delta=44000,euler=[0,30*np.pi/180,0])
-
-L=sl.Liouvillian(ex,ex1,kex=sl.Tools.twoSite_kex(3e-6)) #Here, we produce the exchange matrix with twoSite_kex
+L=ex.Liouvillian()
 
 
 # ## Initialize rho
 
 # Rho is initialized by calling `sl.Rho(...)` and specifying the initial state of the spin-system and the detection operator or operators.
 
-# In[5]:
+# In[62]:
 
 
 # rho must be initialized with rho0, and one or more detection operators. 
@@ -49,20 +41,20 @@ L=sl.Liouvillian(ex,ex1,kex=sl.Tools.twoSite_kex(3e-6)) #Here, we produce the ex
 rho=sl.Rho(rho0='1Hx',detect=['1Hx','13Cx'])
 
 
-# Usually, the initial density matrix and detection operators are specified by a nucleus and a direction (x, y, z, +(p), -(m), α(alpha), or β(beta)). However, we may alternatively specify a specific spin ('S1x', for example). 'Thermal' may be specified as the initial density matrix, which will result in the thermal equilibrium for the spin system being calculated resulting from the rotor-averaged Hamiltonian at the experimental temperature (ex.T_K). Operators may also be scaled (`2*13Cp`, for example). 
+# Usually, the initial density matrix and detection operators are specified by a nucleus and a direction (x, y, z, +(p), -(m), α(alpha), or β(beta)). However, we may alternatively specify a specific spin ('S1x', for example). 'Thermal' may be specified as the initial density matrix, which will result in the thermal equilibrium for the spin system being calculated resulting from the rotor-averaged Hamiltonian at the experimental temperature (ex.T_K). Operators may also be scaled (e.g. `2*13Cp`) or added (e.g. `1Hx+1Hz`). Multiplication via string entry is not supported (e.g. `1Hx*13Cx`), although is supported via explicit entry of the density/detection operator (see below). 
 # 
-# Finally, the user may also input their own initial density matrix and detection operators as matrices. Any arbitrary matrix of the appropriate dimension (`ex.Op.Mult.prod()` x `ex.Op.Mult.prod()`) can be input. The most straightforward way to build this matrix is from the spin matrices, which are stored in ex.Op (see [ExpSys](Ch1_expsys.ipynb) for more details). For example, if we want to initialize in and detect a double quantum coherence between spins 0 and 1, we could construct:
+# The user may also input their own initial density matrix and detection operators as matrices. Any arbitrary matrix of the appropriate dimension (`ex.Op.Mult.prod()` x `ex.Op.Mult.prod()`) can be input. The most straightforward way to build this matrix is from the spin matrices, which are stored in ex.Op (see [ExpSys](Ch1_expsys.ipynb) for more details). For example, if we want to initialize and detect a double quantum coherence between spins 0 and 1, we could construct:
 # 
 # ```
 # Op=ex.Op
 # DQ=Op[0].p@Op[1].p+Op[0].m@Op[1].m
 # rho=sl.Rho(rho0=DQ,detect=DQ)
 # ```
-# Note that the spin operators are numpy matrices, for which `@` is required for correct matrix multiplication; `*` yields elementwise multiplication, which is not the correct type of multiplication for spin-matrices.
+# Note that the spin operators are numpy matrices, for which `@` is required for correct matrix multiplication; `*` performs elementwise multiplication, which is not the correct type of multiplication for spin-matrices.
 
 # ## Detection with rho
 
-# rho already contains the detection matrix or matrices required for detection. Then, detection is performed simply by calling rho
+# rho contains the detection matrix or matrices required for detection. Then, detection is performed simply by calling rho
 # ```
 # rho()
 # ```
@@ -72,12 +64,12 @@ rho=sl.Rho(rho0='1Hx',detect=['1Hx','13Cx'])
 
 # rho works more or less like one would expect with a propagator: we can just multiply rho by the propagator to propagate rho forward in time. We'll set up a cross-polarization sequence as example.
 
-# In[6]:
+# In[63]:
 
 
-seq=L.Sequence(Dt=1e-3)
+seq=L.Sequence()
 seq.add_channel('13C',v1=25000)
-t=L.dt*np.arange(30*5) #L.dt=L.taur/ex.n_gamma, 150 steps is 5 rotor periods (1 ms)
+t=L.dt*np.arange(30*3+1) #L.dt=L.taur/ex.n_gamma, 90 steps is 3 rotor periods (1 ms)
 seq.add_channel('1H',t=t,v1=30000+np.linspace(-1,1,len(t))*5000) #ramp cp 
 seq.plot()
 U=seq.U()
@@ -96,7 +88,7 @@ U=seq.U()
 # rho()
 # ```
 
-# In[7]:
+# In[64]:
 
 
 (U*rho())()
@@ -104,22 +96,22 @@ U=seq.U()
 
 # Now we can check rho.I before and after CP.
 
-# In[8]:
+# In[65]:
 
 
-print(f'1Hx : {rho.I[0][0]:.2f}, {rho.I[0][1]:.2}')
-print(f'13Cx : {rho.I[1][0]:.2f}, {rho.I[1][1]:.2}')
+print(f'1Hx : {rho.I[0][0].real:.2f}, {rho.I[0][1].real:.2}')
+print(f'13Cx : {rho.I[1][0].real:.2f}, {rho.I[1][1].real:.2}')
 
 
-# We may also multiply the sequence by rho. First, we fully clear rho, to go back to the initial conditions. When multiplying a sequence by rho, the sequence uses its default length (seq.Dt) to produce a propagator, which is what actually gets multiplied by rho. This takes a little less code, but if the resulting propagator is discarded in this approach, so cannot be reused (depending on the pulse program, this may or may not matter to the user).
+# We may also multiply the sequence by rho. First, we fully clear rho, to go back to the initial conditions. When multiplying a sequence by rho, the sequence uses its default length (seq.Dt) to produce a propagator, which is what actually gets multiplied by rho. This takes a little less code, but if the resulting propagator is discarded in this approach, so cannot be reused (which may or may not matter to the user).
 
-# In[9]:
+# In[66]:
 
 
 rho.clear()
 (seq*rho())()
-print(f'1Hx : {rho.I[0][0]:.2f}, {rho.I[0][1]:.2}')
-print(f'13Cx : {rho.I[1][0]:.2f}, {rho.I[1][1]:.2}')
+print(f'1Hx : {rho.I[0][0].real:.2f}, {rho.I[0][1].real:.2}')
+print(f'13Cx : {rho.I[1][0].real:.2f}, {rho.I[1][1].real:.2}')
 
 
 # ## clear vs. reset
@@ -138,16 +130,16 @@ print(f'13Cx : {rho.I[1][0]:.2f}, {rho.I[1][1]:.2}')
 # 
 # With DetProp, we provide a sequence or propagator and the number of times to first detect followed by a propagation step (n). We may also break up a sequence into parts, in this example, the number of steps is the number of steps per sequence (n_per_seq), so we only go through the sequence once. Note, if a propagator is provided instead of a sequence, then we cannot use n_per_seq.
 # 
-# Note that we choose 150 steps to match with the number of time points in the sequence.
+# Note that we choose 90 steps to match with the number of time points in the sequence, which should increase the calculation speed.
 
-# In[10]:
+# In[67]:
 
 
 rho.clear()
-rho.DetProp(seq,n=150,n_per_seq=150)
+_=rho.DetProp(seq,n=90,n_per_seq=90)
 
 
-# In[11]:
+# In[68]:
 
 
 rho.plot()
@@ -155,19 +147,19 @@ rho.plot()
 
 # Another good application of this approach is to simulate spinning sidebands. We use a blank sequence in this case.
 
-# In[12]:
+# In[73]:
 
 
 rho=sl.Rho(rho0='13Cx',detect='13Cp')
 seq=L.Sequence(cyclic=True).add_channel('13C',t=[0,L.taur/2,L.taur],v1=0)  #Default sequence with length taur
-rho.DetProp(seq,n=20000,n_per_seq=20)
+_=rho.DetProp(seq,n=20000,n_per_seq=20)
 #8 steps per sequence gives us a spectral with 8 times the rotor frequency
 
 
-# In[13]:
+# In[74]:
 
 
-rho.plot(FT=True,apodize=False)
+_=rho.plot(FT=True,apodize=False)
 
 
 # Aside from reducing coding, DetProp has also executed a few computational speedups. First, it has identified that only 4 of the 32 spin-states would actually be accessed in this simulation, so it reduces the size of the matrix being propagated significantly. Second, it has performed the propagation in the eigenbasis. Note that because we have 20 steps per rotor period, 20 different eigenbases have been used, each corresponding to a different starting point in the rotor period. That is, we take 20 steps through the first rotor period. However, starting from each of those 20 steps, we then take rotor-period length steps, which can be propagated in the eigenbasis, vastly accelerating the computation time through the 20000 total timesteps (or 1000 steps per each starting point in the rotor period.

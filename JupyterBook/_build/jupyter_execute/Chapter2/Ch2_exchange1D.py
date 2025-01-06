@@ -1,19 +1,13 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# # <font  color = "#0093AF"> Exchange in 1D spectra
+# # <font  color = "#0093AF">Exchange in 1D spectra</font>
 
 # <a href="https://githubtocolab.com/alsinmr/SLEEPY_tutorial/blob/main/ColabNotebooks/Chapter2/Ch2_exchange1D.ipynb" target="_blank"><img src="https://colab.research.google.com/assets/colab-badge.svg"></a>
 
 # One of the most basic examples of measuring dynamics is broadening driven by an exchange process that influences the chemical shift of the system. To simulate this in SLEEPY, we must simply build two spin systems with a nucleus with modulated chemical shift, and couple the systems with an exchange matrix.
 
 # ## Setup
-
-# In[ ]:
-
-
-# SETUP SLEEPY
-
 
 # In[2]:
 
@@ -84,13 +78,13 @@ _=rho.DetProp(seq,n=1024)
 # 
 # This sub-matrix of $\hat{\hat{L}}$ corresponds to the $\hat{S}^+$ terms that are being detected. While we also start out with $\hat{S}^-$, they don't exchange with the $\hat{S}^+$ terms, and are also not detected, so we don't need to actually calculate them.
 # 
-# This is shown graphically below (the block indexing is, unfortunately, arbitrary: we just try different block indices until we find the desired states).
+# This is shown graphically below. To obtain only the simulated block, we need to provide 'rho' to the `L.plot` function.
 
-# In[21]:
+# In[7]:
 
 
-L.plot(block=1,mode='re',colorbar=True).set_title('Real (exchange matrix)')
-_=L.plot(block=1,mode='im',colorbar=True).set_title('Imaginary (Frequency)')
+L.plot(rho=rho,mode='re')
+L.plot(rho=rho,mode='im')
 
 
 # ## Plot the results

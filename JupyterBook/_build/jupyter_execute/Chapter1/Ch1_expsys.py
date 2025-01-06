@@ -1,19 +1,13 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# # <font  color = "#0093AF"> Experimental Settings and Spin-System Definition
+# # <font  color = "#0093AF">Experimental Settings and Spin-System Definition</font>
 
 # <a href="https://githubtocolab.com/alsinmr/SLEEPY_tutorial/blob/main/ColabNotebooks/Chapter1/Ch1_expsys.ipynb" target="_blank"><img src="https://colab.research.google.com/assets/colab-badge.svg"></a>
 
 # ## Setup
 
-# In[ ]:
-
-
-# SETUP SLEEPY
-
-
-# In[2]:
+# In[33]:
 
 
 import SLEEPY as sl
@@ -32,10 +26,10 @@ import matplotlib.pyplot as plt
 # - vr: Spinning frequency in Hz (only used if anisotropic interactions provided). Default is 10000
 # - rotor_angle: Rotor angle, in radians. Default is the magic angle
 # - n_gamma: Number of gamma angles calculated per rotor period. For string-specified powder averages (i.e. not JCP59 or grid), this is also the number of gamma angles in the powder average. Default is 100
-# - pwdavg: Type of powder average. Type sl.PowderAvg.list_powder_types to see options (Most powder averages from SIMPSON). If an integer is provided, then this yields the JCP59 powder average, with higher integers yielding more angles. Default is 3 (JCP59 with 99 angles). Note that if 'alpha0beta0','alpha0beta90', or 'alpha0beta45' are used, then the powder average will automatically switch to gamma_encoded mode, since we assume the user only wants one angle (otherwise, gamma_encoded defaults to False). This behavior can be overridden by the user simply by setting gamma_encoded. 
+# - pwdavg: Type of powder average. Type sl.PowderAvg.list_powder_types to see options (Most powder averages are taken from [SIMPSON](https://inano.au.dk/about/research-centers-and-projects/nmr/software/simpson)). If an integer is provided, then this yields the [JCP59](https://doi.org/10.1063/1.1680590) powder average, with higher integers yielding more angles. Default is 3 (JCP59 with 99 angles). Note that if 'alpha0beta0','alpha0beta90', or 'alpha0beta45' are used, then the powder average will automatically switch to gamma_encoded mode, so that only one angle is simulated (otherwise, gamma_encoded defaults to False). This behavior can be overridden by the user simply by setting gamma_encoded. 
 # - LF: Specifiy whether each spin should be simulated in the lab frame. Can be provided as a single boolean, e.g. False sets all spins in the rotating frame, or as a list the same length as Nucs, which puts some spins in the lab frame and some in the rotating frame (useful, e.g. for DNP experiments such as solid-effect/cross-effect where the electrons should be in the rotating frame, but the nucleus in the lab frame).
 
-# In[3]:
+# In[34]:
 
 
 ex=sl.ExpSys(v0H=600,Nucs=['1H','13C'],vr=10000,T_K=298,
@@ -45,7 +39,7 @@ ex=sl.ExpSys(v0H=600,Nucs=['1H','13C'],vr=10000,T_K=298,
 
 # Typing `ex` at the command line will return a description of the experimental setup.
 
-# In[4]:
+# In[35]:
 
 
 ex
@@ -53,7 +47,7 @@ ex
 
 # Note that we have used the default values, so the same system may be obtained while omitting all the defaults:
 
-# In[5]:
+# In[36]:
 
 
 ex=sl.ExpSys(v0H=600,Nucs=['1H','13C'])
@@ -75,7 +69,7 @@ ex=sl.ExpSys(v0H=600,Nucs=['1H','13C'])
 # - g: Electron g-tensor. Specify gxx, gyy, and gzz, and optionally euler.
 # - ZeroField: Electron zero-field. Specify D and optionally E (both in Hz), and optionally euler.
 
-# In[6]:
+# In[37]:
 
 
 ex=sl.ExpSys(v0H=600,Nucs=['1H','13C'],pwdavg='rep678')
@@ -85,9 +79,9 @@ ex.set_inter('CSA',i=1,delta=100,eta=1) #13C CSA
 _=ex.set_inter('CS',i=0,ppm=10) #1H isotropic chemical shift
 
 
-# We can view the shape of the tensors with the "plot_inter" function. Note that this results in a scatter plot, where the number of points is determined by the powder average. What is shown is the magnitude (as distance from the origin) and phase (as color). For the $n=0$ component, only real values are possible, so we only see positive (red) and negative (blue).
+# We can view the shape of a tensor with the "plot_inter" function. Note that this results in a scatter plot, where the number of points is determined by the powder average. What is shown is the magnitude (as distance from the origin) and phase (as color). For the $n=0$ component, only real values are possible, so we only see positive (red) and negative (blue).
 
-# In[8]:
+# In[38]:
 
 
 fig=plt.figure(figsize=[15,8])
@@ -97,7 +91,7 @@ for k,a in enumerate(ax):ex.plot_inter(0,n=k-2,ax=a)
 
 # Note, if we try to plot an isotropic term, we just obtain a sphere.
 
-# In[11]:
+# In[39]:
 
 
 ex.plot_inter(2,n=0)
@@ -105,15 +99,16 @@ ex.plot_inter(2,n=0)
 
 # When setting an interaction, ex returns itself. This lets us string together multiple commands, for example, the following line will achieve the same interactions as above. Note that if an interaction is defined twice for the same spin or spins, the former definition will be overwritten.
 
-# In[5]:
+# In[40]:
 
 
-_=ex.set_inter('dipole',i0=0,i1=1,delta=delta,euler=[0,np.pi/4,0]).set_inter('CSA',i=1,delta=100,eta=1).    set_inter('CS',i=0,ppm=10)
+_=ex.set_inter('dipole',i0=0,i1=1,delta=delta,euler=[0,np.pi/4,0]).set_inter('CSA',i=1,delta=100,eta=1).\
+    set_inter('CS',i=0,ppm=10)
 
 
-# If we just type 'ex' at the command line, we will obtain a description of the experimental system
+# If we type 'ex' at the command line, we will obtain a description of the experimental system
 
-# In[6]:
+# In[41]:
 
 
 ex
@@ -142,7 +137,7 @@ ex
 # 
 # Finally, it contains important objects
 # 
-# - ex.pwdavg: Powder average object for the spin-system. Note, if all interactions are isotropic, when a Liouvillian or Hamiltonian is created, the powder average will be replaced with a 1-element powder-average.
+# - ex.pwdavg: Powder average object for the spin-system. Note, if all interactions are isotropic, when a Liouvillian or Hamiltonian is created, the powder average will be replaced with a 1-element powder-average
 # - ex.Op: Spin-operator object, which contains the spin-operators for the spin-system
 
 # ## The powder average
@@ -163,15 +158,15 @@ ex
 # - pwdavg.weight : weight to use when summing the powder average
 # - pwdavg.gamma_encoded : Boolean, determines whether averaging over gamma is skipped (cannot be set except at initialization, or when running pwdavg.set_pwd_type)
 
-# In[7]:
+# In[42]:
 
 
-ex.pwdavg.set_powder_type('rep256')
+_=ex.pwdavg.set_powder_type('rep256')
 
 
 # Typing ex.pwdavg at the command line will provide basic information about the powder average
 
-# In[8]:
+# In[43]:
 
 
 ex.pwdavg
@@ -179,7 +174,7 @@ ex.pwdavg
 
 # The powder average can also be plotted. By default, this plots the $\alpha$ and $\beta$ angles, but can be switched to $\beta$ and $\gamma$ angles by setting beta_gamma to True
 
-# In[13]:
+# In[44]:
 
 
 ex.pwdavg.plot()
@@ -201,7 +196,7 @@ ex.pwdavg.plot()
 # 
 # 
 
-# In[14]:
+# In[45]:
 
 
 ex.Op[0].x  #Example: x operator for the 0th spin
@@ -213,7 +208,7 @@ ex.Op[0].x  #Example: x operator for the 0th spin
 # 
 # So, ex.Op[0].T[1][0] returns $T_{1,-1}^{(0)}$, that is the rank $m=-1$ component of the rank-1 tensor for spin 0.
 
-# In[47]:
+# In[46]:
 
 
 ex.Op[0].T[1][0] #eg m=-1 component of the rank-1 tensor for spin 0
@@ -221,7 +216,7 @@ ex.Op[0].T[1][0] #eg m=-1 component of the rank-1 tensor for spin 0
 
 # However, what we usually need for building Hamiltonians is the rank-2 spherical tensors. For 1-spin tensors, these are obtained first by changing the mode of the spherical tensor to 'B0_LF', for example:
 
-# In[50]:
+# In[47]:
 
 
 ex.Op[0].T.set_mode('B0_LF')
@@ -254,10 +249,4 @@ T2spin.set_mode('het')
 T2spin[2]
 
 
-# SLEEPY uses the full set of spherical tensors (`T`) when operating in the lab frame, but just the rank-2, $m=0$ component in the rotating frame (and this is not usually inserted with the spherical components).
-
-# In[ ]:
-
-
-
-
+# SLEEPY uses the full set of rank-2 spherical tensors (`T`) when operating in the lab frame, but just the rank-2, $m=0$ component in the rotating frame (rotating frame Hamiltonians are usually defined with the cartesian spin-operators in SLEEPY, although one could use the spherical tensors).

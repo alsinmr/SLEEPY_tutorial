@@ -1,168 +1,113 @@
 
 <!DOCTYPE html>
 
-
-<html lang="en" data-content_root="../" >
-
+<html>
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
     <title>Hamiltonians and Liouvillians &#8212; SLEEPY Tutorial</title>
-  
-  
-  
-  <script data-cfasync="false">
-    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
-    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
-  </script>
-  <!--
-    this give us a css class that will be invisible only if js is disabled
-  -->
-  <noscript>
-    <style>
-      .pst-js-only { display: none !important; }
-
-    </style>
-  </noscript>
-  
+    
   <!-- Loaded before other Sphinx assets -->
-  <link href="../_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
-<link href="../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+  <link href="../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
 
-    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=fa44fd50" />
-    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=a3416100" />
-    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
-    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
-    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
-    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
-  
-  <!-- So that users can add custom icons -->
-  <script src="../_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=5115cc725059bd94278eecd172e13a965bf8f5a9" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.b7bb847fb20b106c3d81b95245e65545.min.css" />
+    
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
-<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
+  <link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
 
-    <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
-    <script src="../_static/doctools.js?v=888ff710"></script>
-    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
-    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
-    <script src="../_static/copybutton.js?v=f281be69"></script>
-    <script src="../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
-    <script src="../_static/togglebutton.js?v=4a39c7ea"></script>
-    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
-    <script src="../_static/design-tabs.js?v=36754332"></script>
-    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
-    <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
-    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
-    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script src="../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
     <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'Chapter1/Ch1_Liouvillian';</script>
-    <link rel="icon" href="../_static/favicon.png"/>
+    <link rel="shortcut icon" href="../_static/favicon.png"/>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Propagators and Sequences" href="Ch1_Propagation.html" />
     <link rel="prev" title="Experimental Settings and Spin-System Definition" href="Ch1_expsys.html" />
-  <meta name="viewport" content="width=device-width, initial-scale=1"/>
-  <meta name="docsearch:language" content="en"/>
-  <meta name="docsearch:version" content="" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
   </head>
-  
-  
-  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
+<!-- Checkboxes to toggle the left sidebar -->
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
+<label class="overlay overlay-navbar" for="__navigation">
+    <div class="visually-hidden">Toggle navigation sidebar</div>
+</label>
+<!-- Checkboxes to toggle the in-page toc -->
+<input type="checkbox" class="sidebar-toggle" name="__page-toc" id="__page-toc" aria-label="Toggle in-page Table of Contents">
+<label class="overlay overlay-pagetoc" for="__page-toc">
+    <div class="visually-hidden">Toggle in-page Table of Contents</div>
+</label>
+<!-- Headers at the top -->
+<div class="announcement header-item noprint"></div>
+<div class="header header-item noprint"></div>
 
-  
-  
-  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
-  
-  <div id="pst-scroll-pixel-helper"></div>
-  
-  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
-    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
-
-  
-  <dialog id="pst-search-dialog">
     
-<form class="bd-search d-flex align-items-center"
-      action="../search.html"
-      method="get">
-  <i class="fa-solid fa-magnifying-glass"></i>
-  <input type="search"
-         class="form-control"
-         name="q"
-         placeholder="Search this book..."
-         aria-label="Search this book..."
-         autocomplete="off"
-         autocorrect="off"
-         autocapitalize="off"
-         spellcheck="false"/>
-  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
-</form>
-  </dialog>
+    <div class="container-fluid" id="banner"></div>
 
-  <div class="pst-async-banner-revealer d-none">
-  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
-</div>
+    
 
-  
-    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
-    </header>
-  
-
-  <div class="bd-container">
-    <div class="bd-container__inner bd-page-width">
+    <div class="container-xl">
+      <div class="row">
+          
+<!-- Sidebar -->
+<div class="bd-sidebar noprint" id="site-navigation">
+    <div class="bd-sidebar__content">
+        <div class="bd-sidebar__top"><div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../index.html">
       
-      
-      
-      <dialog id="pst-primary-sidebar-modal"></dialog>
-      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
         
-
-  
-  <div class="sidebar-header-items sidebar-primary__section">
-    
-    
-    
-    
-  </div>
-  
-    <div class="sidebar-primary-items__start sidebar-primary__section">
-        <div class="sidebar-primary-item">
-
-  
-    
-  
-
-<a class="navbar-brand logo" href="../intro.html">
-  
-  
-  
-  
-  
-    
-    
       
-    
-    
-    <img src="../_static/logo_dark.png" class="logo__image only-light" alt="SLEEPY Tutorial - Home"/>
-    <img src="../_static/logo_dark.png" class="logo__image only-dark pst-js-only" alt="SLEEPY Tutorial - Home"/>
-  
-  
-</a></div>
-        <div class="sidebar-primary-item">
-
-<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
- <i class="fa-solid fa-magnifying-glass"></i>
- <span class="search-button__default-text">Search</span>
- <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
-</button></div>
-        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
-    <div class="bd-toc-item navbar-nav active">
+      
+      <img src="../_static/logo_dark.png" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">SLEEPY Tutorial</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
         
         <ul class="nav bd-sidenav bd-sidenav__home-link">
             <li class="toctree-l1">
@@ -172,275 +117,610 @@
             </li>
         </ul>
         <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="../GettingStarted.html"><font color="#B00000">Getting Started</font></a></li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../GettingStarted.html">
+   <font color="#B00000">
+    Getting Started
+   </font>
+  </a>
+ </li>
 </ul>
-<p aria-level="2" class="caption" role="heading"><span class="caption-text">Tutorial</span></p>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Tutorial
+ </span>
+</p>
 <ul class="current nav bd-sidenav">
-<li class="toctree-l1 current active has-children"><a class="reference internal" href="../Ch1_SLEEPY_basics.html"><font color="#B00000">SLEEPY basics</font></a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="Ch1_basics.html"><font color="#0093AF">A Quick Start</font></a></li>
-<li class="toctree-l2"><a class="reference internal" href="Ch1_ShortExamples.html"><font color="#0093AF">Short Examples</font></a></li>
-<li class="toctree-l2"><a class="reference internal" href="Ch1_Objects.html"><font color="#0093AF">Objects</font></a></li>
-<li class="toctree-l2"><a class="reference internal" href="Ch1_expsys.html"><font color="#0093AF">Experimental Settings and Spin-System Definition</font></a></li>
-<li class="toctree-l2 current active"><a class="current reference internal" href="#"><font color="#0093AF">Hamiltonians and Liouvillians</font></a></li>
-<li class="toctree-l2"><a class="reference internal" href="Ch1_Propagation.html"><font color="#0093AF">Propagators and Sequences</font></a></li>
-<li class="toctree-l2"><a class="reference internal" href="Ch1_rho.html"><font color="#0093AF">The Density Matrix</font></a></li>
-
-</ul>
-</details></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../Ch2_SolutionNMR.html"><font color="#B00000">Solution NMR</font></a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l2"><a class="reference internal" href="../Chapter2/Ch2_exchange1D.html"><font color="#0093AF">Exchange in 1D spectra</font></a></li>
-<li class="toctree-l2"><a class="reference internal" href="../Chapter2/Ch2_EXSY.html"><font color="#0093AF">Exchange Spectroscopy (EXSY)</font></a></li>
-<li class="toctree-l2"><a class="reference internal" href="../Chapter2/Ch2_BMRD.html"><font color="#0093AF">Bloch-McConnell Relaxation Dispersion</font></a></li>
-<li class="toctree-l2"><a class="reference internal" href="../Chapter2/Ch2_CEST.html"><font color="#0093AF">Chemical Exchange Saturation Transfer (CEST)</font></a></li>
-<li class="toctree-l2"><a class="reference internal" href="../Chapter2/Ch2_T1_NOE.html"><font color="#0093AF"><span class="math notranslate nohighlight">\(T_1\)</span> and Nuclear Overhauser Effect</font></a></li>
-<li class="toctree-l2"><a class="reference internal" href="../Chapter2/Ch2_T1_limits.html"><font color="#0093AF"><span class="math notranslate nohighlight">\(T_1\)</span> limits</font></a></li>
-<li class="toctree-l2"><a class="reference internal" href="../Chapter2/Ch2_TROSY.html"><font color="#0093AF">TROSY effects</font></a></li>
-</ul>
-</details></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../Ch3_DynamicsSolids.html"><font color="#B00000">Dynamics in Solids</font></a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l2"><a class="reference internal" href="../Chapter3/Ch3_R1p.html"><font color="#0093AF">R<span class="math notranslate nohighlight">\(_{1ρ}\)</span> relaxation</font></a></li>
-<li class="toctree-l2"><a class="reference internal" href="../Chapter3/Ch3_REDOR.html"><font color="#0093AF">REDOR</font></a></li>
-<li class="toctree-l2"><a class="reference internal" href="../Chapter3/Ch3_DIPSHIFT.html"><font color="#0093AF">DIPSHIFT</font></a></li>
-<li class="toctree-l2"><a class="reference internal" href="../Chapter3/Ch3_T1_NOE.html"><font color="#0093AF"><span class="math notranslate nohighlight">\(T_1\)</span> and NOE</font></a></li>
-<li class="toctree-l2"><a class="reference internal" href="../Chapter3/Ch3_RECRR.html"><font color="#0093AF">Relaxation in complex sequences: RECRR</font></a></li>
-<li class="toctree-l2"><a class="reference internal" href="../Chapter3/Ch3_Quad.html"><font color="#0093AF">Quadrupolar phenomena</font></a></li>
-</ul>
-</details></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../Ch4_DNP.html"><font color="#B00000">Dynamic Nuclear Polarization</font></a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l2"><a class="reference internal" href="../Chapter4/Ch4_SolidEffect.html"><font color="#0093AF">Solid Effect</font></a></li>
-<li class="toctree-l2"><a class="reference internal" href="../Chapter4/Ch4_CrossEffect.html"><font color="#0093AF">Cross-Effect</font></a></li>
-<li class="toctree-l2"><a class="reference internal" href="../Chapter4/Ch4_OverhauserEffect.html"><font color="#0093AF">Overhauser Effect</font></a></li>
-<li class="toctree-l2"><a class="reference internal" href="../Chapter4/Ch4_NOVEL.html"><font color="#0093AF">NOVEL</font></a></li>
-</ul>
-</details></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../Ch5_ParamagneticEffects.html"><font color="#B00000">Paramagnetic Effects</font></a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l2"><a class="reference internal" href="../Chapter5/Ch5_ContactShift.html"><font color="#0093AF">Contact shift</font></a></li>
-<li class="toctree-l2"><a class="reference internal" href="../Chapter5/Ch5_PseudoContactShift.html"><font color="#0093AF">Pseudo-Contact Shift</font></a></li>
-</ul>
-</details></li>
-<li class="toctree-l1"><a class="reference internal" href="../Chapter6/Ch6_RelaxationOptions.html"><font color="#B00000">Relaxation Options</font></a></li>
-<li class="toctree-l1"><a class="reference internal" href="../Ch7_ColabTemplate.html"><font color="#B00000"> SLEEPY Colab Template</font></a></li>
+ <li class="toctree-l1 current active has-children">
+  <a class="reference internal" href="../Ch1_SLEEPY_basics.html">
+   <font color="#B00000">
+    SLEEPY basics
+   </font>
+  </a>
+  <input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
+  <label for="toctree-checkbox-1">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul class="current">
+   <li class="toctree-l2">
+    <a class="reference internal" href="Ch1_basics.html">
+     <font color="#0093AF">
+      A Quick Start
+     </font>
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="Ch1_ShortExamples.html">
+     <font color="#0093AF">
+      Short Examples
+     </font>
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="Ch1_Objects.html">
+     <font color="#0093AF">
+      Objects
+     </font>
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="Ch1_expsys.html">
+     <font color="#0093AF">
+      Experimental Settings and Spin-System Definition
+     </font>
+    </a>
+   </li>
+   <li class="toctree-l2 current active">
+    <a class="current reference internal" href="#">
+     <font color="#0093AF">
+      Hamiltonians and Liouvillians
+     </font>
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="Ch1_Propagation.html">
+     <font color="#0093AF">
+      Propagators and Sequences
+     </font>
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="Ch1_rho.html">
+     <font color="#0093AF">
+      The Density Matrix
+     </font>
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../Ch2_SolutionNMR.html">
+   <font color="#B00000">
+    Solution NMR
+   </font>
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/>
+  <label for="toctree-checkbox-2">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../Chapter2/Ch2_exchange1D.html">
+     <font color="#0093AF">
+      Exchange in 1D spectra
+     </font>
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../Chapter2/Ch2_EXSY.html">
+     <font color="#0093AF">
+      Exchange Spectroscopy (EXSY)
+     </font>
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../Chapter2/Ch2_BMRD.html">
+     <font color="#0093AF">
+      Bloch-McConnell Relaxation Dispersion
+     </font>
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../Chapter2/Ch2_CEST.html">
+     <font color="#0093AF">
+      Chemical Exchange Saturation Transfer (CEST)
+     </font>
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../Chapter2/Ch2_T1_NOE.html">
+     <font color="#0093AF">
+      <span class="math notranslate nohighlight">
+       \(T_1\)
+      </span>
+      and Nuclear Overhauser Effect
+     </font>
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../Chapter2/Ch2_T1_limits.html">
+     <font color="#0093AF">
+      <span class="math notranslate nohighlight">
+       \(T_1\)
+      </span>
+      limits
+     </font>
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../Chapter2/Ch2_TROSY.html">
+     <font color="#0093AF">
+      TROSY effects
+     </font>
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../Ch3_DynamicsSolids.html">
+   <font color="#B00000">
+    Solid-state NMR
+   </font>
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/>
+  <label for="toctree-checkbox-3">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../Chapter3/Ch3_R1p.html">
+     <font color="#0093AF">
+      R
+      <span class="math notranslate nohighlight">
+       \(_{1ρ}\)
+      </span>
+      relaxation
+     </font>
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../Chapter3/Ch3_REDOR.html">
+     <font color="#0093AF">
+      REDOR
+     </font>
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../Chapter3/Ch3_DIPSHIFT.html">
+     <font color="#0093AF">
+      DIPSHIFT
+     </font>
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../Chapter3/Ch3_T1_NOE.html">
+     <font color="#0093AF">
+      <span class="math notranslate nohighlight">
+       \(T_1\)
+      </span>
+      and NOE
+     </font>
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../Chapter3/Ch3_RECRR.html">
+     <font color="#0093AF">
+      Relaxation in complex sequences: RECRR
+     </font>
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../Chapter3/Ch3_Quad.html">
+     <font color="#0093AF">
+      Quadrupolar phenomena
+     </font>
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../Ch4_DNP.html">
+   <font color="#B00000">
+    Dynamic Nuclear Polarization
+   </font>
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/>
+  <label for="toctree-checkbox-4">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../Chapter4/Ch4_SolidEffect.html">
+     <font color="#0093AF">
+      Solid Effect
+     </font>
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../Chapter4/Ch4_CrossEffect.html">
+     <font color="#0093AF">
+      Cross-Effect
+     </font>
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../Chapter4/Ch4_NOVEL.html">
+     <font color="#0093AF">
+      NOVEL
+     </font>
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../Ch5_ParamagneticEffects.html">
+   <font color="#B00000">
+    Paramagnetic Effects
+   </font>
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" type="checkbox"/>
+  <label for="toctree-checkbox-5">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../Chapter5/Ch5_PRE.html">
+     <font color="#0093AF">
+      Paramagnetic Relaxation Enhancement
+     </font>
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../Chapter5/Ch5_ContactShift.html">
+     <font color="#0093AF">
+      Contact shift
+     </font>
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../Chapter5/Ch5_PseudoContactShift.html">
+     <font color="#0093AF">
+      Pseudo-Contact Shift
+     </font>
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../Chapter6/Ch6_RelaxationOptions.html">
+   <font color="#B00000">
+    Relaxation Options
+   </font>
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../Ch7_ColabTemplate.html">
+   <font color="#B00000">
+    SLEEPY Colab Template
+   </font>
+  </a>
+ </li>
 </ul>
 
     </div>
 </nav></div>
+        <div class="bd-sidebar__bottom">
+             <!-- To handle the deprecated key -->
+            
+            <div class="navbar_extra_footer">
+            Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+            </div>
+            
+        </div>
     </div>
-  
-  
-  <div class="sidebar-primary-items__end sidebar-primary__section">
-      <div class="sidebar-primary-item">
-<div id="ethical-ad-placement"
-      class="flat"
-      data-ea-publisher="readthedocs"
-      data-ea-type="readthedocs-sidebar"
-      data-ea-manual="true">
-</div></div>
-  </div>
+    <div id="rtd-footer-container"></div>
+</div>
 
 
-      </div>
-      
-      <main id="main-content" class="bd-main" role="main">
-        
-        
+          
 
+
+          
+<!-- A tiny helper pixel to detect if we've scrolled -->
 <div class="sbt-scroll-pixel-helper"></div>
+<!-- Main content -->
+<div class="col py-0 content-container">
+    
+    <div class="header-article row sticky-top noprint">
+        
 
-          <div class="bd-content">
-            <div class="bd-article-container">
-              
-              <div class="bd-header-article d-print-none">
-<div class="header-article-items header-article__inner">
+
+
+<div class="col py-1 d-flex header-article-main">
+    <div class="header-article__left">
+        
+        <label for="__navigation"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="right"
+title="Toggle navigation"
+>
   
-    <div class="header-article-items__start">
-      
-        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
-  <span class="fa-solid fa-bars"></span>
-</button></div>
-      
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-bars"></i>
+  </span>
+
+</label>
+
+        
     </div>
-  
-  
-    <div class="header-article-items__end">
-      
-        <div class="header-article-item">
-
-<div class="article-header-buttons">
-
-
-
-
-
-<div class="dropdown dropdown-source-buttons">
-  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
-    <i class="fab fa-github"></i>
+    <div class="header-article__right">
+<div class="menu-dropdown menu-dropdown-launch-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Launch interactive content">
+      <i class="fas fa-rocket"></i>
   </button>
-  <ul class="dropdown-menu">
-      
-      
-      
-      <li><a href="https://github.com/alsinmr/SLEEPY_tutorial" target="_blank"
-   class="btn btn-sm btn-source-repository-button dropdown-item"
-   title="Source repository"
-   data-bs-placement="left" data-bs-toggle="tooltip"
->
-  
-
-<span class="btn__icon-container">
-  <i class="fab fa-github"></i>
-  </span>
-<span class="btn__text-container">Repository</span>
-</a>
-</li>
-      
-      
-      
-      
-      <li><a href="https://github.com/alsinmr/SLEEPY_tutorial/issues/new?title=Issue%20on%20page%20%2FChapter1/Ch1_Liouvillian.html&body=Your%20issue%20content%20here." target="_blank"
-   class="btn btn-sm btn-source-issues-button dropdown-item"
-   title="Open an issue"
-   data-bs-placement="left" data-bs-toggle="tooltip"
->
-  
-
-<span class="btn__icon-container">
-  <i class="fas fa-lightbulb"></i>
-  </span>
-<span class="btn__text-container">Open issue</span>
-</a>
-</li>
-      
-  </ul>
+  <div class="menu-dropdown__content">
+    <ul>
+    </ul>
+  </div>
 </div>
-
-
-
-
-
-
-<div class="dropdown dropdown-download-buttons">
-  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
-    <i class="fas fa-download"></i>
-  </button>
-  <ul class="dropdown-menu">
-      
-      
-      
-      <li><a href="../_sources/Chapter1/Ch1_Liouvillian.ipynb" target="_blank"
-   class="btn btn-sm btn-download-source-button dropdown-item"
-   title="Download source file"
-   data-bs-placement="left" data-bs-toggle="tooltip"
->
-  
-
-<span class="btn__icon-container">
-  <i class="fas fa-file"></i>
-  </span>
-<span class="btn__text-container">.ipynb</span>
-</a>
-</li>
-      
-      
-      
-      
-      <li>
-<button onclick="window.print()"
-  class="btn btn-sm btn-download-pdf-button dropdown-item"
-  title="Print to PDF"
-  data-bs-placement="left" data-bs-toggle="tooltip"
->
-  
-
-<span class="btn__icon-container">
-  <i class="fas fa-file-pdf"></i>
-  </span>
-<span class="btn__text-container">.pdf</span>
-</button>
-</li>
-      
-  </ul>
-</div>
-
-
-
 
 <button onclick="toggleFullScreen()"
-  class="btn btn-sm btn-fullscreen-button"
-  title="Fullscreen mode"
-  data-bs-placement="bottom" data-bs-toggle="tooltip"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="bottom"
+title="Fullscreen mode"
 >
   
 
-<span class="btn__icon-container">
+<span class="headerbtn__icon-container">
   <i class="fas fa-expand"></i>
   </span>
 
 </button>
 
-
-
-<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
-  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
-  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
-  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
-</button>
-
-
-<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
-</button>
-<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <span class="fa-solid fa-list"></span>
-</button>
-</div></div>
-      
-    </div>
+<div class="menu-dropdown menu-dropdown-repository-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Source repositories">
+      <i class="fab fa-github"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://github.com/alsinmr/SLEEPY_tutorial/"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Source repository"
+>
   
-</div>
-</div>
-              
-              
 
-<div id="jb-print-docs-body" class="onlyprint">
-    <h1><font  color = "#0093AF">Hamiltonians and Liouvillians</font></h1>
-    <!-- Table of contents -->
-    <div id="print-main-content">
-        <div id="jb-print-toc">
-            
-            <div>
-                <h2> Contents </h2>
-            </div>
-            <nav aria-label="Page">
-                <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#setup">Setup</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-hamiltonian">The Hamiltonian</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#access-and-plot-the-hamiltonian">Access and plot the Hamiltonian</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#hamiltonians-for-individual-interactions">Hamiltonians for individual interactions</a></li>
-</ul>
-</li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-liouvillian">The Liouvillian</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#access-and-plot-the-liouvillian">Access and plot the Liouvillian</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#adding-relaxation">Adding relaxation</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exchange">Exchange</a></li>
-</ul>
-</li>
-</ul>
-            </nav>
-        </div>
+<span class="headerbtn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="headerbtn__text-container">repository</span>
+</a>
+
+      </li>
+      
+      <li>
+        <a href="https://github.com/alsinmr/SLEEPY_tutorial//issues/new?title=Issue%20on%20page%20%2FChapter1/Ch1_Liouvillian.html&body=Your%20issue%20content%20here."
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Open an issue"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="headerbtn__text-container">open issue</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<div class="menu-dropdown menu-dropdown-download-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Download this page">
+      <i class="fas fa-download"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="../_sources/Chapter1/Ch1_Liouvillian.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Download source file"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="headerbtn__text-container">.ipynb</span>
+</a>
+
+      </li>
+      
+      <li>
+        
+<button onclick="printPdf(this)"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="left"
+title="Print to PDF"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="headerbtn__text-container">.pdf</span>
+</button>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+<label for="__page-toc"
+  class="headerbtn headerbtn-page-toc"
+  
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-list"></i>
+  </span>
+
+</label>
+
     </div>
 </div>
 
-              
+<!-- Table of contents -->
+<div class="col-md-3 bd-toc show noprint">
+    <div class="tocsection onthispage pt-5 pb-3">
+        <i class="fas fa-list"></i> Contents
+    </div>
+    <nav id="bd-toc-nav" aria-label="Page">
+        <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#setup">
+   Setup
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#the-hamiltonian">
+   The Hamiltonian
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#access-and-plot-the-hamiltonian">
+     Access and plot the Hamiltonian
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#hamiltonians-for-individual-interactions">
+     Hamiltonians for individual interactions
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#the-liouvillian">
+   The Liouvillian
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#access-and-plot-the-liouvillian">
+     Access and plot the Liouvillian
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#adding-relaxation">
+     Adding relaxation
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#exchange">
+     Exchange
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+    </nav>
+</div>
+    </div>
+    <div class="article row">
+        <div class="col pl-md-3 pl-lg-5 content-container">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1><font  color = "#0093AF">Hamiltonians and Liouvillians</font></h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#setup">
+   Setup
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#the-hamiltonian">
+   The Hamiltonian
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#access-and-plot-the-hamiltonian">
+     Access and plot the Hamiltonian
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#hamiltonians-for-individual-interactions">
+     Hamiltonians for individual interactions
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#the-liouvillian">
+   The Liouvillian
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#access-and-plot-the-liouvillian">
+     Access and plot the Liouvillian
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#adding-relaxation">
+     Adding relaxation
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#exchange">
+     Exchange
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            <main id="main-content" role="main">
                 
-<div id="searchbox"></div>
-                <article class="bd-article">
-                  
-  <section class="tex2jax_ignore mathjax_ignore" id="hamiltonians-and-liouvillians">
-<h1><font  color = "#0093AF">Hamiltonians and Liouvillians</font><a class="headerlink" href="#hamiltonians-and-liouvillians" title="Link to this heading">#</a></h1>
+              <div>
+                
+  <section class="tex2jax_ignore mathjax_ignore" id="font-color-0093af-hamiltonians-and-liouvillians-font">
+<h1><font  color = "#0093AF">Hamiltonians and Liouvillians</font><a class="headerlink" href="#font-color-0093af-hamiltonians-and-liouvillians-font" title="Permalink to this headline">#</a></h1>
 <p><a href="https://githubtocolab.com/alsinmr/SLEEPY_tutorial/blob/main/ColabNotebooks/Chapter1/Ch1_Liouvillian.ipynb" target="_blank"><img src="https://colab.research.google.com/assets/colab-badge.svg"></a></p>
 <p>Evolution of the spin-system is determined by the Liouvillian, which consists of one or more Hamiltonians, relaxation terms, and exchange terms. SLEEPY operates in Liouville space, but the Hamiltonians are also calculated and can be accessed by the user.</p>
 <section id="setup">
-<h2>Setup<a class="headerlink" href="#setup" title="Link to this heading">#</a></h2>
+<h2>Setup<a class="headerlink" href="#setup" title="Permalink to this headline">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">SLEEPY</span> <span class="k">as</span> <span class="nn">sl</span>
@@ -451,7 +731,7 @@
 </div>
 </section>
 <section id="the-hamiltonian">
-<h2>The Hamiltonian<a class="headerlink" href="#the-hamiltonian" title="Link to this heading">#</a></h2>
+<h2>The Hamiltonian<a class="headerlink" href="#the-hamiltonian" title="Permalink to this headline">#</a></h2>
 <p>In the previous section, we defined the experimental conditions and the spin-system. The ‘ex’ object, created with sl.ExpSys, contains all the information required to build the Hamiltonian and Liouvillian (for exchange, we need multiple ‘ex’ objects).</p>
 <p>SLEEPY operates in Liouville space, so while the Hamiltonian is in the background, the user will normally create the Liouvillian directly. Still, here we will start with the Hamiltonian and its contents.</p>
 <p>We start with building ‘ex’.</p>
@@ -467,7 +747,7 @@
 </div>
 </div>
 <section id="access-and-plot-the-hamiltonian">
-<h3>Access and plot the Hamiltonian<a class="headerlink" href="#access-and-plot-the-hamiltonian" title="Link to this heading">#</a></h3>
+<h3>Access and plot the Hamiltonian<a class="headerlink" href="#access-and-plot-the-hamiltonian" title="Permalink to this headline">#</a></h3>
 <p>To access Hamiltonian matrices, we have to specify which element of the powder average we are interested in, and also what step (up to ex.n_gamma) in the rotor cycle we want. For solution-state simulations, these are still required, but can both be set to zero. For example, for the first element of the powder average, and the first step in the rotor cycle, we use</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -497,7 +777,7 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/0bcc3aace73ff336fdee802e249445657c194bc867c5f68cdd2be0c320fbf620.png" src="../_images/0bcc3aace73ff336fdee802e249445657c194bc867c5f68cdd2be0c320fbf620.png" />
+<img alt="../_images/Ch1_Liouvillian_12_0.png" src="../_images/Ch1_Liouvillian_12_0.png" />
 </div>
 </div>
 <p>The full Hamiltonian is built from the 5 rotating components of the Hamiltonian. If we have <span class="math notranslate nohighlight">\(n_\gamma\)</span> steps per rotor period, and we’re at the kth step, this is done as follows:</p>
@@ -536,12 +816,12 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/bb6966909d14cd9a7513953421fd7be260d65d847d920cab17021e5a1a8a645c.png" src="../_images/bb6966909d14cd9a7513953421fd7be260d65d847d920cab17021e5a1a8a645c.png" />
+<img alt="../_images/Ch1_Liouvillian_16_0.png" src="../_images/Ch1_Liouvillian_16_0.png" />
 </div>
 </div>
 </section>
 <section id="hamiltonians-for-individual-interactions">
-<h3>Hamiltonians for individual interactions<a class="headerlink" href="#hamiltonians-for-individual-interactions" title="Link to this heading">#</a></h3>
+<h3>Hamiltonians for individual interactions<a class="headerlink" href="#hamiltonians-for-individual-interactions" title="Permalink to this headline">#</a></h3>
 <p>The rotating components are built up from the rotating components of the individual interactions, where individual interactions are found in a list in H.Hinter. Indexing this list will return a description of the interaction, for example:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -585,13 +865,13 @@ Type: larmor on spin 1
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/a52e56267b0104de462cd0c32a5046ba743a12db6e56bd84e58ff58d4063620f.png" src="../_images/a52e56267b0104de462cd0c32a5046ba743a12db6e56bd84e58ff58d4063620f.png" />
+<img alt="../_images/Ch1_Liouvillian_22_0.png" src="../_images/Ch1_Liouvillian_22_0.png" />
 </div>
 </div>
 </section>
 </section>
 <section id="the-liouvillian">
-<h2>The Liouvillian<a class="headerlink" href="#the-liouvillian" title="Link to this heading">#</a></h2>
+<h2>The Liouvillian<a class="headerlink" href="#the-liouvillian" title="Permalink to this headline">#</a></h2>
 <p>Coherent components of the Liouvillian are calculated from the Hamiltonian, although we may also add relaxation and exchange processes to the Liouvillian. We create the Liouvillian without exchange either from the Hamiltonian or the experimental system (ex).</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -616,7 +896,7 @@ Type: larmor on spin 1
 \end{equation}
 \]</div>
 <section id="access-and-plot-the-liouvillian">
-<h3>Access and plot the Liouvillian<a class="headerlink" href="#access-and-plot-the-liouvillian" title="Link to this heading">#</a></h3>
+<h3>Access and plot the Liouvillian<a class="headerlink" href="#access-and-plot-the-liouvillian" title="Permalink to this headline">#</a></h3>
 <p>Access to specific components of the Liouvillian and plotting use the same rules as for the Hamiltonian. For example, to access the 5th element of the powder average, and the <span class="math notranslate nohighlight">\(n=1\)</span> component of the coherent Liouvillian, we would use</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">L</span><span class="p">[</span><span class="mi">5</span><span class="p">]</span><span class="o">.</span><span class="n">Ln</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
 </pre></div>
@@ -637,7 +917,7 @@ Type: larmor on spin 1
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/94be52e322d0f4a13486d98b537a5eb6698b7c5c6405467d9a567b3722c7f04e.png" src="../_images/94be52e322d0f4a13486d98b537a5eb6698b7c5c6405467d9a567b3722c7f04e.png" />
+<img alt="../_images/Ch1_Liouvillian_29_0.png" src="../_images/Ch1_Liouvillian_29_0.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -647,13 +927,13 @@ Type: larmor on spin 1
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/30d8fff2ce6718a09729ee3b5ce8ee541174593e97eede17928348dd6ad6a695.png" src="../_images/30d8fff2ce6718a09729ee3b5ce8ee541174593e97eede17928348dd6ad6a695.png" />
+<img alt="../_images/Ch1_Liouvillian_30_0.png" src="../_images/Ch1_Liouvillian_30_0.png" />
 </div>
 </div>
 </section>
 <section id="adding-relaxation">
-<h3>Adding relaxation<a class="headerlink" href="#adding-relaxation" title="Link to this heading">#</a></h3>
-<p><span class="math notranslate nohighlight">\(T_1\)</span> and <span class="math notranslate nohighlight">\(T_2\)</span> relaxation is available in SLEEPY, along with “Spin-Diffusion” which just introduces signal decay with <span class="math notranslate nohighlight">\(T_1=T_2\)</span> (see Ernst et al. for spin-diffusion relaxation operator<span class="math notranslate nohighlight">\(^1\)</span>). As implemented in SLEEPY, the <span class="math notranslate nohighlight">\(T_1\)</span> option <em>only</em> decays along <span class="math notranslate nohighlight">\(z\)</span>, which is unphysical, so it is important to also add some <span class="math notranslate nohighlight">\(T_2\)</span> relaxation when using <span class="math notranslate nohighlight">\(T_1\)</span>. By default, <span class="math notranslate nohighlight">\(T_1\)</span> acts along <span class="math notranslate nohighlight">\(z\)</span>, and <span class="math notranslate nohighlight">\(T_2\)</span> along x and y. However, it is possible to specify “orientation-specific” (<code class="docutils literal notranslate"><span class="pre">OS=True</span></code>) relaxation, which will adjust <span class="math notranslate nohighlight">\(T_1\)</span> relaxation to occur on the eigenstates of a given spin, and <span class="math notranslate nohighlight">\(T_2\)</span> acts on coherences between eigenstates of the spin. This option is more computationally expensive. However, for spins that are strongly tilted away from <span class="math notranslate nohighlight">\(z\)</span>, using the default relaxation will “mix” the <span class="math notranslate nohighlight">\(T_1\)</span> and <span class="math notranslate nohighlight">\(T_2\)</span> behavior, so that <span class="math notranslate nohighlight">\(T_1\)</span> may appear much shorter than specified (see <a class="reference internal" href="../Chapter6/Ch6_RelaxationOptions.html"><span class="std std-doc">Relaxation Options</span></a>).</p>
+<h3>Adding relaxation<a class="headerlink" href="#adding-relaxation" title="Permalink to this headline">#</a></h3>
+<p><span class="math notranslate nohighlight">\(T_1\)</span> and <span class="math notranslate nohighlight">\(T_2\)</span> relaxation is available in SLEEPY, along with “Spin-Diffusion” which just introduces signal decay with <span class="math notranslate nohighlight">\(T_1=T_2\)</span> (see Ernst et al. for spin-diffusion relaxation operator<span class="math notranslate nohighlight">\(^1\)</span>). As implemented in SLEEPY, the <span class="math notranslate nohighlight">\(T_1\)</span> option <em>only</em> decays along <span class="math notranslate nohighlight">\(z\)</span>, which is unphysical, so it is important to also add some <span class="math notranslate nohighlight">\(T_2\)</span> relaxation when using <span class="math notranslate nohighlight">\(T_1\)</span>. By default, <span class="math notranslate nohighlight">\(T_1\)</span> acts along <span class="math notranslate nohighlight">\(z\)</span>, and <span class="math notranslate nohighlight">\(T_2\)</span> along x and y. However, it is possible to specify “orientation-specific” (<code class="docutils literal notranslate"><span class="pre">OS=True</span></code>) relaxation, which will adjust <span class="math notranslate nohighlight">\(T_1\)</span> relaxation to occur on the eigenstates of a given spin, and <span class="math notranslate nohighlight">\(T_2\)</span> acts on coherences between eigenstates of the spin. This option is more computationally expensive. However, for spins that are strongly tilted away from <span class="math notranslate nohighlight">\(z\)</span>, using the default relaxation will “mix” the <span class="math notranslate nohighlight">\(T_1\)</span> and <span class="math notranslate nohighlight">\(T_2\)</span> behavior, so that <span class="math notranslate nohighlight">\(T_1\)</span> may appear much shorter than specified (see <a class="reference internal" href="../Chapter6/Ch6_RelaxationOptions.html"><span class="doc std std-doc">Relaxation Options</span></a>).</p>
 <p>We may also include recovery of magnetization to thermal equilibrium (noting that in this case, ex.T_K determines the equilibrium density matrix). If orientation-specific relaxation is included, this is specified when the relaxation is added. Otherwise, it is specified after all relaxation is included. Relaxation is removed by running <code class="docutils literal notranslate"><span class="pre">L.clear_relax()</span></code>. If, for example, <span class="math notranslate nohighlight">\(T_1\)</span> relaxation is added to a spin twice without clearing the first entry, then the relaxation rates will add together, so it is important not to forget to clear existing relaxation.</p>
 <p>[1] M. Ernst, H. Zimmerman, B.H. Meier. <em><a class="reference external" href="https://doi.org/10.1016/S0009-2614(99)01423-2">Chem. Phys. Lett.</a></em>, <strong>2000</strong>, 317, 581-588.</p>
 <div class="cell docutils container">
@@ -688,12 +968,12 @@ Type: larmor on spin 1
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/7c27e1387b3ef11ab702633606d840e9ed2ca9cd67e7a80db6aca7e5bdc513ef.png" src="../_images/7c27e1387b3ef11ab702633606d840e9ed2ca9cd67e7a80db6aca7e5bdc513ef.png" />
+<img alt="../_images/Ch1_Liouvillian_37_0.png" src="../_images/Ch1_Liouvillian_37_0.png" />
 </div>
 </div>
 </section>
 <section id="exchange">
-<h3>Exchange<a class="headerlink" href="#exchange" title="Link to this heading">#</a></h3>
+<h3>Exchange<a class="headerlink" href="#exchange" title="Permalink to this headline">#</a></h3>
 <p>Importantly, SLEEPY allows us to simulate magnetic resonance under exchange conditions. This is achieved by defining two or more experimental system objects, with different interactions. In this example, we just change the orientation of the dipole coupling, representing a hopping motion.</p>
 <p>Since the resulting Liouvillian comes from multiple experimental systems (<code class="docutils literal notranslate"><span class="pre">ex0,ex1</span></code>), we must use sl.Liouvillian, rather than generating it directly from ex.</p>
 <div class="cell docutils container">
@@ -717,7 +997,7 @@ Type: larmor on spin 1
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;AxesSubplot:&gt;
 </pre></div>
 </div>
-<img alt="../_images/3a1333f02ac080fc1ac96499e5a2963cf0701d3f1590e0eab4877a062e265cd2.png" src="../_images/3a1333f02ac080fc1ac96499e5a2963cf0701d3f1590e0eab4877a062e265cd2.png" />
+<img alt="../_images/Ch1_Liouvillian_42_1.png" src="../_images/Ch1_Liouvillian_42_1.png" />
 </div>
 </div>
 <p>On its own, this isn’t very useful because the two dipole orientations are not exchanging. For this, we must also include the exchange matrix, of the form:</p>
@@ -748,7 +1028,7 @@ k_{01}&amp;-k_{10}
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/d8cf9989660eaed9b265c7dfddadef214da1aad67127e3c72207def3e3395fa2.png" src="../_images/d8cf9989660eaed9b265c7dfddadef214da1aad67127e3c72207def3e3395fa2.png" />
+<img alt="../_images/Ch1_Liouvillian_46_0.png" src="../_images/Ch1_Liouvillian_46_0.png" />
 </div>
 </div>
 <p>Finally, we show the total Liouvillian, including exchange.</p>
@@ -759,7 +1039,7 @@ k_{01}&amp;-k_{10}
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/ace4e49d1c86e6b55f14eafd8d79aed5a6e047e5579b0a99986c3555d7e660d1.png" src="../_images/ace4e49d1c86e6b55f14eafd8d79aed5a6e047e5579b0a99986c3555d7e660d1.png" />
+<img alt="../_images/Ch1_Liouvillian_48_0.png" src="../_images/Ch1_Liouvillian_48_0.png" />
 </div>
 </div>
 <p>In the next section, we discuss the generation of propagators and sequences from the Liouvillian.</p>
@@ -779,7 +1059,7 @@ k_{01}&amp;-k_{10}
             mode: "python"
         },
         kernelOptions: {
-            name: "python3",
+            kernelName: "python3",
             path: "./Chapter1"
         },
         predefinedOutput: true
@@ -787,115 +1067,50 @@ k_{01}&amp;-k_{10}
     </script>
     <script>kernelName = 'python3'</script>
 
-                </article>
+              </div>
               
-
-              
-              
-              
-              
-                <footer class="prev-next-footer d-print-none">
-                  
-<div class="prev-next-area">
-    <a class="left-prev"
-       href="Ch1_expsys.html"
-       title="previous page">
-      <i class="fa-solid fa-angle-left"></i>
-      <div class="prev-next-info">
-        <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title"><font  color = "#0093AF">Experimental Settings and Spin-System Definition</font></p>
-      </div>
+            </main>
+            <footer class="footer-article noprint">
+                
+    <!-- Previous / next buttons -->
+<div class='prev-next-area'>
+    <a class='left-prev' id="prev-link" href="Ch1_expsys.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title"><font  color = "#0093AF">Experimental Settings and Spin-System Definition</font></p>
+        </div>
     </a>
-    <a class="right-next"
-       href="Ch1_Propagation.html"
-       title="next page">
-      <div class="prev-next-info">
+    <a class='right-next' id="next-link" href="Ch1_Propagation.html" title="next page">
+    <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
         <p class="prev-next-title"><font  color = "#0093AF">Propagators and Sequences</font></p>
-      </div>
-      <i class="fa-solid fa-angle-right"></i>
+    </div>
+    <i class="fas fa-angle-right"></i>
     </a>
 </div>
-                </footer>
-              
-            </div>
-            
-            
-              
-                <dialog id="pst-secondary-sidebar-modal"></dialog>
-                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
-
-
-  <div class="sidebar-secondary-item">
-  <div class="page-toc tocsection onthispage">
-    <i class="fa-solid fa-list"></i> Contents
-  </div>
-  <nav class="bd-toc-nav page-toc">
-    <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#setup">Setup</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-hamiltonian">The Hamiltonian</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#access-and-plot-the-hamiltonian">Access and plot the Hamiltonian</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#hamiltonians-for-individual-interactions">Hamiltonians for individual interactions</a></li>
-</ul>
-</li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-liouvillian">The Liouvillian</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#access-and-plot-the-liouvillian">Access and plot the Liouvillian</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#adding-relaxation">Adding relaxation</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exchange">Exchange</a></li>
-</ul>
-</li>
-</ul>
-  </nav></div>
-
-</div></div>
-              
-            
-          </div>
-          <footer class="bd-footer-content">
-            
-<div class="bd-footer-content__inner container">
-  
-  <div class="footer-item">
-    
-<p class="component-author">
-By Albert Smith
-</p>
-
-  </div>
-  
-  <div class="footer-item">
-    
-
-  <p class="copyright">
-    
-      © Copyright 2025.
-      <br/>
-    
-  </p>
-
-  </div>
-  
-  <div class="footer-item">
-    
-  </div>
-  
-  <div class="footer-item">
-    
-  </div>
-  
-</div>
-          </footer>
-        
-
-      </main>
+            </footer>
+        </div>
     </div>
-  </div>
+    <div class="footer-content row">
+        <footer class="col footer"><p>
+  
+    By Albert Smith<br/>
+  
+      &copy; Copyright 2025.<br/>
+</p>
+        </footer>
+    </div>
+    
+</div>
+
+
+      </div>
+    </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script defer src="../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
-<script defer src="../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
+  <script src="../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
 
-  <footer class="bd-footer">
-  </footer>
+
   </body>
 </html>

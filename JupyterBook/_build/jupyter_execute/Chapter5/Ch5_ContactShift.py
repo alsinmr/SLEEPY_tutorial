@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# # <font  color = "#0093AF"> Contact shift
+# # <font  color = "#0093AF">Contact shift</font>
 
 # <a href="https://githubtocolab.com/alsinmr/SLEEPY_tutorial/blob/main/ColabNotebooks/Chapter5/Ch5_ContactShift.ipynb" target="_blank"><img src="https://colab.research.google.com/assets/colab-badge.svg"></a>
 
@@ -18,12 +18,6 @@
 # Correct calculation of the contact shift, and the more complex [pseudocontact shift](../Chapter5/Ch5_PseudoContactShift.ipynb) requires correct thermalization of coherences, achieved in SLEEPY via Lindblad thermalization.$^1$
 # 
 # [1] C. Bengs, M. Levitt. [*J. Magn. Reson.*](https://doi.org/10.1016/j.jmr.2019.106645), **2020**, 310,106645.
-
-# In[ ]:
-
-
-# SETUP SLEEPY
-
 
 # ## Setup
 

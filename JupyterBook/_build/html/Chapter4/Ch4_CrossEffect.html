@@ -1,168 +1,113 @@
 
 <!DOCTYPE html>
 
-
-<html lang="en" data-content_root="../" >
-
+<html>
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
     <title>Cross-Effect &#8212; SLEEPY Tutorial</title>
-  
-  
-  
-  <script data-cfasync="false">
-    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
-    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
-  </script>
-  <!--
-    this give us a css class that will be invisible only if js is disabled
-  -->
-  <noscript>
-    <style>
-      .pst-js-only { display: none !important; }
-
-    </style>
-  </noscript>
-  
+    
   <!-- Loaded before other Sphinx assets -->
-  <link href="../_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
-<link href="../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+  <link href="../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
 
-    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=fa44fd50" />
-    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=a3416100" />
-    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
-    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
-    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
-    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
-  
-  <!-- So that users can add custom icons -->
-  <script src="../_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=5115cc725059bd94278eecd172e13a965bf8f5a9" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.b7bb847fb20b106c3d81b95245e65545.min.css" />
+    
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
-<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
+  <link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
 
-    <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
-    <script src="../_static/doctools.js?v=888ff710"></script>
-    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
-    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
-    <script src="../_static/copybutton.js?v=f281be69"></script>
-    <script src="../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
-    <script src="../_static/togglebutton.js?v=4a39c7ea"></script>
-    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
-    <script src="../_static/design-tabs.js?v=36754332"></script>
-    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
-    <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
-    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
-    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script src="../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
     <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'Chapter4/Ch4_CrossEffect';</script>
-    <link rel="icon" href="../_static/favicon.png"/>
+    <link rel="shortcut icon" href="../_static/favicon.png"/>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Overhauser Effect" href="Ch4_OverhauserEffect.html" />
+    <link rel="next" title="NOVEL" href="Ch4_NOVEL.html" />
     <link rel="prev" title="Solid Effect" href="Ch4_SolidEffect.html" />
-  <meta name="viewport" content="width=device-width, initial-scale=1"/>
-  <meta name="docsearch:language" content="en"/>
-  <meta name="docsearch:version" content="" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
   </head>
-  
-  
-  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
+<!-- Checkboxes to toggle the left sidebar -->
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
+<label class="overlay overlay-navbar" for="__navigation">
+    <div class="visually-hidden">Toggle navigation sidebar</div>
+</label>
+<!-- Checkboxes to toggle the in-page toc -->
+<input type="checkbox" class="sidebar-toggle" name="__page-toc" id="__page-toc" aria-label="Toggle in-page Table of Contents">
+<label class="overlay overlay-pagetoc" for="__page-toc">
+    <div class="visually-hidden">Toggle in-page Table of Contents</div>
+</label>
+<!-- Headers at the top -->
+<div class="announcement header-item noprint"></div>
+<div class="header header-item noprint"></div>
 
-  
-  
-  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
-  
-  <div id="pst-scroll-pixel-helper"></div>
-  
-  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
-    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
-
-  
-  <dialog id="pst-search-dialog">
     
-<form class="bd-search d-flex align-items-center"
-      action="../search.html"
-      method="get">
-  <i class="fa-solid fa-magnifying-glass"></i>
-  <input type="search"
-         class="form-control"
-         name="q"
-         placeholder="Search this book..."
-         aria-label="Search this book..."
-         autocomplete="off"
-         autocorrect="off"
-         autocapitalize="off"
-         spellcheck="false"/>
-  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
-</form>
-  </dialog>
+    <div class="container-fluid" id="banner"></div>
 
-  <div class="pst-async-banner-revealer d-none">
-  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
-</div>
+    
 
-  
-    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
-    </header>
-  
-
-  <div class="bd-container">
-    <div class="bd-container__inner bd-page-width">
+    <div class="container-xl">
+      <div class="row">
+          
+<!-- Sidebar -->
+<div class="bd-sidebar noprint" id="site-navigation">
+    <div class="bd-sidebar__content">
+        <div class="bd-sidebar__top"><div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../index.html">
       
-      
-      
-      <dialog id="pst-primary-sidebar-modal"></dialog>
-      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
         
-
-  
-  <div class="sidebar-header-items sidebar-primary__section">
-    
-    
-    
-    
-  </div>
-  
-    <div class="sidebar-primary-items__start sidebar-primary__section">
-        <div class="sidebar-primary-item">
-
-  
-    
-  
-
-<a class="navbar-brand logo" href="../intro.html">
-  
-  
-  
-  
-  
-    
-    
       
-    
-    
-    <img src="../_static/logo_dark.png" class="logo__image only-light" alt="SLEEPY Tutorial - Home"/>
-    <img src="../_static/logo_dark.png" class="logo__image only-dark pst-js-only" alt="SLEEPY Tutorial - Home"/>
-  
-  
-</a></div>
-        <div class="sidebar-primary-item">
-
-<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
- <i class="fa-solid fa-magnifying-glass"></i>
- <span class="search-button__default-text">Search</span>
- <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
-</button></div>
-        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
-    <div class="bd-toc-item navbar-nav active">
+      
+      <img src="../_static/logo_dark.png" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">SLEEPY Tutorial</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
         
         <ul class="nav bd-sidenav bd-sidenav__home-link">
             <li class="toctree-l1">
@@ -172,274 +117,644 @@
             </li>
         </ul>
         <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="../GettingStarted.html"><font color="#B00000">Getting Started</font></a></li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../GettingStarted.html">
+   <font color="#B00000">
+    Getting Started
+   </font>
+  </a>
+ </li>
 </ul>
-<p aria-level="2" class="caption" role="heading"><span class="caption-text">Tutorial</span></p>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Tutorial
+ </span>
+</p>
 <ul class="current nav bd-sidenav">
-<li class="toctree-l1 has-children"><a class="reference internal" href="../Ch1_SLEEPY_basics.html"><font color="#B00000">SLEEPY basics</font></a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l2"><a class="reference internal" href="../Chapter1/Ch1_basics.html"><font color="#0093AF">A Quick Start</font></a></li>
-<li class="toctree-l2"><a class="reference internal" href="../Chapter1/Ch1_ShortExamples.html"><font color="#0093AF">Short Examples</font></a></li>
-<li class="toctree-l2"><a class="reference internal" href="../Chapter1/Ch1_Objects.html"><font color="#0093AF">Objects</font></a></li>
-<li class="toctree-l2"><a class="reference internal" href="../Chapter1/Ch1_expsys.html"><font color="#0093AF">Experimental Settings and Spin-System Definition</font></a></li>
-<li class="toctree-l2"><a class="reference internal" href="../Chapter1/Ch1_Liouvillian.html"><font color="#0093AF">Hamiltonians and Liouvillians</font></a></li>
-<li class="toctree-l2"><a class="reference internal" href="../Chapter1/Ch1_Propagation.html"><font color="#0093AF">Propagators and Sequences</font></a></li>
-<li class="toctree-l2"><a class="reference internal" href="../Chapter1/Ch1_rho.html"><font color="#0093AF">The Density Matrix</font></a></li>
-
-</ul>
-</details></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../Ch2_SolutionNMR.html"><font color="#B00000">Solution NMR</font></a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l2"><a class="reference internal" href="../Chapter2/Ch2_exchange1D.html"><font color="#0093AF">Exchange in 1D spectra</font></a></li>
-<li class="toctree-l2"><a class="reference internal" href="../Chapter2/Ch2_EXSY.html"><font color="#0093AF">Exchange Spectroscopy (EXSY)</font></a></li>
-<li class="toctree-l2"><a class="reference internal" href="../Chapter2/Ch2_BMRD.html"><font color="#0093AF">Bloch-McConnell Relaxation Dispersion</font></a></li>
-<li class="toctree-l2"><a class="reference internal" href="../Chapter2/Ch2_CEST.html"><font color="#0093AF">Chemical Exchange Saturation Transfer (CEST)</font></a></li>
-<li class="toctree-l2"><a class="reference internal" href="../Chapter2/Ch2_T1_NOE.html"><font color="#0093AF"><span class="math notranslate nohighlight">\(T_1\)</span> and Nuclear Overhauser Effect</font></a></li>
-<li class="toctree-l2"><a class="reference internal" href="../Chapter2/Ch2_T1_limits.html"><font color="#0093AF"><span class="math notranslate nohighlight">\(T_1\)</span> limits</font></a></li>
-<li class="toctree-l2"><a class="reference internal" href="../Chapter2/Ch2_TROSY.html"><font color="#0093AF">TROSY effects</font></a></li>
-</ul>
-</details></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../Ch3_DynamicsSolids.html"><font color="#B00000">Dynamics in Solids</font></a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l2"><a class="reference internal" href="../Chapter3/Ch3_R1p.html"><font color="#0093AF">R<span class="math notranslate nohighlight">\(_{1ρ}\)</span> relaxation</font></a></li>
-<li class="toctree-l2"><a class="reference internal" href="../Chapter3/Ch3_REDOR.html"><font color="#0093AF">REDOR</font></a></li>
-<li class="toctree-l2"><a class="reference internal" href="../Chapter3/Ch3_DIPSHIFT.html"><font color="#0093AF">DIPSHIFT</font></a></li>
-<li class="toctree-l2"><a class="reference internal" href="../Chapter3/Ch3_T1_NOE.html"><font color="#0093AF"><span class="math notranslate nohighlight">\(T_1\)</span> and NOE</font></a></li>
-<li class="toctree-l2"><a class="reference internal" href="../Chapter3/Ch3_RECRR.html"><font color="#0093AF">Relaxation in complex sequences: RECRR</font></a></li>
-<li class="toctree-l2"><a class="reference internal" href="../Chapter3/Ch3_Quad.html"><font color="#0093AF">Quadrupolar phenomena</font></a></li>
-</ul>
-</details></li>
-<li class="toctree-l1 current active has-children"><a class="reference internal" href="../Ch4_DNP.html"><font color="#B00000">Dynamic Nuclear Polarization</font></a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="Ch4_SolidEffect.html"><font color="#0093AF">Solid Effect</font></a></li>
-<li class="toctree-l2 current active"><a class="current reference internal" href="#"><font color="#0093AF">Cross-Effect</font></a></li>
-<li class="toctree-l2"><a class="reference internal" href="Ch4_OverhauserEffect.html"><font color="#0093AF">Overhauser Effect</font></a></li>
-<li class="toctree-l2"><a class="reference internal" href="Ch4_NOVEL.html"><font color="#0093AF">NOVEL</font></a></li>
-</ul>
-</details></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../Ch5_ParamagneticEffects.html"><font color="#B00000">Paramagnetic Effects</font></a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l2"><a class="reference internal" href="../Chapter5/Ch5_ContactShift.html"><font color="#0093AF">Contact shift</font></a></li>
-<li class="toctree-l2"><a class="reference internal" href="../Chapter5/Ch5_PseudoContactShift.html"><font color="#0093AF">Pseudo-Contact Shift</font></a></li>
-</ul>
-</details></li>
-<li class="toctree-l1"><a class="reference internal" href="../Chapter6/Ch6_RelaxationOptions.html"><font color="#B00000">Relaxation Options</font></a></li>
-<li class="toctree-l1"><a class="reference internal" href="../Ch7_ColabTemplate.html"><font color="#B00000"> SLEEPY Colab Template</font></a></li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../Ch1_SLEEPY_basics.html">
+   <font color="#B00000">
+    SLEEPY basics
+   </font>
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
+  <label for="toctree-checkbox-1">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../Chapter1/Ch1_basics.html">
+     <font color="#0093AF">
+      A Quick Start
+     </font>
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../Chapter1/Ch1_ShortExamples.html">
+     <font color="#0093AF">
+      Short Examples
+     </font>
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../Chapter1/Ch1_Objects.html">
+     <font color="#0093AF">
+      Objects
+     </font>
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../Chapter1/Ch1_expsys.html">
+     <font color="#0093AF">
+      Experimental Settings and Spin-System Definition
+     </font>
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../Chapter1/Ch1_Liouvillian.html">
+     <font color="#0093AF">
+      Hamiltonians and Liouvillians
+     </font>
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../Chapter1/Ch1_Propagation.html">
+     <font color="#0093AF">
+      Propagators and Sequences
+     </font>
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../Chapter1/Ch1_rho.html">
+     <font color="#0093AF">
+      The Density Matrix
+     </font>
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../Ch2_SolutionNMR.html">
+   <font color="#B00000">
+    Solution NMR
+   </font>
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/>
+  <label for="toctree-checkbox-2">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../Chapter2/Ch2_exchange1D.html">
+     <font color="#0093AF">
+      Exchange in 1D spectra
+     </font>
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../Chapter2/Ch2_EXSY.html">
+     <font color="#0093AF">
+      Exchange Spectroscopy (EXSY)
+     </font>
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../Chapter2/Ch2_BMRD.html">
+     <font color="#0093AF">
+      Bloch-McConnell Relaxation Dispersion
+     </font>
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../Chapter2/Ch2_CEST.html">
+     <font color="#0093AF">
+      Chemical Exchange Saturation Transfer (CEST)
+     </font>
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../Chapter2/Ch2_T1_NOE.html">
+     <font color="#0093AF">
+      <span class="math notranslate nohighlight">
+       \(T_1\)
+      </span>
+      and Nuclear Overhauser Effect
+     </font>
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../Chapter2/Ch2_T1_limits.html">
+     <font color="#0093AF">
+      <span class="math notranslate nohighlight">
+       \(T_1\)
+      </span>
+      limits
+     </font>
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../Chapter2/Ch2_TROSY.html">
+     <font color="#0093AF">
+      TROSY effects
+     </font>
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../Ch3_DynamicsSolids.html">
+   <font color="#B00000">
+    Solid-state NMR
+   </font>
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/>
+  <label for="toctree-checkbox-3">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../Chapter3/Ch3_R1p.html">
+     <font color="#0093AF">
+      R
+      <span class="math notranslate nohighlight">
+       \(_{1ρ}\)
+      </span>
+      relaxation
+     </font>
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../Chapter3/Ch3_REDOR.html">
+     <font color="#0093AF">
+      REDOR
+     </font>
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../Chapter3/Ch3_DIPSHIFT.html">
+     <font color="#0093AF">
+      DIPSHIFT
+     </font>
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../Chapter3/Ch3_T1_NOE.html">
+     <font color="#0093AF">
+      <span class="math notranslate nohighlight">
+       \(T_1\)
+      </span>
+      and NOE
+     </font>
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../Chapter3/Ch3_RECRR.html">
+     <font color="#0093AF">
+      Relaxation in complex sequences: RECRR
+     </font>
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../Chapter3/Ch3_Quad.html">
+     <font color="#0093AF">
+      Quadrupolar phenomena
+     </font>
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 current active has-children">
+  <a class="reference internal" href="../Ch4_DNP.html">
+   <font color="#B00000">
+    Dynamic Nuclear Polarization
+   </font>
+  </a>
+  <input checked="" class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/>
+  <label for="toctree-checkbox-4">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul class="current">
+   <li class="toctree-l2">
+    <a class="reference internal" href="Ch4_SolidEffect.html">
+     <font color="#0093AF">
+      Solid Effect
+     </font>
+    </a>
+   </li>
+   <li class="toctree-l2 current active">
+    <a class="current reference internal" href="#">
+     <font color="#0093AF">
+      Cross-Effect
+     </font>
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="Ch4_NOVEL.html">
+     <font color="#0093AF">
+      NOVEL
+     </font>
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../Ch5_ParamagneticEffects.html">
+   <font color="#B00000">
+    Paramagnetic Effects
+   </font>
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" type="checkbox"/>
+  <label for="toctree-checkbox-5">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../Chapter5/Ch5_PRE.html">
+     <font color="#0093AF">
+      Paramagnetic Relaxation Enhancement
+     </font>
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../Chapter5/Ch5_ContactShift.html">
+     <font color="#0093AF">
+      Contact shift
+     </font>
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../Chapter5/Ch5_PseudoContactShift.html">
+     <font color="#0093AF">
+      Pseudo-Contact Shift
+     </font>
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../Chapter6/Ch6_RelaxationOptions.html">
+   <font color="#B00000">
+    Relaxation Options
+   </font>
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../Ch7_ColabTemplate.html">
+   <font color="#B00000">
+    SLEEPY Colab Template
+   </font>
+  </a>
+ </li>
 </ul>
 
     </div>
 </nav></div>
+        <div class="bd-sidebar__bottom">
+             <!-- To handle the deprecated key -->
+            
+            <div class="navbar_extra_footer">
+            Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+            </div>
+            
+        </div>
     </div>
-  
-  
-  <div class="sidebar-primary-items__end sidebar-primary__section">
-      <div class="sidebar-primary-item">
-<div id="ethical-ad-placement"
-      class="flat"
-      data-ea-publisher="readthedocs"
-      data-ea-type="readthedocs-sidebar"
-      data-ea-manual="true">
-</div></div>
-  </div>
+    <div id="rtd-footer-container"></div>
+</div>
 
 
-      </div>
-      
-      <main id="main-content" class="bd-main" role="main">
-        
-        
+          
 
+
+          
+<!-- A tiny helper pixel to detect if we've scrolled -->
 <div class="sbt-scroll-pixel-helper"></div>
+<!-- Main content -->
+<div class="col py-0 content-container">
+    
+    <div class="header-article row sticky-top noprint">
+        
 
-          <div class="bd-content">
-            <div class="bd-article-container">
-              
-              <div class="bd-header-article d-print-none">
-<div class="header-article-items header-article__inner">
+
+
+<div class="col py-1 d-flex header-article-main">
+    <div class="header-article__left">
+        
+        <label for="__navigation"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="right"
+title="Toggle navigation"
+>
   
-    <div class="header-article-items__start">
-      
-        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
-  <span class="fa-solid fa-bars"></span>
-</button></div>
-      
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-bars"></i>
+  </span>
+
+</label>
+
+        
     </div>
-  
-  
-    <div class="header-article-items__end">
-      
-        <div class="header-article-item">
-
-<div class="article-header-buttons">
-
-
-
-
-
-<div class="dropdown dropdown-source-buttons">
-  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
-    <i class="fab fa-github"></i>
+    <div class="header-article__right">
+<div class="menu-dropdown menu-dropdown-launch-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Launch interactive content">
+      <i class="fas fa-rocket"></i>
   </button>
-  <ul class="dropdown-menu">
-      
-      
-      
-      <li><a href="https://github.com/alsinmr/SLEEPY_tutorial" target="_blank"
-   class="btn btn-sm btn-source-repository-button dropdown-item"
-   title="Source repository"
-   data-bs-placement="left" data-bs-toggle="tooltip"
->
-  
-
-<span class="btn__icon-container">
-  <i class="fab fa-github"></i>
-  </span>
-<span class="btn__text-container">Repository</span>
-</a>
-</li>
-      
-      
-      
-      
-      <li><a href="https://github.com/alsinmr/SLEEPY_tutorial/issues/new?title=Issue%20on%20page%20%2FChapter4/Ch4_CrossEffect.html&body=Your%20issue%20content%20here." target="_blank"
-   class="btn btn-sm btn-source-issues-button dropdown-item"
-   title="Open an issue"
-   data-bs-placement="left" data-bs-toggle="tooltip"
->
-  
-
-<span class="btn__icon-container">
-  <i class="fas fa-lightbulb"></i>
-  </span>
-<span class="btn__text-container">Open issue</span>
-</a>
-</li>
-      
-  </ul>
+  <div class="menu-dropdown__content">
+    <ul>
+    </ul>
+  </div>
 </div>
-
-
-
-
-
-
-<div class="dropdown dropdown-download-buttons">
-  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
-    <i class="fas fa-download"></i>
-  </button>
-  <ul class="dropdown-menu">
-      
-      
-      
-      <li><a href="../_sources/Chapter4/Ch4_CrossEffect.ipynb" target="_blank"
-   class="btn btn-sm btn-download-source-button dropdown-item"
-   title="Download source file"
-   data-bs-placement="left" data-bs-toggle="tooltip"
->
-  
-
-<span class="btn__icon-container">
-  <i class="fas fa-file"></i>
-  </span>
-<span class="btn__text-container">.ipynb</span>
-</a>
-</li>
-      
-      
-      
-      
-      <li>
-<button onclick="window.print()"
-  class="btn btn-sm btn-download-pdf-button dropdown-item"
-  title="Print to PDF"
-  data-bs-placement="left" data-bs-toggle="tooltip"
->
-  
-
-<span class="btn__icon-container">
-  <i class="fas fa-file-pdf"></i>
-  </span>
-<span class="btn__text-container">.pdf</span>
-</button>
-</li>
-      
-  </ul>
-</div>
-
-
-
 
 <button onclick="toggleFullScreen()"
-  class="btn btn-sm btn-fullscreen-button"
-  title="Fullscreen mode"
-  data-bs-placement="bottom" data-bs-toggle="tooltip"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="bottom"
+title="Fullscreen mode"
 >
   
 
-<span class="btn__icon-container">
+<span class="headerbtn__icon-container">
   <i class="fas fa-expand"></i>
   </span>
 
 </button>
 
-
-
-<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
-  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
-  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
-  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
-</button>
-
-
-<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
-</button>
-<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <span class="fa-solid fa-list"></span>
-</button>
-</div></div>
-      
-    </div>
+<div class="menu-dropdown menu-dropdown-repository-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Source repositories">
+      <i class="fab fa-github"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://github.com/alsinmr/SLEEPY_tutorial/"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Source repository"
+>
   
-</div>
-</div>
-              
-              
 
-<div id="jb-print-docs-body" class="onlyprint">
-    <h1><font  color = "#0093AF">Cross-Effect</font></h1>
-    <!-- Table of contents -->
-    <div id="print-main-content">
-        <div id="jb-print-toc">
-            
-            <div>
-                <h2> Contents </h2>
-            </div>
-            <nav aria-label="Page">
-                <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#setup">Setup</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#calculate-a-spectrum-of-one-crystallite-under-mas">Calculate a spectrum of one crystallite under MAS</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#cross-effect-events-as-a-function-of-the-rotor-cycle">Cross-effect events as a function of the rotor cycle</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#build-the-system">Build the System</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#run-the-simulation">Run the simulation</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#plot-the-results">Plot the results</a></li>
-</ul>
-</li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#polarization-build-up-over-many-rotor-cycles">Polarization build up over many rotor cycles</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#add-t-1-relaxation">Add <span class="math notranslate nohighlight">\(T_1\)</span> relaxation</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Run the simulation</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">Plot the results</a></li>
-</ul>
-</li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#one-rotor-cycle-without-microwaves">One rotor cycle without microwaves</a></li>
-</ul>
-            </nav>
-        </div>
+<span class="headerbtn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="headerbtn__text-container">repository</span>
+</a>
+
+      </li>
+      
+      <li>
+        <a href="https://github.com/alsinmr/SLEEPY_tutorial//issues/new?title=Issue%20on%20page%20%2FChapter4/Ch4_CrossEffect.html&body=Your%20issue%20content%20here."
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Open an issue"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="headerbtn__text-container">open issue</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<div class="menu-dropdown menu-dropdown-download-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Download this page">
+      <i class="fas fa-download"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="../_sources/Chapter4/Ch4_CrossEffect.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Download source file"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="headerbtn__text-container">.ipynb</span>
+</a>
+
+      </li>
+      
+      <li>
+        
+<button onclick="printPdf(this)"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="left"
+title="Print to PDF"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="headerbtn__text-container">.pdf</span>
+</button>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+<label for="__page-toc"
+  class="headerbtn headerbtn-page-toc"
+  
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-list"></i>
+  </span>
+
+</label>
+
     </div>
 </div>
 
-              
+<!-- Table of contents -->
+<div class="col-md-3 bd-toc show noprint">
+    <div class="tocsection onthispage pt-5 pb-3">
+        <i class="fas fa-list"></i> Contents
+    </div>
+    <nav id="bd-toc-nav" aria-label="Page">
+        <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#setup">
+   Setup
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#calculate-a-spectrum-of-one-crystallite-under-mas">
+   Calculate a spectrum of one crystallite under MAS
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#cross-effect-events-as-a-function-of-the-rotor-cycle">
+   Cross-effect events as a function of the rotor cycle
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#build-the-system">
+     Build the System
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#run-the-simulation">
+     Run the simulation
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#plot-the-results">
+     Plot the results
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#polarization-build-up-over-many-rotor-cycles">
+   Polarization build up over many rotor cycles
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#add-t-1-relaxation">
+     Add
+     <span class="math notranslate nohighlight">
+      \(T_1\)
+     </span>
+     relaxation
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id1">
+     Run the simulation
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id2">
+     Plot the results
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#one-rotor-cycle-without-microwaves">
+   One rotor cycle without microwaves
+  </a>
+ </li>
+</ul>
+
+    </nav>
+</div>
+    </div>
+    <div class="article row">
+        <div class="col pl-md-3 pl-lg-5 content-container">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1><font  color = "#0093AF">Cross-Effect</font></h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#setup">
+   Setup
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#calculate-a-spectrum-of-one-crystallite-under-mas">
+   Calculate a spectrum of one crystallite under MAS
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#cross-effect-events-as-a-function-of-the-rotor-cycle">
+   Cross-effect events as a function of the rotor cycle
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#build-the-system">
+     Build the System
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#run-the-simulation">
+     Run the simulation
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#plot-the-results">
+     Plot the results
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#polarization-build-up-over-many-rotor-cycles">
+   Polarization build up over many rotor cycles
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#add-t-1-relaxation">
+     Add
+     <span class="math notranslate nohighlight">
+      \(T_1\)
+     </span>
+     relaxation
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id1">
+     Run the simulation
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id2">
+     Plot the results
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#one-rotor-cycle-without-microwaves">
+   One rotor cycle without microwaves
+  </a>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            <main id="main-content" role="main">
                 
-<div id="searchbox"></div>
-                <article class="bd-article">
-                  
-  <section class="tex2jax_ignore mathjax_ignore" id="cross-effect">
-<h1><font  color = "#0093AF">Cross-Effect</font><a class="headerlink" href="#cross-effect" title="Link to this heading">#</a></h1>
+              <div>
+                
+  <section class="tex2jax_ignore mathjax_ignore" id="font-color-0093af-cross-effect-font">
+<h1><font  color = "#0093AF">Cross-Effect</font><a class="headerlink" href="#font-color-0093af-cross-effect-font" title="Permalink to this headline">#</a></h1>
 <p><a href="https://githubtocolab.com/alsinmr/SLEEPY_tutorial/blob/main/ColabNotebooks/Chapter4/Ch4_CrossEffect.ipynb" target="_blank"><img src="https://colab.research.google.com/assets/colab-badge.svg"></a></p>
 <p>The cross-effect<span class="math notranslate nohighlight">\(^{1,2}\)</span> is a particularly popular approach to DNP enhancement, where two coupled electrons with resonance frequencies separated by the nuclear Larmor frequency undergo a three-spin flip with the electron.</p>
 <div class="math notranslate nohighlight">
@@ -454,7 +769,7 @@
 <p>[2] C.F. Hwang, D.A. Hill. <a class="reference external" href="https://doi.org/10.1103/PhysRevLett.19.1011"><em>Phys. Rev. Lett.</em></a>, <strong>1967</strong>, 19, 1011-1014.</p>
 <p>[3] K.R. Thurber, R. Tycko. <a class="reference external" href="https://doi.org/10.1063/1.4747449"><em>J. Chem. Phys.</em></a>, <strong>2012</strong>, 137, 084508.</p>
 <section id="setup">
-<h2>Setup<a class="headerlink" href="#setup" title="Link to this heading">#</a></h2>
+<h2>Setup<a class="headerlink" href="#setup" title="Permalink to this headline">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">SLEEPY</span> <span class="k">as</span> <span class="nn">sl</span>
@@ -467,10 +782,10 @@
 </div>
 </section>
 <section id="calculate-a-spectrum-of-one-crystallite-under-mas">
-<h2>Calculate a spectrum of one crystallite under MAS<a class="headerlink" href="#calculate-a-spectrum-of-one-crystallite-under-mas" title="Link to this heading">#</a></h2>
+<h2>Calculate a spectrum of one crystallite under MAS<a class="headerlink" href="#calculate-a-spectrum-of-one-crystallite-under-mas" title="Permalink to this headline">#</a></h2>
 <p>Something important to understand about cross-effect (and simulating it) is that by spinning the sample at a frequency much slower than the variation of the electron resonance frequency, we sample different resonance frequencies during one rotor period. In our example here, the electron covers a range of frequencies about 600 MHz broad. Then, MAS does not achieve averaging of the frequencies, but rather results in a broad spectrum of frequencies for single orientations.</p>
 <p>A few important points:</p>
-<ol class="arabic simple">
+<ol class="simple">
 <li><p>In reality, the sampling of frequencies by MAS is continuous, but in simulation it is discretized. Then, narrow conditions may be missed in simulation that would be briefly met in reality. This can be dealt with by increasing the number of gamma angles, or by decreasing <span class="math notranslate nohighlight">\(T_2\)</span> which should broaden conditions.</p></li>
 <li><p>A spectrum with many frequencies results from a single crystallite under MAS, although it is not phaseable. This is because different frequencies are sampled at different times during the rotor period, where the magnetization is not always starting along the x-axis, thus resulting in a varying phase.</p></li>
 <li><p>To obtain the full breadth of the spectrum, we spin faster than typical DNP experiments, and then sample many times in the rotor period (faster spinning allows us to sample less in one rotor period, yielding a faster simulation).</p></li>
@@ -508,7 +823,7 @@
 Prop: 10000 steps per every 1 rotor period
 </pre></div>
 </div>
-<img alt="../_images/14de48d01e39c6d23613d231970a6f35cbd63f65930367d9f7fba23de3283afc.png" src="../_images/14de48d01e39c6d23613d231970a6f35cbd63f65930367d9f7fba23de3283afc.png" />
+<img alt="../_images/Ch4_CrossEffect_8_1.png" src="../_images/Ch4_CrossEffect_8_1.png" />
 </div>
 </div>
 <p>Then, we obtain a broad spectrum from the single orientation, but its phase is random. We can plot the power spectrum to get a better view (there is no built-in function for this, but it is trivial to obtain, since the Fourier-transformed spectrum is in <code class="docutils literal notranslate"><span class="pre">rho.FT</span></code>). Note that this does not yield the static spectrum; this would require an average over <span class="math notranslate nohighlight">\(\beta\)</span>-angles.</p>
@@ -526,14 +841,14 @@ Prop: 10000 steps per every 1 rotor period
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Text(0.5, 0, &#39;\\nu / MHz&#39;)
 </pre></div>
 </div>
-<img alt="../_images/f2ee6fdeaba6b24e119958f9e5f5b8eed0726a8fea10b44693933e3fc03e273b.png" src="../_images/f2ee6fdeaba6b24e119958f9e5f5b8eed0726a8fea10b44693933e3fc03e273b.png" />
+<img alt="../_images/Ch4_CrossEffect_10_1.png" src="../_images/Ch4_CrossEffect_10_1.png" />
 </div>
 </div>
 </section>
 <section id="cross-effect-events-as-a-function-of-the-rotor-cycle">
-<h2>Cross-effect events as a function of the rotor cycle<a class="headerlink" href="#cross-effect-events-as-a-function-of-the-rotor-cycle" title="Link to this heading">#</a></h2>
+<h2>Cross-effect events as a function of the rotor cycle<a class="headerlink" href="#cross-effect-events-as-a-function-of-the-rotor-cycle" title="Permalink to this headline">#</a></h2>
 <section id="build-the-system">
-<h3>Build the System<a class="headerlink" href="#build-the-system" title="Link to this heading">#</a></h3>
+<h3>Build the System<a class="headerlink" href="#build-the-system" title="Permalink to this headline">#</a></h3>
 <p>It is also important to put the nucleus, but not the electrons, in the lab frame for cross-effect to occur. Some broadening on the electrons is also important, since the cross-effect condition is otherwise too narrow and will be missed during the rotor period.</p>
 <p>In the first simulation, we will just look at one rotor period to observe the cross-effect transfer. Note that <span class="math notranslate nohighlight">\(T_2\)</span> relaxation added to the nucleus should be applied with the orientation-specific option (<code class="docutils literal notranslate"><span class="pre">OS=True</span></code>), since the nucleus is tipped away from the z-axis. If this is not used, some of the <span class="math notranslate nohighlight">\(T_2\)</span> relaxation will be applied to the nuclear polarization.</p>
 <p>Note that we take some parameters from Thurber and Tycko.<span class="math notranslate nohighlight">\(^1\)</span></p>
@@ -561,7 +876,7 @@ Prop: 10000 steps per every 1 rotor period
 </div>
 </section>
 <section id="run-the-simulation">
-<h3>Run the simulation<a class="headerlink" href="#run-the-simulation" title="Link to this heading">#</a></h3>
+<h3>Run the simulation<a class="headerlink" href="#run-the-simulation" title="Permalink to this headline">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">seq</span><span class="o">=</span><span class="n">L</span><span class="o">.</span><span class="n">Sequence</span><span class="p">()</span><span class="o">.</span><span class="n">add_channel</span><span class="p">(</span><span class="s1">&#39;e&#39;</span><span class="p">,</span><span class="n">v1</span><span class="o">=</span><span class="mf">500e3</span><span class="p">,</span><span class="n">voff</span><span class="o">=-</span><span class="mf">50e6</span><span class="p">)</span>
@@ -579,7 +894,7 @@ Prop: 10000 steps per every 1 rotor period
 </div>
 </section>
 <section id="plot-the-results">
-<h3>Plot the results<a class="headerlink" href="#plot-the-results" title="Link to this heading">#</a></h3>
+<h3>Plot the results<a class="headerlink" href="#plot-the-results" title="Permalink to this headline">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ax</span><span class="o">=</span><span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="n">figsize</span><span class="o">=</span><span class="p">[</span><span class="mi">9</span><span class="p">,</span><span class="mi">9</span><span class="p">])[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">flatten</span><span class="p">()</span>
@@ -604,7 +919,7 @@ Prop: 10000 steps per every 1 rotor period
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/6cd5661ab5c78b305b0d88b7fc77ac77a5a33f43f17cf3e239e5a8300539683d.png" src="../_images/6cd5661ab5c78b305b0d88b7fc77ac77a5a33f43f17cf3e239e5a8300539683d.png" />
+<img alt="../_images/Ch4_CrossEffect_18_0.png" src="../_images/Ch4_CrossEffect_18_0.png" />
 </div>
 </div>
 <p>In the above plots, we can see where cross effect occurs based on where the <span class="math notranslate nohighlight">\(^1\)</span>H polarization changes (upper left). The largest such event is marked by a dashed line in all plots. In the upper right plot, we see the behavior of the two electrons. The first event in this plot is partial saturation of <span class="math notranslate nohighlight">\(\langle S_{1z}\rangle\)</span>. This is followed closely by an exchange of magnetization between the two electrons, where <span class="math notranslate nohighlight">\(\omega_{e1}=\omega_{e2}\)</span>. Next, saturation of <span class="math notranslate nohighlight">\(\langle S_{0z}\rangle\)</span> occurs, followed by the first cross effect event, marked by a dashed line. This event is zoomed in on in the lower two plots. A second cross-effect event occurs next. The final event is further saturation of <span class="math notranslate nohighlight">\(\langle S_{1z}\rangle\)</span>.</p>
@@ -612,9 +927,9 @@ Prop: 10000 steps per every 1 rotor period
 </section>
 </section>
 <section id="polarization-build-up-over-many-rotor-cycles">
-<h2>Polarization build up over many rotor cycles<a class="headerlink" href="#polarization-build-up-over-many-rotor-cycles" title="Link to this heading">#</a></h2>
+<h2>Polarization build up over many rotor cycles<a class="headerlink" href="#polarization-build-up-over-many-rotor-cycles" title="Permalink to this headline">#</a></h2>
 <section id="add-t-1-relaxation">
-<h3>Add <span class="math notranslate nohighlight">\(T_1\)</span> relaxation<a class="headerlink" href="#add-t-1-relaxation" title="Link to this heading">#</a></h3>
+<h3>Add <span class="math notranslate nohighlight">\(T_1\)</span> relaxation<a class="headerlink" href="#add-t-1-relaxation" title="Permalink to this headline">#</a></h3>
 <p>Don’t forget to use <code class="docutils literal notranslate"><span class="pre">OS=True</span></code> to ensure correct relaxation of the mixed nuclear states. We also need thermal recovery for DNP enhancement to occur (<code class="docutils literal notranslate"><span class="pre">Thermal=True</span></code>).</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -627,7 +942,7 @@ Prop: 10000 steps per every 1 rotor period
 </div>
 </section>
 <section id="id1">
-<h3>Run the simulation<a class="headerlink" href="#id1" title="Link to this heading">#</a></h3>
+<h3>Run the simulation<a class="headerlink" href="#id1" title="Permalink to this headline">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">seq</span><span class="o">=</span><span class="n">L</span><span class="o">.</span><span class="n">Sequence</span><span class="p">()</span><span class="o">.</span><span class="n">add_channel</span><span class="p">(</span><span class="s1">&#39;e&#39;</span><span class="p">,</span><span class="n">v1</span><span class="o">=</span><span class="mf">500e3</span><span class="p">,</span><span class="n">voff</span><span class="o">=-</span><span class="mf">150e6</span><span class="p">)</span>
@@ -639,7 +954,7 @@ Prop: 10000 steps per every 1 rotor period
 </div>
 </section>
 <section id="id2">
-<h3>Plot the results<a class="headerlink" href="#id2" title="Link to this heading">#</a></h3>
+<h3>Plot the results<a class="headerlink" href="#id2" title="Permalink to this headline">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ON</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">det_num</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
@@ -650,7 +965,7 @@ Prop: 10000 steps per every 1 rotor period
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;AxesSubplot:xlabel=&#39;t / ms&#39;, ylabel=&#39;&lt;$^{1}H_z$&gt;&#39;&gt;
 </pre></div>
 </div>
-<img alt="../_images/978411b2bfabcf655503a05d20dbe7046fa52438357fd46b2b1b62dfcadbbaa1.png" src="../_images/978411b2bfabcf655503a05d20dbe7046fa52438357fd46b2b1b62dfcadbbaa1.png" />
+<img alt="../_images/Ch4_CrossEffect_26_1.png" src="../_images/Ch4_CrossEffect_26_1.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -690,7 +1005,7 @@ Prop: 10000 steps per every 1 rotor period
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;AxesSubplot:xlabel=&#39;t / ms&#39;, ylabel=&#39;&lt;$^{1}H_z$&gt;&#39;&gt;
 </pre></div>
 </div>
-<img alt="../_images/3babf7180602633bfab786263fd35272c0dd8fc0ace5bc8b87e7ca9dc1d41fbd.png" src="../_images/3babf7180602633bfab786263fd35272c0dd8fc0ace5bc8b87e7ca9dc1d41fbd.png" />
+<img alt="../_images/Ch4_CrossEffect_30_1.png" src="../_images/Ch4_CrossEffect_30_1.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -724,7 +1039,7 @@ Prop: 1000 steps per every 1 rotor period
 </section>
 </section>
 <section id="one-rotor-cycle-without-microwaves">
-<h2>One rotor cycle without microwaves<a class="headerlink" href="#one-rotor-cycle-without-microwaves" title="Link to this heading">#</a></h2>
+<h2>One rotor cycle without microwaves<a class="headerlink" href="#one-rotor-cycle-without-microwaves" title="Permalink to this headline">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ax</span><span class="o">=</span><span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="n">figsize</span><span class="o">=</span><span class="p">[</span><span class="mi">9</span><span class="p">,</span><span class="mi">9</span><span class="p">])[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">flatten</span><span class="p">()</span>
@@ -749,7 +1064,7 @@ Prop: 1000 steps per every 1 rotor period
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/d43369dea79a839a78bbb1a8f937c147fcde0f7d9ed732f65f504c7059a7fc3d.png" src="../_images/d43369dea79a839a78bbb1a8f937c147fcde0f7d9ed732f65f504c7059a7fc3d.png" />
+<img alt="../_images/Ch4_CrossEffect_35_0.png" src="../_images/Ch4_CrossEffect_35_0.png" />
 </div>
 </div>
 <p>Above, we see that although no saturating field is applied to the electron, the electron polarization still varies throughout the rotor period. This is partly because the thermal equilibrium for the electron polarization changes throughout the rotor period, which is observed as slow variation of the electron polarization (it is important to use <code class="docutils literal notranslate"><span class="pre">OS=True</span></code> and <code class="docutils literal notranslate"><span class="pre">Thermal=True</span></code> to obtain this behavior), and secondly because when the electrons having matching frequencies, they exchange polarization. Then, due to different electron polarizations, the nucleus will lose polarization when the cross effect condition is matched.</p>
@@ -768,7 +1083,7 @@ Prop: 1000 steps per every 1 rotor period
             mode: "python"
         },
         kernelOptions: {
-            name: "python3",
+            kernelName: "python3",
             path: "./Chapter4"
         },
         predefinedOutput: true
@@ -776,118 +1091,50 @@ Prop: 1000 steps per every 1 rotor period
     </script>
     <script>kernelName = 'python3'</script>
 
-                </article>
+              </div>
               
-
-              
-              
-              
-              
-                <footer class="prev-next-footer d-print-none">
-                  
-<div class="prev-next-area">
-    <a class="left-prev"
-       href="Ch4_SolidEffect.html"
-       title="previous page">
-      <i class="fa-solid fa-angle-left"></i>
-      <div class="prev-next-info">
-        <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title"><font  color = "#0093AF">Solid Effect</font></p>
-      </div>
+            </main>
+            <footer class="footer-article noprint">
+                
+    <!-- Previous / next buttons -->
+<div class='prev-next-area'>
+    <a class='left-prev' id="prev-link" href="Ch4_SolidEffect.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title"><font  color = "#0093AF">Solid Effect</font></p>
+        </div>
     </a>
-    <a class="right-next"
-       href="Ch4_OverhauserEffect.html"
-       title="next page">
-      <div class="prev-next-info">
+    <a class='right-next' id="next-link" href="Ch4_NOVEL.html" title="next page">
+    <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title"><font  color = "#0093AF">Overhauser Effect</font></p>
-      </div>
-      <i class="fa-solid fa-angle-right"></i>
+        <p class="prev-next-title"><font  color = "#0093AF">NOVEL</font></p>
+    </div>
+    <i class="fas fa-angle-right"></i>
     </a>
 </div>
-                </footer>
-              
-            </div>
-            
-            
-              
-                <dialog id="pst-secondary-sidebar-modal"></dialog>
-                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
-
-
-  <div class="sidebar-secondary-item">
-  <div class="page-toc tocsection onthispage">
-    <i class="fa-solid fa-list"></i> Contents
-  </div>
-  <nav class="bd-toc-nav page-toc">
-    <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#setup">Setup</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#calculate-a-spectrum-of-one-crystallite-under-mas">Calculate a spectrum of one crystallite under MAS</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#cross-effect-events-as-a-function-of-the-rotor-cycle">Cross-effect events as a function of the rotor cycle</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#build-the-system">Build the System</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#run-the-simulation">Run the simulation</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#plot-the-results">Plot the results</a></li>
-</ul>
-</li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#polarization-build-up-over-many-rotor-cycles">Polarization build up over many rotor cycles</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#add-t-1-relaxation">Add <span class="math notranslate nohighlight">\(T_1\)</span> relaxation</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Run the simulation</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">Plot the results</a></li>
-</ul>
-</li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#one-rotor-cycle-without-microwaves">One rotor cycle without microwaves</a></li>
-</ul>
-  </nav></div>
-
-</div></div>
-              
-            
-          </div>
-          <footer class="bd-footer-content">
-            
-<div class="bd-footer-content__inner container">
-  
-  <div class="footer-item">
-    
-<p class="component-author">
-By Albert Smith
-</p>
-
-  </div>
-  
-  <div class="footer-item">
-    
-
-  <p class="copyright">
-    
-      © Copyright 2025.
-      <br/>
-    
-  </p>
-
-  </div>
-  
-  <div class="footer-item">
-    
-  </div>
-  
-  <div class="footer-item">
-    
-  </div>
-  
-</div>
-          </footer>
-        
-
-      </main>
+            </footer>
+        </div>
     </div>
-  </div>
+    <div class="footer-content row">
+        <footer class="col footer"><p>
+  
+    By Albert Smith<br/>
+  
+      &copy; Copyright 2025.<br/>
+</p>
+        </footer>
+    </div>
+    
+</div>
+
+
+      </div>
+    </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script defer src="../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
-<script defer src="../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
+  <script src="../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
 
-  <footer class="bd-footer">
-  </footer>
+
   </body>
 </html>

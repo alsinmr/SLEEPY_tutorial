@@ -1,19 +1,13 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# # <font  color = "#0093AF"> Short Examples
+# # <font  color = "#0093AF">Short Examples</font>
 
 # <a href="https://githubtocolab.com/alsinmr/SLEEPY_tutorial/blob/main/ColabNotebooks/Chapter1/Ch1_ShortExamples.ipynb" target="_blank"><img src="https://colab.research.google.com/assets/colab-badge.svg"></a>
 
-# The following notebook shows some simulations that can be done in just a few lines of code. These are intended to simply familiarize you with the basics of setting up SLEEPY simulations.
+# The following notebook shows some simulations that can be done in just a few lines of code. These are intended to familiarize you with the basics of setting up SLEEPY simulations.
 
 # ## Setup
-
-# In[ ]:
-
-
-# SETUP SLEEPY
-
 
 # In[2]:
 
@@ -80,11 +74,11 @@ _=rho.plot()
 
 
 # ## Chemical Exchange Saturation Transfer
-# CEST is useful when a system has a major and minor population, the minor being invisible in the spectrum. However, applying a saturating field to the minor population will still be effective in saturating the major population, so that we may sweep through a saturating field to find the minor population's resonance frequency.
+# CEST is useful when a system has a major and minor population, the minor being invisible in the spectrum. However, applying a saturating field to the minor population will still be effective in saturating the major population, so that we may sweep the frequency of the saturating field to find the minor population's resonance frequency.
 # 
-# In this simple example, we'll just monitor the total z-magnetization, although in the real experiment we would rather integrate the peak with high population (also possible in SLEEPY, but requires acquiring the full direct dimension).
+# In this simple example, we'll just monitor the total z-magnetization, although in the real experiment we would integrate the peak with high population (also possible in SLEEPY, but requires acquiring the full direct dimension).
 
-# In[44]:
+# In[6]:
 
 
 ex0=sl.ExpSys(600,Nucs='13C')
@@ -103,19 +97,20 @@ voff0=np.linspace(-1500,1500,101)
 
 for voff in voff0:
     rho.reset()
-    (seq.add_channel('13C',v1=50,voff=voff)*rho)()
+    seq.add_channel('13C',v1=50,voff=voff)
+    (seq*rho)()
 ax=rho.plot()
 ax.set_xticks(np.linspace(0,101,11))
 ax.set_xticklabels(voff0[np.linspace(0,100,11).astype(int)]/1000)
-ax.set_xlabel(r'$\nu_{off}$ / kHz')
+_=ax.set_xlabel(r'$\nu_{off}$ / kHz')
 
 
 # ## Contact shift
-# The contact shift comes from the hyperfine coupling between a fast-relaxing electron and a nucleus. While the fast relaxing electron averages the splitting away, the peak itself shifts due to polarization of the electron.
+# The contact shift comes from the hyperfine coupling between a fast-relaxing electron and a nucleus. While the fast relaxing electron averages the splitting, the peak itself shifts due to polarization of the electron.
 # 
 # We'll run the simulation as a function of temperature, where lower temperatures yield a higher shift (and more signal). Note that realistically, we wouldn't expect the electron relaxation times to remain fixed with the varying temperature.
 
-# In[54]:
+# In[7]:
 
 
 ax=None
@@ -134,13 +129,13 @@ for T in [50,100,200,400]:
 
 
 # ## Spinning side-bands (one liner)
-# The last simulation is a little bit just for fun, but also to demonstrate some of the convenience of the SLEEPY simulation setup. We simulate $^{13}$C spinning sidebands resulting from chemical shift anisotropy. However, we set up the whole simulation in a single line of code and plot the result.
+# The last simulation is a little bit just for fun, but also to demonstrate some of the convenience of object-oriented programming in SLEEPY. We simulate $^{13}$C spinning sidebands resulting from chemical shift anisotropy. However, we set up the whole simulation in a single line of code and plot the result.
 # 
 # Compare to Herzfeld/Berger figure 2c.$^1$
 # 
-# [1] J. Herzfeld, A.E. Berger. *[J.Chem. Phys.](https://doi.org/10.1063/1.440136)* **1980**, 73, 6021-6030.
+# [1] J. Herzfeld, A.E. Berger. [*J.Chem. Phys.*](https://doi.org/10.1063/1.440136) **1980**, 73, 6021-6030.
 
-# In[41]:
+# In[27]:
 
 
 _=sl.Rho('31Px','31Pp').DetProp(

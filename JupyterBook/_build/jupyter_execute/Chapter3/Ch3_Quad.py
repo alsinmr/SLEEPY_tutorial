@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# # <font  color = "#0093AF"> Quadrupolar phenomena
+# # <font  color = "#0093AF">Quadrupolar phenomena</font>
 
 # <a href="https://githubtocolab.com/alsinmr/SLEEPY_tutorial/blob/main/ColabNotebooks/Chapter3/Ch3_Quad.ipynb" target="_blank"><img src="https://colab.research.google.com/assets/colab-badge.svg"></a>
 
@@ -12,12 +12,6 @@
 # In more complex membranes, it can be the case that lipids exchange environments, leading to complex lineshapes coming from both environments, with potential broadening depending on the rate of exchange. Here, we simulate a deuterium nuclei, with exchange of the quadrupole coupling.
 
 # ## Setup
-
-# In[ ]:
-
-
-# SETUP SLEEPY
-
 
 # In[2]:
 

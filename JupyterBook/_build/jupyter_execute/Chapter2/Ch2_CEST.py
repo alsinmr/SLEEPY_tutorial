@@ -1,19 +1,13 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# # <font  color = "#0093AF"> Chemical Exchange Saturation Transfer (CEST)
+# # <font  color = "#0093AF">Chemical Exchange Saturation Transfer (CEST)</font>
 
 # <a href="https://githubtocolab.com/alsinmr/SLEEPY_tutorial/blob/main/ColabNotebooks/Chapter2/Ch2_CEST.ipynb" target="_blank"><img src="https://colab.research.google.com/assets/colab-badge.svg"></a>
 
 # In the CEST experiment, one often has chemical exchange, but with one very small population, such that its chemical shift is difficult or impossible to observe directly. However, if we were to apply a low-power saturating field when magnetization is in the z-direction, it is possible to saturate the magnetization when on-resonant with the invisible peak.
 
 # ## Setup
-
-# In[ ]:
-
-
-# SETUP SLEEPY
-
 
 # In[2]:
 

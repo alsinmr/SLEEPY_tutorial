@@ -1,18 +1,12 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# # <font  color = "#0093AF"> R$_{1ρ}$ relaxation
+# # <font  color = "#0093AF">R$_{1ρ}$ relaxation</font>
 # Measurement of $R_{1\rho}$ in solid-state NMR is a powerful means of characterizing μs to ms dynamics. We may simulate it as the result of stochastic reorientation of anisotropic tensors, such as dipole and chemical shift anisotropies
 
 # <a href="https://githubtocolab.com/alsinmr/SLEEPY_tutorial/blob/main/ColabNotebooks/Chapter3/Ch3_R1p.ipynb" target="_blank"><img src="https://colab.research.google.com/assets/colab-badge.svg"></a>
 
 # ## Setup
-
-# In[ ]:
-
-
-# SETUP SLEEPY
-
 
 # In[2]:
 

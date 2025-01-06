@@ -1,19 +1,13 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# # <font  color = "#0093AF"> $T_1$ limits
+# # <font  color = "#0093AF">$T_1$ limits</font>
 
 # <a href="https://githubtocolab.com/alsinmr/SLEEPY_tutorial/blob/main/ColabNotebooks/Chapter2/Ch2_T1_limits.ipynb" target="_blank"><img src="https://colab.research.google.com/assets/colab-badge.svg"></a>
 
 # Longitudinal relaxation occurs because a relative fast motion—on the timescale of the lab frame rotation—induces a slow evolution of the density matrix. In this notebook, we check the validity of this lab frame calculation against analytical formulas, and also investigate the range in which equilibrium of the system to thermal equilibrium (via "DynamicThermal") is valid.
 
 # ## SETUP
-
-# In[ ]:
-
-
-# SETUP SLEEPY
-
 
 # In[2]:
 
@@ -92,7 +86,7 @@ ax.legend(('Simulation','Analytic'))
 # 
 # A second limitation occurs, which is numerical stability of the approach. Essentially, when fast dynamics ($\tau_c<10^{-10}$) is present, numerical error between the fast dynamics and slow recovery fails to stably reach equilibrium. We demonstrate below, where we evaluate the relaxation rate constants and thermal equilibrium.
 # 
-# [1] C. Bengs, M.H. Levitt. *[J. Magn. Reson](https://doi.org/10.1016/j.jmr.2019.106645)*. **2020**, 310, 106645.
+# [1] C. Bengs, M.H. Levitt. [*J. Magn. Reson*](https://doi.org/10.1016/j.jmr.2019.106645), **2020**, 310, 106645.
 
 # ### Add the relaxation
 
@@ -179,7 +173,7 @@ ax[1].set_title(fr'$\tau_c$ = {tc*1e12:.0f} ps')
 # 
 # $$
 # \begin{equation}
-# S^2=\frac14+\frac32\cos^2\phi
+# S^2=\frac14+\frac34\cos^2\phi
 # \end{equation}
 # $$
 

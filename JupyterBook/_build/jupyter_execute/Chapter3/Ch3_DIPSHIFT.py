@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# # <font  color = "#0093AF"> DIPSHIFT
+# # <font  color = "#0093AF">DIPSHIFT</font>
 
 # <a href="https://githubtocolab.com/alsinmr/SLEEPY_tutorial/blob/main/ColabNotebooks/Chapter3/Ch3_DIPSHIFT.ipynb" target="_blank"><img src="https://colab.research.google.com/assets/colab-badge.svg"></a>
 
@@ -11,19 +11,13 @@
 # 
 # Here, we also use SPINAL for heteronuclear decoupling.$^3$
 # 
-# [1] M.G. Munowitz, R.G. Griffin, G. Bodenhausen, T.H. Huang. *[J. Am. Chem. Soc.](https://doi.org/10.1021/ja00400a007)*, **1981**, 103, 2529-2533.
+# [1] M.G. Munowitz, R.G. Griffin, G. Bodenhausen, T.H. Huang. [*J. Am. Chem. Soc.*](https://doi.org/10.1021/ja00400a007)*, **1981**, 103, 2529-2533.
 # 
-# [2] A. Bielecki, A.C. Kolbert, M.H. Levitt. *[Chem. Phys. Lett.](https://doi.org/10.1016/0009-2614(89)87166-0)*, **1989**, 155, 341-346.
+# [2] A. Bielecki, A.C. Kolbert, M.H. Levitt. [*Chem. Phys. Lett.*](https://doi.org/10.1016/0009-2614(89)87166-0), **1989**, 155, 341-346.
 # 
-# [3] B.M. Fung, A.K. Khitrin, K. Ermolaev. *[J. Magn. Reson.](https://doi.org/10.1006/jmre.1999.1896)*, **2000**, 142, 97-101.
+# [3] B.M. Fung, A.K. Khitrin, K. Ermolaev. [*J. Magn. Reson.*](https://doi.org/10.1006/jmre.1999.1896), **2000**, 142, 97-101.
 
 # ## Setup
-
-# In[ ]:
-
-
-# SETUP SLEEPY
-
 
 # In[2]:
 

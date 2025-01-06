@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# # <font  color = "#0093AF"> TROSY effects
+# # <font  color = "#0093AF">TROSY effects</font>
 
 # <a href="https://githubtocolab.com/alsinmr/SLEEPY_tutorial/blob/main/ColabNotebooks/Chapter2/Ch2_TROSY.ipynb" target="_blank"><img src="https://colab.research.google.com/assets/colab-badge.svg"></a>
 
@@ -11,17 +11,11 @@
 # 
 # Here, we will assume the tensors for these two interactions are parallel. This is not entirely accurate (being tilted from each other by about 23$^\circ$, but it allows us to average the couplings to zero, mimicking tumbling in solution, with a simple, tetrahedral hopping motion.
 # 
-# [1] K. Pervushin, R. Riek, G. Wider, K. Wüthrich. *[Proc. Natl. Acad. Sci. USA.](https://doi.org/10.1073/pnas.94.23.12366)* **1997**, 94, 12366 
+# [1] K. Pervushin, R. Riek, G. Wider, K. Wüthrich. [*Proc. Natl. Acad. Sci. USA.*](https://doi.org/10.1073/pnas.94.23.12366) **1997**, 94, 12366 
 
 # ## Setup
 
-# In[ ]:
-
-
-# SETUP SLEEPY
-
-
-# In[3]:
+# In[2]:
 
 
 import SLEEPY as sl
@@ -31,7 +25,7 @@ import matplotlib.pyplot as plt
 
 # ## Build the system
 
-# In[4]:
+# In[3]:
 
 
 # By default, we get a powder average when including anisotropic terms.
@@ -51,7 +45,7 @@ L=sl.Liouvillian(*ex,kex=kex)
 
 # ## 1D spectrum
 
-# In[5]:
+# In[4]:
 
 
 rho=sl.Rho('15Nx','15Np')
@@ -63,7 +57,7 @@ _=rho.plot(FT=True)
 
 # We obtain two peaks, separated by the J-coupling, one being notably larger and narrower than the other, where relaxation effects from the $^{15}$N CSA and H–N dipole coupling cancel. Note that since the CSA scales with field, the cancelation effect is also field dependent. We calculate the spectrum maximum as a function of field, and record the spectrum maximum to demonstrate.
 
-# In[6]:
+# In[5]:
 
 
 sl.Defaults['verbose']=False #Suppress output for loop
@@ -96,7 +90,7 @@ _=ax.set_ylabel('Spectrum Max [a.u.]')
 # ## With and without decoupling
 # We can also compare what happens to the spectrum without and with decoupling. We go a little ways away from the optimal field so we can actually see all peaks.
 
-# In[11]:
+# In[6]:
 
 
 ex=sl.ExpSys(B0=15,Nucs=['15N','1H'],vr=0,pwdavg='alpha0beta0')
@@ -130,7 +124,7 @@ _=ax.legend(('w/o decoupling','w/ decoupling'))
 
 # When measuring $T_1$ in solution NMR, one must take care to account for multiexponential $T_1$ relaxation. To obtain $T_1$ relaxation from exchange, we need to perform our calculations in the lab frame, so we set up a new ExpSys
 
-# In[18]:
+# In[7]:
 
 
 ex0=sl.ExpSys(v0H=1200,Nucs=['15N','1H'],vr=0,LF=True,pwdavg='alpha0beta90')
@@ -154,7 +148,7 @@ _=rho.plot(axis='s')
 
 # We observe a strongly bi-exponential behavior, corresponding to relaxation of the $\hat{S}_z\hat{I}_\alpha$ and $\hat{S}_z\hat{I}_\beta$ states. We can saturate the $^1$H to recover monoexponential behavior. However, because this calculation is in the lab frame, we cannot apply rf-fields as easily. This is because the applied RF is not static in the lab frame, but rather oscillates as in the real experiment, complicating its application in simulation. SLEEPY has a special tool, `LFrf`,  for adding cw-irradation in the lab frame. This class takes a sequence (which just specifies the field strength and nucleus), and returns a propagator with the corresponding applied field. We do not currently support time-dependent sequences for lab-frame irradiation.
 
-# In[19]:
+# In[8]:
 
 
 rho.clear()

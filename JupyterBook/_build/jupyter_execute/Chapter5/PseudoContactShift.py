@@ -9,12 +9,6 @@
 # 
 # On the other hand, the pseudo-contact shift is not removed by isotropic motion or magic angle spinning. In case the electron has a large anisotropy on the g-tensor, tilting of the electron quantization axis away from the magnetic field prevents motion or spinning from completely averaging away the hyperfine coupling.
 
-# In[ ]:
-
-
-# SETUP SLEEPY
-
-
 # In[8]:
 
 

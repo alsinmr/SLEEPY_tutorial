@@ -1,21 +1,15 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# # <font  color = "#0093AF"> NOVEL
+# # <font  color = "#0093AF">NOVEL</font>
 
 # <a href="https://githubtocolab.com/alsinmr/SLEEPY_tutorial/blob/main/ColabNotebooks/Chapter4/Ch4_NOVEL.ipynb" target="_blank"><img src="https://colab.research.google.com/assets/colab-badge.svg"></a>
 
 # Nuclear Overhauser effect Via Electron spin-Locking (NOVEL)$^1$ is a DNP transfer mechanism which occurs by matching a spin-lock applied to electrons to the nuclear Larmor frequency. The sequence needs to be repeated many times to build up bulk nuclear polarization. Here we set up the transfer, and investigate some simple improvements to make the transfer more efficient.
 # 
-# [1] A. Henstra, P. Dirksen, J. Schmidt, W.Th. Wenckebach. *[J. Magn. Reson.](https://doi.org/10.1016/0022-2364(88)90190-4)*, **1988**, 77, 389-393.
+# [1] A. Henstra, P. Dirksen, J. Schmidt, W.Th. Wenckebach. [*J. Magn. Reson.*](https://doi.org/10.1016/0022-2364(88)90190-4), **1988**, 77, 389-393.
 
 # ## Setup
-
-# In[ ]:
-
-
-# SETUP SLEEPY
-
 
 # In[213]:
 

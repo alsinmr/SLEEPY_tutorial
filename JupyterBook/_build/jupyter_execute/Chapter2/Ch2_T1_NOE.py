@@ -1,19 +1,13 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# # <font  color = "#0093AF"> $T_1$ and Nuclear Overhauser Effect
+# # <font  color = "#0093AF">$T_1$ and Nuclear Overhauser Effect</font>
 
 # <a href="https://githubtocolab.com/alsinmr/SLEEPY_tutorial/blob/main/ColabNotebooks/Chapter2/Ch2_T1_NOE.ipynb" target="_blank"><img src="https://colab.research.google.com/assets/colab-badge.svg"></a>
 
 # In the following, we will mimic $T_1$ relaxation and heteronuclear NOE transfer resulting from tumbling in solution. The simplest way to do this is to utilize a tetrahedral hopping motion, however, note that this only results in isotropic averaging to interactions that are initially aligned along the $z$-axis.
 
 # ## Setup
-
-# In[ ]:
-
-
-# SETUP SLEEPY
-
 
 # In[2]:
 
@@ -91,7 +85,7 @@ _=L.plot('Lrelax')
 
 # Then, it is important to note: this correction will result in polarization on, for example, the $\hat{S}_z$ term, by continually reducing the population of $\hat{S}_\beta$ and increasing the population of $\hat{S}_\alpha$ (this can equivalently be seen as an asymmetric transfer between the two populations). However, we also expect asymmetric transfer between, for example, the $\hat{I}^+\hat{S}_\alpha$ and $\hat{I}^+\hat{S}_\beta$ populations. This is what gives rise to, for example, the contact shift occuring due to fast relaxing electrons. However, both the $\hat{I}^+\hat{S}_\alpha$ and $\hat{I}^+\hat{S}_\beta$ terms are zero under thermal conditions, and therefore are not included in the "DynamicThermal" correction term, as we can see above where we note that the correction is calculated from the density matrix at thermal equilibrium, $\hat{\rho}_{eq}$. We will later see that we can correctly product contact and pseudo-contact shifts using Lindblad formalism,$^1$ but this is obtained with a different set of settings which we will use later for paramagnetic effects.
 # 
-# [1] C. Bengs, M. Levitt. *[J. Magn. Reson](https://doi.org/10.1016/j.jmr.2019.106645)*. **2020**, 310,106645.
+# [1] C. Bengs, M. Levitt. [*J. Magn. Reson.*](https://doi.org/10.1016/j.jmr.2019.106645). **2020**, 310,106645.
 
 # We note that the 'DynamicThermal' option is susceptible to numerical error due to the small size of the correction compared to the large exchange rates possible. Please see [$T_1$ tests](Ch2_T1_limits.ipynb) for more details.
 

@@ -1,17 +1,11 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# # <font  color = "#0093AF"> Pseudo-Contact Shift
+# # <font  color = "#0093AF">Pseudo-Contact Shift</font>
 
 # <a href="https://githubtocolab.com/alsinmr/SLEEPY_tutorial/blob/main/ColabNotebooks/Chapter5/Ch5_PseudoContactShift.ipynb" target="_blank"><img src="https://colab.research.google.com/assets/colab-badge.svg"></a>
 
 # In the previous section, we investigated the [contact shift](../Chapter5/Ch5_ContactShift.ipynb), which results from an isotropic hyperfine coupling to a fast-relaxing electron. However, if the coupling is dipolar in nature, then we instead get a pseudocontact shift. Under static conditions, the pseudocontact shift appears just from a dipolar hyperfine coupling, but under tumbling or MAS, this vanishes unless the electron has an anisotropic g-tensor. We show how to simulate this effect here.
-
-# In[ ]:
-
-
-# SETUP SLEEPY
-
 
 # ## Setup
 

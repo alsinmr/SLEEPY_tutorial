@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# # <font  color = "#0093AF"> REDOR
+# # <font  color = "#0093AF">REDOR</font>
 
 # <a href="https://githubtocolab.com/alsinmr/SLEEPY_tutorial/blob/main/ColabNotebooks/Chapter3/Ch3_REDOR.ipynb" target="_blank"><img src="https://colab.research.google.com/assets/colab-badge.svg"></a>
 
@@ -19,21 +19,15 @@
 # 
 # Note, this was the topic of a recent paper by Aebischer et al.,$^4$ where simulations were performed using Gamma. We hope SLEEPY makes this type of simulation more accessible.
 # 
-# [1] T. Gullion, J. Schaefer. *[J. Magn. Reson.](https://doi.org/10.1016/0022-2364(89)90280-1)*, **1989**, 196-200.
+# [1] T. Gullion, J. Schaefer. [*J. Magn. Reson.*](https://doi.org/10.1016/0022-2364(89)90280-1), **1989**, 196-200.
 # 
-# [2] V. Chevelkov, U. Fink. B. Reif. *[J. Am. Chem. Soc.](https://doi.org/10.1021/ja902649u)*, **2009**, 131, 14018-14022.
+# [2] V. Chevelkov, U. Fink. B. Reif. [*J. Am. Chem. Soc.*](https://doi.org/10.1021/ja902649u), **2009**, 131, 14018-14022.
 # 
-# [3] P. Schanda, B.H. Meier, M. Ernst. *[J. Magn. Reson.](https://doi.org/10.1016/j.jmr.2011.03.015)*, **2011**, 210, 246-259.
+# [3] P. Schanda, B.H. Meier, M. Ernst. [*J. Magn. Reson.*](https://doi.org/10.1016/j.jmr.2011.03.015), **2011**, 210, 246-259.
 # 
-# [4] K. Aebischer, L.M. Becker, P. Schanda, M. Ernst. *[Magn. Reson.](https://doi.org/10.5194/mr-5-69-2024)*, **2024**, 5, 69-86
+# [4] K. Aebischer, L.M. Becker, P. Schanda, M. Ernst. [*Magn. Reson.*](https://doi.org/10.5194/mr-5-69-2024), **2024**, 5, 69-86
 
 # ## Setup
-
-# In[ ]:
-
-
-# SETUP SLEEPY
-
 
 # In[2]:
 

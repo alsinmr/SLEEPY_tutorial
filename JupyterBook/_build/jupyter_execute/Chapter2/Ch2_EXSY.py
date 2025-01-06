@@ -1,19 +1,13 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# # <font  color = "#0093AF"> Exchange Spectroscopy (EXSY)
+# # <font  color = "#0093AF">Exchange Spectroscopy (EXSY)</font>
 
 # <a href="https://githubtocolab.com/alsinmr/SLEEPY_tutorial/blob/main/ColabNotebooks/Chapter2/Ch2_EXSY.ipynb" target="_blank"><img src="https://colab.research.google.com/assets/colab-badge.svg"></a>
 
 # In the previous example, we simulated exchange in a 1D spectrum. Here, we perform the 2D EXSY experiment, under exchange conditions. We will then look how it results in a 2D EXSY spectrum, and how that spectrum changes as a function of a mixing time.
 
 # ## Setup
-
-# In[ ]:
-
-
-# SETUP SLEEPY
-
 
 # In[3]:
 
@@ -57,7 +51,7 @@ _=L.add_relax(Type='T2',i=0,T2=.01)
 # 
 # SLEEPY has a function in Tools, the TwoD_Builder, for executing and processing two-dimensional experiements. TwoD_Builder requires an initial density matrix, a Sequence for the indirect dimension evolution, the direction dimension evolution, and transfer periods between the dimensions. For the transfer, one needs a sequence to convert the X component, and one for the Y component (States acquisition$^1$). The sequences for the direct/indirect dimension may just be delays, and can be the same sequence.
 # 
-# [1] D.J. States, R.A. Haberkorn, D.J. Ruben. *[J. Magn. Reson.](https://doi.org/10.1016/0022-2364(82)90279-7)*, **1969**, 48, 286-292.
+# [1] D.J. States, R.A. Haberkorn, D.J. Ruben. [*J. Magn. Reson.*](https://doi.org/10.1016/0022-2364(82)90279-7), **1969**, 48, 286-292.
 
 # In[6]:
 

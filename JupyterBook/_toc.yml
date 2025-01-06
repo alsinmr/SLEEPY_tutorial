@@ -43,6 +43,7 @@ parts:
     - file: Chapter4/Ch4_NOVEL
   - file: Ch5_ParamagneticEffects
     sections:
+    - file: Chapter5/Ch5_PRE.ipynb
     - file: Chapter5/Ch5_ContactShift
     - file: Chapter5/Ch5_PseudoContactShift
   - file: Chapter6/Ch6_RelaxationOptions

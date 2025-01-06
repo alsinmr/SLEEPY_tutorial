@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# # <font  color = "#0093AF"> Cross-Effect
+# # <font  color = "#0093AF">Cross-Effect</font>
 
 # <a href="https://githubtocolab.com/alsinmr/SLEEPY_tutorial/blob/main/ColabNotebooks/Chapter4/Ch4_CrossEffect.ipynb" target="_blank"><img src="https://colab.research.google.com/assets/colab-badge.svg"></a>
 
@@ -24,12 +24,6 @@
 # [3] K.R. Thurber, R. Tycko. [*J. Chem. Phys.*](https://doi.org/10.1063/1.4747449), **2012**, 137, 084508.
 
 # ## Setup
-
-# In[ ]:
-
-
-# SETUP SLEEPY
-
 
 # In[156]:
 

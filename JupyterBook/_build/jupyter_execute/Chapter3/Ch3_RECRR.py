@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# # <font  color = "#0093AF"> Relaxation in complex sequences: RECRR
+# # <font  color = "#0093AF">Relaxation in complex sequences: RECRR</font>
 
 # <a href="https://githubtocolab.com/alsinmr/SLEEPY_tutorial/blob/main/ColabNotebooks/Chapter3/Ch3_RECRR.ipynb" target="_blank"><img src="https://colab.research.google.com/assets/colab-badge.svg"></a>
 
@@ -15,15 +15,9 @@
 # 
 # We will investigate the RECRR here and compare its performance to the standard $R_{1\rho}$ experiment
 # 
-# [1] E.G. Keeler, K.J. Fritzsching, A.E. McDermott. *[J. Magn. Reson](https://doi.org/10.1016/j.jmr.2018.09.004)*, **2018**, 296, 130-137.
+# [1] E.G. Keeler, K.J. Fritzsching, A.E. McDermott. [*J. Magn. Reson.*](https://doi.org/10.1016/j.jmr.2018.09.004), **2018**, 296, 130-137.
 
 # ## Setup
-
-# In[ ]:
-
-
-# SETUP SLEEPY
-
 
 # In[2]:
 

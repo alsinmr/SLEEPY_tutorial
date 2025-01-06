@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# # <font  color = "#0093AF"> Hamiltonians and Liouvillians
+# # <font  color = "#0093AF">Hamiltonians and Liouvillians</font>
 
 # <a href="https://githubtocolab.com/alsinmr/SLEEPY_tutorial/blob/main/ColabNotebooks/Chapter1/Ch1_Liouvillian.ipynb" target="_blank"><img src="https://colab.research.google.com/assets/colab-badge.svg"></a>
 
@@ -9,11 +9,9 @@
 
 # ## Setup
 
-# In[3]:
+# In[13]:
 
 
-import os
-os.chdir('../../../')
 import SLEEPY as sl
 import numpy as np
 
@@ -26,20 +24,21 @@ import numpy as np
 # 
 # We start with building 'ex'.
 
-# In[4]:
+# In[14]:
 
 
 ex=sl.ExpSys(v0H=600,Nucs=['1H','13C'],vr=60000,LF=True)  #For this example, we'll work in the lab frame
-ex.set_inter('dipole',i0=0,i1=1,delta=44000).set_inter('CSA',i=1,delta=100,eta=1).    set_inter('CS',i=0,ppm=10) #Add a dipole, CSA to 13C, and CS to 1H
+ex.set_inter('dipole',i0=0,i1=1,delta=44000).set_inter('CSA',i=1,delta=100,eta=1).\
+    set_inter('CS',i=0,ppm=10) #Add a dipole, CSA to 13C, and CS to 1H
 
 H=ex.Hamiltonian() #Create the Hamiltonian
 
 
-# To access Hamiltonian matrices, we have to specify which element of the powder average we are interested in, and also what step (up to ex.n_gamma) in the rotor cycle we want. For solution-state simulations, these are still required, but can both be set to zero. For example, for the first element of the powder average, and the first step in the rotor cycle, we use
-
 # ### Access and plot the Hamiltonian
 
-# In[5]:
+# To access Hamiltonian matrices, we have to specify which element of the powder average we are interested in, and also what step (up to ex.n_gamma) in the rotor cycle we want. For solution-state simulations, these are still required, but can both be set to zero. For example, for the first element of the powder average, and the first step in the rotor cycle, we use
+
+# In[15]:
 
 
 H[0].H(0)
@@ -47,12 +46,12 @@ H[0].H(0)
 
 # Note that we have run the set up in the lab frame, explaining why the Hamiltonian is so dense. In the rotating frame, this will not be the case.
 # 
-# We may also visualize the Hamiltonian, using H.plot. Plotting may be performed for a given element of the powder average, or if not specified (but required)
+# We may also visualize the Hamiltonian, using H.plot. Plotting may be performed for a given element of the powder average, or if not specified, then an element halfway through the powder average is used.
 
-# In[6]:
+# In[16]:
 
 
-H[5].plot() #Plot the Hamiltonian for the 5th element of the powder average
+_=H[5].plot() #Plot the Hamiltonian for the 5th element of the powder average
 
 
 # The full Hamiltonian is built from the 5 rotating components of the Hamiltonian. If we have $n_\gamma$ steps per rotor period, and we're at the kth step, this is done as follows:
@@ -66,7 +65,7 @@ H[5].plot() #Plot the Hamiltonian for the 5th element of the powder average
 # 
 # The rotating components are obtained via the Hn function, where n (-2,-1,0,1,2) must be provided. For example, for the fifth element of the powder average, if we want the $n=-1$ component, we would call:
 
-# In[7]:
+# In[17]:
 
 
 H[5].Hn(-1)
@@ -74,45 +73,45 @@ H[5].Hn(-1)
 
 # This may also be plotted. Note there are different plotting modes: 're','im','abs', 'log', and 'spy', which are real, imaginary, absolute value, log of absolute value, and spy, which is binary, i.e. zero or not zero.
 
-# In[12]:
+# In[18]:
 
 
-H[5].plot('H-1',mode='re')
+_=H[5].plot('H-1',mode='re')
 
 
 # ### Hamiltonians for individual interactions
 
 # The rotating components are built up from the rotating components of the individual interactions, where individual interactions are found in a list in H.Hinter. Indexing this list will return a description of the interaction, for example:
 
-# In[7]:
+# In[19]:
 
 
 H.Hinter[0]
 
 
-# In[8]:
+# The Hamiltonians are those specified when using ex.set_inter. However, if a spin is specified in the lab frame, then we will also find a Hamiltonian for the Zeeman interaction for those spins. As with the full Hamiltonian, we may plot Hamiltonians for the individual interactions.
+
+# In[20]:
 
 
 H.Hinter[-1]
 
 
-# The Hamiltonians are those specified when using ex.set_inter. However, if a spin is specified in the lab frame, then we will also find Hamiltonians that add the Larmor frequency for those spins. As with the full Hamiltonian, we may plot Hamiltonians for the individual interactions.
-
-# In[9]:
+# In[21]:
 
 
-H.Hinter[0].plot()
+_=H.Hinter[0].plot()
 
 
 # ## The Liouvillian
 
-# Coherent components of the Liouvillian are calculated from the Hamiltonian, although we may also add relaxation and exchange processes to the Liouvillian. We may create the Liouvillian without exchange either from the Hamiltonian or the experimental system (ex). 
+# Coherent components of the Liouvillian are calculated from the Hamiltonian, although we may also add relaxation and exchange processes to the Liouvillian. We create the Liouvillian without exchange either from the Hamiltonian or the experimental system (ex). 
 
-# In[10]:
+# In[22]:
 
 
 L=ex.Liouvillian()  
-L=sl.Liouvillian(H)  #alternatively
+L=H.Liouvillian() #alternatively
 
 
 # The coherent Liouvillian is created by calculating
@@ -147,23 +146,23 @@ L=sl.Liouvillian(H)  #alternatively
 # ```
 # We may also plot these matrices, which is particularly helpful since the Liouvillian gets relatively large and numerical display of the full matrix may not be very helpful.
 
-# In[11]:
+# In[23]:
 
 
-L[0].plot()  #Full Liouvillian
+_=L[0].plot()  #Full Liouvillian
 
 
-# In[12]:
+# In[25]:
 
 
-L[0].plot('L-1') #n=-1 component of the coherent Liouvillian
+_=L[0].plot('L-1') #n=-1 component of the coherent Liouvillian
 
 
 # ### Adding relaxation
 
-# $T_1$ and $T_2$ relaxation are available in SLEEPY, along with "Spin-Diffusion" which just introduces signal decay with $T_1=T_2$ (see Ernst et al. for spin-diffusion relaxation operator$^1$). As implemented in SLEEPY, the $T_1$ option *only* decays along $z$, which is unphysical, so it is important to also add some $T_2$ relaxation when using $T_1$. By default, $T_1$ acts along $z$, and $T_2$ along x and y. However, it is possible to specify "orientation-specific" (`OS=True`) relaxation, which will adjust $T_1$ relaxation to occur on the eigenstates of a given spin, and $T_2$ acts on coherences between eigenstates of the spin. This option is more computationally expensive. However, for spins that are strongly tilted away from $z$, using the default relaxation will "mix" the $T_1$ and $T_2$ behavior, so that $T_1$ may appear much shorter than specified. 
+# $T_1$ and $T_2$ relaxation is available in SLEEPY, along with "Spin-Diffusion" which just introduces signal decay with $T_1=T_2$ (see Ernst et al. for spin-diffusion relaxation operator$^1$). As implemented in SLEEPY, the $T_1$ option *only* decays along $z$, which is unphysical, so it is important to also add some $T_2$ relaxation when using $T_1$. By default, $T_1$ acts along $z$, and $T_2$ along x and y. However, it is possible to specify "orientation-specific" (`OS=True`) relaxation, which will adjust $T_1$ relaxation to occur on the eigenstates of a given spin, and $T_2$ acts on coherences between eigenstates of the spin. This option is more computationally expensive. However, for spins that are strongly tilted away from $z$, using the default relaxation will "mix" the $T_1$ and $T_2$ behavior, so that $T_1$ may appear much shorter than specified (see [Relaxation Options](../Chapter6/Ch6_RelaxationOptions.ipynb)). 
 # 
-# We may also include recovery of magnetization to thermal equilibrium (noting that in this case, ex.T_K becomes relevant). If orientation-specific relaxation is included, this is specified when the relaxation is added. Otherwise, it is specified after all relaxation is included. Relaxation is removed by running `L.clear_relax()`. If, for example, $T_1$ relaxation is added to a spin twice without clearing the first entry, then the relaxation rates will add together, so it is important not to forget to clear existing relaxation.
+# We may also include recovery of magnetization to thermal equilibrium (noting that in this case, ex.T_K determines the equilibrium density matrix). If orientation-specific relaxation is included, this is specified when the relaxation is added. Otherwise, it is specified after all relaxation is included. Relaxation is removed by running `L.clear_relax()`. If, for example, $T_1$ relaxation is added to a spin twice without clearing the first entry, then the relaxation rates will add together, so it is important not to forget to clear existing relaxation.
 # 
 # [1] M. Ernst, H. Zimmerman, B.H. Meier. *[Chem. Phys. Lett.](https://doi.org/10.1016/S0009-2614(99)01423-2)*, **2000**, 317, 581-588.
 
@@ -178,9 +177,9 @@ L.add_relax('T2',i=1,T2=.5) #Add T2 relaxation to spin 0
 _=L.add_relax('recovery') #Add recovery to thermal equilibrium
 
 
-# To add orientation-specific relaxation, specify `OS=True`. To include recovery to thermal equilibrium, the $T_1$ require specifying `Thermal=True`.
+# To add orientation-specific relaxation, specify `OS=True`. To include recovery to thermal equilibrium, $T_1$ requires specifying `Thermal=True`.
 
-# In[14]:
+# In[26]:
 
 
 L.clear_relax()
@@ -192,19 +191,19 @@ _=L.add_relax('T2',i=1,T2=.5,OS=True) #Add T2 relaxation to spin 0
 
 # We can visualize the result with the plot function.
 
-# In[16]:
+# In[28]:
 
 
-L.plot('Lrelax',mode='abs')
+_=L.plot('Lrelax',mode='abs')
 
 
 # ### Exchange
 
-# Importantly, SLEEPY allows us to simulate magnetic resonance under exchange conditions. This is achieved by defining two or more experimental system objects, with different interaction conditions. In this example, we just change the orientation of the dipole coupling, representing a hopping motion.
+# Importantly, SLEEPY allows us to simulate magnetic resonance under exchange conditions. This is achieved by defining two or more experimental system objects, with different interactions. In this example, we just change the orientation of the dipole coupling, representing a hopping motion.
 # 
 # Since the resulting Liouvillian comes from multiple experimental systems (`ex0,ex1`), we must use sl.Liouvillian, rather than generating it directly from ex.
 
-# In[17]:
+# In[29]:
 
 
 ex1=ex.copy() #We can copy an existing ex, so that to start, all parameters match
@@ -213,15 +212,15 @@ ex1.set_inter('dipole',i0=0,i1=1,delta=44000,euler=[0,30*np.pi/180,0]) #30 degre
 L=sl.Liouvillian(ex,ex1)
 
 
-# We can plot the resulting Liouvillian, to see that it now has larger dimension, corresponding to the two experimental systems that were input.
+# We can plot the resulting Liouvillian, to see that it now has larger dimensions, corresponding to the two experimental systems that were input.
 
-# In[18]:
+# In[30]:
 
 
 L.plot()
 
 
-# However, on its own, this isn't very useful because the two dipole orientations are not exchanging. For this, we must also include the exchange matrix, of the form:
+# On its own, this isn't very useful because the two dipole orientations are not exchanging. For this, we must also include the exchange matrix, of the form:
 # 
 # $$
 # \begin{equation}
@@ -235,31 +234,31 @@ L.plot()
 # 
 # Exchange matrices should always be mass conserving, i.e., the columns should sum to 0. Usually, they should also satisfy detailed balance, i.e., $k_{m,n}/k_{n,m}=p_n/p_m$ where $p_n$ are equilibrium populations.
 
-# In[19]:
+# In[32]:
 
 
 L.kex=[[-1e3,1e3],[1e3,-1e3]]  #Symmetric exchange between two sites
 
 
-# A number of tools exist in sl.Tools for building various exchange matrices, and also setting up both the exchange matrix and experimental systems (twoSite_kex,nSite_sym,fourSite_sym,Setup3siteSym,SetupTetraHop).
+# A number of tools exist in sl.Tools for building various exchange matrices. Some functions also set up both the exchange matrix and multiple experimental systems (twoSite_kex,nSite_sym,fourSite_sym,Setup3siteSym,SetupTetraHop).
 # 
 # Below, we show the exchange component of the Liouvillian
 
-# In[20]:
+# In[33]:
 
 
-L.plot('Lex',mode='re')
+_=L.plot('Lex',mode='re')
 
 
 # Finally, we show the total Liouvillian, including exchange.
 
-# In[21]:
+# In[34]:
 
 
-L.plot()
+_=L.plot()
 
 
-# In the next section, we discuss the generation of propagators from the Liouvillian.
+# In the next section, we discuss the generation of propagators and sequences from the Liouvillian.
 
 # In[ ]:
 

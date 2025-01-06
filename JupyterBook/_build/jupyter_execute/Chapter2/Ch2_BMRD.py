@@ -1,25 +1,19 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# # <font  color = "#0093AF"> Bloch-McConnell Relaxation Dispersion
-#     
+# # <font  color = "#0093AF">Bloch-McConnell Relaxation Dispersion</font>
+
+# <a href="https://githubtocolab.com/alsinmr/SLEEPY_tutorial/blob/main/ColabNotebooks/Chapter2/Ch2_BMRD.ipynb" target="_blank"><img src="https://colab.research.google.com/assets/colab-badge.svg"></a>
+
 # In solution NMR, if a two-site exchange process leads to modulation of chemical shift, it is in some cases possible to calculate the rate of exchange ($k_{ex}=k_{1\rightarrow2}+k_{2\rightarrow1}$), the change in chemical shift ($\Delta\omega=\Omega_1-\Omega_2$) and also the populations of the two sites ($p_1/p_2=k_{2\rightarrow1}/k_{1\rightarrow2}$), based on a series of $R_{1\rho}$ measurements. However, this depends on the rate of exchange and also the strength of the spin-lock. If the exchange is too fast, it is impossible to separate the populations from the change in chemical shift, obtaining only the product $p_1p_2\Delta\omega_{12}^2$.
 #     
 # Furthermore, if only on-resonance $R_{1\rho}$ experiments are applied, it is impossible to determine whether the larger population has the larger or smaller chemical shift, whereas this can be resolved using off-resonant $R_{1\rho}$ experiments. We will investigate this with simulation, and also compare to the formula provided by Miloushev and Palmer.$^1$
 #     
 # Note that this experiment is also valid in solids, but then we must also consider reorientational dynamics.
 #     
-# [1] V.Z. Miloushev, A.G. Palmer. [*J. Magn. Reson.*](https://doi.org/10.1021/cr030413t) **2015**, 177, 221-227
-
-# <a href="https://githubtocolab.com/alsinmr/SLEEPY_tutorial/blob/main/ColabNotebooks/Chapter2/Ch2_BMRD.ipynb" target="_blank"><img src="https://colab.research.google.com/assets/colab-badge.svg"></a>
+# [1] V.Z. Miloushev, A.G. Palmer. [*J. Magn. Reson.*](https://doi.org/10.1021/cr030413t), **2015**, 177, 221-227
 
 # ## Setup
-
-# In[ ]:
-
-
-# SETUP SLEEPY
-
 
 # In[2]:
 

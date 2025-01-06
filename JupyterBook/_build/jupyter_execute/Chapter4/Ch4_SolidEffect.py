@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# # <font  color = "#0093AF"> Solid Effect
+# # <font  color = "#0093AF">Solid Effect</font>
 
 # <a href="https://githubtocolab.com/alsinmr/SLEEPY_tutorial/blob/main/ColabNotebooks/Chapter4/Ch4_SolidEffect.ipynb" target="_blank"><img src="https://colab.research.google.com/assets/colab-badge.svg"></a>
 
@@ -13,15 +13,9 @@
 # \end{equation}
 # $$
 # 
-# [1] C.D. Jeffries *[Phys. Rev.](https://doi.org/10.1103/PhysRev.106.164)*, **1957**, 106, 164-165.
+# [1] C.D. Jeffries [*Phys. Rev.*](https://doi.org/10.1103/PhysRev.106.164), **1957**, 106, 164-165.
 
 # ## Setup
-
-# In[ ]:
-
-
-# SETUP SLEEPY
-
 
 # In[2]:
 

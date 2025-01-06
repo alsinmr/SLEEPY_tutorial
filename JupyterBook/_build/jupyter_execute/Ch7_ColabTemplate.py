@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# # <font  color = "maroon"> SLEEPY Colab Template
+# # <font  color = "#B00000"> SLEEPY Colab Template</font>
 # Here we provide the basic SLEEPY setup in Google Colab, along with some suggestions on getting started.
 
 # <a href="https://githubtocolab.com/alsinmr/SLEEPY_tutorial/blob/main/ColabTemplate.ipynb" target="_blank"><img src="https://colab.research.google.com/assets/colab-badge.svg"></a>
