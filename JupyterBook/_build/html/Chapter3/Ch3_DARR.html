@@ -1,111 +1,168 @@
 
 <!DOCTYPE html>
 
-<html>
+
+<html lang="en" data-content_root="../" >
+
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
     <title>Dipolar Assisted Rotary Resonance &#8212; SLEEPY Tutorial</title>
-    
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
   <!-- Loaded before other Sphinx assets -->
-  <link href="../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
-<link href="../_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+  <link href="../_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
 
-    
-  <link rel="stylesheet"
-    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
-  <link rel="preload" as="font" type="font/woff2" crossorigin
-    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
-  <link rel="preload" as="font" type="font/woff2" crossorigin
-    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
-
-    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
-    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=5115cc725059bd94278eecd172e13a965bf8f5a9" type="text/css" />
-    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/design-style.b7bb847fb20b106c3d81b95245e65545.min.css" />
-    
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=a3416100" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- So that users can add custom icons -->
+  <script src="../_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
 
-    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
-    <script src="../_static/jquery.js"></script>
-    <script src="../_static/underscore.js"></script>
-    <script src="../_static/doctools.js"></script>
-    <script src="../_static/clipboard.min.js"></script>
-    <script src="../_static/copybutton.js"></script>
-    <script src="../_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
+    <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../_static/doctools.js?v=888ff710"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
-    <script src="../_static/togglebutton.js"></script>
-    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
-    <script src="../_static/design-tabs.js"></script>
-    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
-const thebe_selector = ".thebe,.cell"
-const thebe_selector_input = "pre"
-const thebe_selector_output = ".output, .cell_output"
-</script>
-    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script src="../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js?v=36754332"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
     <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-    <link rel="shortcut icon" href="../_static/favicon.png"/>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'Chapter3/Ch3_DARR';</script>
+    <link rel="icon" href="../_static/favicon.png"/>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="docsearch:language" content="None">
-    
-
-    <!-- Google Analytics -->
-    
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
   </head>
-  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
-<!-- Checkboxes to toggle the left sidebar -->
-<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
-<label class="overlay overlay-navbar" for="__navigation">
-    <div class="visually-hidden">Toggle navigation sidebar</div>
-</label>
-<!-- Checkboxes to toggle the in-page toc -->
-<input type="checkbox" class="sidebar-toggle" name="__page-toc" id="__page-toc" aria-label="Toggle in-page Table of Contents">
-<label class="overlay overlay-pagetoc" for="__page-toc">
-    <div class="visually-hidden">Toggle in-page Table of Contents</div>
-</label>
-<!-- Headers at the top -->
-<div class="announcement header-item noprint"></div>
-<div class="header header-item noprint"></div>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
 
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <dialog id="pst-search-dialog">
     
-    <div class="container-fluid" id="banner"></div>
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
 
-    
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
 
-    <div class="container-xl">
-      <div class="row">
-          
-<!-- Sidebar -->
-<div class="bd-sidebar noprint" id="site-navigation">
-    <div class="bd-sidebar__content">
-        <div class="bd-sidebar__top"><div class="navbar-brand-box">
-    <a class="navbar-brand text-wrap" href="../index.html">
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
       
-        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+      
+      
         
       
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../intro.html">
+  
+  
+  
+  
+  
+    
+    
       
-      <img src="../_static/logo_dark.png" class="logo" alt="logo">
-      
-      
-      <h1 class="site-logo" id="site-title">SLEEPY Tutorial</h1>
-      
-    </a>
-</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
-  <i class="icon fas fa-search"></i>
-  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
-</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
-    <div class="bd-toc-item active">
+    
+    
+    <img src="../_static/logo_dark.png" class="logo__image only-light" alt="SLEEPY Tutorial - Home"/>
+    <img src="../_static/logo_dark.png" class="logo__image only-dark pst-js-only" alt="SLEEPY Tutorial - Home"/>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
         
         <ul class="nav bd-sidenav bd-sidenav__home-link">
             <li class="toctree-l1">
@@ -115,648 +172,273 @@ const thebe_selector_output = ".output, .cell_output"
             </li>
         </ul>
         <ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="../GettingStarted.html">
-   <font color="#B00000">
-    Getting Started
-   </font>
-  </a>
- </li>
+<li class="toctree-l1"><a class="reference internal" href="../GettingStarted.html"><font color="#B00000">Getting Started</font></a></li>
 </ul>
-<p aria-level="2" class="caption" role="heading">
- <span class="caption-text">
-  Tutorial
- </span>
-</p>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Tutorial</span></p>
 <ul class="nav bd-sidenav">
- <li class="toctree-l1 has-children">
-  <a class="reference internal" href="../Ch1_SLEEPY_basics.html">
-   <font color="#B00000">
-    SLEEPY basics
-   </font>
-  </a>
-  <input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
-  <label for="toctree-checkbox-1">
-   <i class="fas fa-chevron-down">
-   </i>
-  </label>
-  <ul>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../Chapter1/Ch1_basics.html">
-     <font color="#0093AF">
-      A Quick Start
-     </font>
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../Chapter1/Ch1_ShortExamples.html">
-     <font color="#0093AF">
-      Short Examples
-     </font>
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../Chapter1/Ch1_Objects.html">
-     <font color="#0093AF">
-      Objects
-     </font>
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../Chapter1/Ch1_expsys.html">
-     <font color="#0093AF">
-      Experimental Settings and Spin-System Definition
-     </font>
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../Chapter1/Ch1_Liouvillian.html">
-     <font color="#0093AF">
-      Hamiltonians and Liouvillians
-     </font>
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../Chapter1/Ch1_Propagation.html">
-     <font color="#0093AF">
-      Propagators and Sequences
-     </font>
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../Chapter1/Ch1_rho.html">
-     <font color="#0093AF">
-      The Density Matrix
-     </font>
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toctree-l1 has-children">
-  <a class="reference internal" href="../Ch2_SolutionNMR.html">
-   <font color="#B00000">
-    Solution NMR
-   </font>
-  </a>
-  <input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/>
-  <label for="toctree-checkbox-2">
-   <i class="fas fa-chevron-down">
-   </i>
-  </label>
-  <ul>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../Chapter2/Ch2_exchange1D.html">
-     <font color="#0093AF">
-      Exchange in 1D spectra
-     </font>
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../Chapter2/Ch2_EXSY.html">
-     <font color="#0093AF">
-      Exchange Spectroscopy (EXSY)
-     </font>
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../Chapter2/Ch2_BMRD.html">
-     <font color="#0093AF">
-      Bloch-McConnell Relaxation Dispersion
-     </font>
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../Chapter2/Ch2_CEST.html">
-     <font color="#0093AF">
-      Chemical Exchange Saturation Transfer (CEST)
-     </font>
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../Chapter2/Ch2_T1_NOE.html">
-     <font color="#0093AF">
-      <span class="math notranslate nohighlight">
-       \(T_1\)
-      </span>
-      and Nuclear Overhauser Effect
-     </font>
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../Chapter2/Ch2_T1_limits.html">
-     <font color="#0093AF">
-      <span class="math notranslate nohighlight">
-       \(T_1\)
-      </span>
-      limits
-     </font>
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../Chapter2/Ch2_TROSY.html">
-     <font color="#0093AF">
-      TROSY effects
-     </font>
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toctree-l1 has-children">
-  <a class="reference internal" href="../Ch3_DynamicsSolids.html">
-   <font color="#B00000">
-    Solid-state NMR
-   </font>
-  </a>
-  <input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/>
-  <label for="toctree-checkbox-3">
-   <i class="fas fa-chevron-down">
-   </i>
-  </label>
-  <ul>
-   <li class="toctree-l2">
-    <a class="reference internal" href="Ch3_R1p.html">
-     <font color="#0093AF">
-      R
-      <span class="math notranslate nohighlight">
-       \(_{1ρ}\)
-      </span>
-      relaxation
-     </font>
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="Ch3_REDOR.html">
-     <font color="#0093AF">
-      REDOR
-     </font>
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="Ch3_DIPSHIFT.html">
-     <font color="#0093AF">
-      DIPSHIFT
-     </font>
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="Ch3_T1_NOE.html">
-     <font color="#0093AF">
-      <span class="math notranslate nohighlight">
-       \(T_1\)
-      </span>
-      and NOE
-     </font>
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="Ch3_RECRR.html">
-     <font color="#0093AF">
-      Relaxation in complex sequences: RECRR
-     </font>
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="Ch3_Quad.html">
-     <font color="#0093AF">
-      Quadrupolar phenomena
-     </font>
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toctree-l1 has-children">
-  <a class="reference internal" href="../Ch4_DNP.html">
-   <font color="#B00000">
-    Dynamic Nuclear Polarization
-   </font>
-  </a>
-  <input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/>
-  <label for="toctree-checkbox-4">
-   <i class="fas fa-chevron-down">
-   </i>
-  </label>
-  <ul>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../Chapter4/Ch4_SolidEffect.html">
-     <font color="#0093AF">
-      Solid Effect
-     </font>
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../Chapter4/Ch4_CrossEffect.html">
-     <font color="#0093AF">
-      Cross-Effect
-     </font>
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../Chapter4/Ch4_NOVEL.html">
-     <font color="#0093AF">
-      NOVEL
-     </font>
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toctree-l1 has-children">
-  <a class="reference internal" href="../Ch5_ParamagneticEffects.html">
-   <font color="#B00000">
-    Paramagnetic Effects
-   </font>
-  </a>
-  <input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" type="checkbox"/>
-  <label for="toctree-checkbox-5">
-   <i class="fas fa-chevron-down">
-   </i>
-  </label>
-  <ul>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../Chapter5/Ch5_PRE.html">
-     <font color="#0093AF">
-      Paramagnetic Relaxation Enhancement
-     </font>
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../Chapter5/Ch5_ContactShift.html">
-     <font color="#0093AF">
-      Contact shift
-     </font>
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../Chapter5/Ch5_PseudoContactShift.html">
-     <font color="#0093AF">
-      Pseudo-Contact Shift
-     </font>
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../Chapter6/Ch6_RelaxationOptions.html">
-   <font color="#B00000">
-    Relaxation Options
-   </font>
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../Ch7_ColabTemplate.html">
-   <font color="#B00000">
-    SLEEPY Colab Template
-   </font>
-  </a>
- </li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../Ch1_SLEEPY_basics.html"><font color="#B00000">SLEEPY basics</font></a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../Chapter1/Ch1_basics.html"><font color="#0093AF">A Quick Start</font></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Chapter1/Ch1_ShortExamples.html"><font color="#0093AF">Short Examples</font></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Chapter1/Ch1_Objects.html"><font color="#0093AF">Objects</font></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Chapter1/Ch1_expsys.html"><font color="#0093AF">Experimental Settings and Spin-System Definition</font></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Chapter1/Ch1_Liouvillian.html"><font color="#0093AF">Hamiltonians and Liouvillians</font></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Chapter1/Ch1_Propagation.html"><font color="#0093AF">Propagators and Sequences</font></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Chapter1/Ch1_rho.html"><font color="#0093AF">The Density Matrix</font></a></li>
+
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../Ch2_SolutionNMR.html"><font color="#B00000">Solution NMR</font></a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../Chapter2/Ch2_exchange1D.html"><font color="#0093AF">Exchange in 1D spectra</font></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Chapter2/Ch2_EXSY.html"><font color="#0093AF">Exchange Spectroscopy (EXSY)</font></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Chapter2/Ch2_BMRD.html"><font color="#0093AF">Bloch-McConnell Relaxation Dispersion</font></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Chapter2/Ch2_CEST.html"><font color="#0093AF">Chemical Exchange Saturation Transfer (CEST)</font></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Chapter2/Ch2_T1_NOE.html"><font color="#0093AF"><span class="math notranslate nohighlight">\(T_1\)</span> and Nuclear Overhauser Effect</font></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Chapter2/Ch2_T1_limits.html"><font color="#0093AF"><span class="math notranslate nohighlight">\(T_1\)</span> limits</font></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Chapter2/Ch2_TROSY.html"><font color="#0093AF">TROSY effects</font></a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../Ch3_DynamicsSolids.html"><font color="#B00000">Solid-state NMR</font></a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="Ch3_R1p.html"><font color="#0093AF">R<span class="math notranslate nohighlight">\(_{1ρ}\)</span> relaxation</font></a></li>
+<li class="toctree-l2"><a class="reference internal" href="Ch3_REDOR.html"><font color="#0093AF">REDOR</font></a></li>
+<li class="toctree-l2"><a class="reference internal" href="Ch3_DIPSHIFT.html"><font color="#0093AF">DIPSHIFT</font></a></li>
+<li class="toctree-l2"><a class="reference internal" href="Ch3_T1_NOE.html"><font color="#0093AF"><span class="math notranslate nohighlight">\(T_1\)</span> and NOE</font></a></li>
+<li class="toctree-l2"><a class="reference internal" href="Ch3_RECRR.html"><font color="#0093AF">Relaxation in complex sequences: RECRR</font></a></li>
+<li class="toctree-l2"><a class="reference internal" href="Ch3_Quad.html"><font color="#0093AF">Quadrupolar phenomena</font></a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../Ch4_DNP.html"><font color="#B00000">Dynamic Nuclear Polarization</font></a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../Chapter4/Ch4_SolidEffect.html"><font color="#0093AF">Solid Effect</font></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Chapter4/Ch4_CrossEffect.html"><font color="#0093AF">Cross-Effect</font></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Chapter4/Ch4_NOVEL.html"><font color="#0093AF">NOVEL</font></a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../Ch5_ParamagneticEffects.html"><font color="#B00000">Paramagnetic Effects</font></a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../Chapter5/Ch5_PRE.html"><font color="#0093AF">Paramagnetic Relaxation Enhancement</font></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Chapter5/Ch5_ContactShift.html"><font color="#0093AF">Contact shift</font></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Chapter5/Ch5_PseudoContactShift.html"><font color="#0093AF">Pseudo-Contact Shift</font></a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../Chapter6/Ch6_RelaxationOptions.html"><font color="#B00000">Relaxation Options</font></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Ch7_ColabTemplate.html"><font color="#B00000"> SLEEPY Colab Template</font></a></li>
 </ul>
 
     </div>
 </nav></div>
-        <div class="bd-sidebar__bottom">
-             <!-- To handle the deprecated key -->
-            
-            <div class="navbar_extra_footer">
-            Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
-            </div>
-            
-        </div>
     </div>
-    <div id="rtd-footer-container"></div>
-</div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
 
 
-          
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
 
-
-          
-<!-- A tiny helper pixel to detect if we've scrolled -->
 <div class="sbt-scroll-pixel-helper"></div>
-<!-- Main content -->
-<div class="col py-0 content-container">
-    
-    <div class="header-article row sticky-top noprint">
-        
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
 
 
 
-<div class="col py-1 d-flex header-article-main">
-    <div class="header-article__left">
-        
-        <label for="__navigation"
-  class="headerbtn"
-  data-toggle="tooltip"
-data-placement="right"
-title="Toggle navigation"
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/alsinmr/SLEEPY_tutorial" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
 >
   
 
-<span class="headerbtn__icon-container">
-  <i class="fas fa-bars"></i>
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
   </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/alsinmr/SLEEPY_tutorial/issues/new?title=Issue%20on%20page%20%2FChapter3/Ch3_DARR.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
 
-</label>
-
-        
-    </div>
-    <div class="header-article__right">
-<div class="menu-dropdown menu-dropdown-launch-buttons">
-  <button class="headerbtn menu-dropdown__trigger"
-      aria-label="Launch interactive content">
-      <i class="fas fa-rocket"></i>
-  </button>
-  <div class="menu-dropdown__content">
-    <ul>
-    </ul>
-  </div>
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
 </div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/Chapter3/Ch3_DARR.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
 
 <button onclick="toggleFullScreen()"
-  class="headerbtn"
-  data-toggle="tooltip"
-data-placement="bottom"
-title="Fullscreen mode"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
 >
   
 
-<span class="headerbtn__icon-container">
+<span class="btn__icon-container">
   <i class="fas fa-expand"></i>
   </span>
 
 </button>
 
-<div class="menu-dropdown menu-dropdown-repository-buttons">
-  <button class="headerbtn menu-dropdown__trigger"
-      aria-label="Source repositories">
-      <i class="fab fa-github"></i>
-  </button>
-  <div class="menu-dropdown__content">
-    <ul>
-      <li>
-        <a href="https://github.com/alsinmr/SLEEPY_tutorial/"
-   class="headerbtn"
-   data-toggle="tooltip"
-data-placement="left"
-title="Source repository"
->
-  
 
-<span class="headerbtn__icon-container">
-  <i class="fab fa-github"></i>
-  </span>
-<span class="headerbtn__text-container">repository</span>
-</a>
 
-      </li>
-      
-      <li>
-        <a href="https://github.com/alsinmr/SLEEPY_tutorial//issues/new?title=Issue%20on%20page%20%2FChapter3/Ch3_DARR.html&body=Your%20issue%20content%20here."
-   class="headerbtn"
-   data-toggle="tooltip"
-data-placement="left"
-title="Open an issue"
->
-  
-
-<span class="headerbtn__icon-container">
-  <i class="fas fa-lightbulb"></i>
-  </span>
-<span class="headerbtn__text-container">open issue</span>
-</a>
-
-      </li>
-      
-    </ul>
-  </div>
-</div>
-
-<div class="menu-dropdown menu-dropdown-download-buttons">
-  <button class="headerbtn menu-dropdown__trigger"
-      aria-label="Download this page">
-      <i class="fas fa-download"></i>
-  </button>
-  <div class="menu-dropdown__content">
-    <ul>
-      <li>
-        <a href="../_sources/Chapter3/Ch3_DARR.ipynb"
-   class="headerbtn"
-   data-toggle="tooltip"
-data-placement="left"
-title="Download source file"
->
-  
-
-<span class="headerbtn__icon-container">
-  <i class="fas fa-file"></i>
-  </span>
-<span class="headerbtn__text-container">.ipynb</span>
-</a>
-
-      </li>
-      
-      <li>
-        
-<button onclick="printPdf(this)"
-  class="headerbtn"
-  data-toggle="tooltip"
-data-placement="left"
-title="Print to PDF"
->
-  
-
-<span class="headerbtn__icon-container">
-  <i class="fas fa-file-pdf"></i>
-  </span>
-<span class="headerbtn__text-container">.pdf</span>
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
 </button>
 
-      </li>
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
       
-    </ul>
-  </div>
-</div>
-<label for="__page-toc"
-  class="headerbtn headerbtn-page-toc"
+    </div>
   
->
-  
-
-<span class="headerbtn__icon-container">
-  <i class="fas fa-list"></i>
-  </span>
-
-</label>
-
-    </div>
 </div>
-
-<!-- Table of contents -->
-<div class="col-md-3 bd-toc show noprint">
-    <div class="tocsection onthispage pt-5 pb-3">
-        <i class="fas fa-list"></i> Contents
-    </div>
-    <nav id="bd-toc-nav" aria-label="Page">
-        <ul class="visible nav section-nav flex-column">
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#setup">
-   Setup
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#a-static-experiments">
-   A. Static Experiments
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#transfer-between-coupled-spins-with-same-resonance-frequency">
-     1) Transfer between coupled spins with same resonance frequency
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#transfer-between-coupled-spins-with-different-resonance-frequency">
-     2) Transfer between coupled spins with different resonance frequency
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#transfer-between-coupled-spins-with-different-resonance-frequency-coupled-to-a-flipping-1h">
-     3) Transfer between coupled spins with different resonance frequency, coupled to a flipping
-     <span class="math notranslate nohighlight">
-      \(^1\)
-     </span>
-     H
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#b-magic-angle-spinning-experiments">
-   B. Magic-Angle Spinning Experiments
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#transfer-when-two-spins-are-separated-by-the-rotor-frequency">
-     1) Transfer when two spins are separated by the rotor frequency
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#transfer-between-spins-away-from-rotary-resonance-broadened-by-t-2">
-     2) Transfer between spins away from rotary resonance, broadened by T
-     <span class="math notranslate nohighlight">
-      \(_2\)
-     </span>
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#transfer-between-spins-away-from-rotary-resonance-broadened-by-coupled-1h">
-     3) Transfer between spins away from rotary resonance, broadened by coupled
-     <span class="math notranslate nohighlight">
-      \(^1\)
-     </span>
-     H
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#transfer-between-spins-not-on-rotary-resonance-broadened-by-irradiation-of-protons">
-     Transfer between spins not on rotary resonance, broadened by irradiation of protons.
-    </a>
-   </li>
-  </ul>
- </li>
-</ul>
-
-    </nav>
 </div>
-    </div>
-    <div class="article row">
-        <div class="col pl-md-3 pl-lg-5 content-container">
-            <!-- Table of contents that is only displayed when printing the page -->
-            <div id="jb-print-docs-body" class="onlyprint">
-                <h1><font  color = "#0093AF">Dipolar Assisted Rotary Resonance</font></h1>
-                <!-- Table of contents -->
-                <div id="print-main-content">
-                    <div id="jb-print-toc">
-                        
-                        <div>
-                            <h2> Contents </h2>
-                        </div>
-                        <nav aria-label="Page">
-                            <ul class="visible nav section-nav flex-column">
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#setup">
-   Setup
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#a-static-experiments">
-   A. Static Experiments
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#transfer-between-coupled-spins-with-same-resonance-frequency">
-     1) Transfer between coupled spins with same resonance frequency
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#transfer-between-coupled-spins-with-different-resonance-frequency">
-     2) Transfer between coupled spins with different resonance frequency
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#transfer-between-coupled-spins-with-different-resonance-frequency-coupled-to-a-flipping-1h">
-     3) Transfer between coupled spins with different resonance frequency, coupled to a flipping
-     <span class="math notranslate nohighlight">
-      \(^1\)
-     </span>
-     H
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#b-magic-angle-spinning-experiments">
-   B. Magic-Angle Spinning Experiments
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#transfer-when-two-spins-are-separated-by-the-rotor-frequency">
-     1) Transfer when two spins are separated by the rotor frequency
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#transfer-between-spins-away-from-rotary-resonance-broadened-by-t-2">
-     2) Transfer between spins away from rotary resonance, broadened by T
-     <span class="math notranslate nohighlight">
-      \(_2\)
-     </span>
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#transfer-between-spins-away-from-rotary-resonance-broadened-by-coupled-1h">
-     3) Transfer between spins away from rotary resonance, broadened by coupled
-     <span class="math notranslate nohighlight">
-      \(^1\)
-     </span>
-     H
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#transfer-between-spins-not-on-rotary-resonance-broadened-by-irradiation-of-protons">
-     Transfer between spins not on rotary resonance, broadened by irradiation of protons.
-    </a>
-   </li>
-  </ul>
- </li>
-</ul>
+              
+              
 
-                        </nav>
-                    </div>
-                </div>
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1><font  color = "#0093AF">Dipolar Assisted Rotary Resonance</font></h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
             </div>
-            <main id="main-content" role="main">
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#setup">Setup</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#a-static-experiments">A. Static Experiments</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#transfer-between-coupled-spins-with-same-resonance-frequency">1) Transfer between coupled spins with same resonance frequency</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#transfer-between-coupled-spins-with-different-resonance-frequency">2) Transfer between coupled spins with different resonance frequency</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#transfer-between-coupled-spins-with-different-resonance-frequency-coupled-to-a-flipping-1h">3) Transfer between coupled spins with different resonance frequency, coupled to a flipping <span class="math notranslate nohighlight">\(^1\)</span>H</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#b-magic-angle-spinning-experiments">B. Magic-Angle Spinning Experiments</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#transfer-when-two-spins-are-separated-by-the-rotor-frequency">1) Transfer when two spins are separated by the rotor frequency</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#transfer-between-spins-away-from-rotary-resonance-broadened-by-t-2">2) Transfer between spins away from rotary resonance, broadened by T<span class="math notranslate nohighlight">\(_2\)</span></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#transfer-between-spins-away-from-rotary-resonance-broadened-by-coupled-1h">3) Transfer between spins away from rotary resonance, broadened by coupled <span class="math notranslate nohighlight">\(^1\)</span>H</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#transfer-between-spins-not-on-rotary-resonance-broadened-by-irradiation-of-protons">Transfer between spins not on rotary resonance, broadened by irradiation of protons.</a></li>
+</ul>
+</li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
                 
-              <div>
-                
-  <section class="tex2jax_ignore mathjax_ignore" id="font-color-0093af-dipolar-assisted-rotary-resonance-font">
-<h1><font  color = "#0093AF">Dipolar Assisted Rotary Resonance</font><a class="headerlink" href="#font-color-0093af-dipolar-assisted-rotary-resonance-font" title="Permalink to this headline">#</a></h1>
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="dipolar-assisted-rotary-resonance">
+<h1><font  color = "#0093AF">Dipolar Assisted Rotary Resonance</font><a class="headerlink" href="#dipolar-assisted-rotary-resonance" title="Link to this heading">#</a></h1>
 <p><a href="https://githubtocolab.com/alsinmr/SLEEPY_tutorial/blob/main/ColabNotebooks/Chapter3/Ch3_DARR.ipynb" target="_blank"><img src="https://colab.research.google.com/assets/colab-badge.svg"></a></p>
 <p>While SLEEPY is mainly intended for predicting relaxation behavior or the influence of relaxation on a spin-system, some NMR experiments rely on spin-diffusion within the dense <span class="math notranslate nohighlight">\(^1\)</span>H network to induce broadening on heteronuclei which then allows spin-diffusion among the heteronuclei. The prime examples of this is the Proton-Driven Spin-
 Diffusion experiment (PDSD) and the Dipolar Assisted Rotational Resonance (DARR) experiments.</p>
@@ -764,7 +446,7 @@ Diffusion experiment (PDSD) and the Dipolar Assisted Rotational Resonance (DARR)
 <p>We will achieve a DARR transfer by artificially broadening the <span class="math notranslate nohighlight">\(^1H\)</span> line using relaxation settings in SLEEPY. Note that it is also possible to introduce a large number of <span class="math notranslate nohighlight">\(^1\)</span>H spins (10) which will also give rise to the required broadening. The latter approach has been demonstrated in <a class="reference external" href="https://spinevolution.com/">SpinEvolution</a> by Veshtort and Griffin.</p>
 <p>We will take several steps to piece together the DARR experiment.</p>
 <p><strong>A. Static experiments</strong></p>
-<ol class="simple">
+<ol class="arabic simple">
 <li><p>Simulate <span class="math notranslate nohighlight">\(^{13}\)</span>C–<span class="math notranslate nohighlight">\(^{13}\)</span>C transfer occuring via homonuclear dipole couplings, where the two spins have the same resonance frequency (resonant transfer).</p></li>
 <li><p>Simulate <span class="math notranslate nohighlight">\(^{13}\)</span>C–<span class="math notranslate nohighlight">\(^{13}\)</span>C transfer occuring via homonuclear dipole couplings, where the two spins have different resonance frequencies and have an intrinsic linewidth due to <span class="math notranslate nohighlight">\(T_2\)</span>.</p></li>
 <li><p>Simulate <span class="math notranslate nohighlight">\(^{13}\)</span>C–<span class="math notranslate nohighlight">\(^{13}\)</span>C transfer occuring via homonuclear dipole couplings, where the two spins have different resonance frequencies and have an intrinsic linewidth induced by coupling to <span class="math notranslate nohighlight">\(^1\)</span>H.
@@ -787,7 +469,7 @@ Diffusion experiment (PDSD) and the Dipolar Assisted Rotational Resonance (DARR)
 <p>E.R. Andrew, S. Clough. L.F. Farnell, T.D. Gledhill, I. Roberts. <a class="reference external" href="https://doi.org/10.1016/0031-9163(66)91274-1"><em>Phys. Letters</em></a>, <strong>1966</strong>, 21, 505-506.</p>
 <p>E.R. Andrew, A. Bradbury, R.G. Eades, V.T. Wynn. <a class="reference external" href="https://doi.org/10.1016/0031-9163(63)90123-9"><em>Phys. Letters</em></a>, <strong>1963</strong>, 4, 99.</p>
 <section id="setup">
-<h2>Setup<a class="headerlink" href="#setup" title="Permalink to this headline">#</a></h2>
+<h2>Setup<a class="headerlink" href="#setup" title="Link to this heading">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">SLEEPY</span> <span class="k">as</span> <span class="nn">sl</span>
@@ -799,9 +481,9 @@ Diffusion experiment (PDSD) and the Dipolar Assisted Rotational Resonance (DARR)
 </div>
 </section>
 <section id="a-static-experiments">
-<h2>A. Static Experiments<a class="headerlink" href="#a-static-experiments" title="Permalink to this headline">#</a></h2>
+<h2>A. Static Experiments<a class="headerlink" href="#a-static-experiments" title="Link to this heading">#</a></h2>
 <section id="transfer-between-coupled-spins-with-same-resonance-frequency">
-<h3>1) Transfer between coupled spins with same resonance frequency<a class="headerlink" href="#transfer-between-coupled-spins-with-same-resonance-frequency" title="Permalink to this headline">#</a></h3>
+<h3>1) Transfer between coupled spins with same resonance frequency<a class="headerlink" href="#transfer-between-coupled-spins-with-same-resonance-frequency" title="Link to this heading">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#C-C dipole, 2.5 Angstrom distance</span>
@@ -857,7 +539,7 @@ Diffusion experiment (PDSD) and the Dipolar Assisted Rotational Resonance (DARR)
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(-1000.0, 1000.0)
 </pre></div>
 </div>
-<img alt="../_images/Ch3_DARR_9_1.png" src="../_images/Ch3_DARR_9_1.png" />
+<img alt="../_images/c0a42db17153a482be30fd3425208d0448136c0528378e4aa9c7f23088cd8a8c.png" src="../_images/c0a42db17153a482be30fd3425208d0448136c0528378e4aa9c7f23088cd8a8c.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -893,7 +575,7 @@ Current time is 12000.000 microseconds
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;AxesSubplot:xlabel=&#39;t / ms&#39;, ylabel=&#39;&lt;Op&gt;&#39;&gt;
 </pre></div>
 </div>
-<img alt="../_images/Ch3_DARR_11_1.png" src="../_images/Ch3_DARR_11_1.png" />
+<img alt="../_images/d52349ebae9469a361c791f124960cd40e7d88f7cc1085112d81067f84b1d2fb.png" src="../_images/d52349ebae9469a361c791f124960cd40e7d88f7cc1085112d81067f84b1d2fb.png" />
 </div>
 </div>
 <p>Above, we see the spectrum, which has a characteristic Pake-pattern, resulting from the dipole coupling between the two spins. Because the two spins have identical resonance frequencies, they mix, allowing the transfer of z-magnetization from one spin (<span class="math notranslate nohighlight">\(S_{0z}\)</span>) to the other spin (<span class="math notranslate nohighlight">\(S_{1z}\)</span>).</p>
@@ -905,7 +587,7 @@ Current time is 12000.000 microseconds
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/Ch3_DARR_13_0.png" src="../_images/Ch3_DARR_13_0.png" />
+<img alt="../_images/d61e8aeaea6deb3af86df97c1757872036445ad876d180e40935bbcd6d53b46c.png" src="../_images/d61e8aeaea6deb3af86df97c1757872036445ad876d180e40935bbcd6d53b46c.png" />
 </div>
 </div>
 <p>Spin magnetization transfers because the <span class="math notranslate nohighlight">\(|1/2,-1/2\rangle\)</span> and <span class="math notranslate nohighlight">\(|-1/2,1/2\rangle\)</span> states mix. This may also be observed in the Liouvillian, made easier to see by zooming in on the correct set of states:</p>
@@ -919,13 +601,13 @@ Current time is 12000.000 microseconds
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/Ch3_DARR_15_0.png" src="../_images/Ch3_DARR_15_0.png" />
+<img alt="../_images/e0c532acb0394877c3da8bdcc9269791d0b2e0211752d3099126ef0f9419bdf2.png" src="../_images/e0c532acb0394877c3da8bdcc9269791d0b2e0211752d3099126ef0f9419bdf2.png" />
 </div>
 </div>
 <p>We see in the reduced space that <span class="math notranslate nohighlight">\(S_1^\alpha S_2^\beta\)</span> is driven into the zero- and double-quantum coherences by the dipole coupling, and subsequently arrives in <span class="math notranslate nohighlight">\(S_1^\beta S_2^\alpha\)</span>, which is a transfer of magnetization from spin 1 to spin 2.</p>
 </section>
 <section id="transfer-between-coupled-spins-with-different-resonance-frequency">
-<h3>2) Transfer between coupled spins with different resonance frequency<a class="headerlink" href="#transfer-between-coupled-spins-with-different-resonance-frequency" title="Permalink to this headline">#</a></h3>
+<h3>2) Transfer between coupled spins with different resonance frequency<a class="headerlink" href="#transfer-between-coupled-spins-with-different-resonance-frequency" title="Link to this heading">#</a></h3>
 <p>In the next step, we consider what happens if the two spins are separate by a few ppm (10 ppm, resulting in a 10x150=1500 Hz separation).</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -971,7 +653,7 @@ Current time is 12000.000 microseconds
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/Ch3_DARR_21_0.png" src="../_images/Ch3_DARR_21_0.png" />
+<img alt="../_images/f98a5d2ed1f3585ab747c48653631824072702d576444150ba8122a43f9e4274.png" src="../_images/f98a5d2ed1f3585ab747c48653631824072702d576444150ba8122a43f9e4274.png" />
 </div>
 </div>
 <p>Now, we observe to separated Pake-patterns, separated by roughly 10 ppm.</p>
@@ -995,7 +677,7 @@ Current time is 12000.000 microseconds
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/Ch3_DARR_24_0.png" src="../_images/Ch3_DARR_24_0.png" />
+<img alt="../_images/b4a6b527c917aa62e0dba16a24e3e5e2e4f34b8d7aeaeadcf95337358402c906.png" src="../_images/b4a6b527c917aa62e0dba16a24e3e5e2e4f34b8d7aeaeadcf95337358402c906.png" />
 </div>
 </div>
 <p>The separation in resonance frequency quenches the transfer between spins. This can be understood by observing the impact on the Hamiltonian. While the dipole coupling is not gone, it is now smaller than the difference in chemical shift, so that the states no longer mix.</p>
@@ -1006,7 +688,7 @@ Current time is 12000.000 microseconds
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/Ch3_DARR_26_0.png" src="../_images/Ch3_DARR_26_0.png" />
+<img alt="../_images/43883ecea4059da0cf2cb30a2e6b91ada1aa0144ab2cc270a3cd87aae9559bd2.png" src="../_images/43883ecea4059da0cf2cb30a2e6b91ada1aa0144ab2cc270a3cd87aae9559bd2.png" />
 </div>
 </div>
 <p>However, what would happen if some <span class="math notranslate nohighlight">\(T_2\)</span> broadening is introduced to the two spins, such that there is a small amount of overlap?</p>
@@ -1038,13 +720,13 @@ Current time is 12000.000 microseconds
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;AxesSubplot:xlabel=&#39;t / ms&#39;, ylabel=&#39;&lt;Op&gt;&#39;&gt;
 </pre></div>
 </div>
-<img alt="../_images/Ch3_DARR_29_1.png" src="../_images/Ch3_DARR_29_1.png" />
+<img alt="../_images/867db86c290455478d4905beb9ab0f658c4636648fc3a3fa6fa313c684ed67e6.png" src="../_images/867db86c290455478d4905beb9ab0f658c4636648fc3a3fa6fa313c684ed67e6.png" />
 </div>
 </div>
 <p>As we see, the transfer is reintroduced, although it is considerably slower, and no longer coherent.</p>
 </section>
 <section id="transfer-between-coupled-spins-with-different-resonance-frequency-coupled-to-a-flipping-1h">
-<h3>3) Transfer between coupled spins with different resonance frequency, coupled to a flipping <span class="math notranslate nohighlight">\(^1\)</span>H<a class="headerlink" href="#transfer-between-coupled-spins-with-different-resonance-frequency-coupled-to-a-flipping-1h" title="Permalink to this headline">#</a></h3>
+<h3>3) Transfer between coupled spins with different resonance frequency, coupled to a flipping <span class="math notranslate nohighlight">\(^1\)</span>H<a class="headerlink" href="#transfer-between-coupled-spins-with-different-resonance-frequency-coupled-to-a-flipping-1h" title="Link to this heading">#</a></h3>
 <p>We often refer to <span class="math notranslate nohighlight">\(^{13}C\)</span>-<span class="math notranslate nohighlight">\(^{13}C\)</span> transfer without a field applied to <span class="math notranslate nohighlight">\(^1\)</span>H as Proton-Driven Spin-Diffusion (PDSD). But what does this transfer have to do with protons? It turns out that the broadening required for the transfer may be provided indirectly by a coupling to <span class="math notranslate nohighlight">\(^1\)</span>H that undergoes flipping.</p>
 <p>For this experiment, then, we need to add another spin. We’ll add a one-bond H–C dipole coupling to one of the two <span class="math notranslate nohighlight">\(^{13}\)</span>C. We start without flipping on the <span class="math notranslate nohighlight">\(^1H\)</span>, but then introduce it in a subsequent step.</p>
 <div class="cell docutils container">
@@ -1100,7 +782,7 @@ State-space reduction: 64-&gt;12
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/Ch3_DARR_34_0.png" src="../_images/Ch3_DARR_34_0.png" />
+<img alt="../_images/7f1d9c5125ffd88c5c17fa3cfc4a816cfcd384fcb80332aec249c64ca819af77.png" src="../_images/7f1d9c5125ffd88c5c17fa3cfc4a816cfcd384fcb80332aec249c64ca819af77.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -1110,7 +792,7 @@ State-space reduction: 64-&gt;12
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/Ch3_DARR_35_0.png" src="../_images/Ch3_DARR_35_0.png" />
+<img alt="../_images/663052e80d5f0fb7e342804a1eb79e6bb7e4b9668351680e99befd1035a0ebd5.png" src="../_images/663052e80d5f0fb7e342804a1eb79e6bb7e4b9668351680e99befd1035a0ebd5.png" />
 </div>
 </div>
 <p>The <span class="math notranslate nohighlight">\(^1\)</span>H dipole coupling alone is insufficient to drive a transfer, but if the <span class="math notranslate nohighlight">\(^1\)</span>H undergoes flipping due to spin diffusion, then the transfer occurs.</p>
@@ -1140,7 +822,7 @@ State-space reduction: 64-&gt;12
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/Ch3_DARR_38_0.png" src="../_images/Ch3_DARR_38_0.png" />
+<img alt="../_images/3ccb901030d61fbd5bccf630ae6fdce73691e577d1111a7f5a3818a48cad500a.png" src="../_images/3ccb901030d61fbd5bccf630ae6fdce73691e577d1111a7f5a3818a48cad500a.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -1150,16 +832,16 @@ State-space reduction: 64-&gt;12
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/Ch3_DARR_39_0.png" src="../_images/Ch3_DARR_39_0.png" />
+<img alt="../_images/62e2f214df645ae082051b4c489252602a2847b27502d078c87249d67855c788.png" src="../_images/62e2f214df645ae082051b4c489252602a2847b27502d078c87249d67855c788.png" />
 </div>
 </div>
 </section>
 </section>
 <section id="b-magic-angle-spinning-experiments">
-<h2>B. Magic-Angle Spinning Experiments<a class="headerlink" href="#b-magic-angle-spinning-experiments" title="Permalink to this headline">#</a></h2>
+<h2>B. Magic-Angle Spinning Experiments<a class="headerlink" href="#b-magic-angle-spinning-experiments" title="Link to this heading">#</a></h2>
 <p>Previously, we found that two dipole-coupled spins with the same chemical shift resulted in transfer of longitudinal magnetization between them. Here, we test if the same principle applies under magic angle spinning (10 kHz).</p>
 <section id="transfer-when-two-spins-are-separated-by-the-rotor-frequency">
-<h3>1) Transfer when two spins are separated by the rotor frequency<a class="headerlink" href="#transfer-when-two-spins-are-separated-by-the-rotor-frequency" title="Permalink to this headline">#</a></h3>
+<h3>1) Transfer when two spins are separated by the rotor frequency<a class="headerlink" href="#transfer-when-two-spins-are-separated-by-the-rotor-frequency" title="Link to this heading">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Build the spin-system (two nuclei, no MAS, dipole coupled with no chemical shift)</span>
@@ -1202,7 +884,7 @@ State-space reduction: 16-&gt;6
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/Ch3_DARR_45_0.png" src="../_images/Ch3_DARR_45_0.png" />
+<img alt="../_images/541fb5d3362e2423b1bf2afb5b845044a91070603e273f8b09efca9adac11496.png" src="../_images/541fb5d3362e2423b1bf2afb5b845044a91070603e273f8b09efca9adac11496.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -1212,7 +894,7 @@ State-space reduction: 16-&gt;6
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/Ch3_DARR_46_0.png" src="../_images/Ch3_DARR_46_0.png" />
+<img alt="../_images/48346dcb5777f4a4a6d7cbbf1d0b048398fa767a72c1a354df18077193a5a1f3.png" src="../_images/48346dcb5777f4a4a6d7cbbf1d0b048398fa767a72c1a354df18077193a5a1f3.png" />
 </div>
 </div>
 <p>Magic angle spinning quenches the transfer by averaging the dipole coupling to zero. On the other hand, if the spins are separated by the MAS frequency (i.e. the <span class="math notranslate nohighlight">\(R^2\)</span> condition), the coupling is reintroduced</p>
@@ -1257,7 +939,7 @@ Prop: 2 steps per every 1 rotor period
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/Ch3_DARR_50_0.png" src="../_images/Ch3_DARR_50_0.png" />
+<img alt="../_images/0dbf10c39534371ef5b239351464975f276cf2269f65caf4558b60c2cd9173b0.png" src="../_images/0dbf10c39534371ef5b239351464975f276cf2269f65caf4558b60c2cd9173b0.png" />
 </div>
 </div>
 <p>Matching the rotational resonance condition distorts the spectrum by reintroducing the dipole coupling.</p>
@@ -1284,7 +966,7 @@ Prop: 2 steps per every 1 rotor period
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;AxesSubplot:xlabel=&#39;t / ms&#39;, ylabel=&#39;&lt;Op&gt;&#39;&gt;
 </pre></div>
 </div>
-<img alt="../_images/Ch3_DARR_53_1.png" src="../_images/Ch3_DARR_53_1.png" />
+<img alt="../_images/dbd2301f362b637af3f39a7b7f16947a3551235171e15befd64dc6d859d74055.png" src="../_images/dbd2301f362b637af3f39a7b7f16947a3551235171e15befd64dc6d859d74055.png" />
 </div>
 </div>
 <p>The rotational resonance condition induces a transfer, but it also distorts the spectrum, and furthermore can only be matched for one pair of spins at a time. So, we move off the rotational resonance condition.</p>
@@ -1328,7 +1010,7 @@ Prop: 2 steps per every 1 rotor period
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/Ch3_DARR_57_0.png" src="../_images/Ch3_DARR_57_0.png" />
+<img alt="../_images/7f94d537207c146f3dfd946112da1addfb02b580ed02b2d49f2801eebb7827fb.png" src="../_images/7f94d537207c146f3dfd946112da1addfb02b580ed02b2d49f2801eebb7827fb.png" />
 </div>
 </div>
 <p>Away from rotational resonance, our spectrum looks nicer, but what happens to our transfer?</p>
@@ -1352,13 +1034,13 @@ Prop: 2 steps per every 1 rotor period
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/Ch3_DARR_60_0.png" src="../_images/Ch3_DARR_60_0.png" />
+<img alt="../_images/6d2703bd04ccfdcda1e36d904c19cefbf17d8e5aff8f070803061dbf317232b8.png" src="../_images/6d2703bd04ccfdcda1e36d904c19cefbf17d8e5aff8f070803061dbf317232b8.png" />
 </div>
 </div>
 <p>Not surprisingly, the transfer is quenched. It can be reintroduced by broadening of the <span class="math notranslate nohighlight">\(^{13}\)</span>C resonance</p>
 </section>
 <section id="transfer-between-spins-away-from-rotary-resonance-broadened-by-t-2">
-<h3>2) Transfer between spins away from rotary resonance, broadened by T<span class="math notranslate nohighlight">\(_2\)</span><a class="headerlink" href="#transfer-between-spins-away-from-rotary-resonance-broadened-by-t-2" title="Permalink to this headline">#</a></h3>
+<h3>2) Transfer between spins away from rotary resonance, broadened by T<span class="math notranslate nohighlight">\(_2\)</span><a class="headerlink" href="#transfer-between-spins-away-from-rotary-resonance-broadened-by-t-2" title="Link to this heading">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">L</span><span class="o">.</span><span class="n">clear_relax</span><span class="p">()</span>
@@ -1388,13 +1070,13 @@ Prop: 2 steps per every 1 rotor period
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/Ch3_DARR_65_0.png" src="../_images/Ch3_DARR_65_0.png" />
+<img alt="../_images/9023c9e3147a57e6795b3f8bf5a4a5962ebe72326b53cb39d633cfe0d89b07b4.png" src="../_images/9023c9e3147a57e6795b3f8bf5a4a5962ebe72326b53cb39d633cfe0d89b07b4.png" />
 </div>
 </div>
 <p>Then, can we achieve the same affect by coupling to a <span class="math notranslate nohighlight">\(^1\)</span>H?</p>
 </section>
 <section id="transfer-between-spins-away-from-rotary-resonance-broadened-by-coupled-1h">
-<h3>3) Transfer between spins away from rotary resonance, broadened by coupled <span class="math notranslate nohighlight">\(^1\)</span>H<a class="headerlink" href="#transfer-between-spins-away-from-rotary-resonance-broadened-by-coupled-1h" title="Permalink to this headline">#</a></h3>
+<h3>3) Transfer between spins away from rotary resonance, broadened by coupled <span class="math notranslate nohighlight">\(^1\)</span>H<a class="headerlink" href="#transfer-between-spins-away-from-rotary-resonance-broadened-by-coupled-1h" title="Link to this heading">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Build the spin-system (two nuclei, no MAS, dipole coupled with no chemical shift)</span>
@@ -1436,13 +1118,13 @@ Prop: 2 steps per every 1 rotor period
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/Ch3_DARR_70_0.png" src="../_images/Ch3_DARR_70_0.png" />
+<img alt="../_images/d332dbe5d5d6dea971f216c798bc8f3b877b062175185b35db0d5d26dcb2a571.png" src="../_images/d332dbe5d5d6dea971f216c798bc8f3b877b062175185b35db0d5d26dcb2a571.png" />
 </div>
 </div>
 <p>Some transfer occurs, although it is not particularly efficient. We finally want to understand what happens if we introduce a field on the <span class="math notranslate nohighlight">\(^1\)</span>H matching the rotary resonance recoupling (R<span class="math notranslate nohighlight">\(^3\)</span>) condition</p>
 </section>
 <section id="transfer-between-spins-not-on-rotary-resonance-broadened-by-irradiation-of-protons">
-<h3>Transfer between spins not on rotary resonance, broadened by irradiation of protons.<a class="headerlink" href="#transfer-between-spins-not-on-rotary-resonance-broadened-by-irradiation-of-protons" title="Permalink to this headline">#</a></h3>
+<h3>Transfer between spins not on rotary resonance, broadened by irradiation of protons.<a class="headerlink" href="#transfer-between-spins-not-on-rotary-resonance-broadened-by-irradiation-of-protons" title="Link to this heading">#</a></h3>
 <p>First, we observe the <span class="math notranslate nohighlight">\(^{13}\)</span>C spectrum with <span class="math notranslate nohighlight">\(^1\)</span>H cw decoupling, first away from the rotary resonance recoupling condition, and then on the condition. Lines mark the resonance frequency of the first <span class="math notranslate nohighlight">\(^{13}\)</span>C and the distance to the corresponding rotational resonance condition.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1465,7 +1147,7 @@ Prop: 5 steps per every 1 rotor period
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/Ch3_DARR_75_0.png" src="../_images/Ch3_DARR_75_0.png" />
+<img alt="../_images/da529bc27070062a821bee90e26ee21e1d2e94cb97c26c9a36e3896db43f73aa.png" src="../_images/da529bc27070062a821bee90e26ee21e1d2e94cb97c26c9a36e3896db43f73aa.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -1491,7 +1173,7 @@ Prop: 5 steps per every 1 rotor period
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/Ch3_DARR_77_0.png" src="../_images/Ch3_DARR_77_0.png" />
+<img alt="../_images/d8973ae9b95591f2f36cf873751e183e4a2823570662a187be376414bd2179c4.png" src="../_images/d8973ae9b95591f2f36cf873751e183e4a2823570662a187be376414bd2179c4.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -1506,7 +1188,7 @@ Prop: 5 steps per every 1 rotor period
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/Ch3_DARR_78_0.png" src="../_images/Ch3_DARR_78_0.png" />
+<img alt="../_images/5b59dd399f92d7c21143d5f34e6579aeb1b774ddec0444b125ac7689618ac82f.png" src="../_images/5b59dd399f92d7c21143d5f34e6579aeb1b774ddec0444b125ac7689618ac82f.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -1529,7 +1211,7 @@ Prop: 5 steps per every 1 rotor period
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/Ch3_DARR_80_0.png" src="../_images/Ch3_DARR_80_0.png" />
+<img alt="../_images/38b7914ef203595341454361a026692082ec8bd64721f09a2338823ab59fa147.png" src="../_images/38b7914ef203595341454361a026692082ec8bd64721f09a2338823ab59fa147.png" />
 </div>
 </div>
 <p>Then, we see how broadening the C-C <span class="math notranslate nohighlight">\(R^2\)</span> condition via recoupling the H–C dipole coupling with <span class="math notranslate nohighlight">\(R^3\)</span> allows for C-C spin-diffusion to occur.</p>
@@ -1549,7 +1231,7 @@ Prop: 5 steps per every 1 rotor period
             mode: "python"
         },
         kernelOptions: {
-            kernelName: "python3",
+            name: "python3",
             path: "./Chapter3"
         },
         predefinedOutput: true
@@ -1557,36 +1239,99 @@ Prop: 5 steps per every 1 rotor period
     </script>
     <script>kernelName = 'python3'</script>
 
-              </div>
+                </article>
               
-            </main>
-            <footer class="footer-article noprint">
-                
-    <!-- Previous / next buttons -->
-<div class='prev-next-area'>
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
 </div>
-            </footer>
-        </div>
-    </div>
-    <div class="footer-content row">
-        <footer class="col footer"><p>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#setup">Setup</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#a-static-experiments">A. Static Experiments</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#transfer-between-coupled-spins-with-same-resonance-frequency">1) Transfer between coupled spins with same resonance frequency</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#transfer-between-coupled-spins-with-different-resonance-frequency">2) Transfer between coupled spins with different resonance frequency</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#transfer-between-coupled-spins-with-different-resonance-frequency-coupled-to-a-flipping-1h">3) Transfer between coupled spins with different resonance frequency, coupled to a flipping <span class="math notranslate nohighlight">\(^1\)</span>H</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#b-magic-angle-spinning-experiments">B. Magic-Angle Spinning Experiments</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#transfer-when-two-spins-are-separated-by-the-rotor-frequency">1) Transfer when two spins are separated by the rotor frequency</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#transfer-between-spins-away-from-rotary-resonance-broadened-by-t-2">2) Transfer between spins away from rotary resonance, broadened by T<span class="math notranslate nohighlight">\(_2\)</span></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#transfer-between-spins-away-from-rotary-resonance-broadened-by-coupled-1h">3) Transfer between spins away from rotary resonance, broadened by coupled <span class="math notranslate nohighlight">\(^1\)</span>H</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#transfer-between-spins-not-on-rotary-resonance-broadened-by-irradiation-of-protons">Transfer between spins not on rotary resonance, broadened by irradiation of protons.</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
   
-    By Albert Smith<br/>
-  
-      &copy; Copyright 2025.<br/>
-</p>
-        </footer>
-    </div>
+  <div class="footer-item">
     
+<p class="component-author">
+By Albert Smith
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2025.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
 </div>
+          </footer>
+        
 
-
-      </div>
+      </main>
     </div>
+  </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script src="../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
+  <script defer src="../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
+<script defer src="../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
 
-
+  <footer class="bd-footer">
+  </footer>
   </body>
 </html>
