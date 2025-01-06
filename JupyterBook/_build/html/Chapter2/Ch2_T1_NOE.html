@@ -201,8 +201,9 @@
 <li class="toctree-l2"><a class="reference internal" href="../Chapter3/Ch3_R1p.html"><font color="#0093AF">R<span class="math notranslate nohighlight">\(_{1ρ}\)</span> relaxation</font></a></li>
 <li class="toctree-l2"><a class="reference internal" href="../Chapter3/Ch3_REDOR.html"><font color="#0093AF">REDOR</font></a></li>
 <li class="toctree-l2"><a class="reference internal" href="../Chapter3/Ch3_DIPSHIFT.html"><font color="#0093AF">DIPSHIFT</font></a></li>
-<li class="toctree-l2"><a class="reference internal" href="../Chapter3/Ch3_T1_NOE.html"><font color="#0093AF"><span class="math notranslate nohighlight">\(T_1\)</span> and NOE</font></a></li>
 <li class="toctree-l2"><a class="reference internal" href="../Chapter3/Ch3_RECRR.html"><font color="#0093AF">Relaxation in complex sequences: RECRR</font></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Chapter3/Ch3_T1_NOE.html"><font color="#0093AF"><span class="math notranslate nohighlight">\(T_1\)</span> and NOE</font></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Chapter3/Ch3_DARR.html"><font color="#0093AF">Dipolar Assisted Rotary Resonance</font></a></li>
 <li class="toctree-l2"><a class="reference internal" href="../Chapter3/Ch3_Quad.html"><font color="#0093AF">Quadrupolar phenomena</font></a></li>
 </ul>
 </details></li>
@@ -431,7 +432,7 @@
   <section class="tex2jax_ignore mathjax_ignore" id="t-1-and-nuclear-overhauser-effect">
 <h1><font  color = "#0093AF"><span class="math notranslate nohighlight">\(T_1\)</span> and Nuclear Overhauser Effect</font><a class="headerlink" href="#t-1-and-nuclear-overhauser-effect" title="Link to this heading">#</a></h1>
 <p><a href="https://githubtocolab.com/alsinmr/SLEEPY_tutorial/blob/main/ColabNotebooks/Chapter2/Ch2_T1_NOE.ipynb" target="_blank"><img src="https://colab.research.google.com/assets/colab-badge.svg"></a></p>
-<p>In the following, we will mimic <span class="math notranslate nohighlight">\(T_1\)</span> relaxation and heteronuclear NOE transfer resulting from tumbling in solution. The simplest way to do this is to utilize a tetrahedral hopping motion, however, note that this only results in isotropic averaging to interactions that are initially aligned along the <span class="math notranslate nohighlight">\(z\)</span>-axis.</p>
+<p>In the following, we will mimic <span class="math notranslate nohighlight">\(T_1\)</span> relaxation and heteronuclear NOE transfer resulting from tumbling in solution. To do this, we would like to have a motion that averages the dipolar tensor to zero. A simple way to do this is to use a tetrahedral hopping motion, however, note that this only results in isotropic averaging to interactions that are initially aligned along the <span class="math notranslate nohighlight">\(z\)</span>-axis.</p>
 <section id="setup">
 <h2>Setup<a class="headerlink" href="#setup" title="Link to this heading">#</a></h2>
 <div class="cell docutils container">
@@ -446,19 +447,18 @@
 </section>
 <section id="build-the-spin-system">
 <h2>Build the spin-system<a class="headerlink" href="#build-the-spin-system" title="Link to this heading">#</a></h2>
-<p>An important consideration in simulating longitudinal relaxation is that it is induced by interactions that are removed by using the rotating frame approximation. Therefore, we must be sure to setup our spin system in the lab frame.</p>
+<p>An important consideration when simulating longitudinal relaxation is that it is induced by interactions that are removed when using the rotating frame approximation. Therefore, we must be sure to setup our spin system in the lab frame.</p>
 <p>Note that adding explicit relaxation (via L.add_relax) does not require a lab-frame calculation.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># By default, we get a powder average when including anisotropic terms.</span>
-<span class="c1"># However, we don&#39;t need it for mimicking tumbling, </span>
 <span class="c1"># so we set it explicitly to a 1-element powder average</span>
 <span class="n">ex0</span><span class="o">=</span><span class="n">sl</span><span class="o">.</span><span class="n">ExpSys</span><span class="p">(</span><span class="n">v0H</span><span class="o">=</span><span class="mi">400</span><span class="p">,</span><span class="n">Nucs</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;15N&#39;</span><span class="p">,</span><span class="s1">&#39;1H&#39;</span><span class="p">],</span><span class="n">vr</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">LF</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">pwdavg</span><span class="o">=</span><span class="s1">&#39;alpha0beta0&#39;</span><span class="p">)</span>
 <span class="n">delta</span><span class="o">=</span><span class="n">sl</span><span class="o">.</span><span class="n">Tools</span><span class="o">.</span><span class="n">dipole_coupling</span><span class="p">(</span><span class="mf">.102</span><span class="p">,</span><span class="s1">&#39;1H&#39;</span><span class="p">,</span><span class="s1">&#39;15N&#39;</span><span class="p">)</span>
 <span class="n">ex0</span><span class="o">.</span><span class="n">set_inter</span><span class="p">(</span><span class="s1">&#39;dipole&#39;</span><span class="p">,</span><span class="n">i0</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">i1</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">delta</span><span class="o">=</span><span class="n">delta</span><span class="p">)</span>
 
 <span class="c1"># Set up 4-site motion</span>
-<span class="n">ex</span><span class="p">,</span><span class="n">kex</span><span class="o">=</span><span class="n">sl</span><span class="o">.</span><span class="n">Tools</span><span class="o">.</span><span class="n">SetupTumbling</span><span class="p">(</span><span class="n">ex0</span><span class="p">,</span><span class="n">tc</span><span class="o">=</span><span class="mf">1e-9</span><span class="p">,</span><span class="n">q</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span> <span class="c1">#Defaults to the magic angle, which will average the couplings</span>
+<span class="n">ex</span><span class="p">,</span><span class="n">kex</span><span class="o">=</span><span class="n">sl</span><span class="o">.</span><span class="n">Tools</span><span class="o">.</span><span class="n">SetupTumbling</span><span class="p">(</span><span class="n">ex0</span><span class="p">,</span><span class="n">tc</span><span class="o">=</span><span class="mf">1e-9</span><span class="p">,</span><span class="n">q</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
 
 <span class="n">L</span><span class="o">=</span><span class="n">sl</span><span class="o">.</span><span class="n">Liouvillian</span><span class="p">(</span><span class="o">*</span><span class="n">ex</span><span class="p">,</span><span class="n">kex</span><span class="o">=</span><span class="n">kex</span><span class="p">)</span>
 <span class="n">seq</span><span class="o">=</span><span class="n">L</span><span class="o">.</span><span class="n">Sequence</span><span class="p">(</span><span class="n">Dt</span><span class="o">=</span><span class="mf">.1</span><span class="p">)</span>
@@ -473,15 +473,12 @@
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">rho</span><span class="o">=</span><span class="n">sl</span><span class="o">.</span><span class="n">Rho</span><span class="p">(</span><span class="s1">&#39;Thermal&#39;</span><span class="p">,[</span><span class="s1">&#39;15Nz&#39;</span><span class="p">,</span><span class="s1">&#39;1Hz&#39;</span><span class="p">])</span>
 <span class="n">rho</span><span class="o">.</span><span class="n">DetProp</span><span class="p">(</span><span class="n">seq</span><span class="p">,</span><span class="n">n</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
-<span class="n">rho</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="s1">&#39;s&#39;</span><span class="p">)</span>
+<span class="n">_</span><span class="o">=</span><span class="n">rho</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="s1">&#39;s&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;AxesSubplot:xlabel=&#39;t / s&#39;, ylabel=&#39;&lt;Op&gt;&#39;&gt;
-</pre></div>
-</div>
-<img alt="../_images/d2726139ad7ccedfc903bbc57880f531b6cc0626e02901a0c2b584e6c75f474a.png" src="../_images/d2726139ad7ccedfc903bbc57880f531b6cc0626e02901a0c2b584e6c75f474a.png" />
+<img alt="../_images/79d2f1dc859096b5a436dde41b984ba920c807ba2b90dc33a74b0233a2cb961d.png" src="../_images/79d2f1dc859096b5a436dde41b984ba920c807ba2b90dc33a74b0233a2cb961d.png" />
 </div>
 </div>
 <p>We observe both spins start from their thermal equilibrium and decay towards zero.</p>
@@ -494,15 +491,15 @@
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">L</span><span class="o">.</span><span class="n">add_relax</span><span class="p">(</span><span class="s1">&#39;DynamicThermal&#39;</span><span class="p">)</span>
 <span class="n">rho</span><span class="o">=</span><span class="n">sl</span><span class="o">.</span><span class="n">Rho</span><span class="p">(</span><span class="s1">&#39;zero&#39;</span><span class="p">,[</span><span class="s1">&#39;15Nz&#39;</span><span class="p">,</span><span class="s1">&#39;1Hz&#39;</span><span class="p">])</span>
 <span class="n">rho</span><span class="o">.</span><span class="n">DetProp</span><span class="p">(</span><span class="n">seq</span><span class="p">,</span><span class="n">n</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
-<span class="n">rho</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="s1">&#39;s&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">=</span><span class="n">rho</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="s1">&#39;s&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlim</span><span class="p">(</span><span class="n">ax</span><span class="o">.</span><span class="n">get_xlim</span><span class="p">())</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">ax</span><span class="o">.</span><span class="n">get_xlim</span><span class="p">(),</span><span class="n">ex0</span><span class="o">.</span><span class="n">Peq</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="mi">2</span><span class="p">),</span><span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;:&#39;</span><span class="p">,</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">)</span>
+<span class="n">_</span><span class="o">=</span><span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">ax</span><span class="o">.</span><span class="n">get_xlim</span><span class="p">(),</span><span class="n">ex0</span><span class="o">.</span><span class="n">Peq</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="mi">2</span><span class="p">),</span><span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">,</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;grey&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;AxesSubplot:xlabel=&#39;t / s&#39;, ylabel=&#39;&lt;Op&gt;&#39;&gt;
-</pre></div>
-</div>
-<img alt="../_images/20b8576b034841cce343d4f4582c9ddab57e615825e7ad45be52c7f6c4bc2c34.png" src="../_images/20b8576b034841cce343d4f4582c9ddab57e615825e7ad45be52c7f6c4bc2c34.png" />
+<img alt="../_images/17e9d34d5c37f73ea50e99182c169acae171f001048f17db7c5b1b1279af88a5.png" src="../_images/17e9d34d5c37f73ea50e99182c169acae171f001048f17db7c5b1b1279af88a5.png" />
 </div>
 </div>
 <p>“DynamicThermal” works by calculating the full Liouvillian (referred to here as <span class="math notranslate nohighlight">\(\hat{\hat{L}}_0\)</span>) and equilibrium density matrix, <span class="math notranslate nohighlight">\(\hat{\rho}_{eq}\)</span>. Then, a correction term is calculated, such that:</p>
@@ -523,23 +520,26 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/aafb49e6b6faaa642b597b89fcc51be166d2f361283629a3196415c71988175e.png" src="../_images/aafb49e6b6faaa642b597b89fcc51be166d2f361283629a3196415c71988175e.png" />
+<img alt="../_images/590c8eb756091c3834eb1d020fc2670377c445aed7a44503218c8a638d4782cf.png" src="../_images/590c8eb756091c3834eb1d020fc2670377c445aed7a44503218c8a638d4782cf.png" />
 </div>
 </div>
-<p>Then, it is important to note: this correction will result in polarization on, for example, the <span class="math notranslate nohighlight">\(\hat{S}_z\)</span> term, by continually reducing the population of <span class="math notranslate nohighlight">\(\hat{S}_\beta\)</span> and increasing the population of <span class="math notranslate nohighlight">\(\hat{S}_\alpha\)</span> (this can equivalently be seen as an asymmetric transfer between the two populations). However, we also expect asymmetric transfer between, for example, the <span class="math notranslate nohighlight">\(\hat{I}^+\hat{S}_\alpha\)</span> and <span class="math notranslate nohighlight">\(\hat{I}^+\hat{S}_\beta\)</span> populations. This is what gives rise to, for example, the contact shift occuring due to fast relaxing electrons. However, both the <span class="math notranslate nohighlight">\(\hat{I}^+\hat{S}_\alpha\)</span> and <span class="math notranslate nohighlight">\(\hat{I}^+\hat{S}_\beta\)</span> terms are zero under thermal conditions, and therefore are not included in the “DynamicThermal” correction term, as we can see above where we note that the correction is calculated from the density matrix at thermal equilibrium, <span class="math notranslate nohighlight">\(\hat{\rho}_{eq}\)</span>. We will later see that we can correctly product contact and pseudo-contact shifts using Lindblad formalism,<span class="math notranslate nohighlight">\(^1\)</span> but this is obtained with a different set of settings which we will use later for paramagnetic effects.</p>
+<p>Then, it is important to note: this correction will result in polarization on, for example, the <span class="math notranslate nohighlight">\(\hat{S}_z\)</span> term, by continually reducing the population of <span class="math notranslate nohighlight">\(\hat{S}_\beta\)</span> and increasing the population of <span class="math notranslate nohighlight">\(\hat{S}_\alpha\)</span>, whereas the rest of the Liouvillian is continuously try to equilibrate these populations. However, we also expect asymmetric transfer between, for example, the <span class="math notranslate nohighlight">\(\hat{I}^+\hat{S}_\alpha\)</span> and <span class="math notranslate nohighlight">\(\hat{I}^+\hat{S}_\beta\)</span> populations. This is what gives rise to the <a class="reference internal" href="../Chapter5/Ch5_ContactShift.html"><span class="std std-doc">contact shift</span></a> occuring due to fast relaxing electrons. However, both the <span class="math notranslate nohighlight">\(\hat{I}^+\hat{S}_\alpha\)</span> and <span class="math notranslate nohighlight">\(\hat{I}^+\hat{S}_\beta\)</span> terms are zero under thermal conditions, and therefore are not included in the “DynamicThermal” correction term, as we can see above where we note that the correction is calculated from the density matrix at thermal equilibrium, <span class="math notranslate nohighlight">\(\hat{\rho}_{eq}\)</span>. We will later see that we can correctly produce contact and pseudo-contact shifts using Lindblad formalism,<span class="math notranslate nohighlight">\(^1\)</span> but this is obtained with a different set of settings which we will use later for paramagnetic effects.</p>
 <p>[1] C. Bengs, M. Levitt. <a class="reference external" href="https://doi.org/10.1016/j.jmr.2019.106645"><em>J. Magn. Reson.</em></a>. <strong>2020</strong>, 310,106645.</p>
 <p>We note that the ‘DynamicThermal’ option is susceptible to numerical error due to the small size of the correction compared to the large exchange rates possible. Please see <a class="reference internal" href="Ch2_T1_limits.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(T_1\)</span> tests</span></a> for more details.</p>
 </section>
 <section id="obtaining-the-noe-enhancement">
 <h2>Obtaining the NOE enhancement<a class="headerlink" href="#obtaining-the-noe-enhancement" title="Link to this heading">#</a></h2>
 <p>Finally, we may see how saturating one spin can lead to a change in the magnetization on the second spin via the Nuclear Overhauser Effect.<span class="math notranslate nohighlight">\(^1\)</span></p>
-<p>Here, we have to use a special tool in SLEEPY to apply a field in the lab frame. Keep in mind, longitudinal relaxation is driven by terms in the Hamiltonian that are dropped when we go to the rotating frame. However, in the lab frame, the applied RF fields are no longer time-independent and need to be explicitly simulated. SLEEPY uses several tricks for doing this. First, we use a two-step square wave to produce the correct frequency. The applied field is scaled to produce the correct amplitude at center frequency band. The result propagator is then brought into its eigenbasis and propagated either to one step in a rotor period, or here just to the desired length of the propagator.</p>
+<p>Here, we have to use a special tool in SLEEPY to apply an oscillating RF field in the lab frame. Keep in mind, longitudinal relaxation is driven by terms in the Hamiltonian that are dropped when we go to the rotating frame, so a lab frame calculation is required. However, in the lab frame, the applied RF fields are no longer time-independent and need to be explicitly simulated. SLEEPY uses several tricks for doing this. First, we use a two-step square wave to produce the correct frequency. The applied field is scaled to produce the correct amplitude at center frequency band. The resulting propagator is then brought into its eigenbasis and propagated either to one step in a rotor period, or here just to the desired length of the propagator.</p>
 <p>[1] A.W. Overhauser. <em><a class="reference external" href="https://doi.org/10.1103/PhysRev.92.411">Phys. Rev.</a></em>, <strong>1953</strong>, 92, 411-415.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">L</span><span class="o">.</span><span class="n">kex</span><span class="o">=</span><span class="n">sl</span><span class="o">.</span><span class="n">Tools</span><span class="o">.</span><span class="n">fourSite_sym</span><span class="p">(</span><span class="n">tc</span><span class="o">=</span><span class="mf">1e-9</span><span class="p">)</span>
 
 <span class="n">seq</span><span class="o">=</span><span class="n">L</span><span class="o">.</span><span class="n">Sequence</span><span class="p">(</span><span class="n">Dt</span><span class="o">=</span><span class="mf">.1</span><span class="p">)</span><span class="o">.</span><span class="n">add_channel</span><span class="p">(</span><span class="s1">&#39;1H&#39;</span><span class="p">,</span><span class="n">v1</span><span class="o">=</span><span class="mi">500</span><span class="p">)</span>
+<span class="c1">#The lfrf object creates a propagator with a fixed</span>
+<span class="c1">#field strength on one channel, </span>
+<span class="c1">#and length equal to the input sequence length (0.1 s)</span>
 <span class="n">lfrf</span><span class="o">=</span><span class="n">sl</span><span class="o">.</span><span class="n">LFrf</span><span class="p">(</span><span class="n">seq</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -547,44 +547,74 @@
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">lfrf</span><span class="o">.</span><span class="n">seq</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">_</span><span class="o">=</span><span class="n">lfrf</span><span class="o">.</span><span class="n">seq</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&lt;AxesSubplot:ylabel=&#39;$v_1$ / kHz&#39;&gt;,
- &lt;AxesSubplot:xlabel=&#39;t / $\\mu$s&#39;, ylabel=&#39;$v_1$ / kHz&#39;&gt;]
-</pre></div>
-</div>
 <img alt="../_images/0dc5dd8ed6d5993ad5462e7915929a75de318d39ca13fac351b74a819a503815.png" src="../_images/0dc5dd8ed6d5993ad5462e7915929a75de318d39ca13fac351b74a819a503815.png" />
 </div>
 </div>
 <p>First, we get the propagator for the lab-frame RF. Then, we apply it to a system at thermal equilibrium, to observe it evolve away from thermal equilibrium due to the RF irradation.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">U</span><span class="o">=</span><span class="n">lfrf</span><span class="o">.</span><span class="n">U</span><span class="p">()</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">U</span><span class="o">=</span><span class="n">lfrf</span><span class="o">.</span><span class="n">U</span><span class="p">(</span><span class="n">progress</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 
 <span class="n">rho</span><span class="o">=</span><span class="n">sl</span><span class="o">.</span><span class="n">Rho</span><span class="p">(</span><span class="s1">&#39;Thermal&#39;</span><span class="p">,[</span><span class="s1">&#39;15Nz&#39;</span><span class="p">,</span><span class="s1">&#39;1Hz&#39;</span><span class="p">])</span>
 <span class="n">rho</span><span class="o">.</span><span class="n">DetProp</span><span class="p">(</span><span class="n">U</span><span class="p">,</span><span class="n">n</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
-<span class="n">rho</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="s1">&#39;s&#39;</span><span class="p">)</span>
+<span class="n">_</span><span class="o">=</span><span class="n">rho</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="s1">&#39;s&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>LF calculation: |------------------------------| 0% complete
-
-LF calculation: |██████████████████████████████| 100% complete
-
-LF calculation: |██████████████████████████████| 100% complete
-Completed
+<img alt="../_images/7db47308af6f43cce1f63179a9bbdd167a590f615fc11bcbfb3a67ad3b13fce5.png" src="../_images/7db47308af6f43cce1f63179a9bbdd167a590f615fc11bcbfb3a67ad3b13fce5.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Enhancement: </span><span class="si">{</span><span class="n">rho</span><span class="o">.</span><span class="n">I</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">real</span><span class="o">/</span><span class="n">ex0</span><span class="o">.</span><span class="n">Peq</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">:</span><span class="s1">.1f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;AxesSubplot:xlabel=&#39;t / s&#39;, ylabel=&#39;&lt;Op&gt;&#39;&gt;
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Enhancement: -2.1
 </pre></div>
 </div>
-<img alt="../_images/ba88fb2699738238fd68e3b7d8a25ad18a355cc26ff5f008f942dac81af82e51.png" src="../_images/ba88fb2699738238fd68e3b7d8a25ad18a355cc26ff5f008f942dac81af82e51.png" />
 </div>
 </div>
+<p>Then, the <span class="math notranslate nohighlight">\(^1\)</span>H magnetization is saturated, and the <span class="math notranslate nohighlight">\(^{15}\)</span>N signal switches from negative to positive and is enhanced by just over a factor of 2.</p>
+<p>We may also calculate the correlation time dependence of the NOE enhancement.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">seq</span><span class="o">=</span><span class="n">L</span><span class="o">.</span><span class="n">Sequence</span><span class="p">(</span><span class="n">Dt</span><span class="o">=</span><span class="mf">.1</span><span class="p">)</span><span class="o">.</span><span class="n">add_channel</span><span class="p">(</span><span class="s1">&#39;1H&#39;</span><span class="p">,</span><span class="n">v1</span><span class="o">=</span><span class="mi">5000</span><span class="p">)</span>
+<span class="n">rho</span><span class="o">=</span><span class="n">sl</span><span class="o">.</span><span class="n">Rho</span><span class="p">(</span><span class="s1">&#39;Thermal&#39;</span><span class="p">,</span><span class="s1">&#39;15Nz&#39;</span><span class="p">)</span>
+
+<span class="n">tc0</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">logspace</span><span class="p">(</span><span class="o">-</span><span class="mi">10</span><span class="p">,</span><span class="o">-</span><span class="mf">7.5</span><span class="p">,</span><span class="mi">50</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">tc</span> <span class="ow">in</span> <span class="n">tc0</span><span class="p">:</span>
+    <span class="n">rho</span><span class="o">.</span><span class="n">reset</span><span class="p">()</span>
+    <span class="n">L</span><span class="o">.</span><span class="n">kex</span><span class="o">=</span><span class="n">sl</span><span class="o">.</span><span class="n">Tools</span><span class="o">.</span><span class="n">fourSite_sym</span><span class="p">(</span><span class="n">tc</span><span class="o">=</span><span class="n">tc</span><span class="p">)</span>
+    <span class="n">lfrf</span><span class="o">=</span><span class="n">sl</span><span class="o">.</span><span class="n">LFrf</span><span class="p">(</span><span class="n">seq</span><span class="p">)</span>
+    <span class="n">U</span><span class="o">=</span><span class="n">lfrf</span><span class="o">.</span><span class="n">U</span><span class="p">(</span><span class="n">progress</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+    <span class="p">(</span><span class="n">U</span><span class="o">**</span><span class="n">np</span><span class="o">.</span><span class="n">inf</span><span class="o">*</span><span class="n">rho</span><span class="p">)()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ax</span><span class="o">=</span><span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()[</span><span class="mi">1</span><span class="p">]</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">semilogx</span><span class="p">(</span><span class="n">tc0</span><span class="p">,</span><span class="n">rho</span><span class="o">.</span><span class="n">I</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">real</span><span class="o">/</span><span class="n">ex0</span><span class="o">.</span><span class="n">Peq</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">([</span><span class="o">-</span><span class="mf">4.5</span><span class="p">,</span><span class="mi">1</span><span class="p">])</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;$\tau_c$ / s&#39;</span><span class="p">)</span>
+<span class="n">_</span><span class="o">=</span><span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;$\varepsilon$&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/0f8fc5f5dd8be70879c276acb26e15f14b9821c74a57d608dad5174e397569ce.png" src="../_images/0f8fc5f5dd8be70879c276acb26e15f14b9821c74a57d608dad5174e397569ce.png" />
+</div>
+</div>
+<p>We then get the expected enhancement values for an H–N heteronuclear NOE. A little noise appears at short correlation times where the DynamicThermal method is less stable.</p>
 </section>
 </section>
 

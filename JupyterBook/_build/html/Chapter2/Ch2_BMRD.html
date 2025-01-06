@@ -201,8 +201,9 @@
 <li class="toctree-l2"><a class="reference internal" href="../Chapter3/Ch3_R1p.html"><font color="#0093AF">R<span class="math notranslate nohighlight">\(_{1ρ}\)</span> relaxation</font></a></li>
 <li class="toctree-l2"><a class="reference internal" href="../Chapter3/Ch3_REDOR.html"><font color="#0093AF">REDOR</font></a></li>
 <li class="toctree-l2"><a class="reference internal" href="../Chapter3/Ch3_DIPSHIFT.html"><font color="#0093AF">DIPSHIFT</font></a></li>
-<li class="toctree-l2"><a class="reference internal" href="../Chapter3/Ch3_T1_NOE.html"><font color="#0093AF"><span class="math notranslate nohighlight">\(T_1\)</span> and NOE</font></a></li>
 <li class="toctree-l2"><a class="reference internal" href="../Chapter3/Ch3_RECRR.html"><font color="#0093AF">Relaxation in complex sequences: RECRR</font></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Chapter3/Ch3_T1_NOE.html"><font color="#0093AF"><span class="math notranslate nohighlight">\(T_1\)</span> and NOE</font></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Chapter3/Ch3_DARR.html"><font color="#0093AF">Dipolar Assisted Rotary Resonance</font></a></li>
 <li class="toctree-l2"><a class="reference internal" href="../Chapter3/Ch3_Quad.html"><font color="#0093AF">Quadrupolar phenomena</font></a></li>
 </ul>
 </details></li>
@@ -436,7 +437,7 @@
 <p><a href="https://githubtocolab.com/alsinmr/SLEEPY_tutorial/blob/main/ColabNotebooks/Chapter2/Ch2_BMRD.ipynb" target="_blank"><img src="https://colab.research.google.com/assets/colab-badge.svg"></a></p>
 <p>In solution NMR, if a two-site exchange process leads to modulation of chemical shift, it is in some cases possible to calculate the rate of exchange (<span class="math notranslate nohighlight">\(k_{ex}=k_{1\rightarrow2}+k_{2\rightarrow1}\)</span>), the change in chemical shift (<span class="math notranslate nohighlight">\(\Delta\omega=\Omega_1-\Omega_2\)</span>) and also the populations of the two sites (<span class="math notranslate nohighlight">\(p_1/p_2=k_{2\rightarrow1}/k_{1\rightarrow2}\)</span>), based on a series of <span class="math notranslate nohighlight">\(R_{1\rho}\)</span> measurements. However, this depends on the rate of exchange and also the strength of the spin-lock. If the exchange is too fast, it is impossible to separate the populations from the change in chemical shift, obtaining only the product <span class="math notranslate nohighlight">\(p_1p_2\Delta\omega_{12}^2\)</span>.</p>
 <p>Furthermore, if only on-resonance <span class="math notranslate nohighlight">\(R_{1\rho}\)</span> experiments are applied, it is impossible to determine whether the larger population has the larger or smaller chemical shift, whereas this can be resolved using off-resonant <span class="math notranslate nohighlight">\(R_{1\rho}\)</span> experiments. We will investigate this with simulation, and also compare to the formula provided by Miloushev and Palmer.<span class="math notranslate nohighlight">\(^1\)</span></p>
-<p>Note that this experiment is also valid in solids, but then we must also consider reorientational dynamics.</p>
+<p>Note that we also use <a class="reference internal" href="../Chapter3/Ch3_R1p.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(R_{1\rho}\)</span> in solids</span></a>, but then we must also consider reorientational dynamics.</p>
 <p>[1] V.Z. Miloushev, A.G. Palmer. <a class="reference external" href="https://doi.org/10.1021/cr030413t"><em>J. Magn. Reson.</em></a>, <strong>2015</strong>, 177, 221-227</p>
 <section id="setup">
 <h2>Setup<a class="headerlink" href="#setup" title="Link to this heading">#</a></h2>
@@ -472,7 +473,7 @@ k_{ex}&amp;=&amp;k_{1\rightarrow2}+k_{2\rightarrow1} \\
 \sin^2\beta_e&amp;=&amp;\frac{\omega_1^2}{\omega_1^2+\Omega^2}
 \end{eqnarray}
 \end{split}\]</div>
-<p>In the above formula, the relative sizes of the three terms in the denominator determine the availability of information from <span class="math notranslate nohighlight">\(R_{1\rho}\)</span> experiments. For example, if either the field strength is set to high, or <span class="math notranslate nohighlight">\(k_{ex}\)</span> is
+<p>In the above formula, the relative sizes of the three terms in the denominator determine the availability of information from <span class="math notranslate nohighlight">\(R_{1\rho}\)</span> experiments. For example, if either the field strength is set too high, or <span class="math notranslate nohighlight">\(k_{ex}\)</span> is
 too large, the third term can be neglected, yielding</p>
 <div class="math notranslate nohighlight">
 \[
@@ -480,7 +481,7 @@ too large, the third term can be neglected, yielding</p>
 R_{1\rho}^{ex}=\frac{\sin^2\beta_ep_1p_2\Delta\omega_{12}^2k_{ex}}{\frac{\omega_{e1}^2\omega_{e2}^2}{\omega_e^2}+k_{ex}^2}
 \end{equation}
 \]</div>
-<p>In this case, <span class="math notranslate nohighlight">\(p_1\)</span> and <span class="math notranslate nohighlight">\(p_2\)</span> never appear separately from <span class="math notranslate nohighlight">\(\Delta\omega_{12}\)</span>, so that we cannot separate their contributions from experimental results. We may control the applied field strength, which modifies <span class="math notranslate nohighlight">\(\omega_{e1}^2\omega_{e2}^2/\omega_e^2\)</span>, but cannot control <span class="math notranslate nohighlight">\(k_ex\)</span>.</p>
+<p>In this case, <span class="math notranslate nohighlight">\(p_1\)</span> and <span class="math notranslate nohighlight">\(p_2\)</span> never appear separately from <span class="math notranslate nohighlight">\(\Delta\omega_{12}\)</span>, so that we cannot separate their contributions based on experiment. We may control the applied field strength, which modifies <span class="math notranslate nohighlight">\(\omega_{e1}^2\omega_{e2}^2/\omega_e^2\)</span>, but cannot control <span class="math notranslate nohighlight">\(k_{ex}\)</span>.</p>
 <p>Note that if the applied field strength is significantly larger than <span class="math notranslate nohighlight">\(\Delta\omega_{12}\)</span>, then the last term of the denominator drops out, and the first term simplifies to <span class="math notranslate nohighlight">\(\omega_e^2\)</span>, yielding</p>
 <div class="math notranslate nohighlight">
 \[
@@ -544,13 +545,13 @@ R_{1\rho}^{ex}=\frac{\sin^2\beta_ep_1p_2\Delta\omega_{12}^2k_{ex}}{\omega_e^2+k_
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">L</span><span class="o">=</span><span class="n">sl</span><span class="o">.</span><span class="n">Liouvillian</span><span class="p">((</span><span class="n">ex0</span><span class="p">,</span><span class="n">ex1</span><span class="p">))</span>  <span class="c1">#Builds the two different Hamiltonians and exports them to Liouville space</span>
 <span class="n">L</span><span class="o">.</span><span class="n">kex</span><span class="o">=</span><span class="n">sl</span><span class="o">.</span><span class="n">Tools</span><span class="o">.</span><span class="n">twoSite_kex</span><span class="p">(</span><span class="n">tc</span><span class="o">=</span><span class="n">tc</span><span class="p">,</span><span class="n">p1</span><span class="o">=</span><span class="n">p1</span><span class="p">)</span> <span class="c1">#Add exchange to the Liouvillian</span>
 
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;The mean chemical shift is </span><span class="si">{</span><span class="n">ex0</span><span class="o">.</span><span class="n">CS</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="s2">&quot;Hz&quot;</span><span class="p">]</span><span class="o">*</span><span class="n">p1</span><span class="o">+</span><span class="n">ex1</span><span class="o">.</span><span class="n">CS</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="s2">&quot;Hz&quot;</span><span class="p">]</span><span class="o">*</span><span class="n">p2</span><span class="si">:</span><span class="s1">.2f</span><span class="si">}</span><span class="s1"> Hz&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;The average chemical shift is </span><span class="si">{</span><span class="n">ex0</span><span class="o">.</span><span class="n">CS</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="s2">&quot;Hz&quot;</span><span class="p">]</span><span class="o">*</span><span class="n">p1</span><span class="o">+</span><span class="n">ex1</span><span class="o">.</span><span class="n">CS</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="s2">&quot;Hz&quot;</span><span class="p">]</span><span class="o">*</span><span class="n">p2</span><span class="si">:</span><span class="s1">.2f</span><span class="si">}</span><span class="s1"> Hz&#39;</span><span class="p">)</span>
 <span class="c1">#ex0.CS lists all chemical shifts and their parameters in the system</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The mean chemical shift is 0.00 Hz
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The average chemical shift is 0.00 Hz
 </pre></div>
 </div>
 </div>
@@ -583,7 +584,7 @@ R_{1\rho}^{ex}=\frac{\sin^2\beta_ep_1p_2\Delta\omega_{12}^2k_{ex}}{\omega_e^2+k_
 <section id="what-happens-if-we-vary-the-populations-and-delta-omega-12-2-but-leave-p-1p-2-delta-omega-2-fixed">
 <h3>What happens if we vary the populations and <span class="math notranslate nohighlight">\(\Delta\omega_{12}^2\)</span>, but leave <span class="math notranslate nohighlight">\(p_1p_2\Delta\Omega^2\)</span> fixed?<a class="headerlink" href="#what-happens-if-we-vary-the-populations-and-delta-omega-12-2-but-leave-p-1p-2-delta-omega-2-fixed" title="Link to this heading">#</a></h3>
 <p>We start out with fast exchange, i.e. <span class="math notranslate nohighlight">\(k_ex&gt;&gt;\Delta\Omega_{12}\)</span> (<span class="math notranslate nohighlight">\(k_{ex}=\)</span>30000 s<span class="math notranslate nohighlight">\(^{-1}\)</span>, <span class="math notranslate nohighlight">\(\Delta\Omega_{12}\)</span>=500x2<span class="math notranslate nohighlight">\(\pi\)</span> Hz).</p>
-<p>We claim above that for fast exchange, we cannot separate experimentally <span class="math notranslate nohighlight">\(p_1\)</span> and <span class="math notranslate nohighlight">\(p_2\)</span> from <span class="math notranslate nohighlight">\(\Delta\Omega_{12}\)</span>. We verify this by fixing the product <span class="math notranslate nohighlight">\(p_1p_2\Delta\Omega_{12}^2\)</span>, but varying <span class="math notranslate nohighlight">\(p_1\)</span>.</p>
+<p>We claim above that for fast exchange, we cannot separate <span class="math notranslate nohighlight">\(p_1\)</span> and <span class="math notranslate nohighlight">\(p_2\)</span> from <span class="math notranslate nohighlight">\(\Delta\Omega_{12}\)</span> experimentally. We verify this by fixing the product <span class="math notranslate nohighlight">\(p_1p_2\Delta\Omega_{12}^2\)</span>, but varying <span class="math notranslate nohighlight">\(p_1\)</span>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">kex</span><span class="o">=</span><span class="mi">30000</span>
@@ -618,7 +619,7 @@ R_{1\rho}^{ex}=\frac{\sin^2\beta_ep_1p_2\Delta\omega_{12}^2k_{ex}}{\omega_e^2+k_
 </div>
 </div>
 <p>As we can see above, all relaxation curves are nearly identical, showing that we cannot separate the populations from the change in chemical shift.</p>
-<p>On the other hand, if exchange is slower, the curves will separate as we vary the populations. We slow <span class="math notranslate nohighlight">\(k_{ex}\)</span> down to 800 s<span class="math notranslate nohighlight">\(^{-1}\)</span></p>
+<p>On the other hand, if exchange is slower, the curves will separate as we vary the populations. In order to demonstrate this, we reduce <span class="math notranslate nohighlight">\(k_{ex}\)</span> to 800 s<span class="math notranslate nohighlight">\(^{-1}\)</span>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">kex</span><span class="o">=</span><span class="mi">800</span>
@@ -649,7 +650,7 @@ R_{1\rho}^{ex}=\frac{\sin^2\beta_ep_1p_2\Delta\omega_{12}^2k_{ex}}{\omega_e^2+k_
 </div>
 </div>
 <p>For slower exchange, the third term in the denominator becomes important, yielding differences in relaxation depending on the population.</p>
-<p>In the last example, we increase <span class="math notranslate nohighlight">\(\nu_1\)</span> to 5 kHz, but leave the exchange rate fixed. Relaxation also slows down, so we acquire more points.</p>
+<p>In the last example, we increase <span class="math notranslate nohighlight">\(\nu_1\)</span> to 5 kHz, but leave the exchange rate fixed. Relaxation also slows down, so we acquire longer.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">v1</span><span class="o">=</span><span class="mi">5000</span>
@@ -678,9 +679,9 @@ R_{1\rho}^{ex}=\frac{\sin^2\beta_ep_1p_2\Delta\omega_{12}^2k_{ex}}{\omega_e^2+k_
 <img alt="../_images/b6f02d9026f1de7be1eed32c6ee5739a207105cdd04f8b3f0c96516bf810091f.png" src="../_images/b6f02d9026f1de7be1eed32c6ee5739a207105cdd04f8b3f0c96516bf810091f.png" />
 </div>
 </div>
-<p>The stronger field slows down the relaxation considerably, but furthermore, we can no longer separate <span class="math notranslate nohighlight">\(p_1p_2\)</span> from <span class="math notranslate nohighlight">\(\Delta\Omega_{12}\)</span>. This becomes critical in solid-state NMR, where we need to be able to apply low fields while retaining a spin-lock. This can become problematic due to other large, anisotropic interactions, such that we need to spin quickly and decrease the <span class="math notranslate nohighlight">\(^1\)</span>H concentration to avoid higher order effects.</p>
+<p>The stronger field slows down the relaxation considerably, but furthermore, we can no longer separate <span class="math notranslate nohighlight">\(p_1p_2\)</span> from <span class="math notranslate nohighlight">\(\Delta\Omega_{12}\)</span>. This can present challenges especially in solid-state NMR, where we need to be able to apply low fields while retaining a spin-lock. This can become problematic due to other large, anisotropic interactions, such that we need to spin quickly and decrease the <span class="math notranslate nohighlight">\(^1\)</span>H concentration to avoid higher order effects.</p>
 <p>In the case of slow exchange, with a sufficiently low spin-lock field strength, we can separate the population from <span class="math notranslate nohighlight">\(\Delta\Omega_{12}\)</span>. However, we cannot say with an on-resonant spin-lock whether the larger population corresponds to the larger or smaller chemical shift. Then, we must apply an off-resonant spin-lock.</p>
-<p>Therefore, we determine the behavior of relaxation as a function of offset frequency. First, we calculate a spectrum to see where peaks actually appear (and also mark where peaks should be in the absence of exchange).</p>
+<p>Therefore, we simulate the behavior of relaxation as a function of offset frequency. First, we calculate a spectrum to see where peaks actually appear (and also mark where peaks should be in the absence of exchange).</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ax</span><span class="o">=</span><span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()[</span><span class="mi">1</span><span class="p">]</span>
@@ -701,14 +702,11 @@ R_{1\rho}^{ex}=\frac{\sin^2\beta_ep_1p_2\Delta\omega_{12}^2k_{ex}}{\omega_e^2+k_
 <span class="n">rho0</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="s1">&#39;Hz&#39;</span><span class="p">,</span><span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">,</span><span class="n">FT</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 <span class="n">ax</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">(</span><span class="n">ax</span><span class="o">.</span><span class="n">get_ylim</span><span class="p">())</span>
 <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">ex0</span><span class="o">.</span><span class="n">CS</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="s1">&#39;Hz&#39;</span><span class="p">]</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="mi">2</span><span class="p">),</span><span class="n">ax</span><span class="o">.</span><span class="n">get_ylim</span><span class="p">(),</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">,</span><span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;:&#39;</span><span class="p">)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">ex1</span><span class="o">.</span><span class="n">CS</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="s1">&#39;Hz&#39;</span><span class="p">]</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="mi">2</span><span class="p">),</span><span class="n">ax</span><span class="o">.</span><span class="n">get_ylim</span><span class="p">(),</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">,</span><span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;:&#39;</span><span class="p">)</span>
+<span class="n">_</span><span class="o">=</span><span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">ex1</span><span class="o">.</span><span class="n">CS</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="s1">&#39;Hz&#39;</span><span class="p">]</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="mi">2</span><span class="p">),</span><span class="n">ax</span><span class="o">.</span><span class="n">get_ylim</span><span class="p">(),</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">,</span><span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;:&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&lt;matplotlib.lines.Line2D at 0x7fba41659580&gt;]
-</pre></div>
-</div>
 <img alt="../_images/a074fef56c589581931c7771a5620aa5355038a92676ce646c7cafa3f4d00bd9.png" src="../_images/a074fef56c589581931c7771a5620aa5355038a92676ce646c7cafa3f4d00bd9.png" />
 </div>
 </div>

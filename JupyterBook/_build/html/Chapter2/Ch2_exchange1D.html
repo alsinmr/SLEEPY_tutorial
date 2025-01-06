@@ -201,8 +201,9 @@
 <li class="toctree-l2"><a class="reference internal" href="../Chapter3/Ch3_R1p.html"><font color="#0093AF">R<span class="math notranslate nohighlight">\(_{1ρ}\)</span> relaxation</font></a></li>
 <li class="toctree-l2"><a class="reference internal" href="../Chapter3/Ch3_REDOR.html"><font color="#0093AF">REDOR</font></a></li>
 <li class="toctree-l2"><a class="reference internal" href="../Chapter3/Ch3_DIPSHIFT.html"><font color="#0093AF">DIPSHIFT</font></a></li>
-<li class="toctree-l2"><a class="reference internal" href="../Chapter3/Ch3_T1_NOE.html"><font color="#0093AF"><span class="math notranslate nohighlight">\(T_1\)</span> and NOE</font></a></li>
 <li class="toctree-l2"><a class="reference internal" href="../Chapter3/Ch3_RECRR.html"><font color="#0093AF">Relaxation in complex sequences: RECRR</font></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Chapter3/Ch3_T1_NOE.html"><font color="#0093AF"><span class="math notranslate nohighlight">\(T_1\)</span> and NOE</font></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Chapter3/Ch3_DARR.html"><font color="#0093AF">Dipolar Assisted Rotary Resonance</font></a></li>
 <li class="toctree-l2"><a class="reference internal" href="../Chapter3/Ch3_Quad.html"><font color="#0093AF">Quadrupolar phenomena</font></a></li>
 </ul>
 </details></li>
@@ -433,7 +434,7 @@
   <section class="tex2jax_ignore mathjax_ignore" id="exchange-in-1d-spectra">
 <h1><font  color = "#0093AF">Exchange in 1D spectra</font><a class="headerlink" href="#exchange-in-1d-spectra" title="Link to this heading">#</a></h1>
 <p><a href="https://githubtocolab.com/alsinmr/SLEEPY_tutorial/blob/main/ColabNotebooks/Chapter2/Ch2_exchange1D.ipynb" target="_blank"><img src="https://colab.research.google.com/assets/colab-badge.svg"></a></p>
-<p>One of the most basic examples of measuring dynamics is broadening driven by an exchange process that influences the chemical shift of the system. To simulate this in SLEEPY, we must simply build two spin systems with a nucleus with modulated chemical shift, and couple the systems with an exchange matrix.</p>
+<p>One of the most basic examples of dynamics manifesting in NMR spectra is the broadening driven by an exchange process that modulates the chemical shift of the system. To simulate this in SLEEPY, we must build two spin systems, with a different chemical shift in each system. Then, we couple the systems with an exchange matrix.</p>
 <section id="setup">
 <h2>Setup<a class="headerlink" href="#setup" title="Link to this heading">#</a></h2>
 <div class="cell docutils container">
@@ -448,7 +449,7 @@
 </section>
 <section id="build-the-system">
 <h2>Build the system<a class="headerlink" href="#build-the-system" title="Link to this heading">#</a></h2>
-<p>The first step is to build the system, which will have a single nucleus. The first copy of the system has a chemical shift of -5 ppm, and a second copy is made with a shift of +5 ppm.</p>
+<p>The first step is to build the system, which will have a single nucleus. The first copy of the system has a chemical shift of -5 ppm, and a second copy has a shift of +5 ppm.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ex0</span><span class="o">=</span><span class="n">sl</span><span class="o">.</span><span class="n">ExpSys</span><span class="p">(</span><span class="n">Nucs</span><span class="o">=</span><span class="s1">&#39;13C&#39;</span><span class="p">,</span><span class="n">v0H</span><span class="o">=</span><span class="mi">600</span><span class="p">)</span>    <span class="c1">#We need a description of the experiment for both states (ex0, ex1)</span>
@@ -462,7 +463,7 @@
 </section>
 <section id="add-the-exchange-process-symmetric-exchange">
 <h2>Add the exchange process (symmetric exchange)<a class="headerlink" href="#add-the-exchange-process-symmetric-exchange" title="Link to this heading">#</a></h2>
-<p>First, we export this sytem into Liouville space, allowing us to introduce an exchange process. Then we’ll define a correlation time and population 1 and population 2. Here we start assuming the populations, <span class="math notranslate nohighlight">\(p_1\)</span> and <span class="math notranslate nohighlight">\(p_2\)</span> are equal</p>
+<p>First, we export this sytem into Liouville space, allowing us to introduce an exchange process. Then we’ll define a correlation time and the size of the two populations. To start, we assume the populations, <span class="math notranslate nohighlight">\(p_1\)</span> and <span class="math notranslate nohighlight">\(p_2\)</span> are equal.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">L</span><span class="o">=</span><span class="n">sl</span><span class="o">.</span><span class="n">Liouvillian</span><span class="p">((</span><span class="n">ex0</span><span class="p">,</span><span class="n">ex1</span><span class="p">))</span>           <span class="c1">#Builds the two different Hamiltonians and exports them to Liouville space</span>
@@ -503,7 +504,7 @@
 </div>
 </div>
 </div>
-<p>Note that rho.DetProp has reduced the Liouvillian from an 8x8 matrix to a 2x2 matrix. The 2x2 matrix is the familiar matrix obtained while solving the Bloch-McConnel equations</p>
+<p>Note that rho.DetProp has reduced the Liouvillian from an 8x8 matrix to a 2x2 matrix. The 2x2 matrix is the familiar matrix required to the Bloch-McConnel equations</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}
 \begin{equation}
@@ -539,7 +540,7 @@ State-space reduction: 8-&gt;2
 <section id="plot-the-results">
 <h2>Plot the results<a class="headerlink" href="#plot-the-results" title="Link to this heading">#</a></h2>
 <p>We can get the resulting spectrum under exchange conditions from rho by using the <code class="docutils literal notranslate"><span class="pre">rho.plot()</span></code> command. Setting FT to true gives the Fourier-transformed spectrum.</p>
-<p>In this timescale, we still obtain two peaks, but that are strongly broadened by the exchange process. We can sweep the correlation time to observe the coalescence of the peaks.</p>
+<p>In this timescale, we still obtain two peaks, which are strongly broadened by the exchange process. We can sweep the correlation time to observe the coalescence of the peaks.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">_</span><span class="o">=</span><span class="n">rho</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">FT</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
@@ -616,7 +617,7 @@ k &amp; -k-i\Delta\Omega/2-\lambda
 \lambda=-k\pm\sqrt{k^2-\frac14\Delta\Omega^2}
 \end{equation}
 \]</div>
-<p>Then, when the term in the square-root is negative, we obtain complex eigenvalues, corresponding to two separate oscillation frequencies, and <span class="math notranslate nohighlight">\(T_2\)</span>=1/k. When the square-root is positive, then no observable frequency difference arises, but two different decay rates are present (although as <span class="math notranslate nohighlight">\(k\)</span> becomes larger, only the smaller rate contributes significantly to the spectrum).</p>
+<p>Then, when the term in the square-root is negative, we obtain complex eigenvalues, corresponding to two separate oscillation frequencies, and <span class="math notranslate nohighlight">\(T_2\)</span>=1/k. When the square-root is positive, then no observable frequency difference arises, but two different decay rates are present (as <span class="math notranslate nohighlight">\(k\)</span> becomes larger, only the smaller rate contributes significantly to the spectrum).</p>
 <p>On the other hand, if <span class="math notranslate nohighlight">\(k_{12}\ne k_{21}\)</span>, then no well-defined coalescence condition exists. We simulate this case below, as a function of exchange rate.</p>
 </section>
 <section id="repeat-with-asymmetric-exchange">
@@ -655,7 +656,7 @@ k &amp; -k-i\Delta\Omega/2-\lambda
 <img alt="../_images/d024b7bd68480c9bf6a28931095a4e50b5a209f39cc3193b182152f82de0a7d7.png" src="../_images/d024b7bd68480c9bf6a28931095a4e50b5a209f39cc3193b182152f82de0a7d7.png" />
 </div>
 </div>
-<p>Above, we see that the peak to the left gradually vanishes, and the peak to the right shifts left. However, the second peak does not disappear at a well-defined condition, it just becomes gradually smaller.</p>
+<p>Above, we see that the peak to the left gradually vanishes, and the peak to the right shifts left. However, the second peak does not disappear at a well-defined correlation time, it just becomes gradually smaller.</p>
 </section>
 </section>
 

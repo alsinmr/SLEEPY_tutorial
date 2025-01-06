@@ -201,8 +201,9 @@
 <li class="toctree-l2"><a class="reference internal" href="../Chapter3/Ch3_R1p.html"><font color="#0093AF">R<span class="math notranslate nohighlight">\(_{1ρ}\)</span> relaxation</font></a></li>
 <li class="toctree-l2"><a class="reference internal" href="../Chapter3/Ch3_REDOR.html"><font color="#0093AF">REDOR</font></a></li>
 <li class="toctree-l2"><a class="reference internal" href="../Chapter3/Ch3_DIPSHIFT.html"><font color="#0093AF">DIPSHIFT</font></a></li>
-<li class="toctree-l2"><a class="reference internal" href="../Chapter3/Ch3_T1_NOE.html"><font color="#0093AF"><span class="math notranslate nohighlight">\(T_1\)</span> and NOE</font></a></li>
 <li class="toctree-l2"><a class="reference internal" href="../Chapter3/Ch3_RECRR.html"><font color="#0093AF">Relaxation in complex sequences: RECRR</font></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Chapter3/Ch3_T1_NOE.html"><font color="#0093AF"><span class="math notranslate nohighlight">\(T_1\)</span> and NOE</font></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Chapter3/Ch3_DARR.html"><font color="#0093AF">Dipolar Assisted Rotary Resonance</font></a></li>
 <li class="toctree-l2"><a class="reference internal" href="../Chapter3/Ch3_Quad.html"><font color="#0093AF">Quadrupolar phenomena</font></a></li>
 </ul>
 </details></li>
@@ -434,7 +435,7 @@
   <section class="tex2jax_ignore mathjax_ignore" id="chemical-exchange-saturation-transfer-cest">
 <h1><font  color = "#0093AF">Chemical Exchange Saturation Transfer (CEST)</font><a class="headerlink" href="#chemical-exchange-saturation-transfer-cest" title="Link to this heading">#</a></h1>
 <p><a href="https://githubtocolab.com/alsinmr/SLEEPY_tutorial/blob/main/ColabNotebooks/Chapter2/Ch2_CEST.ipynb" target="_blank"><img src="https://colab.research.google.com/assets/colab-badge.svg"></a></p>
-<p>In the CEST experiment, one often has chemical exchange, but with one very small population, such that its chemical shift is difficult or impossible to observe directly. However, if we were to apply a low-power saturating field when magnetization is in the z-direction, it is possible to saturate the magnetization when on-resonant with the invisible peak.</p>
+<p>Sometimes, a system undergoes chemical exchange, but with one large population and one very small population, such that the peak of the latter is difficult or impossible to observe directly. However, if we apply a low-power saturating field to magnetization in the z-direction, it is possible to saturate the magnetization when the applied field is on-resonant with the invisible peak. This allows us to observed “invisible” resonances in exchange with the main resonance.</p>
 <section id="setup">
 <h2>Setup<a class="headerlink" href="#setup" title="Link to this heading">#</a></h2>
 <div class="cell docutils container">
@@ -442,6 +443,7 @@
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">SLEEPY</span> <span class="k">as</span> <span class="nn">sl</span>
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="n">sl</span><span class="o">.</span><span class="n">Defaults</span><span class="p">[</span><span class="s1">&#39;verbose&#39;</span><span class="p">]</span><span class="o">=</span><span class="kc">False</span>
 </pre></div>
 </div>
 </div>
@@ -482,37 +484,30 @@
 </section>
 <section id="calculate-the-required-propagators">
 <h2>Calculate the required propagators<a class="headerlink" href="#calculate-the-required-propagators" title="Link to this heading">#</a></h2>
-<p>We’ll simulate this system by starting with magnetization along the z-axis and saturating at some frequency. After the saturation period, we’ll apply a <span class="math notranslate nohighlight">\(\pi/2\)</span> pulse along the y-axis to get x-magnetization. This will be allowed to evolve, and Fourier transformed. We can then integrate the main peak to determine the amount of saturation that has occured.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">Usat</span><span class="o">=</span><span class="nb">list</span><span class="p">()</span>   <span class="c1">#We&#39;ll pre-calculate the propagators for saturation</span>
-<span class="n">voff0</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mi">20</span><span class="p">,</span><span class="mi">20</span><span class="p">,</span><span class="mi">500</span><span class="p">)</span><span class="o">*</span><span class="n">ex0</span><span class="o">.</span><span class="n">v0</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">/</span><span class="mf">1e6</span>     <span class="c1">#5 ppm*150 MHz / 1e6 =750 Hz</span>
-<span class="n">seq</span><span class="o">=</span><span class="n">L</span><span class="o">.</span><span class="n">Sequence</span><span class="p">()</span>    <span class="c1">#Makes a sequence, which lets us add pulses with user-specified timinig</span>
-<span class="k">for</span> <span class="n">voff</span> <span class="ow">in</span> <span class="n">voff0</span><span class="p">:</span>
-    <span class="n">seq</span><span class="o">.</span><span class="n">add_channel</span><span class="p">(</span><span class="s1">&#39;13C&#39;</span><span class="p">,</span><span class="n">t</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mf">.5</span><span class="p">],</span><span class="n">v1</span><span class="o">=</span><span class="mi">25</span><span class="p">,</span><span class="n">voff</span><span class="o">=</span><span class="n">voff</span><span class="p">)</span>  <span class="c1">#500 ms saturation, 25 Hz strength</span>
-    <span class="n">Usat</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">seq</span><span class="o">.</span><span class="n">U</span><span class="p">())</span>
-    
-<span class="n">seq</span><span class="o">=</span><span class="n">L</span><span class="o">.</span><span class="n">Sequence</span><span class="p">()</span>   <span class="c1">#Usually it&#39;s a better idea to re-initialize the sequence object for new pulses</span>
-<span class="n">seq</span><span class="o">.</span><span class="n">add_channel</span><span class="p">(</span><span class="s1">&#39;13C&#39;</span><span class="p">,</span><span class="n">t</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mf">2.5e-6</span><span class="p">],</span><span class="n">v1</span><span class="o">=</span><span class="mi">100000</span><span class="p">,</span><span class="n">phase</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span> 
-<span class="n">Upi2</span><span class="o">=</span><span class="n">seq</span><span class="o">.</span><span class="n">U</span><span class="p">()</span>     <span class="c1">#Propagator to apply the pi/2 pulse</span>
-<span class="n">Dt</span><span class="o">=</span><span class="mi">1</span><span class="o">/</span><span class="p">(</span><span class="mi">4</span><span class="o">*</span><span class="mi">10</span><span class="o">*</span><span class="mi">150</span><span class="p">)</span>  <span class="c1">#For a 10 ppm shift difference, this should be enough to easily capture both peaks in the spectrum </span>
-<span class="n">Uevol</span><span class="o">=</span><span class="n">L</span><span class="o">.</span><span class="n">U</span><span class="p">(</span><span class="n">Dt</span><span class="o">=</span><span class="n">Dt</span><span class="p">)</span>  <span class="c1">#Propagator for evolving the spin system</span>
-</pre></div>
-</div>
-</div>
-</div>
+<p>We’ll simulate this system by starting with magnetization along the z-axis and saturating at some swept frequency. After the saturation period, we’ll apply a <span class="math notranslate nohighlight">\(\pi/2\)</span> pulse along the y-axis to get x-magnetization. This will be allowed to evolve, and Fourier transformed. We can then integrate the main peak to determine the amount of saturation that has occured.</p>
 </section>
 <section id="run-the-sequence-with-sweep-over-nu-1">
 <h2>Run the sequence, with sweep over <span class="math notranslate nohighlight">\(\nu_1\)</span><a class="headerlink" href="#run-the-sequence-with-sweep-over-nu-1" title="Link to this heading">#</a></h2>
-<p>First, we generate the initial magnetization and the detection operator. Then, at each value of <span class="math notranslate nohighlight">\(\nu_1\)</span>, we reset the detection operator, followed by saturation (U taken out of Usat), apply the <span class="math notranslate nohighlight">\(\pi/2\)</span> pulse (Upi2), and finally detect with Uevol. We store the Fourier-transformed signal in spec.</p>
+<p>For each offset frequency, we start with a 25 Hz saturating field for 500 ms, followed by a <span class="math notranslate nohighlight">\(\pi/2\)</span> pulse (defined in <code class="docutils literal notranslate"><span class="pre">seq</span></code>). Then, we evolve (<code class="docutils literal notranslate"><span class="pre">evol</span></code>) to get a spectrum (which we will later integrate the main peak)</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">rho</span><span class="o">=</span><span class="n">sl</span><span class="o">.</span><span class="n">Rho</span><span class="p">(</span><span class="n">rho0</span><span class="o">=</span><span class="s1">&#39;13Cz&#39;</span><span class="p">,</span><span class="n">detect</span><span class="o">=</span><span class="s1">&#39;13Cp&#39;</span><span class="p">)</span>
+
+<span class="c1"># Make a sequence for saturation</span>
+<span class="n">seq</span><span class="o">=</span><span class="n">L</span><span class="o">.</span><span class="n">Sequence</span><span class="p">()</span>    
+<span class="n">t</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mf">0.5</span><span class="p">,</span><span class="mf">0.5</span><span class="o">+</span><span class="mf">2.5e-6</span><span class="p">]</span> <span class="c1">#Preparation sequence (500 ms saturation, 100 kHz pi-pulse)</span>
+
+<span class="c1"># Make a sequence for detection</span>
+<span class="n">Dt</span><span class="o">=</span><span class="mi">1</span><span class="o">/</span><span class="p">(</span><span class="mi">4</span><span class="o">*</span><span class="mi">10</span><span class="o">*</span><span class="mi">150</span><span class="p">)</span>  <span class="c1">#Broad enough to capture 10 ppm</span>
+<span class="n">evol</span><span class="o">=</span><span class="n">L</span><span class="o">.</span><span class="n">Sequence</span><span class="p">(</span><span class="n">Dt</span><span class="o">=</span><span class="n">Dt</span><span class="p">)</span> <span class="c1">#Evolution sequence</span>
+
+<span class="n">voff0</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mi">20</span><span class="p">,</span><span class="mi">20</span><span class="p">,</span><span class="mi">500</span><span class="p">)</span><span class="o">*</span><span class="n">ex0</span><span class="o">.</span><span class="n">v0</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">/</span><span class="mf">1e6</span>     <span class="c1">#5 ppm*150 MHz / 1e6 =750 Hz</span>
 <span class="n">spec</span><span class="o">=</span><span class="nb">list</span><span class="p">()</span>
-<span class="k">for</span> <span class="n">U</span> <span class="ow">in</span> <span class="n">Usat</span><span class="p">:</span>
+<span class="k">for</span> <span class="n">voff</span> <span class="ow">in</span> <span class="n">voff0</span><span class="p">:</span>
+    <span class="n">seq</span><span class="o">.</span><span class="n">add_channel</span><span class="p">(</span><span class="s1">&#39;13C&#39;</span><span class="p">,</span><span class="n">t</span><span class="o">=</span><span class="n">t</span><span class="p">,</span><span class="n">v1</span><span class="o">=</span><span class="p">[</span><span class="mi">25</span><span class="p">,</span><span class="mf">100e3</span><span class="p">],</span>
+                    <span class="n">voff</span><span class="o">=</span><span class="p">[</span><span class="n">voff</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span><span class="n">phase</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">/</span><span class="mi">2</span><span class="p">])</span>
     <span class="n">rho</span><span class="o">.</span><span class="n">clear</span><span class="p">()</span>
-    <span class="n">Upi2</span><span class="o">*</span><span class="n">U</span><span class="o">*</span><span class="n">rho</span>
-    <span class="n">rho</span><span class="o">.</span><span class="n">DetProp</span><span class="p">(</span><span class="n">Uevol</span><span class="p">,</span><span class="n">n</span><span class="o">=</span><span class="mi">1024</span><span class="p">)</span>
+    <span class="p">(</span><span class="n">seq</span><span class="o">*</span><span class="n">rho</span><span class="p">)</span><span class="o">.</span><span class="n">DetProp</span><span class="p">(</span><span class="n">evol</span><span class="p">,</span><span class="n">n</span><span class="o">=</span><span class="mi">1024</span><span class="p">)</span>
     <span class="n">spec</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">rho</span><span class="o">.</span><span class="n">FT</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">real</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -521,8 +516,8 @@
 </section>
 <section id="plot-one-of-the-spectra">
 <h2>Plot one of the spectra<a class="headerlink" href="#plot-one-of-the-spectra" title="Link to this heading">#</a></h2>
-<p>In order to see the usefulness of this techique, we once plot the spectrum to show that the weaker peak is nearly invisible. We just take the last spectrum that is still stored in rho. The second peak is weakly visible if we zoom in around 5 ppm (but would be quite difficult to see in a real spectrum).</p>
-<p>Note that later we integrate the spectrum by selecting a range of points in the spectrum. In this case, it may be useful to set <code class="docutils literal notranslate"><span class="pre">axis='points'</span></code> to more easily determine what range of points to use.</p>
+<p>In order to see the usefulness of this techique, we plot the spectrum to show that the weaker peak is nearly invisible.  The second peak is weakly visible if we zoom in around 5 ppm (but would be quite difficult to see in a real spectrum).</p>
+<p>Note that later we integrate the spectrum by selecting a range of points in the spectrum. In this case, it may be useful to set <code class="docutils literal notranslate"><span class="pre">axis='points'</span></code> to more easily determine what range of points to sum over.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ax</span><span class="o">=</span><span class="n">rho</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">FT</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">axis</span><span class="o">=</span><span class="s1">&#39;ppm&#39;</span><span class="p">)</span>
@@ -537,7 +532,7 @@
 </section>
 <section id="integrate-spectrum-for-all-values-of-nu-1-and-plot-results">
 <h2>Integrate spectrum for all values of <span class="math notranslate nohighlight">\(\nu_1\)</span> and plot results<a class="headerlink" href="#integrate-spectrum-for-all-values-of-nu-1-and-plot-results" title="Link to this heading">#</a></h2>
-<p>We will just integrate over the strong peak and plot the peak intensity</p>
+<p>We integrate over the strong peak and plot the peak intensity</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">spec</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">spec</span><span class="p">)</span>   <span class="c1">#Convert to a numpy array</span>
@@ -552,45 +547,40 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/84fff82d022577fe6233501d9bb599a7e3192058036e115b737d7fbe3c9fd955.png" src="../_images/84fff82d022577fe6233501d9bb599a7e3192058036e115b737d7fbe3c9fd955.png" />
+<img alt="../_images/9b9b8231c76471c71bd30434ce8d73f3edd1477e62c524c773cdd0f804526cdf.png" src="../_images/9b9b8231c76471c71bd30434ce8d73f3edd1477e62c524c773cdd0f804526cdf.png" />
 </div>
 </div>
 </section>
 <section id="investigate-cest-as-a-function-of-exchange-rate">
 <h2>Investigate CEST as a function of exchange rate<a class="headerlink" href="#investigate-cest-as-a-function-of-exchange-rate" title="Link to this heading">#</a></h2>
-<p>We repeat the above setup, just varying the exchange rates</p>
+<p>We repeat the above setup, while varying the exchange rate</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">p1</span><span class="o">=</span><span class="mf">0.95</span>  <span class="c1">#Population of state 1</span>
 <span class="n">p2</span><span class="o">=</span><span class="mi">1</span><span class="o">-</span><span class="n">p1</span>  <span class="c1">#Population of state 2</span>
 
+<span class="n">rho</span><span class="o">=</span><span class="n">sl</span><span class="o">.</span><span class="n">Rho</span><span class="p">(</span><span class="n">rho0</span><span class="o">=</span><span class="s1">&#39;13Cz&#39;</span><span class="p">,</span><span class="n">detect</span><span class="o">=</span><span class="s1">&#39;13Cp&#39;</span><span class="p">)</span>
+
+<span class="c1"># Make a sequence for saturation</span>
+<span class="n">seq</span><span class="o">=</span><span class="n">L</span><span class="o">.</span><span class="n">Sequence</span><span class="p">()</span>    
+<span class="n">t</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mf">0.5</span><span class="p">,</span><span class="mf">0.5</span><span class="o">+</span><span class="mf">2.5e-6</span><span class="p">]</span> <span class="c1">#Preparation sequence (500 ms saturation, 100 kHz pi-pulse)</span>
+
+<span class="c1"># Make a sequence for detection</span>
+<span class="n">Dt</span><span class="o">=</span><span class="mi">1</span><span class="o">/</span><span class="p">(</span><span class="mi">4</span><span class="o">*</span><span class="mi">10</span><span class="o">*</span><span class="mi">150</span><span class="p">)</span>  <span class="c1">#Broad enough to capture 10 ppm</span>
+<span class="n">evol</span><span class="o">=</span><span class="n">L</span><span class="o">.</span><span class="n">Sequence</span><span class="p">(</span><span class="n">Dt</span><span class="o">=</span><span class="n">Dt</span><span class="p">)</span> <span class="c1">#Evolution sequence</span>
+
 <span class="n">tc0</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">logspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="o">-</span><span class="mf">5.5</span><span class="p">,</span><span class="mi">12</span><span class="p">)</span>
 <span class="n">I</span><span class="o">=</span><span class="nb">list</span><span class="p">()</span>
 <span class="k">for</span> <span class="n">tc</span> <span class="ow">in</span> <span class="n">tc0</span><span class="p">:</span>
-    <span class="n">kex</span><span class="o">=</span><span class="mi">1</span><span class="o">/</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">tc</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">],[</span><span class="mi">1</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">]])</span><span class="o">+</span><span class="p">(</span><span class="n">p1</span><span class="o">-</span><span class="n">p2</span><span class="p">)</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">],[</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">]]))</span>   <span class="c1">#Exchange matrix</span>
-    <span class="n">L</span><span class="o">.</span><span class="n">kex</span><span class="o">=</span><span class="n">kex</span>    <span class="c1">#Add exchange to the Liouvillian</span>
+    <span class="n">L</span><span class="o">.</span><span class="n">kex</span><span class="o">=</span><span class="n">sl</span><span class="o">.</span><span class="n">Tools</span><span class="o">.</span><span class="n">twoSite_kex</span><span class="p">(</span><span class="n">tc</span><span class="o">=</span><span class="n">tc</span><span class="p">,</span><span class="n">p1</span><span class="o">=</span><span class="n">p1</span><span class="p">)</span>    <span class="c1">#Add exchange to the Liouvillian</span>
     
-    <span class="n">Usat</span><span class="o">=</span><span class="nb">list</span><span class="p">()</span>   <span class="c1">#We&#39;ll pre-calculate the propagators for saturation</span>
     <span class="n">voff0</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mi">20</span><span class="p">,</span><span class="mi">20</span><span class="p">,</span><span class="mi">500</span><span class="p">)</span><span class="o">*</span><span class="n">ex0</span><span class="o">.</span><span class="n">v0</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">/</span><span class="mf">1e6</span>     <span class="c1">#5 ppm*150 MHz / 1e6 =750 Hz</span>
-    <span class="n">seq</span><span class="o">=</span><span class="n">L</span><span class="o">.</span><span class="n">Sequence</span><span class="p">()</span>    <span class="c1">#Makes a sequence, which lets us add pulses with user-specified timinig</span>
-    <span class="k">for</span> <span class="n">voff</span> <span class="ow">in</span> <span class="n">voff0</span><span class="p">:</span>
-        <span class="n">seq</span><span class="o">.</span><span class="n">add_channel</span><span class="p">(</span><span class="s1">&#39;13C&#39;</span><span class="p">,</span><span class="n">t</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mf">.5</span><span class="p">],</span><span class="n">v1</span><span class="o">=</span><span class="mi">25</span><span class="p">,</span><span class="n">voff</span><span class="o">=</span><span class="n">voff</span><span class="p">)</span>  <span class="c1">#500 ms saturation, 25 Hz strength</span>
-        <span class="n">Usat</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">seq</span><span class="o">.</span><span class="n">U</span><span class="p">()</span><span class="o">.</span><span class="n">calcU</span><span class="p">())</span> 
-        <span class="c1">#Propagtors do not automatically get calculated. In this case, </span>
-        
-
-    <span class="n">seq</span><span class="o">=</span><span class="n">L</span><span class="o">.</span><span class="n">Sequence</span><span class="p">()</span>   <span class="c1">#Usually it&#39;s a better idea to re-initialize the sequence object for new pulses</span>
-    <span class="n">seq</span><span class="o">.</span><span class="n">add_channel</span><span class="p">(</span><span class="s1">&#39;13C&#39;</span><span class="p">,</span><span class="n">t</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mf">2.5e-6</span><span class="p">],</span><span class="n">v1</span><span class="o">=</span><span class="mi">100000</span><span class="p">,</span><span class="n">phase</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span> 
-    <span class="n">Upi2</span><span class="o">=</span><span class="n">seq</span><span class="o">.</span><span class="n">U</span><span class="p">()</span>     <span class="c1">#Propagator to apply the pi/2 pulse</span>
-    <span class="n">Dt</span><span class="o">=</span><span class="mi">1</span><span class="o">/</span><span class="p">(</span><span class="mi">4</span><span class="o">*</span><span class="mi">10</span><span class="o">*</span><span class="mi">150</span><span class="p">)</span>  <span class="c1">#For a 10 ppm shift difference, this should be enough to easily capture both peaks in the spectrum </span>
-    <span class="n">Uevol</span><span class="o">=</span><span class="n">L</span><span class="o">.</span><span class="n">U</span><span class="p">(</span><span class="n">Dt</span><span class="o">=</span><span class="n">Dt</span><span class="p">)</span>  <span class="c1">#Propagator for evolving the spin system</span>
-
-    <span class="n">rho</span><span class="o">=</span><span class="n">sl</span><span class="o">.</span><span class="n">Rho</span><span class="p">(</span><span class="n">rho0</span><span class="o">=</span><span class="s1">&#39;13Cz&#39;</span><span class="p">,</span><span class="n">detect</span><span class="o">=</span><span class="s1">&#39;13Cp&#39;</span><span class="p">)</span>
     <span class="n">spec</span><span class="o">=</span><span class="nb">list</span><span class="p">()</span>
-    <span class="k">for</span> <span class="n">U</span> <span class="ow">in</span> <span class="n">Usat</span><span class="p">:</span>
+    <span class="k">for</span> <span class="n">voff</span> <span class="ow">in</span> <span class="n">voff0</span><span class="p">:</span>
+        <span class="n">seq</span><span class="o">.</span><span class="n">add_channel</span><span class="p">(</span><span class="s1">&#39;13C&#39;</span><span class="p">,</span><span class="n">t</span><span class="o">=</span><span class="n">t</span><span class="p">,</span><span class="n">v1</span><span class="o">=</span><span class="p">[</span><span class="mi">25</span><span class="p">,</span><span class="mf">100e3</span><span class="p">],</span>
+                        <span class="n">voff</span><span class="o">=</span><span class="p">[</span><span class="n">voff</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span><span class="n">phase</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">/</span><span class="mi">2</span><span class="p">])</span>
         <span class="n">rho</span><span class="o">.</span><span class="n">clear</span><span class="p">()</span>
-        <span class="n">Upi2</span><span class="o">*</span><span class="n">U</span><span class="o">*</span><span class="n">rho</span>
-        <span class="n">rho</span><span class="o">.</span><span class="n">DetProp</span><span class="p">(</span><span class="n">Uevol</span><span class="p">,</span><span class="n">n</span><span class="o">=</span><span class="mi">1024</span><span class="p">)</span>
+        <span class="p">(</span><span class="n">seq</span><span class="o">*</span><span class="n">rho</span><span class="p">)</span><span class="o">.</span><span class="n">DetProp</span><span class="p">(</span><span class="n">evol</span><span class="p">,</span><span class="n">n</span><span class="o">=</span><span class="mi">1024</span><span class="p">)</span>
         <span class="n">spec</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">rho</span><span class="o">.</span><span class="n">FT</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">real</span><span class="p">)</span>
 
     <span class="n">spec</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">spec</span><span class="p">)</span>   <span class="c1">#Convert to a numpy array</span>
@@ -599,7 +589,7 @@
 </div>
 </div>
 </div>
-<p>We plot the results below, where we see that the saturation behavior depends strongly on the exchange rate. Note that if the exchange is too fast or too slow, the CEST experiment is no longer as effective.</p>
+<p>We plot the results below, where we see that the saturation behavior depends strongly on the exchange rate. Note that if the exchange is too fast or too slow, the CEST experiment is no longer as effective, since it either becomes difficult to saturate the main peak via the minor peak, or because the two peaks coalesce.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span><span class="n">ax</span><span class="o">=</span><span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">)</span>
@@ -621,7 +611,7 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/80bd361a49011be6f2726162fa2dc1807c106036cfd50020f32b8e8399a895bf.png" src="../_images/80bd361a49011be6f2726162fa2dc1807c106036cfd50020f32b8e8399a895bf.png" />
+<img alt="../_images/9a60d9023636bec33968a9f9b0f49fb8dacda055fe315db2682554dfc373672b.png" src="../_images/9a60d9023636bec33968a9f9b0f49fb8dacda055fe315db2682554dfc373672b.png" />
 </div>
 </div>
 </section>

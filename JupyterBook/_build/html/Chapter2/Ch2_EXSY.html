@@ -201,8 +201,9 @@
 <li class="toctree-l2"><a class="reference internal" href="../Chapter3/Ch3_R1p.html"><font color="#0093AF">R<span class="math notranslate nohighlight">\(_{1ρ}\)</span> relaxation</font></a></li>
 <li class="toctree-l2"><a class="reference internal" href="../Chapter3/Ch3_REDOR.html"><font color="#0093AF">REDOR</font></a></li>
 <li class="toctree-l2"><a class="reference internal" href="../Chapter3/Ch3_DIPSHIFT.html"><font color="#0093AF">DIPSHIFT</font></a></li>
-<li class="toctree-l2"><a class="reference internal" href="../Chapter3/Ch3_T1_NOE.html"><font color="#0093AF"><span class="math notranslate nohighlight">\(T_1\)</span> and NOE</font></a></li>
 <li class="toctree-l2"><a class="reference internal" href="../Chapter3/Ch3_RECRR.html"><font color="#0093AF">Relaxation in complex sequences: RECRR</font></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Chapter3/Ch3_T1_NOE.html"><font color="#0093AF"><span class="math notranslate nohighlight">\(T_1\)</span> and NOE</font></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Chapter3/Ch3_DARR.html"><font color="#0093AF">Dipolar Assisted Rotary Resonance</font></a></li>
 <li class="toctree-l2"><a class="reference internal" href="../Chapter3/Ch3_Quad.html"><font color="#0093AF">Quadrupolar phenomena</font></a></li>
 </ul>
 </details></li>
@@ -418,7 +419,7 @@
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#run-as-a-2d-experiment">Run as a 2D experiment</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sweep-the-delay-time-to-observe-buildup">Sweep the delay time to observe buildup</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#plot-trajectory-of-the-individual-peaks">Plot trajectory of the individual peaks</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#spectra-as-a-function-of-exchange-rate">Spectra as a function of exchange rate</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#spectrum-as-a-function-of-exchange-rate">Spectrum as a function of exchange rate</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#explicit-execution-and-processing-of-the-2d-sequence">Explicit execution and processing of the 2D sequence</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#acquisition">Acquisition</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#processing">Processing</a></li>
@@ -439,7 +440,7 @@
   <section class="tex2jax_ignore mathjax_ignore" id="exchange-spectroscopy-exsy">
 <h1><font  color = "#0093AF">Exchange Spectroscopy (EXSY)</font><a class="headerlink" href="#exchange-spectroscopy-exsy" title="Link to this heading">#</a></h1>
 <p><a href="https://githubtocolab.com/alsinmr/SLEEPY_tutorial/blob/main/ColabNotebooks/Chapter2/Ch2_EXSY.ipynb" target="_blank"><img src="https://colab.research.google.com/assets/colab-badge.svg"></a></p>
-<p>In the previous example, we simulated exchange in a 1D spectrum. Here, we perform the 2D EXSY experiment, under exchange conditions. We will then look how it results in a 2D EXSY spectrum, and how that spectrum changes as a function of a mixing time.</p>
+<p>In the previous example, we simulated exchange in a 1D spectrum. Here, we perform the 2D EXSY experiment. We will then calculate the 2D EXSY spectrum, and observe how that spectrum changes as a function of a mixing time. We will also investigate the 2D spectrum as a function of correlation time of exchange.</p>
 <section id="setup">
 <h2>Setup<a class="headerlink" href="#setup" title="Link to this heading">#</a></h2>
 <div class="cell docutils container">
@@ -468,7 +469,7 @@
 </section>
 <section id="add-the-exchange-process">
 <h2>Add the exchange process<a class="headerlink" href="#add-the-exchange-process" title="Link to this heading">#</a></h2>
-<p>First, we export the system into Liouville space, allowing us to introduce an exchange process. Then we’ll define a correlation time and population 1 and population 2. From this we can build the exchange matrix and append it to the Liouvillian. We also add some <span class="math notranslate nohighlight">\(T_2\)</span> relaxation to destroy transverse magnetization during the delay period for exchange and produce some broadening.</p>
+<p>First, we export the system into Liouville space, and add the exchange process. We also add some <span class="math notranslate nohighlight">\(T_2\)</span> relaxation to destroy transverse magnetization during the delay period for exchange and produce some broadening when the spectrum is very narrow.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">L</span><span class="o">=</span><span class="n">sl</span><span class="o">.</span><span class="n">Liouvillian</span><span class="p">((</span><span class="n">ex0</span><span class="p">,</span><span class="n">ex1</span><span class="p">))</span>           <span class="c1">#Builds the two different Hamiltonians and exports them to Liouville space</span>
@@ -488,7 +489,7 @@
 <section id="run-as-a-2d-experiment">
 <h2>Run as a 2D experiment<a class="headerlink" href="#run-as-a-2d-experiment" title="Link to this heading">#</a></h2>
 <p>First, we’ll just calculate one 2D spectrum, and then later check how the spectrum evolves as a function of a delay time. We need an initial density matrix, <span class="math notranslate nohighlight">\(S_x\)</span>, a detection matrix, <span class="math notranslate nohighlight">\(S^+\)</span>, and propagators for evolution times, <span class="math notranslate nohighlight">\(\pi\)</span>/2 pulses, and a delay for the exchange process. We start with generating the propagators and density matrices.</p>
-<p>SLEEPY has a function in Tools, the TwoD_Builder, for executing and processing two-dimensional experiements. TwoD_Builder requires an initial density matrix, a Sequence for the indirect dimension evolution, the direction dimension evolution, and transfer periods between the dimensions. For the transfer, one needs a sequence to convert the X component, and one for the Y component (States acquisition<span class="math notranslate nohighlight">\(^1\)</span>). The sequences for the direct/indirect dimension may just be delays, and can be the same sequence.</p>
+<p>SLEEPY has a function in Tools, the TwoD_Builder, for executing and processing two-dimensional experiements. TwoD_Builder requires an initial density matrix (rho), and sequences for the indirect dimension evolution, the direction dimension evolution, and transfer periods between the dimensions. For the transfers, one needs a sequence to convert the X component, and one for the Y component (States acquisition<span class="math notranslate nohighlight">\(^1\)</span>). The sequences for the direct/indirect dimension may just be delays, and can be the same sequence.</p>
 <p>[1] D.J. States, R.A. Haberkorn, D.J. Ruben. <a class="reference external" href="https://doi.org/10.1016/0022-2364(82)90279-7"><em>J. Magn. Reson.</em></a>, <strong>1969</strong>, 48, 286-292.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -592,21 +593,18 @@
 <span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;$\tau$ / s&#39;</span><span class="p">)</span>
 <span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;I / a.u.&#39;</span><span class="p">)</span>
 <span class="n">ax</span><span class="o">.</span><span class="n">set_yticklabels</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="p">)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">((</span><span class="sa">r</span><span class="s1">&#39;$p_1\rightarrow p_1$&#39;</span><span class="p">,</span><span class="sa">r</span><span class="s1">&#39;$p_2\rightarrow p_2$&#39;</span><span class="p">,</span><span class="sa">r</span><span class="s1">&#39;$p_1\rightarrow p_2$&#39;</span><span class="p">,</span><span class="sa">r</span><span class="s1">&#39;$p_2\rightarrow p_1$&#39;</span><span class="p">))</span>
+<span class="n">_</span><span class="o">=</span><span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">((</span><span class="sa">r</span><span class="s1">&#39;$p_1\rightarrow p_1$&#39;</span><span class="p">,</span><span class="sa">r</span><span class="s1">&#39;$p_2\rightarrow p_2$&#39;</span><span class="p">,</span><span class="sa">r</span><span class="s1">&#39;$p_1\rightarrow p_2$&#39;</span><span class="p">,</span><span class="sa">r</span><span class="s1">&#39;$p_2\rightarrow p_1$&#39;</span><span class="p">))</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x7fe6f12e36d0&gt;
-</pre></div>
-</div>
 <img alt="../_images/549eb8dcca845261557fb30006ab6caecbc967ae007bbaa5792829e378199200.png" src="../_images/549eb8dcca845261557fb30006ab6caecbc967ae007bbaa5792829e378199200.png" />
 </div>
 </div>
 </section>
-<section id="spectra-as-a-function-of-exchange-rate">
-<h2>Spectra as a function of exchange rate<a class="headerlink" href="#spectra-as-a-function-of-exchange-rate" title="Link to this heading">#</a></h2>
-<p>We can’t use EXSY for faster motions, because the peaks don’t stay separated. We can observe this behavior here. We just copy the setup from above for the 3D spectra and run it with varying correlation times</p>
+<section id="spectrum-as-a-function-of-exchange-rate">
+<h2>Spectrum as a function of exchange rate<a class="headerlink" href="#spectrum-as-a-function-of-exchange-rate" title="Link to this heading">#</a></h2>
+<p>We can’t use EXSY for faster motions, because the peaks don’t stay separated. We can observe the coalescence of all four peaks by varying the correlation time.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">tc0</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">logspace</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="o">-</span><span class="mi">6</span><span class="p">,</span><span class="mi">6</span><span class="p">)</span>
@@ -636,7 +634,7 @@
 <img alt="../_images/36f9cb70b4534cbb8e067905cb182014750019698b2fe86d2fcd17eb05f0e226.png" src="../_images/36f9cb70b4534cbb8e067905cb182014750019698b2fe86d2fcd17eb05f0e226.png" />
 </div>
 </div>
-<p>Now we do the same as above, but without having symmetric exchange, i.e. <span class="math notranslate nohighlight">\(p_1\ne p_2\)</span>.</p>
+<p>Finally, we do the same as above, but without having symmetric exchange, i.e. <span class="math notranslate nohighlight">\(p_1\ne p_2\)</span>. Here, we set <span class="math notranslate nohighlight">\(p_1=0.75\)</span> and <span class="math notranslate nohighlight">\(p_2=0.25\)</span>. We use the <code class="docutils literal notranslate"><span class="pre">twoSite_kex</span></code> function to build the exchange matrix.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">tc0</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">logspace</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="o">-</span><span class="mi">6</span><span class="p">,</span><span class="mi">6</span><span class="p">)</span>
@@ -829,7 +827,7 @@
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#run-as-a-2d-experiment">Run as a 2D experiment</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sweep-the-delay-time-to-observe-buildup">Sweep the delay time to observe buildup</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#plot-trajectory-of-the-individual-peaks">Plot trajectory of the individual peaks</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#spectra-as-a-function-of-exchange-rate">Spectra as a function of exchange rate</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#spectrum-as-a-function-of-exchange-rate">Spectrum as a function of exchange rate</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#explicit-execution-and-processing-of-the-2d-sequence">Explicit execution and processing of the 2D sequence</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#acquisition">Acquisition</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#processing">Processing</a></li>
