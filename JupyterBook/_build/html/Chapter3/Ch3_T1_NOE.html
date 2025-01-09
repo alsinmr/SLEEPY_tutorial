@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>\(T_1\) and NOE &#8212; SLEEPY Tutorial</title>
+    <title>\(T_1\) and Nuclear Overhauser Effect &#8212; SLEEPY Tutorial</title>
   
   
   
@@ -202,7 +202,7 @@
 <li class="toctree-l2"><a class="reference internal" href="Ch3_REDOR.html"><font color="#0093AF">REDOR</font></a></li>
 <li class="toctree-l2"><a class="reference internal" href="Ch3_DIPSHIFT.html"><font color="#0093AF">DIPSHIFT</font></a></li>
 <li class="toctree-l2"><a class="reference internal" href="Ch3_RECRR.html"><font color="#0093AF">Relaxation in complex sequences: RECRR</font></a></li>
-<li class="toctree-l2 current active"><a class="current reference internal" href="#"><font color="#0093AF"><span class="math notranslate nohighlight">\(T_1\)</span> and NOE</font></a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#"><font color="#0093AF"><span class="math notranslate nohighlight">\(T_1\)</span> and Nuclear Overhauser Effect</font></a></li>
 <li class="toctree-l2"><a class="reference internal" href="Ch3_DARR.html"><font color="#0093AF">Dipolar Assisted Rotary Resonance</font></a></li>
 <li class="toctree-l2"><a class="reference internal" href="Ch3_Quad.html"><font color="#0093AF">Quadrupolar phenomena</font></a></li>
 </ul>
@@ -391,7 +391,9 @@
 <button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
     <i class="fa-solid fa-magnifying-glass fa-lg"></i>
 </button>
-
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
 </div></div>
       
     </div>
@@ -402,11 +404,30 @@
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1><font  color = "#0093AF">T_1 and NOE</font></h1>
+    <h1><font  color = "#0093AF">T_1 and Nuclear Overhauser Effect</font></h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
             
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#setup">Setup</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#t-1-anisotropy-under-static-conditions"><span class="math notranslate nohighlight">\(T_1\)</span> anisotropy under static conditions</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#build-the-system">Build the system</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#propagate-and-plot">Propagate and plot</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#histogram-of-all-rate-constants-present">Histogram of all rate constants present</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#t-1-anisotropy-under-mas-conditions"><span class="math notranslate nohighlight">\(T_1\)</span> anisotropy under MAS conditions</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#methyl-relaxation">Methyl relaxation</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Build the system</a></li>
+</ul>
+</li>
+</ul>
+            </nav>
         </div>
     </div>
 </div>
@@ -416,10 +437,12 @@
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="t-1-and-noe">
-<h1><font  color = "#0093AF"><span class="math notranslate nohighlight">\(T_1\)</span> and NOE</font><a class="headerlink" href="#t-1-and-noe" title="Link to this heading">#</a></h1>
+  <section class="tex2jax_ignore mathjax_ignore" id="t-1-and-nuclear-overhauser-effect">
+<h1><font  color = "#0093AF"><span class="math notranslate nohighlight">\(T_1\)</span> and Nuclear Overhauser Effect</font><a class="headerlink" href="#t-1-and-nuclear-overhauser-effect" title="Link to this heading">#</a></h1>
 <p><a href="https://githubtocolab.com/alsinmr/SLEEPY_tutorial/blob/main/ColabNotebooks/Chapter3/Ch3_T1_NOE.ipynb" target="_blank"><img src="https://colab.research.google.com/assets/colab-badge.svg"></a></p>
-<p>SLEEPY can simulate <span class="math notranslate nohighlight">\(T_1\)</span> relaxation due to exchange dynamics, but requires being run in the lab frame. Modulation of a CSA will yield relaxation of one spin, whereas modulation of a dipole coupling will also bring about a polarization transfer between the spins (Nuclear Overhauser Effect).</p>
+<p>We previously simulated <span class="math notranslate nohighlight">\(T_1\)</span> and NOE in <a class="reference internal" href="../Chapter2/Ch2_T1_NOE.html"><span class="std std-doc">solution state</span></a>. In solution NMR, our motion should result in full averaging of the anisotropic interactions. In contrast, in solid-state NMR, no tumbling occurs, so anisotropic interactions remain and influence the resulting spectrum. This also means that different orientations in the sample undergo relaxation with different rate constants. We will characterize this behavior here, and how it depends on the presence or absence of magic angle spinning.</p>
+<section id="setup">
+<h2>Setup<a class="headerlink" href="#setup" title="Link to this heading">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">SLEEPY</span> <span class="k">as</span> <span class="nn">sl</span>
@@ -429,195 +452,331 @@
 </div>
 </div>
 </div>
+</section>
+<section id="t-1-anisotropy-under-static-conditions">
+<h2><span class="math notranslate nohighlight">\(T_1\)</span> anisotropy under static conditions<a class="headerlink" href="#t-1-anisotropy-under-static-conditions" title="Link to this heading">#</a></h2>
+<section id="build-the-system">
+<h3>Build the system<a class="headerlink" href="#build-the-system" title="Link to this heading">#</a></h3>
+<p>We use a two-spin <span class="math notranslate nohighlight">\(^1\)</span>H–<span class="math notranslate nohighlight">\(^15\)</span>N system, with parameters for the H–N in a  protein backbone. We include a 1 ns correlation time, and recovery to thermal equilibrium (‘DynamicThermal’).</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ex0</span><span class="o">=</span><span class="n">sl</span><span class="o">.</span><span class="n">ExpSys</span><span class="p">(</span><span class="n">v0H</span><span class="o">=</span><span class="mi">600</span><span class="p">,</span><span class="n">Nucs</span><span class="o">=</span><span class="s1">&#39;13C&#39;</span><span class="p">,</span><span class="n">vr</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">LF</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">pwdavg</span><span class="o">=</span><span class="n">sl</span><span class="o">.</span><span class="n">PowderAvg</span><span class="p">())</span>
-<span class="n">ex0</span><span class="o">.</span><span class="n">set_inter</span><span class="p">(</span><span class="s1">&#39;CSA&#39;</span><span class="p">,</span><span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">delta</span><span class="o">=</span><span class="mi">200</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">delta</span><span class="o">=</span><span class="n">sl</span><span class="o">.</span><span class="n">Tools</span><span class="o">.</span><span class="n">dipole_coupling</span><span class="p">(</span><span class="mf">.102</span><span class="p">,</span><span class="s1">&#39;15N&#39;</span><span class="p">,</span><span class="s1">&#39;1H&#39;</span><span class="p">)</span>
+<span class="n">hop</span><span class="o">=</span><span class="mi">40</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">/</span><span class="mi">180</span>
+<span class="n">ex0</span><span class="o">=</span><span class="n">sl</span><span class="o">.</span><span class="n">ExpSys</span><span class="p">(</span><span class="n">v0H</span><span class="o">=</span><span class="mi">600</span><span class="p">,</span><span class="n">Nucs</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;15N&#39;</span><span class="p">,</span><span class="s1">&#39;1H&#39;</span><span class="p">],</span><span class="n">vr</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">LF</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">pwdavg</span><span class="o">=</span><span class="n">sl</span><span class="o">.</span><span class="n">PowderAvg</span><span class="p">(</span><span class="mi">7</span><span class="p">))</span>
+<span class="n">ex0</span><span class="o">.</span><span class="n">set_inter</span><span class="p">(</span><span class="s1">&#39;CSA&#39;</span><span class="p">,</span><span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">delta</span><span class="o">=</span><span class="mi">113</span><span class="p">,</span><span class="n">euler</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">23</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">/</span><span class="mi">180</span><span class="p">,</span><span class="mi">0</span><span class="p">])</span>
+<span class="n">ex0</span><span class="o">.</span><span class="n">set_inter</span><span class="p">(</span><span class="s1">&#39;dipole&#39;</span><span class="p">,</span><span class="n">i0</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">i1</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">delta</span><span class="o">=</span><span class="n">delta</span><span class="p">)</span>
 <span class="n">ex1</span><span class="o">=</span><span class="n">ex0</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
-<span class="n">ex1</span><span class="o">.</span><span class="n">set_inter</span><span class="p">(</span><span class="s1">&#39;CSA&#39;</span><span class="p">,</span><span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">delta</span><span class="o">=</span><span class="mi">200</span><span class="p">,</span><span class="n">euler</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">45</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">/</span><span class="mi">180</span><span class="p">,</span><span class="mi">0</span><span class="p">])</span>
-
-<span class="n">L</span><span class="o">=</span><span class="n">sl</span><span class="o">.</span><span class="n">Liouvillian</span><span class="p">(</span><span class="n">ex0</span><span class="p">,</span><span class="n">ex1</span><span class="p">)</span>
-<span class="n">L</span><span class="o">.</span><span class="n">kex</span><span class="o">=</span><span class="n">sl</span><span class="o">.</span><span class="n">Tools</span><span class="o">.</span><span class="n">twoSite_kex</span><span class="p">(</span><span class="mf">1e-10</span><span class="p">)</span>
-
-<span class="n">seq</span><span class="o">=</span><span class="n">L</span><span class="o">.</span><span class="n">Sequence</span><span class="p">(</span><span class="n">Dt</span><span class="o">=</span><span class="mf">1e-2</span><span class="p">)</span>
-
-<span class="n">rho</span><span class="o">=</span><span class="n">sl</span><span class="o">.</span><span class="n">Rho</span><span class="p">(</span><span class="s1">&#39;Thermal&#39;</span><span class="p">,</span><span class="s1">&#39;13Cz&#39;</span><span class="p">)</span>
-
-<span class="n">rho</span><span class="o">.</span><span class="n">DetProp</span><span class="p">(</span><span class="n">seq</span><span class="p">,</span><span class="n">n</span><span class="o">=</span><span class="mi">1000</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Density Matrix/Detection Operator
-rho0: Thermal
-detect[0]: 13Cz
-Current time is 10000000.000 microseconds
-1000 time points have been recorded
-
-&lt;SLEEPY.Rho.Rho object at 0x7f9f1885ab00&gt;
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">rho</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;AxesSubplot:xlabel=&#39;t / ms&#39;, ylabel=&#39;&lt;$^{13}C_z$&gt;&#39;&gt;
-</pre></div>
-</div>
-<img alt="../_images/6ecb1e941a450ac04d2fb29db84ff229e8cfd2163a0083ba4f37848a55319491.png" src="../_images/6ecb1e941a450ac04d2fb29db84ff229e8cfd2163a0083ba4f37848a55319491.png" />
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ex0</span><span class="o">=</span><span class="n">sl</span><span class="o">.</span><span class="n">ExpSys</span><span class="p">(</span><span class="n">v0H</span><span class="o">=</span><span class="mi">600</span><span class="p">,</span><span class="n">Nucs</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;13C&#39;</span><span class="p">,</span><span class="s1">&#39;1H&#39;</span><span class="p">],</span><span class="n">vr</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">LF</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">pwdavg</span><span class="o">=</span><span class="n">sl</span><span class="o">.</span><span class="n">PowderAvg</span><span class="p">()[</span><span class="mi">10</span><span class="p">])</span>
-<span class="n">ex0</span><span class="o">.</span><span class="n">set_inter</span><span class="p">(</span><span class="s1">&#39;dipole&#39;</span><span class="p">,</span><span class="n">i0</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">i1</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">delta</span><span class="o">=</span><span class="n">sl</span><span class="o">.</span><span class="n">Tools</span><span class="o">.</span><span class="n">dipole_coupling</span><span class="p">(</span><span class="mf">.109</span><span class="p">,</span><span class="s1">&#39;1H&#39;</span><span class="p">,</span><span class="s1">&#39;13C&#39;</span><span class="p">))</span>
-<span class="n">ex1</span><span class="o">=</span><span class="n">ex0</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
-<span class="n">ex1</span><span class="o">.</span><span class="n">set_inter</span><span class="p">(</span><span class="s1">&#39;dipole&#39;</span><span class="p">,</span><span class="n">i0</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">i1</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">delta</span><span class="o">=</span><span class="n">sl</span><span class="o">.</span><span class="n">Tools</span><span class="o">.</span><span class="n">dipole_coupling</span><span class="p">(</span><span class="mf">.109</span><span class="p">,</span><span class="s1">&#39;1H&#39;</span><span class="p">,</span><span class="s1">&#39;13C&#39;</span><span class="p">),</span><span class="n">euler</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">45</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">/</span><span class="mi">180</span><span class="p">,</span><span class="mi">0</span><span class="p">])</span>
+<span class="n">ex1</span><span class="o">.</span><span class="n">set_inter</span><span class="p">(</span><span class="s1">&#39;CSA&#39;</span><span class="p">,</span><span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">delta</span><span class="o">=</span><span class="mi">113</span><span class="p">,</span><span class="n">euler</span><span class="o">=</span><span class="p">[[</span><span class="mi">0</span><span class="p">,</span><span class="mi">23</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">/</span><span class="mi">180</span><span class="p">,</span><span class="mi">0</span><span class="p">],[</span><span class="mi">0</span><span class="p">,</span><span class="n">hop</span><span class="p">,</span><span class="mi">0</span><span class="p">]])</span>
+<span class="n">ex1</span><span class="o">.</span><span class="n">set_inter</span><span class="p">(</span><span class="s1">&#39;dipole&#39;</span><span class="p">,</span><span class="n">i0</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">i1</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">delta</span><span class="o">=</span><span class="n">delta</span><span class="p">,</span><span class="n">euler</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="n">hop</span><span class="p">,</span><span class="mi">0</span><span class="p">])</span>
 
 <span class="n">L</span><span class="o">=</span><span class="n">sl</span><span class="o">.</span><span class="n">Liouvillian</span><span class="p">(</span><span class="n">ex0</span><span class="p">,</span><span class="n">ex1</span><span class="p">)</span>
 <span class="n">L</span><span class="o">.</span><span class="n">kex</span><span class="o">=</span><span class="n">sl</span><span class="o">.</span><span class="n">Tools</span><span class="o">.</span><span class="n">twoSite_kex</span><span class="p">(</span><span class="mf">1e-9</span><span class="p">)</span>
+<span class="n">_</span><span class="o">=</span><span class="n">L</span><span class="o">.</span><span class="n">add_relax</span><span class="p">(</span><span class="s1">&#39;DynamicThermal&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="propagate-and-plot">
+<h3>Propagate and plot<a class="headerlink" href="#propagate-and-plot" title="Link to this heading">#</a></h3>
+<p>We assume the system starts out with the <span class="math notranslate nohighlight">\(^{15}\)</span>N spin having been saturated, but thermal polarization on the <span class="math notranslate nohighlight">\(^1\)</span>H. Note that if a thermalized Liouvillian is used, then the initial magnetization is scaled by the polarization of the system.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">seq</span><span class="o">=</span><span class="n">L</span><span class="o">.</span><span class="n">Sequence</span><span class="p">(</span><span class="n">Dt</span><span class="o">=</span><span class="mf">1e-2</span><span class="p">)</span>
+<span class="n">U</span><span class="o">=</span><span class="n">seq</span><span class="o">.</span><span class="n">U</span><span class="p">()</span>
+<span class="n">rho</span><span class="o">=</span><span class="n">sl</span><span class="o">.</span><span class="n">Rho</span><span class="p">(</span><span class="s1">&#39;1Hz&#39;</span><span class="p">,</span><span class="s1">&#39;15Nz&#39;</span><span class="p">)</span>
 
-<span class="n">L</span><span class="o">.</span><span class="n">add_relax</span><span class="p">(</span><span class="s1">&#39;DynamicThermal&#39;</span><span class="p">)</span>
+<span class="n">_</span><span class="o">=</span><span class="n">rho</span><span class="o">.</span><span class="n">DetProp</span><span class="p">(</span><span class="n">U</span><span class="p">,</span><span class="n">n</span><span class="o">=</span><span class="mi">10000</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ax</span><span class="o">=</span><span class="n">rho</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="s1">&#39;s&#39;</span><span class="p">)</span>
+<span class="n">_</span><span class="o">=</span><span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">ax</span><span class="o">.</span><span class="n">get_xlim</span><span class="p">(),</span><span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span><span class="o">*</span><span class="n">ex0</span><span class="o">.</span><span class="n">Peq</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">,</span><span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;:&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/03415ce94e226b4df92731d24d565dd8a315cfec1dea514602633297dbd5f813.png" src="../_images/03415ce94e226b4df92731d24d565dd8a315cfec1dea514602633297dbd5f813.png" />
+</div>
+</div>
+<p>Then, the <span class="math notranslate nohighlight">\(^{15}\)</span>N magnetization relaxes towards its thermal equilibrium. Note that we observe both a fairly fast component at the beginning (<span class="math notranslate nohighlight">\(T_1\)</span>~1 s), but also a much slower component, with <span class="math notranslate nohighlight">\(T_1\)</span> on the order of 10 s.</p>
+<p>We can analyze the multiexponentiality precisely with SLEEPY, as done below.</p>
+</section>
+<section id="histogram-of-all-rate-constants-present">
+<h3>Histogram of all rate constants present<a class="headerlink" href="#histogram-of-all-rate-constants-present" title="Link to this heading">#</a></h3>
+<p>SLEEPY gives us the ability to extract individual rate constants from propagators, given a starting density matrix, via the <code class="docutils literal notranslate"><span class="pre">rho.extract_decay_rates</span></code> function. This function has a few modes, but the ‘wt_rates’ mode yields a list of rate constants and their corresponding amplitudes, weighted according to the powder average weighting (other modes offer, for example, an averaged weight for each element of the powder average, the average over the full powder average, or a list of rate constants for each element of the powder average; type <code class="docutils literal notranslate"><span class="pre">help(rho.extract_decay_rates)</span></code> for details).</p>
+<p>Once we have the rates and amplitudes, we can create a histogram for each weight. Note this is slightly more complex than a usual histogram, because the rate constants have amplitudes associated with them, so we cannot just count up the rate constants in a bin, rather, we need to add together the amplitudes for all rate constants in a bin.</p>
+<p>We can also calculate the average rate constant from the rates and amplitudes, shown on the plot.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">histogram</span><span class="p">(</span><span class="n">R1</span><span class="p">,</span><span class="n">A</span><span class="p">,</span><span class="n">bins</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">ax</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">bins</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">bins</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">R1</span><span class="o">.</span><span class="n">min</span><span class="p">()),</span><span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">R1</span><span class="o">.</span><span class="n">max</span><span class="p">()),</span><span class="mi">25</span><span class="p">)</span>
+        
+    <span class="n">db</span><span class="o">=</span><span class="n">bins</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">-</span><span class="n">bins</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    
+    <span class="n">i</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">digitize</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">R1</span><span class="p">),</span><span class="n">bins</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span>
+    <span class="n">h</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">bins</span><span class="p">))</span>
+    <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">i</span><span class="o">.</span><span class="n">max</span><span class="p">()</span><span class="o">+</span><span class="mi">1</span><span class="p">):</span>
+        <span class="n">h</span><span class="p">[</span><span class="n">k</span><span class="p">]</span><span class="o">=</span><span class="n">A</span><span class="p">[</span><span class="n">k</span><span class="o">==</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+        
+    <span class="k">if</span> <span class="n">ax</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">ax</span><span class="o">=</span><span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()[</span><span class="mi">1</span><span class="p">]</span>
+        <span class="n">alpha</span><span class="o">=</span><span class="mi">1</span>
+        <span class="n">color</span><span class="o">=</span><span class="n">plt</span><span class="o">.</span><span class="n">get_cmap</span><span class="p">(</span><span class="s1">&#39;tab10&#39;</span><span class="p">)(</span><span class="mi">0</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">alpha</span><span class="o">=</span><span class="mf">.5</span>    
+        <span class="n">color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">bar</span><span class="p">(</span><span class="n">bins</span><span class="p">,</span><span class="n">h</span><span class="p">,</span><span class="n">width</span><span class="o">=</span><span class="p">(</span><span class="n">bins</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">-</span><span class="n">bins</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span><span class="o">*</span><span class="mf">.9</span><span class="p">,</span><span class="n">alpha</span><span class="o">=</span><span class="n">alpha</span><span class="p">,</span><span class="n">color</span><span class="o">=</span><span class="n">color</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_xticks</span><span class="p">(</span><span class="n">bins</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span><span class="o">*</span><span class="mi">5</span><span class="p">])</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_xticklabels</span><span class="p">([</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="mi">10</span><span class="o">**</span><span class="n">bins</span><span class="p">[</span><span class="n">k</span><span class="p">:</span><span class="n">k</span><span class="o">+</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span><span class="o">*</span><span class="mf">1e3</span><span class="si">:</span><span class="s1">6.2f</span><span class="si">}</span><span class="s1">&#39;</span> <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">25</span><span class="p">,</span><span class="mi">5</span><span class="p">)])</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;$R_1$ / s$^{-1}$&#39;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Intensity&#39;</span><span class="p">)</span>
+    
+    <span class="k">return</span> <span class="n">bins</span><span class="p">,</span><span class="n">ax</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">rho</span><span class="o">.</span><span class="n">reset</span><span class="p">()</span>
 
-<span class="n">seq</span><span class="o">=</span><span class="n">L</span><span class="o">.</span><span class="n">Sequence</span><span class="p">(</span><span class="n">Dt</span><span class="o">=</span><span class="mf">1e-4</span><span class="p">)</span>
+<span class="c1"># Calculate a weighted histogram</span>
+<span class="n">R1_static</span><span class="p">,</span><span class="n">A_static</span><span class="o">=</span><span class="n">rho</span><span class="o">.</span><span class="n">extract_decay_rates</span><span class="p">(</span><span class="n">U</span><span class="p">,</span><span class="n">mode</span><span class="o">=</span><span class="s1">&#39;wt_rates&#39;</span><span class="p">)</span>
+<span class="n">bins</span><span class="p">,</span><span class="n">_</span><span class="o">=</span><span class="n">histogram</span><span class="p">(</span><span class="n">R1_static</span><span class="p">,</span><span class="n">A_static</span><span class="p">)</span>
+
+<span class="n">R1_avg_static</span><span class="o">=</span><span class="p">(</span><span class="n">R1_static</span><span class="o">*</span><span class="n">A_static</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="o">/</span><span class="n">A_static</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+
+<span class="n">ax</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="n">bins</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span><span class="mf">4.5e-7</span><span class="p">,</span><span class="sa">fr</span><span class="s1">&#39;$\langle R_1\rangle_</span><span class="se">{{</span><span class="s1">static</span><span class="se">}}</span><span class="s1">$: </span><span class="si">{</span><span class="n">R1_avg_static</span><span class="si">:</span><span class="s1">.2f</span><span class="si">}</span><span class="s1"> $s^</span><span class="se">{{</span><span class="s1">-1</span><span class="se">}}</span><span class="s1">$&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">((</span><span class="s1">&#39;static&#39;</span><span class="p">,</span><span class="s1">&#39;MAS&#39;</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x7fbbe4310e20&gt;
+</pre></div>
+</div>
+<img alt="../_images/be70178990ac4ba1c149ad936de6f4d1662ab23eadd2da41d45bbd67b656a694.png" src="../_images/be70178990ac4ba1c149ad936de6f4d1662ab23eadd2da41d45bbd67b656a694.png" />
+</div>
+</div>
+<p>We see that a relatively broad range of <span class="math notranslate nohighlight">\(R_1\)</span> rate constants are obtained, corresponding to both different orientations in the powder average, and also different rate constants depending if the dipolar and CSA relaxation are constructive or destructive (depending on the <span class="math notranslate nohighlight">\(^1\)</span>H spin state, which may also change during the calculation).</p>
+<p>We now repeat the above calculation, but under magic angle spinning conditions. Note that while we may change <code class="docutils literal notranslate"><span class="pre">ex0.vr</span></code>, we have to take care to clear the Liouvillian cache, also add <code class="docutils literal notranslate"><span class="pre">n_gamma</span></code>, which is set to 1 under static conditions. Newer users may prefer to rebuild the experimental system (<code class="docutils literal notranslate"><span class="pre">ex0</span></code>,<code class="docutils literal notranslate"><span class="pre">ex1</span></code>) and the Liouvillian from scratch, in order to automatically obtain the SLEEPY default settings and avoid mistakes.</p>
+</section>
+</section>
+<section id="t-1-anisotropy-under-mas-conditions">
+<h2><span class="math notranslate nohighlight">\(T_1\)</span> anisotropy under MAS conditions<a class="headerlink" href="#t-1-anisotropy-under-mas-conditions" title="Link to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ex0</span><span class="o">.</span><span class="n">vr</span><span class="o">=</span><span class="mi">10000</span>
+<span class="n">ex0</span><span class="o">.</span><span class="n">n_gamma</span><span class="o">=</span><span class="mi">30</span>
+<span class="n">L</span><span class="o">.</span><span class="n">clear_cache</span><span class="p">()</span>
+
+<span class="n">ex0</span><span class="o">.</span><span class="n">pwdavg</span><span class="o">=</span><span class="n">sl</span><span class="o">.</span><span class="n">PowderAvg</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
+
+<span class="n">seq</span><span class="o">=</span><span class="n">L</span><span class="o">.</span><span class="n">Sequence</span><span class="p">()</span>
 <span class="n">U</span><span class="o">=</span><span class="n">seq</span><span class="o">.</span><span class="n">U</span><span class="p">()</span><span class="o">**</span><span class="mi">100</span>
+<span class="n">rho</span><span class="o">=</span><span class="n">sl</span><span class="o">.</span><span class="n">Rho</span><span class="p">(</span><span class="s1">&#39;1Hz&#39;</span><span class="p">,</span><span class="s1">&#39;15Nz&#39;</span><span class="p">)</span>
 
-<span class="n">rho</span><span class="o">=</span><span class="n">sl</span><span class="o">.</span><span class="n">Rho</span><span class="p">(</span><span class="s1">&#39;Thermal&#39;</span><span class="p">,[</span><span class="s1">&#39;1Hz&#39;</span><span class="p">,</span><span class="s1">&#39;13Cz&#39;</span><span class="p">])</span>
-<span class="c1"># L.Udelta(&#39;1H&#39;,np.pi)*rho</span>
+<span class="n">_</span><span class="o">=</span><span class="n">rho</span><span class="o">.</span><span class="n">DetProp</span><span class="p">(</span><span class="n">U</span><span class="p">,</span><span class="n">n</span><span class="o">=</span><span class="mi">2000</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">_</span><span class="o">=</span><span class="n">rho</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="s1">&#39;s&#39;</span><span class="p">)</span>
+<span class="n">_</span><span class="o">=</span><span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">ax</span><span class="o">.</span><span class="n">get_xlim</span><span class="p">(),</span><span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span><span class="o">*</span><span class="n">ex0</span><span class="o">.</span><span class="n">Peq</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">,</span><span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;:&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/21aad7199cacf4ebe8f0ee46ed6f1fadc493f34dc6ead6c1a066d533a69b5ec6.png" src="../_images/21aad7199cacf4ebe8f0ee46ed6f1fadc493f34dc6ead6c1a066d533a69b5ec6.png" />
+</div>
+</div>
+<p>The resulting curve appears much less multiexponential than obtained from static conditions, although indeed it is still multiexponential.</p>
+<p>We extract the distribution of relaxation rates for the MAS experiment below, and compare to the distribution under static conditions.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">rho</span><span class="o">.</span><span class="n">reset</span><span class="p">()</span>
+<span class="n">R1_mas</span><span class="p">,</span><span class="n">A_mas</span><span class="o">=</span><span class="n">rho</span><span class="o">.</span><span class="n">extract_decay_rates</span><span class="p">(</span><span class="n">U</span><span class="p">,</span><span class="n">mode</span><span class="o">=</span><span class="s1">&#39;wt_rates&#39;</span><span class="p">)</span>
 
-<span class="n">rho</span><span class="o">.</span><span class="n">DetProp</span><span class="p">(</span><span class="n">U</span><span class="p">,</span><span class="n">n</span><span class="o">=</span><span class="mi">50000</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Density Matrix/Detection Operator
-rho0: Thermal
-detect[0]: 1Hz
-detect[1]: 13Cz
-Current time is 500000000.000 microseconds
-50000 time points have been recorded
+<span class="n">_</span><span class="p">,</span><span class="n">ax</span><span class="o">=</span><span class="n">histogram</span><span class="p">(</span><span class="n">R1_static</span><span class="p">,</span><span class="n">A_static</span><span class="p">,</span><span class="n">bins</span><span class="o">=</span><span class="n">bins</span><span class="p">)</span>
 
-&lt;SLEEPY.Rho.Rho object at 0x7f9ec8bd2438&gt;
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">rho</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="s1">&#39;s&#39;</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;AxesSubplot:xlabel=&#39;t / s&#39;, ylabel=&#39;&lt;Op&gt;&#39;&gt;
-</pre></div>
-</div>
-<img alt="../_images/487e9cfa0c60313ce67a1958ceebfc015dac0ee88853f5d56f2e111b8cf86f6c.png" src="../_images/487e9cfa0c60313ce67a1958ceebfc015dac0ee88853f5d56f2e111b8cf86f6c.png" />
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">rho</span><span class="o">.</span><span class="n">_detect</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">@</span><span class="p">((</span><span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">pinv</span><span class="p">(</span><span class="n">L</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">L</span><span class="p">(</span><span class="mi">0</span><span class="p">))</span><span class="nd">@L</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">L</span><span class="p">(</span><span class="mi">0</span><span class="p">))</span><span class="nd">@L</span><span class="o">.</span><span class="n">rho_eq</span><span class="p">(</span><span class="n">sub1</span><span class="o">=</span><span class="kc">True</span><span class="p">))</span>
+<span class="n">_</span><span class="p">,</span><span class="n">ax</span><span class="o">=</span><span class="n">histogram</span><span class="p">(</span><span class="n">R1_mas</span><span class="p">,</span><span class="n">A_mas</span><span class="p">,</span><span class="n">bins</span><span class="o">=</span><span class="n">bins</span><span class="p">,</span><span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">)</span>
+<span class="n">R1_avg_mas</span><span class="o">=</span><span class="p">(</span><span class="n">A_mas</span><span class="o">*</span><span class="n">R1_mas</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="o">/</span><span class="n">A_mas</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+
+<span class="n">ax</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="n">bins</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span><span class="mf">4.5e-7</span><span class="p">,</span><span class="sa">fr</span><span class="s1">&#39;$\langle R_1\rangle_</span><span class="se">{{</span><span class="s1">static</span><span class="se">}}</span><span class="s1">$: </span><span class="si">{</span><span class="n">R1_avg_static</span><span class="si">:</span><span class="s1">.2f</span><span class="si">}</span><span class="s1"> $s^</span><span class="se">{{</span><span class="s1">-1</span><span class="se">}}</span><span class="s1">$&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="n">bins</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span><span class="mf">6e-7</span><span class="p">,</span><span class="sa">fr</span><span class="s1">&#39;$\langle R_1\rangle_</span><span class="se">{{</span><span class="s1">MAS</span><span class="se">}}</span><span class="s1">$: </span><span class="si">{</span><span class="n">R1_avg_mas</span><span class="si">:</span><span class="s1">.2f</span><span class="si">}</span><span class="s1"> $s^</span><span class="se">{{</span><span class="s1">-1</span><span class="se">}}</span><span class="s1">$&#39;</span><span class="p">)</span>
+
+<span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">((</span><span class="s1">&#39;static&#39;</span><span class="p">,</span><span class="s1">&#39;MAS&#39;</span><span class="p">))</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;$R_1$ / s$^{-1}$&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Signal&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(4.831451995963613e-05+1.108187085972349e-12j)
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Text(0, 0.5, &#39;Signal&#39;)
+</pre></div>
+</div>
+<img alt="../_images/7936d95290831b513b85ec1159baad07bace5fbf5717774c0a7157fe445cac1f.png" src="../_images/7936d95290831b513b85ec1159baad07bace5fbf5717774c0a7157fe445cac1f.png" />
+</div>
+</div>
+<p>Indeed, the distribution of rate constants under MAS conditions is significantly narrower than under static conditions, although a distribution certainly still is present. The reduction of the breadth of the distribution comes from the fact that as the sample is rotated, different relaxation rate constants are sampled throughout the rotor period, resulting in an average rate constant. However, the rotation does not bring the individual crystallites necessarily to the orienationally-averaged rate constant.</p>
+<p>Although the width of the distribution changes, its average does not, where both calculations yield <span class="math notranslate nohighlight">\(\langle R_1\rangle\)</span>=0.66 s (the average <span class="math notranslate nohighlight">\(R_1\)</span> must stay the same, the average <span class="math notranslate nohighlight">\(T_1\)</span> may, on the other hand, change due to the different distribution width).</p>
+</section>
+<section id="methyl-relaxation">
+<h2>Methyl relaxation<a class="headerlink" href="#methyl-relaxation" title="Link to this heading">#</a></h2>
+<p>In the next calculation, we investigate relaxation of a <span class="math notranslate nohighlight">\(^{13}\)</span>C nucleus and the surrounding <span class="math notranslate nohighlight">\(^1\)</span>H in a methyl group, due to the 3-site methyl hopping dynamics. Approximate methyl correlation time (30 ps) taken from HET-s.<span class="math notranslate nohighlight">\(^1\)</span></p>
+<p>Methyl hopping represents a special case for exchange simulations, where when a methyl hop (120<span class="math notranslate nohighlight">\(^\circ\)</span> rotation) occurs, the new spin-system is identical to the old spin system, except for a change in the spin-indexing. Rather than introducing exchange, which increases the size of the Liouvillian, we may therefore induce exchange within the existing system. This is done with the <code class="docutils literal notranslate"><span class="pre">L.add_SpinEx</span></code> function, which requires the indices of the spins in exchange and the correlation time of the exchange process as arguments. The resulting Liouvillian is therefore <span class="math notranslate nohighlight">\(3\times3=9\)</span> times smaller than if exchange were added via multiple spin-systems in exchange.</p>
+<p>[1] K. Zumpfe, M. Berbon, B. Habenstein, A. Loquet, A.A. Smith. <a class="reference external" href="https://doi.org/10.1021/jacs.3c12620"><em>J. Am. Chem. Soc.</em></a>, <strong>2024</strong>, 146, 8164-8178</p>
+<section id="id1">
+<h3>Build the system<a class="headerlink" href="#id1" title="Link to this heading">#</a></h3>
+<p>We introduce a 4-spin, C-H-H-H system, with dipole couplings between all spins, and CSA on the <span class="math notranslate nohighlight">\(^{13}\)</span>C. Dipole couplings and euler angles are calculated from a tetrahedral geometry with the symmetry axis of the methyl group along the <em>z</em>-axis.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ex</span><span class="o">=</span><span class="n">sl</span><span class="o">.</span><span class="n">ExpSys</span><span class="p">(</span><span class="mi">700</span><span class="p">,</span><span class="n">Nucs</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;13C&#39;</span><span class="p">,</span><span class="s1">&#39;1H&#39;</span><span class="p">,</span><span class="s1">&#39;1H&#39;</span><span class="p">,</span><span class="s1">&#39;1H&#39;</span><span class="p">],</span><span class="n">LF</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">vr</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">pwdavg</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+<span class="n">tetra</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">arccos</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="o">/</span><span class="mi">3</span><span class="p">)</span>  <span class="c1">#Tetrahedral angle (109.47 degrees)</span>
+<span class="n">dHC</span><span class="o">=</span><span class="mf">0.109</span>     <span class="c1">#H-C bond length</span>
+<span class="n">dHH</span><span class="o">=</span><span class="mi">2</span><span class="o">*</span><span class="n">dHC</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">-</span><span class="n">tetra</span><span class="p">)</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">/</span><span class="mi">3</span><span class="p">)</span>  <span class="c1">#H-H distance in tetrahedron</span>
+
+<span class="n">deltaHC</span><span class="o">=</span><span class="n">sl</span><span class="o">.</span><span class="n">Tools</span><span class="o">.</span><span class="n">dipole_coupling</span><span class="p">(</span><span class="n">dHC</span><span class="p">,</span><span class="s1">&#39;1H&#39;</span><span class="p">,</span><span class="s1">&#39;13C&#39;</span><span class="p">)</span>
+<span class="n">deltaHH</span><span class="o">=</span><span class="n">sl</span><span class="o">.</span><span class="n">Tools</span><span class="o">.</span><span class="n">dipole_coupling</span><span class="p">(</span><span class="n">dHH</span><span class="p">,</span><span class="s1">&#39;1H&#39;</span><span class="p">,</span><span class="s1">&#39;1H&#39;</span><span class="p">)</span>
+<span class="n">ex</span><span class="o">.</span><span class="n">set_inter</span><span class="p">(</span><span class="s1">&#39;CSA&#39;</span><span class="p">,</span><span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">delta</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span><span class="n">euler</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span><span class="mi">0</span><span class="p">])</span>
+<span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">4</span><span class="p">):</span>
+    <span class="n">ex</span><span class="o">.</span><span class="n">set_inter</span><span class="p">(</span><span class="s1">&#39;dipole&#39;</span><span class="p">,</span><span class="n">i0</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">i1</span><span class="o">=</span><span class="n">k</span><span class="p">,</span><span class="n">delta</span><span class="o">=</span><span class="n">deltaHC</span><span class="p">,</span><span class="n">euler</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">-</span><span class="n">tetra</span><span class="p">,(</span><span class="n">k</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">*</span><span class="mi">2</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">/</span><span class="mi">3</span><span class="p">])</span>
+    <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">k</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span><span class="mi">4</span><span class="p">):</span>
+        <span class="n">ex</span><span class="o">.</span><span class="n">set_inter</span><span class="p">(</span><span class="s1">&#39;dipole&#39;</span><span class="p">,</span><span class="n">i0</span><span class="o">=</span><span class="n">k</span><span class="p">,</span><span class="n">i1</span><span class="o">=</span><span class="n">j</span><span class="p">,</span><span class="n">delta</span><span class="o">=</span><span class="n">deltaHH</span><span class="p">,</span><span class="n">euler</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">*</span><span class="p">(</span><span class="mi">5</span><span class="o">/</span><span class="mi">12</span><span class="o">+</span><span class="mi">2</span><span class="o">/</span><span class="mi">3</span><span class="o">*</span><span class="p">(</span><span class="n">k</span><span class="o">-</span><span class="mi">3</span><span class="p">))])</span>
 </pre></div>
 </div>
 </div>
 </div>
+<p>We add <em>spin-exchange</em>, rather than rebuilding the Liouville matrix three times. This approach is only valid if the exchange yields only swapping of positions of the spins.</p>
+<p>We also add recovery to thermal equilibrium (<code class="docutils literal notranslate"><span class="pre">DynamicThermal</span></code>).</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">n</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="n">U</span><span class="o">.</span><span class="n">_eig</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">real</span><span class="p">)</span>
-<span class="n">v</span><span class="o">=</span><span class="n">U</span><span class="o">.</span><span class="n">_eig</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span>
-<span class="n">vi</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">pinv</span><span class="p">(</span><span class="n">v</span><span class="p">)</span>
-<span class="n">mat</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">atleast_2d</span><span class="p">(</span><span class="n">v</span><span class="p">[:,</span><span class="n">n</span><span class="p">])</span><span class="o">.</span><span class="n">T</span><span class="nd">@np</span><span class="o">.</span><span class="n">atleast_2d</span><span class="p">(</span><span class="n">vi</span><span class="p">[</span><span class="n">n</span><span class="p">])</span>
-<span class="c1"># mat=np.atleast_2d(vi[n]).T@np.atleast_2d(v[:,n])</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">L</span><span class="o">=</span><span class="n">ex</span><span class="o">.</span><span class="n">Liouvillian</span><span class="p">()</span>
+<span class="n">L</span><span class="o">.</span><span class="n">add_SpinEx</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">],</span><span class="n">tc</span><span class="o">=</span><span class="mf">30e-12</span><span class="p">)</span>
+<span class="n">_</span><span class="o">=</span><span class="n">L</span><span class="o">.</span><span class="n">add_relax</span><span class="p">(</span><span class="s1">&#39;DynamicThermal&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 </div>
+<p>Below, we plot the resulting Liouvillian, and also the exchange matrix alone. Note that for technical reasons, the spin-exchange matrix appears in the relaxation matrix (<code class="docutils literal notranslate"><span class="pre">Lrelax</span></code>), rather than in the exchange matrix (<code class="docutils literal notranslate"><span class="pre">Lex</span></code>).</p>
+<p>Vertical lines in the Liouvillian plot result from thermalization of the system. The exchange matrix (right), couples states where spins 1, 2, and 3 swap positions (either 1-2-3 goes to 2-3-1 or 3-1-2). For example, the state <span class="math notranslate nohighlight">\(|S_0^\alpha S_1^+S_2^-S_3^\beta\rangle\)</span> is coupled to the <span class="math notranslate nohighlight">\(|S_0^\alpha S_1^-S_2^\beta S_3^+\rangle\)</span> and <span class="math notranslate nohighlight">\(|S_0^\alpha S_1^\beta S_2^+S_3^-\rangle\)</span> states by the exchange matrix.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="n">rho</span><span class="o">.</span><span class="n">_detect</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">@</span><span class="p">(</span><span class="n">mat</span><span class="nd">@rho</span><span class="o">.</span><span class="n">_rho0</span><span class="p">[</span><span class="mi">0</span><span class="p">]))</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span><span class="n">ax</span><span class="o">=</span><span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="n">figsize</span><span class="o">=</span><span class="p">[</span><span class="mi">12</span><span class="p">,</span><span class="mi">7</span><span class="p">])</span>
+<span class="n">L</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="n">colorbar</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">L</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="s1">&#39;Lrelax&#39;</span><span class="p">,</span><span class="n">mode</span><span class="o">=</span><span class="s1">&#39;re&#39;</span><span class="p">,</span><span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span><span class="n">colorbar</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">fig</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(4.8556788146192353e-05+3.7950953443146093e-13j)
+<img alt="../_images/59c60f85cb5619f93c1d960cbc9479693b7a22a9cecc9161b7aca1708a170d0b.png" src="../_images/59c60f85cb5619f93c1d960cbc9479693b7a22a9cecc9161b7aca1708a170d0b.png" />
+</div>
+</div>
+<p>Now we observe the relaxation behavior of the spins, assuming all spins were saturated at the beginning of the measurement.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">rho</span><span class="o">=</span><span class="n">sl</span><span class="o">.</span><span class="n">Rho</span><span class="p">(</span><span class="s1">&#39;zero&#39;</span><span class="p">,[</span><span class="s1">&#39;S0z&#39;</span><span class="p">,</span><span class="s1">&#39;S1z&#39;</span><span class="p">,</span><span class="s1">&#39;S2z&#39;</span><span class="p">,</span><span class="s1">&#39;S3z&#39;</span><span class="p">])</span>
+
+<span class="n">seq</span><span class="o">=</span><span class="n">L</span><span class="o">.</span><span class="n">Sequence</span><span class="p">(</span><span class="n">Dt</span><span class="o">=</span><span class="mf">.1</span><span class="p">)</span> <span class="c1">#100 ms time step</span>
+<span class="n">U</span><span class="o">=</span><span class="n">seq</span><span class="o">.</span><span class="n">U</span><span class="p">()</span>
+<span class="n">_</span><span class="o">=</span><span class="n">rho</span><span class="o">.</span><span class="n">DetProp</span><span class="p">(</span><span class="n">U</span><span class="p">,</span><span class="n">n</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ex0</span><span class="o">.</span><span class="n">Peq</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">_</span><span class="o">=</span><span class="n">rho</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="s1">&#39;s&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([1.21512887e-05, 4.83145275e-05])
+<img alt="../_images/5dca61d985031e5c7f60dd4b3f1a2bc8cd563cc8f8933d80ea2f2e8b79ad90eb.png" src="../_images/5dca61d985031e5c7f60dd4b3f1a2bc8cd563cc8f8933d80ea2f2e8b79ad90eb.png" />
+</div>
+</div>
+<p>We observe a complex relaxation behavior, resulting from coupling of the <span class="math notranslate nohighlight">\(^1\)</span>H and <span class="math notranslate nohighlight">\(^{13}\)</span>C relaxation. If we calculate the histogram for this relaxation process, we obtain both positive and negative amplitudes, resulting from the initial buildup of the <span class="math notranslate nohighlight">\(^{13}\)</span>C relaxation above its thermal equilibrium, followed by decay back to thermal equilibrium. Note that this prevents from easily calculating a meaningful averaged relaxation rate constant.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">rho</span><span class="o">.</span><span class="n">reset</span><span class="p">()</span>
+<span class="n">R1</span><span class="p">,</span><span class="n">A</span><span class="o">=</span><span class="n">rho</span><span class="o">.</span><span class="n">extract_decay_rates</span><span class="p">(</span><span class="n">U</span><span class="p">,</span><span class="n">mode</span><span class="o">=</span><span class="s1">&#39;wt_rates&#39;</span><span class="p">)</span>
+
+<span class="n">_</span><span class="p">,</span><span class="n">ax</span><span class="o">=</span><span class="n">histogram</span><span class="p">(</span><span class="n">R1</span><span class="p">,</span><span class="n">A</span><span class="p">)</span>
+
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;$R_1$ / s$^{-1}$&#39;</span><span class="p">)</span>
+<span class="n">_</span><span class="o">=</span><span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Signal&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/68650e208466b9eebd0540c80fb40ba61b8209f7003bcbbd0773f7af316756a7.png" src="../_images/68650e208466b9eebd0540c80fb40ba61b8209f7003bcbbd0773f7af316756a7.png" />
+</div>
+</div>
+<p>We can get a less complex behavior by saturating the <span class="math notranslate nohighlight">\(^1\)</span>H during the recovery. Note that we must use irradiation in the lab-frame irradiation, which is possible with the <code class="docutils literal notranslate"><span class="pre">sl.LFrf</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">rho</span><span class="o">=</span><span class="n">sl</span><span class="o">.</span><span class="n">Rho</span><span class="p">(</span><span class="s1">&#39;zero&#39;</span><span class="p">,[</span><span class="s1">&#39;S0z&#39;</span><span class="p">,</span><span class="s1">&#39;S1z&#39;</span><span class="p">,</span><span class="s1">&#39;S2z&#39;</span><span class="p">,</span><span class="s1">&#39;S3z&#39;</span><span class="p">])</span>
+
+<span class="n">seq</span><span class="o">=</span><span class="n">L</span><span class="o">.</span><span class="n">Sequence</span><span class="p">(</span><span class="n">Dt</span><span class="o">=</span><span class="mf">0.1</span><span class="p">)</span><span class="o">.</span><span class="n">add_channel</span><span class="p">(</span><span class="s1">&#39;1H&#39;</span><span class="p">,</span><span class="n">v1</span><span class="o">=</span><span class="mi">25000</span><span class="p">)</span>
+<span class="n">U</span><span class="o">=</span><span class="n">sl</span><span class="o">.</span><span class="n">LFrf</span><span class="p">(</span><span class="n">seq</span><span class="p">)</span><span class="o">.</span><span class="n">U</span><span class="p">()</span>
+
+<span class="n">_</span><span class="o">=</span><span class="n">rho</span><span class="o">.</span><span class="n">DetProp</span><span class="p">(</span><span class="n">U</span><span class="p">,</span><span class="n">n</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>LF calculation: |██████████████████████████████| 100% complete
+Completed
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">U</span><span class="o">.</span><span class="n">_eig</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">])</span><span class="o">&gt;</span><span class="mf">1e-10</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">rho</span><span class="o">.</span><span class="n">reset</span><span class="p">()</span>
+<span class="n">R1</span><span class="p">,</span><span class="n">A</span><span class="o">=</span><span class="n">rho</span><span class="o">.</span><span class="n">extract_decay_rates</span><span class="p">(</span><span class="n">U</span><span class="p">,</span><span class="n">mode</span><span class="o">=</span><span class="s1">&#39;wt_rates&#39;</span><span class="p">)</span>
+
+<span class="n">_</span><span class="p">,</span><span class="n">ax</span><span class="o">=</span><span class="n">histogram</span><span class="p">(</span><span class="n">R1</span><span class="p">,</span><span class="o">-</span><span class="n">A</span><span class="p">)</span>
+    
+<span class="n">R1_avg</span><span class="o">=</span><span class="p">(</span><span class="n">A</span><span class="o">*</span><span class="n">R1</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="o">/</span><span class="n">A</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+    
+<span class="n">ax</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mf">6e-6</span><span class="p">,</span><span class="sa">fr</span><span class="s1">&#39;$\langle R_1\rangle$: </span><span class="si">{</span><span class="n">R1_avg</span><span class="si">:</span><span class="s1">.2f</span><span class="si">}</span><span class="s1"> s$^</span><span class="se">{{</span><span class="s1">-1</span><span class="se">}}</span><span class="s1">$&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>16
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Text(3, 6e-06, &#39;$\\langle R_1\\rangle$: 1.81 s$^{-1}$&#39;)
 </pre></div>
 </div>
+<img alt="../_images/8cb32d7d0a14d594ac909af27a0643775e232ce7506a566c6d2ef2e0aba29431.png" src="../_images/8cb32d7d0a14d594ac909af27a0643775e232ce7506a566c6d2ef2e0aba29431.png" />
 </div>
 </div>
+<p>The distribution is narrowed, and negative components are eliminated. We plot the buildup, and compare the resulting curve to a monoexpential curve with the averaged relaxation rate constant.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">U</span><span class="o">.</span><span class="n">_eig</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ax</span><span class="o">=</span><span class="n">rho</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="s1">&#39;s&#39;</span><span class="p">,</span><span class="n">det_num</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">rho</span><span class="o">.</span><span class="n">t_axis</span><span class="p">,</span><span class="n">rho</span><span class="o">.</span><span class="n">I</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">real</span><span class="o">*</span><span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">rho</span><span class="o">.</span><span class="n">t_axis</span><span class="o">*</span><span class="n">R1_avg</span><span class="p">)),</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">,</span><span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;:&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">((</span><span class="sa">r</span><span class="s1">&#39;Simulated decay&#39;</span><span class="p">,</span><span class="sa">fr</span><span class="s1">&#39;Monoexponential decay, $R_1$=</span><span class="si">{</span><span class="n">R1_avg</span><span class="si">:</span><span class="s1">.2f</span><span class="si">}</span><span class="s1"> s$^</span><span class="se">{{</span><span class="s1">-1</span><span class="se">}}</span><span class="s1">$&#39;</span><span class="p">))</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([-0.87317894+4.69546101e-01j, -0.87317895-4.69546105e-01j,
-       -0.72939939-6.71483801e-01j, -0.7293994 +6.71483806e-01j,
-       -0.79821696+5.88017246e-01j,  0.99151681-1.08674541e-01j,
-       -0.81682276+5.61885199e-01j,  0.98720425-1.40655962e-01j,
-       -0.79821696-5.88017246e-01j, -0.81682277-5.61885202e-01j,
-        0.99151681+1.08674547e-01j,  0.98720424+1.40655956e-01j,
-        1.        +1.87033891e-15j,  0.99983054-5.41378598e-16j,
-        0.99500008-1.91883320e-15j,  0.99444054+4.55627374e-15j,
-        0.        +0.00000000e+00j, -0.        -0.00000000e+00j,
-        0.        +0.00000000e+00j,  0.        +0.00000000e+00j,
-        0.        -0.00000000e+00j,  0.        -0.00000000e+00j,
-        0.        +0.00000000e+00j,  0.        +0.00000000e+00j,
-        0.        +0.00000000e+00j, -0.        -0.00000000e+00j,
-        0.        +0.00000000e+00j,  0.        +0.00000000e+00j,
-       -0.        +0.00000000e+00j, -0.        -0.00000000e+00j,
-        0.        -0.00000000e+00j, -0.        +0.00000000e+00j])
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x7fa8036f3048&gt;
 </pre></div>
 </div>
+<img alt="../_images/68847ba9be7abfc198a6891dd3c8896d89007873a14f6f3144a2d603d2df7374.png" src="../_images/68847ba9be7abfc198a6891dd3c8896d89007873a14f6f3144a2d603d2df7374.png" />
 </div>
 </div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">U</span><span class="o">.</span><span class="n">_eig</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">][</span><span class="mi">12</span><span class="p">]</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(1.000000004668621+1.8703389132142916e-15j)
-</pre></div>
-</div>
-</div>
-</div>
+<p>By saturating the <span class="math notranslate nohighlight">\(^1\)</span>H, we get a narrower distribution of correlation times in the <span class="math notranslate nohighlight">\(^{13}\)</span>C recovery. Deviation from the monoexponential curve is fairly limited.</p>
+</section>
+</section>
 </section>
 
     <script type="text/x-thebe-config">
@@ -674,6 +833,33 @@ Current time is 500000000.000 microseconds
             </div>
             
             
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#setup">Setup</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#t-1-anisotropy-under-static-conditions"><span class="math notranslate nohighlight">\(T_1\)</span> anisotropy under static conditions</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#build-the-system">Build the system</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#propagate-and-plot">Propagate and plot</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#histogram-of-all-rate-constants-present">Histogram of all rate constants present</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#t-1-anisotropy-under-mas-conditions"><span class="math notranslate nohighlight">\(T_1\)</span> anisotropy under MAS conditions</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#methyl-relaxation">Methyl relaxation</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Build the system</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
               
             
           </div>
