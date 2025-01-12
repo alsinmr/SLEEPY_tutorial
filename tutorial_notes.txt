@@ -1,0 +1,106 @@
+Gerneral hints
+- you randomly use rf, RF or radiofrequency
+- you sometimes but text that refers to code in a box with background to highlight it, but its very inconsistent I think. I dont always know when you refer to code or an object or a class...
+- What I would really like is if functions/classes would be highlighted in some specific color in the text that you always know exactly what it is refering to
+- often you set the figsize at the end of the script, while you could do it with
+  plt.subplots(figsize=(), sharex=True, sharey=True)
+- for ExpSys().set_inter() I am disturbed that you always calculate the euler angles on the fly. Cant you make a setter for euler that calculates it if the angle is an integer or smth?
+
+Relax with sleepy
+X- the sentence before the last one sounds a little like you include sleepy into numpy
+
+
+
+Gettting Started
+x- "placed with*in* other python modules..."
+x- delete "required modules must..."  redundant
+x- Recommended Installation*s*
+
+
+A Quick start
+ Example 13CR1p
+  - "... we then*n* build a L...*,*"
+X- L.kex -> make a setter funciton for that?
+X  - [6] figsize
+ok  - [9] DetProp is a function? make it lowercase. No
+  
+
+Short examples
+ x - [3] please use keyword vOH in ExpSys()
+ ok - [8] I would not really call it a oneliner :D
+        however, could one find a better keyword for i?
+        
+Objects
+ X - why not use OOP as abbreviation?
+ X - (uh) "black-box" ??? 
+  
+Experimental Settings
+Ok  [3] can you implement a angle setter which will accept "MAS" as keyword?
+	MAS is the default. We wouldn't normally set this. Just as example
+X  [7] remove axis ticks?
+x  [10]v  ex.rotor_angle: *R*otor angle
+  
+  
+Hamiltonians & Liouvillians
+? Source [1] ***
+X  [15] the keyword Thermal might be lowercase
+ 
+Propagators & Sequences
+X   [5]v µs one is in latex the others are normal text?
+   
+Exchange in 1D-Spectra
+X  [10]&[11] figsize
+  
+EXSY
+X   Last Script "plotting" does not work for me
+   
+Block-McConell
+X   Ref [1] Link to wrong paper
+X   [7-10] figsize..
+   
+CEST
+X   [4] dont you have to set Thermal=True somewhere?
+    
+T1&NOE
+?    Overhauser Reference ***
+Ok    also the referencing seems not to have continuous numbering, its all 1
+    
+TROSY
+X   Wrong abbreaviation capitals
+X   [3] put delta in ex.set_inter... its confusing this way
+    Reference numbering! and *** formatting
+    
+R1p
+   [4] put _ before the last plot
+   [13]time is not defined, I am not sure if you intendet to still have the time check there. Also, it takes ages. Please warn the user ( 5 minutes to reach -7)
+   [14]&[16] put _ before ax.set_ylabel
+
+REDOR
+   [14] set size inches
+   - *fulling averaged coupling*
+   
+DIPSHIFT
+   Too often the word decoupling in the description
+   "...sufficienty slow motions..."
+   Didnt capitalize the acronym
+   Source [1] too much stars
+   [8] &[15] figsize
+   
+RECRR
+   in the pulse formula, there are different 'minus'-signs
+   - "Build the propagators and density matrices." you never ended title with a dot before
+   [9] put _  before RECRR.plot()
+   [11] remove axis labeling from the not first/last col/row
+   
+   
+T1NOE
+   [4][6] add _
+   
+DARR
+   Idk, the other topics you do directly head with the acronym but not in this case?
+   PDSD there is a space too much
+   [5][7] _ _ _
+   
+   
+Quadrupolar phenomena (no colab check yet)
+   

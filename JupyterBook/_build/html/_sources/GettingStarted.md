@@ -4,7 +4,7 @@ There are currently two possiblities for running SLEEPY: with a local Python ins
 
 
 ## Local Installation
-SLEEPY does not currently exist for installation via [pip](https://pypi.org/) or [conda](https://docs.conda.io/en/latest/), and instead is downloaded from GitHub, with its containing folder added to the system path (or placed with other Python modules). The required modules must be installed separately by the user.
+SLEEPY does not currently exist for installation via [pip](https://pypi.org/) or [conda](https://docs.conda.io/en/latest/), and instead is downloaded from GitHub, with its containing folder added to the system path (or placed in a folder with other installed Python modules). The required modules must be installed separately by the user.
 
 [**SLEEPY on GitHub**](https://github.com/alsinmr/SLEEPY/)
 

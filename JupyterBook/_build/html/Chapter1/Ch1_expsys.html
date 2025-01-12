@@ -485,7 +485,7 @@ Temperature = 298 K
 Powder Average: JCP59 with 99 angles
 Interactions:
 
-&lt;SLEEPY.ExpSys.ExpSys object at 0x7ff1aa01c370&gt;
+&lt;SLEEPY.ExpSys.ExpSys object at 0x7f96d1db6760&gt;
 </pre></div>
 </div>
 </div>
@@ -516,6 +516,7 @@ Interactions:
 <li><p>g: Electron g-tensor. Specify gxx, gyy, and gzz, and optionally euler.</p></li>
 <li><p>ZeroField: Electron zero-field. Specify D and optionally E (both in Hz), and optionally euler.</p></li>
 </ul>
+<p>Note that ‘euler’ may be replaced with ‘euler_d’ to input the angles in degrees instead of radians.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ex</span><span class="o">=</span><span class="n">sl</span><span class="o">.</span><span class="n">ExpSys</span><span class="p">(</span><span class="n">v0H</span><span class="o">=</span><span class="mi">600</span><span class="p">,</span><span class="n">Nucs</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;1H&#39;</span><span class="p">,</span><span class="s1">&#39;13C&#39;</span><span class="p">],</span><span class="n">pwdavg</span><span class="o">=</span><span class="s1">&#39;rep678&#39;</span><span class="p">)</span>
@@ -583,7 +584,7 @@ Interactions:
 	CSA on spin 1 with arguments: (delta=100.00,eta=1.00)
 	CS on spin 0 with arguments: (ppm=10.00)
 
-&lt;SLEEPY.ExpSys.ExpSys object at 0x7ff1a9b775b0&gt;
+&lt;SLEEPY.ExpSys.ExpSys object at 0x7f96d1ddd5b0&gt;
 </pre></div>
 </div>
 </div>
@@ -601,7 +602,7 @@ Interactions:
 <li><p>ex.v0: Larmor frequency of spins in spin-system</p></li>
 <li><p>ex.vr: Rotor frequency</p></li>
 <li><p>ex.taur: Rotor period</p></li>
-<li><p>ex.rotor_angle: rotor angle</p></li>
+<li><p>ex.rotor_angle: Rotor angle</p></li>
 <li><p>ex.inter: List of all interactions entered</p></li>
 </ul>
 <p>It also contains a number of functions</p>

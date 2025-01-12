@@ -199,14 +199,16 @@
 <li class="toctree-l2"><a class="reference internal" href="../Chapter3/Ch3_R1p.html"><font color="#0093AF">R<span class="math notranslate nohighlight">\(_{1ρ}\)</span> relaxation</font></a></li>
 <li class="toctree-l2"><a class="reference internal" href="../Chapter3/Ch3_REDOR.html"><font color="#0093AF">REDOR</font></a></li>
 <li class="toctree-l2"><a class="reference internal" href="../Chapter3/Ch3_DIPSHIFT.html"><font color="#0093AF">DIPSHIFT</font></a></li>
-<li class="toctree-l2"><a class="reference internal" href="../Chapter3/Ch3_T1_NOE.html"><font color="#0093AF"><span class="math notranslate nohighlight">\(T_1\)</span> and NOE</font></a></li>
 <li class="toctree-l2"><a class="reference internal" href="../Chapter3/Ch3_RECRR.html"><font color="#0093AF">Relaxation in complex sequences: RECRR</font></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Chapter3/Ch3_T1_NOE.html"><font color="#0093AF"><span class="math notranslate nohighlight">\(T_1\)</span> and Nuclear Overhauser Effect</font></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Chapter3/Ch3_DARR.html"><font color="#0093AF">Dipolar Assisted Rotary Resonance</font></a></li>
 <li class="toctree-l2"><a class="reference internal" href="../Chapter3/Ch3_Quad.html"><font color="#0093AF">Quadrupolar phenomena</font></a></li>
 </ul>
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../Ch4_DNP.html"><font color="#B00000">Dynamic Nuclear Polarization</font></a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="../Chapter4/Ch4_SolidEffect.html"><font color="#0093AF">Solid Effect</font></a></li>
 <li class="toctree-l2"><a class="reference internal" href="../Chapter4/Ch4_CrossEffect.html"><font color="#0093AF">Cross-Effect</font></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Chapter4/Ch4_OverhauserEffect.html"><font color="#0093AF">Overhauser Effect</font></a></li>
 <li class="toctree-l2"><a class="reference internal" href="../Chapter4/Ch4_NOVEL.html"><font color="#0093AF">NOVEL</font></a></li>
 </ul>
 </details></li>
@@ -474,7 +476,7 @@
 </pre></div>
 </div>
 <p>We can do this because <code class="docutils literal notranslate"><span class="pre">rho</span></code> is an objects. <code class="docutils literal notranslate"><span class="pre">rho</span></code> has a function, “DetProp”, which performes the detection and propagation functions in sequence <em>n</em> times. The detection matrix is stored inside the <code class="docutils literal notranslate"><span class="pre">rho</span></code> object, because we really only need it to detect the density matrix in rho, so there is no reason to carry it around as a separate variable. The function to propagate <code class="docutils literal notranslate"><span class="pre">rho</span></code> by <code class="docutils literal notranslate"><span class="pre">U</span></code> is also stored internally. Indeed, we can even just type <code class="docutils literal notranslate"><span class="pre">U*rho</span></code> to propagate with <code class="docutils literal notranslate"><span class="pre">U</span></code> one time, where objects allow defining the meaning of mathematical symbols; here, this means multiply the propagator matrix by rho and store the new result in rho, where this can include an internal loop over different orientations in a powder average. <code class="docutils literal notranslate"><span class="pre">rho</span></code> also stores intensities resulting from detection internally, rather than requiring assigment to an external variable (above, we used <code class="docutils literal notranslate"><span class="pre">I</span></code>), and that also allows <code class="docutils literal notranslate"><span class="pre">rho</span></code> to perform signal processing internally. The “plot” function then creates a figure with the Fourier transformed (optionally apodized) data.</p>
-<p>Usage of objects, then, greatly simplifies the coding required by the user to create complex simulations. On the other hand, the objects give the user direct access to all of the data that was used to create the simulation. This makes SLEEPY much less of a (uh) “black-box”, so that one may investigate the components going into a simulation.</p>
+<p>Usage of objects, then, greatly simplifies the coding required by the user to create complex simulations. On the other hand, the objects give the user direct access to all of the data that was used to create the simulation. This makes SLEEPY much less of a “black-box”, so that one may investigate the components going into a simulation.</p>
 </section>
 </section>
 <section id="objects-in-sleepy">

@@ -532,9 +532,9 @@
 </section>
 <section id="obtaining-the-noe-enhancement">
 <h2>Obtaining the NOE enhancement<a class="headerlink" href="#obtaining-the-noe-enhancement" title="Link to this heading">#</a></h2>
-<p>Finally, we may see how saturating one spin can lead to a change in the magnetization on the second spin via the Nuclear Overhauser Effect.<span class="math notranslate nohighlight">\(^1\)</span></p>
+<p>Finally, we may see how saturating one spin can lead to a change in the magnetization on the second spin via the Nuclear Overhauser Effect.<span class="math notranslate nohighlight">\(^2\)</span></p>
 <p>Here, we have to use a special tool in SLEEPY to apply an oscillating RF field in the lab frame. Keep in mind, longitudinal relaxation is driven by terms in the Hamiltonian that are dropped when we go to the rotating frame, so a lab frame calculation is required. However, in the lab frame, the applied RF fields are no longer time-independent and need to be explicitly simulated. SLEEPY uses several tricks for doing this. First, we use a two-step square wave to produce the correct frequency. The applied field is scaled to produce the correct amplitude at center frequency band. The resulting propagator is then brought into its eigenbasis and propagated either to one step in a rotor period, or here just to the desired length of the propagator.</p>
-<p>[1] A.W. Overhauser. <em><a class="reference external" href="https://doi.org/10.1103/PhysRev.92.411">Phys. Rev.</a></em>, <strong>1953</strong>, 92, 411-415.</p>
+<p>[2] A.W. Overhauser. <em><a class="reference external" href="https://doi.org/10.1103/PhysRev.92.411">Phys. Rev.</a></em>, <strong>1953</strong>, 92, 411-415.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">L</span><span class="o">.</span><span class="n">kex</span><span class="o">=</span><span class="n">sl</span><span class="o">.</span><span class="n">Tools</span><span class="o">.</span><span class="n">fourSite_sym</span><span class="p">(</span><span class="n">tc</span><span class="o">=</span><span class="mf">1e-9</span><span class="p">)</span>
@@ -618,52 +618,6 @@
 </div>
 </div>
 <p>We then get the expected enhancement values for an H–N heteronuclear NOE. A little noise appears at short correlation times where the DynamicThermal method is less numerically stable.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">e</span><span class="o">.</span><span class="vm">__class__</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>float
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">fun</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
-    <span class="k">return</span> <span class="n">x</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fun</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__class__</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>type
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">a</span><span class="o">=</span><span class="mf">3.1</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">a</span><span class="o">.</span>
-</pre></div>
-</div>
-</div>
-</div>
 </section>
 </section>
 
