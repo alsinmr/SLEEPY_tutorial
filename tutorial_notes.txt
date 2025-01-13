@@ -7,7 +7,7 @@ Gerneral hints
 - for ExpSys().set_inter() I am disturbed that you always calculate the euler angles on the fly. Cant you make a setter for euler that calculates it if the angle is an integer or smth?
 
 Relax with sleepy
-X- the sentence before the last one sounds a little like you include sleepy into numpy
+ok- the sentence before the last one sounds a little like you include sleepy into numpy
 
 
 
@@ -42,7 +42,7 @@ x  [10]v  ex.rotor_angle: *R*otor angle
   
   
 Hamiltonians & Liouvillians
-? Source [1] ***
+X Source [1] ***
 X  [15] the keyword Thermal might be lowercase
  
 Propagators & Sequences
@@ -62,8 +62,8 @@ CEST
 X   [4] dont you have to set Thermal=True somewhere?
     
 T1&NOE
-?    Overhauser Reference ***
-Ok    also the referencing seems not to have continuous numbering, its all 1
+X    Overhauser Reference ***
+X    also the referencing seems not to have continuous numbering, its all 1
     
 TROSY
 X   Wrong abbreaviation capitals
@@ -71,35 +71,35 @@ X   [3] put delta in ex.set_inter... its confusing this way
     Reference numbering! and *** formatting
     
 R1p
-   [4] put _ before the last plot
-   [13]time is not defined, I am not sure if you intendet to still have the time check there. Also, it takes ages. Please warn the user ( 5 minutes to reach -7)
-   [14]&[16] put _ before ax.set_ylabel
+X   [4] put _ before the last plot
+X   [13]time is not defined, I am not sure if you intendet to still have the time check there. Also, it takes ages. Please warn the user ( 5 minutes to reach -7)
+X   [14]&[16] put _ before ax.set_ylabel
 
 REDOR
-   [14] set size inches
-   - *fulling averaged coupling*
+X  [14] set size inches
+X   - *fulling averaged coupling*
    
 DIPSHIFT
-   Too often the word decoupling in the description
-   "...sufficienty slow motions..."
-   Didnt capitalize the acronym
-   Source [1] too much stars
-   [8] &[15] figsize
+X   Too often the word decoupling in the description
+X   "...sufficienty slow motions..."
+X   Didnt capitalize the acronym
+X   Source [1] too much stars
+X   [8] &[15] figsize
    
 RECRR
-   in the pulse formula, there are different 'minus'-signs
-   - "Build the propagators and density matrices." you never ended title with a dot before
-   [9] put _  before RECRR.plot()
-   [11] remove axis labeling from the not first/last col/row
+x   in the pulse formula, there are different 'minus'-signs
+x   - "Build the propagators and density matrices." you never ended title with a dot before
+x   [9] put _  before RECRR.plot()
+x   [11] remove axis labeling from the not first/last col/row
    
    
 T1NOE
-   [4][6] add _
+ x  [4][6] add _
    
 DARR
-   Idk, the other topics you do directly head with the acronym but not in this case?
+ x  Idk, the other topics you do directly head with the acronym but not in this case?
    PDSD there is a space too much
-   [5][7] _ _ _
+ x  [5][7] _ _ _
    
    
 Quadrupolar phenomena (no colab check yet)
