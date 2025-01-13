@@ -203,7 +203,7 @@
 <li class="toctree-l2"><a class="reference internal" href="../Chapter3/Ch3_DIPSHIFT.html"><font color="#0093AF">DIPSHIFT</font></a></li>
 <li class="toctree-l2"><a class="reference internal" href="../Chapter3/Ch3_RECRR.html"><font color="#0093AF">Relaxation in complex sequences: RECRR</font></a></li>
 <li class="toctree-l2"><a class="reference internal" href="../Chapter3/Ch3_T1_NOE.html"><font color="#0093AF"><span class="math notranslate nohighlight">\(T_1\)</span> and Nuclear Overhauser Effect</font></a></li>
-<li class="toctree-l2"><a class="reference internal" href="../Chapter3/Ch3_DARR.html"><font color="#0093AF">Dipolar Assisted Rotary Resonance</font></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Chapter3/Ch3_DARR.html"><font color="#0093AF">Understanding DARR with simulation</font></a></li>
 <li class="toctree-l2"><a class="reference internal" href="../Chapter3/Ch3_Quad.html"><font color="#0093AF">Quadrupolar phenomena</font></a></li>
 </ul>
 </details></li>
@@ -448,9 +448,9 @@
 </section>
 <section id="build-the-spin-system">
 <h2>Build the spin-system<a class="headerlink" href="#build-the-spin-system" title="Link to this heading">#</a></h2>
-<p>An important consideration when simulating longitudinal relaxation is that this type of relaxation is induced by interactions that are removed when using the rotating frame approximation. Therefore, we must be sure to setup our spin system in the lab frame.</p>
-<p>Note that adding explicit relaxation (via L.add_relax) does not require a lab-frame calculation.</p>
-<p>We start with a 1-bond H–N dipole coupling, hopping around a tetrahedral geometry, with a correlation time of 1 ns.</p>
+<p>An important consideration when simulating longitudinal relaxation is that this type of relaxation is induced by interactions that are removed when using the rotating frame approximation. Therefore, we must be sure to setup our spin system in the lab frame. You can try running these calculations in the rotating frame to see that the <span class="math notranslate nohighlight">\(T_1\)</span> relaxation vanishes.</p>
+<p>Note that adding explicit relaxation (via <code class="docutils literal notranslate"><span class="pre">L.add_relax(...)</span></code>) does not require a lab-frame calculation.</p>
+<p>We start with a 1-bond H–N dipole coupling, hopping around a tetrahedral geometry, with a correlation time of 1 ns. The tool <code class="docutils literal notranslate"><span class="pre">sl.Tools.SetupTumbling</span></code> takes <code class="docutils literal notranslate"><span class="pre">ex0</span></code> and rotates to several orientations (for higher <code class="docutils literal notranslate"><span class="pre">q</span></code>, we get more orientations), return a list of <code class="docutils literal notranslate"><span class="pre">ExpSys</span></code> objects with different Euler angles. <code class="docutils literal notranslate"><span class="pre">SetupTumbling</span></code> also returns an exchange matrix (<code class="docutils literal notranslate"><span class="pre">kex</span></code>) to yield an approximately monoexponential correlation function (for <code class="docutils literal notranslate"><span class="pre">q=0</span></code> or <code class="docutils literal notranslate"><span class="pre">q=1</span></code>, it is exactly monoexponential, but for higher values, it is only approximate). Note that <code class="docutils literal notranslate"><span class="pre">SetupTumbling</span></code> averages around the α- and β-angles, but not γ, so be cautious for more complex geometries.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># By default, we get a powder average when including anisotropic terms.</span>
@@ -471,28 +471,28 @@
 </section>
 <section id="simulate-t-1-relaxation-of-1h-and-15-n">
 <h2>Simulate <span class="math notranslate nohighlight">\(T_1\)</span> relaxation of <span class="math notranslate nohighlight">\(^1\)</span>H and <span class="math notranslate nohighlight">\(^{15}\)</span>N<a class="headerlink" href="#simulate-t-1-relaxation-of-1h-and-15-n" title="Link to this heading">#</a></h2>
-<p>We start with both the <span class="math notranslate nohighlight">\(^{15}\)</span>N and <span class="math notranslate nohighlight">\(^1\)</span>H nuclei at thermal equilibrium and observe decay of magnetization due to the motion.</p>
+<p>We start with both the <span class="math notranslate nohighlight">\(^{15}\)</span>N and <span class="math notranslate nohighlight">\(^1\)</span>H nuclei at thermal equilibrium (<code class="docutils literal notranslate"><span class="pre">rho0='Thermal'</span></code>) and observe decay of magnetization due to the motion.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">rho</span><span class="o">=</span><span class="n">sl</span><span class="o">.</span><span class="n">Rho</span><span class="p">(</span><span class="s1">&#39;Thermal&#39;</span><span class="p">,[</span><span class="s1">&#39;15Nz&#39;</span><span class="p">,</span><span class="s1">&#39;1Hz&#39;</span><span class="p">])</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">rho</span><span class="o">=</span><span class="n">sl</span><span class="o">.</span><span class="n">Rho</span><span class="p">(</span><span class="n">rho0</span><span class="o">=</span><span class="s1">&#39;Thermal&#39;</span><span class="p">,</span><span class="n">detect</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;15Nz&#39;</span><span class="p">,</span><span class="s1">&#39;1Hz&#39;</span><span class="p">])</span>
 <span class="n">rho</span><span class="o">.</span><span class="n">DetProp</span><span class="p">(</span><span class="n">seq</span><span class="p">,</span><span class="n">n</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
 <span class="n">_</span><span class="o">=</span><span class="n">rho</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="s1">&#39;s&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/233360a3b451309c426f7c53fc748a88a8d11620715d9af7e29d12e63ab34859.png" src="../_images/233360a3b451309c426f7c53fc748a88a8d11620715d9af7e29d12e63ab34859.png" />
+<img alt="../_images/79d2f1dc859096b5a436dde41b984ba920c807ba2b90dc33a74b0233a2cb961d.png" src="../_images/79d2f1dc859096b5a436dde41b984ba920c807ba2b90dc33a74b0233a2cb961d.png" />
 </div>
 </div>
 <p>We observe both spins start from their thermal equilibrium and decay towards zero. The <span class="math notranslate nohighlight">\(^{15}\)</span>N magnetization is briefly enhanced by magnetization from the <span class="math notranslate nohighlight">\(^1\)</span>H spin, but then decays together with the <span class="math notranslate nohighlight">\(^1\)</span>H.</p>
 </section>
 <section id="relaxing-towards-thermal-equilibrium">
 <h2>Relaxing towards thermal equilibrium<a class="headerlink" href="#relaxing-towards-thermal-equilibrium" title="Link to this heading">#</a></h2>
-<p>Note that exchange in simulations only can destroy magnetization, so that this approach always forces the magnetization towards zero. We may add a correction term in SLEEPY, that will cause the magnetization to approach thermal equilibrium rather than zero. This is included as the “DynamicThermal” option. We start the magnetization at zero and allow both spins to recover.</p>
+<p>Note that exchange in simulations only can destroy magnetization, so that this approach always forces the magnetization towards zero. We may add a correction term in SLEEPY, that will cause the magnetization to approach thermal equilibrium rather than zero. This is included by running <code class="docutils literal notranslate"><span class="pre">L.add_relax('DynamicThermal')</span></code>. Then, we can start the magnetization at zero (<code class="docutils literal notranslate"><span class="pre">rho0='zero'</span></code>) and allow both spins to recover.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">L</span><span class="o">.</span><span class="n">add_relax</span><span class="p">(</span><span class="s1">&#39;DynamicThermal&#39;</span><span class="p">)</span>
-<span class="n">rho</span><span class="o">=</span><span class="n">sl</span><span class="o">.</span><span class="n">Rho</span><span class="p">(</span><span class="s1">&#39;zero&#39;</span><span class="p">,[</span><span class="s1">&#39;15Nz&#39;</span><span class="p">,</span><span class="s1">&#39;1Hz&#39;</span><span class="p">])</span>
+<span class="n">rho</span><span class="o">=</span><span class="n">sl</span><span class="o">.</span><span class="n">Rho</span><span class="p">(</span><span class="n">rho0</span><span class="o">=</span><span class="s1">&#39;zero&#39;</span><span class="p">,</span><span class="n">detect</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;15Nz&#39;</span><span class="p">,</span><span class="s1">&#39;1Hz&#39;</span><span class="p">])</span>
 <span class="n">rho</span><span class="o">.</span><span class="n">DetProp</span><span class="p">(</span><span class="n">seq</span><span class="p">,</span><span class="n">n</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
 <span class="n">ax</span><span class="o">=</span><span class="n">rho</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="s1">&#39;s&#39;</span><span class="p">)</span>
 <span class="n">ax</span><span class="o">.</span><span class="n">set_xlim</span><span class="p">(</span><span class="n">ax</span><span class="o">.</span><span class="n">get_xlim</span><span class="p">())</span>
@@ -502,15 +502,15 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/580b17519cbbfd0d4b710f33b3db9882d7274cf862f7478690c3e2ac0bc9ef7d.png" src="../_images/580b17519cbbfd0d4b710f33b3db9882d7274cf862f7478690c3e2ac0bc9ef7d.png" />
+<img alt="../_images/17e9d34d5c37f73ea50e99182c169acae171f001048f17db7c5b1b1279af88a5.png" src="../_images/17e9d34d5c37f73ea50e99182c169acae171f001048f17db7c5b1b1279af88a5.png" />
 </div>
 </div>
-<p>“DynamicThermal” works by calculating the full Liouvillian (referred to here as <span class="math notranslate nohighlight">\(\hat{\hat{L}}_0\)</span>) and equilibrium density matrix, <span class="math notranslate nohighlight">\(\hat{\rho}_{eq}\)</span>. Then, a correction term is calculated, such that:</p>
+<p><code class="docutils literal notranslate"><span class="pre">'DynamicThermal'</span></code> works by calculating the full Liouvillian (referred to here as <span class="math notranslate nohighlight">\(\hat{\hat{L}}_0\)</span>) and equilibrium density matrix, <span class="math notranslate nohighlight">\(\hat{\rho}_{eq}\)</span>. Then, a correction term is calculated, such that:</p>
 <div class="math notranslate nohighlight">
 \[
 \hat{\rho}_{corr}=-\hat{\hat{L}}_0\cdot\hat{\rho}_{eq}
 \]</div>
-<p>Then, if <span class="math notranslate nohighlight">\(\hat{\rho}=\hat{\rho}_{eq}\)</span>, the sum of the production of the Liouvillian and the density matrix and the correction term is zero:</p>
+<p>Then, if <span class="math notranslate nohighlight">\(\hat{\rho}=\hat{\rho}_{eq}\)</span>, the sum of the product of the Liouvillian and the density matrix plus the correction term is zero:</p>
 <div class="math notranslate nohighlight">
 \[
 \frac{d}{dt}\hat{\rho}=\hat{\hat{L}}_0\cdot\hat{\rho}+\hat{\rho}_{corr}
@@ -532,9 +532,9 @@
 </section>
 <section id="obtaining-the-noe-enhancement">
 <h2>Obtaining the NOE enhancement<a class="headerlink" href="#obtaining-the-noe-enhancement" title="Link to this heading">#</a></h2>
-<p>Finally, we may see how saturating one spin can lead to a change in the magnetization on the second spin via the Nuclear Overhauser Effect.<span class="math notranslate nohighlight">\(^2\)</span></p>
-<p>Here, we have to use a special tool in SLEEPY to apply an oscillating RF field in the lab frame. Keep in mind, longitudinal relaxation is driven by terms in the Hamiltonian that are dropped when we go to the rotating frame, so a lab frame calculation is required. However, in the lab frame, the applied RF fields are no longer time-independent and need to be explicitly simulated. SLEEPY uses several tricks for doing this. First, we use a two-step square wave to produce the correct frequency. The applied field is scaled to produce the correct amplitude at center frequency band. The resulting propagator is then brought into its eigenbasis and propagated either to one step in a rotor period, or here just to the desired length of the propagator.</p>
-<p>[2] A.W. Overhauser. <em><a class="reference external" href="https://doi.org/10.1103/PhysRev.92.411">Phys. Rev.</a></em>, <strong>1953</strong>, 92, 411-415.</p>
+<p>Finally, we may observe how saturating one spin can lead to a change in the magnetization on the second spin via the Nuclear Overhauser Effect.<span class="math notranslate nohighlight">\(^2\)</span></p>
+<p>Here, we have to use a special tool in SLEEPY to apply an oscillating RF field in the lab frame. Keep in mind, longitudinal relaxation is driven by terms in the Hamiltonian that are dropped when we go to the rotating frame, so a lab frame calculation is required. However, in the lab frame, the applied RF fields are no longer time-independent and their time-dependence needs to be explicitly simulated. SLEEPY uses several tricks for doing this. First, we use a two-step square wave to produce the correct frequency, and scale it to produce the correct amplitude at center frequency band. The resulting propagator is then brought into its eigenbasis and propagated either to one step in a rotor period, or here just to the desired length of the propagator. It should be noted that this approach does indeed produce sidebands to the RF, but we do not have any indication that this negatively impacts the simulations.</p>
+<p>[2] A.W. Overhauser. <a class="reference external" href="https://doi.org/10.1103/PhysRev.92.411"><em>Phys. Rev.</em></a>, <strong>1953</strong>, 92, 411-415.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">L</span><span class="o">.</span><span class="n">kex</span><span class="o">=</span><span class="n">sl</span><span class="o">.</span><span class="n">Tools</span><span class="o">.</span><span class="n">fourSite_sym</span><span class="p">(</span><span class="n">tc</span><span class="o">=</span><span class="mf">1e-9</span><span class="p">)</span>
@@ -548,6 +548,7 @@
 </div>
 </div>
 </div>
+<p>Below, we plot the square wave used to produce RF-irradiation in the lab frame.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">_</span><span class="o">=</span><span class="n">lfrf</span><span class="o">.</span><span class="n">seq</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
@@ -555,10 +556,10 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/fd563102640ebd39a9c4bbbf441cf5e1be836dd095cd14a2f3bc549ce0ea5a31.png" src="../_images/fd563102640ebd39a9c4bbbf441cf5e1be836dd095cd14a2f3bc549ce0ea5a31.png" />
+<img alt="../_images/0dc5dd8ed6d5993ad5462e7915929a75de318d39ca13fac351b74a819a503815.png" src="../_images/0dc5dd8ed6d5993ad5462e7915929a75de318d39ca13fac351b74a819a503815.png" />
 </div>
 </div>
-<p>First, we get the propagator for the lab-frame RF. Then, we apply it to a system at thermal equilibrium, to observe it evolve away from thermal equilibrium due to the RF irradation.</p>
+<p>First, we get the propagator for the lab-frame RF. Then, we apply it to a system at thermal equilibrium, to observe it evolve away from thermal equilibrium due to the RF irradation saturating the <span class="math notranslate nohighlight">\(^1\)</span>H.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">U</span><span class="o">=</span><span class="n">lfrf</span><span class="o">.</span><span class="n">U</span><span class="p">(</span><span class="n">progress</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
@@ -570,7 +571,7 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/da0d83f1ce730f89bde2fd4af0d846d9b5d43bc4a7bb27df1513ec7c953d9e03.png" src="../_images/da0d83f1ce730f89bde2fd4af0d846d9b5d43bc4a7bb27df1513ec7c953d9e03.png" />
+<img alt="../_images/7db47308af6f43cce1f63179a9bbdd167a590f615fc11bcbfb3a67ad3b13fce5.png" src="../_images/7db47308af6f43cce1f63179a9bbdd167a590f615fc11bcbfb3a67ad3b13fce5.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -586,7 +587,7 @@
 </div>
 </div>
 <p>Then, the <span class="math notranslate nohighlight">\(^1\)</span>H magnetization is saturated, and the <span class="math notranslate nohighlight">\(^{15}\)</span>N signal switches from negative to positive and is enhanced by just over a factor of 2.</p>
-<p>We may also calculate the correlation time dependence of the NOE enhancement.</p>
+<p>We finally calculate the correlation time dependence of the NOE enhancement.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">seq</span><span class="o">=</span><span class="n">L</span><span class="o">.</span><span class="n">Sequence</span><span class="p">(</span><span class="n">Dt</span><span class="o">=</span><span class="mf">.1</span><span class="p">)</span><span class="o">.</span><span class="n">add_channel</span><span class="p">(</span><span class="s1">&#39;1H&#39;</span><span class="p">,</span><span class="n">v1</span><span class="o">=</span><span class="mi">5000</span><span class="p">)</span>
@@ -614,10 +615,10 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/2bcaaf55f15e93f0e9e805ee4dbf39a84ea7f73e71cbb89111741ec51b2e8a25.png" src="../_images/2bcaaf55f15e93f0e9e805ee4dbf39a84ea7f73e71cbb89111741ec51b2e8a25.png" />
+<img alt="../_images/6d401b0da597e0699cca8f28b3b6669363462cf3a377f03721c1f598014ce0dc.png" src="../_images/6d401b0da597e0699cca8f28b3b6669363462cf3a377f03721c1f598014ce0dc.png" />
 </div>
 </div>
-<p>We then get the expected enhancement values for an H–N heteronuclear NOE. A little noise appears at short correlation times where the DynamicThermal method is less numerically stable.</p>
+<p>We then get the expected enhancement values for an H–N heteronuclear NOE. A little noise appears at short correlation times where the <code class="docutils literal notranslate"><span class="pre">DynamicThermal</span></code> method is less numerically stable. Limits to this method are discussed in detail in <a class="reference internal" href="Ch2_T1_limits.html"><span class="std std-doc">T<span class="math notranslate nohighlight">\(_1\)</span>tests</span></a>.</p>
 </section>
 </section>
 

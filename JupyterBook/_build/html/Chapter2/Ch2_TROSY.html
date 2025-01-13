@@ -203,7 +203,7 @@
 <li class="toctree-l2"><a class="reference internal" href="../Chapter3/Ch3_DIPSHIFT.html"><font color="#0093AF">DIPSHIFT</font></a></li>
 <li class="toctree-l2"><a class="reference internal" href="../Chapter3/Ch3_RECRR.html"><font color="#0093AF">Relaxation in complex sequences: RECRR</font></a></li>
 <li class="toctree-l2"><a class="reference internal" href="../Chapter3/Ch3_T1_NOE.html"><font color="#0093AF"><span class="math notranslate nohighlight">\(T_1\)</span> and Nuclear Overhauser Effect</font></a></li>
-<li class="toctree-l2"><a class="reference internal" href="../Chapter3/Ch3_DARR.html"><font color="#0093AF">Dipolar Assisted Rotary Resonance</font></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Chapter3/Ch3_DARR.html"><font color="#0093AF">Understanding DARR with simulation</font></a></li>
 <li class="toctree-l2"><a class="reference internal" href="../Chapter3/Ch3_Quad.html"><font color="#0093AF">Quadrupolar phenomena</font></a></li>
 </ul>
 </details></li>
@@ -434,8 +434,8 @@
 <h1><font  color = "#0093AF">TROSY effects</font><a class="headerlink" href="#trosy-effects" title="Link to this heading">#</a></h1>
 <p><a href="https://githubtocolab.com/alsinmr/SLEEPY_tutorial/blob/main/ColabNotebooks/Chapter2/Ch2_TROSY.ipynb" target="_blank"><img src="https://colab.research.google.com/assets/colab-badge.svg"></a></p>
 <p>TROSY (Transverse Relaxation Optimized SpectroscopY)<span class="math notranslate nohighlight">\(^1\)</span> is an important experiment in solution-NMR, which takes advantage of different relaxation rates of doublets coming from the H–N J-coupling in the <span class="math notranslate nohighlight">\(^1\)</span>H or <span class="math notranslate nohighlight">\(^{15}\)</span>N dimensions.</p>
-<p>The effect arises from the constructive or deconstructive effects of motion on relaxation due to the <span class="math notranslate nohighlight">\(^{15}\)</span>N chemical shift anisotropy (or <span class="math notranslate nohighlight">\(^1\)</span>H CSA) and the H–N dipole coupling. For one peak of the doublet, relaxation is additive from the CSA and dipole, but on the other peak it is subtractive, resulting in one fast-relaxing peak and one slow-relaxing peak.</p>
-<p>Here, we will assume the tensors for these two interactions are parallel. This is not entirely accurate (being tilted from each other by about 23<span class="math notranslate nohighlight">\(^\circ\)</span>, but it allows us to average the couplings to zero, mimicking tumbling in solution, with a simple, tetrahedral hopping motion.</p>
+<p>The effect arises from the constructive or deconstructive effects of motion on relaxation due to the <span class="math notranslate nohighlight">\(^{15}\)</span>N chemical shift anisotropy (or <span class="math notranslate nohighlight">\(^1\)</span>H CSA) and the H–N dipole coupling. For one peak of the doublet, relaxation from the CSA and dipole anisotropies is constructive, but on the other peak it is destructive, resulting in one fast-relaxing peak and one slow-relaxing peak.</p>
+<p>Here, we will assume the tensors for these two interactions are parallel. This is not entirely accurate (being tilted from each other by about 23<span class="math notranslate nohighlight">\(^\circ\)</span>), but it allows us to average the couplings to zero, mimicking tumbling in solution, with a simple, tetrahedral hopping motion.</p>
 <p>[1] K. Pervushin, R. Riek, G. Wider, K. Wüthrich. <a class="reference external" href="https://doi.org/10.1073/pnas.94.23.12366"><em>Proc. Natl. Acad. Sci. USA.</em></a> <strong>1997</strong>, 94, 12366</p>
 <section id="setup">
 <h2>Setup<a class="headerlink" href="#setup" title="Link to this heading">#</a></h2>
@@ -451,9 +451,10 @@
 </section>
 <section id="build-the-system">
 <h2>Build the system<a class="headerlink" href="#build-the-system" title="Link to this heading">#</a></h2>
+<p>We need a 2-spin <span class="math notranslate nohighlight">\(^1\)</span>H–<span class="math notranslate nohighlight">\(^{15}\)</span>N system with dipole and CSA terms to yield relaxation, plus a <span class="math notranslate nohighlight">\(J\)</span>-coupling to separate the <span class="math notranslate nohighlight">\(^{15}\)</span>N resonance into peaks corresponding to the <span class="math notranslate nohighlight">\(^1\)</span>H<span class="math notranslate nohighlight">\(^\alpha\)</span> and <span class="math notranslate nohighlight">\(^1\)</span>H<span class="math notranslate nohighlight">\(^\beta\)</span> states. Since we start just observing transverse relaxation, we do not require a lab-frame calculation.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># By default, we get a powder average when including anisotropic terms.</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># By default, SLEEPY gives us powder average when including anisotropic terms.</span>
 <span class="c1"># However, we don&#39;t need it for mimicking tumbling, </span>
 <span class="c1"># so we set it explicitly to a 1-element powder average</span>
 <span class="n">ex</span><span class="o">=</span><span class="n">sl</span><span class="o">.</span><span class="n">ExpSys</span><span class="p">(</span><span class="n">v0H</span><span class="o">=</span><span class="mi">400</span><span class="p">,</span><span class="n">Nucs</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;15N&#39;</span><span class="p">,</span><span class="s1">&#39;1H&#39;</span><span class="p">],</span><span class="n">vr</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">pwdavg</span><span class="o">=</span><span class="s1">&#39;alpha0beta0&#39;</span><span class="p">)</span>
@@ -490,11 +491,11 @@
 <img alt="../_images/df6d16a47a31b482b40434ed09e8671cf3ea5dd0e764cc6b9469e887d6b8a9e9.png" src="../_images/df6d16a47a31b482b40434ed09e8671cf3ea5dd0e764cc6b9469e887d6b8a9e9.png" />
 </div>
 </div>
-<p>We obtain two peaks, separated by the J-coupling, one being notably larger and narrower than the other, where relaxation effects from the <span class="math notranslate nohighlight">\(^{15}\)</span>N CSA and H–N dipole coupling cancel. Note that since the CSA scales with field, the cancelation effect is also field dependent. We calculate the spectrum maximum as a function of field, and record the spectrum maximum to demonstrate.</p>
+<p>We obtain two peaks, separated by the J-coupling, one being notably more intense and narrower than the other, where relaxation effects from the <span class="math notranslate nohighlight">\(^{15}\)</span>N CSA and H–N dipole coupling cancel. Note that since the CSA scales with field, the cancelation effect is also field dependent. We calculate the spectrum maximum as a function of field, and record the spectrum maximum to demonstrate.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sl</span><span class="o">.</span><span class="n">Defaults</span><span class="p">[</span><span class="s1">&#39;verbose&#39;</span><span class="p">]</span><span class="o">=</span><span class="kc">False</span> <span class="c1">#Suppress output for loop</span>
-<span class="n">B0_0</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">40</span><span class="p">,</span><span class="mi">20</span><span class="p">)</span>
+<span class="n">B0_0</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">40</span><span class="p">,</span><span class="mi">40</span><span class="p">)</span>
 <span class="n">I</span><span class="o">=</span><span class="p">[]</span>
 <span class="k">for</span> <span class="n">B0</span> <span class="ow">in</span> <span class="n">B0_0</span><span class="p">:</span>
     <span class="n">ex</span><span class="o">=</span><span class="n">sl</span><span class="o">.</span><span class="n">ExpSys</span><span class="p">(</span><span class="n">B0</span><span class="o">=</span><span class="n">B0</span><span class="p">,</span><span class="n">Nucs</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;15N&#39;</span><span class="p">,</span><span class="s1">&#39;1H&#39;</span><span class="p">],</span><span class="n">vr</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
@@ -518,7 +519,7 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/7a3b739a074669b82c04e86a1b3751ddc6597bfd0ace3c7cfa91c10f331a7f29.png" src="../_images/7a3b739a074669b82c04e86a1b3751ddc6597bfd0ace3c7cfa91c10f331a7f29.png" />
+<img alt="../_images/9ea4543d4137c65753e2604ce8fdab52ea420536bae67fffc59b00ffd8690783.png" src="../_images/9ea4543d4137c65753e2604ce8fdab52ea420536bae67fffc59b00ffd8690783.png" />
 </div>
 </div>
 <p>We see the max occuring at ~24 T, as predicted by Fernández and Wider (23.5 T).<span class="math notranslate nohighlight">\(^2\)</span></p>
@@ -526,7 +527,7 @@
 </section>
 <section id="with-and-without-decoupling">
 <h2>With and without decoupling<a class="headerlink" href="#with-and-without-decoupling" title="Link to this heading">#</a></h2>
-<p>We can also compare what happens to the spectrum without and with decoupling. We go a little ways away from the optimal field so we can actually see all peaks.</p>
+<p>We can also compare what happens to the spectrum without and with decoupling. We go a little ways away from the optimal field so that the smaller peak still has a reasonable intensity.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ex</span><span class="o">=</span><span class="n">sl</span><span class="o">.</span><span class="n">ExpSys</span><span class="p">(</span><span class="n">B0</span><span class="o">=</span><span class="mi">15</span><span class="p">,</span><span class="n">Nucs</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;15N&#39;</span><span class="p">,</span><span class="s1">&#39;1H&#39;</span><span class="p">],</span><span class="n">vr</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">pwdavg</span><span class="o">=</span><span class="s1">&#39;alpha0beta0&#39;</span><span class="p">)</span>
@@ -559,11 +560,11 @@
 <img alt="../_images/3539206de9d3cb1529a8d79084fd7f2592dcfb34bc26f543d2661cf5f195ae9c.png" src="../_images/3539206de9d3cb1529a8d79084fd7f2592dcfb34bc26f543d2661cf5f195ae9c.png" />
 </div>
 </div>
-<p>The decoupled spectrum has significantly less intensity than the undecoupled spectrum, motivating the application of TROSY. Note that the integrals should be the same.</p>
+<p>The decoupled spectrum has significantly less intensity than the larger peak of the undecoupled spectrum, motivating the application of TROSY.</p>
 </section>
 <section id="longitudinal-effects-from-asymmetric-relaxation">
 <h2>Longitudinal effects from asymmetric relaxation<a class="headerlink" href="#longitudinal-effects-from-asymmetric-relaxation" title="Link to this heading">#</a></h2>
-<p>When measuring <span class="math notranslate nohighlight">\(T_1\)</span> in solution NMR, one must take care to account for multiexponential <span class="math notranslate nohighlight">\(T_1\)</span> relaxation. To obtain <span class="math notranslate nohighlight">\(T_1\)</span> relaxation from exchange, we need to perform our calculations in the lab frame, so we set up a new ExpSys</p>
+<p>When measuring <span class="math notranslate nohighlight">\(T_1\)</span> in solution NMR, one must take care to account for multiexponential <span class="math notranslate nohighlight">\(T_1\)</span> relaxation. To obtain <span class="math notranslate nohighlight">\(T_1\)</span> relaxation from exchange, we need to perform our calculations in the lab frame, so we set up a new <code class="docutils literal notranslate"><span class="pre">ExpSys</span></code> object (<code class="docutils literal notranslate"><span class="pre">ex</span></code> is constructed from <code class="docutils literal notranslate"><span class="pre">ex0</span></code> using the <code class="docutils literal notranslate"><span class="pre">SetupTumbling</span></code> function).</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ex0</span><span class="o">=</span><span class="n">sl</span><span class="o">.</span><span class="n">ExpSys</span><span class="p">(</span><span class="n">v0H</span><span class="o">=</span><span class="mi">1200</span><span class="p">,</span><span class="n">Nucs</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;15N&#39;</span><span class="p">,</span><span class="s1">&#39;1H&#39;</span><span class="p">],</span><span class="n">vr</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">LF</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">pwdavg</span><span class="o">=</span><span class="s1">&#39;alpha0beta90&#39;</span><span class="p">)</span>
@@ -590,7 +591,7 @@
 <img alt="../_images/e85aa151da985122957d05835b8ca85b2c9a29f76293751b7958470a2c2b3202.png" src="../_images/e85aa151da985122957d05835b8ca85b2c9a29f76293751b7958470a2c2b3202.png" />
 </div>
 </div>
-<p>We observe a strongly bi-exponential behavior, corresponding to relaxation of the <span class="math notranslate nohighlight">\(\hat{S}_z\hat{I}_\alpha\)</span> and <span class="math notranslate nohighlight">\(\hat{S}_z\hat{I}_\beta\)</span> states. We can saturate the <span class="math notranslate nohighlight">\(^1\)</span>H to recover monoexponential behavior. However, because this calculation is in the lab frame, we cannot apply rf-fields as easily. This is because the applied RF is not static in the lab frame, but rather oscillates as in the real experiment, complicating its application in simulation. SLEEPY has a special tool, <code class="docutils literal notranslate"><span class="pre">LFrf</span></code>,  for adding cw-irradation in the lab frame. This class takes a sequence (which just specifies the field strength and nucleus), and returns a propagator with the corresponding applied field. We do not currently support time-dependent sequences for lab-frame irradiation.</p>
+<p>We observe a strongly bi-exponential behavior, corresponding to relaxation of the <span class="math notranslate nohighlight">\(\hat{S}_z\hat{I}_\alpha\)</span> and <span class="math notranslate nohighlight">\(\hat{S}_z\hat{I}_\beta\)</span> states. We can saturate the <span class="math notranslate nohighlight">\(^1\)</span>H to recover monoexponential behavior. However, because this calculation is in the lab frame, we cannot apply RF-fields as easily. This is because the applied RF is not static in the lab frame, but rather oscillates as in the real experiment, complicating its application in simulation. SLEEPY has a special tool, <code class="docutils literal notranslate"><span class="pre">sl.LFrf</span></code>,  for adding cw-irradation in the lab frame. This class takes a sequence as argument for initialization (which is used to specify the field strength and nucleus), and returns a propagator, <code class="docutils literal notranslate"><span class="pre">U</span></code>, with the corresponding applied field. We do not currently support time-dependent sequences for lab-frame irradiation.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">rho</span><span class="o">.</span><span class="n">clear</span><span class="p">()</span>

@@ -66,7 +66,7 @@
     <link rel="icon" href="../_static/favicon.png"/>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Dipolar Assisted Rotary Resonance" href="Ch3_DARR.html" />
+    <link rel="next" title="Understanding DARR with simulation" href="Ch3_DARR.html" />
     <link rel="prev" title="Relaxation in complex sequences: RECRR" href="Ch3_RECRR.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -203,7 +203,7 @@
 <li class="toctree-l2"><a class="reference internal" href="Ch3_DIPSHIFT.html"><font color="#0093AF">DIPSHIFT</font></a></li>
 <li class="toctree-l2"><a class="reference internal" href="Ch3_RECRR.html"><font color="#0093AF">Relaxation in complex sequences: RECRR</font></a></li>
 <li class="toctree-l2 current active"><a class="current reference internal" href="#"><font color="#0093AF"><span class="math notranslate nohighlight">\(T_1\)</span> and Nuclear Overhauser Effect</font></a></li>
-<li class="toctree-l2"><a class="reference internal" href="Ch3_DARR.html"><font color="#0093AF">Dipolar Assisted Rotary Resonance</font></a></li>
+<li class="toctree-l2"><a class="reference internal" href="Ch3_DARR.html"><font color="#0093AF">Understanding DARR with simulation</font></a></li>
 <li class="toctree-l2"><a class="reference internal" href="Ch3_Quad.html"><font color="#0093AF">Quadrupolar phenomena</font></a></li>
 </ul>
 </details></li>
@@ -457,12 +457,12 @@
 <h2><span class="math notranslate nohighlight">\(T_1\)</span> anisotropy under static conditions<a class="headerlink" href="#t-1-anisotropy-under-static-conditions" title="Link to this heading">#</a></h2>
 <section id="build-the-system">
 <h3>Build the system<a class="headerlink" href="#build-the-system" title="Link to this heading">#</a></h3>
-<p>We use a two-spin <span class="math notranslate nohighlight">\(^1\)</span>H–<span class="math notranslate nohighlight">\(^15\)</span>N system, with parameters for the H–N in a  protein backbone. We include a 1 ns correlation time, and recovery to thermal equilibrium (‘DynamicThermal’).</p>
+<p>We use a two-spin <span class="math notranslate nohighlight">\(^1\)</span>H–<span class="math notranslate nohighlight">\(^{15}\)</span>N system, with parameters for the H–N in a  protein backbone. We include a 1 ns correlation time, and recovery to thermal equilibrium (<code class="docutils literal notranslate"><span class="pre">L.add_relax('DynamicThermal')</span></code>).</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">delta</span><span class="o">=</span><span class="n">sl</span><span class="o">.</span><span class="n">Tools</span><span class="o">.</span><span class="n">dipole_coupling</span><span class="p">(</span><span class="mf">.102</span><span class="p">,</span><span class="s1">&#39;15N&#39;</span><span class="p">,</span><span class="s1">&#39;1H&#39;</span><span class="p">)</span>
 <span class="n">hop</span><span class="o">=</span><span class="mi">40</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">/</span><span class="mi">180</span>
-<span class="n">ex0</span><span class="o">=</span><span class="n">sl</span><span class="o">.</span><span class="n">ExpSys</span><span class="p">(</span><span class="n">v0H</span><span class="o">=</span><span class="mi">600</span><span class="p">,</span><span class="n">Nucs</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;15N&#39;</span><span class="p">,</span><span class="s1">&#39;1H&#39;</span><span class="p">],</span><span class="n">vr</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">LF</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">pwdavg</span><span class="o">=</span><span class="n">sl</span><span class="o">.</span><span class="n">PowderAvg</span><span class="p">(</span><span class="mi">7</span><span class="p">))</span>
+<span class="n">ex0</span><span class="o">=</span><span class="n">sl</span><span class="o">.</span><span class="n">ExpSys</span><span class="p">(</span><span class="n">v0H</span><span class="o">=</span><span class="mi">600</span><span class="p">,</span><span class="n">Nucs</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;15N&#39;</span><span class="p">,</span><span class="s1">&#39;1H&#39;</span><span class="p">],</span><span class="n">vr</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">LF</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">pwdavg</span><span class="o">=</span><span class="mi">7</span><span class="p">)</span>
 <span class="n">ex0</span><span class="o">.</span><span class="n">set_inter</span><span class="p">(</span><span class="s1">&#39;CSA&#39;</span><span class="p">,</span><span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">delta</span><span class="o">=</span><span class="mi">113</span><span class="p">,</span><span class="n">euler</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">23</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">/</span><span class="mi">180</span><span class="p">,</span><span class="mi">0</span><span class="p">])</span>
 <span class="n">ex0</span><span class="o">.</span><span class="n">set_inter</span><span class="p">(</span><span class="s1">&#39;dipole&#39;</span><span class="p">,</span><span class="n">i0</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">i1</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">delta</span><span class="o">=</span><span class="n">delta</span><span class="p">)</span>
 <span class="n">ex1</span><span class="o">=</span><span class="n">ex0</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
@@ -479,7 +479,7 @@
 </section>
 <section id="propagate-and-plot">
 <h3>Propagate and plot<a class="headerlink" href="#propagate-and-plot" title="Link to this heading">#</a></h3>
-<p>We assume the system starts out with the <span class="math notranslate nohighlight">\(^{15}\)</span>N spin having been saturated, but thermal polarization on the <span class="math notranslate nohighlight">\(^1\)</span>H. Note that if a thermalized Liouvillian is used, then the initial magnetization is scaled by the polarization of the system.</p>
+<p>We assume the system starts out with the <span class="math notranslate nohighlight">\(^{15}\)</span>N spin having been saturated, but thermal polarization on the <span class="math notranslate nohighlight">\(^1\)</span>H. Note that if a thermalized Liouvillian is used, then the initial magnetization is automatically scaled by the polarization of the system.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">seq</span><span class="o">=</span><span class="n">L</span><span class="o">.</span><span class="n">Sequence</span><span class="p">(</span><span class="n">Dt</span><span class="o">=</span><span class="mf">1e-2</span><span class="p">)</span>
@@ -507,7 +507,7 @@
 </section>
 <section id="histogram-of-all-rate-constants-present">
 <h3>Histogram of all rate constants present<a class="headerlink" href="#histogram-of-all-rate-constants-present" title="Link to this heading">#</a></h3>
-<p>SLEEPY gives us the ability to extract individual rate constants from propagators, given a starting density matrix, via the <code class="docutils literal notranslate"><span class="pre">rho.extract_decay_rates</span></code> function. This function has a few modes, but the ‘wt_rates’ mode yields a list of rate constants and their corresponding amplitudes, weighted according to the powder average weighting (other modes offer, for example, an averaged weight for each element of the powder average, the average over the full powder average, or a list of rate constants for each element of the powder average; type <code class="docutils literal notranslate"><span class="pre">help(rho.extract_decay_rates)</span></code> for details).</p>
+<p>SLEEPY gives us the ability to extract individual rate constants from propagators, given a starting density matrix, via the <code class="docutils literal notranslate"><span class="pre">rho.extract_decay_rates</span></code> function. This function has a few modes, but the <code class="docutils literal notranslate"><span class="pre">'wt_rates'</span></code> mode yields a list of rate constants and their corresponding amplitudes, weighted according to the powder average weighting (other modes offer, for example, an averaged weight for each element of the powder average, the average over the full powder average, or a list of rate constants for each element of the powder average; type <code class="docutils literal notranslate"><span class="pre">help(rho.extract_decay_rates)</span></code> for details).</p>
 <p>Once we have the rates and amplitudes, we can create a histogram for each weight. Note this is slightly more complex than a usual histogram, because the rate constants have amplitudes associated with them, so we cannot just count up the rate constants in a bin, rather, we need to add together the amplitudes for all rate constants in a bin.</p>
 <p>We can also calculate the average rate constant from the rates and amplitudes, shown on the plot.</p>
 <div class="cell docutils container">
@@ -552,18 +552,15 @@
 <span class="n">R1_avg_static</span><span class="o">=</span><span class="p">(</span><span class="n">R1_static</span><span class="o">*</span><span class="n">A_static</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="o">/</span><span class="n">A_static</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
 
 <span class="n">ax</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="n">bins</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span><span class="mf">4.5e-7</span><span class="p">,</span><span class="sa">fr</span><span class="s1">&#39;$\langle R_1\rangle_</span><span class="se">{{</span><span class="s1">static</span><span class="se">}}</span><span class="s1">$: </span><span class="si">{</span><span class="n">R1_avg_static</span><span class="si">:</span><span class="s1">.2f</span><span class="si">}</span><span class="s1"> $s^</span><span class="se">{{</span><span class="s1">-1</span><span class="se">}}</span><span class="s1">$&#39;</span><span class="p">)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">((</span><span class="s1">&#39;static&#39;</span><span class="p">,</span><span class="s1">&#39;MAS&#39;</span><span class="p">))</span>
+<span class="n">_</span><span class="o">=</span><span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">((</span><span class="s1">&#39;static&#39;</span><span class="p">,</span><span class="s1">&#39;MAS&#39;</span><span class="p">))</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x7fbbe4310e20&gt;
-</pre></div>
-</div>
-<img alt="../_images/be70178990ac4ba1c149ad936de6f4d1662ab23eadd2da41d45bbd67b656a694.png" src="../_images/be70178990ac4ba1c149ad936de6f4d1662ab23eadd2da41d45bbd67b656a694.png" />
+<img alt="../_images/5d507e9cb94dc9deff93f3145e3635ec6112f4b10793c8074407c3791ce4dbdb.png" src="../_images/5d507e9cb94dc9deff93f3145e3635ec6112f4b10793c8074407c3791ce4dbdb.png" />
 </div>
 </div>
-<p>We see that a relatively broad range of <span class="math notranslate nohighlight">\(R_1\)</span> rate constants are obtained, corresponding to both different orientations in the powder average, and also different rate constants depending if the dipolar and CSA relaxation are constructive or destructive (depending on the <span class="math notranslate nohighlight">\(^1\)</span>H spin state, which may also change during the calculation).</p>
+<p>We see that an extremely broad range of <span class="math notranslate nohighlight">\(R_1\)</span> rate constants are obtained, covering several orders of magnitude. These correspond to both different orientations in the powder average, and also different rate constants depending if the dipolar and CSA relaxation are constructive or destructive (see <a class="reference internal" href="../Chapter2/Ch2_TROSY.html"><span class="std std-doc">Trosy Effects</span></a>).</p>
 <p>We now repeat the above calculation, but under magic angle spinning conditions. Note that while we may change <code class="docutils literal notranslate"><span class="pre">ex0.vr</span></code>, we have to take care to clear the Liouvillian cache, also add <code class="docutils literal notranslate"><span class="pre">n_gamma</span></code>, which is set to 1 under static conditions. Newer users may prefer to rebuild the experimental system (<code class="docutils literal notranslate"><span class="pre">ex0</span></code>,<code class="docutils literal notranslate"><span class="pre">ex1</span></code>) and the Liouvillian from scratch, in order to automatically obtain the SLEEPY default settings and avoid mistakes.</p>
 </section>
 </section>
@@ -575,7 +572,7 @@
 <span class="n">ex0</span><span class="o">.</span><span class="n">n_gamma</span><span class="o">=</span><span class="mi">30</span>
 <span class="n">L</span><span class="o">.</span><span class="n">clear_cache</span><span class="p">()</span>
 
-<span class="n">ex0</span><span class="o">.</span><span class="n">pwdavg</span><span class="o">=</span><span class="n">sl</span><span class="o">.</span><span class="n">PowderAvg</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
+<span class="n">ex0</span><span class="o">.</span><span class="n">pwdavg</span><span class="o">=</span><span class="mi">4</span>
 
 <span class="n">seq</span><span class="o">=</span><span class="n">L</span><span class="o">.</span><span class="n">Sequence</span><span class="p">()</span>
 <span class="n">U</span><span class="o">=</span><span class="n">seq</span><span class="o">.</span><span class="n">U</span><span class="p">()</span><span class="o">**</span><span class="mi">100</span>
@@ -594,7 +591,7 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/21aad7199cacf4ebe8f0ee46ed6f1fadc493f34dc6ead6c1a066d533a69b5ec6.png" src="../_images/21aad7199cacf4ebe8f0ee46ed6f1fadc493f34dc6ead6c1a066d533a69b5ec6.png" />
+<img alt="../_images/dbf37d7c13a9b088bedcd98e29171d0bf72dddc01c7a043394cff7c2d74749b1.png" src="../_images/dbf37d7c13a9b088bedcd98e29171d0bf72dddc01c7a043394cff7c2d74749b1.png" />
 </div>
 </div>
 <p>The resulting curve appears much less multiexponential than obtained from static conditions, although indeed it is still multiexponential.</p>
@@ -614,24 +611,21 @@
 
 <span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">((</span><span class="s1">&#39;static&#39;</span><span class="p">,</span><span class="s1">&#39;MAS&#39;</span><span class="p">))</span>
 <span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;$R_1$ / s$^{-1}$&#39;</span><span class="p">)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Signal&#39;</span><span class="p">)</span>
+<span class="n">_</span><span class="o">=</span><span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Signal&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Text(0, 0.5, &#39;Signal&#39;)
-</pre></div>
-</div>
-<img alt="../_images/7936d95290831b513b85ec1159baad07bace5fbf5717774c0a7157fe445cac1f.png" src="../_images/7936d95290831b513b85ec1159baad07bace5fbf5717774c0a7157fe445cac1f.png" />
+<img alt="../_images/21e573276b6c26ee7d15fc22ee755ae0cc5b24d408d400921e4b704e06fce121.png" src="../_images/21e573276b6c26ee7d15fc22ee755ae0cc5b24d408d400921e4b704e06fce121.png" />
 </div>
 </div>
-<p>Indeed, the distribution of rate constants under MAS conditions is significantly narrower than under static conditions, although a distribution certainly still is present. The reduction of the breadth of the distribution comes from the fact that as the sample is rotated, different relaxation rate constants are sampled throughout the rotor period, resulting in an average rate constant. However, the rotation does not bring the individual crystallites necessarily to the orienationally-averaged rate constant.</p>
+<p>Indeed, the distribution of rate constants under MAS conditions is significantly narrower than under static conditions, although a distribution is still present. The reduction of the breadth of the distribution comes from the fact that as the sample is rotated, different relaxation rate constants are sampled throughout the rotor period, resulting in an average rate constant. However, the rotation does not bring the individual crystallites rate constant resulting from an average over <em>all</em> orientations.</p>
 <p>Although the width of the distribution changes, its average does not, where both calculations yield <span class="math notranslate nohighlight">\(\langle R_1\rangle\)</span>=0.66 s (the average <span class="math notranslate nohighlight">\(R_1\)</span> must stay the same, the average <span class="math notranslate nohighlight">\(T_1\)</span> may, on the other hand, change due to the different distribution width).</p>
 </section>
 <section id="methyl-relaxation">
 <h2>Methyl relaxation<a class="headerlink" href="#methyl-relaxation" title="Link to this heading">#</a></h2>
 <p>In the next calculation, we investigate relaxation of a <span class="math notranslate nohighlight">\(^{13}\)</span>C nucleus and the surrounding <span class="math notranslate nohighlight">\(^1\)</span>H in a methyl group, due to the 3-site methyl hopping dynamics. Approximate methyl correlation time (30 ps) taken from HET-s.<span class="math notranslate nohighlight">\(^1\)</span></p>
-<p>Methyl hopping represents a special case for exchange simulations, where when a methyl hop (120<span class="math notranslate nohighlight">\(^\circ\)</span> rotation) occurs, the new spin-system is identical to the old spin system, except for a change in the spin-indexing. Rather than introducing exchange, which increases the size of the Liouvillian, we may therefore induce exchange within the existing system. This is done with the <code class="docutils literal notranslate"><span class="pre">L.add_SpinEx</span></code> function, which requires the indices of the spins in exchange and the correlation time of the exchange process as arguments. The resulting Liouvillian is therefore <span class="math notranslate nohighlight">\(3\times3=9\)</span> times smaller than if exchange were added via multiple spin-systems in exchange.</p>
+<p>Methyl hopping represents a special case for exchange simulations, where when a methyl hop (120<span class="math notranslate nohighlight">\(^\circ\)</span> rotation) occurs, the new spin-system is identical to the old spin system, except for a change in the spin-indexing. Rather than introducing exchange, which increases the size of the Liouvillian, we may therefore induce exchange within the existing Liouvillian. This is done with the <code class="docutils literal notranslate"><span class="pre">L.add_SpinEx(...)</span></code> function, which requires as input the indices of the spins in exchange and the correlation time of the exchange process as arguments. The resulting Liouvillian is therefore <span class="math notranslate nohighlight">\(3\times3=9\)</span> times smaller than if exchange were added via multiple spin-systems in exchange.</p>
 <p>[1] K. Zumpfe, M. Berbon, B. Habenstein, A. Loquet, A.A. Smith. <a class="reference external" href="https://doi.org/10.1021/jacs.3c12620"><em>J. Am. Chem. Soc.</em></a>, <strong>2024</strong>, 146, 8164-8178</p>
 <section id="id1">
 <h3>Build the system<a class="headerlink" href="#id1" title="Link to this heading">#</a></h3>
@@ -655,7 +649,7 @@
 </div>
 </div>
 <p>We add <em>spin-exchange</em>, rather than rebuilding the Liouville matrix three times. This approach is only valid if the exchange yields only swapping of positions of the spins.</p>
-<p>We also add recovery to thermal equilibrium (<code class="docutils literal notranslate"><span class="pre">DynamicThermal</span></code>).</p>
+<p>We also thermalize the Liouvillian, so that it recovers to thermal equilibrium, using <code class="docutils literal notranslate"><span class="pre">L.add_relax('DynamicThermal')</span></code>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">L</span><span class="o">=</span><span class="n">ex</span><span class="o">.</span><span class="n">Liouvillian</span><span class="p">()</span>
@@ -665,7 +659,7 @@
 </div>
 </div>
 </div>
-<p>Below, we plot the resulting Liouvillian, and also the exchange matrix alone. Note that for technical reasons, the spin-exchange matrix appears in the relaxation matrix (<code class="docutils literal notranslate"><span class="pre">Lrelax</span></code>), rather than in the exchange matrix (<code class="docutils literal notranslate"><span class="pre">Lex</span></code>).</p>
+<p>Below, we plot the resulting Liouvillian, and also the exchange matrix extracted from the Liouvillian. Note that for technical reasons, the spin-exchange matrix appears in the relaxation matrix (<code class="docutils literal notranslate"><span class="pre">Lrelax</span></code>), rather than in the exchange matrix (<code class="docutils literal notranslate"><span class="pre">Lex</span></code>).</p>
 <p>Vertical lines in the Liouvillian plot result from thermalization of the system. The exchange matrix (right), couples states where spins 1, 2, and 3 swap positions (either 1-2-3 goes to 2-3-1 or 3-1-2). For example, the state <span class="math notranslate nohighlight">\(|S_0^\alpha S_1^+S_2^-S_3^\beta\rangle\)</span> is coupled to the <span class="math notranslate nohighlight">\(|S_0^\alpha S_1^-S_2^\beta S_3^+\rangle\)</span> and <span class="math notranslate nohighlight">\(|S_0^\alpha S_1^\beta S_2^+S_3^-\rangle\)</span> states by the exchange matrix.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -677,7 +671,7 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/59c60f85cb5619f93c1d960cbc9479693b7a22a9cecc9161b7aca1708a170d0b.png" src="../_images/59c60f85cb5619f93c1d960cbc9479693b7a22a9cecc9161b7aca1708a170d0b.png" />
+<img alt="../_images/1bf85ae7ed0c6da6eeed35dea16f8f4b5f5eb18a601c307fdc01d94df7a8e62a.png" src="../_images/1bf85ae7ed0c6da6eeed35dea16f8f4b5f5eb18a601c307fdc01d94df7a8e62a.png" />
 </div>
 </div>
 <p>Now we observe the relaxation behavior of the spins, assuming all spins were saturated at the beginning of the measurement.</p>
@@ -699,7 +693,7 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/5dca61d985031e5c7f60dd4b3f1a2bc8cd563cc8f8933d80ea2f2e8b79ad90eb.png" src="../_images/5dca61d985031e5c7f60dd4b3f1a2bc8cd563cc8f8933d80ea2f2e8b79ad90eb.png" />
+<img alt="../_images/8e29ac4f6381705d03c0b8283e1c515dcb3b0d2f8c5159383283e7e877023236.png" src="../_images/8e29ac4f6381705d03c0b8283e1c515dcb3b0d2f8c5159383283e7e877023236.png" />
 </div>
 </div>
 <p>We observe a complex relaxation behavior, resulting from coupling of the <span class="math notranslate nohighlight">\(^1\)</span>H and <span class="math notranslate nohighlight">\(^{13}\)</span>C relaxation. If we calculate the histogram for this relaxation process, we obtain both positive and negative amplitudes, resulting from the initial buildup of the <span class="math notranslate nohighlight">\(^{13}\)</span>C relaxation above its thermal equilibrium, followed by decay back to thermal equilibrium. Note that this prevents from easily calculating a meaningful averaged relaxation rate constant.</p>
@@ -716,10 +710,10 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/68650e208466b9eebd0540c80fb40ba61b8209f7003bcbbd0773f7af316756a7.png" src="../_images/68650e208466b9eebd0540c80fb40ba61b8209f7003bcbbd0773f7af316756a7.png" />
+<img alt="../_images/d744ccd33c7ea89fc901cf75ef7e07c57f00a381a81a8791bf82a664c4a6c6b4.png" src="../_images/d744ccd33c7ea89fc901cf75ef7e07c57f00a381a81a8791bf82a664c4a6c6b4.png" />
 </div>
 </div>
-<p>We can get a less complex behavior by saturating the <span class="math notranslate nohighlight">\(^1\)</span>H during the recovery. Note that we must use irradiation in the lab-frame irradiation, which is possible with the <code class="docutils literal notranslate"><span class="pre">sl.LFrf</span></code>.</p>
+<p>We can get a less complex behavior by saturating the <span class="math notranslate nohighlight">\(^1\)</span>H during the recovery. Note that we must use irradiation in the lab-frame irradiation, which is possible with the <code class="docutils literal notranslate"><span class="pre">sl.LFrf</span></code> class.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">rho</span><span class="o">=</span><span class="n">sl</span><span class="o">.</span><span class="n">Rho</span><span class="p">(</span><span class="s1">&#39;zero&#39;</span><span class="p">,[</span><span class="s1">&#39;S0z&#39;</span><span class="p">,</span><span class="s1">&#39;S1z&#39;</span><span class="p">,</span><span class="s1">&#39;S2z&#39;</span><span class="p">,</span><span class="s1">&#39;S3z&#39;</span><span class="p">])</span>
@@ -747,15 +741,12 @@ Completed
     
 <span class="n">R1_avg</span><span class="o">=</span><span class="p">(</span><span class="n">A</span><span class="o">*</span><span class="n">R1</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="o">/</span><span class="n">A</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
     
-<span class="n">ax</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mf">6e-6</span><span class="p">,</span><span class="sa">fr</span><span class="s1">&#39;$\langle R_1\rangle$: </span><span class="si">{</span><span class="n">R1_avg</span><span class="si">:</span><span class="s1">.2f</span><span class="si">}</span><span class="s1"> s$^</span><span class="se">{{</span><span class="s1">-1</span><span class="se">}}</span><span class="s1">$&#39;</span><span class="p">)</span>
+<span class="n">_</span><span class="o">=</span><span class="n">ax</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mf">6e-6</span><span class="p">,</span><span class="sa">fr</span><span class="s1">&#39;$\langle R_1\rangle$: </span><span class="si">{</span><span class="n">R1_avg</span><span class="si">:</span><span class="s1">.2f</span><span class="si">}</span><span class="s1"> s$^</span><span class="se">{{</span><span class="s1">-1</span><span class="se">}}</span><span class="s1">$&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Text(3, 6e-06, &#39;$\\langle R_1\\rangle$: 1.81 s$^{-1}$&#39;)
-</pre></div>
-</div>
-<img alt="../_images/8cb32d7d0a14d594ac909af27a0643775e232ce7506a566c6d2ef2e0aba29431.png" src="../_images/8cb32d7d0a14d594ac909af27a0643775e232ce7506a566c6d2ef2e0aba29431.png" />
+<img alt="../_images/1b85649bdf97ce6d5bd5d2d7ab13c8db6d7effee531177434f55bf83f068dc79.png" src="../_images/1b85649bdf97ce6d5bd5d2d7ab13c8db6d7effee531177434f55bf83f068dc79.png" />
 </div>
 </div>
 <p>The distribution is narrowed, and negative components are eliminated. We plot the buildup, and compare the resulting curve to a monoexpential curve with the averaged relaxation rate constant.</p>
@@ -763,14 +754,11 @@ Completed
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ax</span><span class="o">=</span><span class="n">rho</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="s1">&#39;s&#39;</span><span class="p">,</span><span class="n">det_num</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
 <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">rho</span><span class="o">.</span><span class="n">t_axis</span><span class="p">,</span><span class="n">rho</span><span class="o">.</span><span class="n">I</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">real</span><span class="o">*</span><span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">rho</span><span class="o">.</span><span class="n">t_axis</span><span class="o">*</span><span class="n">R1_avg</span><span class="p">)),</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">,</span><span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;:&#39;</span><span class="p">)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">((</span><span class="sa">r</span><span class="s1">&#39;Simulated decay&#39;</span><span class="p">,</span><span class="sa">fr</span><span class="s1">&#39;Monoexponential decay, $R_1$=</span><span class="si">{</span><span class="n">R1_avg</span><span class="si">:</span><span class="s1">.2f</span><span class="si">}</span><span class="s1"> s$^</span><span class="se">{{</span><span class="s1">-1</span><span class="se">}}</span><span class="s1">$&#39;</span><span class="p">))</span>
+<span class="n">_</span><span class="o">=</span><span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">((</span><span class="sa">r</span><span class="s1">&#39;Simulated decay&#39;</span><span class="p">,</span><span class="sa">fr</span><span class="s1">&#39;Monoexponential decay, $R_1$=</span><span class="si">{</span><span class="n">R1_avg</span><span class="si">:</span><span class="s1">.2f</span><span class="si">}</span><span class="s1"> s$^</span><span class="se">{{</span><span class="s1">-1</span><span class="se">}}</span><span class="s1">$&#39;</span><span class="p">))</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x7fa8036f3048&gt;
-</pre></div>
-</div>
 <img alt="../_images/68847ba9be7abfc198a6891dd3c8896d89007873a14f6f3144a2d603d2df7374.png" src="../_images/68847ba9be7abfc198a6891dd3c8896d89007873a14f6f3144a2d603d2df7374.png" />
 </div>
 </div>
@@ -823,7 +811,7 @@ Completed
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title"><font  color = "#0093AF">Dipolar Assisted Rotary Resonance</font></p>
+        <p class="prev-next-title"><font  color = "#0093AF">Understanding DARR with simulation</font></p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>

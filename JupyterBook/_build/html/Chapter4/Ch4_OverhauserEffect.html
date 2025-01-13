@@ -203,7 +203,7 @@
 <li class="toctree-l2"><a class="reference internal" href="../Chapter3/Ch3_DIPSHIFT.html"><font color="#0093AF">DIPSHIFT</font></a></li>
 <li class="toctree-l2"><a class="reference internal" href="../Chapter3/Ch3_RECRR.html"><font color="#0093AF">Relaxation in complex sequences: RECRR</font></a></li>
 <li class="toctree-l2"><a class="reference internal" href="../Chapter3/Ch3_T1_NOE.html"><font color="#0093AF"><span class="math notranslate nohighlight">\(T_1\)</span> and Nuclear Overhauser Effect</font></a></li>
-<li class="toctree-l2"><a class="reference internal" href="../Chapter3/Ch3_DARR.html"><font color="#0093AF">Dipolar Assisted Rotary Resonance</font></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Chapter3/Ch3_DARR.html"><font color="#0093AF">Understanding DARR with simulation</font></a></li>
 <li class="toctree-l2"><a class="reference internal" href="../Chapter3/Ch3_Quad.html"><font color="#0093AF">Quadrupolar phenomena</font></a></li>
 </ul>
 </details></li>
@@ -449,7 +449,7 @@
   <section class="tex2jax_ignore mathjax_ignore" id="overhauser-effect">
 <h1><font  color = "#0093AF">Overhauser Effect</font><a class="headerlink" href="#overhauser-effect" title="Link to this heading">#</a></h1>
 <p><a href="https://githubtocolab.com/alsinmr/SLEEPY_tutorial/blob/main/ColabNotebooks/Chapter4/Ch4_OverhauserEffect.ipynb" target="_blank"><img src="https://colab.research.google.com/assets/colab-badge.svg"></a></p>
-<p>The Overhauser effect is the original DNP experiment,<span class="math notranslate nohighlight">\(^1\)</span> demonstrated on a conducting metal,<span class="math notranslate nohighlight">\(^2\)</span> and often used in solution-state DNP. However, it is also possible to obtain the Overhauser effect from non-conducting electrons such as in Trityl or BDPA. In this case, the effect comes from either modulation of the isotropic or dipolar part of the Hyperfine coupling. Here, we introduce these modulations, and see the effect they have on the transfer of polarization between the electron and the nucleus.</p>
+<p>The Overhauser effect is the original DNP experiment,<span class="math notranslate nohighlight">\(^1\)</span> demonstrated on a conducting metal.<span class="math notranslate nohighlight">\(^2\)</span> However, it is also possible to obtain the Overhauser effect from non-conducting electrons such as in Trityl or BDPA. In this case, the effect comes from either modulation of the isotropic or dipolar part of the hyperfine coupling. Here, we introduce these modulations, and see the effect they have on the transfer of polarization between the electron and the nucleus.</p>
 <p>[1] A.W. Overhauser. <a class="reference external" href="https://doi.org/10.1103/PhysRev.92.411"><em>Phys. Rev.</em></a>, <strong>1953</strong>, 92, 411-415</p>
 <p>[2] T.R. Carver, C.P. Schlichter. <a class="reference external" href="https://doi.org/10.1103/PhysRev.92.212.2"><em>Phys. Rev.</em></a>, <strong>1953</strong>, 92, 212-213.</p>
 <section id="setup">
@@ -467,7 +467,7 @@
 </section>
 <section id="example-1-modulation-of-the-isotropic-hyperfine-j">
 <h2>Example 1: Modulation of the Isotropic Hyperfine (J)<a class="headerlink" href="#example-1-modulation-of-the-isotropic-hyperfine-j" title="Link to this heading">#</a></h2>
-<p>In the first example, we include a scalar and dipolar component to the coupling. However, we only modulate the scalar part. This is achieved by adding different “Aiso” to ex0 and ex1. The two Hamiltonians are then coupled together with the exchange matrix produced by <code class="docutils literal notranslate"><span class="pre">sl.Tools.twoSite_kex</span></code>, where <code class="docutils literal notranslate"><span class="pre">tc</span></code> specifies the correlation time resulting from the exchange matrix.</p>
+<p>In the first example, we include a scalar and dipolar component to the coupling. However, we only modulate the scalar part. This is achieved by adding different scalar couplings to <code class="docutils literal notranslate"><span class="pre">ex0</span></code> and <code class="docutils literal notranslate"><span class="pre">ex1</span></code> (<code class="docutils literal notranslate"><span class="pre">Aiso</span></code>,<code class="docutils literal notranslate"><span class="pre">Aiso1</span></code>). The two Hamiltonians are then coupled together with the exchange matrix produced by <code class="docutils literal notranslate"><span class="pre">sl.Tools.twoSite_kex(tc=...)</span></code>, where <code class="docutils literal notranslate"><span class="pre">tc</span></code> specifies the correlation time resulting from the exchange matrix.</p>
 <p>Increasing the change between <code class="docutils literal notranslate"><span class="pre">Aiso</span></code> and <code class="docutils literal notranslate"><span class="pre">Aiso1</span></code> will accelerate the transfer. Modifying <code class="docutils literal notranslate"><span class="pre">tc</span></code> will also change the rate, although the current value (1 ps) is nearly optimum for fast transfer.</p>
 <p>Note that for the Overhauser effect, we require the full set of non-secular interactions in the lab frame, not just the pseudosecular terms tilting the nucleus that are required for cross-effect and solid-effect. Therefore, all spins are calculated in the lab frame.</p>
 <section id="build-the-system">
@@ -505,7 +505,7 @@
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;AxesSubplot:xlabel=&#39;t / s&#39;, ylabel=&#39;&lt;Op&gt;&#39;&gt;
 </pre></div>
 </div>
-<img alt="../_images/122af9a8dd39a1f334edb5ad35b24bad154fcf2d4df56f83fc69e44cb7ba5157.png" src="../_images/122af9a8dd39a1f334edb5ad35b24bad154fcf2d4df56f83fc69e44cb7ba5157.png" />
+<img alt="../_images/2c270e57ff6c2434b9dc23b0586017745cf0aab7f05d92494900b4628e85f897.png" src="../_images/2c270e57ff6c2434b9dc23b0586017745cf0aab7f05d92494900b4628e85f897.png" />
 </div>
 </div>
 <p>We observe that the relaxation is a pure transfer from modulation of the isotropic part of the hyperfine coupling. No magnetization is lost.</p>
@@ -567,7 +567,7 @@
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;AxesSubplot:xlabel=&#39;t / s&#39;, ylabel=&#39;&lt;Op&gt;&#39;&gt;
 </pre></div>
 </div>
-<img alt="../_images/2bd8df7e2a964ac6d9be4d15ffcaa6dbc1435f8d1ff9c4c05d9f0c25952a3923.png" src="../_images/2bd8df7e2a964ac6d9be4d15ffcaa6dbc1435f8d1ff9c4c05d9f0c25952a3923.png" />
+<img alt="../_images/015b0b62593c6caf40d978a24a53f5b2a54e6371925e439dae0b991771072021.png" src="../_images/015b0b62593c6caf40d978a24a53f5b2a54e6371925e439dae0b991771072021.png" />
 </div>
 </div>
 <p>Then, the sign of the transfer turns positive, indicating the scalar mechanism, but the dipolar mechanism is also present and gradually destroys the magnetization. Note that in the real experiment, we would have a <em>much</em> faster electron relaxation, which would effectively decouple it from the <span class="math notranslate nohighlight">\(^1\)</span>H relaxation, and provide a constant source of polarization to transfer to many <span class="math notranslate nohighlight">\(^1\)</span>H. However, if the electron is saturated, then during its recovery, the <span class="math notranslate nohighlight">\(^1\)</span>H would become polarized. We demonstrate this effect next.</p>
@@ -592,6 +592,8 @@
 
 <span class="n">L</span><span class="o">=</span><span class="n">sl</span><span class="o">.</span><span class="n">Liouvillian</span><span class="p">(</span><span class="n">ex0</span><span class="p">,</span><span class="n">ex1</span><span class="p">)</span>
 <span class="n">L</span><span class="o">.</span><span class="n">kex</span><span class="o">=</span><span class="n">sl</span><span class="o">.</span><span class="n">Tools</span><span class="o">.</span><span class="n">twoSite_kex</span><span class="p">(</span><span class="n">tc</span><span class="o">=</span><span class="mf">1e-12</span><span class="p">)</span>
+
+<span class="n">ex0</span><span class="o">.</span><span class="n">pwdavg</span><span class="o">=</span><span class="n">sl</span><span class="o">.</span><span class="n">PowderAvg</span><span class="p">(</span><span class="mi">2</span><span class="p">)[</span><span class="mi">10</span><span class="p">]</span>
 <span class="n">L</span><span class="o">.</span><span class="n">add_relax</span><span class="p">(</span><span class="s1">&#39;DynamicThermal&#39;</span><span class="p">)</span>
 
 <span class="n">gavg</span><span class="o">=</span><span class="p">(</span><span class="mf">2.0027</span><span class="o">+</span><span class="mf">2.0031</span><span class="o">+</span><span class="mf">2.0034</span><span class="p">)</span><span class="o">/</span><span class="mi">3</span>
@@ -616,10 +618,10 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&lt;matplotlib.lines.Line2D at 0x7fec2c1456a0&gt;]
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&lt;matplotlib.lines.Line2D at 0x7f8c5a062fd0&gt;]
 </pre></div>
 </div>
-<img alt="../_images/86d9434b2779d1f6a4e75ea96c87723ec6676e563bac3c72fa23dca85fb21e0b.png" src="../_images/86d9434b2779d1f6a4e75ea96c87723ec6676e563bac3c72fa23dca85fb21e0b.png" />
+<img alt="../_images/cf823a747ba69bdc7b4e08f75c14aa82b39029954d15d7f5a1ce5b980049c911.png" src="../_images/cf823a747ba69bdc7b4e08f75c14aa82b39029954d15d7f5a1ce5b980049c911.png" />
 </div>
 </div>
 <p>We get good performance here from the ‘DynamicThermal’ method. Now we observe the Overhauser effect enhancement by irradiating the electron such that it saturates, leading to enhancement on the <span class="math notranslate nohighlight">\(^1\)</span>H.</p>
@@ -662,25 +664,34 @@ Completed
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;AxesSubplot:xlabel=&#39;t / s&#39;, ylabel=&#39;&lt;Op&gt;&#39;&gt;
 </pre></div>
 </div>
-<img alt="../_images/24b2417520112a59af343019232e3f8649f937665858612b7cc92e2ba1080313.png" src="../_images/24b2417520112a59af343019232e3f8649f937665858612b7cc92e2ba1080313.png" />
+<img alt="../_images/ed2f90f3e6a610d6096460cfd2e71f12eca0905e380b702ce4a3197278464e09.png" src="../_images/ed2f90f3e6a610d6096460cfd2e71f12eca0905e380b702ce4a3197278464e09.png" />
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Enhancement: </span><span class="si">{</span><span class="n">e</span><span class="si">:</span><span class="s1">.0f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Enhancement: </span><span class="si">{</span><span class="n">e</span><span class="si">:</span><span class="s1">.1f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Enhancement: -89
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Enhancement: -89.3
 </pre></div>
 </div>
 </div>
 </div>
+<p>As desired, saturating the electron results in enhanced polarization on the nucleus.</p>
 <p>Now, we attempt to extract the <span class="math notranslate nohighlight">\(^1\)</span>H T<span class="math notranslate nohighlight">\(_1\)</span> and transfer rate, <span class="math notranslate nohighlight">\(\Gamma_{IS}\)</span>, and use these rates to predict the enhancement and compare to our result</p>
 </section>
 <section id="predict-enhancement-from-rate-constants">
 <h3>Predict enhancement from rate constants<a class="headerlink" href="#predict-enhancement-from-rate-constants" title="Link to this heading">#</a></h3>
+<p>The nuclear enhancement should be given by</p>
+<div class="math notranslate nohighlight">
+\[
+\begin{equation}
+\frac{P_{DNP}}{P^{1H}_{eq}}=\left(1+\frac{\Gamma_{IS}}{R_1^{1H}}\cdot\frac{P^{e-}_{eq}}{P^{1H}_{eq}}\right)
+\end{equation}
+\]</div>
+<p>We estimate <span class="math notranslate nohighlight">\(\Gamma_{IS}\)</span> and <span class="math notranslate nohighlight">\(R_1^{1H}\)</span> from their initial slopes in short simulations below to predict the enhancement.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">L</span><span class="o">.</span><span class="n">clear_relax</span><span class="p">()</span>
@@ -697,12 +708,12 @@ Completed
 
 <span class="n">Gamma</span><span class="o">=-</span><span class="n">rho</span><span class="o">.</span><span class="n">I</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">real</span><span class="o">/</span><span class="n">rho</span><span class="o">.</span><span class="n">t_axis</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
 
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Predicted Enhancement : </span><span class="si">{</span><span class="n">Gamma</span><span class="o">/</span><span class="n">R1H</span><span class="o">*</span><span class="n">sl</span><span class="o">.</span><span class="n">Tools</span><span class="o">.</span><span class="n">NucInfo</span><span class="p">(</span><span class="s2">&quot;e&quot;</span><span class="p">)</span><span class="o">/</span><span class="n">sl</span><span class="o">.</span><span class="n">Tools</span><span class="o">.</span><span class="n">NucInfo</span><span class="p">(</span><span class="s2">&quot;1H&quot;</span><span class="p">)</span><span class="si">:</span><span class="s1">.1f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Predicted Enhancement : </span><span class="si">{</span><span class="mi">1</span><span class="o">+</span><span class="n">Gamma</span><span class="o">/</span><span class="n">R1H</span><span class="o">*</span><span class="n">sl</span><span class="o">.</span><span class="n">Tools</span><span class="o">.</span><span class="n">NucInfo</span><span class="p">(</span><span class="s2">&quot;e&quot;</span><span class="p">)</span><span class="o">/</span><span class="n">sl</span><span class="o">.</span><span class="n">Tools</span><span class="o">.</span><span class="n">NucInfo</span><span class="p">(</span><span class="s2">&quot;1H&quot;</span><span class="p">)</span><span class="si">:</span><span class="s1">.1f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Predicted Enhancement : -90.5
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Predicted Enhancement : -92.0
 </pre></div>
 </div>
 </div>
@@ -711,25 +722,13 @@ Completed
 </section>
 <section id="include-powder-average">
 <h3>Include powder average<a class="headerlink" href="#include-powder-average" title="Link to this heading">#</a></h3>
+<p>We need to set the powder average, and reintroduce <code class="docutils literal notranslate"><span class="pre">DynamicThermal</span></code></p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ex0</span><span class="o">=</span><span class="n">sl</span><span class="o">.</span><span class="n">ExpSys</span><span class="p">(</span><span class="n">v0H</span><span class="o">=</span><span class="mi">212</span><span class="p">,</span><span class="n">Nucs</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;1H&#39;</span><span class="p">,</span><span class="s1">&#39;e&#39;</span><span class="p">],</span><span class="n">LF</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">vr</span><span class="o">=</span><span class="mi">5000</span><span class="p">,</span><span class="n">n_gamma</span><span class="o">=</span><span class="mi">30</span><span class="p">,</span><span class="n">T_K</span><span class="o">=</span><span class="mi">80</span><span class="p">,</span><span class="n">pwdavg</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
-<span class="n">ex0</span><span class="o">.</span><span class="n">set_inter</span><span class="p">(</span><span class="s1">&#39;g&#39;</span><span class="p">,</span><span class="n">i</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">gxx</span><span class="o">=</span><span class="mf">2.0027</span><span class="p">,</span><span class="n">gyy</span><span class="o">=</span><span class="mf">2.0031</span><span class="p">,</span><span class="n">gzz</span><span class="o">=</span><span class="mf">2.0034</span><span class="p">)</span>
-<span class="n">Adip</span><span class="o">=</span><span class="p">[</span><span class="o">-</span><span class="mf">1e6</span><span class="p">,</span><span class="o">-</span><span class="mf">1e6</span><span class="p">,</span><span class="mf">2e6</span><span class="p">]</span>
-<span class="n">Aiso0</span><span class="o">=</span><span class="mf">.75e6</span>
-<span class="n">ex0</span><span class="o">.</span><span class="n">set_inter</span><span class="p">(</span><span class="s1">&#39;hyperfine&#39;</span><span class="p">,</span><span class="n">i0</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">i1</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">Axx</span><span class="o">=</span><span class="n">Adip</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">+</span><span class="n">Aiso0</span><span class="p">,</span><span class="n">Ayy</span><span class="o">=</span><span class="n">Adip</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">+</span><span class="n">Aiso0</span><span class="p">,</span><span class="n">Azz</span><span class="o">=</span><span class="n">Adip</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">+</span><span class="n">Aiso0</span><span class="p">)</span>
-<span class="n">ex1</span><span class="o">=</span><span class="n">ex0</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
-<span class="n">Aiso1</span><span class="o">=</span><span class="mf">.25e6</span>
-<span class="n">ex1</span><span class="o">.</span><span class="n">set_inter</span><span class="p">(</span><span class="s1">&#39;hyperfine&#39;</span><span class="p">,</span><span class="n">i0</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">i1</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">Axx</span><span class="o">=</span><span class="n">Adip</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">+</span><span class="n">Aiso1</span><span class="p">,</span><span class="n">Ayy</span><span class="o">=</span><span class="n">Adip</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">+</span><span class="n">Aiso1</span><span class="p">,</span><span class="n">Azz</span><span class="o">=</span><span class="n">Adip</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">+</span><span class="n">Aiso1</span><span class="p">,</span><span class="n">euler</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">/</span><span class="mi">8</span><span class="p">,</span><span class="mi">0</span><span class="p">])</span>
-
-<span class="n">L</span><span class="o">=</span><span class="n">sl</span><span class="o">.</span><span class="n">Liouvillian</span><span class="p">(</span><span class="n">ex0</span><span class="p">,</span><span class="n">ex1</span><span class="p">)</span>
-<span class="n">L</span><span class="o">.</span><span class="n">kex</span><span class="o">=</span><span class="n">sl</span><span class="o">.</span><span class="n">Tools</span><span class="o">.</span><span class="n">twoSite_kex</span><span class="p">(</span><span class="n">tc</span><span class="o">=</span><span class="mf">1e-12</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ex0</span><span class="o">.</span><span class="n">pwdavg</span><span class="o">=</span><span class="mi">2</span>
+<span class="n">L</span><span class="o">.</span><span class="n">clear_cache</span><span class="p">()</span> <span class="c1">#Don&#39;t forget after editing ex0!</span>
 <span class="n">L</span><span class="o">.</span><span class="n">add_relax</span><span class="p">(</span><span class="s1">&#39;DynamicThermal&#39;</span><span class="p">)</span>
 
-<span class="n">gavg</span><span class="o">=</span><span class="p">(</span><span class="mf">2.0027</span><span class="o">+</span><span class="mf">2.0031</span><span class="o">+</span><span class="mf">2.0034</span><span class="p">)</span><span class="o">/</span><span class="mi">3</span>
-<span class="n">ge</span><span class="o">=</span><span class="n">sl</span><span class="o">.</span><span class="n">Constants</span><span class="p">[</span><span class="s1">&#39;ge&#39;</span><span class="p">]</span>
-
-<span class="n">seq</span><span class="o">=</span><span class="n">L</span><span class="o">.</span><span class="n">Sequence</span><span class="p">()</span><span class="o">.</span><span class="n">add_channel</span><span class="p">(</span><span class="s1">&#39;e&#39;</span><span class="p">,</span><span class="n">v1</span><span class="o">=</span><span class="mf">5e6</span><span class="p">,</span><span class="n">voff</span><span class="o">=</span><span class="n">ex0</span><span class="o">.</span><span class="n">v0</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">*</span><span class="p">(</span><span class="n">gavg</span><span class="o">-</span><span class="n">ge</span><span class="p">)</span><span class="o">/</span><span class="n">ge</span><span class="p">)</span>  <span class="c1">#1 MHz irradiating field</span>
 
 <span class="n">U</span><span class="o">=</span><span class="n">LFrf</span><span class="p">(</span><span class="n">seq</span><span class="p">)</span><span class="o">.</span><span class="n">U</span><span class="p">()</span>
 
@@ -749,7 +748,7 @@ Completed
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;AxesSubplot:xlabel=&#39;t / s&#39;, ylabel=&#39;&lt;Op&gt;&#39;&gt;
 </pre></div>
 </div>
-<img alt="../_images/b45d5049db68cdfecc57f5c1993094fa8cdaa02addd1da5bf064a5cf940d5b9d.png" src="../_images/b45d5049db68cdfecc57f5c1993094fa8cdaa02addd1da5bf064a5cf940d5b9d.png" />
+<img alt="../_images/cb920e880afe0fe5490a8a2ae2ee70366485c995f16ef00c178ab641948a8448.png" src="../_images/cb920e880afe0fe5490a8a2ae2ee70366485c995f16ef00c178ab641948a8448.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -759,7 +758,7 @@ Completed
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Enhancement: -91.9
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Enhancement: -93.0
 </pre></div>
 </div>
 </div>
@@ -783,12 +782,12 @@ Completed
 
 <span class="n">Gamma</span><span class="o">=-</span><span class="n">rho</span><span class="o">.</span><span class="n">I</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">real</span><span class="o">/</span><span class="n">rho</span><span class="o">.</span><span class="n">t_axis</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
 
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Predicted Enhancement : </span><span class="si">{</span><span class="n">Gamma</span><span class="o">/</span><span class="n">R1H</span><span class="o">*</span><span class="n">sl</span><span class="o">.</span><span class="n">Tools</span><span class="o">.</span><span class="n">NucInfo</span><span class="p">(</span><span class="s2">&quot;e&quot;</span><span class="p">)</span><span class="o">/</span><span class="n">sl</span><span class="o">.</span><span class="n">Tools</span><span class="o">.</span><span class="n">NucInfo</span><span class="p">(</span><span class="s2">&quot;1H&quot;</span><span class="p">)</span><span class="si">:</span><span class="s1">.1f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Predicted Enhancement : </span><span class="si">{</span><span class="mi">1</span><span class="o">+</span><span class="n">Gamma</span><span class="o">/</span><span class="n">R1H</span><span class="o">*</span><span class="n">sl</span><span class="o">.</span><span class="n">Tools</span><span class="o">.</span><span class="n">NucInfo</span><span class="p">(</span><span class="s2">&quot;e&quot;</span><span class="p">)</span><span class="o">/</span><span class="n">sl</span><span class="o">.</span><span class="n">Tools</span><span class="o">.</span><span class="n">NucInfo</span><span class="p">(</span><span class="s2">&quot;1H&quot;</span><span class="p">)</span><span class="si">:</span><span class="s1">.1f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Predicted Enhancement : -93.0
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Predicted Enhancement : -92.0
 </pre></div>
 </div>
 </div>

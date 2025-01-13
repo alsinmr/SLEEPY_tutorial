@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Dipolar Assisted Rotary Resonance &#8212; SLEEPY Tutorial</title>
+    <title>Understanding DARR with simulation &#8212; SLEEPY Tutorial</title>
   
   
   
@@ -203,7 +203,7 @@
 <li class="toctree-l2"><a class="reference internal" href="Ch3_DIPSHIFT.html"><font color="#0093AF">DIPSHIFT</font></a></li>
 <li class="toctree-l2"><a class="reference internal" href="Ch3_RECRR.html"><font color="#0093AF">Relaxation in complex sequences: RECRR</font></a></li>
 <li class="toctree-l2"><a class="reference internal" href="Ch3_T1_NOE.html"><font color="#0093AF"><span class="math notranslate nohighlight">\(T_1\)</span> and Nuclear Overhauser Effect</font></a></li>
-<li class="toctree-l2 current active"><a class="current reference internal" href="#"><font color="#0093AF">Dipolar Assisted Rotary Resonance</font></a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#"><font color="#0093AF">Understanding DARR with simulation</font></a></li>
 <li class="toctree-l2"><a class="reference internal" href="Ch3_Quad.html"><font color="#0093AF">Quadrupolar phenomena</font></a></li>
 </ul>
 </details></li>
@@ -404,7 +404,7 @@
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1><font  color = "#0093AF">Dipolar Assisted Rotary Resonance</font></h1>
+    <h1><font  color = "#0093AF">Understanding DARR with simulation</font></h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -439,12 +439,11 @@
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="dipolar-assisted-rotary-resonance">
-<h1><font  color = "#0093AF">Dipolar Assisted Rotary Resonance</font><a class="headerlink" href="#dipolar-assisted-rotary-resonance" title="Link to this heading">#</a></h1>
+  <section class="tex2jax_ignore mathjax_ignore" id="understanding-darr-with-simulation">
+<h1><font  color = "#0093AF">Understanding DARR with simulation</font><a class="headerlink" href="#understanding-darr-with-simulation" title="Link to this heading">#</a></h1>
 <p><a href="https://githubtocolab.com/alsinmr/SLEEPY_tutorial/blob/main/ColabNotebooks/Chapter3/Ch3_DARR.ipynb" target="_blank"><img src="https://colab.research.google.com/assets/colab-badge.svg"></a></p>
-<p>While SLEEPY is mainly intended for predicting relaxation behavior or the influence of relaxation on a spin-system, some NMR experiments rely on spin-diffusion within the dense <span class="math notranslate nohighlight">\(^1\)</span>H network to induce broadening on heteronuclei which then allows spin-diffusion among the heteronuclei. The prime examples of this is the Proton-Driven Spin-
-Diffusion experiment (PDSD) and the Dipolar Assisted Rotational Resonance (DARR) experiments.</p>
-<p>DARR is the homonuclear (<span class="math notranslate nohighlight">\(^{13}\)</span>C-<span class="math notranslate nohighlight">\(^{13}\)</span>C) transfer of longitudinal magnetization, enabled by broadening of the Rotary Resonance (R<span class="math notranslate nohighlight">\(^2\)</span>) condition. Broadening of the <span class="math notranslate nohighlight">\(R^2\)</span> condition is achieved via reintroduction of a heteronuclear dipole coupling (<span class="math notranslate nohighlight">\(^1\)</span>H-<span class="math notranslate nohighlight">\(^{13}\)</span>C) to the homonuclear spins by satisfying the Rotary Resonance Recoupling (R<span class="math notranslate nohighlight">\(^3\)</span>) condition.</p>
+<p>While SLEEPY is mainly intended for predicting relaxation behavior or observing the influence of relaxation on a spin-system, it is also useful for simplifying other experiments by replacing diffusion-like behavior resulting from many spins with an artificial diffusion term in the Liouvillian. For example, some NMR experiments rely on spin-diffusion within the dense <span class="math notranslate nohighlight">\(^1\)</span>H network to induce broadening on heteronuclei which then drives spin-diffusion among the heteronuclei. The prime examples of this are the Proton-Driven Spin-Diffusion experiment (PDSD) and the Dipolar Assisted Rotational Resonance (DARR) experiments.</p>
+<p>DARR is the homonuclear (<span class="math notranslate nohighlight">\(^{13}\)</span>C-<span class="math notranslate nohighlight">\(^{13}\)</span>C) transfer of longitudinal magnetization, enabled by broadening of the Rotary Resonance (R<span class="math notranslate nohighlight">\(^2\)</span>) condition. Broadening of the R<span class="math notranslate nohighlight">\(^2\)</span> condition is achieved via reintroduction of a heteronuclear dipole coupling (<span class="math notranslate nohighlight">\(^1\)</span>H-<span class="math notranslate nohighlight">\(^{13}\)</span>C) to the homonuclear spins by satisfying the Rotary Resonance Recoupling (R<span class="math notranslate nohighlight">\(^3\)</span>) condition.</p>
 <p>We will achieve a DARR transfer by artificially broadening the <span class="math notranslate nohighlight">\(^1H\)</span> line using relaxation settings in SLEEPY. Note that it is also possible to introduce a large number of <span class="math notranslate nohighlight">\(^1\)</span>H spins (10) which will also give rise to the required broadening. The latter approach has been demonstrated in <a class="reference external" href="https://spinevolution.com/">SpinEvolution</a> by Veshtort and Griffin.</p>
 <p>We will take several steps to piece together the DARR experiment.</p>
 <p><strong>A. Static experiments</strong></p>
@@ -533,14 +532,11 @@ Diffusion experiment (PDSD) and the Dipolar Assisted Rotational Resonance (DARR)
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ax</span><span class="o">=</span><span class="n">rho_spec</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">FT</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">apodize</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">set_xlim</span><span class="p">([</span><span class="o">-</span><span class="mi">1000</span><span class="p">,</span><span class="mi">1000</span><span class="p">])</span>
+<span class="n">_</span><span class="o">=</span><span class="n">ax</span><span class="o">.</span><span class="n">set_xlim</span><span class="p">([</span><span class="o">-</span><span class="mi">1000</span><span class="p">,</span><span class="mi">1000</span><span class="p">])</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(-1000.0, 1000.0)
-</pre></div>
-</div>
 <img alt="../_images/c0a42db17153a482be30fd3425208d0448136c0528378e4aa9c7f23088cd8a8c.png" src="../_images/c0a42db17153a482be30fd3425208d0448136c0528378e4aa9c7f23088cd8a8c.png" />
 </div>
 </div>
@@ -562,21 +558,18 @@ detect[1]: S1z
 Current time is 12000.000 microseconds
 600 time points have been recorded
 
-&lt;SLEEPY.Rho.Rho object at 0x7fdc883a26d8&gt;
+&lt;SLEEPY.Rho.Rho object at 0x7f89f83caa58&gt;
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">rho_zz</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">_</span><span class="o">=</span><span class="n">rho_zz</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;AxesSubplot:xlabel=&#39;t / ms&#39;, ylabel=&#39;&lt;Op&gt;&#39;&gt;
-</pre></div>
-</div>
 <img alt="../_images/d52349ebae9469a361c791f124960cd40e7d88f7cc1085112d81067f84b1d2fb.png" src="../_images/d52349ebae9469a361c791f124960cd40e7d88f7cc1085112d81067f84b1d2fb.png" />
 </div>
 </div>
@@ -714,14 +707,11 @@ Current time is 12000.000 microseconds
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">rho_zz</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="s1">&#39;ms&#39;</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">_</span><span class="o">=</span><span class="n">rho_zz</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="s1">&#39;ms&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;AxesSubplot:xlabel=&#39;t / ms&#39;, ylabel=&#39;&lt;Op&gt;&#39;&gt;
-</pre></div>
-</div>
 <img alt="../_images/867db86c290455478d4905beb9ab0f658c4636648fc3a3fa6fa313c684ed67e6.png" src="../_images/867db86c290455478d4905beb9ab0f658c4636648fc3a3fa6fa313c684ed67e6.png" />
 </div>
 </div>
@@ -824,7 +814,7 @@ State-space reduction: 64-&gt;12
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/3ccb901030d61fbd5bccf630ae6fdce73691e577d1111a7f5a3818a48cad500a.png" src="../_images/3ccb901030d61fbd5bccf630ae6fdce73691e577d1111a7f5a3818a48cad500a.png" />
+<img alt="../_images/badd0ea647c683b948ccfe2467263aa6e36fbf15d75c6b52728d43f21dc40300.png" src="../_images/badd0ea647c683b948ccfe2467263aa6e36fbf15d75c6b52728d43f21dc40300.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -834,7 +824,7 @@ State-space reduction: 64-&gt;12
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/62e2f214df645ae082051b4c489252602a2847b27502d078c87249d67855c788.png" src="../_images/62e2f214df645ae082051b4c489252602a2847b27502d078c87249d67855c788.png" />
+<img alt="../_images/2e5ba3f84d0ea1670acc7c1600341524c10202f8610720830f3c88cc41715da8.png" src="../_images/2e5ba3f84d0ea1670acc7c1600341524c10202f8610720830f3c88cc41715da8.png" />
 </div>
 </div>
 </section>
@@ -960,14 +950,11 @@ Prop: 2 steps per every 1 rotor period
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">rho_zz</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">_</span><span class="o">=</span><span class="n">rho_zz</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;AxesSubplot:xlabel=&#39;t / ms&#39;, ylabel=&#39;&lt;Op&gt;&#39;&gt;
-</pre></div>
-</div>
 <img alt="../_images/dbd2301f362b637af3f39a7b7f16947a3551235171e15befd64dc6d859d74055.png" src="../_images/dbd2301f362b637af3f39a7b7f16947a3551235171e15befd64dc6d859d74055.png" />
 </div>
 </div>
@@ -1216,7 +1203,7 @@ Prop: 5 steps per every 1 rotor period
 <img alt="../_images/38b7914ef203595341454361a026692082ec8bd64721f09a2338823ab59fa147.png" src="../_images/38b7914ef203595341454361a026692082ec8bd64721f09a2338823ab59fa147.png" />
 </div>
 </div>
-<p>Then, we see how broadening the C-C <span class="math notranslate nohighlight">\(R^2\)</span> condition via recoupling the H–C dipole coupling with <span class="math notranslate nohighlight">\(R^3\)</span> allows for C-C spin-diffusion to occur. This is also a convenient way to achieve the required broadening, since to recover an unbroadened spectrum, we must simply remove the field from the <span class="math notranslate nohighlight">\(^1\)</span>H channel (or better yet, apply heteronuclear decoupling).</p>
+<p>Then, we see how broadening the C-C R<span class="math notranslate nohighlight">\(^2\)</span> condition via recoupling the H–C dipole coupling with R<span class="math notranslate nohighlight">\(^3\)</span> allows for C-C spin-diffusion to occur. This is also a convenient way to achieve the required broadening, since to recover an unbroadened spectrum, we must simply remove the field from the <span class="math notranslate nohighlight">\(^1\)</span>H channel (or better yet, apply heteronuclear decoupling).</p>
 </section>
 </section>
 </section>

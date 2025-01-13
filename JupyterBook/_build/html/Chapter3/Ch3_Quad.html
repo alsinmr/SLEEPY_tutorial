@@ -67,7 +67,7 @@
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Dynamic Nuclear Polarization" href="../Ch4_DNP.html" />
-    <link rel="prev" title="Dipolar Assisted Rotary Resonance" href="Ch3_DARR.html" />
+    <link rel="prev" title="Understanding DARR with simulation" href="Ch3_DARR.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   <meta name="docsearch:version" content="" />
@@ -203,7 +203,7 @@
 <li class="toctree-l2"><a class="reference internal" href="Ch3_DIPSHIFT.html"><font color="#0093AF">DIPSHIFT</font></a></li>
 <li class="toctree-l2"><a class="reference internal" href="Ch3_RECRR.html"><font color="#0093AF">Relaxation in complex sequences: RECRR</font></a></li>
 <li class="toctree-l2"><a class="reference internal" href="Ch3_T1_NOE.html"><font color="#0093AF"><span class="math notranslate nohighlight">\(T_1\)</span> and Nuclear Overhauser Effect</font></a></li>
-<li class="toctree-l2"><a class="reference internal" href="Ch3_DARR.html"><font color="#0093AF">Dipolar Assisted Rotary Resonance</font></a></li>
+<li class="toctree-l2"><a class="reference internal" href="Ch3_DARR.html"><font color="#0093AF">Understanding DARR with simulation</font></a></li>
 <li class="toctree-l2 current active"><a class="current reference internal" href="#"><font color="#0093AF">Quadrupolar phenomena</font></a></li>
 </ul>
 </details></li>
@@ -433,8 +433,8 @@
 <h1><font  color = "#0093AF">Quadrupolar phenomena</font><a class="headerlink" href="#quadrupolar-phenomena" title="Link to this heading">#</a></h1>
 <p><a href="https://githubtocolab.com/alsinmr/SLEEPY_tutorial/blob/main/ColabNotebooks/Chapter3/Ch3_Quad.ipynb" target="_blank"><img src="https://colab.research.google.com/assets/colab-badge.svg"></a></p>
 <p>SLEEPY can be used to simulate quadrupolar nuclei, both in the rotating and lab frames. We start with an example on deuterium in exchange.</p>
-<p>Membrane properties are often characterized by measurement of residual dipole or quadrupole couplings. For example, the <span class="math notranslate nohighlight">\(^2\)</span>H quadrupole spliting (difference between maxima) in a membrane aliphatic chain is approximately 167 kHz when rigid, but symmetric rotation about the membrane normal already reduces that value by half. Additional motion reduces this value further, yielding a order parameters (scaling factors) fro 0.01-0.2 in pure POPC.</p>
-<p>In more complex membranes, it can be the case that lipids exchange environments, leading to complex lineshapes coming from both environments, with potential broadening depending on the rate of exchange. Here, we simulate a deuterium nuclei, with exchange of the quadrupole coupling.</p>
+<p>Membrane properties are often characterized by measurement of residual dipole or quadrupole couplings. For example, the <span class="math notranslate nohighlight">\(^2\)</span>H quadrupole spliting (difference between maxima) in a membrane aliphatic chain is approximately 167 kHz when rigid, but symmetric rotation about the membrane normal already reduces that value by half. Additional motion reduces this value further, yielding order parameters (scaling factors) from 0.01-0.2 in pure POPC.</p>
+<p>In more complex membranes, it can be the case that lipids exchange environments, leading to complex lineshapes coming from both environments, with potential broadening depending on the rate of exchange. Here, we simulate a deuterium nucleus, with exchange of the quadrupole coupling.</p>
 <section id="setup">
 <h2>Setup<a class="headerlink" href="#setup" title="Link to this heading">#</a></h2>
 <div class="cell docutils container">
@@ -481,7 +481,7 @@
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>State-space reduction: 18-&gt;4
 </pre></div>
 </div>
-<img alt="../_images/ede9de4cc4c52de7595dc3f25e56c89bebe46b16a6fa12087045aa7ff1c00112.png" src="../_images/ede9de4cc4c52de7595dc3f25e56c89bebe46b16a6fa12087045aa7ff1c00112.png" />
+<img alt="../_images/666d26bcdfc0ffe650c5bf326d48629d03ab79472203b45c08b0cfddbc75a54f.png" src="../_images/666d26bcdfc0ffe650c5bf326d48629d03ab79472203b45c08b0cfddbc75a54f.png" />
 </div>
 </div>
 <p>Note the behavior at the central frequency comes from couplings oriented near the magic angle, where the change in the size of the quadrupole coupling has little influence on the resonance frequency, and so very little relaxation is induced at these orientations.</p>
@@ -518,7 +518,7 @@
 State-space reduction: 18-&gt;4
 </pre></div>
 </div>
-<img alt="../_images/cf01216dd95fc7e76423c25d2e10942ad2a921b1a5cb129a995f4dd826cbdf4a.png" src="../_images/cf01216dd95fc7e76423c25d2e10942ad2a921b1a5cb129a995f4dd826cbdf4a.png" />
+<img alt="../_images/ad1a37807fb7a5f42f2640038973486dd5508896e75fe126569327f939f7faf7.png" src="../_images/ad1a37807fb7a5f42f2640038973486dd5508896e75fe126569327f939f7faf7.png" />
 </div>
 </div>
 </section>
@@ -637,7 +637,7 @@ Prop: 32 steps per every 1 rotor period
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title"><font  color = "#0093AF">Dipolar Assisted Rotary Resonance</font></p>
+        <p class="prev-next-title"><font  color = "#0093AF">Understanding DARR with simulation</font></p>
       </div>
     </a>
     <a class="right-next"

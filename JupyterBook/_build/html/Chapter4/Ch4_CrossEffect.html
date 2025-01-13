@@ -203,7 +203,7 @@
 <li class="toctree-l2"><a class="reference internal" href="../Chapter3/Ch3_DIPSHIFT.html"><font color="#0093AF">DIPSHIFT</font></a></li>
 <li class="toctree-l2"><a class="reference internal" href="../Chapter3/Ch3_RECRR.html"><font color="#0093AF">Relaxation in complex sequences: RECRR</font></a></li>
 <li class="toctree-l2"><a class="reference internal" href="../Chapter3/Ch3_T1_NOE.html"><font color="#0093AF"><span class="math notranslate nohighlight">\(T_1\)</span> and Nuclear Overhauser Effect</font></a></li>
-<li class="toctree-l2"><a class="reference internal" href="../Chapter3/Ch3_DARR.html"><font color="#0093AF">Dipolar Assisted Rotary Resonance</font></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Chapter3/Ch3_DARR.html"><font color="#0093AF">Understanding DARR with simulation</font></a></li>
 <li class="toctree-l2"><a class="reference internal" href="../Chapter3/Ch3_Quad.html"><font color="#0093AF">Quadrupolar phenomena</font></a></li>
 </ul>
 </details></li>
@@ -443,7 +443,7 @@
   <section class="tex2jax_ignore mathjax_ignore" id="cross-effect">
 <h1><font  color = "#0093AF">Cross-Effect</font><a class="headerlink" href="#cross-effect" title="Link to this heading">#</a></h1>
 <p><a href="https://githubtocolab.com/alsinmr/SLEEPY_tutorial/blob/main/ColabNotebooks/Chapter4/Ch4_CrossEffect.ipynb" target="_blank"><img src="https://colab.research.google.com/assets/colab-badge.svg"></a></p>
-<p>The cross-effect<span class="math notranslate nohighlight">\(^{1,2}\)</span> is a particularly popular approach to DNP enhancement, where two coupled electrons with resonance frequencies separated by the nuclear Larmor frequency undergo a three-spin flip with the electron.</p>
+<p>The cross-effect<span class="math notranslate nohighlight">\(^{1,2}\)</span> is a powerful approach to DNP enhancement, where two coupled electrons with resonance frequencies separated by the nuclear Larmor frequency undergo a three-spin flip with the electron.</p>
 <div class="math notranslate nohighlight">
 \[
 \begin{equation}
@@ -451,7 +451,7 @@
 \end{equation}
 \]</div>
 <p>Enhancement on the nucleus is induced if the polarization of the two electrons is different. This is achieved by applying a saturating field to the electrons, such that one becomes more saturated than the other.</p>
-<p>Most orientations of electron pairs in the sample do not match the above condition, however, magic angle spinning will bring most crystallites through the cross-effect matching condition at some point in the rotor period,<span class="math notranslate nohighlight">\(^3\)</span> allowing cross effect to be an effective mechanism of enhancement. However, MAS will cause both electrons to get saturated at various points during the rotor period, and electron-electron transfer without involving the nucleus occurs when the two electrons have the same resonance frequency at some point during the rotor period. We investigate these various processes here.</p>
+<p>Most orientations of electron pairs in the sample do not match the above condition, however, magic angle spinning will bring most crystallites through the cross-effect matching condition at some point in the rotor period,<span class="math notranslate nohighlight">\(^3\)</span> allowing cross effect to be an effective mechanism of enhancement. Other processes also occur: MAS will cause both electrons to get saturated at various points during the rotor period, and electron-electron transfer without involving the nucleus occurs when the two electrons have the same resonance frequency at some point during the rotor period. We investigate these various processes here.</p>
 <p>[1] A.V. Kessenikh, V.L. Luschikov, A.A. Manenkov, Y. Taran. <em>Sov. Phys. Solid State</em>, <strong>1963</strong>, 6, 321-329</p>
 <p>[2] C.F. Hwang, D.A. Hill. <a class="reference external" href="https://doi.org/10.1103/PhysRevLett.19.1011"><em>Phys. Rev. Lett.</em></a>, <strong>1967</strong>, 19, 1011-1014.</p>
 <p>[3] K.R. Thurber, R. Tycko. <a class="reference external" href="https://doi.org/10.1063/1.4747449"><em>J. Chem. Phys.</em></a>, <strong>2012</strong>, 137, 084508.</p>
@@ -470,7 +470,7 @@
 </section>
 <section id="calculate-a-spectrum-of-one-crystallite-under-mas">
 <h2>Calculate a spectrum of one crystallite under MAS<a class="headerlink" href="#calculate-a-spectrum-of-one-crystallite-under-mas" title="Link to this heading">#</a></h2>
-<p>Something important to understand about cross-effect (and simulating it) is that by spinning the sample at a frequency much slower than the variation of the electron resonance frequency, we sample different resonance frequencies during one rotor period. In our example here, the electron covers a range of frequencies about 600 MHz broad. Then, MAS does not achieve averaging of the frequencies, but rather results in a broad spectrum of frequencies for single orientations.</p>
+<p>Something important to understand about cross-effect (and simulating it) is that by spinning the sample at a frequency much slower than the range of the electron resonance frequencies sampled during the rotor period, we do not average the electron resonance frequence. Instead, we sample many different frequencies. In our example here, the electron covers a range of frequencies about 600 MHz broad. This results in a broad spectrum of frequencies for single orientations.</p>
 <p>A few important points:</p>
 <ol class="arabic simple">
 <li><p>In reality, the sampling of frequencies by MAS is continuous, but in simulation it is discretized. Then, narrow conditions may be missed in simulation that would be briefly met in reality. This can be dealt with by increasing the number of gamma angles, or by decreasing <span class="math notranslate nohighlight">\(T_2\)</span> which should broaden conditions.</p></li>
@@ -510,7 +510,7 @@
 Prop: 10000 steps per every 1 rotor period
 </pre></div>
 </div>
-<img alt="../_images/14de48d01e39c6d23613d231970a6f35cbd63f65930367d9f7fba23de3283afc.png" src="../_images/14de48d01e39c6d23613d231970a6f35cbd63f65930367d9f7fba23de3283afc.png" />
+<img alt="../_images/e7d471166eed75383df8f1dc289ce012608d26c93f342ce073a9ad2edd6ddf3f.png" src="../_images/e7d471166eed75383df8f1dc289ce012608d26c93f342ce073a9ad2edd6ddf3f.png" />
 </div>
 </div>
 <p>Then, we obtain a broad spectrum from the single orientation, but its phase is random. We can plot the power spectrum to get a better view (there is no built-in function for this, but it is trivial to obtain, since the Fourier-transformed spectrum is in <code class="docutils literal notranslate"><span class="pre">rho.FT</span></code>). Note that this does not yield the static spectrum; this would require an average over <span class="math notranslate nohighlight">\(\beta\)</span>-angles.</p>
@@ -528,7 +528,7 @@ Prop: 10000 steps per every 1 rotor period
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Text(0.5, 0, &#39;\\nu / MHz&#39;)
 </pre></div>
 </div>
-<img alt="../_images/f2ee6fdeaba6b24e119958f9e5f5b8eed0726a8fea10b44693933e3fc03e273b.png" src="../_images/f2ee6fdeaba6b24e119958f9e5f5b8eed0726a8fea10b44693933e3fc03e273b.png" />
+<img alt="../_images/44811871c78f3a511b11171134a569905a74751528a99740d677aef1864eb75b.png" src="../_images/44811871c78f3a511b11171134a569905a74751528a99740d677aef1864eb75b.png" />
 </div>
 </div>
 </section>
@@ -538,7 +538,7 @@ Prop: 10000 steps per every 1 rotor period
 <h3>Build the System<a class="headerlink" href="#build-the-system" title="Link to this heading">#</a></h3>
 <p>It is also important to put the nucleus, but not the electrons, in the lab frame for cross-effect to occur. Some broadening on the electrons is also important, since the cross-effect condition is otherwise too narrow and will be missed during the rotor period.</p>
 <p>In the first simulation, we will just look at one rotor period to observe the cross-effect transfer. Note that <span class="math notranslate nohighlight">\(T_2\)</span> relaxation added to the nucleus should be applied with the orientation-specific option (<code class="docutils literal notranslate"><span class="pre">OS=True</span></code>), since the nucleus is tipped away from the z-axis. If this is not used, some of the <span class="math notranslate nohighlight">\(T_2\)</span> relaxation will be applied to the nuclear polarization.</p>
-<p>Note that we take some parameters from Thurber and Tycko.<span class="math notranslate nohighlight">\(^1\)</span></p>
+<p>We take some parameters from Thurber and Tycko.<span class="math notranslate nohighlight">\(^1\)</span></p>
 <p>[1] K.R. Thurber, R. Tycko. <a class="reference external" href="https://doi.org/10.1063/1.4747449"><em>J. Chem. Phys.</em></a>, <strong>2012</strong>, 137, 084508.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -568,7 +568,7 @@ Prop: 10000 steps per every 1 rotor period
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">seq</span><span class="o">=</span><span class="n">L</span><span class="o">.</span><span class="n">Sequence</span><span class="p">()</span><span class="o">.</span><span class="n">add_channel</span><span class="p">(</span><span class="s1">&#39;e&#39;</span><span class="p">,</span><span class="n">v1</span><span class="o">=</span><span class="mf">500e3</span><span class="p">,</span><span class="n">voff</span><span class="o">=-</span><span class="mf">50e6</span><span class="p">)</span>
 
-<span class="n">ON</span><span class="o">=</span><span class="n">sl</span><span class="o">.</span><span class="n">Rho</span><span class="p">(</span><span class="s1">&#39;ez&#39;</span><span class="p">,[</span><span class="s1">&#39;S0z&#39;</span><span class="p">,</span><span class="s1">&#39;S1z&#39;</span><span class="p">,</span><span class="s1">&#39;1Hz&#39;</span><span class="p">])</span>
+<span class="n">ON</span><span class="o">=</span><span class="n">sl</span><span class="o">.</span><span class="n">Rho</span><span class="p">(</span><span class="s1">&#39;Thermal&#39;</span><span class="p">,[</span><span class="s1">&#39;S0z&#39;</span><span class="p">,</span><span class="s1">&#39;S1z&#39;</span><span class="p">,</span><span class="s1">&#39;1Hz&#39;</span><span class="p">])</span>
 <span class="n">_</span><span class="o">=</span><span class="n">ON</span><span class="o">.</span><span class="n">DetProp</span><span class="p">(</span><span class="n">seq</span><span class="p">,</span><span class="n">n</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span><span class="n">n_per_seq</span><span class="o">=</span><span class="mi">1000</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -606,7 +606,7 @@ Prop: 10000 steps per every 1 rotor period
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/6cd5661ab5c78b305b0d88b7fc77ac77a5a33f43f17cf3e239e5a8300539683d.png" src="../_images/6cd5661ab5c78b305b0d88b7fc77ac77a5a33f43f17cf3e239e5a8300539683d.png" />
+<img alt="../_images/2758e6e305dd7dfcffdd6b48a6da834eddf3b9bfe2e3b55f5af320fb90b7b1c5.png" src="../_images/2758e6e305dd7dfcffdd6b48a6da834eddf3b9bfe2e3b55f5af320fb90b7b1c5.png" />
 </div>
 </div>
 <p>In the above plots, we can see where cross effect occurs based on where the <span class="math notranslate nohighlight">\(^1\)</span>H polarization changes (upper left). The largest such event is marked by a dashed line in all plots. In the upper right plot, we see the behavior of the two electrons. The first event in this plot is partial saturation of <span class="math notranslate nohighlight">\(\langle S_{1z}\rangle\)</span>. This is followed closely by an exchange of magnetization between the two electrons, where <span class="math notranslate nohighlight">\(\omega_{e1}=\omega_{e2}\)</span>. Next, saturation of <span class="math notranslate nohighlight">\(\langle S_{0z}\rangle\)</span> occurs, followed by the first cross effect event, marked by a dashed line. This event is zoomed in on in the lower two plots. A second cross-effect event occurs next. The final event is further saturation of <span class="math notranslate nohighlight">\(\langle S_{1z}\rangle\)</span>.</p>
@@ -617,7 +617,7 @@ Prop: 10000 steps per every 1 rotor period
 <h2>Polarization build up over many rotor cycles<a class="headerlink" href="#polarization-build-up-over-many-rotor-cycles" title="Link to this heading">#</a></h2>
 <section id="add-t-1-relaxation">
 <h3>Add <span class="math notranslate nohighlight">\(T_1\)</span> relaxation<a class="headerlink" href="#add-t-1-relaxation" title="Link to this heading">#</a></h3>
-<p>Don’t forget to use <code class="docutils literal notranslate"><span class="pre">OS=True</span></code> to ensure correct relaxation of the mixed nuclear states. We also need thermal recovery for DNP enhancement to occur (<code class="docutils literal notranslate"><span class="pre">Thermal=True</span></code>).</p>
+<p>Don’t forget to use <code class="docutils literal notranslate"><span class="pre">OS=True</span></code> to ensure correct relaxation of the mixed nuclear states. We also need thermalization for DNP enhancement to occur (<code class="docutils literal notranslate"><span class="pre">Thermal=True</span></code>).</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">L</span><span class="o">.</span><span class="n">add_relax</span><span class="p">(</span><span class="s1">&#39;T1&#39;</span><span class="p">,</span><span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">T1</span><span class="o">=</span><span class="mf">250e-6</span><span class="p">,</span><span class="n">OS</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">Thermal</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
@@ -652,7 +652,7 @@ Prop: 10000 steps per every 1 rotor period
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;AxesSubplot:xlabel=&#39;t / ms&#39;, ylabel=&#39;&lt;$^{1}H_z$&gt;&#39;&gt;
 </pre></div>
 </div>
-<img alt="../_images/978411b2bfabcf655503a05d20dbe7046fa52438357fd46b2b1b62dfcadbbaa1.png" src="../_images/978411b2bfabcf655503a05d20dbe7046fa52438357fd46b2b1b62dfcadbbaa1.png" />
+<img alt="../_images/1e78e60a676bf4e6e0993ed1b87c7c7119bd5cf85da691a6fd3e6b5b0c52b4fb.png" src="../_images/1e78e60a676bf4e6e0993ed1b87c7c7119bd5cf85da691a6fd3e6b5b0c52b4fb.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -692,7 +692,7 @@ Prop: 10000 steps per every 1 rotor period
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;AxesSubplot:xlabel=&#39;t / ms&#39;, ylabel=&#39;&lt;$^{1}H_z$&gt;&#39;&gt;
 </pre></div>
 </div>
-<img alt="../_images/3babf7180602633bfab786263fd35272c0dd8fc0ace5bc8b87e7ca9dc1d41fbd.png" src="../_images/3babf7180602633bfab786263fd35272c0dd8fc0ace5bc8b87e7ca9dc1d41fbd.png" />
+<img alt="../_images/845dde45697a30a1e8c3c4b49b35b5ce8508c827a333f5de86153409ace7fe61.png" src="../_images/845dde45697a30a1e8c3c4b49b35b5ce8508c827a333f5de86153409ace7fe61.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -709,6 +709,11 @@ Prop: 10000 steps per every 1 rotor period
 </div>
 <p>The <span class="math notranslate nohighlight">\(^1\)</span>H polarization is depleted when no microwave irradiation is applied.</p>
 <p>Then, if the enhancement is determined by comparing on and off signal, we will significantly overestimate the enhancement. This effect can be understood by noting that even without microwave irradiation, the cross effect condition is periodically met, and if the electrons are not at their own thermal equilibrium at that point, then polarization can be lost from the nucleus.</p>
+</section>
+</section>
+<section id="one-rotor-cycle-without-microwaves">
+<h2>One rotor cycle without microwaves<a class="headerlink" href="#one-rotor-cycle-without-microwaves" title="Link to this heading">#</a></h2>
+<p>We simulate one rotor cycle without microwaves to observe the trajectory of the nuclear and electronic magnetization.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">OFF</span><span class="o">=</span><span class="n">sl</span><span class="o">.</span><span class="n">Rho</span><span class="p">(</span><span class="s1">&#39;Thermal&#39;</span><span class="p">,[</span><span class="s1">&#39;S0z&#39;</span><span class="p">,</span><span class="s1">&#39;S1z&#39;</span><span class="p">,</span><span class="s1">&#39;1Hz&#39;</span><span class="p">])</span>
@@ -723,10 +728,6 @@ Prop: 1000 steps per every 1 rotor period
 </div>
 </div>
 </div>
-</section>
-</section>
-<section id="one-rotor-cycle-without-microwaves">
-<h2>One rotor cycle without microwaves<a class="headerlink" href="#one-rotor-cycle-without-microwaves" title="Link to this heading">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ax</span><span class="o">=</span><span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="n">figsize</span><span class="o">=</span><span class="p">[</span><span class="mi">9</span><span class="p">,</span><span class="mi">9</span><span class="p">])[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">flatten</span><span class="p">()</span>
@@ -751,7 +752,7 @@ Prop: 1000 steps per every 1 rotor period
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/d43369dea79a839a78bbb1a8f937c147fcde0f7d9ed732f65f504c7059a7fc3d.png" src="../_images/d43369dea79a839a78bbb1a8f937c147fcde0f7d9ed732f65f504c7059a7fc3d.png" />
+<img alt="../_images/4da69811c4d180aa3071b5769d23e7964b87630f2f0816b7a5399479d83127cc.png" src="../_images/4da69811c4d180aa3071b5769d23e7964b87630f2f0816b7a5399479d83127cc.png" />
 </div>
 </div>
 <p>Above, we see that although no saturating field is applied to the electron, the electron polarization still varies throughout the rotor period. This is partly because the thermal equilibrium for the electron polarization changes throughout the rotor period, which is observed as slow variation of the electron polarization (it is important to use <code class="docutils literal notranslate"><span class="pre">OS=True</span></code> and <code class="docutils literal notranslate"><span class="pre">Thermal=True</span></code> to obtain this behavior), and secondly because when the electrons having matching frequencies, they exchange polarization. Then, due to different electron polarizations, the nucleus will lose polarization when the cross effect condition is matched.</p>

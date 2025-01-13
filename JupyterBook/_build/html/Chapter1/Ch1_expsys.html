@@ -203,7 +203,7 @@
 <li class="toctree-l2"><a class="reference internal" href="../Chapter3/Ch3_DIPSHIFT.html"><font color="#0093AF">DIPSHIFT</font></a></li>
 <li class="toctree-l2"><a class="reference internal" href="../Chapter3/Ch3_RECRR.html"><font color="#0093AF">Relaxation in complex sequences: RECRR</font></a></li>
 <li class="toctree-l2"><a class="reference internal" href="../Chapter3/Ch3_T1_NOE.html"><font color="#0093AF"><span class="math notranslate nohighlight">\(T_1\)</span> and Nuclear Overhauser Effect</font></a></li>
-<li class="toctree-l2"><a class="reference internal" href="../Chapter3/Ch3_DARR.html"><font color="#0093AF">Dipolar Assisted Rotary Resonance</font></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Chapter3/Ch3_DARR.html"><font color="#0093AF">Understanding DARR with simulation</font></a></li>
 <li class="toctree-l2"><a class="reference internal" href="../Chapter3/Ch3_Quad.html"><font color="#0093AF">Quadrupolar phenomena</font></a></li>
 </ul>
 </details></li>
@@ -450,15 +450,15 @@
 <h2>Defining nuclei and experimental conditions<a class="headerlink" href="#defining-nuclei-and-experimental-conditions" title="Link to this heading">#</a></h2>
 <p>The experimental system defines the magnetic field, the nuclei in the spin-system, the spinning rate, the temperature, the rotor angle, the powder average, and the number of gamma angles calculated during one rotor period. Except for the field and nuclei, these all have default values and only need to be provided if other values are needed.</p>
 <ul class="simple">
-<li><p>v0H: The magnetic field strength, given as the <span class="math notranslate nohighlight">\(^1\)</span>H frequency in MHz (required, unless B0 provided)</p></li>
-<li><p>B0: The magnetic field strength in Tesla (required, unless v0H provided)</p></li>
-<li><p>Nucs: List of nuclei, with mass number followed by atomic symbol (‘1H’,’13C’,’2H’, etc.). Electrons may also be included via ‘e-’. To obtain a high-spin electron, start with e and follow with the spin. For example, specifying ‘e1’ would give an electron with spin 1, and ‘e3/2’ or ‘e1.5’ would produce an electron with spin-3/2.</p></li>
-<li><p>T_K: Temperature in Kelvin. Only used if relaxation to thermal equilibrium is used (thermalization), or the density matrix (rho) is initialized with the “thermal” option. Default is 298 K.</p></li>
-<li><p>vr: Spinning frequency in Hz (only used if anisotropic interactions provided). Default is 10000</p></li>
-<li><p>rotor_angle: Rotor angle, in radians. Default is the magic angle</p></li>
-<li><p>n_gamma: Number of gamma angles calculated per rotor period. For string-specified powder averages (i.e. not JCP59 or grid), this is also the number of gamma angles in the powder average. Default is 100</p></li>
-<li><p>pwdavg: Type of powder average. Type sl.PowderAvg.list_powder_types to see options (Most powder averages are taken from <a class="reference external" href="https://inano.au.dk/about/research-centers-and-projects/nmr/software/simpson">SIMPSON</a>). If an integer is provided, then this yields the <a class="reference external" href="https://doi.org/10.1063/1.1680590">JCP59</a> powder average, with higher integers yielding more angles. Default is 3 (JCP59 with 99 angles). Note that if ‘alpha0beta0’,’alpha0beta90’, or ‘alpha0beta45’ are used, then the powder average will automatically switch to gamma_encoded mode, so that only one angle is simulated (otherwise, gamma_encoded defaults to False). This behavior can be overridden by the user simply by setting gamma_encoded.</p></li>
-<li><p>LF: Specifiy whether each spin should be simulated in the lab frame. Can be provided as a single boolean, e.g. False sets all spins in the rotating frame, or as a list the same length as Nucs, which puts some spins in the lab frame and some in the rotating frame (useful, e.g. for DNP experiments such as solid-effect/cross-effect where the electrons should be in the rotating frame, but the nucleus in the lab frame).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">v0H</span></code>: The magnetic field strength, given as the <span class="math notranslate nohighlight">\(^1\)</span>H frequency in MHz (required, unless <code class="docutils literal notranslate"><span class="pre">B0</span></code> provided)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">B0</span></code>: The magnetic field strength in Tesla (required, unless <code class="docutils literal notranslate"><span class="pre">v0H</span></code> provided)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Nucs</span></code>: List of nuclei, with mass number followed by atomic symbol (‘1H’,’13C’,’2H’, etc.). Electrons may also be included via ‘e-’. To obtain a high-spin electron, start with e and follow with the spin. For example, specifying ‘e1’ would give an electron with spin 1, and ‘e3/2’ or ‘e1.5’ would produce an electron with spin-3/2.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">T_K</span></code>: Temperature in Kelvin. Only used if relaxation to thermal equilibrium is used (thermalization), or the density matrix (rho) is initialized with the “thermal” option. Default is 298 K.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">vr</span></code>: Spinning frequency in Hz (only used if anisotropic interactions provided). Default is 10000</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">rotor_angle</span></code>: Rotor angle, in radians. Default is the magic angle</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">n_gamma</span></code> Number of gamma angles calculated per rotor period. For string-specified powder averages (i.e. not JCP59 or grid), this is also the number of gamma angles in the powder average. Default is 100</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">pwdavg</span></code>: Type of powder average. Type sl.PowderAvg.list_powder_types to see options (Most powder averages are taken from <a class="reference external" href="https://inano.au.dk/about/research-centers-and-projects/nmr/software/simpson">SIMPSON</a>). If an integer is provided, then this yields the <a class="reference external" href="https://doi.org/10.1063/1.1680590">JCP59</a> powder average, with higher integers yielding more angles. Default is 3 (JCP59 with 99 angles). Note that if ‘alpha0beta0’,’alpha0beta90’, or ‘alpha0beta45’ are used, then the powder average will automatically switch to gamma_encoded mode, so that only one angle is simulated (otherwise, gamma_encoded defaults to False). This behavior can be overridden by the user simply by setting <code class="docutils literal notranslate"><span class="pre">gamma_encoded=True</span></code> or <code class="docutils literal notranslate"><span class="pre">gamma_encoded=False</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">LF</span></code>: Specifiy whether each spin should be simulated in the lab frame. Can be provided as a single boolean, e.g. False sets all spins in the rotating frame, or as a list the same length as Nucs, which puts some spins in the lab frame and some in the rotating frame (useful, e.g. for DNP experiments such as solid-effect/cross-effect where the electrons should be in the rotating frame, but the nucleus in the lab frame).</p></li>
 </ul>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -485,7 +485,7 @@ Temperature = 298 K
 Powder Average: JCP59 with 99 angles
 Interactions:
 
-&lt;SLEEPY.ExpSys.ExpSys object at 0x7f96d1db6760&gt;
+&lt;SLEEPY.ExpSys.ExpSys object at 0x7fe6f9cc2208&gt;
 </pre></div>
 </div>
 </div>
@@ -507,16 +507,16 @@ Interactions:
 </div>
 <p>For every interaction, we have to specify the spins involved. For an N-spin system, this is specified with an index (spin-field) or indices (spin-spin) referring to the spin at the corresponding position in Nucs. Note we use python convention of indexing from 0 to N-1. For spin-field interactions, we specify “i”, and for spin-spin interactions, we specify “i0” and “i1”. The available interactions are:</p>
 <ul class="simple">
-<li><p>dipole: Specify delta (the full anisotropy in Hz, which is 2x the definition used by SIMPSON). Optionally specify an asymmetry, eta (unitless) and the euler angles, euler as a 3-element (alpha,beta,gamma) list in radians.</p></li>
-<li><p>J: Specify J in Hz.</p></li>
+<li><p>dipole: Specify <code class="docutils literal notranslate"><span class="pre">delta</span></code> (the full anisotropy in Hz, which is 2x the definition used by SIMPSON). Optionally specify an asymmetry, <code class="docutils literal notranslate"><span class="pre">eta</span></code> (unitless) and the euler angles, <code class="docutils literal notranslate"><span class="pre">euler</span></code> as a 3-element (alpha,beta,gamma) list in radians.</p></li>
+<li><p>J: Specify <code class="docutils literal notranslate"><span class="pre">J</span></code> in Hz.</p></li>
 <li><p>CS: Isotropic chemical shift, specify in ppm (use <code class="docutils literal notranslate"><span class="pre">ppm=...</span></code>) or in Hz (use <code class="docutils literal notranslate"><span class="pre">Hz=...</span></code>).</p></li>
 <li><p>CSA: Chemical shift anisotropy. Specify delta in ppm (<code class="docutils literal notranslate"><span class="pre">delta=...</span></code>) or in Hz (<code class="docutils literal notranslate"><span class="pre">deltaHz=...</span></code>). eta and the euler angles are optional.</p></li>
-<li><p>hyperfine: Specify Axx, Ayy, and Azz. If all entries are equal, will be treated as an isotropic interaction. “euler” may be optionally provided.</p></li>
-<li><p>quadrupole: Specify delta in Hz. Note that this is not the peak-to-peak splitting, but rather the tensor anisotropy (as is always the case in SLEEPY). Optionally specify eta and euler</p></li>
-<li><p>g: Electron g-tensor. Specify gxx, gyy, and gzz, and optionally euler.</p></li>
-<li><p>ZeroField: Electron zero-field. Specify D and optionally E (both in Hz), and optionally euler.</p></li>
+<li><p>hyperfine: Specify <code class="docutils literal notranslate"><span class="pre">Axx</span></code>, <code class="docutils literal notranslate"><span class="pre">Ayy</span></code>, and <code class="docutils literal notranslate"><span class="pre">Azz</span></code>. If all entries are equal, will be treated as an isotropic interaction. <code class="docutils literal notranslate"><span class="pre">euler</span></code> may be optionally provided.</p></li>
+<li><p>quadrupole: Specify <code class="docutils literal notranslate"><span class="pre">delta</span></code> in Hz. Note that this is not the peak-to-peak splitting, but rather the tensor anisotropy (as is always the case in SLEEPY). <code class="docutils literal notranslate"><span class="pre">DelPP</span></code> can be alternatively be provided to directly specify the peak-to-peak splitting (integer spin: distance between the inner two peaks, half-integer spin: distance between the central peak and the first peak). Optionally specify <code class="docutils literal notranslate"><span class="pre">eta</span></code> and <code class="docutils literal notranslate"><span class="pre">euler</span></code>.</p></li>
+<li><p>g: Electron g-tensor. Specify <code class="docutils literal notranslate"><span class="pre">gxx</span></code>, <code class="docutils literal notranslate"><span class="pre">gyy</span></code>, and <code class="docutils literal notranslate"><span class="pre">gzz</span></code>, and optionally <code class="docutils literal notranslate"><span class="pre">euler</span></code>.</p></li>
+<li><p>ZeroField: Electron zero-field. Specify <code class="docutils literal notranslate"><span class="pre">D</span></code> and optionally <code class="docutils literal notranslate"><span class="pre">E</span></code> (both in Hz), and optionally <code class="docutils literal notranslate"><span class="pre">euler</span></code>.</p></li>
 </ul>
-<p>Note that ‘euler’ may be replaced with ‘euler_d’ to input the angles in degrees instead of radians.</p>
+<p>Note that <code class="docutils literal notranslate"><span class="pre">euler</span></code> may be replaced with <code class="docutils literal notranslate"><span class="pre">euler_d</span></code> to input the angles in degrees instead of radians.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ex</span><span class="o">=</span><span class="n">sl</span><span class="o">.</span><span class="n">ExpSys</span><span class="p">(</span><span class="n">v0H</span><span class="o">=</span><span class="mi">600</span><span class="p">,</span><span class="n">Nucs</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;1H&#39;</span><span class="p">,</span><span class="s1">&#39;13C&#39;</span><span class="p">],</span><span class="n">pwdavg</span><span class="o">=</span><span class="s1">&#39;rep678&#39;</span><span class="p">)</span>
@@ -528,7 +528,7 @@ Interactions:
 </div>
 </div>
 </div>
-<p>We can view the shape of a tensor with the “plot_inter” function. Note that this results in a scatter plot, where the number of points is determined by the powder average. What is shown is the magnitude (as distance from the origin) and phase (as color). For the <span class="math notranslate nohighlight">\(n=0\)</span> component, only real values are possible, so we only see positive (red) and negative (blue).</p>
+<p>We can view the shape of a tensor with the <code class="docutils literal notranslate"><span class="pre">ex.plot_inter()</span></code> function. Note that this results in a scatter plot, where the number of points is determined by the powder average. What is shown is the magnitude (as distance from the origin) and phase (as color). For the <span class="math notranslate nohighlight">\(n=0\)</span> component, only real values are possible, so we only see positive (red) and negative (blue).</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="o">=</span><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">[</span><span class="mi">15</span><span class="p">,</span><span class="mi">8</span><span class="p">])</span>
@@ -538,7 +538,7 @@ Interactions:
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/6ec1144f3d90a9334298973a43bb5115053a3bfad707efb4c86352711eab8da1.png" src="../_images/6ec1144f3d90a9334298973a43bb5115053a3bfad707efb4c86352711eab8da1.png" />
+<img alt="../_images/240ad77af2fc660e7d7aaeeaf444d2e32cffd53f086fbd3d6abf2c0687566ef2.png" src="../_images/240ad77af2fc660e7d7aaeeaf444d2e32cffd53f086fbd3d6abf2c0687566ef2.png" />
 </div>
 </div>
 <p>Note, if we try to plot an isotropic term, we just obtain a sphere.</p>
@@ -552,7 +552,7 @@ Interactions:
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;Axes3DSubplot:title={&#39;center&#39;:&#39;n=0&#39;}, xlabel=&#39;Hz&#39;, ylabel=&#39;Hz&#39;&gt;
 </pre></div>
 </div>
-<img alt="../_images/66944d10155dd4fd6ccb147f72e4eed965ef2565e3a379eab67bc8214d736aea.png" src="../_images/66944d10155dd4fd6ccb147f72e4eed965ef2565e3a379eab67bc8214d736aea.png" />
+<img alt="../_images/2762ce89343e2814a4b40259577a9c946c5f8c944fa91970f8f322889b28b139.png" src="../_images/2762ce89343e2814a4b40259577a9c946c5f8c944fa91970f8f322889b28b139.png" />
 </div>
 </div>
 <p>When setting an interaction, ex returns itself. This lets us string together multiple commands, for example, the following line will achieve the same interactions as above. Note that if an interaction is defined twice for the same spin or spins, the former definition will be overwritten.</p>
@@ -584,7 +584,7 @@ Interactions:
 	CSA on spin 1 with arguments: (delta=100.00,eta=1.00)
 	CS on spin 0 with arguments: (ppm=10.00)
 
-&lt;SLEEPY.ExpSys.ExpSys object at 0x7f96d1ddd5b0&gt;
+&lt;SLEEPY.ExpSys.ExpSys object at 0x7fe6f9cdc400&gt;
 </pre></div>
 </div>
 </div>
@@ -592,48 +592,53 @@ Interactions:
 </section>
 <section id="functions-and-contents-of-expsys">
 <h2>Functions and contents of ExpSys<a class="headerlink" href="#functions-and-contents-of-expsys" title="Link to this heading">#</a></h2>
-<p>The ExpSys object, ex, contains various useful pieces of information (both to the user, and the program). For example:</p>
+<p>The ExpSys object, <code class="docutils literal notranslate"><span class="pre">ex</span></code>, contains various useful pieces of information (both to the user, and the program). For example:</p>
 <ul class="simple">
-<li><p>ex.B0: Magnetic field</p></li>
-<li><p>ex.Nucs: Nuclei/electrons in spin-system</p></li>
-<li><p>ex.S: Spins of nuclei in spin-system</p></li>
-<li><p>ex.Peq: Thermal polarization of spins in spin-system (based on Larmor frequency only)</p></li>
-<li><p>ex.gamma: Gyromagnetic ratio of spins in spin-system</p></li>
-<li><p>ex.v0: Larmor frequency of spins in spin-system</p></li>
-<li><p>ex.vr: Rotor frequency</p></li>
-<li><p>ex.taur: Rotor period</p></li>
-<li><p>ex.rotor_angle: Rotor angle</p></li>
-<li><p>ex.inter: List of all interactions entered</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">ex.B0</span></code>: Magnetic field</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">ex.Nucs</span></code>: Nuclei/electrons in spin-system</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">ex.S</span></code>: Spins of nuclei in spin-system</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">ex.Peq</span></code>: Thermal polarization of spins in spin-system (based on Larmor frequency only)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">ex.gamma</span></code>: Gyromagnetic ratio of spins in spin-system</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">ex.v0</span></code>: Larmor frequency of spins in spin-system</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">ex.vr</span></code>: Rotor frequency</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">ex.taur</span></code>: Rotor period</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">ex.rotor_angle</span></code>: Rotor angle</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">ex.inter</span></code>: List of all interactions entered</p></li>
 </ul>
 <p>It also contains a number of functions</p>
 <ul class="simple">
-<li><p>ex.copy: Returns a copy of ex (useful for building exchange calculations, where interactions may change due to exchange, but things like the field, Nuclei, etc. should remain fixed)</p></li>
-<li><p>ex.Hamiltonian: Returns a Hamiltonian object for the spin-system</p></li>
-<li><p>ex.Liouvillian: Returns a Liouvillian object for the spin-system</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">ex.copy</span></code>: Returns a copy of ex (useful for building exchange calculations, where interactions may change due to exchange, but things like the field, Nuclei, etc. should remain fixed)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">ex.Hamiltonian</span></code>: Returns a Hamiltonian object for the spin-system</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">ex.Liouvillian</span></code>: Returns a Liouvillian object for the spin-system</p></li>
 </ul>
 <p>Finally, it contains important objects</p>
 <ul class="simple">
-<li><p>ex.pwdavg: Powder average object for the spin-system. Note, if all interactions are isotropic, when a Liouvillian or Hamiltonian is created, the powder average will be replaced with a 1-element powder-average</p></li>
-<li><p>ex.Op: Spin-operator object, which contains the spin-operators for the spin-system</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">ex.pwdavg</span></code>: Powder average object for the spin-system. Note, if all interactions are isotropic, when a Liouvillian or Hamiltonian is created, the powder average will be replaced with a 1-element powder-average</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">ex.Op</span></code>: Spin-operator object, which contains the spin-operators for the spin-system</p></li>
 </ul>
 </section>
 <section id="the-powder-average">
 <h2>The powder average<a class="headerlink" href="#the-powder-average" title="Link to this heading">#</a></h2>
-<p>The powder average can be changed, by simply replacing the powder average object (can be generated from sl.PowderAvg), or by running the function pwdavg.set_pwd_type. Note that this needs to be done before calculating propagators.</p>
+<p>The powder average can be changed, by simply replacing the powder average object (can be generated from <code class="docutils literal notranslate"><span class="pre">sl.PowderAvg</span></code>), or by running the function <code class="docutils literal notranslate"><span class="pre">pwdavg.set_pwd_type(...)</span></code>. Note that this needs to be done before calculating propagators.</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">ex</span><span class="o">.</span><span class="n">pwdavg</span><span class="o">=</span><span class="n">sl</span><span class="o">.</span><span class="n">PowderAvg</span><span class="p">(</span><span class="s1">&#39;rep144&#39;</span><span class="p">,</span><span class="n">gamma_encoded</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 <span class="n">ex</span><span class="o">.</span><span class="n">pwdavg</span><span class="o">.</span><span class="n">set_powder_type</span><span class="p">(</span><span class="s1">&#39;rep144&#39;</span><span class="p">,</span><span class="n">gamma_encoded</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>Both would set the powder average to a repulsion powder average with 144 alpha and beta angles. Setting gamma_encode to True will skip the average over gamma_angles, which speeds up some calculations considerably, but will return incorrect results for pulse sequences that are not gamma encoded (e.g. REDOR).</p>
+<p>One can also specify simply</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">ex</span><span class="o">.</span><span class="n">pwdavg</span><span class="o">=</span><span class="s1">&#39;rep144&#39;</span>
+</pre></div>
+</div>
+<p>although in this approach, it is not possible to specify gamma encoding (will yield <code class="docutils literal notranslate"><span class="pre">gamma_encoded=False</span></code>).</p>
 <p>The powder average object contains useful information about how to execute the powder average. For example:</p>
 <ul class="simple">
-<li><p>pwdavg.PwdType : Type of powder average used</p></li>
-<li><p>pwdavg.N : Number of angles in the powder average</p></li>
-<li><p>pwdavg.alpha : alpha angles</p></li>
-<li><p>pwdavg.beta : beta angles</p></li>
-<li><p>pwdavg.gamma : gamma angles</p></li>
-<li><p>pwdavg.weight : weight to use when summing the powder average</p></li>
-<li><p>pwdavg.gamma_encoded : Boolean, determines whether averaging over gamma is skipped (cannot be set except at initialization, or when running pwdavg.set_pwd_type)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">pwdavg.PwdType</span></code> : Type of powder average used</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">pwdavg.N</span></code> : Number of angles in the powder average</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">pwdavg.alpha</span></code> : alpha angles</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">pwdavg.beta</span></code> : beta angles</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">pwdavg.gamma</span></code> : gamma angles</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">pwdavg.weight</span></code> : weight to use when summing the powder average</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">pwdavg.gamma_encoded</span></code> : Boolean, determines whether averaging over gamma is skipped (cannot be set except at initialization, or when running pwdavg.set_pwd_type)</p></li>
 </ul>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -642,7 +647,7 @@ Interactions:
 </div>
 </div>
 </div>
-<p>Typing ex.pwdavg at the command line will provide basic information about the powder average</p>
+<p>Typing <code class="docutils literal notranslate"><span class="pre">ex.pwdavg</span></code> at the command line will provide basic information about the powder average</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ex</span><span class="o">.</span><span class="n">pwdavg</span>
@@ -653,7 +658,7 @@ Interactions:
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Powder Average
 Type:	rep256 with 25600 angles
 
-&lt;SLEEPY.PowderAvg.PowderAvg object at 0x7ff1a9f922b0&gt;
+&lt;SLEEPY.PowderAvg.PowderAvg object at 0x7fe6f9cdc630&gt;
 </pre></div>
 </div>
 </div>
@@ -661,30 +666,27 @@ Type:	rep256 with 25600 angles
 <p>The powder average can also be plotted. By default, this plots the <span class="math notranslate nohighlight">\(\alpha\)</span> and <span class="math notranslate nohighlight">\(\beta\)</span> angles, but can be switched to <span class="math notranslate nohighlight">\(\beta\)</span> and <span class="math notranslate nohighlight">\(\gamma\)</span> angles by setting beta_gamma to True</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ex</span><span class="o">.</span><span class="n">pwdavg</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">_</span><span class="o">=</span><span class="n">ex</span><span class="o">.</span><span class="n">pwdavg</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;Axes3DSubplot:xlabel=&#39;x&#39;, ylabel=&#39;y&#39;&gt;
-</pre></div>
-</div>
-<img alt="../_images/f52db45a8a99789d2cdffbe19d8feb665ba0c0750c39ecda3f6db55017e2f221.png" src="../_images/f52db45a8a99789d2cdffbe19d8feb665ba0c0750c39ecda3f6db55017e2f221.png" />
+<img alt="../_images/df171539b397b195fa1194b0266bbcf91a72e2952f74ef549dbc8b15a5e9ed7e.png" src="../_images/df171539b397b195fa1194b0266bbcf91a72e2952f74ef549dbc8b15a5e9ed7e.png" />
 </div>
 </div>
 </section>
 <section id="the-spin-operators">
 <h2>The Spin Operators<a class="headerlink" href="#the-spin-operators" title="Link to this heading">#</a></h2>
-<p>The spin operators are used to build the Hamiltonian for a given spin system. They are found in ex.Op, although one can also create a spin-operators from sl.SpinOp, with a list of spins as input. ex.Op contains basic information about the operators:</p>
+<p>The spin operators are used to build the Hamiltonian for a given spin system. They are found in <code class="docutils literal notranslate"><span class="pre">ex.Op</span></code>, although one can also create a spin-operators from <code class="docutils literal notranslate"><span class="pre">sl.SpinOp(...)</span></code>, with a list of spins as input. <code class="docutils literal notranslate"><span class="pre">ex.Op</span></code> contains basic information about the operators:</p>
 <ul class="simple">
-<li><p>ex.Op.N: Number of spins</p></li>
-<li><p>ex.Op.S: Spin number</p></li>
-<li><p>ex.Op.Mult: Multiplicity of each spin (2*S+1)</p></li>
-<li><p>ex.Hlabels/ex.Llabels: <span class="math notranslate nohighlight">\(\LaTeX\)</span> labels for each spin state in Hilbert and Liouville space</p></li>
-<li><p>ex.state_index: List of states of each spin in the density matrix (used for spin-exchange)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">ex.Op.N</span></code>: Number of spins</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">ex.Op.S</span></code>: Spin number</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">ex.Op.Mult</span></code>: Multiplicity of each spin (2*S+1)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">ex.Hlabels</span></code>/<code class="docutils literal notranslate"><span class="pre">ex.Llabels</span></code>: <span class="math notranslate nohighlight">\(\LaTeX\)</span> labels for each spin state in Hilbert and Liouville space</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">ex.state_index</span></code>: List of states of each spin in the density matrix (used for spin-exchange)</p></li>
 </ul>
 <p>To access the spin matrices themselves, we first provide an index to go the desired spin, and then choose the spin matrix that we want:</p>
-<p>Possible matrices: x, y, z, alpha, beta, m (<span class="math notranslate nohighlight">\(I^-\)</span>), p (<span class="math notranslate nohighlight">\(I^+\)</span>), eye (identity matrix)</p>
+<p>Possible matrices: <code class="docutils literal notranslate"><span class="pre">x</span></code>, <code class="docutils literal notranslate"><span class="pre">y</span></code>, <code class="docutils literal notranslate"><span class="pre">z</span></code>, <code class="docutils literal notranslate"><span class="pre">alpha</span></code>, <code class="docutils literal notranslate"><span class="pre">beta</span></code>, <code class="docutils literal notranslate"><span class="pre">m</span></code> (<span class="math notranslate nohighlight">\(I^-\)</span>), <code class="docutils literal notranslate"><span class="pre">p</span></code> (<span class="math notranslate nohighlight">\(I^+\)</span>), <code class="docutils literal notranslate"><span class="pre">eye</span></code> (identity matrix)</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ex</span><span class="o">.</span><span class="n">Op</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">x</span>  <span class="c1">#Example: x operator for the 0th spin</span>
@@ -700,9 +702,9 @@ Type:	rep256 with 25600 angles
 </div>
 </div>
 </div>
-<p>We also have access to the coherence order of each element of the matrix (ex.Op[0].coherence_order).</p>
-<p>Finally, we have access to the matrices for spherical tensors, via e.g. ex.Op[0].T. T can be be indexed to give the rank 0, rank 1, and rank 2 (if spin-1 or higher) operators. The resulting list contains the operators running from the lowest to highest index.</p>
-<p>So, ex.Op[0].T[1][0] returns <span class="math notranslate nohighlight">\(T_{1,-1}^{(0)}\)</span>, that is the rank <span class="math notranslate nohighlight">\(m=-1\)</span> component of the rank-1 tensor for spin 0.</p>
+<p>We also have access to the coherence order of each element of the matrix (<code class="docutils literal notranslate"><span class="pre">ex.Op[0].coherence_order</span></code>).</p>
+<p>Finally, we have access to the matrices for spherical tensors, via e.g. <code class="docutils literal notranslate"><span class="pre">ex.Op[0].T</span></code>. T can be be indexed to give the rank 0, rank 1, and rank 2 (if spin-1 or higher) operators. The resulting list contains the operators running from the lowest to highest index.</p>
+<p>So, <code class="docutils literal notranslate"><span class="pre">ex.Op[0].T[1][0]</span></code> returns <span class="math notranslate nohighlight">\(T_{1,-1}^{(0)}\)</span>, that is the rank <span class="math notranslate nohighlight">\(m=-1\)</span> component of the rank-1 tensor for spin 0.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ex</span><span class="o">.</span><span class="n">Op</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">T</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="c1">#eg m=-1 component of the rank-1 tensor for spin 0</span>

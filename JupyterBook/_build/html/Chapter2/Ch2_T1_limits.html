@@ -203,7 +203,7 @@
 <li class="toctree-l2"><a class="reference internal" href="../Chapter3/Ch3_DIPSHIFT.html"><font color="#0093AF">DIPSHIFT</font></a></li>
 <li class="toctree-l2"><a class="reference internal" href="../Chapter3/Ch3_RECRR.html"><font color="#0093AF">Relaxation in complex sequences: RECRR</font></a></li>
 <li class="toctree-l2"><a class="reference internal" href="../Chapter3/Ch3_T1_NOE.html"><font color="#0093AF"><span class="math notranslate nohighlight">\(T_1\)</span> and Nuclear Overhauser Effect</font></a></li>
-<li class="toctree-l2"><a class="reference internal" href="../Chapter3/Ch3_DARR.html"><font color="#0093AF">Dipolar Assisted Rotary Resonance</font></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Chapter3/Ch3_DARR.html"><font color="#0093AF">Understanding DARR with simulation</font></a></li>
 <li class="toctree-l2"><a class="reference internal" href="../Chapter3/Ch3_Quad.html"><font color="#0093AF">Quadrupolar phenomena</font></a></li>
 </ul>
 </details></li>
@@ -422,7 +422,7 @@
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#dynamic-thermal-performance">Dynamic Thermal performance</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#add-the-relaxation">Add the relaxation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#thermalize-the-system">Thermalize the system</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Sweep the correlation time</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">Plot the results</a></li>
 </ul>
@@ -442,7 +442,7 @@
   <section class="tex2jax_ignore mathjax_ignore" id="t-1-limits">
 <h1><font  color = "#0093AF"><span class="math notranslate nohighlight">\(T_1\)</span> limits</font><a class="headerlink" href="#t-1-limits" title="Link to this heading">#</a></h1>
 <p><a href="https://githubtocolab.com/alsinmr/SLEEPY_tutorial/blob/main/ColabNotebooks/Chapter2/Ch2_T1_limits.ipynb" target="_blank"><img src="https://colab.research.google.com/assets/colab-badge.svg"></a></p>
-<p>Longitudinal relaxation occurs because a relative fast motion—on the timescale of the lab frame rotation—induces a slow evolution of the density matrix. In this notebook, we check the validity of this lab frame calculation against analytical formulas, and also investigate the range in which equilibrium of the system to thermal equilibrium (via “DynamicThermal”) is valid.</p>
+<p>Longitudinal relaxation occurs because a relative fast motion—on the timescale of the lab frame rotation—induces a slow evolution of the density matrix. In this notebook, we check the validity of this lab frame calculation against analytical formulas, and also investigate the range in which equilibrium of the system to thermal equilibrium (via <code class="docutils literal notranslate"><span class="pre">'DynamicThermal'</span></code>) is valid.</p>
 <section id="setup">
 <h2>SETUP<a class="headerlink" href="#setup" title="Link to this heading">#</a></h2>
 <div class="cell docutils container">
@@ -462,7 +462,7 @@
 <h2>Range of <span class="math notranslate nohighlight">\(T_1\)</span> validity<a class="headerlink" href="#range-of-t-1-validity" title="Link to this heading">#</a></h2>
 <section id="build-the-system">
 <h3>Build the system<a class="headerlink" href="#build-the-system" title="Link to this heading">#</a></h3>
-<p>We mimick a tumbling motion by hopping around the ‘rep10’ power average. Note that tumbling is currently only implemented for colinear tensors without asymmetry (we don’t include a gamma average, so this yield vector tumbling, not tensor tumbling).</p>
+<p>We mimick a tumbling motion by hopping around the ‘rep10’ power average. Note that tumbling is currently only implemented for colinear tensors without asymmetry (we don’t include a gamma average, so this yields vector tumbling, not tensor tumbling).</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Since we use a tumbling model, we only need a single angle in the powder average</span>
@@ -483,12 +483,12 @@
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ax</span><span class="o">=</span><span class="n">L</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">figure</span><span class="o">.</span><span class="n">set_size_inches</span><span class="p">([</span><span class="mi">8</span><span class="p">,</span><span class="mi">8</span><span class="p">])</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">figure</span><span class="o">.</span><span class="n">set_size_inches</span><span class="p">([</span><span class="mi">6</span><span class="p">,</span><span class="mi">6</span><span class="p">])</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/d4bcdebb13f413d9d9f469c6c752ca97bdb11e094c04c16f4cdc8a91a1f20984.png" src="../_images/d4bcdebb13f413d9d9f469c6c752ca97bdb11e094c04c16f4cdc8a91a1f20984.png" />
+<img alt="../_images/2e3be0fb767d65dbffdc07e66a353ad6fcd4e5103911135158b2c43bb15ce5b2.png" src="../_images/2e3be0fb767d65dbffdc07e66a353ad6fcd4e5103911135158b2c43bb15ce5b2.png" />
 </div>
 </div>
 </section>
@@ -524,22 +524,22 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x7fa57349b710&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x7facc9536340&gt;
 </pre></div>
 </div>
-<img alt="../_images/c7a4a68113a751ee67193dd22b8cacba8093ed6b83d17d7bd00b020534c62412.png" src="../_images/c7a4a68113a751ee67193dd22b8cacba8093ed6b83d17d7bd00b020534c62412.png" />
+<img alt="../_images/4b706995ac90c146f85b672f1f0a24046fc480f074d0b1cb0e2a5bfe4e90bf7b.png" src="../_images/4b706995ac90c146f85b672f1f0a24046fc480f074d0b1cb0e2a5bfe4e90bf7b.png" />
 </div>
 </div>
-<p>We see extremely good agreement between the simulation and the analytical formulas implemented in pyDR</p>
+<p>We see extremely good agreement between the simulation and the analytical formulas implemented in <a class="reference external" href="https://alsinmr.github.io/pyDR">pyDR</a>.</p>
 </section>
 </section>
 <section id="dynamic-thermal-performance">
 <h2>Dynamic Thermal performance<a class="headerlink" href="#dynamic-thermal-performance" title="Link to this heading">#</a></h2>
-<p>The method <code class="docutils literal notranslate"><span class="pre">L.add_relax('DynamicThermal)</span></code> gives us the ability to add recovery to thermal equilibrium to systems where longitudinal relaxation is introduced by an exchange process (necessarily in the lab frame). This is not a fully accurate approach, as it does not properly introduce non-adiabatic contributions to the coherences. A good discussion is found in Bengs and Levitt.<span class="math notranslate nohighlight">\(^1\)</span>. We do not expect this particular limitation to present problems in the applications presented here. We will not be able to introduce electron effects like the contact and pseudocontact shift via exchange-induced relaxation of the electrons: we’ll have to use explicitly defined relaxation of the electron instead. To the best of our knowledge, no approach exists to induce contact shift via explicit exchange-induced electron relaxation.</p>
+<p>The method <code class="docutils literal notranslate"><span class="pre">L.add_relax('DynamicThermal)</span></code> gives us the ability to add recovery to thermal equilibrium to systems where longitudinal relaxation is introduced by an exchange process (necessarily in the lab frame). This is not a fully accurate approach, as it does not properly introduce non-adiabatic contributions to the coherences. A good discussion is found in Bengs and Levitt.<span class="math notranslate nohighlight">\(^1\)</span>. We do not expect this particular limitation to present problems in the applications presented here. We will not be able to introduce electron effects like the contact and pseudocontact shift via exchange-induced relaxation of the electrons: we’ll have to use explicitly defined relaxation of the electron instead. To the best of our knowledge, no approach exists to induce contact shift via exchange-induced electron relaxation.</p>
 <p>A second limitation occurs, which is numerical stability of the approach. Essentially, when fast dynamics (<span class="math notranslate nohighlight">\(\tau_c&lt;10^{-10}\)</span>) is present, numerical error between the fast dynamics and slow recovery fails to stably reach equilibrium. We demonstrate below, where we evaluate the relaxation rate constants and thermal equilibrium.</p>
 <p>[1] C. Bengs, M.H. Levitt. <a class="reference external" href="https://doi.org/10.1016/j.jmr.2019.106645"><em>J. Magn. Reson</em></a>, <strong>2020</strong>, 310, 106645.</p>
-<section id="add-the-relaxation">
-<h3>Add the relaxation<a class="headerlink" href="#add-the-relaxation" title="Link to this heading">#</a></h3>
+<section id="thermalize-the-system">
+<h3>Thermalize the system<a class="headerlink" href="#thermalize-the-system" title="Link to this heading">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">_</span><span class="o">=</span><span class="n">L</span><span class="o">.</span><span class="n">add_relax</span><span class="p">(</span><span class="s1">&#39;DynamicThermal&#39;</span><span class="p">)</span>
@@ -634,7 +634,7 @@
 </section>
 <section id="better-dynamicthermal-performance-for-smaller-systems">
 <h2>Better “DynamicThermal” performance for smaller systems<a class="headerlink" href="#better-dynamicthermal-performance-for-smaller-systems" title="Link to this heading">#</a></h2>
-<p>The validity of dynamic thermal is better for smaller exchange systems, due to less numerical error buildup. Here, we consider a system in two-site exchange. We need to include a powder average to compare to the analytical formulas (since these are valid only for orientationally averaged relaxation). We also need to include a scaling factor, <span class="math notranslate nohighlight">\(1-S^2\)</span>, for the relaxation, where <span class="math notranslate nohighlight">\(S^2\)</span> can be calculated from the angle of the two-site hop:</p>
+<p>The validity of <code class="docutils literal notranslate"><span class="pre">'DynamicThermal'</span></code> is better for smaller exchange systems, due to less numerical error buildup. Here, we consider a system in two-site exchange. We need to include a powder average to compare to the analytical formulas (since these are valid only for orientationally averaged relaxation). We also need to include a scaling factor, <span class="math notranslate nohighlight">\(1-S^2\)</span>, for the relaxation, where <span class="math notranslate nohighlight">\(S^2\)</span> can be calculated from the angle of the two-site hop:</p>
 <div class="math notranslate nohighlight">
 \[
 \begin{equation}
@@ -701,7 +701,7 @@ S^2=\frac14+\frac34\cos^2\phi
 <img alt="../_images/64ed56b248ad75a5198ad4804037e791d0bdcfcbf127307fa3e6b33807be3c48.png" src="../_images/64ed56b248ad75a5198ad4804037e791d0bdcfcbf127307fa3e6b33807be3c48.png" />
 </div>
 </div>
-<p>We see that the thermal equilibrium is retained to shorter correlation times</p>
+<p>We see that the correct thermal equilibrium is maintained at correlation times almost two orders of magnitude shorter.</p>
 </section>
 </section>
 
@@ -778,7 +778,7 @@ S^2=\frac14+\frac34\cos^2\phi
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#dynamic-thermal-performance">Dynamic Thermal performance</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#add-the-relaxation">Add the relaxation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#thermalize-the-system">Thermalize the system</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Sweep the correlation time</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">Plot the results</a></li>
 </ul>

@@ -203,7 +203,7 @@
 <li class="toctree-l2"><a class="reference internal" href="../Chapter3/Ch3_DIPSHIFT.html"><font color="#0093AF">DIPSHIFT</font></a></li>
 <li class="toctree-l2"><a class="reference internal" href="../Chapter3/Ch3_RECRR.html"><font color="#0093AF">Relaxation in complex sequences: RECRR</font></a></li>
 <li class="toctree-l2"><a class="reference internal" href="../Chapter3/Ch3_T1_NOE.html"><font color="#0093AF"><span class="math notranslate nohighlight">\(T_1\)</span> and Nuclear Overhauser Effect</font></a></li>
-<li class="toctree-l2"><a class="reference internal" href="../Chapter3/Ch3_DARR.html"><font color="#0093AF">Dipolar Assisted Rotary Resonance</font></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Chapter3/Ch3_DARR.html"><font color="#0093AF">Understanding DARR with simulation</font></a></li>
 <li class="toctree-l2"><a class="reference internal" href="../Chapter3/Ch3_Quad.html"><font color="#0093AF">Quadrupolar phenomena</font></a></li>
 </ul>
 </details></li>
@@ -456,7 +456,7 @@
 </section>
 <section id="build-the-system">
 <h2>Build the system<a class="headerlink" href="#build-the-system" title="Link to this heading">#</a></h2>
-<p>The first step is to build the system, which will have a single nucleus, with two different chemical shifts.</p>
+<p>The first step is to build the systems (<code class="docutils literal notranslate"><span class="pre">ex0</span></code>,<code class="docutils literal notranslate"><span class="pre">ex1</span></code>), which will have a single nucleus, with two different chemical shifts.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ex0</span><span class="o">=</span><span class="n">sl</span><span class="o">.</span><span class="n">ExpSys</span><span class="p">(</span><span class="n">Nucs</span><span class="o">=</span><span class="s1">&#39;13C&#39;</span><span class="p">,</span><span class="n">v0H</span><span class="o">=</span><span class="mi">600</span><span class="p">)</span>    <span class="c1">#We need a description of the experiment for both states (ex0, ex1)</span>
@@ -470,10 +470,10 @@
 </section>
 <section id="add-the-exchange-process">
 <h2>Add the exchange process<a class="headerlink" href="#add-the-exchange-process" title="Link to this heading">#</a></h2>
-<p>First, we export the system into Liouville space, and add the exchange process. We also add some <span class="math notranslate nohighlight">\(T_2\)</span> relaxation to destroy transverse magnetization during the delay period for exchange and produce some broadening when the spectrum is very narrow.</p>
+<p>First, we export the systems into Liouville space, and add the exchange process. We also add some <span class="math notranslate nohighlight">\(T_2\)</span> relaxation to destroy transverse magnetization during the delay period for exchange and produce some broadening when the spectrum is very narrow (<code class="docutils literal notranslate"><span class="pre">L.add_relax(...)</span></code>).</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">L</span><span class="o">=</span><span class="n">sl</span><span class="o">.</span><span class="n">Liouvillian</span><span class="p">((</span><span class="n">ex0</span><span class="p">,</span><span class="n">ex1</span><span class="p">))</span>           <span class="c1">#Builds the two different Hamiltonians and exports them to Liouville space</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">L</span><span class="o">=</span><span class="n">sl</span><span class="o">.</span><span class="n">Liouvillian</span><span class="p">(</span><span class="n">ex0</span><span class="p">,</span><span class="n">ex1</span><span class="p">)</span>           <span class="c1">#Builds the two different Hamiltonians and exports them to Liouville space</span>
 
 <span class="n">tc</span><span class="o">=</span><span class="mi">1</span>     <span class="c1">#Correlation time (1 s)</span>
 <span class="n">p1</span><span class="o">=</span><span class="mf">0.75</span>  <span class="c1">#Population of state 1</span>
@@ -490,7 +490,7 @@
 <section id="run-as-a-2d-experiment">
 <h2>Run as a 2D experiment<a class="headerlink" href="#run-as-a-2d-experiment" title="Link to this heading">#</a></h2>
 <p>First, we’ll just calculate one 2D spectrum, and then later check how the spectrum evolves as a function of a delay time. We need an initial density matrix, <span class="math notranslate nohighlight">\(S_x\)</span>, a detection matrix, <span class="math notranslate nohighlight">\(S^+\)</span>, and propagators for evolution times, <span class="math notranslate nohighlight">\(\pi\)</span>/2 pulses, and a delay for the exchange process. We start with generating the propagators and density matrices.</p>
-<p>SLEEPY has a function in Tools, the TwoD_Builder, for executing and processing two-dimensional experiements. TwoD_Builder requires an initial density matrix (rho), and sequences for the indirect dimension evolution, the direction dimension evolution, and transfer periods between the dimensions. For the transfers, one needs a sequence to convert the X component, and one for the Y component (States acquisition<span class="math notranslate nohighlight">\(^1\)</span>). The sequences for the direct/indirect dimension may just be delays, and can be the same sequence.</p>
+<p>SLEEPY has a function in <code class="docutils literal notranslate"><span class="pre">sl.Tools</span></code>, <code class="docutils literal notranslate"><span class="pre">sl.Tools.TwoD_Builder</span></code>, for executing and processing two-dimensional experiements. <code class="docutils literal notranslate"><span class="pre">TwoD_Builder</span></code> requires an initial density matrix (<code class="docutils literal notranslate"><span class="pre">rho</span></code>), and sequences for the indirect dimension evolution, the direction dimension evolution (in this example, <code class="docutils literal notranslate"><span class="pre">seq</span></code> is used for both), and transfer periods between the dimensions (<code class="docutils literal notranslate"><span class="pre">seq_trX</span></code>, <code class="docutils literal notranslate"><span class="pre">seq_trY</span></code>). For the transfers, one needs a sequence to convert the X component, and one for the Y component (States acquisition<span class="math notranslate nohighlight">\(^1\)</span>). The sequences for the direct/indirect dimension may just be delays, and can be the same sequence.</p>
 <p>[1] D.J. States, R.A. Haberkorn, D.J. Ruben. <a class="reference external" href="https://doi.org/10.1016/0022-2364(82)90279-7"><em>J. Magn. Reson.</em></a>, <strong>1969</strong>, 48, 286-292.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -526,7 +526,7 @@
 </section>
 <section id="sweep-the-delay-time-to-observe-buildup">
 <h2>Sweep the delay time to observe buildup<a class="headerlink" href="#sweep-the-delay-time-to-observe-buildup" title="Link to this heading">#</a></h2>
-<p>In order to observe the diagonal peaks decay, and the off-diagonal peaks build up, we repeat the above code except with different lengths for the delay. We slice through the larger peak in order to see the growth of the second peak</p>
+<p>In order to observe the diagonal peaks decay, and the off-diagonal peaks build up, we repeat the above calculation except with different lengths for the delay. We slice through the largest peak and observe buildup of the cross-peak at the same position.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">i_dir</span><span class="o">=</span><span class="p">[</span><span class="mi">16</span><span class="p">,</span><span class="mi">48</span><span class="p">]</span>
@@ -576,7 +576,7 @@
 </section>
 <section id="plot-trajectory-of-the-individual-peaks">
 <h2>Plot trajectory of the individual peaks<a class="headerlink" href="#plot-trajectory-of-the-individual-peaks" title="Link to this heading">#</a></h2>
-<p>Each curve represents the probability of starting in some state and ending in another state after the delay time, <span class="math notranslate nohighlight">\(\tau\)</span></p>
+<p>We can track the four peak intensities as a function of delay time. Then, each curve represents the probability of starting in some state and ending in another state after the delay time, <span class="math notranslate nohighlight">\(\tau\)</span>. These are given in the legend, where the diagonal peaks then decay with time and the cross peaks build up.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">I</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">I</span><span class="p">)</span>
@@ -602,7 +602,7 @@
 </section>
 <section id="spectrum-as-a-function-of-exchange-rate">
 <h2>Spectrum as a function of exchange rate<a class="headerlink" href="#spectrum-as-a-function-of-exchange-rate" title="Link to this heading">#</a></h2>
-<p>We can’t use EXSY for faster motions, because the peaks don’t stay separated. We can observe the coalescence of all four peaks by varying the correlation time.</p>
+<p>We can’t use EXSY for very fast motions, because the peaks coalesce such that we are no longer able to observe the independent buildup of the cross peaks. Here, we simulate the coalescence of the four peaks by varying the correlation time.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">tc0</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">logspace</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="o">-</span><span class="mi">6</span><span class="p">,</span><span class="mi">6</span><span class="p">)</span>
@@ -631,7 +631,7 @@
 <img alt="../_images/36f9cb70b4534cbb8e067905cb182014750019698b2fe86d2fcd17eb05f0e226.png" src="../_images/36f9cb70b4534cbb8e067905cb182014750019698b2fe86d2fcd17eb05f0e226.png" />
 </div>
 </div>
-<p>Finally, we do the same as above, but without having symmetric exchange, i.e. <span class="math notranslate nohighlight">\(p_1\ne p_2\)</span>. Here, we set <span class="math notranslate nohighlight">\(p_1=0.75\)</span> and <span class="math notranslate nohighlight">\(p_2=0.25\)</span>. We use the <code class="docutils literal notranslate"><span class="pre">twoSite_kex</span></code> function to build the exchange matrix.</p>
+<p>Finally, we do the same as above, but without having symmetric exchange, i.e. <span class="math notranslate nohighlight">\(p_1\ne p_2\)</span>. Here, we set <span class="math notranslate nohighlight">\(p_1=0.75\)</span> and <span class="math notranslate nohighlight">\(p_2=0.25\)</span>. We use the <code class="docutils literal notranslate"><span class="pre">sl.Tools.twoSite_kex(tc=...,p1=...)</span></code> function to build the exchange matrix.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">tc0</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">logspace</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="o">-</span><span class="mi">6</span><span class="p">,</span><span class="mi">6</span><span class="p">)</span>

@@ -203,7 +203,7 @@
 <li class="toctree-l2"><a class="reference internal" href="../Chapter3/Ch3_DIPSHIFT.html"><font color="#0093AF">DIPSHIFT</font></a></li>
 <li class="toctree-l2"><a class="reference internal" href="../Chapter3/Ch3_RECRR.html"><font color="#0093AF">Relaxation in complex sequences: RECRR</font></a></li>
 <li class="toctree-l2"><a class="reference internal" href="../Chapter3/Ch3_T1_NOE.html"><font color="#0093AF"><span class="math notranslate nohighlight">\(T_1\)</span> and Nuclear Overhauser Effect</font></a></li>
-<li class="toctree-l2"><a class="reference internal" href="../Chapter3/Ch3_DARR.html"><font color="#0093AF">Dipolar Assisted Rotary Resonance</font></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Chapter3/Ch3_DARR.html"><font color="#0093AF">Understanding DARR with simulation</font></a></li>
 <li class="toctree-l2"><a class="reference internal" href="../Chapter3/Ch3_Quad.html"><font color="#0093AF">Quadrupolar phenomena</font></a></li>
 </ul>
 </details></li>
@@ -436,7 +436,8 @@
   <section class="tex2jax_ignore mathjax_ignore" id="chemical-exchange-saturation-transfer-cest">
 <h1><font  color = "#0093AF">Chemical Exchange Saturation Transfer (CEST)</font><a class="headerlink" href="#chemical-exchange-saturation-transfer-cest" title="Link to this heading">#</a></h1>
 <p><a href="https://githubtocolab.com/alsinmr/SLEEPY_tutorial/blob/main/ColabNotebooks/Chapter2/Ch2_CEST.ipynb" target="_blank"><img src="https://colab.research.google.com/assets/colab-badge.svg"></a></p>
-<p>Sometimes, a system undergoes chemical exchange, but with one large population and one very small population, such that the peak of the latter is difficult or impossible to observe directly. However, if we apply a low-power saturating field to magnetization in the z-direction, it is possible to saturate the magnetization when the applied field is on-resonant with the invisible peak. This allows us to observed “invisible” resonances in exchange with the main resonance.</p>
+<p>Sometimes, a system undergoes chemical exchange, but with one large population and one very small population, such that the peak of the latter is difficult or impossible to observe directly. However, if we apply a low-power saturating field to magnetization in the z-direction, it is possible to saturate the magnetization when the applied field is on-resonant with the invisible peak. This is referred to as the Chemical Exchange Saturation Transfer experiment (CEST).<span class="math notranslate nohighlight">\(^1\)</span> This allows us to observed “invisible” resonances in exchange with the main resonance.</p>
+<p>[1] S. Forsén, R.A. Hoffman. <a class="reference external" href="https://doi.org/10.1063/1.1734121"><em>J. Chem. Phys.</em></a>, <strong>1963</strong>, 39, 2892-2901.</p>
 <section id="setup">
 <h2>Setup<a class="headerlink" href="#setup" title="Link to this heading">#</a></h2>
 <div class="cell docutils container">
@@ -465,7 +466,7 @@
 </section>
 <section id="build-the-liouvillian">
 <h2>Build the Liouvillian<a class="headerlink" href="#build-the-liouvillian" title="Link to this heading">#</a></h2>
-<p>For CEST to work, we need to be able saturate the spins, which requires <span class="math notranslate nohighlight">\(T_2\)</span> relaxation. For a more realistic behavior, we also include <span class="math notranslate nohighlight">\(T_1\)</span> recovery of the magnetization, which can inhibit the saturation. Finally, we will allow the magnetization to recover towards its thermal equilibrium.</p>
+<p>For CEST to work, we need to be able saturate the spins, which requires <span class="math notranslate nohighlight">\(T_2\)</span> relaxation. For a more realistic behavior, we also include <span class="math notranslate nohighlight">\(T_1\)</span> recovery of the magnetization, which can inhibit the saturation. Finally, we will allow the magnetization to recover towards its thermal equilibrium. These terms are all added via the <code class="docutils literal notranslate"><span class="pre">L.add_relax(...)</span></code> functionality of the Liouvillian.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">L</span><span class="o">=</span><span class="n">sl</span><span class="o">.</span><span class="n">Liouvillian</span><span class="p">((</span><span class="n">ex0</span><span class="p">,</span><span class="n">ex1</span><span class="p">))</span>  <span class="c1">#Builds the two different Hamiltonians and exports them to Liouville space</span>
@@ -485,17 +486,17 @@
 </section>
 <section id="calculate-the-required-propagators">
 <h2>Calculate the required propagators<a class="headerlink" href="#calculate-the-required-propagators" title="Link to this heading">#</a></h2>
-<p>We’ll simulate this system by starting with magnetization along the z-axis and saturating at some swept frequency. After the saturation period, we’ll apply a <span class="math notranslate nohighlight">\(\pi/2\)</span> pulse along the y-axis to get x-magnetization. This will be allowed to evolve, and Fourier transformed. We can then integrate the main peak to determine the amount of saturation that has occured.</p>
+<p>We’ll simulate this system by starting with magnetization along the z-axis and saturating at some frequency, which will be swept. After the saturation period, we’ll apply a <span class="math notranslate nohighlight">\(\pi/2\)</span>-pulse along the y-axis to get x-magnetization. This will be allowed to evolve, and will then be Fourier transformed. We then integrate the main peak to determine the amount of saturation that has occured.</p>
 </section>
 <section id="run-the-sequence-with-sweep-over-nu-1">
 <h2>Run the sequence, with sweep over <span class="math notranslate nohighlight">\(\nu_1\)</span><a class="headerlink" href="#run-the-sequence-with-sweep-over-nu-1" title="Link to this heading">#</a></h2>
-<p>For each offset frequency, we start with a 25 Hz saturating field for 500 ms, followed by a <span class="math notranslate nohighlight">\(\pi/2\)</span> pulse (defined in <code class="docutils literal notranslate"><span class="pre">seq</span></code>). Then, we evolve (<code class="docutils literal notranslate"><span class="pre">evol</span></code>) to get a spectrum (which we will later integrate the main peak)</p>
+<p>For each offset frequency, we start with a 25 Hz saturating field for 500 ms, followed by a <span class="math notranslate nohighlight">\(\pi/2\)</span> pulse (defined in the sequence <code class="docutils literal notranslate"><span class="pre">seq</span></code>). Then, we evolve (using the sequence <code class="docutils literal notranslate"><span class="pre">evol</span></code>) to get a spectrum (which we will later integrate the main peak)</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">rho</span><span class="o">=</span><span class="n">sl</span><span class="o">.</span><span class="n">Rho</span><span class="p">(</span><span class="n">rho0</span><span class="o">=</span><span class="s1">&#39;13Cz&#39;</span><span class="p">,</span><span class="n">detect</span><span class="o">=</span><span class="s1">&#39;13Cp&#39;</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">rho</span><span class="o">=</span><span class="n">sl</span><span class="o">.</span><span class="n">Rho</span><span class="p">(</span><span class="n">rho0</span><span class="o">=</span><span class="s1">&#39;13Cz&#39;</span><span class="p">,</span><span class="n">detect</span><span class="o">=</span><span class="s1">&#39;13Cp&#39;</span><span class="p">)</span>  <span class="c1">#Initial density matrix</span>
 
 <span class="c1"># Make a sequence for saturation</span>
-<span class="n">seq</span><span class="o">=</span><span class="n">L</span><span class="o">.</span><span class="n">Sequence</span><span class="p">()</span>    
+<span class="n">seq</span><span class="o">=</span><span class="n">L</span><span class="o">.</span><span class="n">Sequence</span><span class="p">()</span>    <span class="c1">#Saturation and pi/2 pulse</span>
 <span class="n">t</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mf">0.5</span><span class="p">,</span><span class="mf">0.5</span><span class="o">+</span><span class="mf">2.5e-6</span><span class="p">]</span> <span class="c1">#Preparation sequence (500 ms saturation, 100 kHz pi-pulse)</span>
 
 <span class="c1"># Make a sequence for detection</span>
@@ -517,7 +518,7 @@
 </section>
 <section id="plot-one-of-the-spectra">
 <h2>Plot one of the spectra<a class="headerlink" href="#plot-one-of-the-spectra" title="Link to this heading">#</a></h2>
-<p>In order to see the usefulness of this techique, we plot the spectrum to show that the weaker peak is nearly invisible.  The second peak is weakly visible if we zoom in around 5 ppm (but would be quite difficult to see in a real spectrum).</p>
+<p>We first plot a spectrum, where we observe that the weaker peak is nearly invisible (it appears if we zoom in around 5 ppm, but would be quite difficult to see in a real spectrum).</p>
 <p>Note that later we integrate the spectrum by selecting a range of points in the spectrum. In this case, it may be useful to set <code class="docutils literal notranslate"><span class="pre">axis='points'</span></code> to more easily determine what range of points to sum over.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -536,7 +537,7 @@
 <p>We integrate over the strong peak and plot the peak intensity</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">spec</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">spec</span><span class="p">)</span>   <span class="c1">#Convert to a numpy array</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">spec</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">spec</span><span class="p">)</span>   <span class="c1">#Convert the list of spectra to a numpy array</span>
 <span class="n">I</span><span class="o">=</span><span class="n">spec</span><span class="p">[:,</span><span class="mi">400</span><span class="p">:</span><span class="mi">620</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>  <span class="c1">#Integrate over the main peak</span>
 
 <span class="n">ax</span><span class="o">=</span><span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()[</span><span class="mi">1</span><span class="p">]</span>

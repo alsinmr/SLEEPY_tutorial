@@ -203,7 +203,7 @@
 <li class="toctree-l2"><a class="reference internal" href="Ch3_DIPSHIFT.html"><font color="#0093AF">DIPSHIFT</font></a></li>
 <li class="toctree-l2"><a class="reference internal" href="Ch3_RECRR.html"><font color="#0093AF">Relaxation in complex sequences: RECRR</font></a></li>
 <li class="toctree-l2"><a class="reference internal" href="Ch3_T1_NOE.html"><font color="#0093AF"><span class="math notranslate nohighlight">\(T_1\)</span> and Nuclear Overhauser Effect</font></a></li>
-<li class="toctree-l2"><a class="reference internal" href="Ch3_DARR.html"><font color="#0093AF">Dipolar Assisted Rotary Resonance</font></a></li>
+<li class="toctree-l2"><a class="reference internal" href="Ch3_DARR.html"><font color="#0093AF">Understanding DARR with simulation</font></a></li>
 <li class="toctree-l2"><a class="reference internal" href="Ch3_Quad.html"><font color="#0093AF">Quadrupolar phenomena</font></a></li>
 </ul>
 </details></li>
@@ -436,7 +436,7 @@
   <section class="tex2jax_ignore mathjax_ignore" id="redor">
 <h1><font  color = "#0093AF">REDOR</font><a class="headerlink" href="#redor" title="Link to this heading">#</a></h1>
 <p><a href="https://githubtocolab.com/alsinmr/SLEEPY_tutorial/blob/main/ColabNotebooks/Chapter3/Ch3_REDOR.ipynb" target="_blank"><img src="https://colab.research.google.com/assets/colab-badge.svg"></a></p>
-<p>Rotational-Echo DOuble Resonance NMR (REDOR<span class="math notranslate nohighlight">\(^1\)</span>) is an important technique for dynamics measurements,<span class="math notranslate nohighlight">\(^{2,3}\)</span> where applying REDOR to one-bond dipole couplings allows one to compare the known size of the dipole coupling, to its measured size, which is smaller due to dynamics. This yields the order parameter, <span class="math notranslate nohighlight">\(S\)</span>, according to</p>
+<p>Rotational-Echo DOuble Resonance NMR (REDOR<span class="math notranslate nohighlight">\(^1\)</span>) is an important technique for dynamics measurements,<span class="math notranslate nohighlight">\(^{2,3}\)</span> where applying REDOR to one-bond dipole couplings allows one to compare the known size of the rigid dipole coupling, to its measured size, which is reduced due to dynamics. This yields the order parameter, <span class="math notranslate nohighlight">\(S\)</span>, according to</p>
 <div class="math notranslate nohighlight">
 \[
 \begin{equation}
@@ -445,11 +445,12 @@
 \]</div>
 <p>We do not obtain the sign of the dipole coupling from REDOR, so we only get the absolute value of <span class="math notranslate nohighlight">\(S\)</span>.</p>
 <p>Here, we investigate how REDOR behaves as a function of correlation time.</p>
-<p>Note, this was the topic of a recent paper by Aebischer et al.,<span class="math notranslate nohighlight">\(^4\)</span> where simulations were performed using Gamma. We hope SLEEPY makes this type of simulation more accessible.</p>
+<p>Note, this was the topic of a recent paper by Aebischer et al.,<span class="math notranslate nohighlight">\(^4\)</span> where simulations were performed using Gamma<span class="math notranslate nohighlight">\(^5\)</span>. We hope SLEEPY makes this type of simulation more accessible.</p>
 <p>[1] T. Gullion, J. Schaefer. <a class="reference external" href="https://doi.org/10.1016/0022-2364(89)90280-1"><em>J. Magn. Reson.</em></a>, <strong>1989</strong>, 196-200.</p>
 <p>[2] V. Chevelkov, U. Fink. B. Reif. <a class="reference external" href="https://doi.org/10.1021/ja902649u"><em>J. Am. Chem. Soc.</em></a>, <strong>2009</strong>, 131, 14018-14022.</p>
 <p>[3] P. Schanda, B.H. Meier, M. Ernst. <a class="reference external" href="https://doi.org/10.1016/j.jmr.2011.03.015"><em>J. Magn. Reson.</em></a>, <strong>2011</strong>, 210, 246-259.</p>
 <p>[4] K. Aebischer, L.M. Becker, P. Schanda, M. Ernst. <a class="reference external" href="https://doi.org/10.5194/mr-5-69-2024"><em>Magn. Reson.</em></a>, <strong>2024</strong>, 5, 69-86</p>
+<p>[5] S.A. Smith, T.O. Levant, B.H. Meier, R.R. Ernst. <a class="reference external" href="https://doi.org/10.1006/jmra.1994.1008"><em>J. Magn. Reson. A</em></a>, <strong>1994</strong>, 106, 75-105.</p>
 <section id="setup">
 <h2>Setup<a class="headerlink" href="#setup" title="Link to this heading">#</a></h2>
 <div class="cell docutils container">
@@ -465,7 +466,7 @@
 </section>
 <section id="build-the-system">
 <h2>Build the system<a class="headerlink" href="#build-the-system" title="Link to this heading">#</a></h2>
-<p>We construct a system undergoing 3-site symmetric exchange, in order to obtain a residual dipole coupling without asymmetry (<span class="math notranslate nohighlight">\(\eta\)</span>=0).</p>
+<p>We construct a system undergoing 3-site symmetric exchange, in order to obtain a residual dipole coupling without asymmetry (<span class="math notranslate nohighlight">\(\eta\)</span>=0). The <code class="docutils literal notranslate"><span class="pre">sl.Tools.Setup3siteSym(...)</span></code> function is used to create the three-site hopping motion out of the initial system, <code class="docutils literal notranslate"><span class="pre">ex0</span></code>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ex0</span><span class="o">=</span><span class="n">sl</span><span class="o">.</span><span class="n">ExpSys</span><span class="p">(</span><span class="n">v0H</span><span class="o">=</span><span class="mi">600</span><span class="p">,</span><span class="n">Nucs</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;15N&#39;</span><span class="p">,</span><span class="s1">&#39;1H&#39;</span><span class="p">],</span><span class="n">vr</span><span class="o">=</span><span class="mi">60000</span><span class="p">,</span><span class="n">pwdavg</span><span class="o">=</span><span class="n">sl</span><span class="o">.</span><span class="n">PowderAvg</span><span class="p">(</span><span class="s1">&#39;bcr20&#39;</span><span class="p">),</span><span class="n">n_gamma</span><span class="o">=</span><span class="mi">30</span><span class="p">)</span>
@@ -485,7 +486,7 @@
 </section>
 <section id="generate-and-plot-pulse-sequences">
 <h2>Generate and plot pulse sequences<a class="headerlink" href="#generate-and-plot-pulse-sequences" title="Link to this heading">#</a></h2>
-<p>First half, refocusing, second half</p>
+<p>We break the REDOR sequence up into three sequences (<code class="docutils literal notranslate"><span class="pre">L.Sequence()</span></code>), a first half (<code class="docutils literal notranslate"><span class="pre">first</span></code>) with <span class="math notranslate nohighlight">\(^1\)</span>H <span class="math notranslate nohighlight">\(\pi\)</span>-pulses coming in the middle and end of the rotor period, a middle sequence (<code class="docutils literal notranslate"><span class="pre">center</span></code>) with a <span class="math notranslate nohighlight">\(^{15}\)</span>N <span class="math notranslate nohighlight">\(\pi\)</span>-pulse to refocus the <span class="math notranslate nohighlight">\(^{15}\)</span>N chemical shift, and a second half (<code class="docutils literal notranslate"><span class="pre">second</span></code>) with <span class="math notranslate nohighlight">\(^1\)</span>H <span class="math notranslate nohighlight">\(\pi\)</span>-pulses coming at the beginning and middle of the rotor period.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">v1</span><span class="o">=</span><span class="mf">150e3</span> <span class="c1">#100 kHz pulse</span>
@@ -503,6 +504,7 @@
 </div>
 </div>
 </div>
+<p>We plot the three sequences below.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span><span class="n">ax</span><span class="o">=</span><span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="n">figsize</span><span class="o">=</span><span class="p">[</span><span class="mi">8</span><span class="p">,</span><span class="mi">4</span><span class="p">],</span><span class="n">sharey</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
@@ -520,6 +522,7 @@
 </section>
 <section id="propagation">
 <h2>Propagation<a class="headerlink" href="#propagation" title="Link to this heading">#</a></h2>
+<p>We first generate a propagator for each of the three sequences (<code class="docutils literal notranslate"><span class="pre">Ucenter</span></code>,<code class="docutils literal notranslate"><span class="pre">Ufirst</span></code>,<code class="docutils literal notranslate"><span class="pre">Usecond</span></code>). Then below, we create two propagators for the first (<code class="docutils literal notranslate"><span class="pre">U1</span></code>) and second half (<code class="docutils literal notranslate"><span class="pre">U2</span></code>) of the sequence which are increased in length by one rotor period at every step of the rotor period.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">Ucenter</span><span class="o">=</span><span class="n">center</span><span class="o">.</span><span class="n">U</span><span class="p">()</span>
@@ -529,6 +532,7 @@
 </div>
 </div>
 </div>
+<p>At each step below, the density matrix (<code class="docutils literal notranslate"><span class="pre">rho</span></code>), is set back to the initial time via <code class="docutils literal notranslate"><span class="pre">rho.reset()</span></code>, and then multiplied with propagators for the first half (<code class="docutils literal notranslate"><span class="pre">U1</span></code>), the center (<code class="docutils literal notranslate"><span class="pre">Ucenter</span></code>), and for the second half (<code class="docutils literal notranslate"><span class="pre">U2</span></code>), where <code class="docutils literal notranslate"><span class="pre">U1</span></code> and <code class="docutils literal notranslate"><span class="pre">U2</span></code> are each increased by one rotor period at every step. <code class="docutils literal notranslate"><span class="pre">(U2*Ucenter*U1*rho)()</span></code> propagates <code class="docutils literal notranslate"><span class="pre">rho</span></code> with the full REDOR sequence, followed by detection (don’t forget the parenthesis!).</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">rho</span><span class="o">=</span><span class="n">sl</span><span class="o">.</span><span class="n">Rho</span><span class="p">(</span><span class="s1">&#39;15Nx&#39;</span><span class="p">,</span><span class="s1">&#39;15Nx&#39;</span><span class="p">)</span>
@@ -563,7 +567,7 @@
 </div>
 <section id="reducible-sequence">
 <h3>Reducible sequence<a class="headerlink" href="#reducible-sequence" title="Link to this heading">#</a></h3>
-<p>The above sequence is computationally expensive, requiring a basis set of 48 elements. If we consider that we’re mainly interested in the <span class="math notranslate nohighlight">\(S^+\)</span> operator of the <span class="math notranslate nohighlight">\(^{15}\)</span>N spin, then its worth noting that the <span class="math notranslate nohighlight">\(^{15}\)</span>N <span class="math notranslate nohighlight">\(\pi\)</span>-pulse in the middle of the sequence converts <span class="math notranslate nohighlight">\(S^+\)</span> into <span class="math notranslate nohighlight">\(S^-\)</span>, <span class="math notranslate nohighlight">\(S^\alpha\)</span>, and <span class="math notranslate nohighlight">\(S^\beta\)</span>, so that if we could get rid of it, we could use a basis set 1/4 as big (12 elements). Since there is no isotropic <span class="math notranslate nohighlight">\(^{15}\)</span>N shift included, we can switch the channel of the middle pulse to <span class="math notranslate nohighlight">\(^1\)</span>H. An alternative approach would be to use a <span class="math notranslate nohighlight">\(\delta\)</span>-pulse on <span class="math notranslate nohighlight">\(^{15}\)</span>N, although the basis set would then only be reduced to 24 elements, since <span class="math notranslate nohighlight">\(S^+\)</span> would still be converted to <span class="math notranslate nohighlight">\(S^-\)</span></p>
+<p>The above sequence is computationally expensive, requiring a basis set of 48 elements. If we consider that we’re mainly interested in the <span class="math notranslate nohighlight">\(S^+\)</span> operator of the <span class="math notranslate nohighlight">\(^{15}\)</span>N spin, then its worth noting that the <span class="math notranslate nohighlight">\(^{15}\)</span>N <span class="math notranslate nohighlight">\(\pi\)</span>-pulse in the middle of the sequence converts <span class="math notranslate nohighlight">\(S^+\)</span> into <span class="math notranslate nohighlight">\(S^-\)</span>, <span class="math notranslate nohighlight">\(S^\alpha\)</span>, and <span class="math notranslate nohighlight">\(S^\beta\)</span>, so that if we could get rid of it, we could use a basis set 1/4 as big (12 elements). Since there is no <span class="math notranslate nohighlight">\(^{15}\)</span>N chemical shift included in our simulation, we can switch the channel of the middle pulse to <span class="math notranslate nohighlight">\(^1\)</span>H. An alternative approach would be to use a <span class="math notranslate nohighlight">\(\delta\)</span>-pulse on <span class="math notranslate nohighlight">\(^{15}\)</span>N, although the basis set would then only be reduced to 24 elements, since <span class="math notranslate nohighlight">\(S^+\)</span> would still be converted to <span class="math notranslate nohighlight">\(S^-\)</span></p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">centerH</span><span class="o">=</span><span class="n">L</span><span class="o">.</span><span class="n">Sequence</span><span class="p">()</span><span class="o">.</span><span class="n">add_channel</span><span class="p">(</span><span class="s1">&#39;1H&#39;</span><span class="p">,</span><span class="n">t</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="n">L</span><span class="o">.</span><span class="n">taur</span><span class="o">/</span><span class="mi">2</span><span class="o">-</span><span class="n">tp</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span><span class="n">L</span><span class="o">.</span><span class="n">taur</span><span class="o">/</span><span class="mi">2</span><span class="o">+</span><span class="n">tp</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span><span class="n">L</span><span class="o">.</span><span class="n">taur</span><span class="p">],</span><span class="n">v1</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="n">v1</span><span class="p">,</span><span class="mi">0</span><span class="p">])</span>
@@ -623,11 +627,12 @@
 <img alt="../_images/b28e765f756e751fbec29a1b74da62c19bc8332d511cf00abe343923e4a71c2f.png" src="../_images/b28e765f756e751fbec29a1b74da62c19bc8332d511cf00abe343923e4a71c2f.png" />
 </div>
 </div>
+<p>We see that the reduced sequence yields the same results as before, but with matrices only 1/16 as big as the previous calculation.</p>
 </section>
 </section>
 <section id="sweep-the-correlation-time">
 <h2>Sweep the correlation time<a class="headerlink" href="#sweep-the-correlation-time" title="Link to this heading">#</a></h2>
-<p>We now re-run the above setup, but while varying the correlation time to watch the transition between seeing only the averaged dipole coupling to seeing the rigid-limit coupling.</p>
+<p>We now re-run the above setup, but while varying the correlation time to observe the transition between having a fully averaged dipole coupling and having the rigid-limit coupling.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">rho_list</span><span class="o">=</span><span class="p">[]</span>
@@ -672,7 +677,7 @@ log10(tc /s) = -3.0, 83 seconds elapsed
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span><span class="n">ax</span><span class="o">=</span><span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">4</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span><span class="n">ax</span><span class="o">=</span><span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="n">figsize</span><span class="o">=</span><span class="p">[</span><span class="mi">9</span><span class="p">,</span><span class="mf">4.5</span><span class="p">])</span>
 <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="o">.</span><span class="n">flatten</span><span class="p">()</span>
 <span class="k">for</span> <span class="n">a</span><span class="p">,</span><span class="n">l</span><span class="p">,</span><span class="n">r</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">ax</span><span class="p">,</span><span class="n">legend</span><span class="p">,</span><span class="n">rho_list</span><span class="p">):</span>
     <span class="n">r</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">ax</span><span class="o">=</span><span class="n">a</span><span class="p">)</span>
@@ -683,7 +688,6 @@ log10(tc /s) = -3.0, 83 seconds elapsed
     <span class="k">if</span> <span class="ow">not</span><span class="p">(</span><span class="n">a</span><span class="o">.</span><span class="n">is_last_row</span><span class="p">()):</span>
         <span class="n">a</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="p">)</span>
         <span class="n">a</span><span class="o">.</span><span class="n">set_xticklabels</span><span class="p">([])</span>
-<span class="n">fig</span><span class="o">.</span><span class="n">set_size_inches</span><span class="p">([</span><span class="mi">9</span><span class="p">,</span><span class="mf">4.5</span><span class="p">])</span>
 <span class="n">fig</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
 </pre></div>
 </div>
@@ -692,7 +696,7 @@ log10(tc /s) = -3.0, 83 seconds elapsed
 <img alt="../_images/b2e9e55d5f1092a78fcd04bb1f6a523d0f475ebadbe0073be90f0ed9aa709816.png" src="../_images/b2e9e55d5f1092a78fcd04bb1f6a523d0f475ebadbe0073be90f0ed9aa709816.png" />
 </div>
 </div>
-<p>We observe above that when the correlation time is shorter than about 100 <span class="math notranslate nohighlight">\(\mu\)</span>s, we see the fulling averaged coupling, and when the correlation time is longer than about 1 ms, we obtain the rigid-limit value. In between, oscillations are damped due to dynamics being on the timescale of the coupling.</p>
+<p>We observe above that when the correlation time is shorter than about 100 <span class="math notranslate nohighlight">\(\mu\)</span>s, we see the fully averaged coupling, and when the correlation time is longer than about 1 ms, we obtain the rigid-limit value. In between, oscillations are damped due to dynamics being on the timescale of the coupling.</p>
 </section>
 </section>
 

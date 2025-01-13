@@ -203,7 +203,7 @@
 <li class="toctree-l2"><a class="reference internal" href="../Chapter3/Ch3_DIPSHIFT.html"><font color="#0093AF">DIPSHIFT</font></a></li>
 <li class="toctree-l2"><a class="reference internal" href="../Chapter3/Ch3_RECRR.html"><font color="#0093AF">Relaxation in complex sequences: RECRR</font></a></li>
 <li class="toctree-l2"><a class="reference internal" href="../Chapter3/Ch3_T1_NOE.html"><font color="#0093AF"><span class="math notranslate nohighlight">\(T_1\)</span> and Nuclear Overhauser Effect</font></a></li>
-<li class="toctree-l2"><a class="reference internal" href="../Chapter3/Ch3_DARR.html"><font color="#0093AF">Dipolar Assisted Rotary Resonance</font></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Chapter3/Ch3_DARR.html"><font color="#0093AF">Understanding DARR with simulation</font></a></li>
 <li class="toctree-l2"><a class="reference internal" href="../Chapter3/Ch3_Quad.html"><font color="#0093AF">Quadrupolar phenomena</font></a></li>
 </ul>
 </details></li>
@@ -420,7 +420,7 @@
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#t-1-rho-relaxation"><span class="math notranslate nohighlight">\(T_{1\rho}\)</span> relaxation</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chemical-exchange-saturation-transfer">Chemical Exchange Saturation Transfer</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#contact-shift">Contact shift</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#spinning-side-bands-one-liner">Spinning side-bands (one liner)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#spinning-sidebands-one-liner">Spinning sidebands (one liner)</a></li>
 </ul>
             </nav>
         </div>
@@ -500,13 +500,13 @@
 </section>
 <section id="t-1-rho-relaxation">
 <h2><span class="math notranslate nohighlight">\(T_{1\rho}\)</span> relaxation<a class="headerlink" href="#t-1-rho-relaxation" title="Link to this heading">#</a></h2>
-<p><span class="math notranslate nohighlight">\(^{13}\)</span>C <span class="math notranslate nohighlight">\(T_{1\rho}\)</span> relaxation in solid-state NMR, due to a 15<span class="math notranslate nohighlight">\(^\circ\)</span> reorientation of the H–C dipole coupling, occuring with a correlation time of 100 ns.</p>
+<p><span class="math notranslate nohighlight">\(^{13}\)</span>C <span class="math notranslate nohighlight">\(T_{1\rho}\)</span> relaxation in solid-state NMR, due to a 30<span class="math notranslate nohighlight">\(^\circ\)</span> reorientation of the H–C dipole coupling, occuring with a correlation time of 100 ns.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ex0</span><span class="o">=</span><span class="n">sl</span><span class="o">.</span><span class="n">ExpSys</span><span class="p">(</span><span class="n">v0H</span><span class="o">=</span><span class="mi">600</span><span class="p">,</span><span class="n">Nucs</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;13C&#39;</span><span class="p">,</span><span class="s1">&#39;1H&#39;</span><span class="p">],</span><span class="n">vr</span><span class="o">=</span><span class="mi">10000</span><span class="p">)</span>
 <span class="n">ex1</span><span class="o">=</span><span class="n">ex0</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
 <span class="n">ex0</span><span class="o">.</span><span class="n">set_inter</span><span class="p">(</span><span class="s1">&#39;dipole&#39;</span><span class="p">,</span><span class="n">i0</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">i1</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">delta</span><span class="o">=</span><span class="mi">44000</span><span class="p">)</span>
-<span class="n">ex1</span><span class="o">.</span><span class="n">set_inter</span><span class="p">(</span><span class="s1">&#39;dipole&#39;</span><span class="p">,</span><span class="n">i0</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">i1</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">delta</span><span class="o">=</span><span class="mi">44000</span><span class="p">,</span><span class="n">euler</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">30</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">/</span><span class="mi">180</span><span class="p">,</span><span class="mi">0</span><span class="p">])</span>
+<span class="n">ex1</span><span class="o">.</span><span class="n">set_inter</span><span class="p">(</span><span class="s1">&#39;dipole&#39;</span><span class="p">,</span><span class="n">i0</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">i1</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">delta</span><span class="o">=</span><span class="mi">44000</span><span class="p">,</span><span class="n">euler_d</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">30</span><span class="p">,</span><span class="mi">0</span><span class="p">])</span>
 
 <span class="n">L</span><span class="o">=</span><span class="n">sl</span><span class="o">.</span><span class="n">Liouvillian</span><span class="p">(</span><span class="n">ex0</span><span class="p">,</span><span class="n">ex1</span><span class="p">,</span><span class="n">kex</span><span class="o">=</span><span class="n">sl</span><span class="o">.</span><span class="n">Tools</span><span class="o">.</span><span class="n">twoSite_kex</span><span class="p">(</span><span class="n">tc</span><span class="o">=</span><span class="mf">1e-7</span><span class="p">))</span>
 <span class="n">seq</span><span class="o">=</span><span class="n">L</span><span class="o">.</span><span class="n">Sequence</span><span class="p">()</span><span class="o">.</span><span class="n">add_channel</span><span class="p">(</span><span class="s1">&#39;13C&#39;</span><span class="p">,</span><span class="n">v1</span><span class="o">=</span><span class="mi">25000</span><span class="p">)</span> <span class="c1">#Defaults to 1 rotor period</span>
@@ -521,14 +521,14 @@
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>State-space reduction: 32-&gt;16
 </pre></div>
 </div>
-<img alt="../_images/8071efe41fda3c3da9e0b38947cb46a5afea6546345250559c91cd6e03b7590e.png" src="../_images/8071efe41fda3c3da9e0b38947cb46a5afea6546345250559c91cd6e03b7590e.png" />
+<img alt="../_images/c634cc06d970beba9ca231b59eb96face7be7b86988e98ec1231b8e23f890cdc.png" src="../_images/c634cc06d970beba9ca231b59eb96face7be7b86988e98ec1231b8e23f890cdc.png" />
 </div>
 </div>
 </section>
 <section id="chemical-exchange-saturation-transfer">
 <h2>Chemical Exchange Saturation Transfer<a class="headerlink" href="#chemical-exchange-saturation-transfer" title="Link to this heading">#</a></h2>
 <p>CEST is useful when a system has a major and minor population, the minor being invisible in the spectrum. However, applying a saturating field to the minor population will still be effective in saturating the major population, so that we may sweep the frequency of the saturating field to find the minor population’s resonance frequency.</p>
-<p>In this simple example, we’ll just monitor the total z-magnetization, although in the real experiment we would integrate the peak with high population (also possible in SLEEPY, but requires acquiring the full direct dimension).</p>
+<p>In this simple example, we’ll just monitor the total z-magnetization, although in the real experiment we would integrate the peak with high population (also possible in SLEEPY, but requires additional steps to acquire the full direct dimension and integrate over the correct peak).</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ex0</span><span class="o">=</span><span class="n">sl</span><span class="o">.</span><span class="n">ExpSys</span><span class="p">(</span><span class="n">v0H</span><span class="o">=</span><span class="mi">600</span><span class="p">,</span><span class="n">Nucs</span><span class="o">=</span><span class="s1">&#39;13C&#39;</span><span class="p">)</span>
@@ -594,8 +594,8 @@ State-space reduction: 16-&gt;2
 </div>
 </div>
 </section>
-<section id="spinning-side-bands-one-liner">
-<h2>Spinning side-bands (one liner)<a class="headerlink" href="#spinning-side-bands-one-liner" title="Link to this heading">#</a></h2>
+<section id="spinning-sidebands-one-liner">
+<h2>Spinning sidebands (one liner)<a class="headerlink" href="#spinning-sidebands-one-liner" title="Link to this heading">#</a></h2>
 <p>The last simulation is a little bit just for fun, but also to demonstrate some of the convenience of object-oriented programming in SLEEPY. We simulate <span class="math notranslate nohighlight">\(^{13}\)</span>C spinning sidebands resulting from chemical shift anisotropy. However, we set up the whole simulation in a single (broken) line of code and plot the result.</p>
 <p>Compare to Herzfeld/Berger figure 2c.<span class="math notranslate nohighlight">\(^1\)</span></p>
 <p>[1] J. Herzfeld, A.E. Berger. <a class="reference external" href="https://doi.org/10.1063/1.440136"><em>J.Chem. Phys.</em></a> <strong>1980</strong>, 73, 6021-6030.</p>
@@ -613,7 +613,7 @@ State-space reduction: 16-&gt;2
 Prop: 20 steps per every 1 rotor period
 </pre></div>
 </div>
-<img alt="../_images/2bb6bf71aba2ded84a83427c89105f1fca23ae15658806b7d3916cbc05b35a84.png" src="../_images/2bb6bf71aba2ded84a83427c89105f1fca23ae15658806b7d3916cbc05b35a84.png" />
+<img alt="../_images/b8d760742afe3ae07a9cdcab7715784d71a57c152543be779cb84495e4cf1642.png" src="../_images/b8d760742afe3ae07a9cdcab7715784d71a57c152543be779cb84495e4cf1642.png" />
 </div>
 </div>
 </section>
@@ -690,7 +690,7 @@ Prop: 20 steps per every 1 rotor period
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#t-1-rho-relaxation"><span class="math notranslate nohighlight">\(T_{1\rho}\)</span> relaxation</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chemical-exchange-saturation-transfer">Chemical Exchange Saturation Transfer</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#contact-shift">Contact shift</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#spinning-side-bands-one-liner">Spinning side-bands (one liner)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#spinning-sidebands-one-liner">Spinning sidebands (one liner)</a></li>
 </ul>
   </nav></div>
 

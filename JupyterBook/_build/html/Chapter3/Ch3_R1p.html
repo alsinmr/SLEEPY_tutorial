@@ -203,7 +203,7 @@
 <li class="toctree-l2"><a class="reference internal" href="Ch3_DIPSHIFT.html"><font color="#0093AF">DIPSHIFT</font></a></li>
 <li class="toctree-l2"><a class="reference internal" href="Ch3_RECRR.html"><font color="#0093AF">Relaxation in complex sequences: RECRR</font></a></li>
 <li class="toctree-l2"><a class="reference internal" href="Ch3_T1_NOE.html"><font color="#0093AF"><span class="math notranslate nohighlight">\(T_1\)</span> and Nuclear Overhauser Effect</font></a></li>
-<li class="toctree-l2"><a class="reference internal" href="Ch3_DARR.html"><font color="#0093AF">Dipolar Assisted Rotary Resonance</font></a></li>
+<li class="toctree-l2"><a class="reference internal" href="Ch3_DARR.html"><font color="#0093AF">Understanding DARR with simulation</font></a></li>
 <li class="toctree-l2"><a class="reference internal" href="Ch3_Quad.html"><font color="#0093AF">Quadrupolar phenomena</font></a></li>
 </ul>
 </details></li>
@@ -436,7 +436,10 @@
                   
   <section class="tex2jax_ignore mathjax_ignore" id="r-1-relaxation">
 <h1><font  color = "#0093AF">R<span class="math notranslate nohighlight">\(_{1ρ}\)</span> relaxation</font><a class="headerlink" href="#r-1-relaxation" title="Link to this heading">#</a></h1>
-<p>Measurement of <span class="math notranslate nohighlight">\(R_{1\rho}\)</span> in solid-state NMR is a powerful means of characterizing μs to ms dynamics. We may simulate it as the result of stochastic reorientation of anisotropic tensors, such as dipole and chemical shift anisotropies</p>
+<p>Measurement of <span class="math notranslate nohighlight">\(R_{1\rho}\)</span> in solid-state NMR is a powerful means of characterizing μs to ms dynamics.<span class="math notranslate nohighlight">\(^{1-3}\)</span> We may simulate it as the result of stochastic reorientation of anisotropic tensors, such as dipole and chemical shift anisotropies.</p>
+<p>[1] P. Ma, J.D. Haller, J. Zajakala, P. Macek, A.C. Sivertsen, D. Willbold, J. Boisbouvier, P. Schanda. <a class="reference external" href="https://doi.org/10.1002/anie.201311275"><em>Angew. Chem. Int. Ed.</em></a>, <strong>2014</strong>, 53, 4312-4317.</p>
+<p>[2] J.R. Lewandowki, M.E. Halse, M. Blackledge, L. Emsley. <a class="reference external" href="https://doi.org/10.1126/science.aaa6111"><em>Science</em></a>, <strong>2015</strong>, 348, 578.</p>
+<p>[3] A.A. Smith, E. Testori, R. Cadalbert, B.H. Meier, M. Ernst. <a class="reference external" href="https://doi.org/10.1007/s10858-016-0047-8"><em>J. Biomol. NMR</em></a>, <strong>2016</strong>, 65, 171-191.</p>
 <p><a href="https://githubtocolab.com/alsinmr/SLEEPY_tutorial/blob/main/ColabNotebooks/Chapter3/Ch3_R1p.ipynb" target="_blank"><img src="https://colab.research.google.com/assets/colab-badge.svg"></a></p>
 <section id="setup">
 <h2>Setup<a class="headerlink" href="#setup" title="Link to this heading">#</a></h2>
@@ -452,19 +455,19 @@
 </section>
 <section id="build-the-system">
 <h2>Build the system<a class="headerlink" href="#build-the-system" title="Link to this heading">#</a></h2>
-<p>We build an H–N system, with dipole coupling and <span class="math notranslate nohighlight">\(^{15}\)</span>N CSA. The system is constructed before and after a 25<span class="math notranslate nohighlight">\(^\circ\)</span> hop.</p>
+<p>We build an H–N system, with dipole coupling and <span class="math notranslate nohighlight">\(^{15}\)</span>N CSA. The system is constructed before (<code class="docutils literal notranslate"><span class="pre">ex0</span></code>) and after (<code class="docutils literal notranslate"><span class="pre">ex1</span></code>) a 25<span class="math notranslate nohighlight">\(^\circ\)</span> hop.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">delta</span><span class="o">=</span><span class="n">sl</span><span class="o">.</span><span class="n">Tools</span><span class="o">.</span><span class="n">dipole_coupling</span><span class="p">(</span><span class="mf">.102</span><span class="p">,</span><span class="s1">&#39;1H&#39;</span><span class="p">,</span><span class="s1">&#39;15N&#39;</span><span class="p">)</span>
 <span class="n">ex0</span><span class="o">=</span><span class="n">sl</span><span class="o">.</span><span class="n">ExpSys</span><span class="p">(</span><span class="n">v0H</span><span class="o">=</span><span class="mi">600</span><span class="p">,</span><span class="n">Nucs</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;15N&#39;</span><span class="p">,</span><span class="s1">&#39;1H&#39;</span><span class="p">],</span><span class="n">vr</span><span class="o">=</span><span class="mi">60000</span><span class="p">,</span><span class="n">LF</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 <span class="n">ex0</span><span class="o">.</span><span class="n">set_inter</span><span class="p">(</span><span class="s1">&#39;dipole&#39;</span><span class="p">,</span><span class="n">i0</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">i1</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">delta</span><span class="o">=</span><span class="n">delta</span><span class="p">)</span>
 <span class="c1"># The 15N CSA is oriented about 23 degrees away from the H–N bond</span>
-<span class="n">ex0</span><span class="o">.</span><span class="n">set_inter</span><span class="p">(</span><span class="s1">&#39;CSA&#39;</span><span class="p">,</span><span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">delta</span><span class="o">=</span><span class="mi">113</span><span class="p">,</span><span class="n">euler</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">23</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">/</span><span class="mi">180</span><span class="p">,</span><span class="mi">0</span><span class="p">])</span>
+<span class="n">ex0</span><span class="o">.</span><span class="n">set_inter</span><span class="p">(</span><span class="s1">&#39;CSA&#39;</span><span class="p">,</span><span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">delta</span><span class="o">=</span><span class="mi">113</span><span class="p">,</span><span class="n">euler_d</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">23</span><span class="p">,</span><span class="mi">0</span><span class="p">])</span>
 <span class="n">phi</span><span class="o">=</span><span class="mi">25</span> <span class="c1">#25 degree hop</span>
 <span class="n">ex1</span><span class="o">=</span><span class="n">ex0</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
-<span class="n">ex1</span><span class="o">.</span><span class="n">set_inter</span><span class="p">(</span><span class="s1">&#39;dipole&#39;</span><span class="p">,</span><span class="n">i0</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">i1</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">delta</span><span class="o">=</span><span class="n">delta</span><span class="p">,</span><span class="n">euler</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="n">phi</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">/</span><span class="mi">180</span><span class="p">,</span><span class="mi">0</span><span class="p">])</span>
+<span class="n">ex1</span><span class="o">.</span><span class="n">set_inter</span><span class="p">(</span><span class="s1">&#39;dipole&#39;</span><span class="p">,</span><span class="n">i0</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">i1</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">delta</span><span class="o">=</span><span class="n">delta</span><span class="p">,</span><span class="n">euler_d</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="n">phi</span><span class="p">,</span><span class="mi">0</span><span class="p">])</span>
 <span class="c1"># We want the same hop amplitude on both interactions</span>
-<span class="n">_</span><span class="o">=</span><span class="n">ex1</span><span class="o">.</span><span class="n">set_inter</span><span class="p">(</span><span class="s1">&#39;CSA&#39;</span><span class="p">,</span><span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">delta</span><span class="o">=</span><span class="mi">113</span><span class="p">,</span><span class="n">euler</span><span class="o">=</span><span class="p">[[</span><span class="mi">0</span><span class="p">,</span><span class="mi">23</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">/</span><span class="mi">180</span><span class="p">,</span><span class="mi">0</span><span class="p">],[</span><span class="mi">0</span><span class="p">,</span><span class="n">phi</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">/</span><span class="mi">180</span><span class="p">,</span><span class="mi">0</span><span class="p">]])</span>
+<span class="n">_</span><span class="o">=</span><span class="n">ex1</span><span class="o">.</span><span class="n">set_inter</span><span class="p">(</span><span class="s1">&#39;CSA&#39;</span><span class="p">,</span><span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">delta</span><span class="o">=</span><span class="mi">113</span><span class="p">,</span><span class="n">euler_d</span><span class="o">=</span><span class="p">[[</span><span class="mi">0</span><span class="p">,</span><span class="mi">23</span><span class="p">,</span><span class="mi">0</span><span class="p">],[</span><span class="mi">0</span><span class="p">,</span><span class="n">phi</span><span class="p">,</span><span class="mi">0</span><span class="p">]])</span>
 
 <span class="n">L</span><span class="o">=</span><span class="n">sl</span><span class="o">.</span><span class="n">Liouvillian</span><span class="p">(</span><span class="n">ex0</span><span class="p">,</span><span class="n">ex1</span><span class="p">,</span><span class="n">kex</span><span class="o">=</span><span class="n">sl</span><span class="o">.</span><span class="n">Tools</span><span class="o">.</span><span class="n">twoSite_kex</span><span class="p">(</span><span class="mf">3e-7</span><span class="p">))</span>
 
@@ -478,21 +481,18 @@
 </div>
 <section id="view-the-tensors">
 <h3>View the tensors<a class="headerlink" href="#view-the-tensors" title="Link to this heading">#</a></h3>
-<p>Below, we view the CSA before and after the hop.</p>
+<p>Below, we view the CSA before and after the hop, using the <code class="docutils literal notranslate"><span class="pre">ex.plot_inter()</span></code> function.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="o">=</span><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">[</span><span class="mi">8</span><span class="p">,</span><span class="mi">4</span><span class="p">])</span>
 <span class="n">ax</span><span class="o">=</span><span class="p">[</span><span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="n">k</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span><span class="n">projection</span><span class="o">=</span><span class="s1">&#39;3d&#39;</span><span class="p">)</span> <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">)]</span>
 <span class="n">ex0</span><span class="o">.</span><span class="n">plot_inter</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
-<span class="n">ex1</span><span class="o">.</span><span class="n">plot_inter</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+<span class="n">_</span><span class="o">=</span><span class="n">ex1</span><span class="o">.</span><span class="n">plot_inter</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;Axes3DSubplot:title={&#39;center&#39;:&#39;n=0&#39;}, xlabel=&#39;kHz&#39;, ylabel=&#39;kHz&#39;&gt;
-</pre></div>
-</div>
-<img alt="../_images/8321c8d37dec9c0196e250404933690c2329c7111ce065d28c7b653abeac691c.png" src="../_images/8321c8d37dec9c0196e250404933690c2329c7111ce065d28c7b653abeac691c.png" />
+<img alt="../_images/908f630f9f5a929bbc08e99efe42f02e4b6ea9ebf32350cab580341ba7783adf.png" src="../_images/908f630f9f5a929bbc08e99efe42f02e4b6ea9ebf32350cab580341ba7783adf.png" />
 </div>
 </div>
 </section>
@@ -519,14 +519,14 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/522f98b8bc65adbc0ee489695704ffe4c810e145f7660fa119535590dae027c3.png" src="../_images/522f98b8bc65adbc0ee489695704ffe4c810e145f7660fa119535590dae027c3.png" />
+<img alt="../_images/d0ad81ffeba6e18d09f2f91099ffee6c9cb1b8514ad4966f2114157b3432f5c8.png" src="../_images/d0ad81ffeba6e18d09f2f91099ffee6c9cb1b8514ad4966f2114157b3432f5c8.png" />
 </div>
 </div>
 </section>
 <section id="origin-of-multi-exponentiality">
 <h3>Origin of multi-exponentiality<a class="headerlink" href="#origin-of-multi-exponentiality" title="Link to this heading">#</a></h3>
 <p>Note that the signal decay is multi-exponential. This is always the case in solid-state NMR, where different orientations give rise to different decay rates. However, this curve is particularly multiexponential, due to TROSY-like effects resulting from relaxation due to both the dipole and CSA (see <a class="reference internal" href="../Chapter2/Ch2_TROSY.html"><span class="std std-doc">TROSY</span></a> in chapter 2).</p>
-<p>We may investigate this by actively separating components when the <span class="math notranslate nohighlight">\(^1\)</span>H is in the α and β states. Here, we must construct our detection matrices explicitly from matrices.</p>
+<p>We may investigate this by actively separating components when the <span class="math notranslate nohighlight">\(^1\)</span>H is in the α and β states. Here, we must construct our detection operators explicitly from the spin-matrices found in <code class="docutils literal notranslate"><span class="pre">ex0.Op</span></code>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">rho</span><span class="o">=</span><span class="n">sl</span><span class="o">.</span><span class="n">Rho</span><span class="p">(</span><span class="s1">&#39;15Nx&#39;</span><span class="p">,[</span><span class="n">ex0</span><span class="o">.</span><span class="n">Op</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">x</span><span class="nd">@ex0</span><span class="o">.</span><span class="n">Op</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">alpha</span><span class="p">,</span><span class="n">ex0</span><span class="o">.</span><span class="n">Op</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">x</span><span class="nd">@ex0</span><span class="o">.</span><span class="n">Op</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">beta</span><span class="p">])</span>
@@ -540,10 +540,9 @@
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>State-space reduction: 32-&gt;16
 </pre></div>
 </div>
-<img alt="../_images/adbf4640864b3b93752730efc4fdabfe2f336daf720a3571b70ebdb1751447e7.png" src="../_images/adbf4640864b3b93752730efc4fdabfe2f336daf720a3571b70ebdb1751447e7.png" />
 </div>
 </div>
-<p>Indeed, we see two very different decay curves, corresponding to the two different components. However, this is actually somewhat unrealistic in solid-state NMR, where <span class="math notranslate nohighlight">\(^1\)</span>H spin-diffusion periodically inverts the <span class="math notranslate nohighlight">\(^1\)</span>H spins. We may add this effect by flipping the <span class="math notranslate nohighlight">\(^1\)</span>H with a rate of 50 s<span class="math notranslate nohighlight">\(^{-1}\)</span>, to see how the two curves re-converge. Here, we plot the average curve plus the two <span class="math notranslate nohighlight">\(^1\)</span>H states separately.</p>
+<p>Indeed, we see two very different decay curves, corresponding to the two different components. However, this is somewhat unrealistic in solid-state NMR, where <span class="math notranslate nohighlight">\(^1\)</span>H spin-diffusion periodically inverts the <span class="math notranslate nohighlight">\(^1\)</span>H spins. We may add this effect by flipping the <span class="math notranslate nohighlight">\(^1\)</span>H with a rate of 50 s<span class="math notranslate nohighlight">\(^{-1}\)</span>, to see how the two curves re-converge. Here, we plot the average curve plus the two <span class="math notranslate nohighlight">\(^1\)</span>H states separately.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">L</span><span class="o">.</span><span class="n">add_relax</span><span class="p">(</span><span class="s1">&#39;SpinDiffusion&#39;</span><span class="p">,</span><span class="n">i</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">k</span><span class="o">=</span><span class="mi">50</span><span class="p">)</span>
@@ -559,13 +558,13 @@
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>State-space reduction: 32-&gt;16
 </pre></div>
 </div>
-<img alt="../_images/8858ec636d9068f04748560198efd0bf984eb880d64bdf5969b80de776744334.png" src="../_images/8858ec636d9068f04748560198efd0bf984eb880d64bdf5969b80de776744334.png" />
+<img alt="../_images/84db025d0b45bd78c2ae40df029a9fa841f317da0043601b1265faec630944d0.png" src="../_images/84db025d0b45bd78c2ae40df029a9fa841f317da0043601b1265faec630944d0.png" />
 </div>
 </div>
 </section>
 <section id="field-strength-dependence">
 <h3>Field-strength dependence<a class="headerlink" href="#field-strength-dependence" title="Link to this heading">#</a></h3>
-<p>We may also observe how the decay rates depend on the applied field strength. Below, we apply field strengths of 10, 20, 30, 40, and 50 kHz, where we expect faster relaxation, the closer we are to the MAS frequency (60 kHz).</p>
+<p>We may also observe how the decay rates depend on the applied field strength. Below, we apply field strengths of 10, 20, 30, 40, and 50 kHz, where we expect faster relaxation as we get closer to the MAS frequency (60 kHz).</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">rho</span><span class="o">=</span><span class="p">[]</span>
@@ -593,7 +592,7 @@ State-space reduction: 32-&gt;16
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/466117ca28669cda5d4bcf3b1742a5248eba968df73e42c635e18d9310e23fb7.png" src="../_images/466117ca28669cda5d4bcf3b1742a5248eba968df73e42c635e18d9310e23fb7.png" />
+<img alt="../_images/b7bbfa3f5605ba9bd27b0278b2eeb4cc2bfe60eb3d2197c0c510d322c72a07f3.png" src="../_images/b7bbfa3f5605ba9bd27b0278b2eeb4cc2bfe60eb3d2197c0c510d322c72a07f3.png" />
 </div>
 </div>
 <p>The curves are fairly similar, indicating a relatively fast motion (300 ns was input). We may slow down this motion to obtain faster relaxation, but also more dispersion among the curves.</p>
@@ -625,15 +624,19 @@ State-space reduction: 32-&gt;16
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/a918a51159b38c1a85853304018ca7f78b450a91d757b06555b54a86bbf4f9cd.png" src="../_images/a918a51159b38c1a85853304018ca7f78b450a91d757b06555b54a86bbf4f9cd.png" />
+<img alt="../_images/df5e7f5f0c1942d6cde36f78ed2073cda8be8661acab56f3fbce97b91941d530.png" src="../_images/df5e7f5f0c1942d6cde36f78ed2073cda8be8661acab56f3fbce97b91941d530.png" />
 </div>
 </div>
-<p>We may also investigate correlation time dependence for several field strengths. In this case, we use a special feature of SLEEPY that extracts non-oscillating terms from the propagator or sequence directly, without actually propagating the system (we can pull these from the eigenvectors of the propagator, and weight them depending on the density matrix and detection operator). This is achieved using the <code class="docutils literal notranslate"><span class="pre">rho.extract_decay_rates</span></code> function. This function only works where oscillating terms should be neglected (so, for example, we cannot get <span class="math notranslate nohighlight">\(T_2\)</span> this way, peaks in a spectrum both oscillate and decay).</p>
+<p>We may also investigate correlation time dependence for several field strengths. In this case, we use a special feature of SLEEPY, the <code class="docutils literal notranslate"><span class="pre">rho.extract_decay_rates(...)</span></code> function, which extracts non-oscillating terms from the propagator or sequence directly, without actually propagating the system. This is achieved by finding the eigenvalues and eigenvectors of the propagator. The real parts of the logarithm of the eigenvalues yield the decay rates, where we may filter for non-oscillating terms by finding eigenvalues that are strictly real.</p>
+<p>Note that various modes for this function exist, yielding different averaging and different weightings. Type <code class="docutils literal notranslate"><span class="pre">help(rho.extract_decay_rates)</span></code> for more details.</p>
+<p>This mode of the function only works where oscillating terms should be neglected (so, for example, we cannot get <span class="math notranslate nohighlight">\(T_2\)</span> this way, because peaks in a spectrum both oscillate and decay).</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sl</span><span class="o">.</span><span class="n">Defaults</span><span class="p">[</span><span class="s1">&#39;verbose&#39;</span><span class="p">]</span><span class="o">=</span><span class="kc">False</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># ~ 10 minutes calculation time (164 simulations with powder average)</span>
+<span class="kn">from</span> <span class="nn">time</span> <span class="kn">import</span> <span class="n">time</span>
+<span class="n">sl</span><span class="o">.</span><span class="n">Defaults</span><span class="p">[</span><span class="s1">&#39;verbose&#39;</span><span class="p">]</span><span class="o">=</span><span class="kc">False</span>
 <span class="n">tc0</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">logspace</span><span class="p">(</span><span class="o">-</span><span class="mi">8</span><span class="p">,</span><span class="o">-</span><span class="mi">4</span><span class="p">,</span><span class="mi">41</span><span class="p">)</span>
-<span class="n">v10</span><span class="o">=</span><span class="p">[</span><span class="mf">10e3</span><span class="p">,</span><span class="mf">25e3</span><span class="p">,</span><span class="mf">40e3</span><span class="p">,</span><span class="mf">55e3</span><span class="p">]</span>
+<span class="n">v10</span><span class="o">=</span><span class="p">[</span><span class="mf">10e3</span><span class="p">,</span><span class="mf">25e3</span><span class="p">,</span><span class="mf">40e3</span><span class="p">,</span><span class="mf">50e3</span><span class="p">]</span>
 <span class="n">R1p</span><span class="o">=</span><span class="p">{</span><span class="n">v1</span><span class="p">:</span><span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">tc0</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span> <span class="k">for</span> <span class="n">v1</span> <span class="ow">in</span> <span class="n">v10</span><span class="p">}</span>
 <span class="n">rho</span><span class="o">=</span><span class="n">sl</span><span class="o">.</span><span class="n">Rho</span><span class="p">(</span><span class="s1">&#39;15Nx&#39;</span><span class="p">,</span><span class="s1">&#39;15Nx&#39;</span><span class="p">)</span>
 
@@ -649,11 +652,11 @@ State-space reduction: 32-&gt;16
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>log10(tc)=-8.0, 17 seconds elapsed
-log10(tc)=-7.0, 183 seconds elapsed
-log10(tc)=-6.0, 322 seconds elapsed
-log10(tc)=-5.0, 454 seconds elapsed
-log10(tc)=-4.0, 583 seconds elapsed
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>log10(tc)=-8.0, 14 seconds elapsed
+log10(tc)=-7.0, 153 seconds elapsed
+log10(tc)=-6.0, 272 seconds elapsed
+log10(tc)=-5.0, 385 seconds elapsed
+log10(tc)=-4.0, 540 seconds elapsed
 </pre></div>
 </div>
 </div>
@@ -665,22 +668,19 @@ log10(tc)=-4.0, 583 seconds elapsed
     <span class="n">ax</span><span class="o">.</span><span class="n">semilogx</span><span class="p">(</span><span class="n">tc0</span><span class="p">,</span><span class="n">R1p</span><span class="p">[</span><span class="n">v1</span><span class="p">],</span><span class="n">label</span><span class="o">=</span><span class="sa">fr</span><span class="s1">&#39;$\nu_1$ = </span><span class="si">{</span><span class="n">v1</span><span class="o">/</span><span class="mf">1e3</span><span class="si">:</span><span class="s1">.0f</span><span class="si">}</span><span class="s1"> kHz&#39;</span><span class="p">)</span>
 <span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
 <span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;$\tau_c$ / s&#39;</span><span class="p">)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;$R_{1\rho}$ / s$^{-1}$&#39;</span><span class="p">)</span>
+<span class="n">_</span><span class="o">=</span><span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;$R_{1\rho}$ / s$^{-1}$&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Text(0, 0.5, &#39;$R_{1\\rho}$ / s$^{-1}$&#39;)
-</pre></div>
-</div>
-<img alt="../_images/15549698e2f7b28b43ded1827cd8206eddfa2338132d0489b248527dfda7ad9d.png" src="../_images/15549698e2f7b28b43ded1827cd8206eddfa2338132d0489b248527dfda7ad9d.png" />
+<img alt="../_images/b3a8341eef3deb341d844a2eb5c704dda8f8a24280450ce72da2b87d8c23f11b.png" src="../_images/b3a8341eef3deb341d844a2eb5c704dda8f8a24280450ce72da2b87d8c23f11b.png" />
 </div>
 </div>
 </section>
 </section>
 <section id="combined-decay-from-reorientation-and-chemical-shift-modulation">
 <h2>Combined decay from reorientation and chemical shift modulation<a class="headerlink" href="#combined-decay-from-reorientation-and-chemical-shift-modulation" title="Link to this heading">#</a></h2>
-<p>It is also possible that we have both reorientational motion <em>and</em> chemical shift modulation, induced by the same motion. To investigate this, we add chemical shifts to the <span class="math notranslate nohighlight">\(^{15}\)</span>N, and investigate the field-strength dependence of the relaxation.</p>
+<p>It is also possible that we have both reorientational motion <em>and</em> chemical shift modulation, induced by the same motion. To investigate this the results, we add chemical shifts to the <span class="math notranslate nohighlight">\(^{15}\)</span>N, and observe the field-strength dependence of the relaxation.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ex0</span><span class="o">.</span><span class="n">set_inter</span><span class="p">(</span><span class="s1">&#39;CS&#39;</span><span class="p">,</span><span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">ppm</span><span class="o">=-</span><span class="mi">5</span><span class="p">)</span>
@@ -694,7 +694,7 @@ log10(tc)=-4.0, 583 seconds elapsed
 <span class="n">v10</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">51</span><span class="p">,</span><span class="mi">21</span><span class="p">)</span><span class="o">*</span><span class="mf">1e3</span>
 <span class="k">for</span> <span class="n">v1</span> <span class="ow">in</span> <span class="n">v10</span><span class="p">:</span>
     <span class="n">seq</span><span class="o">.</span><span class="n">add_channel</span><span class="p">(</span><span class="s1">&#39;15N&#39;</span><span class="p">,</span><span class="n">v1</span><span class="o">=</span><span class="n">v1</span><span class="p">)</span>
-    <span class="n">R1p</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">rho</span><span class="o">.</span><span class="n">extract_decay_rates</span><span class="p">(</span><span class="n">seq</span><span class="p">,</span><span class="n">pwdavg</span><span class="o">=</span><span class="kc">True</span><span class="p">))</span>
+    <span class="n">R1p</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">rho</span><span class="o">.</span><span class="n">extract_decay_rates</span><span class="p">(</span><span class="n">seq</span><span class="p">,</span><span class="n">mode</span><span class="o">=</span><span class="s1">&#39;pwdavg&#39;</span><span class="p">))</span>
 </pre></div>
 </div>
 </div>
@@ -704,18 +704,17 @@ log10(tc)=-4.0, 583 seconds elapsed
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ax</span><span class="o">=</span><span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">[</span><span class="mi">5</span><span class="p">,</span><span class="mi">4</span><span class="p">])[</span><span class="mi">1</span><span class="p">]</span>
 <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">v10</span><span class="o">/</span><span class="mf">1e3</span><span class="p">,</span><span class="n">R1p</span><span class="p">)</span>
 <span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;$\nu_1$ / kHz&#39;</span><span class="p">)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;$R_{1\rho}$ / s$^{-1}$&#39;</span><span class="p">)</span>
+<span class="n">_</span><span class="o">=</span><span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;$R_{1\rho}$ / s$^{-1}$&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Text(0, 0.5, &#39;$R_{1\\rho}$ / s$^{-1}$&#39;)
-</pre></div>
-</div>
-<img alt="../_images/b64f18b2a797fb0b4692568901e29c22ef4b528460d77a4a4ffd4ca9b61025b5.png" src="../_images/b64f18b2a797fb0b4692568901e29c22ef4b528460d77a4a4ffd4ca9b61025b5.png" />
+<img alt="../_images/bd481647f1cbcc2bc1b4ea6339d4fa351b97f241109fc8ced724473b461e336b.png" src="../_images/bd481647f1cbcc2bc1b4ea6339d4fa351b97f241109fc8ced724473b461e336b.png" />
 </div>
 </div>
-<p>We see increased relaxation rate constants at low applied fields, due to chemical shift modulation, and at high fields due to reorientational motion of the <span class="math notranslate nohighlight">\(^{15}\)</span>N CSA and H–N dipole coupling. Note that the timescale dependence of the two relaxation mechanisms is different. This experiment is particularly interesting because while being essentially the same experiment, we investigate two different mechanisms of relaxation just based on the field-strength setting.</p>
+<p>We see increased relaxation rate constants at low RF-fields, due to chemical shift modulation, and at high RF-fields due to reorientational motion of the <span class="math notranslate nohighlight">\(^{15}\)</span>N CSA and H–N dipole coupling. Note that the timescale dependence of the two relaxation mechanisms is different. This experiment is particularly interesting because while being essentially the same experiment, we investigate two different mechanisms of relaxation just based on the field-strength setting.<span class="math notranslate nohighlight">\(^{4-5}\)</span></p>
+<p>[4] J.D. Haller, P. Schanda. <a class="reference external" href="https://doi.org/10.1007/s10858-013-9787-x"><em>J. Biomol. NMR</em></a>, <strong>2013</strong>, 57, 263-280.</p>
+<p>[5] P. Rovó. <a class="reference external" href="https://doi.org/10.1016/j.ssnmr.2020.101665"><em>Solid-State NMR</em></a>, <strong>2020</strong>, 108, 101665.</p>
 </section>
 </section>
 

@@ -203,7 +203,7 @@
 <li class="toctree-l2"><a class="reference internal" href="../Chapter3/Ch3_DIPSHIFT.html"><font color="#0093AF">DIPSHIFT</font></a></li>
 <li class="toctree-l2"><a class="reference internal" href="../Chapter3/Ch3_RECRR.html"><font color="#0093AF">Relaxation in complex sequences: RECRR</font></a></li>
 <li class="toctree-l2"><a class="reference internal" href="../Chapter3/Ch3_T1_NOE.html"><font color="#0093AF"><span class="math notranslate nohighlight">\(T_1\)</span> and Nuclear Overhauser Effect</font></a></li>
-<li class="toctree-l2"><a class="reference internal" href="../Chapter3/Ch3_DARR.html"><font color="#0093AF">Dipolar Assisted Rotary Resonance</font></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Chapter3/Ch3_DARR.html"><font color="#0093AF">Understanding DARR with simulation</font></a></li>
 <li class="toctree-l2"><a class="reference internal" href="../Chapter3/Ch3_Quad.html"><font color="#0093AF">Quadrupolar phenomena</font></a></li>
 </ul>
 </details></li>
@@ -454,7 +454,7 @@
 </section>
 <section id="build-the-system">
 <h2>Build the system<a class="headerlink" href="#build-the-system" title="Link to this heading">#</a></h2>
-<p>We build an electron-nuclear system, noting that the nucleus needs to be in the lab frame, since the pseudosecular hyperfine coupling drives NOVEL transfer. We start monitoring magnetization during the NOVEL sequence (a <span class="math notranslate nohighlight">\(pi/2\)</span>-pulse followed by a spin-lock).</p>
+<p>We build an electron-nuclear system, noting that the nucleus needs to be in the lab frame, since the pseudosecular hyperfine coupling drives NOVEL transfer. We start monitoring magnetization during a single NOVEL sequence (a <span class="math notranslate nohighlight">\(pi/2\)</span>-pulse followed by a spin-lock).</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ex</span><span class="o">=</span><span class="n">sl</span><span class="o">.</span><span class="n">ExpSys</span><span class="p">(</span><span class="n">v0H</span><span class="o">=</span><span class="mi">212</span><span class="p">,</span><span class="n">Nucs</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;1H&#39;</span><span class="p">,</span><span class="s1">&#39;e&#39;</span><span class="p">],</span><span class="n">vr</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">LF</span><span class="o">=</span><span class="p">[</span><span class="kc">True</span><span class="p">,</span><span class="kc">False</span><span class="p">],</span><span class="n">T_K</span><span class="o">=</span><span class="mi">80</span><span class="p">,</span><span class="n">pwdavg</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
@@ -486,10 +486,10 @@
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;AxesSubplot:xlabel=&#39;t / $\\mu$s&#39;, ylabel=&#39;&lt;Op&gt;&#39;&gt;
 </pre></div>
 </div>
-<img alt="../_images/fbe2dab33e92ac2a6a931cfd51d0b42f3016ab76b8ff5a9bacfbb92c5f87b08c.png" src="../_images/fbe2dab33e92ac2a6a931cfd51d0b42f3016ab76b8ff5a9bacfbb92c5f87b08c.png" />
+<img alt="../_images/27973e924dfb2f98e34fdb47b7f6a6680ec88995d621f1cdcb96d0b49a6f8f7c.png" src="../_images/27973e924dfb2f98e34fdb47b7f6a6680ec88995d621f1cdcb96d0b49a6f8f7c.png" />
 </div>
 </div>
-<p>We monitor electron <em>z</em>- and <em>y</em>-magnetization, where an initial <span class="math notranslate nohighlight">\(\pi\)</span>/2-pulse on the electron converts all electron <em>z</em>-magnetization to <em>y</em>-magnetization. That magnetization is then transferred to the nucleus. However, it also decays primarily due to the electron <span class="math notranslate nohighlight">\(T_2\)</span> relaxation. Then, we see that the length of the transfer could be optimized to minimize this loss, by setting the transfer time near to where the maximum nuclear polarization occurs. We add a recycle delay (<code class="docutils literal notranslate"><span class="pre">RD</span></code>) to see what happens to the magnetization after the transfer.</p>
+<p>We monitor electron <em>z</em>- and <em>y</em>-magnetization, where an initial <span class="math notranslate nohighlight">\(\pi\)</span>/2-pulse on the electron converts all electron <em>z</em>-magnetization to <em>y</em>-magnetization. That magnetization is then transferred <span class="math notranslate nohighlight">\(z\)</span>-magnetization on the nucleus. However, it also decays primarily due to the electron <span class="math notranslate nohighlight">\(T_2\)</span> relaxation. Then, we see that the length of the transfer could be optimized to minimize this loss, by setting the transfer time near to where the maximum nuclear polarization occurs. We add a recycle delay (<code class="docutils literal notranslate"><span class="pre">RD</span></code>) to see what happens to the magnetization after the transfer.</p>
 <section id="stop-transfer-after-maximum-reached">
 <h3>Stop transfer after maximum reached<a class="headerlink" href="#stop-transfer-after-maximum-reached" title="Link to this heading">#</a></h3>
 <div class="cell docutils container">
@@ -509,7 +509,7 @@
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;AxesSubplot:xlabel=&#39;t / $\\mu$s&#39;, ylabel=&#39;&lt;Op&gt;&#39;&gt;
 </pre></div>
 </div>
-<img alt="../_images/34ff2d35d9aefc1d63d0decaf89b74367757f64b592ad54b00c055d81ffe09d6.png" src="../_images/34ff2d35d9aefc1d63d0decaf89b74367757f64b592ad54b00c055d81ffe09d6.png" />
+<img alt="../_images/0952cadb90ef43c7d40ca8a03a0ef60037daa71eea76f4782787506a0e484c98.png" src="../_images/0952cadb90ef43c7d40ca8a03a0ef60037daa71eea76f4782787506a0e484c98.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -551,7 +551,7 @@
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;AxesSubplot:xlabel=&#39;t / ms&#39;, ylabel=&#39;&lt;Op&gt;&#39;&gt;
 </pre></div>
 </div>
-<img alt="../_images/b05cbe3227e15b5338583d9a2398e3496643dbb03090c35f2f6b12b9a11b84c9.png" src="../_images/b05cbe3227e15b5338583d9a2398e3496643dbb03090c35f2f6b12b9a11b84c9.png" />
+<img alt="../_images/0e61f8622f679dd350c5e12e6dbfbbd33ce14b72e4dcd68ab4439ce84da1fe90.png" src="../_images/0e61f8622f679dd350c5e12e6dbfbbd33ce14b72e4dcd68ab4439ce84da1fe90.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -592,7 +592,7 @@
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;AxesSubplot:xlabel=&#39;t / ms&#39;, ylabel=&#39;&lt;Op&gt;&#39;&gt;
 </pre></div>
 </div>
-<img alt="../_images/a26786f9df15ff883e4d0c41b55d60b82bb47bb2e64c2157d136ef8cbf159e43.png" src="../_images/a26786f9df15ff883e4d0c41b55d60b82bb47bb2e64c2157d136ef8cbf159e43.png" />
+<img alt="../_images/eeb209d4dcce077ce0fa0271331204416ce17ec13da6b74ac67d37f6ebf9d89d.png" src="../_images/eeb209d4dcce077ce0fa0271331204416ce17ec13da6b74ac67d37f6ebf9d89d.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -615,11 +615,9 @@
 <p>To get the true optimimum, we would need to include the powder average, but for sake of example, this is sufficient.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ex</span><span class="o">=</span><span class="n">sl</span><span class="o">.</span><span class="n">ExpSys</span><span class="p">(</span><span class="n">v0H</span><span class="o">=</span><span class="mi">212</span><span class="p">,</span><span class="n">Nucs</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;1H&#39;</span><span class="p">,</span><span class="s1">&#39;e&#39;</span><span class="p">],</span><span class="n">vr</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">LF</span><span class="o">=</span><span class="p">[</span><span class="kc">True</span><span class="p">,</span><span class="kc">False</span><span class="p">],</span><span class="n">T_K</span><span class="o">=</span><span class="mi">80</span><span class="p">,</span><span class="n">pwdavg</span><span class="o">=</span><span class="s1">&#39;alpha0beta45&#39;</span><span class="p">)</span>
-<span class="n">delta</span><span class="o">=</span><span class="mf">4e5</span>
-<span class="n">ex</span><span class="o">.</span><span class="n">set_inter</span><span class="p">(</span><span class="s1">&#39;hyperfine&#39;</span><span class="p">,</span><span class="n">i0</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">i1</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">Axx</span><span class="o">=-</span><span class="n">delta</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span><span class="n">Ayy</span><span class="o">=-</span><span class="n">delta</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span><span class="n">Azz</span><span class="o">=</span><span class="n">delta</span><span class="p">)</span>
-
-<span class="n">L</span><span class="o">=</span><span class="n">ex</span><span class="o">.</span><span class="n">Liouvillian</span><span class="p">()</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ex</span><span class="o">.</span><span class="n">pwdavg</span><span class="o">=</span><span class="s1">&#39;alpha0beta45&#39;</span>
+<span class="n">L</span><span class="o">.</span><span class="n">clear_cache</span><span class="p">()</span>
+<span class="n">L</span><span class="o">.</span><span class="n">clear_relax</span><span class="p">()</span>
 
 <span class="n">L</span><span class="o">.</span><span class="n">add_relax</span><span class="p">(</span><span class="n">Type</span><span class="o">=</span><span class="s1">&#39;T2&#39;</span><span class="p">,</span><span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">T2</span><span class="o">=</span><span class="mf">5e-3</span><span class="p">,</span><span class="n">OS</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 <span class="n">L</span><span class="o">.</span><span class="n">add_relax</span><span class="p">(</span><span class="n">Type</span><span class="o">=</span><span class="s1">&#39;T2&#39;</span><span class="p">,</span><span class="n">i</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">T2</span><span class="o">=</span><span class="mf">.890e-6</span><span class="p">,</span><span class="n">OS</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
@@ -649,15 +647,12 @@
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ax</span><span class="o">=</span><span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()[</span><span class="mi">1</span><span class="p">]</span>
 <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">RD0</span><span class="o">*</span><span class="mf">1e3</span><span class="p">,</span><span class="n">e</span><span class="p">)</span>
 <span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;RD / ms&#39;</span><span class="p">)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Enhancement&#39;</span><span class="p">)</span>
+<span class="n">_</span><span class="o">=</span><span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Enhancement&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Text(0, 0.5, &#39;Enhancement&#39;)
-</pre></div>
-</div>
-<img alt="../_images/83f0d50450e3b4aea7eb9d72a9fb7717c09af0e027b5af523f42574f7e0e09be.png" src="../_images/83f0d50450e3b4aea7eb9d72a9fb7717c09af0e027b5af523f42574f7e0e09be.png" />
+<img alt="../_images/4abde19fa4b093e41414dd8aabcf66d67490e37981a547805558bebd24477865.png" src="../_images/4abde19fa4b093e41414dd8aabcf66d67490e37981a547805558bebd24477865.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -680,11 +675,7 @@
 <p>The problem is that the while for one repetition of the NOVEL sequence, the optimal <span class="math notranslate nohighlight">\(^1H\)</span> polarization occured at about 2.5 μs. However, significant electron polarization loss has already occured for a spin-lock of that length, given the <span class="math notranslate nohighlight">\(T_2\)</span> of 0.89 μs (note under the spin-lock, the effective <span class="math notranslate nohighlight">\(T_{1\rho}\)</span> becomes twice the set value of <span class="math notranslate nohighlight">\(T_2\)</span>). So, we can also optimize the spin-lock length (using 5*<span class="math notranslate nohighlight">\(T_1\)</span> for the recycle delay).</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ex</span><span class="o">=</span><span class="n">sl</span><span class="o">.</span><span class="n">ExpSys</span><span class="p">(</span><span class="n">v0H</span><span class="o">=</span><span class="mi">212</span><span class="p">,</span><span class="n">Nucs</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;1H&#39;</span><span class="p">,</span><span class="s1">&#39;e&#39;</span><span class="p">],</span><span class="n">vr</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">LF</span><span class="o">=</span><span class="p">[</span><span class="kc">True</span><span class="p">,</span><span class="kc">False</span><span class="p">],</span><span class="n">T_K</span><span class="o">=</span><span class="mi">80</span><span class="p">,</span><span class="n">pwdavg</span><span class="o">=</span><span class="s1">&#39;alpha0beta45&#39;</span><span class="p">)</span>
-<span class="n">delta</span><span class="o">=</span><span class="mf">4e5</span>
-<span class="n">ex</span><span class="o">.</span><span class="n">set_inter</span><span class="p">(</span><span class="s1">&#39;hyperfine&#39;</span><span class="p">,</span><span class="n">i0</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">i1</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">Axx</span><span class="o">=-</span><span class="n">delta</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span><span class="n">Ayy</span><span class="o">=-</span><span class="n">delta</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span><span class="n">Azz</span><span class="o">=</span><span class="n">delta</span><span class="p">)</span>
-
-<span class="n">L</span><span class="o">=</span><span class="n">ex</span><span class="o">.</span><span class="n">Liouvillian</span><span class="p">()</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">L</span><span class="o">.</span><span class="n">clear_relax</span><span class="p">()</span>
 
 <span class="n">L</span><span class="o">.</span><span class="n">add_relax</span><span class="p">(</span><span class="n">Type</span><span class="o">=</span><span class="s1">&#39;T2&#39;</span><span class="p">,</span><span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">T2</span><span class="o">=</span><span class="mf">5e-3</span><span class="p">,</span><span class="n">OS</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 <span class="n">L</span><span class="o">.</span><span class="n">add_relax</span><span class="p">(</span><span class="n">Type</span><span class="o">=</span><span class="s1">&#39;T2&#39;</span><span class="p">,</span><span class="n">i</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">T2</span><span class="o">=</span><span class="mf">.890e-6</span><span class="p">,</span><span class="n">OS</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
@@ -715,15 +706,12 @@
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ax</span><span class="o">=</span><span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()[</span><span class="mi">1</span><span class="p">]</span>
 <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">SL0</span><span class="o">*</span><span class="mf">1e6</span><span class="p">,</span><span class="n">e</span><span class="p">)</span>
 <span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Spin-lock length / $\mu$s&#39;</span><span class="p">)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Enhancement&#39;</span><span class="p">)</span>
+<span class="n">_</span><span class="o">=</span><span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Enhancement&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Text(0, 0.5, &#39;Enhancement&#39;)
-</pre></div>
-</div>
-<img alt="../_images/03610d33539dc8160be144df0cfe43b8588afbdee22e0c0e189748ea6d1095ae.png" src="../_images/03610d33539dc8160be144df0cfe43b8588afbdee22e0c0e189748ea6d1095ae.png" />
+<img alt="../_images/2be2fa9024e470e5019360aa07eb1b30aba3a56860114d4c51bbb63912d76112.png" src="../_images/2be2fa9024e470e5019360aa07eb1b30aba3a56860114d4c51bbb63912d76112.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -748,15 +736,12 @@
 <span class="n">rho</span><span class="o">.</span><span class="n">DetProp</span><span class="p">(</span><span class="n">seq</span><span class="p">,</span><span class="n">n</span><span class="o">=</span><span class="mi">500</span><span class="p">)</span>
 <span class="n">ax</span><span class="o">=</span><span class="n">rho</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="s1">&#39;s&#39;</span><span class="p">)</span>
 <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span><span class="n">rho</span><span class="o">.</span><span class="n">t_axis</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]],</span><span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span><span class="o">*</span><span class="n">ex</span><span class="o">.</span><span class="n">Peq</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;grey&#39;</span><span class="p">,</span><span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;:&#39;</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="sa">r</span><span class="s1">&#39;|e$^-$ thermal polar.|&#39;</span><span class="p">)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">_</span><span class="o">=</span><span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x7f89a9f91ba8&gt;
-</pre></div>
-</div>
-<img alt="../_images/6ba8ad5684dddaa8bfc55070f10f79ce371c3c45d966b1306992cc004b95022f.png" src="../_images/6ba8ad5684dddaa8bfc55070f10f79ce371c3c45d966b1306992cc004b95022f.png" />
+<img alt="../_images/4964f89bed09f7194f221962d453a23849042771e70a893bc3f6a2c3f840df66.png" src="../_images/4964f89bed09f7194f221962d453a23849042771e70a893bc3f6a2c3f840df66.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -794,15 +779,12 @@
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ax</span><span class="o">=</span><span class="n">rho</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="s1">&#39;s&#39;</span><span class="p">)</span>
 <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span><span class="n">rho</span><span class="o">.</span><span class="n">t_axis</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]],</span><span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span><span class="o">*</span><span class="n">ex</span><span class="o">.</span><span class="n">Peq</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;grey&#39;</span><span class="p">,</span><span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;:&#39;</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="sa">r</span><span class="s1">&#39;|e$^-$ thermal polar.|&#39;</span><span class="p">)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">_</span><span class="o">=</span><span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x7f89da248320&gt;
-</pre></div>
-</div>
-<img alt="../_images/518d8227c2092fd3f06ae6a3d7851b533c4daccdbafc4bd12962b845265ba498.png" src="../_images/518d8227c2092fd3f06ae6a3d7851b533c4daccdbafc4bd12962b845265ba498.png" />
+<img alt="../_images/0f278582ff36d5c550d4c21a6c15df8ba57507cfc83fa9c46a67eda7c3f7c85d.png" src="../_images/0f278582ff36d5c550d4c21a6c15df8ba57507cfc83fa9c46a67eda7c3f7c85d.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -818,7 +800,7 @@
 </div>
 </div>
 </div>
-<p>Above, we’ve caused the spin-lock length to start at 2.5 μs and end at 0.2 μs, where a decaying exponential defines the transition between the two values (the time constant of this decay has been optimized by hand, the choice of an exponential is only a guess). As we see 95% of the maximum enhancement is reached much more quickly than with a fixed spin-lock length.</p>
+<p>Above, we’ve set up the calculation such that the spin-lock length starts at 2.5 μs and ends at 0.2 μs, where a decaying exponential defines the transition between the two values (the time constant of this decay has been optimized by hand, the choice of an exponential is only a guess). As we see 95% of the maximum enhancement is reached much more quickly than with a fixed spin-lock length.</p>
 </section>
 </section>
 </section>

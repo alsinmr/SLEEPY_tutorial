@@ -203,7 +203,7 @@
 <li class="toctree-l2"><a class="reference internal" href="../Chapter3/Ch3_DIPSHIFT.html"><font color="#0093AF">DIPSHIFT</font></a></li>
 <li class="toctree-l2"><a class="reference internal" href="../Chapter3/Ch3_RECRR.html"><font color="#0093AF">Relaxation in complex sequences: RECRR</font></a></li>
 <li class="toctree-l2"><a class="reference internal" href="../Chapter3/Ch3_T1_NOE.html"><font color="#0093AF"><span class="math notranslate nohighlight">\(T_1\)</span> and Nuclear Overhauser Effect</font></a></li>
-<li class="toctree-l2"><a class="reference internal" href="../Chapter3/Ch3_DARR.html"><font color="#0093AF">Dipolar Assisted Rotary Resonance</font></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Chapter3/Ch3_DARR.html"><font color="#0093AF">Understanding DARR with simulation</font></a></li>
 <li class="toctree-l2"><a class="reference internal" href="../Chapter3/Ch3_Quad.html"><font color="#0093AF">Quadrupolar phenomena</font></a></li>
 </ul>
 </details></li>
@@ -440,7 +440,7 @@
   <section class="tex2jax_ignore mathjax_ignore" id="hamiltonians-and-liouvillians">
 <h1><font  color = "#0093AF">Hamiltonians and Liouvillians</font><a class="headerlink" href="#hamiltonians-and-liouvillians" title="Link to this heading">#</a></h1>
 <p><a href="https://githubtocolab.com/alsinmr/SLEEPY_tutorial/blob/main/ColabNotebooks/Chapter1/Ch1_Liouvillian.ipynb" target="_blank"><img src="https://colab.research.google.com/assets/colab-badge.svg"></a></p>
-<p>Evolution of the spin-system is determined by the Liouvillian, which consists of one or more Hamiltonians, relaxation terms, and exchange terms. SLEEPY operates in Liouville space, but the Hamiltonians are also calculated and can be accessed by the user.</p>
+<p>Interactions and relaxation in the spin-system is determined by the Liouvillian, which consists of one or more Hamiltonians, relaxation terms, and exchange terms. SLEEPY operates in Liouville space, but the Hamiltonians are also calculated and can be accessed by the user. In this section, we discussion how the Hamiltonians and Liouvillians are build and how matrices in each may be accessed.</p>
 <section id="setup">
 <h2>Setup<a class="headerlink" href="#setup" title="Link to this heading">#</a></h2>
 <div class="cell docutils container">
@@ -454,9 +454,9 @@
 </section>
 <section id="the-hamiltonian">
 <h2>The Hamiltonian<a class="headerlink" href="#the-hamiltonian" title="Link to this heading">#</a></h2>
-<p>In the previous section, we defined the experimental conditions and the spin-system. The ‘ex’ object, created with sl.ExpSys, contains all the information required to build the Hamiltonian and Liouvillian (for exchange, we need multiple ‘ex’ objects).</p>
+<p>In the previous section, we defined the experimental conditions and the spin-system. The <code class="docutils literal notranslate"><span class="pre">ex</span></code> object, created with <code class="docutils literal notranslate"><span class="pre">sl.ExpSys</span></code>, contains all the information required to build the Hamiltonian and Liouvillian (for exchange, we need multiple <code class="docutils literal notranslate"><span class="pre">ex</span></code> objects).</p>
 <p>SLEEPY operates in Liouville space, so while the Hamiltonian is in the background, the user will normally create the Liouvillian directly. Still, here we will start with the Hamiltonian and its contents.</p>
-<p>We start with building ‘ex’.</p>
+<p>We start with building <code class="docutils literal notranslate"><span class="pre">ex</span></code>, and then generate the Hamiltonian from <code class="docutils literal notranslate"><span class="pre">ex.Hamiltonian()</span></code>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ex</span><span class="o">=</span><span class="n">sl</span><span class="o">.</span><span class="n">ExpSys</span><span class="p">(</span><span class="n">v0H</span><span class="o">=</span><span class="mi">600</span><span class="p">,</span><span class="n">Nucs</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;1H&#39;</span><span class="p">,</span><span class="s1">&#39;13C&#39;</span><span class="p">],</span><span class="n">vr</span><span class="o">=</span><span class="mi">60000</span><span class="p">,</span><span class="n">LF</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>  <span class="c1">#For this example, we&#39;ll work in the lab frame</span>
@@ -470,7 +470,7 @@
 </div>
 <section id="access-and-plot-the-hamiltonian">
 <h3>Access and plot the Hamiltonian<a class="headerlink" href="#access-and-plot-the-hamiltonian" title="Link to this heading">#</a></h3>
-<p>To access Hamiltonian matrices, we have to specify which element of the powder average we are interested in, and also what step (up to ex.n_gamma) in the rotor cycle we want. For solution-state simulations, these are still required, but can both be set to zero. For example, for the first element of the powder average, and the first step in the rotor cycle, we use</p>
+<p>To access Hamiltonian matrices, we have to specify which element of the powder average we are interested in, and also what step (up to <code class="docutils literal notranslate"><span class="pre">ex.n_gamma</span></code>) in the rotor cycle we want. For solution-state simulations, these are still required, but can both be set to zero. For example, for the first element of the powder average, and the first step in the rotor cycle, we use</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">H</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">H</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
@@ -478,9 +478,9 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[ 3.75456344e+08-1.13686838e-13j, -3.65267208e+03-2.63141747e+03j,
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[ 3.75456344e+08+0.00000000e+00j, -3.65267208e+03-2.63141747e+03j,
         -7.91082291e+03-1.66268635e+02j,  1.05759754e+04-4.44765395e+02j],
-       [-3.65267208e+03+2.63141747e+03j,  2.24549656e+08+1.13686838e-13j,
+       [-3.65267208e+03+2.63141747e+03j,  2.24549656e+08+0.00000000e+00j,
         -4.14676554e+02+3.33066907e-14j,  7.91082291e+03+1.66268635e+02j],
        [-7.91082291e+03+1.66268635e+02j, -4.14676554e+02+3.33066907e-14j,
         -2.24550485e+08+0.00000000e+00j,  1.21689737e+04-2.29888020e+03j],
@@ -491,7 +491,7 @@
 </div>
 </div>
 <p>Note that we have run the set up in the lab frame, explaining why the Hamiltonian is so dense. In the rotating frame, this will not be the case.</p>
-<p>We may also visualize the Hamiltonian, using H.plot. Plotting may be performed for a given element of the powder average, or if not specified, then an element halfway through the powder average is used.</p>
+<p>We may also visualize the Hamiltonian, using <code class="docutils literal notranslate"><span class="pre">H.plot()</span></code>. Plotting may be performed for a given element of the powder average, or if not specified, then an element halfway through the powder average is used.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">_</span><span class="o">=</span><span class="n">H</span><span class="p">[</span><span class="mi">5</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span> <span class="c1">#Plot the Hamiltonian for the 5th element of the powder average</span>
@@ -499,7 +499,7 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/0bcc3aace73ff336fdee802e249445657c194bc867c5f68cdd2be0c320fbf620.png" src="../_images/0bcc3aace73ff336fdee802e249445657c194bc867c5f68cdd2be0c320fbf620.png" />
+<img alt="../_images/6ef31b17c636b57088f3159f4f47a9a7876ad9b969a1002a362971fb7e2037d5.png" src="../_images/6ef31b17c636b57088f3159f4f47a9a7876ad9b969a1002a362971fb7e2037d5.png" />
 </div>
 </div>
 <p>The full Hamiltonian is built from the 5 rotating components of the Hamiltonian. If we have <span class="math notranslate nohighlight">\(n_\gamma\)</span> steps per rotor period, and we’re at the kth step, this is done as follows:</p>
@@ -510,7 +510,7 @@
 \hat{H}_k&amp;=&amp;\sum\limits_{n=-2}^2{\phi_k^{-n}*\hat{H}_n}
 \end{eqnarray}
 \end{split}\]</div>
-<p>The rotating components are obtained via the Hn function, where n (-2,-1,0,1,2) must be provided. For example, for the fifth element of the powder average, if we want the <span class="math notranslate nohighlight">\(n=-1\)</span> component, we would call:</p>
+<p>The rotating components are obtained via the <code class="docutils literal notranslate"><span class="pre">H.Hn(n=...)</span></code> function, where n (-2,-1,0,1,2) must be provided. For example, for the fifth element of the powder average, if we want the <span class="math notranslate nohighlight">\(n=-1\)</span> component, we would call:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">H</span><span class="p">[</span><span class="mi">5</span><span class="p">]</span><span class="o">.</span><span class="n">Hn</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
@@ -538,13 +538,13 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/bb6966909d14cd9a7513953421fd7be260d65d847d920cab17021e5a1a8a645c.png" src="../_images/bb6966909d14cd9a7513953421fd7be260d65d847d920cab17021e5a1a8a645c.png" />
+<img alt="../_images/9769bfafdf814e694d8ff3b18ed6b14ccdf694cc78987e48c64ef873356c3d3f.png" src="../_images/9769bfafdf814e694d8ff3b18ed6b14ccdf694cc78987e48c64ef873356c3d3f.png" />
 </div>
 </div>
 </section>
 <section id="hamiltonians-for-individual-interactions">
 <h3>Hamiltonians for individual interactions<a class="headerlink" href="#hamiltonians-for-individual-interactions" title="Link to this heading">#</a></h3>
-<p>The rotating components are built up from the rotating components of the individual interactions, where individual interactions are found in a list in H.Hinter. Indexing this list will return a description of the interaction, for example:</p>
+<p>The rotating components are built up from the rotating components of the individual interactions, where individual interactions are found in the list stored in <code class="docutils literal notranslate"><span class="pre">H.Hinter</span></code>. Indexing this list will return a description of the interaction, for example:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">H</span><span class="o">.</span><span class="n">Hinter</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
@@ -564,7 +564,7 @@ Arguments:
 </div>
 </div>
 </div>
-<p>The Hamiltonians are those specified when using ex.set_inter. However, if a spin is specified in the lab frame, then we will also find a Hamiltonian for the Zeeman interaction for those spins. As with the full Hamiltonian, we may plot Hamiltonians for the individual interactions.</p>
+<p>The Hamiltonians are those specified when using <code class="docutils literal notranslate"><span class="pre">ex.set_inter(...)</span></code>. However, if a spin is specified in the lab frame, then we will also find a Hamiltonian for the Zeeman interaction for those spins. As with the full Hamiltonian, we may plot Hamiltonians for the individual interactions.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">H</span><span class="o">.</span><span class="n">Hinter</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
@@ -594,11 +594,12 @@ Type: larmor on spin 1
 </section>
 <section id="the-liouvillian">
 <h2>The Liouvillian<a class="headerlink" href="#the-liouvillian" title="Link to this heading">#</a></h2>
-<p>Coherent components of the Liouvillian are calculated from the Hamiltonian, although we may also add relaxation and exchange processes to the Liouvillian. We create the Liouvillian without exchange either from the Hamiltonian or the experimental system (ex).</p>
+<p>Coherent components of the Liouvillian are calculated from the Hamiltonian, although we may also add relaxation and exchange processes to the Liouvillian. We create the Liouvillian without exchange either from the Hamiltonian or the experimental system (<code class="docutils literal notranslate"><span class="pre">ex.Liouvillian()</span></code>).</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">L</span><span class="o">=</span><span class="n">ex</span><span class="o">.</span><span class="n">Liouvillian</span><span class="p">()</span>  
 <span class="n">L</span><span class="o">=</span><span class="n">H</span><span class="o">.</span><span class="n">Liouvillian</span><span class="p">()</span> <span class="c1">#alternatively</span>
+<span class="n">L</span><span class="o">=</span><span class="n">sl</span><span class="o">.</span><span class="n">Liouvillian</span><span class="p">(</span><span class="n">ex</span><span class="p">)</span> <span class="c1">#alternatively</span>
 </pre></div>
 </div>
 </div>
@@ -614,9 +615,10 @@ Type: larmor on spin 1
 <div class="math notranslate nohighlight">
 \[
 \begin{equation}
-\hat{\hat{L}}_n=i(\hat{H}_n\otimes\hat{\mathbf{1}}-\hat{\mathbf{1}}\otimes\hat{H}_n)
+\hat{\hat{L}}_n=i(\hat{H}_n\otimes\hat{\mathbf{1}}-\hat{\mathbf{1}}\otimes\hat{H}_n^T)
 \end{equation}
 \]</div>
+<p><span class="math notranslate nohighlight">\(^\mathrm{T}\)</span> indicates the transpose without complex conjugate on the Hamiltonian</p>
 <section id="access-and-plot-the-liouvillian">
 <h3>Access and plot the Liouvillian<a class="headerlink" href="#access-and-plot-the-liouvillian" title="Link to this heading">#</a></h3>
 <p>Access to specific components of the Liouvillian and plotting use the same rules as for the Hamiltonian. For example, to access the 5th element of the powder average, and the <span class="math notranslate nohighlight">\(n=1\)</span> component of the coherent Liouvillian, we would use</p>
@@ -655,9 +657,9 @@ Type: larmor on spin 1
 </section>
 <section id="adding-relaxation">
 <h3>Adding relaxation<a class="headerlink" href="#adding-relaxation" title="Link to this heading">#</a></h3>
-<p><span class="math notranslate nohighlight">\(T_1\)</span> and <span class="math notranslate nohighlight">\(T_2\)</span> relaxation is available in SLEEPY, along with “Spin-Diffusion” which just introduces signal decay with <span class="math notranslate nohighlight">\(T_1=T_2\)</span> (see Ernst et al. for spin-diffusion relaxation operator<span class="math notranslate nohighlight">\(^1\)</span>). As implemented in SLEEPY, the <span class="math notranslate nohighlight">\(T_1\)</span> option <em>only</em> decays along <span class="math notranslate nohighlight">\(z\)</span>, which is unphysical, so it is important to also add some <span class="math notranslate nohighlight">\(T_2\)</span> relaxation when using <span class="math notranslate nohighlight">\(T_1\)</span>. By default, <span class="math notranslate nohighlight">\(T_1\)</span> acts along <span class="math notranslate nohighlight">\(z\)</span>, and <span class="math notranslate nohighlight">\(T_2\)</span> along x and y. However, it is possible to specify “orientation-specific” (<code class="docutils literal notranslate"><span class="pre">OS=True</span></code>) relaxation, which will adjust <span class="math notranslate nohighlight">\(T_1\)</span> relaxation to occur on the eigenstates of a given spin, and <span class="math notranslate nohighlight">\(T_2\)</span> acts on coherences between eigenstates of the spin. This option is more computationally expensive. However, for spins that are strongly tilted away from <span class="math notranslate nohighlight">\(z\)</span>, using the default relaxation will “mix” the <span class="math notranslate nohighlight">\(T_1\)</span> and <span class="math notranslate nohighlight">\(T_2\)</span> behavior, so that <span class="math notranslate nohighlight">\(T_1\)</span> may appear much shorter than specified (see <a class="reference internal" href="../Chapter6/Ch6_RelaxationOptions.html"><span class="std std-doc">Relaxation Options</span></a>).</p>
-<p>We may also include recovery of magnetization to thermal equilibrium (noting that in this case, ex.T_K determines the equilibrium density matrix). If orientation-specific relaxation is included, this is specified when the relaxation is added. Otherwise, it is specified after all relaxation is included. Relaxation is removed by running <code class="docutils literal notranslate"><span class="pre">L.clear_relax()</span></code>. If, for example, <span class="math notranslate nohighlight">\(T_1\)</span> relaxation is added to a spin twice without clearing the first entry, then the relaxation rates will add together, so it is important not to forget to clear existing relaxation.</p>
-<p>[1] M. Ernst, H. Zimmerman, B.H. Meier. <em><a class="reference external" href="https://doi.org/10.1016/S0009-2614(99)01423-2">Chem. Phys. Lett.</a></em>, <strong>2000</strong>, 317, 581-588.</p>
+<p><span class="math notranslate nohighlight">\(T_1\)</span> and <span class="math notranslate nohighlight">\(T_2\)</span> relaxation is available in SLEEPY, along with “Spin-Diffusion” which just introduces signal decay with <span class="math notranslate nohighlight">\(T_1=T_2\)</span> (see Ernst et al. for spin-diffusion relaxation operator<span class="math notranslate nohighlight">\(^1\)</span>). As implemented in SLEEPY, the <span class="math notranslate nohighlight">\(T_1\)</span> option <em>only</em> decays along <span class="math notranslate nohighlight">\(z\)</span>, which is unphysical, so it is important to also add some <span class="math notranslate nohighlight">\(T_2\)</span> relaxation when using <span class="math notranslate nohighlight">\(T_1\)</span>. By default, <span class="math notranslate nohighlight">\(T_1\)</span> acts along <span class="math notranslate nohighlight">\(z\)</span>, and <span class="math notranslate nohighlight">\(T_2\)</span> along x and y. However, it is possible to specify “orientation-specific” (<code class="docutils literal notranslate"><span class="pre">OS=True</span></code>) relaxation, which will adjust <span class="math notranslate nohighlight">\(T_1\)</span> relaxation to occur among the eigenstates of a given spin, and <span class="math notranslate nohighlight">\(T_2\)</span> acts on coherences between eigenstates of the spin. This option is more computationally expensive. However, for spins that are strongly tilted away from <span class="math notranslate nohighlight">\(z\)</span>, using the default relaxation will “mix” the <span class="math notranslate nohighlight">\(T_1\)</span> and <span class="math notranslate nohighlight">\(T_2\)</span> behavior, so that <span class="math notranslate nohighlight">\(T_1\)</span> may appear much shorter than specified (see <a class="reference internal" href="../Chapter6/Ch6_RelaxationOptions.html"><span class="std std-doc">Relaxation Options</span></a>).</p>
+<p>We may also include recovery of magnetization to thermal equilibrium (noting that in this case, <code class="docutils literal notranslate"><span class="pre">ex.T_K</span></code> determines the equilibrium density matrix). If orientation-specific relaxation is included, this is specified when the relaxation is added. Otherwise, it is specified after all relaxation is included. Relaxation is removed by running <code class="docutils literal notranslate"><span class="pre">L.clear_relax()</span></code>. If, for example, <span class="math notranslate nohighlight">\(T_1\)</span> relaxation is added to a spin twice without clearing the first entry, then the relaxation rates will add together, so it is important not to forget to clear existing relaxation.</p>
+<p>[1] M. Ernst, H. Zimmerman, B.H. Meier. <a class="reference external" href="https://doi.org/10.1016/S0009-2614(99)01423-2"><em>Chem. Phys. Lett.</em></a>, <strong>2000</strong>, 317, 581-588.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">L</span><span class="o">.</span><span class="n">clear_relax</span><span class="p">()</span>
@@ -697,7 +699,7 @@ Type: larmor on spin 1
 <section id="exchange">
 <h3>Exchange<a class="headerlink" href="#exchange" title="Link to this heading">#</a></h3>
 <p>Importantly, SLEEPY allows us to simulate magnetic resonance under exchange conditions. This is achieved by defining two or more experimental system objects, with different interactions. In this example, we just change the orientation of the dipole coupling, representing a hopping motion.</p>
-<p>Since the resulting Liouvillian comes from multiple experimental systems (<code class="docutils literal notranslate"><span class="pre">ex0,ex1</span></code>), we must use sl.Liouvillian, rather than generating it directly from ex.</p>
+<p>Since the resulting Liouvillian comes from multiple experimental systems (<code class="docutils literal notranslate"><span class="pre">ex0,ex1</span></code>), we must use <code class="docutils literal notranslate"><span class="pre">sl.Liouvillian</span></code>, rather than generating it directly from <code class="docutils literal notranslate"><span class="pre">ex</span></code>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ex1</span><span class="o">=</span><span class="n">ex</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span> <span class="c1">#We can copy an existing ex, so that to start, all parameters match</span>
@@ -711,15 +713,12 @@ Type: larmor on spin 1
 <p>We can plot the resulting Liouvillian, to see that it now has larger dimensions, corresponding to the two experimental systems that were input.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">L</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">_</span><span class="o">=</span><span class="n">L</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;AxesSubplot:&gt;
-</pre></div>
-</div>
-<img alt="../_images/3a1333f02ac080fc1ac96499e5a2963cf0701d3f1590e0eab4877a062e265cd2.png" src="../_images/3a1333f02ac080fc1ac96499e5a2963cf0701d3f1590e0eab4877a062e265cd2.png" />
+<img alt="../_images/ae74f04d004a351a880729294d42de32755b573c31296151c9e501bea6ecbdbb.png" src="../_images/ae74f04d004a351a880729294d42de32755b573c31296151c9e501bea6ecbdbb.png" />
 </div>
 </div>
 <p>On its own, this isn’t very useful because the two dipole orientations are not exchanging. For this, we must also include the exchange matrix, of the form:</p>
@@ -741,7 +740,7 @@ k_{01}&amp;-k_{10}
 </div>
 </div>
 </div>
-<p>A number of tools exist in sl.Tools for building various exchange matrices. Some functions also set up both the exchange matrix and multiple experimental systems (twoSite_kex,nSite_sym,fourSite_sym,Setup3siteSym,SetupTetraHop).</p>
+<p>A number of tools exist in sl.Tools for building various exchange matrices. Some functions also set up both the exchange matrix and multiple experimental systems (<code class="docutils literal notranslate"><span class="pre">twoSite_kex</span></code>,<code class="docutils literal notranslate"><span class="pre">nSite_sym</span></code>,<code class="docutils literal notranslate"><span class="pre">fourSite_sym</span></code>,<code class="docutils literal notranslate"><span class="pre">Setup3siteSym</span></code>,<code class="docutils literal notranslate"><span class="pre">SetupTetraHop</span></code>).</p>
 <p>Below, we show the exchange component of the Liouvillian</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -750,7 +749,7 @@ k_{01}&amp;-k_{10}
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/d8cf9989660eaed9b265c7dfddadef214da1aad67127e3c72207def3e3395fa2.png" src="../_images/d8cf9989660eaed9b265c7dfddadef214da1aad67127e3c72207def3e3395fa2.png" />
+<img alt="../_images/22544e7b94fb512a72050b6e3fc498f1229ef98113843f26db78b593e7c441c6.png" src="../_images/22544e7b94fb512a72050b6e3fc498f1229ef98113843f26db78b593e7c441c6.png" />
 </div>
 </div>
 <p>Finally, we show the total Liouvillian, including exchange.</p>
@@ -761,7 +760,7 @@ k_{01}&amp;-k_{10}
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/ace4e49d1c86e6b55f14eafd8d79aed5a6e047e5579b0a99986c3555d7e660d1.png" src="../_images/ace4e49d1c86e6b55f14eafd8d79aed5a6e047e5579b0a99986c3555d7e660d1.png" />
+<img alt="../_images/469812921c4a1ce52776012e08498b09924d7548f20802e4d360fc7acb7d067f.png" src="../_images/469812921c4a1ce52776012e08498b09924d7548f20802e4d360fc7acb7d067f.png" />
 </div>
 </div>
 <p>In the next section, we discuss the generation of propagators and sequences from the Liouvillian.</p>
