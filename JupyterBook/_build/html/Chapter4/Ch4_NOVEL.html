@@ -478,14 +478,11 @@
 
 <span class="n">rho</span><span class="o">=</span><span class="n">sl</span><span class="o">.</span><span class="n">Rho</span><span class="p">(</span><span class="s1">&#39;Thermal&#39;</span><span class="p">,[</span><span class="s1">&#39;1Hz&#39;</span><span class="p">,</span><span class="s1">&#39;ez&#39;</span><span class="p">,</span><span class="s1">&#39;ey&#39;</span><span class="p">])</span>
 <span class="n">rho</span><span class="o">.</span><span class="n">DetProp</span><span class="p">(</span><span class="n">seq</span><span class="p">,</span><span class="n">n</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span><span class="n">n_per_seq</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
-<span class="n">rho</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="s1">&#39;us&#39;</span><span class="p">)</span>
+<span class="n">_</span><span class="o">=</span><span class="n">rho</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="s1">&#39;us&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;AxesSubplot:xlabel=&#39;t / $\\mu$s&#39;, ylabel=&#39;&lt;Op&gt;&#39;&gt;
-</pre></div>
-</div>
 <img alt="../_images/27973e924dfb2f98e34fdb47b7f6a6680ec88995d621f1cdcb96d0b49a6f8f7c.png" src="../_images/27973e924dfb2f98e34fdb47b7f6a6680ec88995d621f1cdcb96d0b49a6f8f7c.png" />
 </div>
 </div>
@@ -501,14 +498,11 @@
 
 <span class="n">rho</span><span class="o">=</span><span class="n">sl</span><span class="o">.</span><span class="n">Rho</span><span class="p">(</span><span class="s1">&#39;Thermal&#39;</span><span class="p">,[</span><span class="s1">&#39;1Hz&#39;</span><span class="p">,</span><span class="s1">&#39;ez&#39;</span><span class="p">,</span><span class="s1">&#39;ey&#39;</span><span class="p">])</span>
 <span class="n">rho</span><span class="o">.</span><span class="n">DetProp</span><span class="p">(</span><span class="n">seq</span><span class="p">,</span><span class="n">n</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span><span class="n">n_per_seq</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
-<span class="n">rho</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="s1">&#39;us&#39;</span><span class="p">)</span>
+<span class="n">_</span><span class="o">=</span><span class="n">rho</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="s1">&#39;us&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;AxesSubplot:xlabel=&#39;t / $\\mu$s&#39;, ylabel=&#39;&lt;Op&gt;&#39;&gt;
-</pre></div>
-</div>
 <img alt="../_images/0952cadb90ef43c7d40ca8a03a0ef60037daa71eea76f4782787506a0e484c98.png" src="../_images/0952cadb90ef43c7d40ca8a03a0ef60037daa71eea76f4782787506a0e484c98.png" />
 </div>
 </div>
@@ -616,7 +610,6 @@
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ex</span><span class="o">.</span><span class="n">pwdavg</span><span class="o">=</span><span class="s1">&#39;alpha0beta45&#39;</span>
-<span class="n">L</span><span class="o">.</span><span class="n">clear_cache</span><span class="p">()</span>
 <span class="n">L</span><span class="o">.</span><span class="n">clear_relax</span><span class="p">()</span>
 
 <span class="n">L</span><span class="o">.</span><span class="n">add_relax</span><span class="p">(</span><span class="n">Type</span><span class="o">=</span><span class="s1">&#39;T2&#39;</span><span class="p">,</span><span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">T2</span><span class="o">=</span><span class="mf">5e-3</span><span class="p">,</span><span class="n">OS</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>

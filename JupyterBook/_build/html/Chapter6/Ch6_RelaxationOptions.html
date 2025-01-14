@@ -473,6 +473,7 @@
 </section>
 <section id="simple-one-spin-relaxation">
 <h2>Simple one-spin relaxation<a class="headerlink" href="#simple-one-spin-relaxation" title="Link to this heading">#</a></h2>
+<p>In the first example, we just introduce <span class="math notranslate nohighlight">\(T_1\)</span> and <span class="math notranslate nohighlight">\(T_2\)</span> relaxation along the <em>z</em>-axis and in the <em>xy</em>-plane, respectively.</p>
 <section id="build-the-system">
 <h3>Build the system<a class="headerlink" href="#build-the-system" title="Link to this heading">#</a></h3>
 <div class="cell docutils container">
@@ -520,26 +521,26 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x7fa2f69e3e20&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x7fb3889347b8&gt;
 </pre></div>
 </div>
-<img alt="../_images/c97249464ce3c8794aee954c3f970fb2a134bc79173e20b96ccdccc42869ad26.png" src="../_images/c97249464ce3c8794aee954c3f970fb2a134bc79173e20b96ccdccc42869ad26.png" />
+<img alt="../_images/735c8684da49f050fbb0fa81206bfeb8e4addd02260a8e7d7d1c7a26f150fcc3.png" src="../_images/735c8684da49f050fbb0fa81206bfeb8e4addd02260a8e7d7d1c7a26f150fcc3.png" />
 </div>
 </div>
 <p>Not surprisingly, we obtain perfect monoexponential relaxation, matching the input rate constants for both <span class="math notranslate nohighlight">\(T_2\)</span> and <span class="math notranslate nohighlight">\(T_1\)</span>.</p>
-<p>Note that <span class="math notranslate nohighlight">\(T_1\)</span> relaxation as implemented in SLEEPY does not produce any <span class="math notranslate nohighlight">\(T_2\)</span> relaxation. Caution should be taken to also include <span class="math notranslate nohighlight">\(T_2\)</span> relaxation such that <span class="math notranslate nohighlight">\(2\cdot T_1\ge T_2\)</span>.<span class="math notranslate nohighlight">\(^1\)</span></p>
-<p>[1] D.D. Traficante. <a class="reference external" href="https://doi.org/10.1002/cmr.1820030305"><em>Conc. Magn. Reson.</em></a>, <strong>1991</strong>, 3, 171-177.</p>
+<p>Note that <span class="math notranslate nohighlight">\(T_1\)</span> relaxation as implemented in SLEEPY does not produce any <span class="math notranslate nohighlight">\(T_2\)</span> relaxation. Caution should be taken to also include <span class="math notranslate nohighlight">\(T_2\)</span> relaxation such that <span class="math notranslate nohighlight">\(2\cdot T_1\ge T_2\)</span>.<span class="math notranslate nohighlight">\(^2\)</span></p>
+<p>[2] D.D. Traficante. <a class="reference external" href="https://doi.org/10.1002/cmr.1820030305"><em>Conc. Magn. Reson.</em></a>, <strong>1991</strong>, 3, 171-177.</p>
 </section>
 <section id="thermalization">
 <h3>Thermalization<a class="headerlink" href="#thermalization" title="Link to this heading">#</a></h3>
-<p>We may also force the magnetization to recover to its thermal equilibrium, by including ‘recovery’. This function works by adding terms to all non-zero off-diagonal matrix elements of the relaxation matrix so that for the <span class="math notranslate nohighlight">\(\alpha\)</span> and <span class="math notranslate nohighlight">\(\beta\)</span> states of a spin, we have that</p>
+<p>We may also force the magnetization to recover to its thermal equilibrium, by calling <code class="docutils literal notranslate"><span class="pre">L.add_relax('recovery')</span></code>. This function works by adding terms to all non-zero off-diagonal matrix elements of the relaxation matrix so that for the <span class="math notranslate nohighlight">\(\alpha\)</span> and <span class="math notranslate nohighlight">\(\beta\)</span> states of a spin, we have that</p>
 <div class="math notranslate nohighlight">
 \[
 \begin{equation}
 \frac{p_{eq}^\alpha}{p_{eq}^\beta}=\frac{k_{\beta\rightarrow\alpha}}{k_{\alpha\rightarrow\beta}}
 \end{equation}
 \]</div>
-<p>which satisfies detailed balance. Note that we also add these terms to coherences, so that, for example, the <span class="math notranslate nohighlight">\(S^\alpha I_x\)</span> coherence transfers magnetization to the <span class="math notranslate nohighlight">\(S^\beta I_x\)</span> coherence more quickly than <span class="math notranslate nohighlight">\(S^\beta I_x\)</span> to <span class="math notranslate nohighlight">\(S^\alpha I_x\)</span>. This occurs, even though both the coherences relax to zero, although this is only to be relevant if the longitudinal relaxation of the <em>S</em>-spin is comparable to or faster than the transverse relaxation of the <em>I</em>-spin, a situation which arises primarily for electron-nuclear systems. We first demonstrate recovery for one spin, and then also show how this affects relaxation of coherences.</p>
+<p>which satisfies <a class="reference external" href="https://en.wikipedia.org/wiki/Detailed_balance">detailed balance</a>. Note that we also add these terms to coherences, so that, for example, the <span class="math notranslate nohighlight">\(S^\alpha I_x\)</span> coherence transfers magnetization to the <span class="math notranslate nohighlight">\(S^\beta I_x\)</span> coherence more quickly than <span class="math notranslate nohighlight">\(S^\beta I_x\)</span> to <span class="math notranslate nohighlight">\(S^\alpha I_x\)</span>. This occurs, even though both the coherences relax to zero. This is only relevant if the longitudinal relaxation of the <em>S</em>-spin is comparable to or faster than the transverse relaxation of the <em>I</em>-spin, a situation which arises primarily for electron-nuclear systems. We demonstrate recovery for one spin. To see how this influences relaxation of coherences, see the section on <a class="reference internal" href="../Chapter5/Ch5_ContactShift.html"><span class="std std-doc">contact shifts</span></a></p>
 <p>An important note: <code class="docutils literal notranslate"><span class="pre">L.add_relax('recovery')</span></code> should only be applied after all <span class="math notranslate nohighlight">\(T_1\)</span> relaxation is introduced, since the adjustment to the relaxation matrix depends on what values of <span class="math notranslate nohighlight">\(T_1\)</span> are used. Furthermore, the thermal equilibrium depends on the temperature setting of the experiment (an optional argument of ExpSys, which defaults to 298 (K)).</p>
 <p>We now start the system without any longitudinal magnetization, since the system should recover to thermal equilibrium.</p>
 <div class="cell docutils container">
@@ -565,15 +566,12 @@
 <span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">rho</span><span class="o">.</span><span class="n">t_axis</span><span class="p">,(</span><span class="mi">1</span><span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">rho</span><span class="o">.</span><span class="n">t_axis</span><span class="o">/</span><span class="n">T1</span><span class="p">))</span><span class="o">*</span><span class="n">ex</span><span class="o">.</span><span class="n">Peq</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">,</span><span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;:&#39;</span><span class="p">)</span>
 <span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlim</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span><span class="n">rho</span><span class="o">.</span><span class="n">t_axis</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]])</span>
 <span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;$T_1$ relaxation&#39;</span><span class="p">)</span>
-<span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">legend</span><span class="p">((</span><span class="s1">&#39;Simulation&#39;</span><span class="p">,</span><span class="sa">rf</span><span class="s1">&#39;$T_1$=</span><span class="si">{</span><span class="n">T1</span><span class="si">:</span><span class="s1">.0f</span><span class="si">}</span><span class="s1"> s&#39;</span><span class="p">))</span>
+<span class="n">_</span><span class="o">=</span><span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">legend</span><span class="p">((</span><span class="s1">&#39;Simulation&#39;</span><span class="p">,</span><span class="sa">rf</span><span class="s1">&#39;$T_1$=</span><span class="si">{</span><span class="n">T1</span><span class="si">:</span><span class="s1">.0f</span><span class="si">}</span><span class="s1"> s&#39;</span><span class="p">))</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x7fa2cd82f1f0&gt;
-</pre></div>
-</div>
-<img alt="../_images/799eda4b8c6689a72792ec1ccff735f38e9d501182a2254b18a0cda60539dd80.png" src="../_images/799eda4b8c6689a72792ec1ccff735f38e9d501182a2254b18a0cda60539dd80.png" />
+<img alt="../_images/221b8e905c254f69b4d520787ffd8ff2707c280fc9fbb520505287779e0593a9.png" src="../_images/221b8e905c254f69b4d520787ffd8ff2707c280fc9fbb520505287779e0593a9.png" />
 </div>
 </div>
 <p>Now, the longitudinal magnetization starts out at zero, and recovers to the thermal equilibrium, again yielding monoexponential functions matching the input relaxation times.</p>
@@ -641,10 +639,11 @@
 </div>
 </div>
 <p>The <span class="math notranslate nohighlight">\(T_2\)</span> relaxation has a slow component, and the <span class="math notranslate nohighlight">\(T_1\)</span> relaxation is too fast. This is because the nucleus is titled into the xy-plane, and so some <span class="math notranslate nohighlight">\(T_2\)</span> relaxation is applied to the populations, accelerating its decay. Furthermore, parts of the coherences are relaxing with <span class="math notranslate nohighlight">\(T_1\)</span>.</p>
-<p>Note that this is signal in the lab frame. We could downmix it to detect in the rotating frame, but for our purposes, this is not really necessary (<code class="docutils literal notranslate"><span class="pre">rho.downmix()</span></code>).</p>
+<p>Note that this is signal in the lab frame. We could downmix it to detect in the rotating frame (<code class="docutils literal notranslate"><span class="pre">rho.downmix()</span></code>), but for our purposes, this is not really necessary.</p>
 </section>
 <section id="tilted-frame-with-thermalization">
 <h3>Tilted frame with thermalization<a class="headerlink" href="#tilted-frame-with-thermalization" title="Link to this heading">#</a></h3>
+<p>Above, we see that the tilted frame distorts relaxation behavior using the basic SLEEPY settings. Here, we observe that it also causes thermalization to fail.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">L</span><span class="o">.</span><span class="n">add_relax</span><span class="p">(</span><span class="s1">&#39;recovery&#39;</span><span class="p">)</span>
@@ -737,15 +736,15 @@
 <img alt="../_images/73ecf5ffdd3f2c1bcef00d7e33d28b57514c58e2db3bb9af76a49a82885afada.png" src="../_images/73ecf5ffdd3f2c1bcef00d7e33d28b57514c58e2db3bb9af76a49a82885afada.png" />
 </div>
 </div>
-<p>The desired relaxation rates are recovered. Note that some <span class="math notranslate nohighlight">\(\langle ^1H_x\rangle\)</span> will remain even at infinite time. This is due to the nuclear quantization axis lying partly in the <em>xy</em>-plane, so the magnetization aligns there at thermal equilibrium. Similarly, some oscillation is observed at the beginning of the <span class="math notranslate nohighlight">\(T_1\)</span> curve, which is coherence oscillating in the <em>z</em>-direction. These are not errors, but simply what happens with a tilted quantization axis (however, the spectrometer cannot <em>see</em> static magnetization, so the constant part of the x-signal would not actually show up in an experiment).</p>
+<p>The desired relaxation rates are recovered. Note that some <span class="math notranslate nohighlight">\(\langle ^1H_x\rangle\)</span> will remain even at infinite time. This is due to the nuclear quantization axis lying partly in the <em>xy</em>-plane, so the magnetization aligns there at thermal equilibrium. Similarly, some oscillation is observed at the beginning of the <span class="math notranslate nohighlight">\(T_1\)</span> curve, which is the result of coherences oscillating in the <em>z</em>-direction. These are not errors, but simply what happens with a tilted quantization axis (however, the spectrometer cannot <em>see</em> static magnetization, so the constant part of the x-signal would not actually show up in an experiment).</p>
 <p>Orientation-specific relaxation is particularly important for calculating the <a class="reference internal" href="../Chapter5/Ch5_PseudoContactShift.html"><span class="std std-doc">pseudo-contact shift</span></a>, although should also be used for DNP experiments where the nucleus is titled by the electron, especially to correct polarization leakage as observed above.</p>
-<p>Note that orientation-specific relaxation is spin-specific.</p>
+<p>Note that orientation-specific relaxation is spin-specific, and so may yield unexpected behaviors when two spins are coupled in a triplet configuration, since the relaxation in this case is no longer independent.</p>
 </section>
 </section>
 <section id="thermalizing-relaxation-due-to-dynamics">
 <h2>Thermalizing relaxation due to dynamics<a class="headerlink" href="#thermalizing-relaxation-due-to-dynamics" title="Link to this heading">#</a></h2>
 <p>For some calculations, we want to see how a dynamic process induces relaxation, and in other simulations, we may want to see how relaxation affects some process or how polarization is transferred. In the former case, we do not introduce any relaxation directly, but instead add an exchange process, in which case magnetization can only be destroyed. In the latter case, we may introduce recovery of the magnetization, especially in case we are interested in polarization transfer.</p>
-<p>Occasionally, we would like to see how specific dynamics processes result in polarization transfer. This is especially the case for Overhauser and Nuclear Overhauser effects. But, it is sometimes impractical to do this if polarization is only being destroyed. Therefore, we would like to thermalize these systems as well. We can do this by adding a correction term to the Liouville matrix, which is added with the ‘DynamicThermal’ option. Here we consider a simple two-spin system undergoing exchange to induce <span class="math notranslate nohighlight">\(T_1\)</span> relaxation.</p>
+<p>Occasionally, we would like to see how specific dynamics processes result in polarization transfer. This is especially the case for <a class="reference internal" href="../Chapter4/Ch4_OverhauserEffect.html"><span class="std std-doc">Overhauser</span></a> and <a class="reference internal" href="../Chapter2/Ch2_T1_NOE.html"><span class="std std-doc">Nuclear Overhauser</span></a> effects. But, it is sometimes impractical to do this if polarization is only being destroyed. Therefore, we would like to thermalize these systems as well. We can do this by adding a correction term to the Liouville matrix, which is added with by running <code class="docutils literal notranslate"><span class="pre">L.add_relax('DynamicThermal')</span></code>. Here we consider a simple two-spin system undergoing exchange to induce <span class="math notranslate nohighlight">\(T_1\)</span> relaxation.</p>
 <section id="id1">
 <h3>Build the system<a class="headerlink" href="#id1" title="Link to this heading">#</a></h3>
 <div class="cell docutils container">
@@ -783,7 +782,7 @@
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;AxesSubplot:xlabel=&#39;t / s&#39;, ylabel=&#39;&lt;Op&gt;&#39;&gt;
 </pre></div>
 </div>
-<img alt="../_images/a1ad1eda013c09b95d0ff16910f7eb5c12143963b469128f873de8ab99b585c7.png" src="../_images/a1ad1eda013c09b95d0ff16910f7eb5c12143963b469128f873de8ab99b585c7.png" />
+<img alt="../_images/53d2c8f62854ed64ed1826f5b6903f8db41fc89b908912d0df408a0e131f462a.png" src="../_images/53d2c8f62854ed64ed1826f5b6903f8db41fc89b908912d0df408a0e131f462a.png" />
 </div>
 </div>
 <p>The dynamic process destroys the polarization on both spins.</p>
@@ -817,10 +816,10 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&lt;matplotlib.lines.Line2D at 0x7fa2ce5f3af0&gt;]
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&lt;matplotlib.lines.Line2D at 0x7fb388e6cc18&gt;]
 </pre></div>
 </div>
-<img alt="../_images/f4ef28abc6f51d43ff829ac48fb69323c8688f320fa31a383ce9f1e92a5101cd.png" src="../_images/f4ef28abc6f51d43ff829ac48fb69323c8688f320fa31a383ce9f1e92a5101cd.png" />
+<img alt="../_images/e67c650c8ed065af693c3e8361e3a83f89c4b7af590f968435aaf85a60dea839.png" src="../_images/e67c650c8ed065af693c3e8361e3a83f89c4b7af590f968435aaf85a60dea839.png" />
 </div>
 </div>
 <p>As we see, both spins arive at their thermal polarization using the ‘DynamicThermal’ option.</p>
@@ -829,7 +828,7 @@
 <section id="limitations-of-dynamicthermal">
 <h3>Limitations of ‘DynamicThermal’<a class="headerlink" href="#limitations-of-dynamicthermal" title="Link to this heading">#</a></h3>
 <p>There are some limitations to this approach, due to numerical stability for very fast motions (see <a class="reference internal" href="../Chapter2/Ch2_T1_limits.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(T_1\)</span> limits</span></a>), and also because it does not correctly achieve thermalization of the coherences. The latter limitation we demonstrate here. We create a system with a fast-relaxing electron due to dynamics, and add thermalization to it, to see if we can obtain a <a class="reference internal" href="../Chapter5/Ch5_ContactShift.html"><span class="std std-doc">contact shift</span></a> on the nucleus.</p>
-<p>We run the calculation twice, once with a 1 ns correlation time on the motion, inducing only slow electron <span class="math notranslate nohighlight">\(T_1\)</span> relaxation, and then with a 1 ps correlation time, inducing fast electron <span class="math notranslate nohighlight">\(T_1\)</span> relaxation. Only the latter will cause the proton signal to collapse into a single peak. We will then add thermalization, to see that we fail to produce the contact shift, due to incorrect thermalization of the coherences.</p>
+<p>We run the calculation twice, once with a 1 ns correlation time on the motion, inducing only slow electron <span class="math notranslate nohighlight">\(T_1\)</span> relaxation, and then with a 1 ps correlation time, inducing fast electron <span class="math notranslate nohighlight">\(T_1\)</span> relaxation. Only the latter will cause the proton signal to collapse into a single peak. We will then add thermalization, via <code class="docutils literal notranslate"><span class="pre">L.add_relax('DynamicThermal')</span></code>, but we fail to produce the contact shift, due to incorrect thermalization of the coherences.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">gxx</span><span class="p">,</span><span class="n">gyy</span><span class="p">,</span><span class="n">gzz</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mf">2.05</span>
@@ -867,10 +866,10 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x7fa305b0aaf0&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x7fb3784c2400&gt;
 </pre></div>
 </div>
-<img alt="../_images/89cded74c0f06215ca8b3c8aa515f4d248d6142cebf15a0faa66ceda75d260e5.png" src="../_images/89cded74c0f06215ca8b3c8aa515f4d248d6142cebf15a0faa66ceda75d260e5.png" />
+<img alt="../_images/465a252808dc804e16dfe0ea5554f2eb7aa50431e8664e1b484bb53a07250859.png" src="../_images/465a252808dc804e16dfe0ea5554f2eb7aa50431e8664e1b484bb53a07250859.png" />
 </div>
 </div>
 <p>We induce a very slow electron <span class="math notranslate nohighlight">\(T_1\)</span> relaxation with the 1 ns motion (6.5 μs), but an electron <span class="math notranslate nohighlight">\(T_1\)</span> of 15.8 ns with the 1 ps motion. We next see how this influences the <span class="math notranslate nohighlight">\(^1\)</span>H lineshape.</p>
@@ -902,11 +901,11 @@
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;AxesSubplot:xlabel=&#39;$\\nu$ / MHz&#39;, ylabel=&#39;I / a.u.&#39;&gt;
 </pre></div>
 </div>
-<img alt="../_images/526c82de0f7438ff498dfa8cd4af96949fc9eab3da66e6ccd5583ad34f9e9ae4.png" src="../_images/526c82de0f7438ff498dfa8cd4af96949fc9eab3da66e6ccd5583ad34f9e9ae4.png" />
+<img alt="../_images/988083c3d78167e96f25e3bf44e3e745601597710fe60a80d74155eb609ccaf0.png" src="../_images/988083c3d78167e96f25e3bf44e3e745601597710fe60a80d74155eb609ccaf0.png" />
 </div>
 </div>
 <p>For slow electron relaxation, we obtain two peaks, with different intensities due to different populations of the two electron states. For fast relaxation, the peaks merge into a single peak. This should yield a contact shift, but since the system is not thermalized, no contact shift appears.</p>
-<p>Below, we thermalize the system with ‘DynamicThermal’, but because this method does not thermalize the coherences, we still do not expect a contact shift.</p>
+<p>Below, we thermalize the system with <code class="docutils literal notranslate"><span class="pre">DynamicThermal</span></code>, but because this method does not thermalize the coherences, we still do not expect a contact shift.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">L</span><span class="o">.</span><span class="n">add_relax</span><span class="p">(</span><span class="s1">&#39;DynamicThermal&#39;</span><span class="p">)</span>
@@ -929,17 +928,18 @@
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ax</span><span class="o">=</span><span class="n">rho_1ns</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="s1">&#39;ns&#39;</span><span class="p">)</span>
 <span class="n">rho_1ps</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="s1">&#39;ns&#39;</span><span class="p">,</span><span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">rho_1ns</span><span class="o">.</span><span class="n">t_axis</span><span class="p">[[</span><span class="mi">0</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">]]</span><span class="o">*</span><span class="mf">1e9</span><span class="p">,</span><span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span><span class="o">*</span><span class="n">ex0</span><span class="o">.</span><span class="n">Peq</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span><span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;:&#39;</span><span class="p">,</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;AxesSubplot:xlabel=&#39;t / ns&#39;, ylabel=&#39;&lt;e$_z$&gt;&#39;&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&lt;matplotlib.lines.Line2D at 0x7fb388ba9240&gt;]
 </pre></div>
 </div>
-<img alt="../_images/e3dc600740bb747898d28889e8840b9675a76d9b790602f6a9bf930b520bd719.png" src="../_images/e3dc600740bb747898d28889e8840b9675a76d9b790602f6a9bf930b520bd719.png" />
+<img alt="../_images/8db2155270311502d2fb8e66f95f4b59fb74cb78e02fcb3c0b0458f7edd388f4.png" src="../_images/8db2155270311502d2fb8e66f95f4b59fb74cb78e02fcb3c0b0458f7edd388f4.png" />
 </div>
 </div>
-<p>We observe that now the electron z-magnetization is correctly thermalized.</p>
+<p>We first check that the electron z-magnetization is correctly thermalized, as can be seen above.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">L</span><span class="o">.</span><span class="n">kex</span><span class="o">=</span><span class="n">sl</span><span class="o">.</span><span class="n">Tools</span><span class="o">.</span><span class="n">twoSite_kex</span><span class="p">(</span><span class="mf">1e-9</span><span class="p">)</span>
@@ -967,10 +967,10 @@
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;AxesSubplot:xlabel=&#39;$\\nu$ / MHz&#39;, ylabel=&#39;I / a.u.&#39;&gt;
 </pre></div>
 </div>
-<img alt="../_images/526c82de0f7438ff498dfa8cd4af96949fc9eab3da66e6ccd5583ad34f9e9ae4.png" src="../_images/526c82de0f7438ff498dfa8cd4af96949fc9eab3da66e6ccd5583ad34f9e9ae4.png" />
+<img alt="../_images/988083c3d78167e96f25e3bf44e3e745601597710fe60a80d74155eb609ccaf0.png" src="../_images/988083c3d78167e96f25e3bf44e3e745601597710fe60a80d74155eb609ccaf0.png" />
 </div>
 </div>
-<p>However, we still do not observe a contact shift, as expected.</p>
+<p>With slow motion, we obtain two peaks with different peak heights. However, for fast motion, we still do not observe a contact shift, as expected, due to incorrect thermalization of the coherences.</p>
 <p>Finally, we re-build this system with explicit electron relaxation, using Lindblad thermalization, to obtain the correct contact shift. We will explicitly input the 15.8 ns electron <span class="math notranslate nohighlight">\(T_1\)</span> that was induced by motion above.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1005,7 +1005,7 @@
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;AxesSubplot:xlabel=&#39;$\\nu$ / MHz&#39;, ylabel=&#39;I / a.u.&#39;&gt;
 </pre></div>
 </div>
-<img alt="../_images/05746d4541d74bcc68024f739f23edd19150b0616b2a49e359dbd1f7303073f2.png" src="../_images/05746d4541d74bcc68024f739f23edd19150b0616b2a49e359dbd1f7303073f2.png" />
+<img alt="../_images/efd50a7c303d06294232df8a8855dae701334fc3e801f105d30749116cc08189.png" src="../_images/efd50a7c303d06294232df8a8855dae701334fc3e801f105d30749116cc08189.png" />
 </div>
 </div>
 <p>We obtain a very similar result as before, <em>however</em>, now the averaged line has been shifted towards the large peak, which is brought about by having the correct thermalization behavior.</p>
@@ -1041,7 +1041,7 @@
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">L</span><span class="o">.</span><span class="n">add_relax</span><span class="p">(</span><span class="s1">&#39;DynamicThermal&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
-<p><em>This method will not produce correct thermalization of coherences!</em></p>
+<p><em><code class="docutils literal notranslate"><span class="pre">DynamicThermal</span></code> will not produce correct thermalization of coherences!</em></p>
 </section>
 </section>
 </section>

@@ -514,7 +514,7 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/5c14a4da529ac3404721ac758f80bc6f98d63df22fc98e2e814d9f490f62e068.png" src="../_images/5c14a4da529ac3404721ac758f80bc6f98d63df22fc98e2e814d9f490f62e068.png" />
+<img alt="../_images/4c08e8974f0b0f5c035bbe71bf6c7660d2d2b23d8d50ecfcb92118cc37615eb7.png" src="../_images/4c08e8974f0b0f5c035bbe71bf6c7660d2d2b23d8d50ecfcb92118cc37615eb7.png" />
 </div>
 </div>
 </section>
@@ -546,7 +546,7 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/19829134b61b2950c1fb950c223f256c1b438f5c99674b1e9a5ef2e8aaf48371.png" src="../_images/19829134b61b2950c1fb950c223f256c1b438f5c99674b1e9a5ef2e8aaf48371.png" />
+<img alt="../_images/66a1eae33f87fe54612ae4b4729d5a4d405600cc4dd1a12b776e84ce58d3cbed.png" src="../_images/66a1eae33f87fe54612ae4b4729d5a4d405600cc4dd1a12b776e84ce58d3cbed.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -588,7 +588,7 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/a6885a32a051aaeae71f54c71dae5e0d3bf897dd9ddf0e4ff857fbb409507020.png" src="../_images/a6885a32a051aaeae71f54c71dae5e0d3bf897dd9ddf0e4ff857fbb409507020.png" />
+<img alt="../_images/ee2d4b87308d36bb10e732aef4603559257400d497c422c5d8efc4a9b0e22a40.png" src="../_images/ee2d4b87308d36bb10e732aef4603559257400d497c422c5d8efc4a9b0e22a40.png" />
 </div>
 </div>
 <p>Indeed, oscillations at the beginning of the decay curve have been almost entirely removed. However, it is worth noting that the decay rate at the beginning of the curve appears to be faster than with the standard <span class="math notranslate nohighlight">\(R_{1\rho}\)</span> experiment. We overlay the two curves, scaling the RECRR curve to match the beginning of the non-coherent decay of the <span class="math notranslate nohighlight">\(R_{1\rho}\)</span> curve.</p>
@@ -613,14 +613,10 @@
 <p>We plot the <span class="math notranslate nohighlight">\(R_{1\rho}\)</span> curves at the top, and RECRR curves at the bottom. We calculate the <span class="math notranslate nohighlight">\(R_{1\rho}\)</span> decay without oscillation as well (dashed lines). This curve is overlayed over the RECRR curve with a scaling factor. We do this to show that the relaxation at longer times is very similar to the <span class="math notranslate nohighlight">\(R_{1\rho}\)</span> behavior. For slower motion, it takes longer for the two curves to line up, since we are further into the sequence before the interference between motion and phase changes is fully mitigated.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Use just one crystallite from the current powder average</span>
-<span class="c1"># (non-standard usage)</span>
-<span class="n">ex0</span><span class="o">.</span><span class="n">pwdavg</span><span class="o">=</span><span class="n">ex0</span><span class="o">.</span><span class="n">pwdavg</span><span class="p">[</span><span class="mi">10</span><span class="p">]</span>
-<span class="c1"># Best practice is that if we edit ex0, </span>
-<span class="c1"># we should clear the Liouvillian cache</span>
-<span class="c1"># L does not know about edits to ex0 and will use </span>
-<span class="c1"># matrices calculated for the previous powder average</span>
-<span class="n">L</span><span class="o">.</span><span class="n">clear_cache</span><span class="p">()</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Use just one orientation</span>
+<span class="c1"># We generate the JCP59 powder average with q=2</span>
+<span class="c1"># Indexing powder average returns single orientation</span>
+<span class="n">ex0</span><span class="o">.</span><span class="n">pwdavg</span><span class="o">=</span><span class="n">sl</span><span class="o">.</span><span class="n">PowderAvg</span><span class="p">(</span><span class="mi">3</span><span class="p">)[</span><span class="mi">10</span><span class="p">]</span>
 
 <span class="n">fig</span><span class="p">,</span><span class="n">ax0</span><span class="o">=</span><span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="n">figsize</span><span class="o">=</span><span class="p">[</span><span class="mi">12</span><span class="p">,</span><span class="mi">5</span><span class="p">],</span><span class="n">sharex</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">sharey</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 <span class="k">for</span> <span class="n">tc</span><span class="p">,</span><span class="n">ax</span><span class="p">,</span><span class="n">sc</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">([</span><span class="mf">1e-6</span><span class="p">,</span><span class="mf">1e-5</span><span class="p">,</span><span class="mf">1e-4</span><span class="p">,</span><span class="mf">1e-3</span><span class="p">,</span><span class="mf">1e-2</span><span class="p">],</span><span class="n">ax0</span><span class="o">.</span><span class="n">T</span><span class="p">,[</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mf">.55</span><span class="p">,</span><span class="mf">.5</span><span class="p">,</span><span class="mi">0</span><span class="p">]):</span>
@@ -669,7 +665,10 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/c0e9b008ac511987c8bc30b3d389cf5f87fe502353f0322d3e30073b7ba275ae.png" src="../_images/c0e9b008ac511987c8bc30b3d389cf5f87fe502353f0322d3e30073b7ba275ae.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Clearing caches
+</pre></div>
+</div>
+<img alt="../_images/0ffd1aeed34511825c596b28f68bdd8b22d9d9cfaba4e4bac65bcccd5c5db999.png" src="../_images/0ffd1aeed34511825c596b28f68bdd8b22d9d9cfaba4e4bac65bcccd5c5db999.png" />
 </div>
 </div>
 <p>Then, while the RECRR pulse sequence presents some significant advantages over the <span class="math notranslate nohighlight">\(R_{1\rho}\)</span> sequence, because of the more complex relaxation behavior, it becomes necessary to use simulation to fit the curves, rather than relying on simple mono-exponential or bi-exponential fitting. This is especially important at slower correlation times, where a second relaxation mechanism emerges, and the sensitivity of this experiment to correlation time varies throughout the duration of the experiment.</p>

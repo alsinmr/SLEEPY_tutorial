@@ -433,7 +433,7 @@
   <section class="tex2jax_ignore mathjax_ignore" id="contact-shift">
 <h1><font  color = "#0093AF">Contact shift</font><a class="headerlink" href="#contact-shift" title="Link to this heading">#</a></h1>
 <p><a href="https://githubtocolab.com/alsinmr/SLEEPY_tutorial/blob/main/ColabNotebooks/Chapter5/Ch5_ContactShift.ipynb" target="_blank"><img src="https://colab.research.google.com/assets/colab-badge.svg"></a></p>
-<p>The contact shift occurs due to an isotropic hyperfine coupling between an electron and a nucleus, where the electron relaxes quickly compared to the size of the coupling. The result is that the coupling is averaged away, but due to the electron polarization, the apparent shift of the nucleus is moved slightly, according to:</p>
+<p>The contact shift occurs due to an isotropic hyperfine coupling between an electron and a nucleus, where the electron relaxes quickly compared to the size of the coupling. The result is that the coupling is averaged away, and therefore only a single peak appeals. Due to the electron polarization, however, the apparent shift of the nucleus is altered, according to:</p>
 <div class="math notranslate nohighlight">
 \[
 \begin{equation}
@@ -457,7 +457,7 @@
 </section>
 <section id="build-the-spin-system">
 <h2>Build the spin-system<a class="headerlink" href="#build-the-spin-system" title="Link to this heading">#</a></h2>
-<p>To observe the contact shift, we just need an electron-nuclear system with an isotropic hyperfine coupling (i.e. <span class="math notranslate nohighlight">\(A_{xx}=A_{yy}=A_{zz}\)</span>).</p>
+<p>To observe the contact shift, we just need an electron-nuclear system with an isotropic hyperfine coupling (i.e. <span class="math notranslate nohighlight">\(A_{xx}=A_{yy}=A_{zz}\)</span>). We may use the above formula to predict the size of the contact shift.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ex</span><span class="o">=</span><span class="n">sl</span><span class="o">.</span><span class="n">ExpSys</span><span class="p">(</span><span class="n">v0H</span><span class="o">=</span><span class="mi">850</span><span class="p">,</span><span class="n">Nucs</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;13C&#39;</span><span class="p">,</span><span class="s1">&#39;e-&#39;</span><span class="p">],</span><span class="n">T_K</span><span class="o">=</span><span class="mi">298</span><span class="p">)</span>
@@ -509,7 +509,7 @@
 </section>
 <section id="add-relaxation">
 <h2>Add relaxation<a class="headerlink" href="#add-relaxation" title="Link to this heading">#</a></h2>
-<p>Here, we add fast <span class="math notranslate nohighlight">\(T_1\)</span> and <span class="math notranslate nohighlight">\(T_2\)</span> relaxation. We also need the electrons to recovery to their thermal equilibrium, so we use the ‘recovery’ option.</p>
+<p>Here, we add fast <span class="math notranslate nohighlight">\(T_1\)</span> and <span class="math notranslate nohighlight">\(T_2\)</span> relaxation. We need the electrons to recover to their thermal equilibrium, so we use <code class="docutils literal notranslate"><span class="pre">L.add_relax(Type='recovery')</span></code> to thermalize the system.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#Now add T1 relaxation</span>
@@ -550,12 +550,11 @@
 </div>
 </div>
 <p>Indeed, the resulting contact shift is exactly where expected (-112 Hz), as marked with the dashed line.</p>
-<p>Without relaxation, we obtain two peaks at <span class="math notranslate nohighlight">\(\pm\)</span>2500 Hz, with the peak at -2500 Hz being slightly higher in amplitude, due to the higher electron polarization for that state. When electron <span class="math notranslate nohighlight">\(T_1\)</span> is included, the two peaks get averaged together, weighted according to their amplitude, yielding the peak at -112 Hz.</p>
+<p>Without relaxation, we obtain two peaks at <span class="math notranslate nohighlight">\(\pm\)</span>2500 Hz, with the peak at -2500 Hz being slightly higher in amplitude, due to the higher electron polarization for that state. When electron <span class="math notranslate nohighlight">\(T_1\)</span> relaxation is included, the two peaks get averaged together, weighted according to their amplitude, yielding the peak at -112 Hz.</p>
 </section>
 <section id="sweep-the-temperature">
 <h2>Sweep the temperature<a class="headerlink" href="#sweep-the-temperature" title="Link to this heading">#</a></h2>
-<p>An interesting effect with the contact shift is its dependence on temperature. As we increase temperature here, first, the peak gets smaller due to less polarization on the spin, and the contact shift is decreased, since the electron polarization is decreased.</p>
-<p>Note that the relaxation must be reset at each temperature, since the relaxation matrices for this type of relaxation are only calculated when running <code class="docutils literal notranslate"><span class="pre">L.add_relax</span></code>.</p>
+<p>An interesting effect with the contact shift is its dependence on temperature. As we increase temperature, the peak gets smaller due to less polarization on the spin, and the contact shift is decreased, since the electron polarization is decreased.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">rho</span><span class="o">=</span><span class="n">sl</span><span class="o">.</span><span class="n">Rho</span><span class="p">(</span><span class="n">rho0</span><span class="o">=</span><span class="s1">&#39;Thermal&#39;</span><span class="p">,</span><span class="n">detect</span><span class="o">=</span><span class="s1">&#39;13Cp&#39;</span><span class="p">)</span>
@@ -566,11 +565,6 @@
 <span class="n">T</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">logspace</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">log10</span><span class="p">(</span><span class="mi">20</span><span class="p">),</span><span class="n">np</span><span class="o">.</span><span class="n">log10</span><span class="p">(</span><span class="mi">200</span><span class="p">),</span><span class="mi">8</span><span class="p">)</span>
 <span class="k">for</span> <span class="n">T_K</span> <span class="ow">in</span> <span class="n">T</span><span class="p">:</span>
     <span class="n">ex</span><span class="o">.</span><span class="n">T_K</span><span class="o">=</span><span class="n">T_K</span>
-    
-    <span class="n">L</span><span class="o">.</span><span class="n">clear_relax</span><span class="p">()</span>
-    <span class="n">L</span><span class="o">.</span><span class="n">add_relax</span><span class="p">(</span><span class="n">Type</span><span class="o">=</span><span class="s1">&#39;T1&#39;</span><span class="p">,</span><span class="n">i</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">T1</span><span class="o">=</span><span class="mf">1e-6</span><span class="p">)</span>
-    <span class="n">L</span><span class="o">.</span><span class="n">add_relax</span><span class="p">(</span><span class="n">Type</span><span class="o">=</span><span class="s1">&#39;T2&#39;</span><span class="p">,</span><span class="n">i</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">T2</span><span class="o">=</span><span class="mf">1e-9</span><span class="p">)</span>
-    <span class="n">L</span><span class="o">.</span><span class="n">add_relax</span><span class="p">(</span><span class="n">Type</span><span class="o">=</span><span class="s1">&#39;recovery&#39;</span><span class="p">)</span>
     
     <span class="n">rho</span><span class="o">.</span><span class="n">clear</span><span class="p">()</span>
     <span class="n">Upi2</span><span class="o">*</span><span class="n">rho</span>
@@ -593,13 +587,13 @@ State-space reduction: 16-&gt;2
 State-space reduction: 16-&gt;2
 </pre></div>
 </div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x7fd4583eba58&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x7fc499ffa5f8&gt;
 </pre></div>
 </div>
 <img alt="../_images/1d004e549ef632ddb50a99191ac9cce16259a11bb045c36d1bf21baa74a6a2b9.png" src="../_images/1d004e549ef632ddb50a99191ac9cce16259a11bb045c36d1bf21baa74a6a2b9.png" />
 </div>
 </div>
-<p>Note that the contact shift has the same dependence on magnetic field as a normal chemical shift; the hyperfine coupling remains fixed with field, but the electron polarization grows linearly with field (in the high temperature approximation)</p>
+<p>Note that the contact shift has the same dependence on magnetic field as a normal chemical shift: the hyperfine coupling remains fixed with field, but the electron polarization grows linearly with field (in the high temperature approximation)</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ex</span><span class="o">.</span><span class="n">T_K</span><span class="o">=</span><span class="mi">200</span>
@@ -613,11 +607,6 @@ State-space reduction: 16-&gt;2
 <span class="n">B00</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span><span class="mi">30</span><span class="p">,</span><span class="mi">6</span><span class="p">)</span>
 <span class="k">for</span> <span class="n">B0</span> <span class="ow">in</span> <span class="n">B00</span><span class="p">:</span>
     <span class="n">ex</span><span class="o">.</span><span class="n">B0</span><span class="o">=</span><span class="n">B0</span> <span class="c1">#Adjust the magnetic field</span>
-    
-    <span class="n">L</span><span class="o">.</span><span class="n">clear_relax</span><span class="p">()</span>
-    <span class="n">L</span><span class="o">.</span><span class="n">add_relax</span><span class="p">(</span><span class="n">Type</span><span class="o">=</span><span class="s1">&#39;T1&#39;</span><span class="p">,</span><span class="n">i</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">T1</span><span class="o">=</span><span class="mf">1e-6</span><span class="p">)</span>
-    <span class="n">L</span><span class="o">.</span><span class="n">add_relax</span><span class="p">(</span><span class="n">Type</span><span class="o">=</span><span class="s1">&#39;T2&#39;</span><span class="p">,</span><span class="n">i</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">T2</span><span class="o">=</span><span class="mf">1e-9</span><span class="p">)</span>
-    <span class="n">L</span><span class="o">.</span><span class="n">add_relax</span><span class="p">(</span><span class="n">Type</span><span class="o">=</span><span class="s1">&#39;recovery&#39;</span><span class="p">)</span>
     
     <span class="n">rho</span><span class="o">.</span><span class="n">clear</span><span class="p">()</span>
     <span class="n">Upi2</span><span class="o">*</span><span class="n">rho</span>
@@ -645,7 +634,7 @@ State-space reduction: 16-&gt;2
 <img alt="../_images/9238f737c2db05d2c01f358d265e2cd55982d1ac139bc84a57b906185b0e4cad.png" src="../_images/9238f737c2db05d2c01f358d265e2cd55982d1ac139bc84a57b906185b0e4cad.png" />
 </div>
 </div>
-<p>Note that if the temperature approaches 0 K, then the electron is no longer in the high-temperature approximation, and therefore the contact shift is no longer linear with the field, as demonstrated below.</p>
+<p>If the temperature approaches 0 K, then the electron is no longer in the high-temperature approximation, and therefore the contact shift is no longer linear with the field, as demonstrated below.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ex</span><span class="o">.</span><span class="n">T_K</span><span class="o">=</span><span class="mi">10</span>
@@ -661,16 +650,12 @@ State-space reduction: 16-&gt;2
 <span class="k">for</span> <span class="n">B0</span> <span class="ow">in</span> <span class="n">B00</span><span class="p">:</span>
     <span class="n">ex</span><span class="o">.</span><span class="n">B0</span><span class="o">=</span><span class="n">B0</span>
     
-    <span class="n">L</span><span class="o">.</span><span class="n">clear_relax</span><span class="p">()</span>
-    <span class="n">L</span><span class="o">.</span><span class="n">add_relax</span><span class="p">(</span><span class="n">Type</span><span class="o">=</span><span class="s1">&#39;T1&#39;</span><span class="p">,</span><span class="n">i</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">T1</span><span class="o">=</span><span class="mf">1e-6</span><span class="p">)</span>  <span class="c1">#Add T1 relaxation (1 ns). </span>
-    <span class="n">L</span><span class="o">.</span><span class="n">add_relax</span><span class="p">(</span><span class="n">Type</span><span class="o">=</span><span class="s1">&#39;T2&#39;</span><span class="p">,</span><span class="n">i</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">T2</span><span class="o">=</span><span class="mf">1e-9</span><span class="p">)</span> <span class="c1">#Add T2 relaxation (ensure physical system)</span>
-    <span class="n">L</span><span class="o">.</span><span class="n">add_relax</span><span class="p">(</span><span class="n">Type</span><span class="o">=</span><span class="s1">&#39;recovery&#39;</span><span class="p">)</span>
-    
     <span class="n">rho</span><span class="o">.</span><span class="n">clear</span><span class="p">()</span>
     <span class="n">Upi2</span><span class="o">*</span><span class="n">rho</span>
     <span class="n">rho</span><span class="o">.</span><span class="n">DetProp</span><span class="p">(</span><span class="n">seq</span><span class="p">,</span><span class="n">n</span><span class="o">=</span><span class="mi">4096</span><span class="p">)</span>
     <span class="n">rho</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">FT</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">apodize</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="n">axis</span><span class="o">=</span><span class="s1">&#39;kHz&#39;</span><span class="p">)</span>
     <span class="n">rho</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">FT</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">apodize</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span><span class="n">axis</span><span class="o">=</span><span class="s1">&#39;ppm&#39;</span><span class="p">)</span>
+    
 <span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">legend</span><span class="p">([</span><span class="sa">f</span><span class="s1">&#39;B0 = </span><span class="si">{</span><span class="n">B0</span><span class="si">:</span><span class="s1">.0f</span><span class="si">}</span><span class="s1"> T&#39;</span> <span class="k">for</span> <span class="n">B0</span> <span class="ow">in</span> <span class="n">B00</span><span class="p">])</span>
 <span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlim</span><span class="p">([</span><span class="mi">3</span><span class="p">,</span><span class="o">-</span><span class="mi">3</span><span class="p">])</span>
 <span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlim</span><span class="p">([</span><span class="mi">20</span><span class="p">,</span><span class="o">-</span><span class="mi">20</span><span class="p">])</span>
@@ -690,7 +675,7 @@ State-space reduction: 16-&gt;2
 <img alt="../_images/396d0790da887545fdb057f9a6e8dac87056b2cbf7679e03c5405859688d3152.png" src="../_images/396d0790da887545fdb057f9a6e8dac87056b2cbf7679e03c5405859688d3152.png" />
 </div>
 </div>
-<p>The contact shift only occurs where an isotropic hyperfine coupling is present, so no through-space contact shift occurs. On the other hand, the dipolar-modulated pseudocontact shift, discussed in the next section, can induce a similar effect.</p>
+<p>The contact shift only occurs where an isotropic hyperfine coupling is present, so no through-space contact shift occurs. On the other hand, the dipolar-modulated pseudocontact shift, discussed in the next <a class="reference internal" href="Ch5_PseudoContactShift.html"><span class="std std-doc">section</span></a>, can induce a similar effect.</p>
 </section>
 </section>
 

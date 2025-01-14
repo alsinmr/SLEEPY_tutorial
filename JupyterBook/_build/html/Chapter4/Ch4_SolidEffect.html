@@ -552,12 +552,10 @@
 <section id="behavior-during-a-rotor-period">
 <h2>Behavior during a rotor period<a class="headerlink" href="#behavior-during-a-rotor-period" title="Link to this heading">#</a></h2>
 <p>It is interesting to note that the efficiency of DNP under MAS comes in large part because the rotor spinning sweeps us through the matching conditions for many different orientations of the electron g-tensor. Here, we select just one crystallite from our powder average, and simulate one rotor period with 100 steps, to observe the time dependence of the enhancement throughout the rotor period.</p>
-<p>Note that we simply edit the powder average in <code class="docutils literal notranslate"><span class="pre">ex</span></code> to get the single crystal. We always need to reset the cache when editing <code class="docutils literal notranslate"><span class="pre">ex</span></code> without rebuilding the Liouvillian, via <code class="docutils literal notranslate"><span class="pre">L.clear_cache()</span></code>.</p>
+<p>Note that we simply edit the powder average in <code class="docutils literal notranslate"><span class="pre">ex</span></code> to get the single crystal.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ex</span><span class="o">.</span><span class="n">pwdavg</span><span class="o">=</span><span class="n">sl</span><span class="o">.</span><span class="n">PowderAvg</span><span class="p">(</span><span class="mi">2</span><span class="p">)[</span><span class="mi">10</span><span class="p">]</span>
-<span class="c1"># Always clear the cache when editing the original ex</span>
-<span class="n">L</span><span class="o">.</span><span class="n">clear_cache</span><span class="p">()</span>
 
 <span class="n">rho</span><span class="o">=</span><span class="n">sl</span><span class="o">.</span><span class="n">Rho</span><span class="p">(</span><span class="s1">&#39;Thermal&#39;</span><span class="p">,</span><span class="s1">&#39;1Hz&#39;</span><span class="p">)</span>
 
@@ -576,7 +574,7 @@
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Prop: 100 steps per every 1 rotor period
 </pre></div>
 </div>
-<img alt="../_images/846de4fe36ad5c9766c0297ac0a38e5368ad2428603bb004b45244502352008d.png" src="../_images/846de4fe36ad5c9766c0297ac0a38e5368ad2428603bb004b45244502352008d.png" />
+<img alt="../_images/e94030695b93c2a7a07826ab287e229e71278b9f9b1dcf241096f4e7bd2b891e.png" src="../_images/e94030695b93c2a7a07826ab287e229e71278b9f9b1dcf241096f4e7bd2b891e.png" />
 </div>
 </div>
 <p>We see that the solid-effect condition is hit twice per rotor period (left plot),leading to a gradual build up of the polarization (right plot). Note that the choice of index on the powder average (e.g. <code class="docutils literal notranslate"><span class="pre">sl.PowderAvg(q=2)[25]</span></code>) will change the locations in the rotor period that transfer occurs.</p>
@@ -587,7 +585,6 @@
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ex</span><span class="o">.</span><span class="n">pwdavg</span><span class="o">=</span><span class="mi">2</span>
-<span class="n">_</span><span class="o">=</span><span class="n">L</span><span class="o">.</span><span class="n">clear_cache</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
@@ -626,10 +623,7 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x7fc251964438&gt;
-</pre></div>
-</div>
-<img alt="../_images/c6ff8ce2ac43f65e0ebd4598818c63fb6fe56bf3725925cbf05a8526279761dd.png" src="../_images/c6ff8ce2ac43f65e0ebd4598818c63fb6fe56bf3725925cbf05a8526279761dd.png" />
+<img alt="../_images/6df5b7db48a2bd229c5d7a98866e4e8ca6dcc1bc81109f204389f1e96a512f52.png" src="../_images/6df5b7db48a2bd229c5d7a98866e4e8ca6dcc1bc81109f204389f1e96a512f52.png" />
 </div>
 </div>
 <p>We see that a shorter electron <span class="math notranslate nohighlight">\(T_1\)</span> yields a larger enhancement, since the electron must recover its magnetization when transferred to the nucleus. If it becomes too short, it interferes with the transfer itself.</p>
@@ -679,7 +673,6 @@
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ex</span><span class="o">.</span><span class="n">pwdavg</span><span class="o">=</span><span class="n">sl</span><span class="o">.</span><span class="n">PowderAvg</span><span class="p">(</span><span class="mi">2</span><span class="p">)[</span><span class="mi">10</span><span class="p">]</span>
-<span class="n">L</span><span class="o">.</span><span class="n">clear_cache</span><span class="p">()</span>
 <span class="n">L</span><span class="o">.</span><span class="n">clear_relax</span><span class="p">()</span>
 
 <span class="n">rho</span><span class="o">=</span><span class="n">sl</span><span class="o">.</span><span class="n">Rho</span><span class="p">(</span><span class="s1">&#39;Thermal&#39;</span><span class="p">,</span><span class="s1">&#39;1Hz&#39;</span><span class="p">)</span>

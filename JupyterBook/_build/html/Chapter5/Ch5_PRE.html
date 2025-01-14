@@ -460,6 +460,7 @@
 <h2>PRE from an isotropic hyperfine coupling<a class="headerlink" href="#pre-from-an-isotropic-hyperfine-coupling" title="Link to this heading">#</a></h2>
 <section id="build-the-system">
 <h3>Build the system<a class="headerlink" href="#build-the-system" title="Link to this heading">#</a></h3>
+<p>We start with an electron nuclear system, with an isotropic hyperfine coupling</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ex</span><span class="o">=</span><span class="n">sl</span><span class="o">.</span><span class="n">ExpSys</span><span class="p">(</span><span class="n">v0H</span><span class="o">=</span><span class="mi">500</span><span class="p">,</span><span class="n">Nucs</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;13C&#39;</span><span class="p">,</span><span class="s1">&#39;e-&#39;</span><span class="p">],</span><span class="n">LF</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
@@ -495,18 +496,18 @@
 <span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;$T_2$ decay&#39;</span><span class="p">)</span>
 <span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">rho</span><span class="o">.</span><span class="n">t_axis</span><span class="p">,</span><span class="mf">0.5</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">rho</span><span class="o">.</span><span class="n">t_axis</span><span class="o">/</span><span class="p">(</span><span class="n">T1</span><span class="o">*</span><span class="mi">2</span><span class="p">)),</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">,</span><span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;:&#39;</span><span class="p">)</span>
 <span class="n">rho</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="s1">&#39;s&#39;</span><span class="p">,</span><span class="n">det_num</span><span class="o">=</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">],</span><span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
-<span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Overhauser effect&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;$T_1$ / Overhauser effect&#39;</span><span class="p">)</span>
 <span class="n">_</span><span class="o">=</span><span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">rho</span><span class="o">.</span><span class="n">t_axis</span><span class="p">,</span><span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">rho</span><span class="o">.</span><span class="n">t_axis</span><span class="o">/</span><span class="p">(</span><span class="n">T1</span><span class="o">/</span><span class="mi">2</span><span class="p">))</span><span class="o">*</span><span class="mf">0.5</span><span class="o">+</span><span class="mf">0.5</span><span class="p">,</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">,</span><span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;:&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/66a5d5930914e779f5c6cfb9179420a258800f680543a916848f8a94ce67dbf2.png" src="../_images/66a5d5930914e779f5c6cfb9179420a258800f680543a916848f8a94ce67dbf2.png" />
+<img alt="../_images/e7f92f42f40a671e9624e22c1eb8cf3aaf48c93d55cfd770d85bc87bdb91dc44.png" src="../_images/e7f92f42f40a671e9624e22c1eb8cf3aaf48c93d55cfd770d85bc87bdb91dc44.png" />
 </div>
 </div>
-<p>We see that the elecron <span class="math notranslate nohighlight">\(T_2\)</span> induces transverse relaxation on the electron. In fact, this is an Overhauser effect in the rotating frame (ROE), but the short electron <span class="math notranslate nohighlight">\(T_2\)</span> immediately destroys any magnetization gained on the nucleus. It also induces a transfer of longitudinal magnetization between electron and nucleus. In a real system, the electron <span class="math notranslate nohighlight">\(T_1\)</span> relaxation would almost immediately destroy the gains, although in principle an Overhauser effect enhancement could be possible through this mechanism (although unlikely– the short electron <span class="math notranslate nohighlight">\(T_2\)</span> used here would make electron saturation very difficult).</p>
-<p>We have plotted a monoexponential curve on each plot. For <span class="math notranslate nohighlight">\(T_1\)</span>-decay, we have a time-constant of 2.1 seconds, and for <span class="math notranslate nohighlight">\(T_2\)</span>-decay, a time-constant twice as long, of 4.2 seconds. Then, this is a rare case when <span class="math notranslate nohighlight">\(T_2\)</span> relaxation is slower than <span class="math notranslate nohighlight">\(T_1\)</span> relaxation (see <a class="reference external" href="https://doi.org/10.1002/cmr.1820030305">Traficante 1991</a>). This occurs when the relaxing field, in this case the non-secular components of the hyperfine coupling, only comes in the xy-plane, where the electron <span class="math notranslate nohighlight">\(T_2\)</span> is active. We will later see that relaxation induced by the electron <span class="math notranslate nohighlight">\(T_1\)</span> will prevent <span class="math notranslate nohighlight">\(T_2\)</span> from actually exceeding <span class="math notranslate nohighlight">\(T_1\)</span> in this example.</p>
-<p>If we add an electron <span class="math notranslate nohighlight">\(T_1\)</span>, we can evaluate the dependence of the nuclear <span class="math notranslate nohighlight">\(T_1\)</span> on the electron <span class="math notranslate nohighlight">\(T_2\)</span>. We expect to find the maximum <span class="math notranslate nohighlight">\(T_1\)</span> relaxation when <span class="math notranslate nohighlight">\(T_{2e}=1/|(\omega_{0e}-\omega_{0n})|\)</span>, i.e. matched to the energy differnce of the two spins, which we will mark on the resulting plot.</p>
+<p>We see that the elecron <span class="math notranslate nohighlight">\(T_2\)</span> induces transverse relaxation on the electron. In fact, this is an Overhauser effect in the rotating frame (ROE), but the short electron <span class="math notranslate nohighlight">\(T_2\)</span> immediately destroys any magnetization gained on the electron. It also induces a transfer of longitudinal magnetization between electron and nucleus. In a real system, the electron <span class="math notranslate nohighlight">\(T_1\)</span> relaxation would almost immediately destroy the gains on the electron. However, transfer in the opposite direction allows, in principle, an Overhauser effect enhancement (although unlikely– the short electron <span class="math notranslate nohighlight">\(T_2\)</span> used here would make electron saturation very difficult).</p>
+<p>We have plotted a monoexponential curve on each plot. For <span class="math notranslate nohighlight">\(T_1\)</span>-decay, we have a time-constant of 2.1 seconds, and for <span class="math notranslate nohighlight">\(T_2\)</span>-decay, a time-constant twice as long, of 4.2 seconds. Then, this is a rare case when <span class="math notranslate nohighlight">\(T_2\)</span> relaxation is slower than <span class="math notranslate nohighlight">\(T_1\)</span> relaxation (see <a class="reference external" href="https://doi.org/10.1002/cmr.1820030305">Traficante 1991</a>). This occurs when the relaxing field, in this case the non-secular components of the hyperfine coupling, only comes in the xy-plane, where the electron <span class="math notranslate nohighlight">\(T_2\)</span> is active. We will later see that relaxation induced by the electron <span class="math notranslate nohighlight">\(T_1\)</span> will prevent <span class="math notranslate nohighlight">\(T_2\)</span> from actually exceeding <span class="math notranslate nohighlight">\(T_1\)</span> in such a system.</p>
+<p>We can evaluate the dependence of the nuclear <span class="math notranslate nohighlight">\(T_1\)</span> on the electron <span class="math notranslate nohighlight">\(T_2\)</span>. We expect to find the minimum <span class="math notranslate nohighlight">\(T_1\)</span> when <span class="math notranslate nohighlight">\(T_{2e}=1/|(\omega_{0e}-\omega_{0n})|\)</span>, i.e. matched to the energy difference of the two spins, which we will mark on the resulting plot.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">rho</span><span class="o">=</span><span class="n">sl</span><span class="o">.</span><span class="n">Rho</span><span class="p">(</span><span class="s1">&#39;13Cz&#39;</span><span class="p">,</span><span class="s1">&#39;13Cz&#39;</span><span class="p">)</span>
@@ -514,7 +515,6 @@
 <span class="n">R1</span><span class="o">=</span><span class="p">[]</span>
 <span class="k">for</span> <span class="n">T2</span> <span class="ow">in</span> <span class="n">T20</span><span class="p">:</span>
     <span class="n">L</span><span class="o">.</span><span class="n">clear_relax</span><span class="p">()</span>
-    <span class="n">L</span><span class="o">.</span><span class="n">add_relax</span><span class="p">(</span><span class="s1">&#39;T1&#39;</span><span class="p">,</span><span class="n">i</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">T1</span><span class="o">=</span><span class="mf">1e-6</span><span class="p">)</span> <span class="c1">#Longer than all T2s used</span>
     <span class="n">L</span><span class="o">.</span><span class="n">add_relax</span><span class="p">(</span><span class="s1">&#39;T2&#39;</span><span class="p">,</span><span class="n">i</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">T2</span><span class="o">=</span><span class="n">T2</span><span class="p">)</span>
     <span class="n">R1</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">rho</span><span class="o">.</span><span class="n">extract_decay_rates</span><span class="p">(</span><span class="n">L</span><span class="o">.</span><span class="n">U</span><span class="p">(</span><span class="n">Dt</span><span class="o">=</span><span class="mf">1e-3</span><span class="p">)))</span>
 </pre></div>
@@ -534,10 +534,10 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/3d6d6198e38e46ec3d2335f79719174f97f002643fb38054ad336eb0fa45e2db.png" src="../_images/3d6d6198e38e46ec3d2335f79719174f97f002643fb38054ad336eb0fa45e2db.png" />
+<img alt="../_images/10eddecd55448bad9518f81259cc2dfd0ba1028bac2aa1098ced9895cfe34805.png" src="../_images/10eddecd55448bad9518f81259cc2dfd0ba1028bac2aa1098ced9895cfe34805.png" />
 </div>
 </div>
-<p>Indeed, the maximum occurs as expected.</p>
+<p>Indeed, the minimum occurs as expected (we plot <span class="math notranslate nohighlight">\(1/T_{1n}\)</span>, so this appears as a maximum), where the dashed line marks the predicted minimum.</p>
 </section>
 <section id="electron-t-1-relaxation-only">
 <h3>Electron <span class="math notranslate nohighlight">\(T_1\)</span> relaxation only<a class="headerlink" href="#electron-t-1-relaxation-only" title="Link to this heading">#</a></h3>
@@ -554,7 +554,7 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/Users/albertsmith/Documents/GitHub/SLEEPY/Liouvillian.py:495: UserWarning: T1 relaxation included without T2 relaxation. Unphysical system
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/Users/albertsmith/Documents/GitHub/SLEEPY/Liouvillian.py:540: UserWarning: T1 relaxation included without T2 relaxation. Unphysical system
   warnings.warn(&#39;T1 relaxation included without T2 relaxation. Unphysical system&#39;)
 </pre></div>
 </div>
@@ -569,12 +569,12 @@
 <span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;$T_2$ decay&#39;</span><span class="p">)</span>
 <span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">rho</span><span class="o">.</span><span class="n">t_axis</span><span class="p">,</span><span class="mf">0.5</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">rho</span><span class="o">.</span><span class="n">t_axis</span><span class="o">/</span><span class="p">(</span><span class="n">T1</span><span class="o">*</span><span class="mi">2</span><span class="p">)),</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">,</span><span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;:&#39;</span><span class="p">)</span>
 <span class="n">rho</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="s1">&#39;s&#39;</span><span class="p">,</span><span class="n">det_num</span><span class="o">=</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">],</span><span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
-<span class="n">_</span><span class="o">=</span><span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Overhauser effect&#39;</span><span class="p">)</span>
+<span class="n">_</span><span class="o">=</span><span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;$T_1$ / Overhauser effect&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/8b036b352458452ce74957d39b5feb8f633bcbe3317a65067554e1d3d5c3acc1.png" src="../_images/8b036b352458452ce74957d39b5feb8f633bcbe3317a65067554e1d3d5c3acc1.png" />
+<img alt="../_images/29017a0df6566c739ff25ca0d907793638fbf374eac0e64d54cae2e169417c93.png" src="../_images/29017a0df6566c739ff25ca0d907793638fbf374eac0e64d54cae2e169417c93.png" />
 </div>
 </div>
 <p>Then, we see that an electron <span class="math notranslate nohighlight">\(T_1\)</span> acting via an isotropic hyperfine coupling induces <span class="math notranslate nohighlight">\(T_2\)</span> decay, but no <span class="math notranslate nohighlight">\(T_1\)</span> or Overhauser effect. As mentioned above, if we have electron <span class="math notranslate nohighlight">\(T_1\)</span> and <span class="math notranslate nohighlight">\(T_2\)</span> together, then we no longer have the case that <span class="math notranslate nohighlight">\(T_{2n}&lt;T_{1n}.\)</span> In fact, when <span class="math notranslate nohighlight">\(T_{1e}\)</span>=<span class="math notranslate nohighlight">\(T_{2e}\)</span>, then <span class="math notranslate nohighlight">\(T_{1n}\)</span>=<span class="math notranslate nohighlight">\(T_{2n}\)</span>. If <span class="math notranslate nohighlight">\(T_{1e}\)</span> gets longer, then the <span class="math notranslate nohighlight">\(T_{2n}\)</span> becomes shorter, giving the more typical case of <span class="math notranslate nohighlight">\(T_{1n}&gt;T_{2n}\)</span>.</p>
@@ -596,26 +596,27 @@
 <span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">rho</span><span class="o">.</span><span class="n">t_axis</span><span class="p">,</span><span class="mf">0.5</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">rho</span><span class="o">.</span><span class="n">t_axis</span><span class="o">/</span><span class="n">T1</span><span class="p">),</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">,</span><span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;:&#39;</span><span class="p">)</span>
 <span class="n">rho</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="s1">&#39;s&#39;</span><span class="p">,</span><span class="n">det_num</span><span class="o">=</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">],</span><span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
 <span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">rho</span><span class="o">.</span><span class="n">t_axis</span><span class="p">,</span><span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">rho</span><span class="o">.</span><span class="n">t_axis</span><span class="o">/</span><span class="n">T1</span><span class="p">),</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">,</span><span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;:&#39;</span><span class="p">)</span>
-<span class="n">_</span><span class="o">=</span><span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Overhauser effect&#39;</span><span class="p">)</span>
+<span class="n">_</span><span class="o">=</span><span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;$T_1$ / Overhauser effect&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/530ff800d4979ecb6cdca7be8ac8a1d3f6490fa33c20cba604f0e8d89c120099.png" src="../_images/530ff800d4979ecb6cdca7be8ac8a1d3f6490fa33c20cba604f0e8d89c120099.png" />
+<img alt="../_images/bd69eec1e08a4b77885ed017e6908870e78f1727be6e22544d4036ed0b436ddd.png" src="../_images/bd69eec1e08a4b77885ed017e6908870e78f1727be6e22544d4036ed0b436ddd.png" />
 </div>
 </div>
+<p>Both <span class="math notranslate nohighlight">\(T_{2n}\)</span> and <span class="math notranslate nohighlight">\(T_{1n}\)</span> are approximately 2.1 seconds.</p>
 <p>We can also acquire dependence of the nuclear <span class="math notranslate nohighlight">\(T_2\)</span> on the electron <span class="math notranslate nohighlight">\(T_1\)</span>.</p>
-<p>This is a little tricker than extracting the <span class="math notranslate nohighlight">\(T_1\)</span>. Decay rates are extracted from the real part of the eigenvalues of the propagators, but the relevant rates are easily identified because they are non-oscillating. For <span class="math notranslate nohighlight">\(T_2\)</span>, that is no longer the case, so that we must simply find the biggest term and its decay rate. This is not always the correct approach for extracting  decay of an oscillating signal, but works here.</p>
+<p>This is a little tricker than extracting the <span class="math notranslate nohighlight">\(T_1\)</span>. Decay rates are extracted from the real part of the eigenvalues of the propagators, but the relevant rates are easily identified because they are non-oscillating. For <span class="math notranslate nohighlight">\(T_2\)</span>, that is no longer the case, so that we simply search for the biggest term and extract its decay rate. This is not always the correct approach for extracting  decay of an oscillating signal, but works here because all the other terms are negligible.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">rho</span><span class="o">=</span><span class="n">sl</span><span class="o">.</span><span class="n">Rho</span><span class="p">(</span><span class="s1">&#39;13Cx&#39;</span><span class="p">,</span><span class="s1">&#39;13Cp&#39;</span><span class="p">)</span>
-<span class="n">T10</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">logspace</span><span class="p">(</span><span class="o">-</span><span class="mi">12</span><span class="p">,</span><span class="o">-</span><span class="mi">7</span><span class="p">,</span><span class="mi">100</span><span class="p">)</span>
+<span class="n">T10</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">logspace</span><span class="p">(</span><span class="o">-</span><span class="mi">12</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">200</span><span class="p">)</span>
 <span class="n">R2</span><span class="o">=</span><span class="p">[]</span>
 <span class="k">for</span> <span class="n">T1</span> <span class="ow">in</span> <span class="n">T10</span><span class="p">:</span>
     <span class="n">L</span><span class="o">.</span><span class="n">clear_relax</span><span class="p">()</span>
     <span class="n">L</span><span class="o">.</span><span class="n">add_relax</span><span class="p">(</span><span class="s1">&#39;T1&#39;</span><span class="p">,</span><span class="n">i</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">T1</span><span class="o">=</span><span class="n">T1</span><span class="p">)</span> <span class="c1">#Longer than all T2s used</span>
     <span class="n">L</span><span class="o">.</span><span class="n">add_relax</span><span class="p">(</span><span class="s1">&#39;T2&#39;</span><span class="p">,</span><span class="n">i</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">T2</span><span class="o">=</span><span class="mf">1e-12</span><span class="p">)</span>
-    <span class="n">rate</span><span class="p">,</span><span class="n">_</span><span class="p">,</span><span class="n">A</span><span class="o">=</span><span class="n">rho</span><span class="o">.</span><span class="n">extract_decay_rates</span><span class="p">(</span><span class="n">L</span><span class="o">.</span><span class="n">U</span><span class="p">(</span><span class="n">Dt</span><span class="o">=</span><span class="mf">1e-3</span><span class="p">),</span><span class="n">mode</span><span class="o">=</span><span class="s1">&#39;all&#39;</span><span class="p">)</span>
+    <span class="n">rate</span><span class="p">,</span><span class="n">_</span><span class="p">,</span><span class="n">A</span><span class="o">=</span><span class="n">rho</span><span class="o">.</span><span class="n">extract_decay_rates</span><span class="p">(</span><span class="n">L</span><span class="o">.</span><span class="n">U</span><span class="p">(</span><span class="n">Dt</span><span class="o">=</span><span class="mf">1e-6</span><span class="p">),</span><span class="n">mode</span><span class="o">=</span><span class="s1">&#39;all&#39;</span><span class="p">)</span>
     <span class="n">i</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="n">A</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
     <span class="n">R2</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">rate</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="n">i</span><span class="p">])</span>
 </pre></div>
@@ -625,7 +626,7 @@
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ax</span><span class="o">=</span><span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()[</span><span class="mi">1</span><span class="p">]</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">loglog</span><span class="p">(</span><span class="n">T20</span><span class="p">,</span><span class="n">R2</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">loglog</span><span class="p">(</span><span class="n">T10</span><span class="p">,</span><span class="n">R2</span><span class="p">)</span>
 <span class="n">ax</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">(</span><span class="n">ax</span><span class="o">.</span><span class="n">get_ylim</span><span class="p">())</span>
 <span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;$T_</span><span class="si">{1e}</span><span class="s1">$ / s&#39;</span><span class="p">)</span>
 <span class="n">_</span><span class="o">=</span><span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;$1/T_</span><span class="si">{2n}</span><span class="s1">$ / s$^{-1}$&#39;</span><span class="p">)</span>
@@ -633,10 +634,27 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/7611b10cea0759ace270b74f045fe1e6a6da5f1d581b3644d7a44bc4dbd02b10.png" src="../_images/7611b10cea0759ace270b74f045fe1e6a6da5f1d581b3644d7a44bc4dbd02b10.png" />
+<img alt="../_images/6512c038d5dda5cb3edbeba2e19e578c22b3b8ead1872e9638dc8fcc4be42047.png" src="../_images/6512c038d5dda5cb3edbeba2e19e578c22b3b8ead1872e9638dc8fcc4be42047.png" />
 </div>
 </div>
-<p>Then, as the electron <span class="math notranslate nohighlight">\(T_1\)</span> gets longer, the nuclear <span class="math notranslate nohighlight">\(T_2\)</span> gets shorter, resulting in a linear plot.</p>
+<p>Then, as the electron <span class="math notranslate nohighlight">\(T_1\)</span> gets longer, the nuclear <span class="math notranslate nohighlight">\(T_2\)</span> gets shorter, resulting in a linear plot for short correlation times. However, when <span class="math notranslate nohighlight">\(1/T_1&lt;2\pi A_{iso}\approx3x10^{-6}\)</span> s<span class="math notranslate nohighlight">\(^{-1}\)</span>, the nuclear <span class="math notranslate nohighlight">\(T_2\)</span> becomes longer again. A sharp transition occurs, similar to the coalescence condition found for simple <a class="reference internal" href="../Chapter2/Ch2_exchange1D.html"><span class="std std-doc">1D exchange</span></a>. Note that after this transition, we would observe two peaks, seen below.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">L</span><span class="o">.</span><span class="n">clear_relax</span><span class="p">()</span>
+<span class="n">L</span><span class="o">.</span><span class="n">add_relax</span><span class="p">(</span><span class="s1">&#39;T1&#39;</span><span class="p">,</span><span class="n">i</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">T1</span><span class="o">=</span><span class="mf">5e-6</span><span class="p">)</span>
+<span class="n">L</span><span class="o">.</span><span class="n">add_relax</span><span class="p">(</span><span class="s1">&#39;T2&#39;</span><span class="p">,</span><span class="n">i</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">T2</span><span class="o">=</span><span class="mf">1e-12</span><span class="p">)</span>
+
+<span class="n">rho</span><span class="o">.</span><span class="n">clear</span><span class="p">()</span>
+<span class="n">rho</span><span class="o">.</span><span class="n">DetProp</span><span class="p">(</span><span class="n">L</span><span class="o">.</span><span class="n">U</span><span class="p">(</span><span class="n">Dt</span><span class="o">=</span><span class="mf">1e-7</span><span class="p">),</span><span class="n">n</span><span class="o">=</span><span class="mi">1000</span><span class="p">)</span>
+<span class="n">rho</span><span class="o">.</span><span class="n">downmix</span><span class="p">()</span>
+<span class="n">_</span><span class="o">=</span><span class="n">rho</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">FT</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/e11ff2d12091b6875772761e2142563fa5616f3ba58e8c12ec1f0ce1c78e318b.png" src="../_images/e11ff2d12091b6875772761e2142563fa5616f3ba58e8c12ec1f0ce1c78e318b.png" />
+</div>
+</div>
 </section>
 </section>
 <section id="pre-from-a-dipolar-hyperfine-coupling">
@@ -687,7 +705,7 @@
 </div>
 </div>
 <p>Electron <span class="math notranslate nohighlight">\(T_2\)</span> then similarly induces a nuclear <span class="math notranslate nohighlight">\(T_2\)</span> and <span class="math notranslate nohighlight">\(T_1\)</span>. Unlike the scalar case, the <span class="math notranslate nohighlight">\(T_1\)</span> is not a pure Overhauser effect transfer, and eventually the full magnetization is destroyed.</p>
-<p>The electron hyperfine coupling is strong enough to tilt the nucleus quantization away from the <em>z</em>-axis, such that MAS can no longer average the coupling, yielding a complex lineshape if we Fourier transform the transverse magnetization, shown below. Note that this effect will only appear if the nucleus is in the lab frame.</p>
+<p>The electron hyperfine coupling is strong enough to tilt the nuclear quantization axis away from the <em>z</em>, such that MAS can no longer average the coupling, yielding a complex lineshape if we Fourier transform the transverse magnetization. Note that this effect will only appear if the nucleus is in the lab frame.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">rho</span><span class="o">.</span><span class="n">apod_pars</span><span class="p">[</span><span class="s1">&#39;LB&#39;</span><span class="p">]</span><span class="o">=</span><span class="mi">2</span>
@@ -740,6 +758,7 @@
 </section>
 <section id="id3">
 <h3>Electron <span class="math notranslate nohighlight">\(T_1\)</span> relaxation only<a class="headerlink" href="#id3" title="Link to this heading">#</a></h3>
+<p>Above, we saw the influence of the electron <span class="math notranslate nohighlight">\(T_{2e}\)</span> on the nuclear <span class="math notranslate nohighlight">\(T_{1n}\)</span> and <span class="math notranslate nohighlight">\(T_{2n}\)</span>, in the presence of a dipolar hyperfine coupling. Here, we investigate the influence of the electron <span class="math notranslate nohighlight">\(T_{1e}\)</span>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ex</span><span class="o">=</span><span class="n">sl</span><span class="o">.</span><span class="n">ExpSys</span><span class="p">(</span><span class="n">v0H</span><span class="o">=</span><span class="mi">500</span><span class="p">,</span><span class="n">Nucs</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;13C&#39;</span><span class="p">,</span><span class="s1">&#39;e-&#39;</span><span class="p">],</span><span class="n">LF</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">pwdavg</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span>
@@ -785,7 +804,7 @@
 <img alt="../_images/d2db136dad52951e1366c4af478cbc71eb2cfc26bdf7a3a30fc64207ad0c51f8.png" src="../_images/d2db136dad52951e1366c4af478cbc71eb2cfc26bdf7a3a30fc64207ad0c51f8.png" />
 </div>
 </div>
-<p>As with the scalar hyperfine coupling, the electron <span class="math notranslate nohighlight">\(T_1\)</span> relaxation induces <span class="math notranslate nohighlight">\(T_2\)</span> and <span class="math notranslate nohighlight">\(T_1\)</span> relaxation on the nucleus without inducing any Overhauser effect. We can calculate the nuclear <span class="math notranslate nohighlight">\(T_1\)</span> as a function of electron <span class="math notranslate nohighlight">\(T_1\)</span></p>
+<p>As with the scalar hyperfine coupling, the electron <span class="math notranslate nohighlight">\(T_1\)</span> relaxation induces <span class="math notranslate nohighlight">\(T_2\)</span>. <span class="math notranslate nohighlight">\(T_1\)</span> relaxation is also induced on the nucleus, but without inducing any Overhauser effect. We can calculate the nuclear <span class="math notranslate nohighlight">\(T_1\)</span> as a function of electron <span class="math notranslate nohighlight">\(T_1\)</span>, as is done below.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Takes a few minutes</span>
@@ -806,7 +825,7 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/Users/albertsmith/Documents/GitHub/SLEEPY/Liouvillian.py:495: UserWarning: T1 relaxation included without T2 relaxation. Unphysical system
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/Users/albertsmith/Documents/GitHub/SLEEPY/Liouvillian.py:540: UserWarning: T1 relaxation included without T2 relaxation. Unphysical system
   warnings.warn(&#39;T1 relaxation included without T2 relaxation. Unphysical system&#39;)
 </pre></div>
 </div>
@@ -828,7 +847,7 @@
 <img alt="../_images/682227c56d2387c1dd68f9a84178789c3b9f363ea4b2854583ff9b9640a8c634.png" src="../_images/682227c56d2387c1dd68f9a84178789c3b9f363ea4b2854583ff9b9640a8c634.png" />
 </div>
 </div>
-<p>We see that the maximum occurs when <span class="math notranslate nohighlight">\(T_{1e}=1/|(\omega_{0n})|\)</span>, in contrast to the results from the scalar hyperfine coupling.</p>
+<p>We see that the maximum occurs when <span class="math notranslate nohighlight">\(T_{1e}=1/|(\omega_{0n})|\)</span>, in contrast to the results from the scalar hyperfine coupling where no nuclear <span class="math notranslate nohighlight">\(T_{1n}\)</span> was induced by the electron <span class="math notranslate nohighlight">\(T_{1e}\)</span></p>
 </section>
 </section>
 </section>
