@@ -48,4 +48,8 @@ parts:
     - file: Chapter5/Ch5_ContactShift
     - file: Chapter5/Ch5_PseudoContactShift
   - file: Chapter6/Ch6_RelaxationOptions
-  - file: Ch7_ColabTemplate
+  - file: ColabTemplate
+- caption: User library
+  numbered: false
+  chapters:
+  - file: UserLibrary

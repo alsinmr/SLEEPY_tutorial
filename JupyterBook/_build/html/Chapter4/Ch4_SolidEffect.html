@@ -55,7 +55,7 @@
     <script>let toggleOpenOnPrint = 'true';</script>
     <script src="../_static/togglebutton.js?v=4a39c7ea"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
-    <script src="../_static/design-tabs.js?v=36754332"></script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
     <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
@@ -66,7 +66,7 @@
     <link rel="icon" href="../_static/favicon.png"/>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Cross-Effect" href="Ch4_CrossEffect.html" />
+    <link rel="next" title="Cross Effect" href="Ch4_CrossEffect.html" />
     <link rel="prev" title="Dynamic Nuclear Polarization" href="../Ch4_DNP.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -209,9 +209,9 @@
 </details></li>
 <li class="toctree-l1 current active has-children"><a class="reference internal" href="../Ch4_DNP.html"><font color="#B00000">Dynamic Nuclear Polarization</font></a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
 <li class="toctree-l2 current active"><a class="current reference internal" href="#"><font color="#0093AF">Solid Effect</font></a></li>
-<li class="toctree-l2"><a class="reference internal" href="Ch4_CrossEffect.html"><font color="#0093AF">Cross-Effect</font></a></li>
+<li class="toctree-l2"><a class="reference internal" href="Ch4_CrossEffect.html"><font color="#0093AF">Cross Effect</font></a></li>
 <li class="toctree-l2"><a class="reference internal" href="Ch4_OverhauserEffect.html"><font color="#0093AF">Overhauser Effect</font></a></li>
-<li class="toctree-l2"><a class="reference internal" href="Ch4_NOVEL.html"><font color="#0093AF">NOVEL</font></a></li>
+<li class="toctree-l2"><a class="reference internal" href="Ch4_NOVEL.html"><font color="#0093AF">Pulsed-DNP: NOVEL</font></a></li>
 </ul>
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../Ch5_ParamagneticEffects.html"><font color="#B00000">Paramagnetic Effects</font></a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
@@ -221,7 +221,11 @@
 </ul>
 </details></li>
 <li class="toctree-l1"><a class="reference internal" href="../Chapter6/Ch6_RelaxationOptions.html"><font color="#B00000">Relaxation Options</font></a></li>
-<li class="toctree-l1"><a class="reference internal" href="../Ch7_ColabTemplate.html"><font color="#B00000"> SLEEPY Colab Template</font></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ColabTemplate.html"><font color="#B00000"> SLEEPY Colab Template</font></a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">User library</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../UserLibrary.html"><font color="#B00000">User contributions</font></a></li>
 </ul>
 
     </div>
@@ -422,7 +426,7 @@
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#sweep-nuclear-t-1">Sweep nuclear <span class="math notranslate nohighlight">\(T_1\)</span></a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#simulating-solid-effect-without-relaxation">Simulating Solid-Effect without relaxation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#simulating-solid-effect-without-relaxation">Simulating solid effect without relaxation</a></li>
 </ul>
             </nav>
         </div>
@@ -437,7 +441,7 @@
   <section class="tex2jax_ignore mathjax_ignore" id="solid-effect">
 <h1><font  color = "#0093AF">Solid Effect</font><a class="headerlink" href="#solid-effect" title="Link to this heading">#</a></h1>
 <p><a href="https://githubtocolab.com/alsinmr/SLEEPY_tutorial/blob/main/ColabNotebooks/Chapter4/Ch4_SolidEffect.ipynb" target="_blank"><img src="https://colab.research.google.com/assets/colab-badge.svg"></a></p>
-<p>The solid-effect<span class="math notranslate nohighlight">\(^1\)</span> is a two-spin mechanism of transfering polarization from electrons to nuclei. It is active when the electron is irradiated with an offset equal to the nuclear Larmor frequency:</p>
+<p>The solid effect<span class="math notranslate nohighlight">\(^1\)</span> is a two-spin mechanism of transfering polarization from electrons to nuclei. It is active when the electron is irradiated with an offset equal to the nuclear Larmor frequency:</p>
 <div class="math notranslate nohighlight">
 \[
 \begin{equation}
@@ -470,9 +474,9 @@
 </div>
 </div>
 </div>
-<p>We add some relaxation to make the simulation more realistic. Values taken from Smith et al.<span class="math notranslate nohighlight">\(^1\)</span></p>
+<p>We add some relaxation to make the simulation more realistic. Values for the glycerol water with 40 mM trityl radical taken from Smith et al.<span class="math notranslate nohighlight">\(^2\)</span></p>
 <p>Note that because the nucleus is titled, to be fully rigorous, we need to use relaxation in the eigenbasis of the Hamiltonian, obtained by setting <code class="docutils literal notranslate"><span class="pre">OS=True</span></code> (and <code class="docutils literal notranslate"><span class="pre">Thermal=True</span></code> for <span class="math notranslate nohighlight">\(T_1\)</span> relaxation).</p>
-<p>[1] A.A. Smith, B. Corzilius, A.B. Barnes, T. Maly, R.G. Griffin. <em><a class="reference external" href="https://doi.org/10.1063/1.3670019">J. Chem. Phys.</a></em>, <strong>2012</strong>, 136, 015101.</p>
+<p>[2] A.A. Smith, B. Corzilius, A.B. Barnes, T. Maly, R.G. Griffin. <a class="reference external" href="https://doi.org/10.1063/1.3670019"><em>J. Chem. Phys.</em></a>, <strong>2012</strong>, 136, 015101.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">L</span><span class="o">=</span><span class="n">ex</span><span class="o">.</span><span class="n">Liouvillian</span><span class="p">()</span>
@@ -484,7 +488,7 @@
 </div>
 </div>
 </div>
-<p>Note that SLEEPY’s “on-resonance” electron has a g-value of 2.0023193 (<code class="docutils literal notranslate"><span class="pre">sl.Constants['ge']</span></code>). That means that the trityl g-tensor is fairly far away from being on-resonant already, such that we need to offset the applied microwave frequency by the difference between these, plus or minus the <span class="math notranslate nohighlight">\(^1\)</span>H Larmor frequency.</p>
+<p>Note that SLEEPY’s “on-resonance” electron has a g-value of 2.0023193 (<code class="docutils literal notranslate"><span class="pre">sl.Constants['ge']</span></code>). That means that the trityl g-tensor used here is fairly far away from being on-resonant already, such that we need to offset the applied microwave frequency by the difference between these, plus or minus the <span class="math notranslate nohighlight">\(^1\)</span>H Larmor frequency.</p>
 <p>While we do not use this approach here, the electron g-value can be reset by the user (<code class="docutils literal notranslate"><span class="pre">sl.Constants['ge']=...</span></code>), which changes the definition of the offsets (see <a class="reference internal" href="Ch4_CrossEffect.html"><span class="std std-doc">Cross Effect</span></a> for example).</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -577,11 +581,11 @@
 <img alt="../_images/e94030695b93c2a7a07826ab287e229e71278b9f9b1dcf241096f4e7bd2b891e.png" src="../_images/e94030695b93c2a7a07826ab287e229e71278b9f9b1dcf241096f4e7bd2b891e.png" />
 </div>
 </div>
-<p>We see that the solid-effect condition is hit twice per rotor period (left plot),leading to a gradual build up of the polarization (right plot). Note that the choice of index on the powder average (e.g. <code class="docutils literal notranslate"><span class="pre">sl.PowderAvg(q=2)[25]</span></code>) will change the locations in the rotor period that transfer occurs.</p>
+<p>We see that the solid-effect condition is hit twice per rotor period (left plot), leading to a gradual build up of the polarization (right plot). Note that the choice of index on the powder average (e.g. <code class="docutils literal notranslate"><span class="pre">sl.PowderAvg(q=2)[25]</span></code>) will change the locations in the rotor period that transfer occurs.</p>
 </section>
 <section id="dependence-on-relaxation-times">
 <h2>Dependence on relaxation times<a class="headerlink" href="#dependence-on-relaxation-times" title="Link to this heading">#</a></h2>
-<p>We re-run the first simulation, now with several difference electron <span class="math notranslate nohighlight">\(T_1\)</span>s and several nuclear <span class="math notranslate nohighlight">\(T_1\)</span>s. We first need to reset the powder average.</p>
+<p>We re-run the first simulation, now with several different electron <span class="math notranslate nohighlight">\(T_1\)</span>s and several nuclear <span class="math notranslate nohighlight">\(T_1\)</span>s. We first need to reset the powder average.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ex</span><span class="o">.</span><span class="n">pwdavg</span><span class="o">=</span><span class="mi">2</span>
@@ -668,7 +672,7 @@
 </section>
 </section>
 <section id="simulating-solid-effect-without-relaxation">
-<h2>Simulating Solid-Effect without relaxation<a class="headerlink" href="#simulating-solid-effect-without-relaxation" title="Link to this heading">#</a></h2>
+<h2>Simulating solid effect without relaxation<a class="headerlink" href="#simulating-solid-effect-without-relaxation" title="Link to this heading">#</a></h2>
 <p>In the last simulation, we show that relaxation is critical in achieving polarization buildup. We change the powder average back to a single orientation, and remove all relaxation via <code class="docutils literal notranslate"><span class="pre">L.clear_relax()</span></code>. What we observe is that although the solid-effect conditions are met during the rotor period, over the course of many rotor periods, the magnetization gained by the nucleus is periodically transferred back to the electron so that no net magnetization is achieved.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -742,7 +746,7 @@
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title"><font  color = "#0093AF">Cross-Effect</font></p>
+        <p class="prev-next-title"><font  color = "#0093AF">Cross Effect</font></p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -771,7 +775,7 @@
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#sweep-nuclear-t-1">Sweep nuclear <span class="math notranslate nohighlight">\(T_1\)</span></a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#simulating-solid-effect-without-relaxation">Simulating Solid-Effect without relaxation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#simulating-solid-effect-without-relaxation">Simulating solid effect without relaxation</a></li>
 </ul>
   </nav></div>
 

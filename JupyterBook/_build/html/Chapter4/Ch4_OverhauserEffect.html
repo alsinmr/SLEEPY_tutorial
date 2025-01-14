@@ -55,7 +55,7 @@
     <script>let toggleOpenOnPrint = 'true';</script>
     <script src="../_static/togglebutton.js?v=4a39c7ea"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
-    <script src="../_static/design-tabs.js?v=36754332"></script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
     <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
@@ -66,8 +66,8 @@
     <link rel="icon" href="../_static/favicon.png"/>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="NOVEL" href="Ch4_NOVEL.html" />
-    <link rel="prev" title="Cross-Effect" href="Ch4_CrossEffect.html" />
+    <link rel="next" title="Pulsed-DNP: NOVEL" href="Ch4_NOVEL.html" />
+    <link rel="prev" title="Cross Effect" href="Ch4_CrossEffect.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   <meta name="docsearch:version" content="" />
@@ -209,9 +209,9 @@
 </details></li>
 <li class="toctree-l1 current active has-children"><a class="reference internal" href="../Ch4_DNP.html"><font color="#B00000">Dynamic Nuclear Polarization</font></a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="Ch4_SolidEffect.html"><font color="#0093AF">Solid Effect</font></a></li>
-<li class="toctree-l2"><a class="reference internal" href="Ch4_CrossEffect.html"><font color="#0093AF">Cross-Effect</font></a></li>
+<li class="toctree-l2"><a class="reference internal" href="Ch4_CrossEffect.html"><font color="#0093AF">Cross Effect</font></a></li>
 <li class="toctree-l2 current active"><a class="current reference internal" href="#"><font color="#0093AF">Overhauser Effect</font></a></li>
-<li class="toctree-l2"><a class="reference internal" href="Ch4_NOVEL.html"><font color="#0093AF">NOVEL</font></a></li>
+<li class="toctree-l2"><a class="reference internal" href="Ch4_NOVEL.html"><font color="#0093AF">Pulsed-DNP: NOVEL</font></a></li>
 </ul>
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../Ch5_ParamagneticEffects.html"><font color="#B00000">Paramagnetic Effects</font></a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
@@ -221,7 +221,11 @@
 </ul>
 </details></li>
 <li class="toctree-l1"><a class="reference internal" href="../Chapter6/Ch6_RelaxationOptions.html"><font color="#B00000">Relaxation Options</font></a></li>
-<li class="toctree-l1"><a class="reference internal" href="../Ch7_ColabTemplate.html"><font color="#B00000"> SLEEPY Colab Template</font></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ColabTemplate.html"><font color="#B00000"> SLEEPY Colab Template</font></a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">User library</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../UserLibrary.html"><font color="#B00000">User contributions</font></a></li>
 </ul>
 
     </div>
@@ -449,9 +453,9 @@
   <section class="tex2jax_ignore mathjax_ignore" id="overhauser-effect">
 <h1><font  color = "#0093AF">Overhauser Effect</font><a class="headerlink" href="#overhauser-effect" title="Link to this heading">#</a></h1>
 <p><a href="https://githubtocolab.com/alsinmr/SLEEPY_tutorial/blob/main/ColabNotebooks/Chapter4/Ch4_OverhauserEffect.ipynb" target="_blank"><img src="https://colab.research.google.com/assets/colab-badge.svg"></a></p>
-<p>The Overhauser effect is the original DNP experiment,<span class="math notranslate nohighlight">\(^1\)</span> demonstrated on a conducting metal.<span class="math notranslate nohighlight">\(^2\)</span> However, it is also possible to obtain the Overhauser effect from non-conducting electrons such as in Trityl or BDPA. In this case, the effect comes from either modulation of the isotropic or dipolar part of the hyperfine coupling. Here, we introduce these modulations, and see the effect they have on the transfer of polarization between the electron and the nucleus.</p>
+<p>The Overhauser effect is the original DNP experiment,<span class="math notranslate nohighlight">\(^1\)</span> demonstrated on a conducting metal.<span class="math notranslate nohighlight">\(^2\)</span> However, it is also possible to obtain the Overhauser effect from non-conducting electrons such as in trityl or BDPA. In this case, the effect comes from either modulation of the isotropic or dipolar part of the hyperfine coupling. Here, we introduce these modulations, and see the effect they have on the transfer of polarization between the electron and the nucleus.</p>
 <p>[1] A.W. Overhauser. <a class="reference external" href="https://doi.org/10.1103/PhysRev.92.411"><em>Phys. Rev.</em></a>, <strong>1953</strong>, 92, 411-415</p>
-<p>[2] T.R. Carver, C.P. Schlichter. <a class="reference external" href="https://doi.org/10.1103/PhysRev.92.212.2"><em>Phys. Rev.</em></a>, <strong>1953</strong>, 92, 212-213.</p>
+<p>[2] T.R. Carver, C.P. Slichter. <a class="reference external" href="https://doi.org/10.1103/PhysRev.92.212.2"><em>Phys. Rev.</em></a>, <strong>1953</strong>, 92, 212-213.</p>
 <section id="setup">
 <h2>Setup<a class="headerlink" href="#setup" title="Link to this heading">#</a></h2>
 <div class="cell docutils container">
@@ -469,7 +473,7 @@
 <h2>Example 1: Modulation of the Isotropic Hyperfine (J)<a class="headerlink" href="#example-1-modulation-of-the-isotropic-hyperfine-j" title="Link to this heading">#</a></h2>
 <p>In the first example, we include a scalar and dipolar component to the coupling. However, we only modulate the scalar part. This is achieved by adding different scalar couplings to <code class="docutils literal notranslate"><span class="pre">ex0</span></code> and <code class="docutils literal notranslate"><span class="pre">ex1</span></code> (<code class="docutils literal notranslate"><span class="pre">Aiso</span></code>,<code class="docutils literal notranslate"><span class="pre">Aiso1</span></code>). The two Hamiltonians are then coupled together with the exchange matrix produced by <code class="docutils literal notranslate"><span class="pre">sl.Tools.twoSite_kex(tc=...)</span></code>, where <code class="docutils literal notranslate"><span class="pre">tc</span></code> specifies the correlation time resulting from the exchange matrix.</p>
 <p>Increasing the change between <code class="docutils literal notranslate"><span class="pre">Aiso</span></code> and <code class="docutils literal notranslate"><span class="pre">Aiso1</span></code> will accelerate the transfer. Modifying <code class="docutils literal notranslate"><span class="pre">tc</span></code> will also change the rate, although the current value (1 ps) is nearly optimum for fast transfer.</p>
-<p>Note that for the Overhauser effect, we require the full set of non-secular interactions in the lab frame, not just the pseudosecular terms tilting the nucleus that are required for cross-effect and solid-effect. Therefore, all spins are calculated in the lab frame.</p>
+<p>Note that for the Overhauser effect, we require the full set of non-secular interactions in the lab frame, not just the pseudo-secular terms tilting the nucleus that are required for cross-effect and solid-effect. Therefore, all spins are calculated in the lab frame.</p>
 <section id="build-the-system">
 <h3>Build the system<a class="headerlink" href="#build-the-system" title="Link to this heading">#</a></h3>
 <div class="cell docutils container">
@@ -497,14 +501,11 @@
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">seq</span><span class="o">=</span><span class="n">L</span><span class="o">.</span><span class="n">Sequence</span><span class="p">()</span>
 <span class="n">rho</span><span class="o">=</span><span class="n">sl</span><span class="o">.</span><span class="n">Rho</span><span class="p">(</span><span class="s1">&#39;ez&#39;</span><span class="p">,[</span><span class="s1">&#39;1Hz&#39;</span><span class="p">,</span><span class="s1">&#39;ez&#39;</span><span class="p">])</span>
 <span class="n">rho</span><span class="o">.</span><span class="n">DetProp</span><span class="p">(</span><span class="n">seq</span><span class="p">,</span><span class="n">n</span><span class="o">=</span><span class="mi">20000</span><span class="p">)</span>
-<span class="n">rho</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="s1">&#39;s&#39;</span><span class="p">)</span>
+<span class="n">_</span><span class="o">=</span><span class="n">rho</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="s1">&#39;s&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;AxesSubplot:xlabel=&#39;t / s&#39;, ylabel=&#39;&lt;Op&gt;&#39;&gt;
-</pre></div>
-</div>
 <img alt="../_images/2c270e57ff6c2434b9dc23b0586017745cf0aab7f05d92494900b4628e85f897.png" src="../_images/2c270e57ff6c2434b9dc23b0586017745cf0aab7f05d92494900b4628e85f897.png" />
 </div>
 </div>
@@ -536,14 +537,11 @@
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">seq</span><span class="o">=</span><span class="n">L</span><span class="o">.</span><span class="n">Sequence</span><span class="p">()</span>
 <span class="n">rho</span><span class="o">=</span><span class="n">sl</span><span class="o">.</span><span class="n">Rho</span><span class="p">(</span><span class="s1">&#39;ez&#39;</span><span class="p">,[</span><span class="s1">&#39;1Hz&#39;</span><span class="p">,</span><span class="s1">&#39;ez&#39;</span><span class="p">])</span>
 <span class="n">rho</span><span class="o">.</span><span class="n">DetProp</span><span class="p">(</span><span class="n">seq</span><span class="p">,</span><span class="n">n</span><span class="o">=</span><span class="mi">20000</span><span class="p">)</span>
-<span class="n">rho</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="s1">&#39;s&#39;</span><span class="p">)</span>
+<span class="n">_</span><span class="o">=</span><span class="n">rho</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="s1">&#39;s&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;AxesSubplot:xlabel=&#39;t / s&#39;, ylabel=&#39;&lt;Op&gt;&#39;&gt;
-</pre></div>
-</div>
 <img alt="../_images/f58f55f2a443418573641a1430da3d49c410d542fd7eb79597a9ef73b53447ac.png" src="../_images/f58f55f2a443418573641a1430da3d49c410d542fd7eb79597a9ef73b53447ac.png" />
 </div>
 </div>
@@ -559,14 +557,11 @@
 <span class="n">seq</span><span class="o">=</span><span class="n">L</span><span class="o">.</span><span class="n">Sequence</span><span class="p">()</span>
 <span class="n">rho</span><span class="o">=</span><span class="n">sl</span><span class="o">.</span><span class="n">Rho</span><span class="p">(</span><span class="s1">&#39;ez&#39;</span><span class="p">,[</span><span class="s1">&#39;1Hz&#39;</span><span class="p">,</span><span class="s1">&#39;ez&#39;</span><span class="p">])</span>
 <span class="n">rho</span><span class="o">.</span><span class="n">DetProp</span><span class="p">(</span><span class="n">seq</span><span class="p">,</span><span class="n">n</span><span class="o">=</span><span class="mi">20000</span><span class="p">)</span>
-<span class="n">rho</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="s1">&#39;s&#39;</span><span class="p">)</span>
+<span class="n">_</span><span class="o">=</span><span class="n">rho</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="s1">&#39;s&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;AxesSubplot:xlabel=&#39;t / s&#39;, ylabel=&#39;&lt;Op&gt;&#39;&gt;
-</pre></div>
-</div>
 <img alt="../_images/015b0b62593c6caf40d978a24a53f5b2a54e6371925e439dae0b991771072021.png" src="../_images/015b0b62593c6caf40d978a24a53f5b2a54e6371925e439dae0b991771072021.png" />
 </div>
 </div>
@@ -613,14 +608,11 @@
 <span class="n">rho</span><span class="o">.</span><span class="n">DetProp</span><span class="p">(</span><span class="n">seq</span><span class="p">,</span><span class="n">n</span><span class="o">=</span><span class="mi">20000</span><span class="p">)</span>
 <span class="n">ax</span><span class="o">=</span><span class="n">rho</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="s1">&#39;s&#39;</span><span class="p">)</span>
 <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">rho</span><span class="o">.</span><span class="n">t_axis</span><span class="p">[[</span><span class="mi">0</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">]],</span><span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span><span class="o">*</span><span class="n">ex0</span><span class="o">.</span><span class="n">Peq</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">,</span><span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;:&#39;</span><span class="p">)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">rho</span><span class="o">.</span><span class="n">t_axis</span><span class="p">[[</span><span class="mi">0</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">]],</span><span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span><span class="o">*</span><span class="n">ex0</span><span class="o">.</span><span class="n">Peq</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;grey&#39;</span><span class="p">,</span><span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">)</span>
+<span class="n">_</span><span class="o">=</span><span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">rho</span><span class="o">.</span><span class="n">t_axis</span><span class="p">[[</span><span class="mi">0</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">]],</span><span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span><span class="o">*</span><span class="n">ex0</span><span class="o">.</span><span class="n">Peq</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;grey&#39;</span><span class="p">,</span><span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&lt;matplotlib.lines.Line2D at 0x7fb430702f10&gt;]
-</pre></div>
-</div>
 <img alt="../_images/cf823a747ba69bdc7b4e08f75c14aa82b39029954d15d7f5a1ce5b980049c911.png" src="../_images/cf823a747ba69bdc7b4e08f75c14aa82b39029954d15d7f5a1ce5b980049c911.png" />
 </div>
 </div>
@@ -656,14 +648,11 @@ Completed
 <span class="c1"># Clear, run the buildup</span>
 <span class="n">rho</span><span class="o">.</span><span class="n">clear</span><span class="p">()</span>
 <span class="n">rho</span><span class="o">.</span><span class="n">DetProp</span><span class="p">(</span><span class="n">U</span><span class="p">,</span><span class="n">n</span><span class="o">=</span><span class="mi">20000</span><span class="p">)</span>
-<span class="n">rho</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="s1">&#39;s&#39;</span><span class="p">)</span>
+<span class="n">_</span><span class="o">=</span><span class="n">rho</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="s1">&#39;s&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;AxesSubplot:xlabel=&#39;t / s&#39;, ylabel=&#39;&lt;Op&gt;&#39;&gt;
-</pre></div>
-</div>
 <img alt="../_images/ed2f90f3e6a610d6096460cfd2e71f12eca0905e380b702ce4a3197278464e09.png" src="../_images/ed2f90f3e6a610d6096460cfd2e71f12eca0905e380b702ce4a3197278464e09.png" />
 </div>
 </div>
@@ -735,16 +724,13 @@ Completed
 
 <span class="n">rho</span><span class="o">.</span><span class="n">DetProp</span><span class="p">(</span><span class="n">U</span><span class="p">,</span><span class="n">n</span><span class="o">=</span><span class="mi">20000</span><span class="p">)</span>
 
-<span class="n">rho</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="s1">&#39;s&#39;</span><span class="p">)</span>
+<span class="n">_</span><span class="o">=</span><span class="n">rho</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="s1">&#39;s&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>LF calculation: |██████████████████████████████| 100% complete
 Completed
-</pre></div>
-</div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;AxesSubplot:xlabel=&#39;t / s&#39;, ylabel=&#39;&lt;Op&gt;&#39;&gt;
 </pre></div>
 </div>
 <img alt="../_images/cb920e880afe0fe5490a8a2ae2ee70366485c995f16ef00c178ab641948a8448.png" src="../_images/cb920e880afe0fe5490a8a2ae2ee70366485c995f16ef00c178ab641948a8448.png" />
@@ -832,7 +818,7 @@ Completed
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title"><font  color = "#0093AF">Cross-Effect</font></p>
+        <p class="prev-next-title"><font  color = "#0093AF">Cross Effect</font></p>
       </div>
     </a>
     <a class="right-next"
@@ -840,7 +826,7 @@ Completed
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title"><font  color = "#0093AF">NOVEL</font></p>
+        <p class="prev-next-title"><font  color = "#0093AF">Pulsed-DNP: NOVEL</font></p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>

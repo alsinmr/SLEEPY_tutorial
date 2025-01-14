@@ -1,62 +1,62 @@
 Quadrupolar phenomena (no colab check yet)
-	Last sentence of the introduction: "a deuterium nuclei"
-	[5] figsize
-	Second order quad... broadening... You have "most simulation packages" twice in the same sentence
-	[7] The saved image of the plot have overlapping axis label with axis, I guess tight_layout() would solve it
+x	Last sentence of the introduction: "a deuterium nuclei"
+x	[5] figsize
+x	Second order quad... broadening... You have "most simulation packages" twice in the same sentence
+x	[7] The saved image of the plot have overlapping axis label with axis, I guess tight_layout() would solve it
 	
 DNP
 Solid Effect
-	It bothers me that the title is "Solid Effect" and in the text you write "solid-effect"... :D
-	Source [2] first, Numbering, second... ****
-	[5] missing function parenthesis
-	You suddenly start talking about trityl, I didn't see that introduced before? Sounds like a topic jump
-	[6]2.0031 is the g-value of the trityl?
-	[12] in the explaination after the plot, you miss a space after comma
-	Dependence on relaxatio times: "difference" -> different?
-	[14] give the user a note that the calculation might take a while, also, 
-	[15]put a _ before ax.legend
-	[17] put _ before ax legend
-	Now you write "Solid-Effect" 
+x	It bothers me that the title is "Solid Effect" and in the text you write "solid-effect"... :D
+x	Source [2] first, Numbering, second... ****
+?	[5] missing function parenthesis
+x	You suddenly start talking about trityl, I didn't see that introduced before? Sounds like a topic jump
+x	[6]2.0031 is the g-value of the trityl?
+x	[12] in the explaination after the plot, you miss a space after comma
+x	Dependence on relaxatio times: "difference" -> different?
+ok	[14] give the user a note that the calculation might take a while, also, 
+x	[15]put a _ before ax.legend
+x	[17] put _ before ax legend
+x	Now you write "Solid-Effect" 
 
 Cross-Effect
-	[5] put _ before ax.set_xlabel()
-	Cross-effect events...
-	You put Thurber source in here again
-	[8] The presaved figure was now upside down here, maybe this will
+x	[5] put _ before ax.set_xlabel()
+?	Cross-effect events...
+x	You put Thurber source in here again
+ok	[8] The presaved figure was now upside down here, maybe this will
 	[11] put _
 	[14] put _
 	after [15] you say "cross effect" in the text
 	
 Overhauser Effect
-	Here you write Trityl capital. Change it here or in Solid Effect
-	Source [2] The name is Slichter, not Schlichter
-	Not sure about the rules there, but you write 'non-secular' and 'pseudosecular' in one sentence, should this be uniform with or without -?
-	[4,6,7,9,10?,11,14] missing _
-	[13] running gives me a different result than the stored one (-89.5 vs -92.0)
+x	Here you write Trityl capital. Change it here or in Solid Effect
+x	Source [2] The name is Slichter, not Schlichter
+x	Not sure about the rules there, but you write 'non-secular' and 'pseudosecular' in one sentence, should this be uniform with or without -?
+x	[4,6,7,9,10?,11,14] missing _
+ok	[13] running gives me a different result than the stored one (-89.5 vs -92.0)
 	
 	
 NOVEL
-	General: In the titles of the other sections you capitalize a lot of words, but not here
-	Build the system... can you write the pi/2 pulse nicer?
-	[3,4,6,8] mising _
-	after [7,12] can you write 5*T1 with latex? (cdot)
-	same for the title "Use longer relaxation delay..."
+x	General: In the titles of the other sections you capitalize a lot of words, but not here
+x	Build the system... can you write the pi/2 pulse nicer?
+x	[3,4,6,8] mising _
+x	after [7,12] can you write 5*T1 with latex? (cdot)
+x	same for the title "Use longer relaxation delay..."
 	
 Paramagnetic Effects
-	Second sentence... acts as stochastic field?
+x	Second sentence... acts as stochastic field?
 	
 PRE
-	Fourth sentence, T1 and T2 the nuclear T1 and T2... somethings missing here
-	Last sentence before [6] *differnce*
-	[20] There was a warning preshown but the run doesnt provide it
-	[22] same here
+x	Fourth sentence, T1 and T2 the nuclear T1 and T2... somethings missing here
+x	Last sentence before [6] *differnce*
+x	[20] There was a warning preshown but the run doesnt provide it
+x	[22] same here
 	
 Contact shift
-	your link "pseudocontact shift" leads to "Pseudo-Contact Shift"
-	[6] add _
-	you use both high-temperature and high temperature approximation
+x	your link "pseudocontact shift" leads to "Pseudo-Contact Shift"
+x	[6] add _
+x	you use both high-temperature and high temperature approximation
 	
 Pseudo-Contact Shift
-	yeah, update wheather you want to use - or not
-	You also use Pake pattern & pake-pattern
+x	yeah, update wheather you want to use - or not
+x	You also use Pake pattern & pake-pattern
 	

@@ -1,7 +1,7 @@
 # <font color="#B00000">Getting Started</font>
 
 There are currently two possiblities for running SLEEPY: with a local Python installation, or online via [Google Colab](https://githubtocolab.com/alsinmr/SLEEPY_tutorial/blob/main/ColabTemplate.ipynb). A local installation of SLEEPY may be run in [Jupyter notebooks](https://jupyter.org/), as a script, or in a Python/iPython terminal. Here we provide a few notes for a local installation or for running in Google Colab.
-
+ 
 
 ## Local Installation
 SLEEPY does not currently exist for installation via [pip](https://pypi.org/) or [conda](https://docs.conda.io/en/latest/), and instead is downloaded from GitHub, with its containing folder added to the system path (or placed in a folder with other installed Python modules). The required modules must be installed separately by the user.

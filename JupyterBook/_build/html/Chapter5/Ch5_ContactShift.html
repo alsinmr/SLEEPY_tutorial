@@ -55,7 +55,7 @@
     <script>let toggleOpenOnPrint = 'true';</script>
     <script src="../_static/togglebutton.js?v=4a39c7ea"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
-    <script src="../_static/design-tabs.js?v=36754332"></script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
     <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
@@ -209,9 +209,9 @@
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../Ch4_DNP.html"><font color="#B00000">Dynamic Nuclear Polarization</font></a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="../Chapter4/Ch4_SolidEffect.html"><font color="#0093AF">Solid Effect</font></a></li>
-<li class="toctree-l2"><a class="reference internal" href="../Chapter4/Ch4_CrossEffect.html"><font color="#0093AF">Cross-Effect</font></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Chapter4/Ch4_CrossEffect.html"><font color="#0093AF">Cross Effect</font></a></li>
 <li class="toctree-l2"><a class="reference internal" href="../Chapter4/Ch4_OverhauserEffect.html"><font color="#0093AF">Overhauser Effect</font></a></li>
-<li class="toctree-l2"><a class="reference internal" href="../Chapter4/Ch4_NOVEL.html"><font color="#0093AF">NOVEL</font></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Chapter4/Ch4_NOVEL.html"><font color="#0093AF">Pulsed-DNP: NOVEL</font></a></li>
 </ul>
 </details></li>
 <li class="toctree-l1 current active has-children"><a class="reference internal" href="../Ch5_ParamagneticEffects.html"><font color="#B00000">Paramagnetic Effects</font></a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
@@ -221,7 +221,11 @@
 </ul>
 </details></li>
 <li class="toctree-l1"><a class="reference internal" href="../Chapter6/Ch6_RelaxationOptions.html"><font color="#B00000">Relaxation Options</font></a></li>
-<li class="toctree-l1"><a class="reference internal" href="../Ch7_ColabTemplate.html"><font color="#B00000"> SLEEPY Colab Template</font></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ColabTemplate.html"><font color="#B00000"> SLEEPY Colab Template</font></a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">User library</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../UserLibrary.html"><font color="#B00000">User contributions</font></a></li>
 </ul>
 
     </div>
@@ -441,7 +445,7 @@
 \end{equation}
 \]</div>
 <p>where <span class="math notranslate nohighlight">\(A_{iso}\)</span> is the size of the isotropic hyperfine coupling, and <span class="math notranslate nohighlight">\(P_{e-}\)</span> is the electron polarization. Then, the size of the contact shift is dependent on temperature, since it depends on the electron polarization.</p>
-<p>Correct calculation of the contact shift, and the more complex <a class="reference internal" href="Ch5_PseudoContactShift.html"><span class="std std-doc">pseudocontact shift</span></a> requires correct thermalization of coherences, achieved in SLEEPY via Lindblad thermalization.<span class="math notranslate nohighlight">\(^1\)</span></p>
+<p>Correct calculation of the contact shift, and the more complex <a class="reference internal" href="Ch5_PseudoContactShift.html"><span class="std std-doc">pseudo-contact shift</span></a> requires correct thermalization of coherences, achieved in SLEEPY via Lindblad thermalization.<span class="math notranslate nohighlight">\(^1\)</span></p>
 <p>[1] C. Bengs, M. Levitt. <a class="reference external" href="https://doi.org/10.1016/j.jmr.2019.106645"><em>J. Magn. Reson.</em></a>, <strong>2020</strong>, 310,106645.</p>
 <section id="setup">
 <h2>Setup<a class="headerlink" href="#setup" title="Link to this heading">#</a></h2>
@@ -502,7 +506,7 @@
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>State-space reduction: 16-&gt;2
 </pre></div>
 </div>
-<img alt="../_images/8dc5fa6481f9da8c1ad4b5413ea0361aaa58e71c72e91207e6caf44c9dec8ea8.png" src="../_images/8dc5fa6481f9da8c1ad4b5413ea0361aaa58e71c72e91207e6caf44c9dec8ea8.png" />
+<img alt="../_images/fd9d42d306215a119b4b567ca0b58e0aa82739c5489c535ec84dd61104b483b9.png" src="../_images/fd9d42d306215a119b4b567ca0b58e0aa82739c5489c535ec84dd61104b483b9.png" />
 </div>
 </div>
 <p>Indeed, we get two peaks for each state of the electron, but they have different amplitudes due to the electron polarization.</p>
@@ -546,7 +550,7 @@
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>State-space reduction: 16-&gt;2
 </pre></div>
 </div>
-<img alt="../_images/d190a31add9d0eac3dd7b03d16c0b42b39ec0b2f62fcbfb00fb858a596bb80fa.png" src="../_images/d190a31add9d0eac3dd7b03d16c0b42b39ec0b2f62fcbfb00fb858a596bb80fa.png" />
+<img alt="../_images/45f806e84147ce7ceed3ac6eab9fa0bd7d444d0fe7fe14f6526df758f7cfed07.png" src="../_images/45f806e84147ce7ceed3ac6eab9fa0bd7d444d0fe7fe14f6526df758f7cfed07.png" />
 </div>
 </div>
 <p>Indeed, the resulting contact shift is exactly where expected (-112 Hz), as marked with the dashed line.</p>
@@ -572,7 +576,7 @@
     
     <span class="n">rho</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">FT</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">apodize</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">,</span><span class="n">axis</span><span class="o">=</span><span class="s1">&#39;kHz&#39;</span><span class="p">)</span>
 <span class="n">ax</span><span class="o">.</span><span class="n">figure</span><span class="o">.</span><span class="n">set_size_inches</span><span class="p">([</span><span class="mi">6</span><span class="p">,</span><span class="mi">4</span><span class="p">])</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">([</span><span class="sa">f</span><span class="s1">&#39;T = </span><span class="si">{</span><span class="n">T_K</span><span class="si">:</span><span class="s1">.0f</span><span class="si">}</span><span class="s1"> K&#39;</span> <span class="k">for</span> <span class="n">T_K</span> <span class="ow">in</span> <span class="n">T</span><span class="p">])</span>
+<span class="n">_</span><span class="o">=</span><span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">([</span><span class="sa">f</span><span class="s1">&#39;T = </span><span class="si">{</span><span class="n">T_K</span><span class="si">:</span><span class="s1">.0f</span><span class="si">}</span><span class="s1"> K&#39;</span> <span class="k">for</span> <span class="n">T_K</span> <span class="ow">in</span> <span class="n">T</span><span class="p">])</span>
 </pre></div>
 </div>
 </div>
@@ -587,13 +591,10 @@ State-space reduction: 16-&gt;2
 State-space reduction: 16-&gt;2
 </pre></div>
 </div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x7fc499ffa5f8&gt;
-</pre></div>
-</div>
-<img alt="../_images/1d004e549ef632ddb50a99191ac9cce16259a11bb045c36d1bf21baa74a6a2b9.png" src="../_images/1d004e549ef632ddb50a99191ac9cce16259a11bb045c36d1bf21baa74a6a2b9.png" />
+<img alt="../_images/112aefa5cc302df991350a7861f0dfb784794357617d444d0b65b21783776c74.png" src="../_images/112aefa5cc302df991350a7861f0dfb784794357617d444d0b65b21783776c74.png" />
 </div>
 </div>
-<p>Note that the contact shift has the same dependence on magnetic field as a normal chemical shift: the hyperfine coupling remains fixed with field, but the electron polarization grows linearly with field (in the high temperature approximation)</p>
+<p>Note that the contact shift has the same dependence on magnetic field as a normal chemical shift: the hyperfine coupling remains fixed with field, but the electron polarization grows linearly with field (in the high-temperature approximation)</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ex</span><span class="o">.</span><span class="n">T_K</span><span class="o">=</span><span class="mi">200</span>
@@ -631,7 +632,7 @@ State-space reduction: 16-&gt;2
 State-space reduction: 16-&gt;2
 </pre></div>
 </div>
-<img alt="../_images/9238f737c2db05d2c01f358d265e2cd55982d1ac139bc84a57b906185b0e4cad.png" src="../_images/9238f737c2db05d2c01f358d265e2cd55982d1ac139bc84a57b906185b0e4cad.png" />
+<img alt="../_images/8966b63436a5a8660cbdc0fba775a2d80ec5a6692d64df01aabb59d4b0932224.png" src="../_images/8966b63436a5a8660cbdc0fba775a2d80ec5a6692d64df01aabb59d4b0932224.png" />
 </div>
 </div>
 <p>If the temperature approaches 0 K, then the electron is no longer in the high-temperature approximation, and therefore the contact shift is no longer linear with the field, as demonstrated below.</p>

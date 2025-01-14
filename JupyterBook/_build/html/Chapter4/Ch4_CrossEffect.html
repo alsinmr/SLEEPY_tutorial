@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Cross-Effect &#8212; SLEEPY Tutorial</title>
+    <title>Cross Effect &#8212; SLEEPY Tutorial</title>
   
   
   
@@ -55,7 +55,7 @@
     <script>let toggleOpenOnPrint = 'true';</script>
     <script src="../_static/togglebutton.js?v=4a39c7ea"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
-    <script src="../_static/design-tabs.js?v=36754332"></script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
     <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
@@ -209,9 +209,9 @@
 </details></li>
 <li class="toctree-l1 current active has-children"><a class="reference internal" href="../Ch4_DNP.html"><font color="#B00000">Dynamic Nuclear Polarization</font></a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="Ch4_SolidEffect.html"><font color="#0093AF">Solid Effect</font></a></li>
-<li class="toctree-l2 current active"><a class="current reference internal" href="#"><font color="#0093AF">Cross-Effect</font></a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#"><font color="#0093AF">Cross Effect</font></a></li>
 <li class="toctree-l2"><a class="reference internal" href="Ch4_OverhauserEffect.html"><font color="#0093AF">Overhauser Effect</font></a></li>
-<li class="toctree-l2"><a class="reference internal" href="Ch4_NOVEL.html"><font color="#0093AF">NOVEL</font></a></li>
+<li class="toctree-l2"><a class="reference internal" href="Ch4_NOVEL.html"><font color="#0093AF">Pulsed-DNP: NOVEL</font></a></li>
 </ul>
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../Ch5_ParamagneticEffects.html"><font color="#B00000">Paramagnetic Effects</font></a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
@@ -221,7 +221,11 @@
 </ul>
 </details></li>
 <li class="toctree-l1"><a class="reference internal" href="../Chapter6/Ch6_RelaxationOptions.html"><font color="#B00000">Relaxation Options</font></a></li>
-<li class="toctree-l1"><a class="reference internal" href="../Ch7_ColabTemplate.html"><font color="#B00000"> SLEEPY Colab Template</font></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ColabTemplate.html"><font color="#B00000"> SLEEPY Colab Template</font></a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">User library</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../UserLibrary.html"><font color="#B00000">User contributions</font></a></li>
 </ul>
 
     </div>
@@ -404,7 +408,7 @@
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1><font  color = "#0093AF">Cross-Effect</font></h1>
+    <h1><font  color = "#0093AF">Cross Effect</font></h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -441,9 +445,9 @@
                 <article class="bd-article">
                   
   <section class="tex2jax_ignore mathjax_ignore" id="cross-effect">
-<h1><font  color = "#0093AF">Cross-Effect</font><a class="headerlink" href="#cross-effect" title="Link to this heading">#</a></h1>
+<h1><font  color = "#0093AF">Cross Effect</font><a class="headerlink" href="#cross-effect" title="Link to this heading">#</a></h1>
 <p><a href="https://githubtocolab.com/alsinmr/SLEEPY_tutorial/blob/main/ColabNotebooks/Chapter4/Ch4_CrossEffect.ipynb" target="_blank"><img src="https://colab.research.google.com/assets/colab-badge.svg"></a></p>
-<p>The cross-effect<span class="math notranslate nohighlight">\(^{1,2}\)</span> is a powerful approach to DNP enhancement, where two coupled electrons with resonance frequencies separated by the nuclear Larmor frequency undergo a three-spin flip with the electron.</p>
+<p>The cross effect<span class="math notranslate nohighlight">\(^{1,2}\)</span> is a powerful approach to DNP enhancement, where two coupled electrons with resonance frequencies separated by the nuclear Larmor frequency undergo a three-spin flip with the electron.</p>
 <div class="math notranslate nohighlight">
 \[
 \begin{equation}
@@ -510,7 +514,7 @@
 Prop: 10000 steps per every 1 rotor period
 </pre></div>
 </div>
-<img alt="../_images/14de48d01e39c6d23613d231970a6f35cbd63f65930367d9f7fba23de3283afc.png" src="../_images/14de48d01e39c6d23613d231970a6f35cbd63f65930367d9f7fba23de3283afc.png" />
+<img alt="../_images/e7d471166eed75383df8f1dc289ce012608d26c93f342ce073a9ad2edd6ddf3f.png" src="../_images/e7d471166eed75383df8f1dc289ce012608d26c93f342ce073a9ad2edd6ddf3f.png" />
 </div>
 </div>
 <p>Then, we obtain a broad spectrum from the single orientation, but its phase is random. We can plot the power spectrum to get a better view (there is no built-in function for this, but it is trivial to obtain, since the Fourier-transformed spectrum is in <code class="docutils literal notranslate"><span class="pre">rho.FT</span></code>). Note that this does not yield the static spectrum; this would require an average over <span class="math notranslate nohighlight">\(\beta\)</span>-angles.</p>
@@ -520,15 +524,12 @@ Prop: 10000 steps per every 1 rotor period
 <span class="n">rho</span><span class="o">.</span><span class="n">apodize</span><span class="o">=</span><span class="kc">True</span>
 <span class="n">rho</span><span class="o">.</span><span class="n">apod_pars</span><span class="p">[</span><span class="s1">&#39;LB&#39;</span><span class="p">]</span><span class="o">=</span><span class="mi">200000</span>
 <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">rho</span><span class="o">.</span><span class="n">v_axis</span><span class="o">*</span><span class="mf">1e6</span><span class="p">,</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">rho</span><span class="o">.</span><span class="n">FT</span><span class="p">[</span><span class="mi">0</span><span class="p">]))</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;\nu / MHz&#39;</span><span class="p">)</span>
+<span class="n">_</span><span class="o">=</span><span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;\nu / MHz&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Text(0.5, 0, &#39;\\nu / MHz&#39;)
-</pre></div>
-</div>
-<img alt="../_images/f2ee6fdeaba6b24e119958f9e5f5b8eed0726a8fea10b44693933e3fc03e273b.png" src="../_images/f2ee6fdeaba6b24e119958f9e5f5b8eed0726a8fea10b44693933e3fc03e273b.png" />
+<img alt="../_images/44811871c78f3a511b11171134a569905a74751528a99740d677aef1864eb75b.png" src="../_images/44811871c78f3a511b11171134a569905a74751528a99740d677aef1864eb75b.png" />
 </div>
 </div>
 </section>
@@ -538,8 +539,7 @@ Prop: 10000 steps per every 1 rotor period
 <h3>Build the System<a class="headerlink" href="#build-the-system" title="Link to this heading">#</a></h3>
 <p>It is also important to put the nucleus, but not the electrons, in the lab frame for cross-effect to occur. Some broadening on the electrons is also important, since the cross-effect condition is otherwise too narrow and will be missed during the rotor period.</p>
 <p>In the first simulation, we will just look at one rotor period to observe the cross-effect transfer. Note that <span class="math notranslate nohighlight">\(T_2\)</span> relaxation added to the nucleus should be applied with the orientation-specific option (<code class="docutils literal notranslate"><span class="pre">OS=True</span></code>), since the nucleus is tipped away from the z-axis. If this is not used, some of the <span class="math notranslate nohighlight">\(T_2\)</span> relaxation will be applied to the nuclear polarization.</p>
-<p>We take some parameters from Thurber and Tycko.<span class="math notranslate nohighlight">\(^1\)</span></p>
-<p>[1] K.R. Thurber, R. Tycko. <a class="reference external" href="https://doi.org/10.1063/1.4747449"><em>J. Chem. Phys.</em></a>, <strong>2012</strong>, 137, 084508.</p>
+<p>We take some parameters from Thurber and Tycko.<span class="math notranslate nohighlight">\(^3\)</span></p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Note that I have adjusted n_gamma large enough that the enhancement does</span>
@@ -606,7 +606,7 @@ Prop: 10000 steps per every 1 rotor period
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/76e620f5cf869c9fc66cce89d79280b603a00f93b6e3a106565e45fe1facb06d.png" src="../_images/76e620f5cf869c9fc66cce89d79280b603a00f93b6e3a106565e45fe1facb06d.png" />
+<img alt="../_images/d326a249afcd5f8d47261b62e11dbce6da8513bf1aadb2ee90dd363a0a91d8c9.png" src="../_images/d326a249afcd5f8d47261b62e11dbce6da8513bf1aadb2ee90dd363a0a91d8c9.png" />
 </div>
 </div>
 <p>In the above plots, we can see where cross effect occurs based on where the <span class="math notranslate nohighlight">\(^1\)</span>H polarization changes (upper left). The largest such event is marked by a dashed line in all plots. In the upper right plot, we see the behavior of the two electrons. The first event in this plot is partial saturation of <span class="math notranslate nohighlight">\(\langle S_{1z}\rangle\)</span>. This is followed closely by an exchange of magnetization between the two electrons, where <span class="math notranslate nohighlight">\(\omega_{e1}=\omega_{e2}\)</span>. Next, saturation of <span class="math notranslate nohighlight">\(\langle S_{0z}\rangle\)</span> occurs, followed by the first cross effect event, marked by a dashed line. This event is zoomed in on in the lower two plots. A second cross-effect event occurs next. The final event is further saturation of <span class="math notranslate nohighlight">\(\langle S_{1z}\rangle\)</span>.</p>
@@ -644,15 +644,12 @@ Prop: 10000 steps per every 1 rotor period
 <h3>Plot the results<a class="headerlink" href="#id2" title="Link to this heading">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ON</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">det_num</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">_</span><span class="o">=</span><span class="n">ON</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">det_num</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;AxesSubplot:xlabel=&#39;t / ms&#39;, ylabel=&#39;&lt;$^{1}H_z$&gt;&#39;&gt;
-</pre></div>
-</div>
-<img alt="../_images/978411b2bfabcf655503a05d20dbe7046fa52438357fd46b2b1b62dfcadbbaa1.png" src="../_images/978411b2bfabcf655503a05d20dbe7046fa52438357fd46b2b1b62dfcadbbaa1.png" />
+<img alt="../_images/1e78e60a676bf4e6e0993ed1b87c7c7119bd5cf85da691a6fd3e6b5b0c52b4fb.png" src="../_images/1e78e60a676bf4e6e0993ed1b87c7c7119bd5cf85da691a6fd3e6b5b0c52b4fb.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -684,15 +681,12 @@ Prop: 10000 steps per every 1 rotor period
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">OFF</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">det_num</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">_</span><span class="o">=</span><span class="n">OFF</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">det_num</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;AxesSubplot:xlabel=&#39;t / ms&#39;, ylabel=&#39;&lt;$^{1}H_z$&gt;&#39;&gt;
-</pre></div>
-</div>
-<img alt="../_images/3babf7180602633bfab786263fd35272c0dd8fc0ace5bc8b87e7ca9dc1d41fbd.png" src="../_images/3babf7180602633bfab786263fd35272c0dd8fc0ace5bc8b87e7ca9dc1d41fbd.png" />
+<img alt="../_images/845dde45697a30a1e8c3c4b49b35b5ce8508c827a333f5de86153409ace7fe61.png" src="../_images/845dde45697a30a1e8c3c4b49b35b5ce8508c827a333f5de86153409ace7fe61.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -752,7 +746,7 @@ Prop: 200 steps per every 1 rotor period
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/e82230a4d709ba057ca434ea930f2f4b75a75ee1359c336509f2629ea50576cf.png" src="../_images/e82230a4d709ba057ca434ea930f2f4b75a75ee1359c336509f2629ea50576cf.png" />
+<img alt="../_images/0adc5adb84f57126eba616eef9145f18f6292fa04760e71c1e038999048f66f9.png" src="../_images/0adc5adb84f57126eba616eef9145f18f6292fa04760e71c1e038999048f66f9.png" />
 </div>
 </div>
 <p>Above, we see that although no saturating field is applied to the electron, the electron polarization still varies throughout the rotor period. This is partly because the thermal equilibrium for the electron polarization changes throughout the rotor period, which is observed as slow variation of the electron polarization (it is important to use <code class="docutils literal notranslate"><span class="pre">OS=True</span></code> and <code class="docutils literal notranslate"><span class="pre">Thermal=True</span></code> to obtain this behavior), and secondly because when the electrons having matching frequencies, they exchange polarization. Then, due to different electron polarizations, the nucleus will lose polarization when the cross effect condition is matched.</p>

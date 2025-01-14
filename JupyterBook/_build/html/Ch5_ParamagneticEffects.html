@@ -55,7 +55,7 @@
     <script>let toggleOpenOnPrint = 'true';</script>
     <script src="_static/togglebutton.js?v=4a39c7ea"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
-    <script src="_static/design-tabs.js?v=36754332"></script>
+    <script src="_static/design-tabs.js?v=f930bc37"></script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
     <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
@@ -67,7 +67,7 @@
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="Paramagnetic Relaxation Enhancement" href="Chapter5/Ch5_PRE.html" />
-    <link rel="prev" title="NOVEL" href="Chapter4/Ch4_NOVEL.html" />
+    <link rel="prev" title="Pulsed-DNP: NOVEL" href="Chapter4/Ch4_NOVEL.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   <meta name="docsearch:version" content="" />
@@ -209,9 +209,9 @@
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="Ch4_DNP.html"><font color="#B00000">Dynamic Nuclear Polarization</font></a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="Chapter4/Ch4_SolidEffect.html"><font color="#0093AF">Solid Effect</font></a></li>
-<li class="toctree-l2"><a class="reference internal" href="Chapter4/Ch4_CrossEffect.html"><font color="#0093AF">Cross-Effect</font></a></li>
+<li class="toctree-l2"><a class="reference internal" href="Chapter4/Ch4_CrossEffect.html"><font color="#0093AF">Cross Effect</font></a></li>
 <li class="toctree-l2"><a class="reference internal" href="Chapter4/Ch4_OverhauserEffect.html"><font color="#0093AF">Overhauser Effect</font></a></li>
-<li class="toctree-l2"><a class="reference internal" href="Chapter4/Ch4_NOVEL.html"><font color="#0093AF">NOVEL</font></a></li>
+<li class="toctree-l2"><a class="reference internal" href="Chapter4/Ch4_NOVEL.html"><font color="#0093AF">Pulsed-DNP: NOVEL</font></a></li>
 </ul>
 </details></li>
 <li class="toctree-l1 current active has-children"><a class="current reference internal" href="#"><font color="#B00000">Paramagnetic Effects</font></a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
@@ -221,7 +221,11 @@
 </ul>
 </details></li>
 <li class="toctree-l1"><a class="reference internal" href="Chapter6/Ch6_RelaxationOptions.html"><font color="#B00000">Relaxation Options</font></a></li>
-<li class="toctree-l1"><a class="reference internal" href="Ch7_ColabTemplate.html"><font color="#B00000"> SLEEPY Colab Template</font></a></li>
+<li class="toctree-l1"><a class="reference internal" href="ColabTemplate.html"><font color="#B00000"> SLEEPY Colab Template</font></a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">User library</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="UserLibrary.html"><font color="#B00000">User contributions</font></a></li>
 </ul>
 
     </div>
@@ -418,7 +422,7 @@
                   
   <section class="tex2jax_ignore mathjax_ignore" id="paramagnetic-effects">
 <h1><font color="#B00000">Paramagnetic Effects</font><a class="headerlink" href="#paramagnetic-effects" title="Link to this heading">#</a></h1>
-<p>Fast-relaxing electrons can have a variety of effects on NMR spectra. First, the relaxation of the electron acts a stochastic field on the nuclei, inducing paramagnetic relaxation enhancement. Second, while electron relaxation removes splittings on the nucleus resulting from hyperfine couplings, the electronic <span class="math notranslate nohighlight">\(\alpha\)</span> and <span class="math notranslate nohighlight">\(\beta\)</span> states are not equally populated, so that the nuclear resonance frequency shifts. This is known as the contact (isotropic hyperfine) and pseudo-contact (dipolar hyperfine) shift. We show how to simulate these effects here.</p>
+<p>Fast-relaxing electrons can have a variety of effects on NMR spectra. First, the relaxation of the electron acts a stochastic field on the nucleus via the hyperfine coupling, inducing paramagnetic relaxation enhancement (PRE). Second, while electron relaxation removes splittings on the nucleus resulting from hyperfine couplings, the electronic <span class="math notranslate nohighlight">\(\alpha\)</span> and <span class="math notranslate nohighlight">\(\beta\)</span> states are not equally populated, so that the nuclear resonance frequency shifts. This is known as the contact (isotropic hyperfine) or pseudo-contact (dipolar hyperfine) shift. We show how to simulate these effects here.</p>
 <ul class="simple">
 <li><p><a class="reference internal" href="Chapter5/Ch5_PRE.html"><span class="std std-doc">Paramagnetic Relaxation Enhancement</span></a></p></li>
 <li><p><a class="reference internal" href="Chapter5/Ch5_ContactShift.html"><span class="std std-doc">Contact shift</span></a></p></li>
@@ -464,7 +468,7 @@
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title"><font  color = "#0093AF">NOVEL</font></p>
+        <p class="prev-next-title"><font  color = "#0093AF">Pulsed-DNP: NOVEL</font></p>
       </div>
     </a>
     <a class="right-next"

@@ -55,7 +55,7 @@
     <script>let toggleOpenOnPrint = 'true';</script>
     <script src="../_static/togglebutton.js?v=4a39c7ea"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
-    <script src="../_static/design-tabs.js?v=36754332"></script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
     <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
@@ -209,9 +209,9 @@
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../Ch4_DNP.html"><font color="#B00000">Dynamic Nuclear Polarization</font></a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="../Chapter4/Ch4_SolidEffect.html"><font color="#0093AF">Solid Effect</font></a></li>
-<li class="toctree-l2"><a class="reference internal" href="../Chapter4/Ch4_CrossEffect.html"><font color="#0093AF">Cross-Effect</font></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Chapter4/Ch4_CrossEffect.html"><font color="#0093AF">Cross Effect</font></a></li>
 <li class="toctree-l2"><a class="reference internal" href="../Chapter4/Ch4_OverhauserEffect.html"><font color="#0093AF">Overhauser Effect</font></a></li>
-<li class="toctree-l2"><a class="reference internal" href="../Chapter4/Ch4_NOVEL.html"><font color="#0093AF">NOVEL</font></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Chapter4/Ch4_NOVEL.html"><font color="#0093AF">Pulsed-DNP: NOVEL</font></a></li>
 </ul>
 </details></li>
 <li class="toctree-l1 current active has-children"><a class="reference internal" href="../Ch5_ParamagneticEffects.html"><font color="#B00000">Paramagnetic Effects</font></a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
@@ -221,7 +221,11 @@
 </ul>
 </details></li>
 <li class="toctree-l1"><a class="reference internal" href="../Chapter6/Ch6_RelaxationOptions.html"><font color="#B00000">Relaxation Options</font></a></li>
-<li class="toctree-l1"><a class="reference internal" href="../Ch7_ColabTemplate.html"><font color="#B00000"> SLEEPY Colab Template</font></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ColabTemplate.html"><font color="#B00000"> SLEEPY Colab Template</font></a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">User library</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../UserLibrary.html"><font color="#B00000">User contributions</font></a></li>
 </ul>
 
     </div>
@@ -429,7 +433,7 @@
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#d-plot-of-the-pcs-magnitude">3D plot of the PCS magnitude</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pseudocontact-shift-under-mas">Pseudocontact Shift under MAS</a><ul class="nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pseudo-contact-shift-under-mas">Pseudo-contact Shift under MAS</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#run-the-simulation">Run the simulation</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#plot-the-results">Plot the results</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Temperature dependence</a></li>
@@ -451,7 +455,7 @@
   <section class="tex2jax_ignore mathjax_ignore" id="pseudo-contact-shift">
 <h1><font  color = "#0093AF">Pseudo-Contact Shift</font><a class="headerlink" href="#pseudo-contact-shift" title="Link to this heading">#</a></h1>
 <p><a href="https://githubtocolab.com/alsinmr/SLEEPY_tutorial/blob/main/ColabNotebooks/Chapter5/Ch5_PseudoContactShift.ipynb" target="_blank"><img src="https://colab.research.google.com/assets/colab-badge.svg"></a></p>
-<p>In the previous section, we investigated the <a class="reference internal" href="Ch5_ContactShift.html"><span class="std std-doc">contact shift</span></a>, which results from an isotropic hyperfine coupling to a fast-relaxing electron. However, if the coupling is dipolar in nature, then we instead have a pseudocontact shift. Under static conditions, the pseudocontact shift appears just from a dipolar hyperfine coupling, but under tumbling or MAS, this vanishes unless the electron has an anisotropic g-tensor. We show how to simulate this effect here.</p>
+<p>In the previous section, we investigated the <a class="reference internal" href="Ch5_ContactShift.html"><span class="std std-doc">contact shift</span></a>, which results from an isotropic hyperfine coupling to a fast-relaxing electron. However, if the coupling is dipolar in nature, then we instead have a pseudo-contact shift. Under static conditions, the pseudo-contact shift appears just from a dipolar hyperfine coupling, but under tumbling or MAS, this vanishes unless the electron has an anisotropic g-tensor. We show how to simulate this effect here.</p>
 <section id="setup">
 <h2>Setup<a class="headerlink" href="#setup" title="Link to this heading">#</a></h2>
 <div class="cell docutils container">
@@ -464,11 +468,11 @@
 </div>
 </div>
 </div>
-<p>The shift in the NMR peak due to an isotropic coupling to a polarized electron is known as the contact shift. The pseudo-contact shift, on the other hand, results from the anisotropic part of the coupling to the electron. The anisotropic hyperfine coupling’s Hamiltonian has an average of zero when sampling all orientations, however. This means that isotropic tumbling or MAS would in principal remove the hyperfine coupling (MAS can, in principle, leave spnning sidebands), even if the electron is polarized. Another factor comes in, however, which is the fact that the <span class="math notranslate nohighlight">\(g_{xz}\)</span> and <span class="math notranslate nohighlight">\(g_{yz}\)</span> components of the electron g-tensor may be large enough to tilt the electron’s quantization axis away from the magnetic field’s <em>z</em>-axis, such that MAS or isotropic tumbling no longer results in a complete averaging of the hyperfine Hamiltonian. Furthermore, the electron’s polarization becomes orientation-dependent, which also hinders complete averaging of the pseudocontact shift.</p>
+<p>The shift in the NMR peak due to an isotropic coupling to a polarized electron is known as the contact shift. The pseudo-contact shift, on the other hand, results from the anisotropic part of the coupling to the electron. The anisotropic hyperfine coupling’s Hamiltonian has an average of zero when sampling all orientations, however. This means that isotropic tumbling or MAS would in principal remove the hyperfine coupling (MAS can, in principle, leave spnning sidebands), even if the electron is polarized. Another factor comes in, however, which is the fact that the <span class="math notranslate nohighlight">\(g_{xz}\)</span> and <span class="math notranslate nohighlight">\(g_{yz}\)</span> components of the electron g-tensor may be large enough to tilt the electron’s quantization axis away from the magnetic field’s <em>z</em>-axis, such that MAS or isotropic tumbling no longer results in a complete averaging of the hyperfine Hamiltonian. Furthermore, the electron’s polarization becomes orientation-dependent, which also hinders complete averaging of the pseudo-contact shift.</p>
 </section>
 <section id="pseudo-contact-shift-without-g-anisotropy">
 <h2>Pseudo-contact shift without g-anisotropy<a class="headerlink" href="#pseudo-contact-shift-without-g-anisotropy" title="Link to this heading">#</a></h2>
-<p>Without MAS or motion to average the coupling, a pseudocontact shift (PCS) appears without g-tensor anisotropy, although the average shift is indeed zero. We start by simulating this case, showing the PCS under static conditions, and under tumbling or MAS.</p>
+<p>Without MAS or motion to average the coupling, a pseudo-contact shift (PCS) appears without g-tensor anisotropy, although the average shift is indeed zero. We start by simulating this case, showing the PCS under static conditions, and under tumbling or MAS.</p>
 <section id="build-the-system">
 <h3>Build the system<a class="headerlink" href="#build-the-system" title="Link to this heading">#</a></h3>
 <div class="cell docutils container">
@@ -489,7 +493,7 @@
 </section>
 <section id="spectrum-without-relaxation">
 <h3>Spectrum without relaxation<a class="headerlink" href="#spectrum-without-relaxation" title="Link to this heading">#</a></h3>
-<p>First, we just simulate the pake-pattern resulting from the dipolar hyperfine coupling without relaxation. We start from thermal equilibrium, in order to be able to see the asymmetry of the Pake pattern due to electron polarization. If we just start from ‘13Cx’, no polarization is enforced on the electron.</p>
+<p>First, we just simulate the Pake pattern resulting from the dipolar hyperfine coupling without relaxation. We start from thermal equilibrium, in order to be able to see the asymmetry of the Pake pattern due to electron polarization. If we just start from ‘13Cx’, no polarization is enforced on the electron.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">Dt</span><span class="o">=</span><span class="mf">0.00002</span>
@@ -545,7 +549,7 @@
 <img alt="../_images/ac812258329905e0b0d47e44970d6aac98165706d56f4674c0859dcf81edc5c7.png" src="../_images/ac812258329905e0b0d47e44970d6aac98165706d56f4674c0859dcf81edc5c7.png" />
 </div>
 </div>
-<p>Then, we see that the Pake pattern collapses to the average of the two sides of the pattern. However, the average of the pseudocontact shift is zero, and can be removed with moderate spinning, as shown below. Note that we change the powder average since the large number of angles are not required for MAS.</p>
+<p>Then, we see that the Pake pattern collapses to the average of the two sides of the pattern. However, the average of the pseudo-contact shift is zero, and can be removed with moderate spinning, as shown below. Note that we change the powder average since the large number of angles are not required for MAS.</p>
 <p>We re-initialize the experimental system (<code class="docutils literal notranslate"><span class="pre">ex</span></code>), since a number of settings get changed when adding MAS.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -604,10 +608,10 @@
 </section>
 <section id="pseudo-contact-shift-with-g-anisotropy">
 <h2>Pseudo-contact shift with g-anisotropy<a class="headerlink" href="#pseudo-contact-shift-with-g-anisotropy" title="Link to this heading">#</a></h2>
-<p>Above, we saw that the pseudocontact shift vanishes with MAS or isotropic motion. However, if a g-anisotropy is included, then the pseudo-contact shift reappears.</p>
-<p>It is not sufficient to add the g-anisotropy in the rotating frame. The g-anisotropy induces a pseudocontact shift because it changes the quantization axis of the electron away from the <span class="math notranslate nohighlight">\(z-\)</span>axis of the lab frame, <em>and</em> because the electron polarization varies as a function of the g-tensor orientation. The former effect is only induced if the computation is performed in the lab frame. In this case, we need to be careful not to forget to downmix the resulting signal. One may try also simulating in the rotating frame, to separate contributions from electron tilting and variation of the electron polarization.</p>
+<p>Above, we saw that the pseudo-contact shift vanishes with MAS or isotropic motion. However, if a g-anisotropy is included, then the pseudo-contact shift reappears.</p>
+<p>It is not sufficient to add the g-anisotropy in the rotating frame. The g-anisotropy induces a pseudo-contact shift because it changes the quantization axis of the electron away from the <span class="math notranslate nohighlight">\(z-\)</span>axis of the lab frame, <em>and</em> because the electron polarization varies as a function of the g-tensor orientation. The former effect is only induced if the computation is performed in the lab frame. In this case, we need to be careful not to forget to downmix the resulting signal. One may try also simulating in the rotating frame, to separate contributions from electron tilting and variation of the electron polarization.</p>
 <p>The latter effect is only induced if we correctly implement relaxation. Since the electron quantization axis is no longer along <em>z</em>, then <span class="math notranslate nohighlight">\(T_1\)</span> and <span class="math notranslate nohighlight">\(T_2\)</span> relaxation need to be applied along the tilted axes, and the polarization needs to be readjusted depending on the g-tensor orientation. This requires using the <code class="docutils literal notranslate"><span class="pre">OS=True</span></code> option, along with the <code class="docutils literal notranslate"><span class="pre">Thermal=True</span></code> option for <span class="math notranslate nohighlight">\(T_1\)</span> relaxation.</p>
-<p>We furthermore note that the electron <span class="math notranslate nohighlight">\(T_1\)</span> must be faster than the tumbling: otherwise, the electron does not return to its quantization axis quickly enough to induce the pseudocontact shift.</p>
+<p>We furthermore note that the electron <span class="math notranslate nohighlight">\(T_1\)</span> must be faster than the tumbling: otherwise, the electron does not return to its quantization axis quickly enough to induce the pseudo-contact shift.</p>
 <p>We use hopping around the ‘rep10’ powder average to mimic tumbling. This will not perfectly reproduce the solution-state PCS, partly because it does not include motion around the <span class="math notranslate nohighlight">\(\gamma\)</span> angle, and also because not enough angles are included. Nonetheless, it is a good demonstrate of the PCS concept and its general behavior.</p>
 <section id="pseudo-contact-shift-with-isotropic-hopping">
 <h3>Pseudo-contact shift with isotropic hopping<a class="headerlink" href="#pseudo-contact-shift-with-isotropic-hopping" title="Link to this heading">#</a></h3>
@@ -668,7 +672,7 @@
 </div>
 </div>
 <p>Indeed, the expected temperature dependence is obtained.</p>
-<p>Note that the pseudocontact shift depends on the electron’s polarization and quantization axis changing for different orientations. If the electron <span class="math notranslate nohighlight">\(T_1\)</span> is longer than the rate of reorientation (from tumbling or MAS), the pseudocontact shift is reduced, because the electron does not have time to fully requilibrate at each new orientation. We repeat the above calculation with a longer electron <span class="math notranslate nohighlight">\(T_1\)</span> to see the effects.</p>
+<p>Note that the pseudo-contact shift depends on the electron’s polarization and quantization axis changing for different orientations. If the electron <span class="math notranslate nohighlight">\(T_1\)</span> is longer than the rate of reorientation (from tumbling or MAS), the pseudo-contact shift is reduced, because the electron does not have time to fully requilibrate at each new orientation. We repeat the above calculation with a longer electron <span class="math notranslate nohighlight">\(T_1\)</span> to see the effects.</p>
 </section>
 <section id="electron-t-1-dependence">
 <h3>Electron <span class="math notranslate nohighlight">\(T_1\)</span> dependence<a class="headerlink" href="#electron-t-1-dependence" title="Link to this heading">#</a></h3>
@@ -779,8 +783,8 @@
 <p>Then, we see that the sign and magnitude of the PCS varies depending on the relative orientations of the dipolar and g-tensors, resulting in different PCS depending on the position of the nucleas relative to the electron. The resulting shape is slightly tilted– this effect only comes when calculating in the lab frame. In the rotating frame, the shape is aligned along the axes, highlighting the importance of including lab-frame terms.</p>
 </section>
 </section>
-<section id="pseudocontact-shift-under-mas">
-<h2>Pseudocontact Shift under MAS<a class="headerlink" href="#pseudocontact-shift-under-mas" title="Link to this heading">#</a></h2>
+<section id="pseudo-contact-shift-under-mas">
+<h2>Pseudo-contact Shift under MAS<a class="headerlink" href="#pseudo-contact-shift-under-mas" title="Link to this heading">#</a></h2>
 <p>Finally, we investigate how the PCS manifests under magic angle spinning. Due to the anistropic g-tensor, the PCS cannot be spun out, and furthermore, different crystallites in the rotor will have different shifts, yielding a complex, rank-4 lineshape.</p>
 <section id="run-the-simulation">
 <h3>Run the simulation<a class="headerlink" href="#run-the-simulation" title="Link to this heading">#</a></h3>
@@ -981,7 +985,7 @@
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#d-plot-of-the-pcs-magnitude">3D plot of the PCS magnitude</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pseudocontact-shift-under-mas">Pseudocontact Shift under MAS</a><ul class="nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pseudo-contact-shift-under-mas">Pseudo-contact Shift under MAS</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#run-the-simulation">Run the simulation</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#plot-the-results">Plot the results</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Temperature dependence</a></li>
