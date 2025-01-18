@@ -1,33 +1,34 @@
 A Quick Start
-	[10] add _
+ok	[10] add _
 
 Experimental Settings and Spin.System Definition
-	[8] add _
+x	[8] add _
 	
 Liouvillian
-	Source [1] Second Author is Zimmermann not man, double n! test me if you can
+x	Source [1] Second Author is Zimmermann not man, double n! test me if you can
 	
 Density Matrix
-	[10] add _
+x	[10] add _
 	
 Exchange in 1D
-	[6] add _
+x	[6] add _
 	
 EXSY
-	[6] you set sm=None and 2 lines later sm=0
-	[9] & [10] you create a I=list() but you never use it
+x	[6] you set sm=None and 2 lines later sm=0
+x	[9] & [10] you create a I=list() but you never use it
 	
 BMRD
-	[11]&[12] Is there a reason to use dark colors for plotting? with dark background they are just not good visible
+
+x	[11]&[12] Is there a reason to use dark colors for plotting? with dark background they are just not good visible
 	
 CEST
-	[9] figsize
+x	[9] figsize
 	
 T1 limits
-	[2] why not put clone pyDR in the first code block of colab?
-	[6] add _
-	[10] add _
-	[9] & [13] the plots look different for me when I run the code, idk if its numerical issue that creates noise in a different way for me?
+?	[2] why not put clone pyDR in the first code block of colab?
+x	[6] add _
+x	[10] add _
+ok	[9] & [13] the plots look different for me when I run the code, idk if its numerical issue that creates noise in a different way for me?
 	
 TROSY
 	Source [2] the *** problem
