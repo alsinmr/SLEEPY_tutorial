@@ -198,7 +198,7 @@
 </ul>
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../Ch3_DynamicsSolids.html"><font color="#B00000">Solid-state NMR</font></a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l2"><a class="reference internal" href="../Chapter3/Ch3_R1p.html"><font color="#0093AF">R<span class="math notranslate nohighlight">\(_{1ρ}\)</span> relaxation</font></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Chapter3/Ch3_R1p.html"><font color="#0093AF">R<span class="math notranslate nohighlight">\(_{1ρ}\)</span> Relaxation</font></a></li>
 <li class="toctree-l2"><a class="reference internal" href="../Chapter3/Ch3_REDOR.html"><font color="#0093AF">REDOR</font></a></li>
 <li class="toctree-l2"><a class="reference internal" href="../Chapter3/Ch3_DIPSHIFT.html"><font color="#0093AF">DIPSHIFT</font></a></li>
 <li class="toctree-l2"><a class="reference internal" href="../Chapter3/Ch3_RECRR.html"><font color="#0093AF">Relaxation in complex sequences: RECRR</font></a></li>
@@ -454,8 +454,8 @@
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">SLEEPY</span> <span class="k">as</span> <span class="nn">sl</span>
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
-<span class="c1"># !git clone https://github.com/alsinmr/pyDR     #Uncomment on Google Colab to import pyDR. </span>
-<span class="c1">#pyDR will also install MDAnalysis</span>
+<span class="c1"># !git clone https://github.com/alsinmr/pyDR     #Uncomment on Google Colab to import pyDR.</span>
+<span class="c1">#pyDR will also install MDAnalysis on Colab</span>
 <span class="kn">import</span> <span class="nn">pyDR</span>
 </pre></div>
 </div>
@@ -492,7 +492,7 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/23d8341d8a34a2165eb86377a585a36f4e0c5533a351c1da03362364660a6200.png" src="../_images/23d8341d8a34a2165eb86377a585a36f4e0c5533a351c1da03362364660a6200.png" />
+<img alt="../_images/2e3be0fb767d65dbffdc07e66a353ad6fcd4e5103911135158b2c43bb15ce5b2.png" src="../_images/2e3be0fb767d65dbffdc07e66a353ad6fcd4e5103911135158b2c43bb15ce5b2.png" />
 </div>
 </div>
 </section>
@@ -523,15 +523,12 @@
 <span class="n">ax</span><span class="o">.</span><span class="n">semilogx</span><span class="p">(</span><span class="n">nmr</span><span class="o">.</span><span class="n">tc</span><span class="p">,</span><span class="n">nmr</span><span class="o">.</span><span class="n">rhoz</span><span class="o">.</span><span class="n">T</span><span class="p">,</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">,</span><span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;:&#39;</span><span class="p">,</span><span class="n">linewidth</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
 <span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;$\tau_c$ / s&#39;</span><span class="p">)</span>
 <span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;$R_1$ / s&#39;</span><span class="p">)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">((</span><span class="s1">&#39;Simulation&#39;</span><span class="p">,</span><span class="s1">&#39;Analytic&#39;</span><span class="p">))</span>
+<span class="n">_</span><span class="o">=</span><span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">((</span><span class="s1">&#39;Simulation&#39;</span><span class="p">,</span><span class="s1">&#39;Analytic&#39;</span><span class="p">))</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x7f9873201c88&gt;
-</pre></div>
-</div>
-<img alt="../_images/c7a4a68113a751ee67193dd22b8cacba8093ed6b83d17d7bd00b020534c62412.png" src="../_images/c7a4a68113a751ee67193dd22b8cacba8093ed6b83d17d7bd00b020534c62412.png" />
+<img alt="../_images/4b706995ac90c146f85b672f1f0a24046fc480f074d0b1cb0e2a5bfe4e90bf7b.png" src="../_images/4b706995ac90c146f85b672f1f0a24046fc480f074d0b1cb0e2a5bfe4e90bf7b.png" />
 </div>
 </div>
 <p>We see extremely good agreement between the simulation and the analytical formulas implemented in <a class="reference external" href="https://alsinmr.github.io/pyDR">pyDR</a>.</p>
@@ -598,7 +595,7 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/41cf0723d2f5212a17355205347be824fd1fba2048e71b689e48b9c79af1eea3.png" src="../_images/41cf0723d2f5212a17355205347be824fd1fba2048e71b689e48b9c79af1eea3.png" />
+<img alt="../_images/6c71b503ebbd490cbf692aa77d5328a6b4639e0099921b096432ab862b553e8d.png" src="../_images/6c71b503ebbd490cbf692aa77d5328a6b4639e0099921b096432ab862b553e8d.png" />
 </div>
 </div>
 <p>Below, we plot a simulation below and above the failure threshold.</p>
@@ -621,16 +618,13 @@
 <span class="n">rho</span><span class="o">.</span><span class="n">DetProp</span><span class="p">(</span><span class="n">L</span><span class="o">.</span><span class="n">Sequence</span><span class="p">(</span><span class="n">Dt</span><span class="o">=</span><span class="mf">0.1</span><span class="p">),</span><span class="n">n</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
 <span class="n">rho</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="s1">&#39;s&#39;</span><span class="p">,</span><span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
 <span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">rho</span><span class="o">.</span><span class="n">t_axis</span><span class="p">[[</span><span class="mi">0</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">]],</span><span class="n">ex0</span><span class="o">.</span><span class="n">Peq</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="mi">2</span><span class="p">),</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">,</span><span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;:&#39;</span><span class="p">)</span>
-<span class="n">_</span><span class="o">=</span><span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">rho</span><span class="o">.</span><span class="n">t_axis</span><span class="p">[[</span><span class="mi">0</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">]],</span><span class="n">ex0</span><span class="o">.</span><span class="n">Peq</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="mi">2</span><span class="p">),</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;grey&#39;</span><span class="p">,</span><span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">)</span>
-<span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="sa">fr</span><span class="s1">&#39;$\tau_c$ = </span><span class="si">{</span><span class="n">tc</span><span class="o">*</span><span class="mf">1e12</span><span class="si">:</span><span class="s1">.0f</span><span class="si">}</span><span class="s1"> ps&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">rho</span><span class="o">.</span><span class="n">t_axis</span><span class="p">[[</span><span class="mi">0</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">]],</span><span class="n">ex0</span><span class="o">.</span><span class="n">Peq</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="mi">2</span><span class="p">),</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;grey&#39;</span><span class="p">,</span><span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">)</span>
+<span class="n">_</span><span class="o">=</span><span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="sa">fr</span><span class="s1">&#39;$\tau_c$ = </span><span class="si">{</span><span class="n">tc</span><span class="o">*</span><span class="mf">1e12</span><span class="si">:</span><span class="s1">.0f</span><span class="si">}</span><span class="s1"> ps&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Text(0.5, 1.0, &#39;$\\tau_c$ = 500 ps&#39;)
-</pre></div>
-</div>
-<img alt="../_images/1ac1b51d8b48e9618d8ff68714b9f776f37959aa116954cedd03930c607c7c1d.png" src="../_images/1ac1b51d8b48e9618d8ff68714b9f776f37959aa116954cedd03930c607c7c1d.png" />
+<img alt="../_images/b8eb31b80bd8379e6bf46deb6dca09a0e6a0eb275b087153026394dd45099f87.png" src="../_images/b8eb31b80bd8379e6bf46deb6dca09a0e6a0eb275b087153026394dd45099f87.png" />
 </div>
 </div>
 <p>We see that for the shorter correlation time, thermal equilibrium is not achieved (dashed/dotted lines indicate the thermal equilibrium for the two spins).</p>

@@ -198,7 +198,7 @@
 </ul>
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../Ch3_DynamicsSolids.html"><font color="#B00000">Solid-state NMR</font></a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l2"><a class="reference internal" href="../Chapter3/Ch3_R1p.html"><font color="#0093AF">R<span class="math notranslate nohighlight">\(_{1ρ}\)</span> relaxation</font></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Chapter3/Ch3_R1p.html"><font color="#0093AF">R<span class="math notranslate nohighlight">\(_{1ρ}\)</span> Relaxation</font></a></li>
 <li class="toctree-l2"><a class="reference internal" href="../Chapter3/Ch3_REDOR.html"><font color="#0093AF">REDOR</font></a></li>
 <li class="toctree-l2"><a class="reference internal" href="../Chapter3/Ch3_DIPSHIFT.html"><font color="#0093AF">DIPSHIFT</font></a></li>
 <li class="toctree-l2"><a class="reference internal" href="../Chapter3/Ch3_RECRR.html"><font color="#0093AF">Relaxation in complex sequences: RECRR</font></a></li>
@@ -506,7 +506,7 @@
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>State-space reduction: 16-&gt;2
 </pre></div>
 </div>
-<img alt="../_images/8dc5fa6481f9da8c1ad4b5413ea0361aaa58e71c72e91207e6caf44c9dec8ea8.png" src="../_images/8dc5fa6481f9da8c1ad4b5413ea0361aaa58e71c72e91207e6caf44c9dec8ea8.png" />
+<img alt="../_images/fd9d42d306215a119b4b567ca0b58e0aa82739c5489c535ec84dd61104b483b9.png" src="../_images/fd9d42d306215a119b4b567ca0b58e0aa82739c5489c535ec84dd61104b483b9.png" />
 </div>
 </div>
 <p>Indeed, we get two peaks for each state of the electron, but they have different amplitudes due to the electron polarization.</p>
@@ -542,7 +542,8 @@
 <span class="n">rlx</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="s1">&#39;Hz&#39;</span><span class="p">,</span><span class="n">FT</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">apodize</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
 <span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlim</span><span class="p">(</span><span class="mi">1000</span><span class="p">,</span><span class="o">-</span><span class="mi">1000</span><span class="p">)</span>
 <span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">(</span><span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">get_ylim</span><span class="p">())</span>
-<span class="n">_</span><span class="o">=</span><span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">Aiso</span><span class="o">/</span><span class="mi">2</span><span class="o">*</span><span class="n">ex</span><span class="o">.</span><span class="n">Peq</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="mi">2</span><span class="p">),</span><span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">get_ylim</span><span class="p">(),</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;grey&#39;</span><span class="p">,</span><span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;:&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">Aiso</span><span class="o">/</span><span class="mi">2</span><span class="o">*</span><span class="n">ex</span><span class="o">.</span><span class="n">Peq</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="mi">2</span><span class="p">),</span><span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">get_ylim</span><span class="p">(),</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;grey&#39;</span><span class="p">,</span><span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;:&#39;</span><span class="p">)</span>
+<span class="n">fig</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
@@ -550,7 +551,7 @@
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>State-space reduction: 16-&gt;2
 </pre></div>
 </div>
-<img alt="../_images/d190a31add9d0eac3dd7b03d16c0b42b39ec0b2f62fcbfb00fb858a596bb80fa.png" src="../_images/d190a31add9d0eac3dd7b03d16c0b42b39ec0b2f62fcbfb00fb858a596bb80fa.png" />
+<img alt="../_images/62c16642683fa5109b0a8250286a56a13dfee9914fa9215e7e0fb55f2aa0f31c.png" src="../_images/62c16642683fa5109b0a8250286a56a13dfee9914fa9215e7e0fb55f2aa0f31c.png" />
 </div>
 </div>
 <p>Indeed, the resulting contact shift is exactly where expected (-112 Hz), as marked with the dashed line.</p>
@@ -591,7 +592,7 @@ State-space reduction: 16-&gt;2
 State-space reduction: 16-&gt;2
 </pre></div>
 </div>
-<img alt="../_images/1d004e549ef632ddb50a99191ac9cce16259a11bb045c36d1bf21baa74a6a2b9.png" src="../_images/1d004e549ef632ddb50a99191ac9cce16259a11bb045c36d1bf21baa74a6a2b9.png" />
+<img alt="../_images/112aefa5cc302df991350a7861f0dfb784794357617d444d0b65b21783776c74.png" src="../_images/112aefa5cc302df991350a7861f0dfb784794357617d444d0b65b21783776c74.png" />
 </div>
 </div>
 <p>Note that the contact shift has the same dependence on magnetic field as a normal chemical shift: the hyperfine coupling remains fixed with field, but the electron polarization grows linearly with field (in the high-temperature approximation)</p>
@@ -638,7 +639,7 @@ State-space reduction: 16-&gt;2
 State-space reduction: 16-&gt;2
 </pre></div>
 </div>
-<img alt="../_images/29eb2399740c2a99bae79a3d3469bea4abee791b5dad78bf6e44e4969266a9ab.png" src="../_images/29eb2399740c2a99bae79a3d3469bea4abee791b5dad78bf6e44e4969266a9ab.png" />
+<img alt="../_images/98cf94adc35a087352bdd4024e3a1b924318ed6b92e47beb8c467012d3a71859.png" src="../_images/98cf94adc35a087352bdd4024e3a1b924318ed6b92e47beb8c467012d3a71859.png" />
 </div>
 </div>
 <p>If the temperature approaches 0 K, then the electron is no longer in the high-temperature approximation, and therefore the contact shift is no longer linear with the field, as demonstrated below.</p>

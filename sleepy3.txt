@@ -31,46 +31,46 @@ x	[10] add _
 ok	[9] & [13] the plots look different for me when I run the code, idk if its numerical issue that creates noise in a different way for me?
 	
 TROSY
-	Source [2] the *** problem
+x	Source [2] the *** problem
 	
 SolidStateNMR
 R1p Relaxation
-	Um, you wrote relaxation lowercase here, bevore you wrote it uppercase in titles at least
+x	Um, you wrote relaxation lowercase here, bevore you wrote it uppercase in titles at least
 	Source [2] you misspelled Lewandowski
-	[7] the presaved plot is missing in the notebook
+x	[7] the presaved plot is missing in the notebook
 	
 REDOR
-	Source [5] you misspelled Levante
-	[7] did you intend to keep the time printout there? however it seems to take ages in calculation for me (you took obv 23 seconds, i take 126, I wonder why that is, but maybe you had still some cache from multiple running?
-	[12] seems like the notebook is not properly updated? there was a printout of Axes even though there was a _, idk
+x	Source [5] you misspelled Levante
+x	[7] did you intend to keep the time printout there? however it seems to take ages in calculation for me (you took obv 23 seconds, i take 126, I wonder why that is, but maybe you had still some cache from multiple running?
+x	[12] seems like the notebook is not properly updated? there was a printout of Axes even though there was a _, idk
 	
 DIPSHIFT
-	in the very end you write dipshift lowercase
+x	in the very end you write dipshift lowercase
 
 DARR
-	do you keep the references that way?
+x	do you keep the references that way?
 	after S.Clogh you put a dot instead of a comma
 	
 	
 DNP
 Solid Effect
-	you still have 'solid-effect' in the text
+x	you still have 'solid-effect' in the text
 	
 NOVEL
-	Source [1] it makes W.Th. a link in the website. guess it just needs a space
+x	Source [1] it makes W.Th. a link in the website. guess it just needs a space
 	Build the system.... second sentence. make pi a greek letter?
 	[8] the axis label of the right plot is overlapping on the left plot
 	
 PRE
-	[21] The stored output shows a warning about unphysical system, but the colab output does not
-	[23] same here
+ok	[21] The stored output shows a warning about unphysical system, but the colab output does not
+ok	[23] same here
 	
 Contact shift
-	[5] overlapping axis label
-	[7] B0 does not have a setter function oh no...
+x	[5] overlapping axis label
+x	[7] B0 does not have a setter function oh no...
 	
 Pseudo-Contact shift
-	[14] the z-axis label is cutoff, guess tight_layout solves it
+x	[14] the z-axis label is cutoff, guess tight_layout solves it
 	
 Relaxation Options
 	[5] & [10] & [15] & [18] [21]23,25,27,29,31 missing _
