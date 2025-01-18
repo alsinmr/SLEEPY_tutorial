@@ -12,7 +12,7 @@
 /Users/albertsmith/Documents/GitHub.nosync/SLEEPY_tutorial/Chapters/Chapter2/Ch2_EXSY.ipynb	1737212098
 /Users/albertsmith/Documents/GitHub.nosync/SLEEPY_tutorial/Chapters/Chapter2/Ch2_TROSY.ipynb	1737213020
 /Users/albertsmith/Documents/GitHub.nosync/SLEEPY_tutorial/Chapters/Chapter3/Ch3_RECRR.ipynb	1736878707
-/Users/albertsmith/Documents/GitHub.nosync/SLEEPY_tutorial/Chapters/Chapter3/Ch3_REDOR.ipynb	1737213819
+/Users/albertsmith/Documents/GitHub.nosync/SLEEPY_tutorial/Chapters/Chapter3/Ch3_REDOR.ipynb	1737229541
 /Users/albertsmith/Documents/GitHub.nosync/SLEEPY_tutorial/Chapters/Chapter3/Ch3_T1_NOE.ipynb	1736802467
 /Users/albertsmith/Documents/GitHub.nosync/SLEEPY_tutorial/Chapters/Chapter3/Ch3_Quad.ipynb	1737048410
 /Users/albertsmith/Documents/GitHub.nosync/SLEEPY_tutorial/Chapters/Chapter3/Ch3_DIPSHIFT.ipynb	1737213877

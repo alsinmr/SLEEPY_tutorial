@@ -493,7 +493,7 @@
 <p>We break the REDOR sequence up into three sequences (<code class="docutils literal notranslate"><span class="pre">L.Sequence()</span></code>), a first half (<code class="docutils literal notranslate"><span class="pre">first</span></code>) with <span class="math notranslate nohighlight">\(^1\)</span>H <span class="math notranslate nohighlight">\(\pi\)</span>-pulses coming in the middle and end of the rotor period, a middle sequence (<code class="docutils literal notranslate"><span class="pre">center</span></code>) with a <span class="math notranslate nohighlight">\(^{15}\)</span>N <span class="math notranslate nohighlight">\(\pi\)</span>-pulse to refocus the <span class="math notranslate nohighlight">\(^{15}\)</span>N chemical shift, and a second half (<code class="docutils literal notranslate"><span class="pre">second</span></code>) with <span class="math notranslate nohighlight">\(^1\)</span>H <span class="math notranslate nohighlight">\(\pi\)</span>-pulses coming at the beginning and middle of the rotor period.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">v1</span><span class="o">=</span><span class="mf">150e3</span> <span class="c1">#100 kHz pulse</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">v1</span><span class="o">=</span><span class="mf">120e3</span> <span class="c1">#100 kHz pulse</span>
 <span class="n">tp</span><span class="o">=</span><span class="mi">1</span><span class="o">/</span><span class="n">v1</span><span class="o">/</span><span class="mi">2</span> <span class="c1">#pi/2 pulse length</span>
 
 <span class="n">t</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="n">L</span><span class="o">.</span><span class="n">taur</span><span class="o">/</span><span class="mi">2</span><span class="o">-</span><span class="n">tp</span><span class="p">,</span><span class="n">L</span><span class="o">.</span><span class="n">taur</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span><span class="n">L</span><span class="o">.</span><span class="n">taur</span><span class="o">-</span><span class="n">tp</span><span class="p">,</span><span class="n">L</span><span class="o">.</span><span class="n">taur</span><span class="p">]</span>
@@ -520,7 +520,7 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/1739f67065897cd94ce82bddb787bf17421d9c2da94e8a7dae78c6c9c875cd83.png" src="../_images/1739f67065897cd94ce82bddb787bf17421d9c2da94e8a7dae78c6c9c875cd83.png" />
+<img alt="../_images/74b2dd1d4e91188b0afc84dcf2dca1ff78cc6726ddc38b96257c24ad2c4a38b4.png" src="../_images/74b2dd1d4e91188b0afc84dcf2dca1ff78cc6726ddc38b96257c24ad2c4a38b4.png" />
 </div>
 </div>
 </section>
@@ -554,7 +554,7 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>23.063619136810303
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>24.72684097290039
 </pre></div>
 </div>
 </div>
@@ -566,7 +566,7 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/44bfaffa70298bf656838b81e7d259a95ac4862f17cd693043d64c9a1a59a1e8.png" src="../_images/44bfaffa70298bf656838b81e7d259a95ac4862f17cd693043d64c9a1a59a1e8.png" />
+<img alt="../_images/e05060eb7513034e7d3cfbe2de9e71c5018e26d1be33f084c322052fbe0b5467.png" src="../_images/e05060eb7513034e7d3cfbe2de9e71c5018e26d1be33f084c322052fbe0b5467.png" />
 </div>
 </div>
 <section id="reducible-sequence">
@@ -613,7 +613,7 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>12.277156829833984
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>12.240375995635986
 </pre></div>
 </div>
 </div>
@@ -625,7 +625,7 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/b28e765f756e751fbec29a1b74da62c19bc8332d511cf00abe343923e4a71c2f.png" src="../_images/b28e765f756e751fbec29a1b74da62c19bc8332d511cf00abe343923e4a71c2f.png" />
+<img alt="../_images/46c0b253051d723ea0b1bdf0a89f51b155b4e06ff604e12b57ceb385c02e5bba.png" src="../_images/46c0b253051d723ea0b1bdf0a89f51b155b4e06ff604e12b57ceb385c02e5bba.png" />
 </div>
 </div>
 <p>We see that the reduced sequence yields the same results as before, but with matrices only 1/16 as big as the previous calculation.</p>
@@ -665,13 +665,13 @@
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>log10(tc /s) = -6.0, 11 seconds elapsed
-log10(tc /s) = -5.6, 21 seconds elapsed
-log10(tc /s) = -5.1, 31 seconds elapsed
-log10(tc /s) = -4.7, 42 seconds elapsed
-log10(tc /s) = -4.3, 52 seconds elapsed
-log10(tc /s) = -3.9, 62 seconds elapsed
-log10(tc /s) = -3.4, 73 seconds elapsed
-log10(tc /s) = -3.0, 83 seconds elapsed
+log10(tc /s) = -5.6, 22 seconds elapsed
+log10(tc /s) = -5.1, 33 seconds elapsed
+log10(tc /s) = -4.7, 44 seconds elapsed
+log10(tc /s) = -4.3, 55 seconds elapsed
+log10(tc /s) = -3.9, 65 seconds elapsed
+log10(tc /s) = -3.4, 76 seconds elapsed
+log10(tc /s) = -3.0, 87 seconds elapsed
 </pre></div>
 </div>
 </div>
@@ -694,7 +694,7 @@ log10(tc /s) = -3.0, 83 seconds elapsed
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/b2e9e55d5f1092a78fcd04bb1f6a523d0f475ebadbe0073be90f0ed9aa709816.png" src="../_images/b2e9e55d5f1092a78fcd04bb1f6a523d0f475ebadbe0073be90f0ed9aa709816.png" />
+<img alt="../_images/27b3ffe8905bd9a82136a17dba2b75e4b6271f12d8b7cba14c2614e4b58b3f93.png" src="../_images/27b3ffe8905bd9a82136a17dba2b75e4b6271f12d8b7cba14c2614e4b58b3f93.png" />
 </div>
 </div>
 <p>We observe above that when the correlation time is shorter than about 100 <span class="math notranslate nohighlight">\(\mu\)</span>s, we see the fully averaged coupling, and when the correlation time is longer than about 1 ms, we obtain the rigid-limit value. In between, oscillations are damped due to dynamics being on the timescale of the coupling.</p>
