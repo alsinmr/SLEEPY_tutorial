@@ -34,7 +34,7 @@
     <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=a3416100" />
     <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
   
@@ -538,12 +538,12 @@
 <p>This may also be plotted. Note there are different plotting modes: ‘re’,’im’,’abs’, ‘log’, and ‘spy’, which are real, imaginary, absolute value, log of absolute value, and spy, which is binary, i.e. zero or not zero.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">_</span><span class="o">=</span><span class="n">H</span><span class="p">[</span><span class="mi">5</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="s1">&#39;H-1&#39;</span><span class="p">,</span><span class="n">mode</span><span class="o">=</span><span class="s1">&#39;re&#39;</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">_</span><span class="o">=</span><span class="n">H</span><span class="p">[</span><span class="mi">5</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="s1">&#39;H1&#39;</span><span class="p">,</span><span class="n">mode</span><span class="o">=</span><span class="s1">&#39;re&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/9769bfafdf814e694d8ff3b18ed6b14ccdf694cc78987e48c64ef873356c3d3f.png" src="../_images/9769bfafdf814e694d8ff3b18ed6b14ccdf694cc78987e48c64ef873356c3d3f.png" />
+<img alt="../_images/6a1fb0759537fd769ca6a4dac51b7353f44ed7b93ada7e75f0cb09bd7fc9fe6c.png" src="../_images/6a1fb0759537fd769ca6a4dac51b7353f44ed7b93ada7e75f0cb09bd7fc9fe6c.png" />
 </div>
 </div>
 </section>
@@ -564,7 +564,7 @@ Arguments:
 	eta=0
 	euler=[0.00,0.00,0.00]
 
-&lt;SLEEPY.HamTypes.Ham1inter object at 0x7fd828f28dc0&gt;
+&lt;SLEEPY.HamTypes.Ham1inter object at 0x7fca102b3f28&gt;
 </pre></div>
 </div>
 </div>
@@ -585,14 +585,15 @@ Type: larmor on spin 1
 </div>
 </div>
 </div>
+<p>Below, we plot the real part of the dipole Hamiltonian. Note that the values shown depend on the element of the powder average, determined below by setting <code class="docutils literal notranslate"><span class="pre">H[5]</span></code> and the step in the rotor period (<code class="docutils literal notranslate"><span class="pre">step=25</span></code>).</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">_</span><span class="o">=</span><span class="n">H</span><span class="o">.</span><span class="n">Hinter</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">_</span><span class="o">=</span><span class="n">H</span><span class="p">[</span><span class="mi">5</span><span class="p">]</span><span class="o">.</span><span class="n">Hinter</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">mode</span><span class="o">=</span><span class="s1">&#39;re&#39;</span><span class="p">,</span><span class="n">step</span><span class="o">=</span><span class="mi">25</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/a52e56267b0104de462cd0c32a5046ba743a12db6e56bd84e58ff58d4063620f.png" src="../_images/a52e56267b0104de462cd0c32a5046ba743a12db6e56bd84e58ff58d4063620f.png" />
+<img alt="../_images/7f17253007fa7a1955e5e612d393b425ca40e2e23f58c459b580746ec212f562.png" src="../_images/7f17253007fa7a1955e5e612d393b425ca40e2e23f58c459b580746ec212f562.png" />
 </div>
 </div>
 </section>

@@ -1,4 +1,4 @@
-/Users/albertsmith/Documents/GitHub.nosync/SLEEPY_tutorial/Chapters/Chapter1/Ch1_Liouvillian.ipynb	1737211857
+/Users/albertsmith/Documents/GitHub.nosync/SLEEPY_tutorial/Chapters/Chapter1/Ch1_Liouvillian.ipynb	1737797511
 /Users/albertsmith/Documents/GitHub.nosync/SLEEPY_tutorial/Chapters/Chapter1/Ch1_Propagation.ipynb	1736791375
 /Users/albertsmith/Documents/GitHub.nosync/SLEEPY_tutorial/Chapters/Chapter1/Ch1_ShortExamples.ipynb	1736791375
 /Users/albertsmith/Documents/GitHub.nosync/SLEEPY_tutorial/Chapters/Chapter1/Ch1_rho.ipynb	1737211978
@@ -12,7 +12,7 @@
 /Users/albertsmith/Documents/GitHub.nosync/SLEEPY_tutorial/Chapters/Chapter2/Ch2_EXSY.ipynb	1737212098
 /Users/albertsmith/Documents/GitHub.nosync/SLEEPY_tutorial/Chapters/Chapter2/Ch2_TROSY.ipynb	1737213020
 /Users/albertsmith/Documents/GitHub.nosync/SLEEPY_tutorial/Chapters/Chapter3/Ch3_RECRR.ipynb	1736878707
-/Users/albertsmith/Documents/GitHub.nosync/SLEEPY_tutorial/Chapters/Chapter3/Ch3_REDOR.ipynb	1737229541
+/Users/albertsmith/Documents/GitHub.nosync/SLEEPY_tutorial/Chapters/Chapter3/Ch3_REDOR.ipynb	1737229859
 /Users/albertsmith/Documents/GitHub.nosync/SLEEPY_tutorial/Chapters/Chapter3/Ch3_T1_NOE.ipynb	1736802467
 /Users/albertsmith/Documents/GitHub.nosync/SLEEPY_tutorial/Chapters/Chapter3/Ch3_Quad.ipynb	1737048410
 /Users/albertsmith/Documents/GitHub.nosync/SLEEPY_tutorial/Chapters/Chapter3/Ch3_DIPSHIFT.ipynb	1737213877
@@ -24,5 +24,5 @@
 /Users/albertsmith/Documents/GitHub.nosync/SLEEPY_tutorial/Chapters/Chapter4/Ch4_SolidEffect.ipynb	1737214022
 /Users/albertsmith/Documents/GitHub.nosync/SLEEPY_tutorial/Chapters/Chapter5/Ch5_PseudoContactShift.ipynb	1736886772
 /Users/albertsmith/Documents/GitHub.nosync/SLEEPY_tutorial/Chapters/Chapter5/Ch5_ContactShift.ipynb	1737223138
-/Users/albertsmith/Documents/GitHub.nosync/SLEEPY_tutorial/Chapters/Chapter5/Ch5_PRE.ipynb	1737222770
+/Users/albertsmith/Documents/GitHub.nosync/SLEEPY_tutorial/Chapters/Chapter5/Ch5_PRE.ipynb	1738506413
 /Users/albertsmith/Documents/GitHub.nosync/SLEEPY_tutorial/Chapters/Chapter6/Ch6_RelaxationOptions.ipynb	1737048410
