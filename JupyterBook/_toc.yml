@@ -48,8 +48,10 @@ parts:
     - file: Chapter5/Ch5_ContactShift
     - file: Chapter5/Ch5_PseudoContactShift
   - file: Chapter6/Ch6_RelaxationOptions
+  
   - file: ColabTemplate
 - caption: User library
   numbered: false
   chapters:
+  - file: SharingSleepy
   - file: UserLibrary

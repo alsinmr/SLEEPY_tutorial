@@ -4,7 +4,7 @@ Part of the goal with writing SLEEPY in Python is to make it easy to share your 
 
 1. Prepare your simulations in a Jupyter Notebook. This can be done locally, but can also be done online, for example, in [Google Colab](http://colab.research.google.com). 
 
-2. Add "!github clone https://github.com/alsinmr/SLEEPY/" to the first line of the notebook to add SLEEPY so that SLEEPY is downloaded to Google Colab when run online
+2. Add `!github clone https://github.com/alsinmr/SLEEPY/` to the first line of the notebook to add SLEEPY so that SLEEPY is downloaded to Google Colab when run online
 
 3. Upload your Jupyter Notebook to a public [GitHub](http://github.com/) repository.
 
@@ -13,5 +13,5 @@ Part of the goal with writing SLEEPY in Python is to make it easy to share your 
 [https://githubtocolab.com/alsinmr/SLEEPY_tutorial/blob/main/ColabNotebooks/Chapter1/Ch1_basics.ipynb](https://githubtocolab.com/alsinmr/SLEEPY_tutorial/blob/main/ColabNotebooks/Chapter1/Ch1_basics.ipynb)
 
 More generally:
-"https://githubtocolab.com/<username>/<repository>/blob/<branch>/<path_to_notebook>/<notebook.ipynb>"
+`https://githubtocolab.com/<username>/<repository>/blob/<branch>/<path_to_notebook>/<notebook.ipynb>`
 
