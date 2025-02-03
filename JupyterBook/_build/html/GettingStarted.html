@@ -34,7 +34,7 @@
     <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=a3416100" />
     <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=13237357" />
     <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
     <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
   
@@ -436,10 +436,19 @@
                   
   <section class="tex2jax_ignore mathjax_ignore" id="getting-started">
 <h1><font color="#B00000">Getting Started</font><a class="headerlink" href="#getting-started" title="Link to this heading">#</a></h1>
-<p>There are currently two possiblities for running SLEEPY: with a local Python installation, or online via <a class="reference external" href="https://githubtocolab.com/alsinmr/SLEEPY_tutorial/blob/main/ColabTemplate.ipynb">Google Colab</a>. A local installation of SLEEPY may be run in <a class="reference external" href="https://jupyter.org/">Jupyter notebooks</a>, as a script, or in a Python/iPython terminal. Here we provide a few notes for a local installation or for running in Google Colab.</p>
+<p>There are currently three possiblities for running SLEEPY: with a local Python installation, online via <a class="reference external" href="https://githubtocolab.com/alsinmr/SLEEPY_tutorial/blob/main/ColabTemplate.ipynb">Google Colab</a>, or online via <a class="reference external" href="https://mybinder.org/v2/gh/alsinmr/SLEEPY_tutorial/main">myBinder.org</a>. A local installation of SLEEPY may be run in <a class="reference external" href="https://jupyter.org/">Jupyter notebooks</a>, as a script, or in a Python/iPython terminal. Here we provide a few notes for a local installation or for running in Google Colab.</p>
 <section id="local-installation">
 <h2>Local Installation<a class="headerlink" href="#local-installation" title="Link to this heading">#</a></h2>
-<p>SLEEPY does not currently exist for installation via <a class="reference external" href="https://pypi.org/">pip</a> or <a class="reference external" href="https://docs.conda.io/en/latest/">conda</a>, and instead is downloaded from GitHub, with its containing folder added to the system path (or placed in a folder with other installed Python modules). The required modules must be installed separately by the user.</p>
+<p>The stable version of SLEEPY can be installed with pip (or alternatively downloaded from <a class="reference external" href="https://pypi.org/project/sleepy-nmr/">PyPI</a>):</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">pip</span> <span class="n">install</span> <span class="n">sleepy</span><span class="o">-</span><span class="n">nmr</span>
+</pre></div>
+</div>
+<p>Note that the resulting module is called SLEEPY, as opposed to sleepy-nmr. Import as follows (shortening name to ‘sl’ is optional)</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">SLEEPY</span> <span class="k">as</span> <span class="nn">sl</span>
+</pre></div>
+</div>
+<p>SLEEPY does not exist for installation via <a class="reference external" href="https://docs.conda.io/en/latest/">conda</a>, but package requirements for SLEEPY are relatively limited (numpy, scipy, matplotlib), so installing via pip is unlikely to break your conda installation.</p>
+<p>For the latest (potentially less stable) version of SLEEPY, download from GitHub and add its folder to your system path. The required modules must be installed separately by the user.</p>
 <p><a class="reference external" href="https://github.com/alsinmr/SLEEPY/"><strong>SLEEPY on GitHub</strong></a></p>
 <p>Versions listed have been tested for SLEEPY, although any recent module version should work.</p>
 <section id="requirements">

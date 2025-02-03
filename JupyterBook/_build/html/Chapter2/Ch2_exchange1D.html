@@ -278,6 +278,55 @@
 
 
 
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://mybinder.org/v2/gh/alsinmr/SLEEPY_tutorial/master?urlpath=tree/JupyterBook/Chapter2/Ch2_exchange1D.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch on Binder"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img alt="Binder logo" src="../_static/images/logo_binder.svg">
+  </span>
+<span class="btn__text-container">Binder</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://colab.research.google.com/github/alsinmr/SLEEPY_tutorial/blob/master/JupyterBook/Chapter2/Ch2_exchange1D.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch on Colab"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img alt="Colab logo" src="../_static/images/logo_colab.png">
+  </span>
+<span class="btn__text-container">Colab</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
 <div class="dropdown dropdown-source-buttons">
   <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
     <i class="fab fa-github"></i>
@@ -536,8 +585,8 @@ k_{12} &amp; -k_{21}+i\Omega_2
 State-space reduction: 8-&gt;2
 </pre></div>
 </div>
-<img alt="../_images/4681f176e98d3db04dd6002c71c52f07c6c4395c65afbcbf4d7c81d72b381e69.png" src="../_images/4681f176e98d3db04dd6002c71c52f07c6c4395c65afbcbf4d7c81d72b381e69.png" />
-<img alt="../_images/325daa253622007460930410db9186bc5e522cc99061e4ba0cd2c115715b82f9.png" src="../_images/325daa253622007460930410db9186bc5e522cc99061e4ba0cd2c115715b82f9.png" />
+<img alt="../_images/c3733b6352d8ad2d344c998236fbd8702b6618d24b3f2044fa3434f6725ce07a.png" src="../_images/c3733b6352d8ad2d344c998236fbd8702b6618d24b3f2044fa3434f6725ce07a.png" />
+<img alt="../_images/e4e481912dc7628450f59e0e89c1c75577a6e2351e91161b9e43fb859939bc8a.png" src="../_images/e4e481912dc7628450f59e0e89c1c75577a6e2351e91161b9e43fb859939bc8a.png" />
 </div>
 </div>
 </section>
@@ -552,7 +601,7 @@ State-space reduction: 8-&gt;2
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/e41cc429cd5e39c8b783c59a0ffd3ec8bb151e569cb7d8f3fc871cd0ded389a7.png" src="../_images/e41cc429cd5e39c8b783c59a0ffd3ec8bb151e569cb7d8f3fc871cd0ded389a7.png" />
+<img alt="../_images/b40a19c13b6fe42c37f30a267289afe7e79006dd71ec9db09751f8d94b6361b1.png" src="../_images/b40a19c13b6fe42c37f30a267289afe7e79006dd71ec9db09751f8d94b6361b1.png" />
 </div>
 </div>
 </section>
@@ -581,12 +630,12 @@ State-space reduction: 8-&gt;2
     <span class="k">if</span> <span class="ow">not</span><span class="p">(</span><span class="n">a</span><span class="o">.</span><span class="n">is_first_col</span><span class="p">()):</span>
         <span class="n">a</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="p">)</span>
     <span class="n">a</span><span class="o">.</span><span class="n">set_yticklabels</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="p">)</span>
-    <span class="n">a</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="o">-</span><span class="mi">10</span><span class="p">,</span><span class="n">sm</span><span class="o">*</span><span class="mf">.9</span><span class="p">,</span><span class="sa">r</span><span class="s1">&#39;$\tau_c$&#39;</span><span class="o">+</span><span class="sa">f</span><span class="s1">&#39; = </span><span class="si">{</span><span class="n">tc</span><span class="si">:</span><span class="s1">.0e</span><span class="si">}</span><span class="s1"> s&#39;</span><span class="p">)</span>
+    <span class="n">a</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="o">-</span><span class="mf">.01</span><span class="p">,</span><span class="n">sm</span><span class="o">*</span><span class="mf">.9</span><span class="p">,</span><span class="sa">r</span><span class="s1">&#39;$\tau_c$&#39;</span><span class="o">+</span><span class="sa">f</span><span class="s1">&#39; = </span><span class="si">{</span><span class="n">tc</span><span class="si">:</span><span class="s1">.0e</span><span class="si">}</span><span class="s1"> s&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/d867ffc6aecf5f7bc68ef2437dab173aca102f2344729e417e8797551da4acd8.png" src="../_images/d867ffc6aecf5f7bc68ef2437dab173aca102f2344729e417e8797551da4acd8.png" />
+<img alt="../_images/77f3d76faf82883ce1259cbb140112da1852c4a8d192337d60f013e160433d3a.png" src="../_images/77f3d76faf82883ce1259cbb140112da1852c4a8d192337d60f013e160433d3a.png" />
 </div>
 </div>
 <p>In symmetic exchange, we can obtain the peak positions and linewidths by diagonalizing the following equation:</p>
@@ -650,12 +699,12 @@ k &amp; -k-i\Delta\Omega/2-\lambda
     <span class="k">if</span> <span class="ow">not</span><span class="p">(</span><span class="n">a</span><span class="o">.</span><span class="n">is_first_col</span><span class="p">()):</span>
         <span class="n">a</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="p">)</span>
     <span class="n">a</span><span class="o">.</span><span class="n">set_yticklabels</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="p">)</span>
-    <span class="n">a</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="o">-</span><span class="mi">10</span><span class="p">,</span><span class="n">sm</span><span class="o">*</span><span class="mf">.9</span><span class="p">,</span><span class="sa">r</span><span class="s1">&#39;$\tau_c$&#39;</span><span class="o">+</span><span class="sa">f</span><span class="s1">&#39; = </span><span class="si">{</span><span class="n">tc</span><span class="si">:</span><span class="s1">.0e</span><span class="si">}</span><span class="s1"> s&#39;</span><span class="p">)</span>
+    <span class="n">a</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="o">-</span><span class="mf">.01</span><span class="p">,</span><span class="n">sm</span><span class="o">*</span><span class="mf">.9</span><span class="p">,</span><span class="sa">r</span><span class="s1">&#39;$\tau_c$&#39;</span><span class="o">+</span><span class="sa">f</span><span class="s1">&#39; = </span><span class="si">{</span><span class="n">tc</span><span class="si">:</span><span class="s1">.0e</span><span class="si">}</span><span class="s1"> s&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/571eebc4f1cb99874d42f30cd58d907e4db63a53a3dadf40e7d35d728958b6a6.png" src="../_images/571eebc4f1cb99874d42f30cd58d907e4db63a53a3dadf40e7d35d728958b6a6.png" />
+<img alt="../_images/840aa0c832f6cfb99a290cfc88781612a3ce3aa124448d8231a9a5e88930442e.png" src="../_images/840aa0c832f6cfb99a290cfc88781612a3ce3aa124448d8231a9a5e88930442e.png" />
 </div>
 </div>
 <p>Above, we see that the peak to the left gradually vanishes, and the peak to the right shifts left. However, the second peak does not disappear at a well-defined correlation time, it just becomes gradually smaller.</p>

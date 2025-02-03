@@ -43,5 +43,6 @@ myst:
   linkify_fuzzy_links: false
 
 launch_buttons:
-  notebook_interface        : "jupyterlab"  # The interface interactive links will activate ["classic", "jupyterlab"]
-  binderhub_url             : "https://mybinder.org/v2/gh/alsinmr/SLEEPY_tutorial/main"
+  notebook_interface        : "classic"  # The interface interactive links will activate ["classic", "jupyterlab"]
+  binderhub_url             : "https://mybinder.org/"
+  colab_url                 : "https://colab.research.google.com"

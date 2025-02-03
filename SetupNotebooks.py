@@ -207,15 +207,19 @@ def write_book_setup(f):
     #   "os.chdir('../..')"
     #  ]
     # }""")
-    return
+    # return
     
-    f.write("""{
+    f.write(""",
+    {
      "cell_type": "code",
      "execution_count": 0,
-     "metadata": {},
+     "metadata": {"tags": [
+        "remove-cell"
+    ]},
      "outputs": [],
      "source": [
-      "# SETUP SLEEPY"
+      "# SETUP SLEEPY\\n",
+      "!pip install sleepy-nmr"
      ]
     }""")
     
