@@ -157,6 +157,17 @@ def write_colab_setup(f):
     
     
     
+    # f.write("""{
+    #  "cell_type": "code",
+    #  "execution_count": 0,
+    #  "metadata": {},
+    #  "outputs": [],
+    #  "source": [
+    #   "# SETUP SLEEPY\\n",
+    #   "!git clone https://github.com/alsinmr/SLEEPY.git"
+    #  ]
+    # }""")
+    
     f.write("""{
      "cell_type": "code",
      "execution_count": 0,
@@ -164,7 +175,7 @@ def write_colab_setup(f):
      "outputs": [],
      "source": [
       "# SETUP SLEEPY\\n",
-      "!git clone https://github.com/alsinmr/SLEEPY.git"
+      "!pip install -i https://test.pypi.org/simple/ sleepy-nmr"
      ]
     }""")
     
