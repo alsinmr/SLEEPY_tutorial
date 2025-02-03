@@ -1,0 +1,11 @@
+name: SLEEPY-env
+channels:
+  - conda-forge
+dependencies:
+  - python
+  - numpy
+  - scipy
+  - pip
+  - pip:
+    - sleepy-nmr
+    - matplotlib
