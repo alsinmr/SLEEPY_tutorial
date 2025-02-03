@@ -1,10 +1,21 @@
 # <font color="#B00000">Getting Started</font>
 
-There are currently two possiblities for running SLEEPY: with a local Python installation, or online via [Google Colab](https://githubtocolab.com/alsinmr/SLEEPY_tutorial/blob/main/ColabTemplate.ipynb). A local installation of SLEEPY may be run in [Jupyter notebooks](https://jupyter.org/), as a script, or in a Python/iPython terminal. Here we provide a few notes for a local installation or for running in Google Colab.
+There are currently three possiblities for running SLEEPY: with a local Python installation, online via [Google Colab](https://githubtocolab.com/alsinmr/SLEEPY_tutorial/blob/main/ColabTemplate.ipynb), or online via [myBinder.org](https://mybinder.org/v2/gh/alsinmr/SLEEPY_tutorial/main). A local installation of SLEEPY may be run in [Jupyter notebooks](https://jupyter.org/), as a script, or in a Python/iPython terminal. Here we provide a few notes for a local installation or for running in Google Colab.
  
 
 ## Local Installation
-SLEEPY does not currently exist for installation via [pip](https://pypi.org/) or [conda](https://docs.conda.io/en/latest/), and instead is downloaded from GitHub, with its containing folder added to the system path (or placed in a folder with other installed Python modules). The required modules must be installed separately by the user.
+The stable version of SLEEPY can be installed with pip (or alternatively downloaded from [PyPI](https://pypi.org/project/sleepy-nmr/)):
+```
+pip install sleepy-nmr
+```
+Note that the resulting module is called SLEEPY, as opposed to sleepy-nmr. Import as follows (shortening name to 'sl' is optional)
+```
+import SLEEPY as sl
+```
+
+SLEEPY does not exist for installation via [conda](https://docs.conda.io/en/latest/), but package requirements for SLEEPY are relatively limited (numpy, scipy, matplotlib), so installing via pip is unlikely to break your conda installation. 
+
+For the latest (potentially less stable) version of SLEEPY, download from GitHub and add its folder to your system path. The required modules must be installed separately by the user.
 
 [**SLEEPY on GitHub**](https://github.com/alsinmr/SLEEPY/)
 
