@@ -4,7 +4,7 @@ Part of the goal with writing SLEEPY in Python is to make it easy to share your 
 
 1. Prepare your simulations in a Jupyter Notebook. This can be done locally, but can also be done online, for example, in [Google Colab](http://colab.research.google.com). 
 
-2. Add `!github clone https://github.com/alsinmr/SLEEPY/` to the first line of the notebook to add SLEEPY so that SLEEPY is downloaded to Google Colab when run online
+2. Add `!pip install sleepy-nmr` to the first line of the notebook so that SLEEPY is downloaded to Google Colab when run online.
 
 3. Upload your Jupyter Notebook to a public [GitHub](http://github.com/) repository.
 
