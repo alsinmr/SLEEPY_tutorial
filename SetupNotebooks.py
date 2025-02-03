@@ -175,9 +175,7 @@ def write_colab_setup(f):
      "outputs": [],
      "source": [
       "# SETUP SLEEPY\\n",
-      "import sys\\n",
-      "if 'google.colab' in sys.modules:\\n",
-      "  !pip install sleepy-nmr"
+      "!pip install sleepy-nmr"
      ]
     }""")
     
@@ -221,7 +219,9 @@ def write_book_setup(f):
      "outputs": [],
      "source": [
       "# SETUP SLEEPY\\n",
-      "!pip install sleepy-nmr"
+      "import sys\\n",
+      "if 'google.colab' in sys.modules:\\n",
+      "  !pip install sleepy-nmr"
      ]
     }""")
     
