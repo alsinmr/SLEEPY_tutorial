@@ -175,7 +175,7 @@ def write_colab_setup(f):
      "outputs": [],
      "source": [
       "# SETUP SLEEPY\\n",
-      "!pip install -i https://test.pypi.org/simple/ sleepy-nmr"
+      "!pip install sleepy-nmr"
      ]
     }""")
     
