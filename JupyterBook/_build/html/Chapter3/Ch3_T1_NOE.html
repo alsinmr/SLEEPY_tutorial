@@ -553,7 +553,7 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/03415ce94e226b4df92731d24d565dd8a315cfec1dea514602633297dbd5f813.png" src="../_images/03415ce94e226b4df92731d24d565dd8a315cfec1dea514602633297dbd5f813.png" />
+<img alt="../_images/6826237a3765d4fd9dc1a773bb401a4a7e2938ff7a61955ab1a9e320f79bed8e.png" src="../_images/6826237a3765d4fd9dc1a773bb401a4a7e2938ff7a61955ab1a9e320f79bed8e.png" />
 </div>
 </div>
 <p>Then, the <span class="math notranslate nohighlight">\(^{15}\)</span>N magnetization relaxes towards its thermal equilibrium. Note that we observe both a fairly fast component at the beginning (<span class="math notranslate nohighlight">\(T_1\)</span>~1 s), but also a much slower component, with <span class="math notranslate nohighlight">\(T_1\)</span> on the order of 10 s.</p>
@@ -601,7 +601,7 @@
 
 <span class="c1"># Calculate a weighted histogram</span>
 <span class="n">R1_static</span><span class="p">,</span><span class="n">A_static</span><span class="o">=</span><span class="n">rho</span><span class="o">.</span><span class="n">extract_decay_rates</span><span class="p">(</span><span class="n">U</span><span class="p">,</span><span class="n">mode</span><span class="o">=</span><span class="s1">&#39;wt_rates&#39;</span><span class="p">)</span>
-<span class="n">bins</span><span class="p">,</span><span class="n">_</span><span class="o">=</span><span class="n">histogram</span><span class="p">(</span><span class="n">R1_static</span><span class="p">,</span><span class="n">A_static</span><span class="p">)</span>
+<span class="n">bins</span><span class="p">,</span><span class="n">ax</span><span class="o">=</span><span class="n">histogram</span><span class="p">(</span><span class="n">R1_static</span><span class="p">,</span><span class="n">A_static</span><span class="p">)</span>
 
 <span class="n">R1_avg_static</span><span class="o">=</span><span class="p">(</span><span class="n">R1_static</span><span class="o">*</span><span class="n">A_static</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="o">/</span><span class="n">A_static</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
 
@@ -611,7 +611,7 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/5d507e9cb94dc9deff93f3145e3635ec6112f4b10793c8074407c3791ce4dbdb.png" src="../_images/5d507e9cb94dc9deff93f3145e3635ec6112f4b10793c8074407c3791ce4dbdb.png" />
+<img alt="../_images/9ae903c3574a74d301ce2ef491f6ee7eb8759a1df7c8ceda4e1be51d92c0e74f.png" src="../_images/9ae903c3574a74d301ce2ef491f6ee7eb8759a1df7c8ceda4e1be51d92c0e74f.png" />
 </div>
 </div>
 <p>We see that an extremely broad range of <span class="math notranslate nohighlight">\(R_1\)</span> rate constants are obtained, covering several orders of magnitude. These correspond to both different orientations in the powder average, and also different rate constants depending if the dipolar and CSA relaxation are constructive or destructive (see <a class="reference internal" href="../Chapter2/Ch2_TROSY.html"><span class="std std-doc">Trosy Effects</span></a>).</p>

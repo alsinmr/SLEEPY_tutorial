@@ -618,7 +618,7 @@ Constructed from the following Liouvillian:
 		array([[-50000.,  50000.],
 		       [ 50000., -50000.]])
 	
-&lt;SLEEPY.Propagator.Propagator object at 0x7fe052428190&gt;
+&lt;SLEEPY.Propagator.Propagator object at 0x7faaf8987828&gt;
 </pre></div>
 </div>
 </div>
@@ -631,7 +631,7 @@ Constructed from the following Liouvillian:
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/Users/albertsmith/Documents/GitHub.nosync/SLEEPY/Propagator.py:258: UserWarning: 
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/Users/albertsmith/Documents/GitHub/SLEEPY/SLEEPY/Propagator.py:258: UserWarning: 
 First propagator ends at 5.555555555555556e-06 but second propagator starts at 0.0
   warnings.warn(f&#39;\nFirst propagator ends at {U.tf%self.taur} but second propagator starts at {self.t0%U.taur}&#39;)
 </pre></div>
@@ -646,7 +646,7 @@ First propagator ends at 5.555555555555556e-06 but second propagator starts at 0
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/245f3f698cfde317086794c3676926461d32aef0a0b63cb13cec9c237366ce6f.png" src="../_images/245f3f698cfde317086794c3676926461d32aef0a0b63cb13cec9c237366ce6f.png" />
+<img alt="../_images/b7a8af99db630c74b60537beac09561752ada9f77967654a7c61661ee21c2496.png" src="../_images/b7a8af99db630c74b60537beac09561752ada9f77967654a7c61661ee21c2496.png" />
 </div>
 </div>
 <section id="special-propagators">
@@ -660,7 +660,7 @@ First propagator ends at 5.555555555555556e-06 but second propagator starts at 0
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/7c9c11b16af8365b38d098ca2ab3bf6b6804021acae313974ca848d67de2c8cb.png" src="../_images/7c9c11b16af8365b38d098ca2ab3bf6b6804021acae313974ca848d67de2c8cb.png" />
+<img alt="../_images/cc7ff3d1a1aa5957343a2c32feeb982784392a976c6023d729ffb7b65e0ef429.png" src="../_images/cc7ff3d1a1aa5957343a2c32feeb982784392a976c6023d729ffb7b65e0ef429.png" />
 </div>
 </div>
 <p>A <span class="math notranslate nohighlight">\(\delta\)</span>-pulse propagator needs to be provided with a channel (‘13C’,’1H’, etc.) or a spin-index (0,1,2). The spin-index will apply the pulse just to one spin, even if there are other spins of the same nucleus type. While this is unphysical, it can be useful for creating selective pulses without requiring a full simulation of a complex pulse shape.</p>
@@ -673,7 +673,7 @@ First propagator ends at 5.555555555555556e-06 but second propagator starts at 0
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/8af15597ddcf4c2824027f69bd4f1dee31acd128f079485bb4dceb08a64629ad.png" src="../_images/8af15597ddcf4c2824027f69bd4f1dee31acd128f079485bb4dceb08a64629ad.png" />
+<img alt="../_images/7f991a6d80a4999b01a7b0aad3c9f662e17fe2108b5bc2c21d81c2378e913db8.png" src="../_images/7f991a6d80a4999b01a7b0aad3c9f662e17fe2108b5bc2c21d81c2378e913db8.png" />
 </div>
 </div>
 </section>
@@ -700,7 +700,7 @@ First propagator ends at 5.555555555555556e-06 but second propagator starts at 0
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/8245223ca444560be46a7c5f040a9b50c2929aa1ed8f391a156da0e181e45703.png" src="../_images/8245223ca444560be46a7c5f040a9b50c2929aa1ed8f391a156da0e181e45703.png" />
+<img alt="../_images/68e6f9878a90e5fb29cd3c95fda7e7da187c9bb5ff0a842c92088e22379234df.png" src="../_images/68e6f9878a90e5fb29cd3c95fda7e7da187c9bb5ff0a842c92088e22379234df.png" />
 </div>
 </div>
 <p>Alternatively, we may use pulses. We may overwrite the existing channels, or just create a new sequence. Here we overwrite the <span class="math notranslate nohighlight">\(^{13}\)</span>C channel by calling it without any arguments (the default for v1 is 0). Note that the <code class="docutils literal notranslate"><span class="pre">seq.add_channel(...)</span></code> function returns the sequence, so we can string together multiple calls to <code class="docutils literal notranslate"><span class="pre">seq</span></code>.</p>
@@ -714,7 +714,7 @@ First propagator ends at 5.555555555555556e-06 but second propagator starts at 0
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/dea302728201fea47542fc33e6ed383b13e5dd4d7d9c76468527e00fcb6294a2.png" src="../_images/dea302728201fea47542fc33e6ed383b13e5dd4d7d9c76468527e00fcb6294a2.png" />
+<img alt="../_images/39f62bc9d86fd7fd4e04d09ebe037b6bf5deec27eafa9da2d1c3bdb8a32d0e80.png" src="../_images/39f62bc9d86fd7fd4e04d09ebe037b6bf5deec27eafa9da2d1c3bdb8a32d0e80.png" />
 </div>
 </div>
 <p>This setup lets us easily create shaped pulses by just providing a time axis and a time-dependent amplitude. Note that for complex shapes, it is computationally advantageous to synchronize the time axis for the sequence with <code class="docutils literal notranslate"><span class="pre">n_gamma</span></code> for the rotor period, i.e. if <code class="docutils literal notranslate"><span class="pre">n_gamma</span></code> is 100, and we define a sequence over one rotor period, we would take 100 uniform time steps (i.e. <code class="docutils literal notranslate"><span class="pre">t=np.linspace(0,L.taur,ex.n_gamma)</span></code>).</p>
@@ -730,7 +730,7 @@ First propagator ends at 5.555555555555556e-06 but second propagator starts at 0
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/d9a8653baa0c37a1ed8b7da66a4e0b4ff692923cd2c20442e0154e5aaa8e9d07.png" src="../_images/d9a8653baa0c37a1ed8b7da66a4e0b4ff692923cd2c20442e0154e5aaa8e9d07.png" />
+<img alt="../_images/d13c91e935ac9d9191b9719304397ff2ffe92260771cdf71d9796b7f5de1185c.png" src="../_images/d13c91e935ac9d9191b9719304397ff2ffe92260771cdf71d9796b7f5de1185c.png" />
 </div>
 </div>
 <p>Now, if we generate another 5 μs sequence, we obtain a very different propagator, because both <code class="docutils literal notranslate"><span class="pre">t0</span></code> and <code class="docutils literal notranslate"><span class="pre">t0_seq</span></code> have been set forward by 5 μs. Now the propagator contains a <span class="math notranslate nohighlight">\(\pi\)</span>-pulse on <span class="math notranslate nohighlight">\(^1\)</span>H. We can check <code class="docutils literal notranslate"><span class="pre">t0_seq</span></code> before and after generating <code class="docutils literal notranslate"><span class="pre">U1</span></code> to see how this works.</p>
@@ -748,7 +748,7 @@ First propagator ends at 5.555555555555556e-06 but second propagator starts at 0
 After: 10.00 microseconds
 </pre></div>
 </div>
-<img alt="../_images/f89ee42f32f760008997d750fd731649522aa830665d4c17b0c6faf791686056.png" src="../_images/f89ee42f32f760008997d750fd731649522aa830665d4c17b0c6faf791686056.png" />
+<img alt="../_images/e8b8a6631dd124195f6ecbe9da279355a07f8e35fc500ec7f608f5dacf1746eb.png" src="../_images/e8b8a6631dd124195f6ecbe9da279355a07f8e35fc500ec7f608f5dacf1746eb.png" />
 </div>
 </div>
 <p>We complete the sequence, and do one more check of <code class="docutils literal notranslate"><span class="pre">t0_seq</span></code>, which should now be set back to 0. We also check that multiplying all the propagators together works, since they were generated one after another to cover a rotor cycle.</p>
@@ -772,7 +772,7 @@ After: 10.00 microseconds
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Propagator with length of 16.667 microseconds (t0=15.000,tf=31.667)
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Propagator with length of 16.667 microseconds (t0=0.000,tf=16.667)
 Constructed from the following Liouvillian:
 	Liouvillian under the following conditions:
 		2-spin system (1H,13C)
@@ -800,7 +800,7 @@ Constructed from the following Liouvillian:
 		array([[-50000.,  50000.],
 		       [ 50000., -50000.]])
 	
-&lt;SLEEPY.Propagator.Propagator object at 0x7fe040901ee0&gt;
+&lt;SLEEPY.Propagator.Propagator object at 0x7fab086f4e80&gt;
 </pre></div>
 </div>
 </div>

@@ -865,12 +865,12 @@
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">rho200</span><span class="o">.</span><span class="n">downmix</span><span class="p">()</span>
 <span class="n">ax</span><span class="o">=</span><span class="n">rho200</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">FT</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span> <span class="c1">#Plot the results into the same axis</span>
-<span class="n">_</span><span class="o">=</span><span class="n">ax</span><span class="o">.</span><span class="n">set_xlim</span><span class="p">([</span><span class="mi">1500</span><span class="p">,</span><span class="o">-</span><span class="mi">1500</span><span class="p">])</span>
+<span class="n">_</span><span class="o">=</span><span class="n">ax</span><span class="o">.</span><span class="n">set_xlim</span><span class="p">([</span><span class="mf">1.5</span><span class="p">,</span><span class="o">-</span><span class="mf">1.5</span><span class="p">])</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/680e43828e86f4e126e92b4b168b53409360b5a3c61002d6ad61eb179012c794.png" src="../_images/680e43828e86f4e126e92b4b168b53409360b5a3c61002d6ad61eb179012c794.png" />
+<img alt="../_images/3931cc5facd6affbf7a8d5a8fef63fd60d1a6a8dce2f704ebce30925bdce4703.png" src="../_images/3931cc5facd6affbf7a8d5a8fef63fd60d1a6a8dce2f704ebce30925bdce4703.png" />
 </div>
 </div>
 <p>A complex lineshape is obtained, resulting from incomplete averaging of the rank-4 PCS tensor. As with isotropic hopping, decreasing the temperature will increasing the magnitude of the PCS, as shown below.</p>
@@ -903,12 +903,15 @@
 <span class="n">ax</span><span class="o">=</span><span class="n">rho200</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">FT</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span> <span class="c1">#Plot the results into the same axis</span>
 <span class="n">rho100</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">FT</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">)</span>
 <span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">((</span><span class="s1">&#39;200 K&#39;</span><span class="p">,</span><span class="s1">&#39;100 K&#39;</span><span class="p">))</span>
-<span class="n">_</span><span class="o">=</span><span class="n">ax</span><span class="o">.</span><span class="n">set_xlim</span><span class="p">([</span><span class="mi">1500</span><span class="p">,</span><span class="o">-</span><span class="mi">1500</span><span class="p">])</span>
+<span class="n">_</span><span class="o">=</span><span class="n">ax</span><span class="o">.</span><span class="n">set_xlim</span><span class="p">([</span><span class="mf">1.5</span><span class="p">,</span><span class="o">-</span><span class="mf">1.5</span><span class="p">])</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/3d44c8537d6516d7b39a700f7251b3d88aa58370811f2da4160bc0029a4473be.png" src="../_images/3d44c8537d6516d7b39a700f7251b3d88aa58370811f2da4160bc0029a4473be.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Already downmixed
+</pre></div>
+</div>
+<img alt="../_images/1c54d9d09a85dac3802cc3bf3d1681a9f348ffb22b7924ad1d36f13a27667fa8.png" src="../_images/1c54d9d09a85dac3802cc3bf3d1681a9f348ffb22b7924ad1d36f13a27667fa8.png" />
 </div>
 </div>
 <p>The same tensor shape is obtained, but it is now twice as broad (it also has more signal from the lower temperature).</p>
@@ -943,12 +946,12 @@
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">rho</span><span class="o">.</span><span class="n">downmix</span><span class="p">()</span>
 <span class="n">ax</span><span class="o">=</span><span class="n">rho</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">FT</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span> <span class="c1">#Plot the results into the same axis</span>
-<span class="n">_</span><span class="o">=</span><span class="n">ax</span><span class="o">.</span><span class="n">set_xlim</span><span class="p">([</span><span class="mi">1500</span><span class="p">,</span><span class="o">-</span><span class="mi">1500</span><span class="p">])</span>
+<span class="n">_</span><span class="o">=</span><span class="n">ax</span><span class="o">.</span><span class="n">set_xlim</span><span class="p">([</span><span class="mf">1.5</span><span class="p">,</span><span class="o">-</span><span class="mf">1.5</span><span class="p">])</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/66a02bbca8f2743e2dd89ee638cb0b6e2beaeaa8ecfdbacf629dc4288c13ec93.png" src="../_images/66a02bbca8f2743e2dd89ee638cb0b6e2beaeaa8ecfdbacf629dc4288c13ec93.png" />
+<img alt="../_images/01b8e4ab6502caff2907d457327adbdde6e5d3a4e4ab325e17865763923e3e73.png" src="../_images/01b8e4ab6502caff2907d457327adbdde6e5d3a4e4ab325e17865763923e3e73.png" />
 </div>
 </div>
 </section>
