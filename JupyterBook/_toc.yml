@@ -18,6 +18,7 @@ parts:
     - file: Chapter1/Ch1_Liouvillian
     - file: Chapter1/Ch1_Propagation
     - file: Chapter1/Ch1_rho  
+    - file: Chapter1/Ch1_Tools
   - file: Ch2_SolutionNMR
     sections:
     - file: Chapter2/Ch2_exchange1D

@@ -34,7 +34,7 @@
     <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=a3416100" />
     <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
   
@@ -184,6 +184,8 @@
 <li class="toctree-l2"><a class="reference internal" href="../Chapter1/Ch1_Liouvillian.html"><font color="#0093AF">Hamiltonians and Liouvillians</font></a></li>
 <li class="toctree-l2"><a class="reference internal" href="../Chapter1/Ch1_Propagation.html"><font color="#0093AF">Propagators and Sequences</font></a></li>
 <li class="toctree-l2"><a class="reference internal" href="../Chapter1/Ch1_rho.html"><font color="#0093AF">The Density Matrix</font></a></li>
+
+<li class="toctree-l2"><a class="reference internal" href="../Chapter1/Ch1_Tools.html"><font color="#0093AF">Defaults, Constants, and Tools</font></a></li>
 
 </ul>
 </details></li>
@@ -587,7 +589,7 @@
     <span class="n">ax</span><span class="o">.</span><span class="n">bar</span><span class="p">(</span><span class="n">bins</span><span class="p">,</span><span class="n">h</span><span class="p">,</span><span class="n">width</span><span class="o">=</span><span class="p">(</span><span class="n">bins</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">-</span><span class="n">bins</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span><span class="o">*</span><span class="mf">.9</span><span class="p">,</span><span class="n">alpha</span><span class="o">=</span><span class="n">alpha</span><span class="p">,</span><span class="n">color</span><span class="o">=</span><span class="n">color</span><span class="p">)</span>
     <span class="n">ax</span><span class="o">.</span><span class="n">set_xticks</span><span class="p">(</span><span class="n">bins</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span><span class="o">*</span><span class="mi">5</span><span class="p">])</span>
     <span class="n">ax</span><span class="o">.</span><span class="n">set_xticklabels</span><span class="p">([</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="mi">10</span><span class="o">**</span><span class="n">bins</span><span class="p">[</span><span class="n">k</span><span class="p">:</span><span class="n">k</span><span class="o">+</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span><span class="o">*</span><span class="mf">1e3</span><span class="si">:</span><span class="s1">6.2f</span><span class="si">}</span><span class="s1">&#39;</span> <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">25</span><span class="p">,</span><span class="mi">5</span><span class="p">)])</span>
-    <span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;$R_1$ / s$^{-1}$&#39;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;$R_1*1e3$ / s$^{-1}$&#39;</span><span class="p">)</span>
     <span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Intensity&#39;</span><span class="p">)</span>
     
     <span class="k">return</span> <span class="n">bins</span><span class="p">,</span><span class="n">ax</span>
@@ -611,7 +613,7 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/9ae903c3574a74d301ce2ef491f6ee7eb8759a1df7c8ceda4e1be51d92c0e74f.png" src="../_images/9ae903c3574a74d301ce2ef491f6ee7eb8759a1df7c8ceda4e1be51d92c0e74f.png" />
+<img alt="../_images/b2842e359e828fe392f04558138f956c83ade673442e7ba8ac712581e00198d6.png" src="../_images/b2842e359e828fe392f04558138f956c83ade673442e7ba8ac712581e00198d6.png" />
 </div>
 </div>
 <p>We see that an extremely broad range of <span class="math notranslate nohighlight">\(R_1\)</span> rate constants are obtained, covering several orders of magnitude. These correspond to both different orientations in the powder average, and also different rate constants depending if the dipolar and CSA relaxation are constructive or destructive (see <a class="reference internal" href="../Chapter2/Ch2_TROSY.html"><span class="std std-doc">Trosy Effects</span></a>).</p>
@@ -645,7 +647,7 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/dbf37d7c13a9b088bedcd98e29171d0bf72dddc01c7a043394cff7c2d74749b1.png" src="../_images/dbf37d7c13a9b088bedcd98e29171d0bf72dddc01c7a043394cff7c2d74749b1.png" />
+<img alt="../_images/f79b1d2b5ec168040bf2f61a5e2e57c46c1f1eba373925bd860a8b13d2140559.png" src="../_images/f79b1d2b5ec168040bf2f61a5e2e57c46c1f1eba373925bd860a8b13d2140559.png" />
 </div>
 </div>
 <p>The resulting curve appears much less multiexponential than obtained from static conditions, although indeed it is still multiexponential.</p>
@@ -800,7 +802,7 @@ Completed
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/1b85649bdf97ce6d5bd5d2d7ab13c8db6d7effee531177434f55bf83f068dc79.png" src="../_images/1b85649bdf97ce6d5bd5d2d7ab13c8db6d7effee531177434f55bf83f068dc79.png" />
+<img alt="../_images/75f9aac8bf7cef6569ec52fe93e1903531b6503928a80e32c49a2137aa74cfb6.png" src="../_images/75f9aac8bf7cef6569ec52fe93e1903531b6503928a80e32c49a2137aa74cfb6.png" />
 </div>
 </div>
 <p>The distribution is narrowed, and negative components are eliminated. We plot the buildup, and compare the resulting curve to a monoexpential curve with the averaged relaxation rate constant.</p>

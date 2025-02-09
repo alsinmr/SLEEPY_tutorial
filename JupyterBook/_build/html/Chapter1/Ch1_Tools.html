@@ -1,0 +1,1057 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Defaults, Constants, and Tools &#8212; SLEEPY Tutorial</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=a3416100" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- So that users can add custom icons -->
+  <script src="../_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
+
+    <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../_static/doctools.js?v=888ff710"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'Chapter1/Ch1_Tools';</script>
+    <link rel="icon" href="../_static/favicon.png"/>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Solution NMR" href="../Ch2_SolutionNMR.html" />
+    <link rel="prev" title="The Density Matrix" href="Ch1_rho.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/logo_dark.png" class="logo__image only-light" alt="SLEEPY Tutorial - Home"/>
+    <img src="../_static/logo_dark.png" class="logo__image only-dark pst-js-only" alt="SLEEPY Tutorial - Home"/>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../intro.html">
+                    Relax with SLEEPY!
+                </a>
+            </li>
+        </ul>
+        <ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../GettingStarted.html"><font color="#B00000">Getting Started</font></a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Tutorial</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="../Ch1_SLEEPY_basics.html"><font color="#B00000">SLEEPY basics</font></a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="Ch1_basics.html"><font color="#0093AF">A Quick Start</font></a></li>
+<li class="toctree-l2"><a class="reference internal" href="Ch1_ShortExamples.html"><font color="#0093AF">Short Examples</font></a></li>
+<li class="toctree-l2"><a class="reference internal" href="Ch1_Objects.html"><font color="#0093AF">Objects</font></a></li>
+<li class="toctree-l2"><a class="reference internal" href="Ch1_expsys.html"><font color="#0093AF">Experimental Settings and Spin-System Definition</font></a></li>
+<li class="toctree-l2"><a class="reference internal" href="Ch1_Liouvillian.html"><font color="#0093AF">Hamiltonians and Liouvillians</font></a></li>
+<li class="toctree-l2"><a class="reference internal" href="Ch1_Propagation.html"><font color="#0093AF">Propagators and Sequences</font></a></li>
+<li class="toctree-l2"><a class="reference internal" href="Ch1_rho.html"><font color="#0093AF">The Density Matrix</font></a></li>
+
+<li class="toctree-l2 current active"><a class="current reference internal" href="#"><font color="#0093AF">Defaults, Constants, and Tools</font></a></li>
+
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../Ch2_SolutionNMR.html"><font color="#B00000">Solution NMR</font></a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../Chapter2/Ch2_exchange1D.html"><font color="#0093AF">Exchange in 1D spectra</font></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Chapter2/Ch2_EXSY.html"><font color="#0093AF">Exchange Spectroscopy (EXSY)</font></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Chapter2/Ch2_BMRD.html"><font color="#0093AF">Bloch-McConnell Relaxation Dispersion</font></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Chapter2/Ch2_CEST.html"><font color="#0093AF">Chemical Exchange Saturation Transfer (CEST)</font></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Chapter2/Ch2_T1_NOE.html"><font color="#0093AF"><span class="math notranslate nohighlight">\(T_1\)</span> and Nuclear Overhauser Effect</font></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Chapter2/Ch2_T1_limits.html"><font color="#0093AF"><span class="math notranslate nohighlight">\(T_1\)</span> limits</font></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Chapter2/Ch2_TROSY.html"><font color="#0093AF">TROSY effects</font></a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../Ch3_DynamicsSolids.html"><font color="#B00000">Solid-state NMR</font></a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../Chapter3/Ch3_R1p.html"><font color="#0093AF">R<span class="math notranslate nohighlight">\(_{1ρ}\)</span> Relaxation</font></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Chapter3/Ch3_REDOR.html"><font color="#0093AF">REDOR</font></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Chapter3/Ch3_DIPSHIFT.html"><font color="#0093AF">DIPSHIFT</font></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Chapter3/Ch3_RECRR.html"><font color="#0093AF">Relaxation in complex sequences: RECRR</font></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Chapter3/Ch3_T1_NOE.html"><font color="#0093AF"><span class="math notranslate nohighlight">\(T_1\)</span> and Nuclear Overhauser Effect</font></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Chapter3/Ch3_DARR.html"><font color="#0093AF">Understanding DARR with simulation</font></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Chapter3/Ch3_Quad.html"><font color="#0093AF">Quadrupolar phenomena</font></a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../Ch4_DNP.html"><font color="#B00000">Dynamic Nuclear Polarization</font></a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../Chapter4/Ch4_SolidEffect.html"><font color="#0093AF">Solid Effect</font></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Chapter4/Ch4_CrossEffect.html"><font color="#0093AF">Cross Effect</font></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Chapter4/Ch4_OverhauserEffect.html"><font color="#0093AF">Overhauser Effect</font></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Chapter4/Ch4_NOVEL.html"><font color="#0093AF">Pulsed-DNP: NOVEL</font></a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../Ch5_ParamagneticEffects.html"><font color="#B00000">Paramagnetic Effects</font></a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../Chapter5/Ch5_PRE.html"><font color="#0093AF">Paramagnetic Relaxation Enhancement</font></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Chapter5/Ch5_ContactShift.html"><font color="#0093AF">Contact shift</font></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Chapter5/Ch5_PseudoContactShift.html"><font color="#0093AF">Pseudo-Contact Shift</font></a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../Chapter6/Ch6_RelaxationOptions.html"><font color="#B00000">Relaxation Options</font></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ColabTemplate.html"><font color="#B00000"> SLEEPY Colab Template</font></a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">User library</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../SharingSleepy.html"><font color="#B00000">Sharing SLEEPY Simulations</font></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../UserLibrary.html"><font color="#B00000">User contributions</font></a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://mybinder.org/v2/gh/alsinmr/SLEEPY_tutorial/master?urlpath=lab/tree/JupyterBook/Chapter1/Ch1_Tools.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch on Binder"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img alt="Binder logo" src="../_static/images/logo_binder.svg">
+  </span>
+<span class="btn__text-container">Binder</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://colab.research.google.com/github/alsinmr/SLEEPY_tutorial/blob/master/JupyterBook/Chapter1/Ch1_Tools.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch on Colab"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img alt="Colab logo" src="../_static/images/logo_colab.png">
+  </span>
+<span class="btn__text-container">Colab</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/alsinmr/SLEEPY_tutorial" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/alsinmr/SLEEPY_tutorial/issues/new?title=Issue%20on%20page%20%2FChapter1/Ch1_Tools.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/Chapter1/Ch1_Tools.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button>
+
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1><font  color = "#0093AF">Defaults, Constants, and Tools</font></h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#"><font color="#0093AF">Defaults, Constants, and Tools</font></a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#setup">Setup</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#defaults">Defaults</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#constants">Constants</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tools">Tools</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#nucinfo">NucInfo</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#dipole-coupling">dipole_coupling</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exchange-matrices">Exchange matrices</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#back-calculating-the-correlation-function">Back-calculating the correlation function</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exchange-setup-tools">Exchange setup tools</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#two-dimensional-acquisition">Two-dimensional acquisition</a></li>
+</ul>
+</li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="defaults-constants-and-tools">
+<h1><font  color = "#0093AF">Defaults, Constants, and Tools</font><a class="headerlink" href="#defaults-constants-and-tools" title="Link to this heading">#</a></h1>
+<p><a href="https://githubtocolab.com/alsinmr/SLEEPY_tutorial/blob/main/ColabNotebooks/Chapter1/Ch1_Tools.ipynb" target="_blank"><img src="https://colab.research.google.com/assets/colab-badge.svg"></a></p>
+<p>SLEEPY relies on a few default settings, numerical constants, and includes a toolbox. These are all found in the main SLEEPY module:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sl</span><span class="o">.</span><span class="n">Defaults</span>     <span class="c1">#Python dictionary containing defaults</span>
+<span class="n">sl</span><span class="o">.</span><span class="n">Constants</span>    <span class="c1">#Python dictionary containing constants</span>
+<span class="n">sl</span><span class="o">.</span><span class="n">Tools</span>        <span class="c1">#Python sub-module containing tools</span>
+</pre></div>
+</div>
+<p>We summarize the contents of these here.</p>
+<section id="setup">
+<h2>Setup<a class="headerlink" href="#setup" title="Link to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">SLEEPY</span> <span class="k">as</span> <span class="nn">sl</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="defaults">
+<h2>Defaults<a class="headerlink" href="#defaults" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">rtype</span></code>,<code class="docutils literal notranslate"><span class="pre">ctype</span></code>: Default numpy data types for real and complex data</p>
+<ul>
+<li><p>We do not recommend changing these. Numpy does not support higher precision data types for all calculations, and lower precision data types do not result in significant speed up in calculations (although should reduce memory usage).</p></li>
+</ul>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">parallel</span></code>,<code class="docutils literal notranslate"><span class="pre">ncores</span></code>: Flag to activate parallel processing over the powder average and the number of cores to use</p>
+<ul>
+<li><p>Parallel processing is not always beneficial, because the implemented linear algebra libraries in the BLAS and LAPACK libraries are already fairly optimized for parallel calculations, whereas Python’s parallelism introduces communication overhead (this can be system-dependent). Use ncores where SLEEPY should not use all cores available.</p></li>
+</ul>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">verbose</span></code>: Activates text outputs from SLEEPY.</p>
+<ul>
+<li><p>Especially where one loops over many simulations, the text outputs can get annoying and can be turned off here.</p></li>
+</ul>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">zoom</span></code>: Create plots with sliders for zooming in on the various axes.</p>
+<ul>
+<li><p>By default, off unless running in Google Colab or MyBinder, but can be turned on for any Jupyter-like Notebook. Note that in Colab, this setting will restrict post-editing of the figure axis. For locally-run Jupyter Notebooks, a nice alternative to <code class="docutils literal notranslate"><span class="pre">zoom</span></code> is to run <code class="docutils literal notranslate"><span class="pre">%matplotlib</span> <span class="pre">notebook</span></code> in a cell, which activates zoomable plots with the cursor (no sliders). However, for many other notebook implementations, <code class="docutils literal notranslate"><span class="pre">%matplotlib</span> <span class="pre">notebook</span></code> will break matplotlib outputs (for example, in Binder or Colab).</p></li>
+</ul>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Colab</span></code>,<code class="docutils literal notranslate"><span class="pre">Binder</span></code>: Each of these flags is set to True if running in Colab or Binder, respectively.</p>
+<ul>
+<li><p>These will changing ‘zoom’ behavior and the dark-mode coloring. Note that when Colab is in dark mode when SLEEPY is imported, SLEEPY will also switch into to dark mode. This can be turned on and off with <code class="docutils literal notranslate"><span class="pre">sl.set_dark(True/False)</span></code></p></li>
+</ul>
+</li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sl</span><span class="o">.</span><span class="n">Defaults</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;rtype&#39;: numpy.float64,
+ &#39;ctype&#39;: numpy.complex128,
+ &#39;parallel&#39;: False,
+ &#39;cache&#39;: True,
+ &#39;ncores&#39;: None,
+ &#39;verbose&#39;: True,
+ &#39;zoom&#39;: False,
+ &#39;Colab&#39;: False,
+ &#39;Binder&#39;: False}
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="constants">
+<h1>Constants<a class="headerlink" href="#constants" title="Link to this heading">#</a></h1>
+<p>SLEEPY loads a few physical constants for calculations.</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(h\)</span> = <span class="math notranslate nohighlight">\(6.62607015\times10^{-34}\)</span> J<span class="math notranslate nohighlight">\(\cdot\)</span>s: Planck constant</p></li>
+<li><p><span class="math notranslate nohighlight">\(k_B\)</span> = <span class="math notranslate nohighlight">\(1.380649\times10^{-23}\)</span> J/K: Boltzmann constant</p></li>
+<li><p><span class="math notranslate nohighlight">\(\mu_B\)</span> = <span class="math notranslate nohighlight">\(-13996244936.072704\)</span> Hz/T: Bohr magneton</p></li>
+<li><p><span class="math notranslate nohighlight">\(g_e\)</span> = <span class="math notranslate nohighlight">\(2.00231930436092\)</span> : Free electron g-factor (unitless)</p></li>
+<li><p><span class="math notranslate nohighlight">\(\mu_n\)</span> = <span class="math notranslate nohighlight">\(7622593.158495312\)</span> Hz/T: Nuclear magneton</p></li>
+<li><p><span class="math notranslate nohighlight">\(\mu_0\)</span> = <span class="math notranslate nohighlight">\(1.256637\times10^{-6}\)</span> T<span class="math notranslate nohighlight">\(^2\cdot\)</span>m<span class="math notranslate nohighlight">\(^3\)</span>/J: Vacuum Permeability</p></li>
+</ul>
+<p>The Planck constant (<span class="math notranslate nohighlight">\(h\)</span>) is used to calculate energy from frequencies, and the Boltzmann constant (<span class="math notranslate nohighlight">\(k_B)\)</span> is used with these energies to calculate equilibrium density matrices. The Bohr magneton (<span class="math notranslate nohighlight">\(\mu_B\)</span>) is used with the free electron g-factor (<span class="math notranslate nohighlight">\(g_e\)</span>) to calculate the electron Gyromagnetic ratio. This is in turn used as reference for the electron carrier frequency. The nuclear magneton (<span class="math notranslate nohighlight">\(\mu_n\)</span>) is used for calculating the nuclear gyromagnetic ratios from their g-factors. <span class="math notranslate nohighlight">\(\mu_0\)</span> is used for calculating dipole couplings.</p>
+<p>These constants can be user-adjusted. Note that adjusting <span class="math notranslate nohighlight">\(\mu_n\)</span> after loading SLEEPY will <em>not</em> affect the nuclear gyromagnetic ratios because these are calculated when SLEEPY loads. However, adjusting <span class="math notranslate nohighlight">\(g_e\)</span> will change the electron gyromagnetic ratio and in turn, change the electron carrier frequency (resulting in shifting the middle of electron spectra, and re-defining offsets for applied microwave fields). Adjustments to <span class="math notranslate nohighlight">\(h\)</span> and <span class="math notranslate nohighlight">\(k_B\)</span> will affect thermal equilibrium calculations, and adjusting <span class="math notranslate nohighlight">\(\mu_0\)</span> will change dipole coupling calculations.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sl</span><span class="o">.</span><span class="n">Constants</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;h&#39;: 6.62607015e-34,
+ &#39;kB&#39;: 1.380649e-23,
+ &#39;mub&#39;: -13996244936.072704,
+ &#39;ge&#39;: 2.0023193043609235,
+ &#39;mun&#39;: 7622593.158495312,
+ &#39;mu0&#39;: 1.256637e-06}
+</pre></div>
+</div>
+</div>
+</div>
+<section id="tools">
+<h2>Tools<a class="headerlink" href="#tools" title="Link to this heading">#</a></h2>
+<p>SLEEPY has a variety of tools for help setting up simulations or obtaining general useful information. These are discussed here.</p>
+<section id="nucinfo">
+<h3>NucInfo<a class="headerlink" href="#nucinfo" title="Link to this heading">#</a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">sl.Tools.NucInfo</span></code> provides information about nuclei. It may be indexed (<code class="docutils literal notranslate"><span class="pre">NucInfo[...]</span></code>) with the name of a nucleus, or called as a function. Using the chemical symbol without mass number will return all isotopes of that element. Calling by default returns the gyromagnetic ratio in Hz/T. One may also set <code class="docutils literal notranslate"><span class="pre">info=...</span></code> and request ‘gyro’, ‘mass’, ‘spin’, ‘abund’, or ‘all’, which returns a dictionary with all values. For calls (<code class="docutils literal notranslate"><span class="pre">NucInfo(...)</span></code>), if only the chemical symbol is provided (‘H’, ‘N’,’U’, etc.), then it will try to guess the desired nucleus (priority: spin 1/2, non-zero spin, abundance, so ‘H’-&gt;’1H’, ‘C’-&gt;’13C’, ‘U’-&gt;’235U’).</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sl</span><span class="o">.</span><span class="n">Tools</span><span class="o">.</span><span class="n">NucInfo</span><span class="p">(</span><span class="s1">&#39;H&#39;</span><span class="p">)</span>  <span class="c1">#Returns 1H gyroratio </span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>42577478.05321166
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sl</span><span class="o">.</span><span class="n">Tools</span><span class="o">.</span><span class="n">NucInfo</span><span class="p">(</span><span class="s1">&#39;13C&#39;</span><span class="p">,</span><span class="n">info</span><span class="o">=</span><span class="s1">&#39;all&#39;</span><span class="p">)</span>  <span class="c1">#Returns all info about 13C</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;Nuc&#39;: &#39;C&#39;,
+ &#39;mass&#39;: 13.0,
+ &#39;spin&#39;: 0.5,
+ &#39;gyro&#39;: 10708398.762252755,
+ &#39;abundance&#39;: 0.010700000000000001}
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sl</span><span class="o">.</span><span class="n">Tools</span><span class="o">.</span><span class="n">NucInfo</span><span class="p">[</span><span class="s1">&#39;15N&#39;</span><span class="p">]</span>  <span class="c1">#Returns all info about 15N (exact match required)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>                     0
+Nuc                  N
+mass              15.0
+spin               0.5
+gyro        -4317266.6
+abundance      0.00368
+
+[1 experiments with 5 parameters]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sl</span><span class="o">.</span><span class="n">Tools</span><span class="o">.</span><span class="n">NucInfo</span><span class="p">[</span><span class="s1">&#39;O&#39;</span><span class="p">]</span> <span class="c1">#Returns all types of Oxygen</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>                     0           1           2
+Nuc                  O           O           O
+mass              16.0        17.0        18.0
+spin               0.0         2.5         0.0
+gyro               0.0  -5774236.2         0.0
+abundance   0.99757000  0.00037999  0.00204999
+
+[3 experiments with 5 parameters]
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="dipole-coupling">
+<h3>dipole_coupling<a class="headerlink" href="#dipole-coupling" title="Link to this heading">#</a></h3>
+<p>Calculates the dipole coupling between two nuclei (or electron). Input is the distance between the nuclei in Angstroms and the names of the two nuclei. Output is the <em>anisotropy</em> (<code class="docutils literal notranslate"><span class="pre">delta</span></code>) of the dipole coupling in Hz, which is twice as large as some other definitions of the dipole. If using this function, the output value should be assigned to <code class="docutils literal notranslate"><span class="pre">delta</span></code> when adding a dipole coupling to a system (assign <code class="docutils literal notranslate"><span class="pre">D</span></code> if using half this value for the <code class="docutils literal notranslate"><span class="pre">dipole</span></code> interaction).</p>
+<p>e.g.:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">ex</span><span class="o">.</span><span class="n">set_inter</span><span class="p">(</span><span class="s1">&#39;dipole&#39;</span><span class="p">,</span><span class="n">i0</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">i1</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">delta</span><span class="o">=</span><span class="n">sl</span><span class="o">.</span><span class="n">Tools</span><span class="o">.</span><span class="n">dipole_coupling</span><span class="p">(</span><span class="mf">.102</span><span class="p">,</span><span class="s1">&#39;15N&#39;</span><span class="p">,</span><span class="s1">&#39;1H&#39;</span><span class="p">))</span>
+</pre></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sl</span><span class="o">.</span><span class="n">Tools</span><span class="o">.</span><span class="n">dipole_coupling</span><span class="p">(</span><span class="mf">.109</span><span class="p">,</span><span class="s1">&#39;1H&#39;</span><span class="p">,</span><span class="s1">&#39;13C&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>46656.37350022942
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="exchange-matrices">
+<h3>Exchange matrices<a class="headerlink" href="#exchange-matrices" title="Link to this heading">#</a></h3>
+<p>Sleepy calculates a number of different exchange matrices. One provides a correlation time to define these matrices. This correlation time is the inverse of the non-zero eigenvalue (or inverse of the mean of the non-zero eigenvalues). This effective correlation time is the correct value to be applied, for example, for model-free calculations. For a 2-site exchange, for example, <span class="math notranslate nohighlight">\(\tau_c=1/(k_{12}+k_{21})\)</span>.</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">twoSite_kex</span></code>: Two-site exchange with correlation time and optionally populations as input.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">nSite_sym</span></code>: Returns an exchange matrix over <span class="math notranslate nohighlight">\(n\)</span>-sites, where all sites are equally populated, and all exchange rate constants are the same. Input is the number of sites and the correlation time. Note that while there are <span class="math notranslate nohighlight">\(n-1\)</span> non-zero eigenvalues to this matrix, all eigenvalues are the same.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">fourSite_sym</span></code>: Same as above, but specifically for four sites. Usually paired with tetrahedral hopping.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">tumbling</span></code>: Takes either a 3-site or 4-site symmetric hop, or a “repulsion” powder average, and calculates an exchange matrix to mimic tumbling. The rates are adjusted so that the mean non-zero eigenvalue matches the input correlation time. Also returns Euler angles (usually, not directly used by the user; rather use <code class="docutils literal notranslate"><span class="pre">sl.Tools.SetupTumbling</span></code>, see below). Number of angles is determined by an integer quality factor, <code class="docutils literal notranslate"><span class="pre">q</span></code>. Tumbling does not currently include an average around the <span class="math notranslate nohighlight">\(\gamma\)</span>-angle.</p></li>
+</ul>
+<p>[1] G. Lipari, A. Szabo. <a class="reference external" href="https://doi.org/10.1021/ja00381a010">J. Am. Chem. Soc.</a>, <strong>1982</strong>, 104, 4559-4579.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">sl</span><span class="o">.</span><span class="n">Tools</span><span class="o">.</span><span class="n">twoSite_kex</span><span class="p">(</span><span class="n">tc</span><span class="o">=</span><span class="mf">1e-3</span><span class="p">,</span><span class="n">p1</span><span class="o">=</span><span class="mf">.75</span><span class="p">))</span>  <span class="c1">#Two-site, asymmetric exchange</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[[-250.  750.]
+ [ 250. -750.]]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">sl</span><span class="o">.</span><span class="n">Tools</span><span class="o">.</span><span class="n">nSite_sym</span><span class="p">(</span><span class="n">n</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span><span class="n">tc</span><span class="o">=</span><span class="mf">1e-3</span><span class="p">))</span>    <span class="c1">#Five-site, symmetric exchange</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[[-800.  200.  200.  200.  200.]
+ [ 200. -800.  200.  200.  200.]
+ [ 200.  200. -800.  200.  200.]
+ [ 200.  200.  200. -800.  200.]
+ [ 200.  200.  200.  200. -800.]]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">kex</span><span class="p">,</span><span class="n">euler</span><span class="o">=</span><span class="n">sl</span><span class="o">.</span><span class="n">Tools</span><span class="o">.</span><span class="n">tumbling</span><span class="p">(</span><span class="n">q</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span><span class="n">tc</span><span class="o">=</span><span class="mf">1e-3</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">kex</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39; &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">k0</span><span class="si">:</span><span class="s1">6.1f</span><span class="si">}</span><span class="s1">&#39;</span> <span class="k">for</span> <span class="n">k0</span> <span class="ow">in</span> <span class="n">k</span><span class="p">]))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>-768.1  180.7    0.0  173.4  173.2  119.8    0.0    0.0    0.0  121.0
+ 180.7 -752.9    0.0    0.0    0.0  180.9   28.9  180.3    0.0  182.2
+   0.0    0.0 -753.7  181.6  180.9    0.0  180.8   28.9  181.5    0.0
+ 173.4    0.0  181.6 -769.3  120.0    0.0  121.3    0.0    0.0  173.1
+ 173.2    0.0  180.9  120.0 -768.4  173.7    0.0    0.0  120.5    0.0
+ 119.8  180.9    0.0    0.0  173.7 -768.1    0.0  120.2  173.4    0.0
+   0.0   28.9  180.8  121.3    0.0    0.0 -797.5  173.3  119.7  173.4
+   0.0  180.3   28.9    0.0    0.0  120.2  173.3 -796.5  173.6  120.2
+   0.0    0.0  181.5    0.0  120.5  173.4  119.7  173.6 -768.8    0.0
+ 121.0  182.2    0.0  173.1    0.0    0.0  173.4  120.2    0.0 -769.9
+</pre></div>
+</div>
+</div>
+</div>
+<p>Note that the eigenvalues of the above matrix are not all identical, but span a fairly small range where the amplitude is significant, making it a good approximation for tumbling. The inverse of the weighted average of the eigenvalues matches the input correlation time (use <code class="docutils literal notranslate"><span class="pre">kex2A</span></code> to verify)</p>
+</section>
+<section id="back-calculating-the-correlation-function">
+<h3>Back-calculating the correlation function<a class="headerlink" href="#back-calculating-the-correlation-function" title="Link to this heading">#</a></h3>
+<p>SLEEPY provides several tools to help obtain correlation functions from motion. For example, <code class="docutils literal notranslate"><span class="pre">kex2A</span></code> will calculate the order parameter (<code class="docutils literal notranslate"><span class="pre">S2</span></code>), populations (<code class="docutils literal notranslate"><span class="pre">peq</span></code>), correlation times(<code class="docutils literal notranslate"><span class="pre">tc</span></code>), and weights of the correlation times (<code class="docutils literal notranslate"><span class="pre">A</span></code>) resulting from a given exchange matrix and the corresponding set of euler angles. From <code class="docutils literal notranslate"><span class="pre">S2</span></code>, <code class="docutils literal notranslate"><span class="pre">tc</span></code>, and <code class="docutils literal notranslate"><span class="pre">A</span></code>, it is possible to calculate the correlation function, according to:</p>
+<div class="math notranslate nohighlight">
+\[
+\begin{equation}
+C(t)=S^2+(1-S^2)\sum_i{A_i\exp(-t/\tau_i)}
+\end{equation}
+\]</div>
+<p>For example, we can obtain the correlation function via the following code (make sure you pick a sensible time axis for the given correlation time). Note that <code class="docutils literal notranslate"><span class="pre">sl.Tools.pars2Ct</span></code> will also do this calculation for you (including picking a good time axis if not provided).</p>
+<p>We plot the result, and also a monoexponential correlation time with the same mean rate constant.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">S2</span><span class="p">,</span><span class="n">peq</span><span class="p">,</span><span class="n">tc</span><span class="p">,</span><span class="n">A</span><span class="o">=</span><span class="n">sl</span><span class="o">.</span><span class="n">Tools</span><span class="o">.</span><span class="n">kex2A</span><span class="p">(</span><span class="n">kex</span><span class="p">,</span><span class="n">euler</span><span class="p">)</span>
+<span class="n">t</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mf">5e-3</span><span class="p">,</span><span class="mi">200</span><span class="p">)</span>
+<span class="n">Ct</span><span class="o">=</span><span class="n">S2</span><span class="o">+</span><span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">S2</span><span class="p">)</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">([</span><span class="n">A0</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">t</span><span class="o">/</span><span class="n">tc0</span><span class="p">)</span> <span class="k">for</span> <span class="n">A0</span><span class="p">,</span><span class="n">tc0</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">A</span><span class="p">,</span><span class="n">tc</span><span class="p">)],</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+
+<span class="n">kavg</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="n">tc</span><span class="o">*</span><span class="n">A</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+
+<span class="n">ax</span><span class="o">=</span><span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()[</span><span class="mi">1</span><span class="p">]</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="o">*</span><span class="mf">1e3</span><span class="p">,</span><span class="n">Ct</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="o">*</span><span class="mf">1e3</span><span class="p">,</span><span class="n">S2</span><span class="o">+</span><span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">S2</span><span class="p">)</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">t</span><span class="o">*</span><span class="n">kavg</span><span class="p">),</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">,</span><span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;:&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">((</span><span class="s1">&#39;C(t)&#39;</span><span class="p">,</span><span class="s1">&#39;MonoExponential&#39;</span><span class="p">))</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;t / ms&#39;</span><span class="p">)</span>
+<span class="n">_</span><span class="o">=</span><span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;C(t)&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/5f8b2ff67a9d1214e3531ca12955eed5ce73782806fe1d47e8ca3c0d77fe9ddf.png" src="../_images/5f8b2ff67a9d1214e3531ca12955eed5ce73782806fe1d47e8ca3c0d77fe9ddf.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;S2 = </span><span class="si">{</span><span class="n">S2</span><span class="si">:</span><span class="s1">.5f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>S2 = 0.00023
+</pre></div>
+</div>
+</div>
+</div>
+<p>As we see, the model for tumbling yields a very nearly monoexponential correlation function, with an order parameter of nearly zero. We later use our tumbling model for predicting dynamics effects in solution.</p>
+<p>Note that the tumbling model will effect tensors differently if they are not initially pointing along the <em>z</em>-axis. The simplest way to deal with this is to always set the Euler angles to zero, but some simulations require multiple tensors with different Euler angles. In this case, it may be useful to check the correlation function and Euler angles for each tensor separately. Then, we may use <code class="docutils literal notranslate"><span class="pre">sl.Tools.L2A</span></code>, which will extract parameters for the correlation function for all anisotropic interactions in the Liouvillian. We build a system with two non-parallel interactions and demonstrate below (note we use a tool from the next section to perform the setup).</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">tc</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">shape</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(9,)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ex</span><span class="o">=</span><span class="n">sl</span><span class="o">.</span><span class="n">ExpSys</span><span class="p">(</span><span class="n">v0H</span><span class="o">=</span><span class="mi">600</span><span class="p">,</span><span class="n">Nucs</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;1H&#39;</span><span class="p">,</span><span class="s1">&#39;15N&#39;</span><span class="p">],</span><span class="n">vr</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">pwdavg</span><span class="o">=</span><span class="s1">&#39;alpha0beta0&#39;</span><span class="p">)</span>
+<span class="n">ex</span><span class="o">.</span><span class="n">set_inter</span><span class="p">(</span><span class="s1">&#39;dipole&#39;</span><span class="p">,</span><span class="n">i0</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">i1</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">delta</span><span class="o">=-</span><span class="mi">22950</span><span class="p">,</span><span class="n">euler_d</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">])</span>
+<span class="n">ex</span><span class="o">.</span><span class="n">set_inter</span><span class="p">(</span><span class="s1">&#39;CSA&#39;</span><span class="p">,</span><span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">delta</span><span class="o">=</span><span class="mi">113</span><span class="p">,</span><span class="n">euler_d</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">23</span><span class="p">,</span><span class="mi">0</span><span class="p">])</span>
+
+<span class="n">L</span><span class="o">=</span><span class="n">sl</span><span class="o">.</span><span class="n">Tools</span><span class="o">.</span><span class="n">SetupTumbling</span><span class="p">(</span><span class="n">ex</span><span class="p">,</span><span class="n">tc</span><span class="o">=</span><span class="mf">1e-9</span><span class="p">,</span><span class="n">q</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+
+<span class="n">S2</span><span class="p">,</span><span class="n">peq</span><span class="p">,</span><span class="n">tc</span><span class="p">,</span><span class="n">A</span><span class="o">=</span><span class="n">sl</span><span class="o">.</span><span class="n">Tools</span><span class="o">.</span><span class="n">L2A</span><span class="p">(</span><span class="n">L</span><span class="p">)</span>
+
+<span class="n">t</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mf">5e-9</span><span class="p">,</span><span class="mi">200</span><span class="p">)</span>
+<span class="n">_</span><span class="p">,</span><span class="n">Ct_dip</span><span class="o">=</span><span class="n">sl</span><span class="o">.</span><span class="n">Tools</span><span class="o">.</span><span class="n">pars2Ct</span><span class="p">(</span><span class="n">S2</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="n">tc</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="n">A</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="n">t</span><span class="o">=</span><span class="n">t</span><span class="p">)</span>
+<span class="n">_</span><span class="p">,</span><span class="n">Ct_CSA</span><span class="o">=</span><span class="n">sl</span><span class="o">.</span><span class="n">Tools</span><span class="o">.</span><span class="n">pars2Ct</span><span class="p">(</span><span class="n">S2</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span><span class="n">tc</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span><span class="n">A</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span><span class="n">t</span><span class="o">=</span><span class="n">t</span><span class="p">)</span>
+
+<span class="n">ax</span><span class="o">=</span><span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()[</span><span class="mi">1</span><span class="p">]</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="o">*</span><span class="mf">1e9</span><span class="p">,</span><span class="n">Ct_dip</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="o">*</span><span class="mf">1e9</span><span class="p">,</span><span class="n">Ct_CSA</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="o">*</span><span class="mf">1e9</span><span class="p">,</span><span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">t</span><span class="o">/</span><span class="mf">1e-9</span><span class="p">),</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">,</span><span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;:&#39;</span><span class="p">)</span>
+<span class="n">_</span><span class="o">=</span><span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">((</span><span class="sa">r</span><span class="s1">&#39;dipole ($\beta$=0$^\circ$)&#39;</span><span class="p">,</span><span class="sa">r</span><span class="s1">&#39;CSA ($\beta$=23$^\circ$)&#39;</span><span class="p">,</span><span class="sa">r</span><span class="s1">&#39;Monoexponential ($\tau_c$= 1 ns)&#39;</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/854dae8e3cb0773dc01be4a2b17cd010535cdaed6ea787f7ae7511fc5529ef2f.png" src="../_images/854dae8e3cb0773dc01be4a2b17cd010535cdaed6ea787f7ae7511fc5529ef2f.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;S2 for dipole: </span><span class="si">{</span><span class="n">S2</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">:</span><span class="s1">.4f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;S2 for CSA: </span><span class="si">{</span><span class="n">S2</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="si">:</span><span class="s1">.4f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>S2 for dipole: 0.0002
+S2 for CSA: 0.0088
+</pre></div>
+</div>
+</div>
+</div>
+<p>Then, for the second interaction, the performance is not as good, but will often be sufficient for approximating various dynamics effects resulting from tumbling. In particular, the order parameter performance is quite good, but the effective correlation time is longer than the input value.</p>
+<p>Note that once we have the parameters of our correlation function, we can use the <code class="docutils literal notranslate"><span class="pre">sl.Tools.pars2Ct</span></code> function to obtain the correlation function itself. We may also use the <code class="docutils literal notranslate"><span class="pre">sl.Tools.L2Ct</span></code> function to go directly from the Liouvillian to correlation functions for each interaction in the Liouvillian.</p>
+</section>
+<section id="exchange-setup-tools">
+<h3>Exchange setup tools<a class="headerlink" href="#exchange-setup-tools" title="Link to this heading">#</a></h3>
+<p>SLEEPY has three tools for setting up orientational exchange simulations, which handles both construction of an exchange matrix, and construction of the spin-systems in exchange starting from a reference system (<code class="docutils literal notranslate"><span class="pre">ExpSys</span></code>). These tools can return the Liouvillian directly, or return the <code class="docutils literal notranslate"><span class="pre">ExpSys</span></code> list (<code class="docutils literal notranslate"><span class="pre">ex_list</span></code>) and exchange matrix (<code class="docutils literal notranslate"><span class="pre">kex</span></code>).</p>
+<p>The three tools are :</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">Setup3siteSym</span></code>: Three site hopping around a given axis. Provide the reference <code class="docutils literal notranslate"><span class="pre">ExpSys</span></code>, the correlation time (<code class="docutils literal notranslate"><span class="pre">tc</span></code>), and the opening angle of hopping (<code class="docutils literal notranslate"><span class="pre">phi</span></code>). Note that the resulting order parameter is <span class="math notranslate nohighlight">\(S^2=(-1/2+3/2\cos^2(\phi))^2\)</span></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">SetupTetraHop</span></code>: Hopping on a tetrahedral grid. Provide the reference <code class="docutils literal notranslate"><span class="pre">ExpSys</span></code>, the correlation time (<code class="docutils literal notranslate"><span class="pre">tc</span></code>), and the number of sites to use (<code class="docutils literal notranslate"><span class="pre">n</span></code>, for example, a methyl group hops around 3 of 4 tetrahedral sites.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">SetupTumbling</span></code>: Approximately isotropic hopping around a repulsion powder average to mimic tumbling. Provide the reference <code class="docutils literal notranslate"><span class="pre">ExpSys</span></code>, the correlation time (<code class="docutils literal notranslate"><span class="pre">tc</span></code>), and a quality factor, <code class="docutils literal notranslate"><span class="pre">q</span></code>. Note that <code class="docutils literal notranslate"><span class="pre">q=0</span></code> hops among the <em>x</em>-, <em>y</em>-, and <em>z</em>-axes, and <code class="docutils literal notranslate"><span class="pre">q=1</span></code> hops on a tetrahedral geometry. <code class="docutils literal notranslate"><span class="pre">q=2-12</span></code> hops on the repulsion powder averages (with 10, 20, 66, 100, 144, 168, 256, 320, 678, and 2000 elements).</p></li>
+</ul>
+<p>The <code class="docutils literal notranslate"><span class="pre">sl.Tools.SetupTumbling</span></code> function was applied above. The output of these functions can always be plugged into <code class="docutils literal notranslate"><span class="pre">sl.Tools.L2A</span></code> followed by <code class="docutils literal notranslate"><span class="pre">sl.Tools.pars2Ct</span></code> or into <code class="docutils literal notranslate"><span class="pre">sl.Tools.L2Ct</span></code>, which performs both steps, to evaluate how well the tumbling model performs.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ex</span><span class="o">=</span><span class="n">sl</span><span class="o">.</span><span class="n">ExpSys</span><span class="p">(</span><span class="n">v0H</span><span class="o">=</span><span class="mi">600</span><span class="p">,</span><span class="n">Nucs</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;1H&#39;</span><span class="p">,</span><span class="s1">&#39;13C&#39;</span><span class="p">],</span><span class="n">vr</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">pwdavg</span><span class="o">=</span><span class="s1">&#39;alpha0beta0&#39;</span><span class="p">)</span>
+<span class="n">ex</span><span class="o">.</span><span class="n">set_inter</span><span class="p">(</span><span class="s1">&#39;dipole&#39;</span><span class="p">,</span><span class="n">i0</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">i1</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">delta</span><span class="o">=</span><span class="n">sl</span><span class="o">.</span><span class="n">Tools</span><span class="o">.</span><span class="n">dipole_coupling</span><span class="p">(</span><span class="mf">.109</span><span class="p">,</span><span class="s1">&#39;1H&#39;</span><span class="p">,</span><span class="s1">&#39;13C&#39;</span><span class="p">))</span>
+<span class="n">L</span><span class="o">=</span><span class="n">sl</span><span class="o">.</span><span class="n">Tools</span><span class="o">.</span><span class="n">SetupTetraHop</span><span class="p">(</span><span class="n">ex</span><span class="p">,</span><span class="n">tc</span><span class="o">=</span><span class="mf">1e-9</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">t</span><span class="p">,</span><span class="n">Ct</span><span class="o">=</span><span class="n">sl</span><span class="o">.</span><span class="n">Tools</span><span class="o">.</span><span class="n">L2Ct</span><span class="p">(</span><span class="n">L</span><span class="p">)</span>
+
+<span class="n">kavg</span><span class="o">=-</span><span class="p">(</span><span class="n">Ct</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span><span class="o">-</span><span class="n">Ct</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">])</span><span class="o">/</span><span class="n">t</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+
+<span class="n">ax</span><span class="o">=</span><span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()[</span><span class="mi">1</span><span class="p">]</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="o">*</span><span class="mf">1e3</span><span class="p">,</span><span class="n">Ct</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="o">*</span><span class="mf">1e3</span><span class="p">,</span><span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">t</span><span class="o">*</span><span class="n">kavg</span><span class="p">),</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">,</span><span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;:&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">((</span><span class="s1">&#39;C(t)&#39;</span><span class="p">,</span><span class="s1">&#39;MonoExponential&#39;</span><span class="p">))</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;t / ms&#39;</span><span class="p">)</span>
+<span class="n">_</span><span class="o">=</span><span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;C(t)&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/ea862a928146a28aa2f37bac600adbe7266fdd58d4b09a53f5fff615f6fc015a.png" src="../_images/ea862a928146a28aa2f37bac600adbe7266fdd58d4b09a53f5fff615f6fc015a.png" />
+</div>
+</div>
+<p>Then, <code class="docutils literal notranslate"><span class="pre">L</span></code> is derived from the interactions in <code class="docutils literal notranslate"><span class="pre">ex</span></code>, but exchanges over 10 different sets of Euler angles. The exchange matrix can be viewed as follows:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">_</span><span class="o">=</span><span class="n">L</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">what</span><span class="o">=</span><span class="s1">&#39;kex&#39;</span><span class="p">,</span><span class="n">mode</span><span class="o">=</span><span class="s1">&#39;re&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/003630a509908ed58a9b299fa03a24e1ffb080d5a4cd62ccf8eae65ace530241.png" src="../_images/003630a509908ed58a9b299fa03a24e1ffb080d5a4cd62ccf8eae65ace530241.png" />
+</div>
+</div>
+</section>
+</section>
+<section id="two-dimensional-acquisition">
+<h2>Two-dimensional acquisition<a class="headerlink" href="#two-dimensional-acquisition" title="Link to this heading">#</a></h2>
+<p>SLEEPY has a tool, the <code class="docutils literal notranslate"><span class="pre">TwoD_Builder</span></code>, which allows acquisition of two-dimensional experiments. The user needs to provide an initial density matrix, <code class="docutils literal notranslate"><span class="pre">rho</span></code> (may already be propagated with propagators or sequences), sequences for the indirect (<code class="docutils literal notranslate"><span class="pre">seq_in</span></code>) and direct dimension acquisition (<code class="docutils literal notranslate"><span class="pre">seq_dir)</span></code>, and sequences to convert from the <em>x</em>-component of the indirect dimension (<code class="docutils literal notranslate"><span class="pre">seq_trX</span></code>) and from the <em>y</em>-component of the indirect dimension (<code class="docutils literal notranslate"><span class="pre">seq_trY</span></code>) to the direct dimension. Further details may be found in Chapter 2, <a class="reference internal" href="../Chapter2/Ch2_EXSY.html"><span class="std std-doc">EXSY</span></a>.</p>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./Chapter1"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="Ch1_rho.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title"><font  color = "#0093AF">The Density Matrix</font></p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="../Ch2_SolutionNMR.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title"><font color="#B00000">Solution NMR</font></p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#"><font color="#0093AF">Defaults, Constants, and Tools</font></a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#setup">Setup</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#defaults">Defaults</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#constants">Constants</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tools">Tools</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#nucinfo">NucInfo</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#dipole-coupling">dipole_coupling</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exchange-matrices">Exchange matrices</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#back-calculating-the-correlation-function">Back-calculating the correlation function</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exchange-setup-tools">Exchange setup tools</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#two-dimensional-acquisition">Two-dimensional acquisition</a></li>
+</ul>
+</li>
+</ul>
+
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Albert Smith, Kai Zumpfe
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2025.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
+<script defer src="../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

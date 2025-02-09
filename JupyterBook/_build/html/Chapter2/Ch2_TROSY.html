@@ -34,7 +34,7 @@
     <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=a3416100" />
     <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
   
@@ -184,6 +184,8 @@
 <li class="toctree-l2"><a class="reference internal" href="../Chapter1/Ch1_Liouvillian.html"><font color="#0093AF">Hamiltonians and Liouvillians</font></a></li>
 <li class="toctree-l2"><a class="reference internal" href="../Chapter1/Ch1_Propagation.html"><font color="#0093AF">Propagators and Sequences</font></a></li>
 <li class="toctree-l2"><a class="reference internal" href="../Chapter1/Ch1_rho.html"><font color="#0093AF">The Density Matrix</font></a></li>
+
+<li class="toctree-l2"><a class="reference internal" href="../Chapter1/Ch1_Tools.html"><font color="#0093AF">Defaults, Constants, and Tools</font></a></li>
 
 </ul>
 </details></li>
@@ -628,9 +630,7 @@
 <span class="n">ex0</span><span class="o">.</span><span class="n">set_inter</span><span class="p">(</span><span class="s1">&#39;J&#39;</span><span class="p">,</span><span class="n">i0</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">i1</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">J</span><span class="o">=</span><span class="mi">92</span><span class="p">)</span>
 
 <span class="c1"># Set up 4-site motion</span>
-<span class="n">ex</span><span class="p">,</span><span class="n">kex</span><span class="o">=</span><span class="n">sl</span><span class="o">.</span><span class="n">Tools</span><span class="o">.</span><span class="n">SetupTumbling</span><span class="p">(</span><span class="n">ex0</span><span class="p">,</span><span class="n">tc</span><span class="o">=</span><span class="mf">1e-9</span><span class="p">,</span><span class="n">q</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span> <span class="c1">#Defaults to the magic angle, which will average the couplings</span>
-
-<span class="n">L</span><span class="o">=</span><span class="n">sl</span><span class="o">.</span><span class="n">Liouvillian</span><span class="p">(</span><span class="o">*</span><span class="n">ex</span><span class="p">,</span><span class="n">kex</span><span class="o">=</span><span class="n">kex</span><span class="p">)</span>
+<span class="n">L</span><span class="o">=</span><span class="n">sl</span><span class="o">.</span><span class="n">Tools</span><span class="o">.</span><span class="n">SetupTumbling</span><span class="p">(</span><span class="n">ex0</span><span class="p">,</span><span class="n">tc</span><span class="o">=</span><span class="mf">1e-9</span><span class="p">,</span><span class="n">q</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span> <span class="c1">#Defaults to the magic angle, which will average the couplings</span>
 <span class="n">L</span><span class="o">.</span><span class="n">add_relax</span><span class="p">(</span><span class="s1">&#39;DynamicThermal&#39;</span><span class="p">)</span>
 
 <span class="n">rho</span><span class="o">=</span><span class="n">sl</span><span class="o">.</span><span class="n">Rho</span><span class="p">(</span><span class="s1">&#39;zero&#39;</span><span class="p">,</span><span class="s1">&#39;15Nz&#39;</span><span class="p">)</span>
@@ -642,7 +642,7 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/e85aa151da985122957d05835b8ca85b2c9a29f76293751b7958470a2c2b3202.png" src="../_images/e85aa151da985122957d05835b8ca85b2c9a29f76293751b7958470a2c2b3202.png" />
+<img alt="../_images/d3972db01d91f31bfe3453842881facf95328ec759860afb32b43255a9fd488e.png" src="../_images/d3972db01d91f31bfe3453842881facf95328ec759860afb32b43255a9fd488e.png" />
 </div>
 </div>
 <p>We observe a strongly bi-exponential behavior, corresponding to relaxation of the <span class="math notranslate nohighlight">\(\hat{S}_z\hat{I}_\alpha\)</span> and <span class="math notranslate nohighlight">\(\hat{S}_z\hat{I}_\beta\)</span> states. We can saturate the <span class="math notranslate nohighlight">\(^1\)</span>H to recover monoexponential behavior. However, because this calculation is in the lab frame, we cannot apply RF-fields as easily. This is because the applied RF is not static in the lab frame, but rather oscillates as in the real experiment, complicating its application in simulation. SLEEPY has a special tool, <code class="docutils literal notranslate"><span class="pre">sl.LFrf</span></code>,  for adding cw-irradation in the lab frame. This class takes a sequence as argument for initialization (which is used to specify the field strength and nucleus), and returns a propagator, <code class="docutils literal notranslate"><span class="pre">U</span></code>, with the corresponding applied field. We do not currently support time-dependent sequences for lab-frame irradiation.</p>
@@ -657,11 +657,15 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>LF calculation: |██████████████████████████████| 100% complete
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>LF calculation: |------------------------------| 0% complete
+
+LF calculation: |██████████████████████████████| 100% complete
+
+LF calculation: |██████████████████████████████| 100% complete
 Completed
 </pre></div>
 </div>
-<img alt="../_images/e9b02ce097594a119deee3d8a4c2b4dfdb3e89e4604f9fbc4d8cda675b57d338.png" src="../_images/e9b02ce097594a119deee3d8a4c2b4dfdb3e89e4604f9fbc4d8cda675b57d338.png" />
+<img alt="../_images/2a33ba946adf49923b303c177762b904ca83536f446196e96b974fc7c8fb66c2.png" src="../_images/2a33ba946adf49923b303c177762b904ca83536f446196e96b974fc7c8fb66c2.png" />
 </div>
 </div>
 <p>The decay curve becomes monoexponential. Note the equilibrium’s  absolute value is also slightly decreased, due to an unfavorable NOE condition at 1 ns for H–N NOE.</p>

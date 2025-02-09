@@ -34,7 +34,7 @@
     <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=a3416100" />
     <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
   
@@ -184,6 +184,8 @@
 <li class="toctree-l2"><a class="reference internal" href="../Chapter1/Ch1_Liouvillian.html"><font color="#0093AF">Hamiltonians and Liouvillians</font></a></li>
 <li class="toctree-l2"><a class="reference internal" href="../Chapter1/Ch1_Propagation.html"><font color="#0093AF">Propagators and Sequences</font></a></li>
 <li class="toctree-l2"><a class="reference internal" href="../Chapter1/Ch1_rho.html"><font color="#0093AF">The Density Matrix</font></a></li>
+
+<li class="toctree-l2"><a class="reference internal" href="../Chapter1/Ch1_Tools.html"><font color="#0093AF">Defaults, Constants, and Tools</font></a></li>
 
 </ul>
 </details></li>
@@ -504,7 +506,7 @@
 <h2>Build the spin-system<a class="headerlink" href="#build-the-spin-system" title="Link to this heading">#</a></h2>
 <p>An important consideration when simulating longitudinal relaxation is that this type of relaxation is induced by interactions that are removed when using the rotating frame approximation. Therefore, we must be sure to setup our spin system in the lab frame. You can try running these calculations in the rotating frame to see that the <span class="math notranslate nohighlight">\(T_1\)</span> relaxation vanishes.</p>
 <p>Note that adding explicit relaxation (via <code class="docutils literal notranslate"><span class="pre">L.add_relax(...)</span></code>) does not require a lab-frame calculation.</p>
-<p>We start with a 1-bond H–N dipole coupling, hopping around a tetrahedral geometry, with a correlation time of 1 ns. The tool <code class="docutils literal notranslate"><span class="pre">sl.Tools.SetupTumbling</span></code> takes <code class="docutils literal notranslate"><span class="pre">ex0</span></code> and rotates to several orientations (for higher <code class="docutils literal notranslate"><span class="pre">q</span></code>, we get more orientations), return a list of <code class="docutils literal notranslate"><span class="pre">ExpSys</span></code> objects with different Euler angles. <code class="docutils literal notranslate"><span class="pre">SetupTumbling</span></code> also returns an exchange matrix (<code class="docutils literal notranslate"><span class="pre">kex</span></code>) to yield an approximately monoexponential correlation function (for <code class="docutils literal notranslate"><span class="pre">q=0</span></code> or <code class="docutils literal notranslate"><span class="pre">q=1</span></code>, it is exactly monoexponential, but for higher values, it is only approximate). Note that <code class="docutils literal notranslate"><span class="pre">SetupTumbling</span></code> averages around the α- and β-angles, but not γ, so be cautious for more complex geometries.</p>
+<p>We start with a 1-bond H–N dipole coupling, hopping around a tetrahedral geometry, with a correlation time of 1 ns. The tool <code class="docutils literal notranslate"><span class="pre">sl.Tools.SetupTumbling</span></code> takes <code class="docutils literal notranslate"><span class="pre">ex0</span></code> and rotates to several orientations (for higher <code class="docutils literal notranslate"><span class="pre">q</span></code>, we get more orientations), and returns a Liouvillian with different the Euler angles in exchange. The exchange matrix in the resulting Liouvillian yields an approximately monoexponential correlation function (for <code class="docutils literal notranslate"><span class="pre">q=0</span></code> or <code class="docutils literal notranslate"><span class="pre">q=1</span></code>, it is exactly monoexponential, but for higher values, it is only approximate). Note that <code class="docutils literal notranslate"><span class="pre">SetupTumbling</span></code> averages around the α- and β-angles, but not γ, so be cautious for more complex geometries.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># By default, we get a powder average when including anisotropic terms.</span>
@@ -514,9 +516,8 @@
 <span class="n">ex0</span><span class="o">.</span><span class="n">set_inter</span><span class="p">(</span><span class="s1">&#39;dipole&#39;</span><span class="p">,</span><span class="n">i0</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">i1</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">delta</span><span class="o">=</span><span class="n">delta</span><span class="p">)</span>
 
 <span class="c1"># Set up 4-site motion</span>
-<span class="n">ex</span><span class="p">,</span><span class="n">kex</span><span class="o">=</span><span class="n">sl</span><span class="o">.</span><span class="n">Tools</span><span class="o">.</span><span class="n">SetupTumbling</span><span class="p">(</span><span class="n">ex0</span><span class="p">,</span><span class="n">tc</span><span class="o">=</span><span class="mf">1e-9</span><span class="p">,</span><span class="n">q</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span> <span class="c1">#q=1 gives just the tetrahedral orientations</span>
+<span class="n">L</span><span class="o">=</span><span class="n">sl</span><span class="o">.</span><span class="n">Tools</span><span class="o">.</span><span class="n">SetupTumbling</span><span class="p">(</span><span class="n">ex0</span><span class="p">,</span><span class="n">tc</span><span class="o">=</span><span class="mf">1e-9</span><span class="p">,</span><span class="n">q</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span> <span class="c1">#q=1 gives just the tetrahedral orientations</span>
 
-<span class="n">L</span><span class="o">=</span><span class="n">sl</span><span class="o">.</span><span class="n">Liouvillian</span><span class="p">(</span><span class="o">*</span><span class="n">ex</span><span class="p">,</span><span class="n">kex</span><span class="o">=</span><span class="n">kex</span><span class="p">)</span>
 <span class="n">seq</span><span class="o">=</span><span class="n">L</span><span class="o">.</span><span class="n">Sequence</span><span class="p">(</span><span class="n">Dt</span><span class="o">=</span><span class="mf">.1</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -535,7 +536,7 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/79d2f1dc859096b5a436dde41b984ba920c807ba2b90dc33a74b0233a2cb961d.png" src="../_images/79d2f1dc859096b5a436dde41b984ba920c807ba2b90dc33a74b0233a2cb961d.png" />
+<img alt="../_images/118d2936c23af4a49182d46be361cf299f767d2bfc658642c09d50f2633d6116.png" src="../_images/118d2936c23af4a49182d46be361cf299f767d2bfc658642c09d50f2633d6116.png" />
 </div>
 </div>
 <p>We observe both spins start from their thermal equilibrium and decay towards zero. The <span class="math notranslate nohighlight">\(^{15}\)</span>N magnetization is briefly enhanced by magnetization from the <span class="math notranslate nohighlight">\(^1\)</span>H spin, but then decays together with the <span class="math notranslate nohighlight">\(^1\)</span>H.</p>

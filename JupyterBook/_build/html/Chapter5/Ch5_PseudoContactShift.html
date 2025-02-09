@@ -34,7 +34,7 @@
     <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=a3416100" />
     <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
   
@@ -184,6 +184,8 @@
 <li class="toctree-l2"><a class="reference internal" href="../Chapter1/Ch1_Liouvillian.html"><font color="#0093AF">Hamiltonians and Liouvillians</font></a></li>
 <li class="toctree-l2"><a class="reference internal" href="../Chapter1/Ch1_Propagation.html"><font color="#0093AF">Propagators and Sequences</font></a></li>
 <li class="toctree-l2"><a class="reference internal" href="../Chapter1/Ch1_rho.html"><font color="#0093AF">The Density Matrix</font></a></li>
+
+<li class="toctree-l2"><a class="reference internal" href="../Chapter1/Ch1_Tools.html"><font color="#0093AF">Defaults, Constants, and Tools</font></a></li>
 
 </ul>
 </details></li>
@@ -565,7 +567,7 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/52fabf5d2b23e15e304c74a822f1210e9db96023003c06914b11cdf01e57e311.png" src="../_images/52fabf5d2b23e15e304c74a822f1210e9db96023003c06914b11cdf01e57e311.png" />
+<img alt="../_images/fb99de15465441b0bb9f5bc245ae823b377a57d87f149d110fe9b269232862f1.png" src="../_images/fb99de15465441b0bb9f5bc245ae823b377a57d87f149d110fe9b269232862f1.png" />
 </div>
 </div>
 </section>
@@ -588,15 +590,15 @@
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ax</span><span class="o">=</span><span class="n">no_rlx</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">FT</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">apodize</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-<span class="n">rlx</span><span class="o">.</span><span class="n">apod_pars</span><span class="p">[</span><span class="s1">&#39;LB&#39;</span><span class="p">]</span><span class="o">=</span><span class="mi">300</span>
-<span class="n">rlx</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">FT</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">apodize</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">)</span>
-<span class="n">_</span><span class="o">=</span><span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">((</span><span class="s1">&#39;No relaxation&#39;</span><span class="p">,</span><span class="s1">&#39;With relaxation&#39;</span><span class="p">))</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">rlx</span><span class="o">.</span><span class="n">apod_pars</span><span class="p">[</span><span class="s1">&#39;LB&#39;</span><span class="p">]</span><span class="o">=</span><span class="mi">300</span>
+<span class="n">ax</span><span class="o">=</span><span class="n">rlx</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">FT</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">apodize</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">no_rlx</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">FT</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">apodize</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">)</span>
+<span class="n">_</span><span class="o">=</span><span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">((</span><span class="s1">&#39;With relaxation&#39;</span><span class="p">,</span><span class="s1">&#39;No relaxation&#39;</span><span class="p">))</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/ac812258329905e0b0d47e44970d6aac98165706d56f4674c0859dcf81edc5c7.png" src="../_images/ac812258329905e0b0d47e44970d6aac98165706d56f4674c0859dcf81edc5c7.png" />
+<img alt="../_images/fbbd0bc9a4766c5be147c7110eaf62725001d30866749871351985eb3825ab19.png" src="../_images/fbbd0bc9a4766c5be147c7110eaf62725001d30866749871351985eb3825ab19.png" />
 </div>
 </div>
 <p>Then, we see that the Pake pattern collapses to the average of the two sides of the pattern. However, the average of the pseudo-contact shift is zero, and can be removed with moderate spinning, as shown below. Note that we change the powder average since the large number of angles are not required for MAS.</p>
@@ -631,9 +633,8 @@
 <span class="n">ex0</span><span class="o">.</span><span class="n">set_inter</span><span class="p">(</span><span class="s1">&#39;hyperfine&#39;</span><span class="p">,</span><span class="n">i0</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">i1</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">Axx</span><span class="o">=-</span><span class="n">delta</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span><span class="n">Ayy</span><span class="o">=-</span><span class="n">delta</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span><span class="n">Azz</span><span class="o">=</span><span class="n">delta</span><span class="p">)</span>
 <span class="n">ex0</span><span class="o">.</span><span class="n">set_inter</span><span class="p">(</span><span class="s1">&#39;g&#39;</span><span class="p">,</span><span class="n">i</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">gxx</span><span class="o">=</span><span class="n">gxx</span><span class="p">,</span><span class="n">gyy</span><span class="o">=</span><span class="n">gyy</span><span class="p">,</span><span class="n">gzz</span><span class="o">=</span><span class="n">gzz</span><span class="p">)</span>
 
-<span class="n">ex</span><span class="p">,</span><span class="n">kex</span><span class="o">=</span><span class="n">sl</span><span class="o">.</span><span class="n">Tools</span><span class="o">.</span><span class="n">SetupTumbling</span><span class="p">(</span><span class="n">ex0</span><span class="p">,</span><span class="n">q</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">tc</span><span class="o">=</span><span class="mf">1e-9</span><span class="p">)</span> <span class="c1">#This creates a system hopping around a tetrahedral geometry</span>
+<span class="n">L</span><span class="o">=</span><span class="n">sl</span><span class="o">.</span><span class="n">Tools</span><span class="o">.</span><span class="n">SetupTumbling</span><span class="p">(</span><span class="n">ex0</span><span class="p">,</span><span class="n">q</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">tc</span><span class="o">=</span><span class="mf">1e-9</span><span class="p">)</span> <span class="c1">#This creates a system hopping around a tetrahedral geometry</span>
 
-<span class="n">L</span><span class="o">=</span><span class="n">sl</span><span class="o">.</span><span class="n">Liouvillian</span><span class="p">(</span><span class="n">ex</span><span class="p">,</span><span class="n">kex</span><span class="o">=</span><span class="n">kex</span><span class="p">)</span>
 <span class="n">L</span><span class="o">.</span><span class="n">add_relax</span><span class="p">(</span><span class="n">Type</span><span class="o">=</span><span class="s1">&#39;T1&#39;</span><span class="p">,</span><span class="n">i</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">T1</span><span class="o">=</span><span class="mf">1e-7</span><span class="p">)</span>
 <span class="n">L</span><span class="o">.</span><span class="n">add_relax</span><span class="p">(</span><span class="n">Type</span><span class="o">=</span><span class="s1">&#39;T2&#39;</span><span class="p">,</span><span class="n">i</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">T2</span><span class="o">=</span><span class="mf">1e-12</span><span class="p">)</span>
 <span class="n">L</span><span class="o">.</span><span class="n">add_relax</span><span class="p">(</span><span class="n">Type</span><span class="o">=</span><span class="s1">&#39;recovery&#39;</span><span class="p">)</span>
@@ -672,9 +673,8 @@
 <span class="n">ex0</span><span class="o">.</span><span class="n">set_inter</span><span class="p">(</span><span class="s1">&#39;hyperfine&#39;</span><span class="p">,</span><span class="n">i0</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">i1</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">Axx</span><span class="o">=-</span><span class="n">delta</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span><span class="n">Ayy</span><span class="o">=-</span><span class="n">delta</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span><span class="n">Azz</span><span class="o">=</span><span class="n">delta</span><span class="p">)</span>
 <span class="n">ex0</span><span class="o">.</span><span class="n">set_inter</span><span class="p">(</span><span class="s1">&#39;g&#39;</span><span class="p">,</span><span class="n">i</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">gxx</span><span class="o">=</span><span class="n">gxx</span><span class="p">,</span><span class="n">gyy</span><span class="o">=</span><span class="n">gyy</span><span class="p">,</span><span class="n">gzz</span><span class="o">=</span><span class="n">gzz</span><span class="p">)</span>
 
-<span class="n">ex</span><span class="p">,</span><span class="n">kex</span><span class="o">=</span><span class="n">sl</span><span class="o">.</span><span class="n">Tools</span><span class="o">.</span><span class="n">SetupTumbling</span><span class="p">(</span><span class="n">ex0</span><span class="p">,</span><span class="n">q</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span><span class="n">tc</span><span class="o">=</span><span class="mf">5e-9</span><span class="p">)</span> <span class="c1">#This creates a system hopping around a tetrahedral geometry</span>
+<span class="n">L</span><span class="o">=</span><span class="n">sl</span><span class="o">.</span><span class="n">Tools</span><span class="o">.</span><span class="n">SetupTumbling</span><span class="p">(</span><span class="n">ex0</span><span class="p">,</span><span class="n">q</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span><span class="n">tc</span><span class="o">=</span><span class="mf">5e-9</span><span class="p">)</span> <span class="c1">#This creates a system hopping around a tetrahedral geometry</span>
 
-<span class="n">L</span><span class="o">=</span><span class="n">sl</span><span class="o">.</span><span class="n">Liouvillian</span><span class="p">(</span><span class="n">ex</span><span class="p">,</span><span class="n">kex</span><span class="o">=</span><span class="n">kex</span><span class="p">)</span>
 <span class="n">L</span><span class="o">.</span><span class="n">add_relax</span><span class="p">(</span><span class="n">Type</span><span class="o">=</span><span class="s1">&#39;T1&#39;</span><span class="p">,</span><span class="n">i</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">T1</span><span class="o">=</span><span class="mf">1e-10</span><span class="p">,</span><span class="n">OS</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">Thermal</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 <span class="n">L</span><span class="o">.</span><span class="n">add_relax</span><span class="p">(</span><span class="n">Type</span><span class="o">=</span><span class="s1">&#39;T2&#39;</span><span class="p">,</span><span class="n">i</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">T2</span><span class="o">=</span><span class="mf">1e-10</span><span class="p">,</span><span class="n">OS</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 
@@ -774,9 +774,8 @@
     <span class="n">ex0</span><span class="o">.</span><span class="n">set_inter</span><span class="p">(</span><span class="s1">&#39;hyperfine&#39;</span><span class="p">,</span><span class="n">i0</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">i1</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">Axx</span><span class="o">=-</span><span class="n">delta</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span><span class="n">Ayy</span><span class="o">=-</span><span class="n">delta</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span><span class="n">Azz</span><span class="o">=</span><span class="n">delta</span><span class="p">)</span>
     <span class="n">ex0</span><span class="o">.</span><span class="n">set_inter</span><span class="p">(</span><span class="s1">&#39;g&#39;</span><span class="p">,</span><span class="n">i</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">gxx</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">gyy</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">gzz</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span><span class="n">euler</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="n">beta0</span><span class="p">,</span><span class="n">gamma0</span><span class="p">])</span>
 
-    <span class="n">ex</span><span class="p">,</span><span class="n">kex</span><span class="o">=</span><span class="n">sl</span><span class="o">.</span><span class="n">Tools</span><span class="o">.</span><span class="n">SetupTumbling</span><span class="p">(</span><span class="n">ex0</span><span class="p">,</span><span class="n">tc</span><span class="o">=</span><span class="mf">1e-9</span><span class="p">,</span><span class="n">q</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span> <span class="c1">#1 ns tumbling</span>
+    <span class="n">L</span><span class="o">=</span><span class="n">sl</span><span class="o">.</span><span class="n">Tools</span><span class="o">.</span><span class="n">SetupTumbling</span><span class="p">(</span><span class="n">ex0</span><span class="p">,</span><span class="n">tc</span><span class="o">=</span><span class="mf">1e-9</span><span class="p">,</span><span class="n">q</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span> <span class="c1">#1 ns tumbling</span>
 
-    <span class="n">L</span><span class="o">=</span><span class="n">sl</span><span class="o">.</span><span class="n">Liouvillian</span><span class="p">(</span><span class="n">ex</span><span class="p">,</span><span class="n">kex</span><span class="o">=</span><span class="n">kex</span><span class="p">)</span>
     <span class="n">L</span><span class="o">.</span><span class="n">add_relax</span><span class="p">(</span><span class="n">Type</span><span class="o">=</span><span class="s1">&#39;T1&#39;</span><span class="p">,</span><span class="n">i</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">T1</span><span class="o">=</span><span class="mf">1e-11</span><span class="p">,</span><span class="n">OS</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">Thermal</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
     <span class="n">L</span><span class="o">.</span><span class="n">add_relax</span><span class="p">(</span><span class="n">Type</span><span class="o">=</span><span class="s1">&#39;T2&#39;</span><span class="p">,</span><span class="n">i</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">T2</span><span class="o">=</span><span class="mf">1e-11</span><span class="p">,</span><span class="n">OS</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 
@@ -870,7 +869,7 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/3931cc5facd6affbf7a8d5a8fef63fd60d1a6a8dce2f704ebce30925bdce4703.png" src="../_images/3931cc5facd6affbf7a8d5a8fef63fd60d1a6a8dce2f704ebce30925bdce4703.png" />
+<img alt="../_images/cbead9dbe21be3d16715eb41a79363d60b19a6e4efbaa48eebcfe287c09ed167.png" src="../_images/cbead9dbe21be3d16715eb41a79363d60b19a6e4efbaa48eebcfe287c09ed167.png" />
 </div>
 </div>
 <p>A complex lineshape is obtained, resulting from incomplete averaging of the rank-4 PCS tensor. As with isotropic hopping, decreasing the temperature will increasing the magnitude of the PCS, as shown below.</p>
@@ -900,18 +899,15 @@
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">rho100</span><span class="o">.</span><span class="n">downmix</span><span class="p">()</span>
-<span class="n">ax</span><span class="o">=</span><span class="n">rho200</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">FT</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span> <span class="c1">#Plot the results into the same axis</span>
-<span class="n">rho100</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">FT</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">((</span><span class="s1">&#39;200 K&#39;</span><span class="p">,</span><span class="s1">&#39;100 K&#39;</span><span class="p">))</span>
+<span class="n">ax</span><span class="o">=</span><span class="n">rho100</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">FT</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span> <span class="c1">#Plot the results into the same axis</span>
+<span class="n">rho200</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">FT</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">((</span><span class="s1">&#39;100 K&#39;</span><span class="p">,</span><span class="s1">&#39;200 K&#39;</span><span class="p">))</span>
 <span class="n">_</span><span class="o">=</span><span class="n">ax</span><span class="o">.</span><span class="n">set_xlim</span><span class="p">([</span><span class="mf">1.5</span><span class="p">,</span><span class="o">-</span><span class="mf">1.5</span><span class="p">])</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Already downmixed
-</pre></div>
-</div>
-<img alt="../_images/1c54d9d09a85dac3802cc3bf3d1681a9f348ffb22b7924ad1d36f13a27667fa8.png" src="../_images/1c54d9d09a85dac3802cc3bf3d1681a9f348ffb22b7924ad1d36f13a27667fa8.png" />
+<img alt="../_images/36f14411f1a0a6855a52bfee1670fd8dfdd00ba2d846228c2afd1293e412c043.png" src="../_images/36f14411f1a0a6855a52bfee1670fd8dfdd00ba2d846228c2afd1293e412c043.png" />
 </div>
 </div>
 <p>The same tensor shape is obtained, but it is now twice as broad (it also has more signal from the lower temperature).</p>
