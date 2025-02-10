@@ -34,7 +34,7 @@
     <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=a3416100" />
     <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
   
@@ -588,12 +588,12 @@
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ax</span><span class="o">=</span><span class="n">rho_spec</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">FT</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">apodize</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-<span class="n">_</span><span class="o">=</span><span class="n">ax</span><span class="o">.</span><span class="n">set_xlim</span><span class="p">([</span><span class="o">-</span><span class="mi">1000</span><span class="p">,</span><span class="mi">1000</span><span class="p">])</span>
+<span class="n">_</span><span class="o">=</span><span class="n">ax</span><span class="o">.</span><span class="n">set_xlim</span><span class="p">([</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">])</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/c0a42db17153a482be30fd3425208d0448136c0528378e4aa9c7f23088cd8a8c.png" src="../_images/c0a42db17153a482be30fd3425208d0448136c0528378e4aa9c7f23088cd8a8c.png" />
+<img alt="../_images/1f9579c8bfebe525ecbbbd3bc8ad98e3de6925de0c28ec9d48621b1550622016.png" src="../_images/1f9579c8bfebe525ecbbbd3bc8ad98e3de6925de0c28ec9d48621b1550622016.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -614,7 +614,7 @@ detect[1]: S1z
 Current time is 12000.000 microseconds
 600 time points have been recorded
 
-&lt;SLEEPY.Rho.Rho object at 0x7f89f83caa58&gt;
+&lt;SLEEPY.SLEEPY.Rho.Rho object at 0x7f9a004d1748&gt;
 </pre></div>
 </div>
 </div>
@@ -626,7 +626,7 @@ Current time is 12000.000 microseconds
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/d52349ebae9469a361c791f124960cd40e7d88f7cc1085112d81067f84b1d2fb.png" src="../_images/d52349ebae9469a361c791f124960cd40e7d88f7cc1085112d81067f84b1d2fb.png" />
+<img alt="../_images/2fd7636c1b11ee3572d4dae36ab16518bed451b21447bdd9adaacda0b03c9707.png" src="../_images/2fd7636c1b11ee3572d4dae36ab16518bed451b21447bdd9adaacda0b03c9707.png" />
 </div>
 </div>
 <p>Above, we see the spectrum, which has a characteristic Pake-pattern, resulting from the dipole coupling between the two spins. Because the two spins have identical resonance frequencies, they mix, allowing the transfer of z-magnetization from one spin (<span class="math notranslate nohighlight">\(S_{0z}\)</span>) to the other spin (<span class="math notranslate nohighlight">\(S_{1z}\)</span>).</p>
@@ -638,7 +638,7 @@ Current time is 12000.000 microseconds
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/d61e8aeaea6deb3af86df97c1757872036445ad876d180e40935bbcd6d53b46c.png" src="../_images/d61e8aeaea6deb3af86df97c1757872036445ad876d180e40935bbcd6d53b46c.png" />
+<img alt="../_images/b5fe42fadfebb6ddebecfd9a2634fa2243a49c0a86f28f737e5ebe2b18534bc7.png" src="../_images/b5fe42fadfebb6ddebecfd9a2634fa2243a49c0a86f28f737e5ebe2b18534bc7.png" />
 </div>
 </div>
 <p>Spin magnetization transfers because the <span class="math notranslate nohighlight">\(|1/2,-1/2\rangle\)</span> and <span class="math notranslate nohighlight">\(|-1/2,1/2\rangle\)</span> states mix. This may also be observed in the Liouvillian, made easier to see by zooming in on the correct set of states:</p>
@@ -704,7 +704,7 @@ Current time is 12000.000 microseconds
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/f98a5d2ed1f3585ab747c48653631824072702d576444150ba8122a43f9e4274.png" src="../_images/f98a5d2ed1f3585ab747c48653631824072702d576444150ba8122a43f9e4274.png" />
+<img alt="../_images/406e78d7548ca8fe9b2ffa8cc9580bbc000973286ab096ecab971cc08796c9bf.png" src="../_images/406e78d7548ca8fe9b2ffa8cc9580bbc000973286ab096ecab971cc08796c9bf.png" />
 </div>
 </div>
 <p>Now, we observe to separated Pake-patterns, separated by roughly 10 ppm.</p>
@@ -739,7 +739,7 @@ Current time is 12000.000 microseconds
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/43883ecea4059da0cf2cb30a2e6b91ada1aa0144ab2cc270a3cd87aae9559bd2.png" src="../_images/43883ecea4059da0cf2cb30a2e6b91ada1aa0144ab2cc270a3cd87aae9559bd2.png" />
+<img alt="../_images/d67f677eaa1c2b82be9b6851c36e517f51a972303d079b5307bbd04da9d3eb6b.png" src="../_images/d67f677eaa1c2b82be9b6851c36e517f51a972303d079b5307bbd04da9d3eb6b.png" />
 </div>
 </div>
 <p>However, what would happen if some <span class="math notranslate nohighlight">\(T_2\)</span> broadening is introduced to the two spins, such that there is a small amount of overlap?</p>
@@ -830,7 +830,7 @@ State-space reduction: 64-&gt;12
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/7f1d9c5125ffd88c5c17fa3cfc4a816cfcd384fcb80332aec249c64ca819af77.png" src="../_images/7f1d9c5125ffd88c5c17fa3cfc4a816cfcd384fcb80332aec249c64ca819af77.png" />
+<img alt="../_images/d03f8c9a32d5f6eb8dd6b88c93ef29ecaa6dfb9a4b17bf9e9b69fb736a20fa6c.png" src="../_images/d03f8c9a32d5f6eb8dd6b88c93ef29ecaa6dfb9a4b17bf9e9b69fb736a20fa6c.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -840,7 +840,7 @@ State-space reduction: 64-&gt;12
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/663052e80d5f0fb7e342804a1eb79e6bb7e4b9668351680e99befd1035a0ebd5.png" src="../_images/663052e80d5f0fb7e342804a1eb79e6bb7e4b9668351680e99befd1035a0ebd5.png" />
+<img alt="../_images/8eae97970648e41dc925edfd5ffaae82afeb1963252fba2fef1a3f22440cfc68.png" src="../_images/8eae97970648e41dc925edfd5ffaae82afeb1963252fba2fef1a3f22440cfc68.png" />
 </div>
 </div>
 <p>The <span class="math notranslate nohighlight">\(^1\)</span>H dipole coupling alone is insufficient to drive a transfer, but if the <span class="math notranslate nohighlight">\(^1\)</span>H undergoes flipping due to spin diffusion, then the transfer occurs.</p>
@@ -870,7 +870,7 @@ State-space reduction: 64-&gt;12
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/badd0ea647c683b948ccfe2467263aa6e36fbf15d75c6b52728d43f21dc40300.png" src="../_images/badd0ea647c683b948ccfe2467263aa6e36fbf15d75c6b52728d43f21dc40300.png" />
+<img alt="../_images/9d1d81b5ad3293b40860de2b2e21aefec217179f84c002fbedec66e19a90c650.png" src="../_images/9d1d81b5ad3293b40860de2b2e21aefec217179f84c002fbedec66e19a90c650.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -880,7 +880,7 @@ State-space reduction: 64-&gt;12
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/2e5ba3f84d0ea1670acc7c1600341524c10202f8610720830f3c88cc41715da8.png" src="../_images/2e5ba3f84d0ea1670acc7c1600341524c10202f8610720830f3c88cc41715da8.png" />
+<img alt="../_images/755656cda432946f10f597a460fed0d1300fe6ec374979120a57b07803c63218.png" src="../_images/755656cda432946f10f597a460fed0d1300fe6ec374979120a57b07803c63218.png" />
 </div>
 </div>
 </section>
@@ -932,7 +932,7 @@ State-space reduction: 16-&gt;6
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/541fb5d3362e2423b1bf2afb5b845044a91070603e273f8b09efca9adac11496.png" src="../_images/541fb5d3362e2423b1bf2afb5b845044a91070603e273f8b09efca9adac11496.png" />
+<img alt="../_images/f0c6a11e455ccbcf9db7c5f86e02f54cd255b435131f6d5a191c075bb670905b.png" src="../_images/f0c6a11e455ccbcf9db7c5f86e02f54cd255b435131f6d5a191c075bb670905b.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -987,7 +987,7 @@ Prop: 2 steps per every 1 rotor period
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/0dbf10c39534371ef5b239351464975f276cf2269f65caf4558b60c2cd9173b0.png" src="../_images/0dbf10c39534371ef5b239351464975f276cf2269f65caf4558b60c2cd9173b0.png" />
+<img alt="../_images/48e3bb8eb72199f41067891ac2a809ba57ef341aec34fbcd92c83f8bcad71ddc.png" src="../_images/48e3bb8eb72199f41067891ac2a809ba57ef341aec34fbcd92c83f8bcad71ddc.png" />
 </div>
 </div>
 <p>Matching the rotational resonance condition distorts the spectrum by reintroducing the dipole coupling.</p>
@@ -1011,7 +1011,7 @@ Prop: 2 steps per every 1 rotor period
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/dbd2301f362b637af3f39a7b7f16947a3551235171e15befd64dc6d859d74055.png" src="../_images/dbd2301f362b637af3f39a7b7f16947a3551235171e15befd64dc6d859d74055.png" />
+<img alt="../_images/163ba66a8fc4d765dcae3c5c8ae2cab32f0f53435d6b8d28e34beed6385aa632.png" src="../_images/163ba66a8fc4d765dcae3c5c8ae2cab32f0f53435d6b8d28e34beed6385aa632.png" />
 </div>
 </div>
 <p>The rotational resonance condition induces a transfer, but it also distorts the spectrum, and furthermore can only be matched for one pair of spins at a time. So, we move off the rotational resonance condition.</p>
@@ -1055,7 +1055,7 @@ Prop: 2 steps per every 1 rotor period
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/7f94d537207c146f3dfd946112da1addfb02b580ed02b2d49f2801eebb7827fb.png" src="../_images/7f94d537207c146f3dfd946112da1addfb02b580ed02b2d49f2801eebb7827fb.png" />
+<img alt="../_images/bbe874d751d54de87a5d6fa6ce40bce5dd0f3db3d9a4a97fdac5547c32fb4c1e.png" src="../_images/bbe874d751d54de87a5d6fa6ce40bce5dd0f3db3d9a4a97fdac5547c32fb4c1e.png" />
 </div>
 </div>
 <p>Away from rotational resonance, our spectrum looks nicer, but what happens to our transfer?</p>
@@ -1115,7 +1115,7 @@ Prop: 2 steps per every 1 rotor period
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/9023c9e3147a57e6795b3f8bf5a4a5962ebe72326b53cb39d633cfe0d89b07b4.png" src="../_images/9023c9e3147a57e6795b3f8bf5a4a5962ebe72326b53cb39d633cfe0d89b07b4.png" />
+<img alt="../_images/0e05e38527674479532bea9b4a71540eb0a60a89dfe6606e99d0a80ae7cb9437.png" src="../_images/0e05e38527674479532bea9b4a71540eb0a60a89dfe6606e99d0a80ae7cb9437.png" />
 </div>
 </div>
 <p>Then, can we achieve the same affect by coupling to a <span class="math notranslate nohighlight">\(^1\)</span>H?</p>
@@ -1163,7 +1163,7 @@ Prop: 2 steps per every 1 rotor period
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/d332dbe5d5d6dea971f216c798bc8f3b877b062175185b35db0d5d26dcb2a571.png" src="../_images/d332dbe5d5d6dea971f216c798bc8f3b877b062175185b35db0d5d26dcb2a571.png" />
+<img alt="../_images/9bf31b006b0274ee4e0c05fbe8fd9dd18f8b00b200ebdeffd609ae962b484c41.png" src="../_images/9bf31b006b0274ee4e0c05fbe8fd9dd18f8b00b200ebdeffd609ae962b484c41.png" />
 </div>
 </div>
 <p>Some transfer occurs, although it is not particularly efficient. We finally want to understand what happens if we introduce a field on the <span class="math notranslate nohighlight">\(^1\)</span>H matching the rotary resonance recoupling (R<span class="math notranslate nohighlight">\(^3\)</span>) condition</p>
@@ -1192,7 +1192,7 @@ Prop: 5 steps per every 1 rotor period
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/da529bc27070062a821bee90e26ee21e1d2e94cb97c26c9a36e3896db43f73aa.png" src="../_images/da529bc27070062a821bee90e26ee21e1d2e94cb97c26c9a36e3896db43f73aa.png" />
+<img alt="../_images/118318b53d027f767e0848514cefd9d151d6c1acc2a2ada08519d2ac09912eed.png" src="../_images/118318b53d027f767e0848514cefd9d151d6c1acc2a2ada08519d2ac09912eed.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -1218,22 +1218,22 @@ Prop: 5 steps per every 1 rotor period
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/d8973ae9b95591f2f36cf873751e183e4a2823570662a187be376414bd2179c4.png" src="../_images/d8973ae9b95591f2f36cf873751e183e4a2823570662a187be376414bd2179c4.png" />
+<img alt="../_images/2f127b6b888a22759594a4a26e42455751ef4c128641a1f43757219b6dca203a.png" src="../_images/2f127b6b888a22759594a4a26e42455751ef4c128641a1f43757219b6dca203a.png" />
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">rho_spec</span><span class="o">.</span><span class="n">apod_pars</span><span class="p">[</span><span class="s1">&#39;LB&#39;</span><span class="p">]</span><span class="o">=</span><span class="mi">500</span>
 <span class="n">ax</span><span class="o">=</span><span class="n">rho_spec</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">FT</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">apodize</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span><span class="mi">5</span><span class="p">])</span>
-<span class="n">CS</span><span class="o">=-</span><span class="mi">15</span><span class="o">*</span><span class="n">ex</span><span class="o">.</span><span class="n">v0</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">/</span><span class="mf">1e6</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">])</span>
+<span class="n">CS</span><span class="o">=-</span><span class="mi">15</span><span class="o">*</span><span class="n">ex</span><span class="o">.</span><span class="n">v0</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">/</span><span class="mf">1e9</span>
 <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="n">CS</span><span class="p">,</span><span class="n">CS</span><span class="p">],</span><span class="n">ax</span><span class="o">.</span><span class="n">get_ylim</span><span class="p">(),</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;grey&#39;</span><span class="p">,</span><span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;:&#39;</span><span class="p">)</span>
-<span class="n">_</span><span class="o">=</span><span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="n">CS</span><span class="o">+</span><span class="mi">10000</span><span class="p">,</span><span class="n">CS</span><span class="o">+</span><span class="mi">10000</span><span class="p">],</span><span class="n">ax</span><span class="o">.</span><span class="n">get_ylim</span><span class="p">(),</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;grey&#39;</span><span class="p">,</span><span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;:&#39;</span><span class="p">)</span>
+<span class="n">_</span><span class="o">=</span><span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="n">CS</span><span class="o">+</span><span class="mi">10</span><span class="p">,</span><span class="n">CS</span><span class="o">+</span><span class="mi">10</span><span class="p">],</span><span class="n">ax</span><span class="o">.</span><span class="n">get_ylim</span><span class="p">(),</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;grey&#39;</span><span class="p">,</span><span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;:&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/5b59dd399f92d7c21143d5f34e6579aeb1b774ddec0444b125ac7689618ac82f.png" src="../_images/5b59dd399f92d7c21143d5f34e6579aeb1b774ddec0444b125ac7689618ac82f.png" />
+<img alt="../_images/f5d8c4129fab2d40040336fedb667f3b94fd80c9b205051791b3f8b1b50c3bcd.png" src="../_images/f5d8c4129fab2d40040336fedb667f3b94fd80c9b205051791b3f8b1b50c3bcd.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -1256,7 +1256,7 @@ Prop: 5 steps per every 1 rotor period
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/38b7914ef203595341454361a026692082ec8bd64721f09a2338823ab59fa147.png" src="../_images/38b7914ef203595341454361a026692082ec8bd64721f09a2338823ab59fa147.png" />
+<img alt="../_images/830dbcabc24e0a3e7053401b3abb438bfff7b16c289cc5b166770569129bf820.png" src="../_images/830dbcabc24e0a3e7053401b3abb438bfff7b16c289cc5b166770569129bf820.png" />
 </div>
 </div>
 <p>Then, we see how broadening the C-C R<span class="math notranslate nohighlight">\(^2\)</span> condition via recoupling the H–C dipole coupling with R<span class="math notranslate nohighlight">\(^3\)</span> allows for C-C spin-diffusion to occur. This is also a convenient way to achieve the required broadening, since to recover an unbroadened spectrum, we must simply remove the field from the <span class="math notranslate nohighlight">\(^1\)</span>H channel (or better yet, apply heteronuclear decoupling).</p>

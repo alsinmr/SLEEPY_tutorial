@@ -34,7 +34,7 @@
     <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=a3416100" />
     <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
   
@@ -520,11 +520,11 @@
 </div>
 </div>
 </div>
-<p>The shift in the NMR peak due to an isotropic coupling to a polarized electron is known as the contact shift. The pseudo-contact shift, on the other hand, results from the anisotropic part of the coupling to the electron. The anisotropic hyperfine coupling’s Hamiltonian has an average of zero when sampling all orientations, however. This means that isotropic tumbling or MAS would in principal remove the hyperfine coupling (MAS can, in principle, leave spnning sidebands), even if the electron is polarized. Another factor comes in, however, which is the fact that the <span class="math notranslate nohighlight">\(g_{xz}\)</span> and <span class="math notranslate nohighlight">\(g_{yz}\)</span> components of the electron g-tensor may be large enough to tilt the electron’s quantization axis away from the magnetic field’s <em>z</em>-axis, such that MAS or isotropic tumbling no longer results in a complete averaging of the hyperfine Hamiltonian. Furthermore, the electron’s polarization becomes orientation-dependent, which also hinders complete averaging of the pseudo-contact shift.</p>
+<p>The shift in the NMR peak due to an isotropic coupling to a polarized electron is known as the contact shift. The pseudo-contact shift, on the other hand, results from the anisotropic part of the coupling to the electron. The anisotropic hyperfine coupling’s Hamiltonian has an average of zero when sampling all orientations, however. This means that isotropic tumbling or MAS would in principal remove the hyperfine coupling (MAS may leave spnning sidebands), even if the electron is polarized. Another factor comes in, however, which is the fact that the <span class="math notranslate nohighlight">\(g_{xz}\)</span> and <span class="math notranslate nohighlight">\(g_{yz}\)</span> components of the electron g-tensor may be large enough to tilt the electron’s quantization axis away from the magnetic field’s <em>z</em>-axis, such that MAS or isotropic tumbling no longer results in a complete averaging of the hyperfine Hamiltonian. Furthermore, the electron’s polarization becomes orientation-dependent, which also hinders complete averaging of the pseudo-contact shift.</p>
 </section>
 <section id="pseudo-contact-shift-without-g-anisotropy">
 <h2>Pseudo-contact shift without g-anisotropy<a class="headerlink" href="#pseudo-contact-shift-without-g-anisotropy" title="Link to this heading">#</a></h2>
-<p>Without MAS or motion to average the coupling, a pseudo-contact shift (PCS) appears without g-tensor anisotropy, although the average shift is indeed zero. We start by simulating this case, showing the PCS under static conditions, and under tumbling or MAS.</p>
+<p>Without MAS or motion to average the coupling, a pseudo-contact shift (PCS) appears without g-tensor anisotropy, although the average shift is zero. We start by simulating this case, showing the PCS under static conditions, and under tumbling or MAS.</p>
 <section id="build-the-system">
 <h3>Build the system<a class="headerlink" href="#build-the-system" title="Link to this heading">#</a></h3>
 <div class="cell docutils container">
@@ -545,7 +545,7 @@
 </section>
 <section id="spectrum-without-relaxation">
 <h3>Spectrum without relaxation<a class="headerlink" href="#spectrum-without-relaxation" title="Link to this heading">#</a></h3>
-<p>First, we just simulate the Pake pattern resulting from the dipolar hyperfine coupling without relaxation. We start from thermal equilibrium, in order to be able to see the asymmetry of the Pake pattern due to electron polarization. If we just start from ‘13Cx’, no polarization is enforced on the electron.</p>
+<p>First, we just simulate the Pake pattern resulting from the dipolar hyperfine coupling without relaxation. We start from thermal equilibrium, in order to be able to see the asymmetry of the Pake pattern due to electron polarization. If we just start from ‘13Cx’, no polarization is included on the electron.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">Dt</span><span class="o">=</span><span class="mf">0.00002</span>
@@ -618,12 +618,12 @@
 <span class="n">rho</span><span class="o">.</span><span class="n">DetProp</span><span class="p">(</span><span class="n">seq</span><span class="p">,</span><span class="n">n</span><span class="o">=</span><span class="mi">1024</span><span class="p">)</span>
 
 <span class="n">ax</span><span class="o">=</span><span class="n">rho</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">FT</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">apodize</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-<span class="n">_</span><span class="o">=</span><span class="n">ax</span><span class="o">.</span><span class="n">set_xlim</span><span class="p">([</span><span class="o">-</span><span class="mi">500</span><span class="p">,</span><span class="mi">500</span><span class="p">])</span>
+<span class="n">_</span><span class="o">=</span><span class="n">ax</span><span class="o">.</span><span class="n">set_xlim</span><span class="p">([</span><span class="o">-</span><span class="mf">.5</span><span class="p">,</span><span class="mf">.5</span><span class="p">])</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/c3d7faad60ca8422c1e096f09a77773580727b703203c215e67cccbdb84852a3.png" src="../_images/c3d7faad60ca8422c1e096f09a77773580727b703203c215e67cccbdb84852a3.png" />
+<img alt="../_images/6e378803afb04ae669344c42c8302dea5dbac45b9517d17f3e1f721cac0ea33c.png" src="../_images/6e378803afb04ae669344c42c8302dea5dbac45b9517d17f3e1f721cac0ea33c.png" />
 </div>
 </div>
 <p>Then, if include magic-angle spinning, the influence of the pseudo-contact shift is removed. Similarly, if the system undergoes isotropic tumbling, the pseudo-contact shift vanishes. We allow the system to hop around a tetrahedral geometry to mimic this behavior.</p>
@@ -691,7 +691,7 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/98de90941a92b0097a6bcefd7a8aaab0fbe0549bf9cc956ba1038ceec48ebaf8.png" src="../_images/98de90941a92b0097a6bcefd7a8aaab0fbe0549bf9cc956ba1038ceec48ebaf8.png" />
+<img alt="../_images/66e144b8ba636d8893fded9b52b5bbb898c8f98b0e7af01e77af266583f1deeb.png" src="../_images/66e144b8ba636d8893fded9b52b5bbb898c8f98b0e7af01e77af266583f1deeb.png" />
 </div>
 </div>
 <p>We can repeat the above calculation with decreasing temperature, to verify that the simulated PCS increases with decreasing temperature.</p>
@@ -718,7 +718,7 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/bd9df970438a0b3e96916219dd47a662ba2ecfa24f12f294cb60e07ab5283fb4.png" src="../_images/bd9df970438a0b3e96916219dd47a662ba2ecfa24f12f294cb60e07ab5283fb4.png" />
+<img alt="../_images/be0eee806c7b94282d7f03ce6797b5129bbda5bc2db4ef5410636da5926e2446.png" src="../_images/be0eee806c7b94282d7f03ce6797b5129bbda5bc2db4ef5410636da5926e2446.png" />
 </div>
 </div>
 <p>Indeed, the expected temperature dependence is obtained.</p>
@@ -750,7 +750,7 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/f3a730f7946f9d13c5837e5531d651729a32d5156f1dca21d8476cd6389c5f57.png" src="../_images/f3a730f7946f9d13c5837e5531d651729a32d5156f1dca21d8476cd6389c5f57.png" />
+<img alt="../_images/07fb608a33e2b1437697ef82d0e298671979d1e67ac1cf29b611d68abe09dd19.png" src="../_images/07fb608a33e2b1437697ef82d0e298671979d1e67ac1cf29b611d68abe09dd19.png" />
 </div>
 </div>
 <p>The magnitude of the PCS is reduced, since the electron does not recover to its thermal equilibrium quickly when hopping to a new orientation.</p>
@@ -947,7 +947,7 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/01b8e4ab6502caff2907d457327adbdde6e5d3a4e4ab325e17865763923e3e73.png" src="../_images/01b8e4ab6502caff2907d457327adbdde6e5d3a4e4ab325e17865763923e3e73.png" />
+<img alt="../_images/e5e63de2c5a11fbc8a166c48bb5e7909223d2840235100722e70026b55dec949.png" src="../_images/e5e63de2c5a11fbc8a166c48bb5e7909223d2840235100722e70026b55dec949.png" />
 </div>
 </div>
 </section>

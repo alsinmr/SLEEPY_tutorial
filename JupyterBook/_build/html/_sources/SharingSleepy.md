@@ -15,3 +15,5 @@ Part of the goal with writing SLEEPY in Python is to make it easy to share your 
 More generally:
 `https://githubtocolab.com/<username>/<repository>/blob/<branch>/<path_to_notebook>/<notebook.ipynb>`
 
+
+We are also more than happy to host simulations here. See [Users Contributions](UserLibrary.md)

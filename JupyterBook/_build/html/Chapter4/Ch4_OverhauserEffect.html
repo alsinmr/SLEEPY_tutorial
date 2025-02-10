@@ -34,7 +34,7 @@
     <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=a3416100" />
     <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
   
@@ -513,7 +513,7 @@
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">SLEEPY</span> <span class="k">as</span> <span class="nn">sl</span>
-<span class="kn">from</span> <span class="nn">SLEEPY.LFrf</span> <span class="kn">import</span> <span class="n">LFrf</span>
+<span class="n">LFrf</span><span class="o">=</span><span class="n">sl</span><span class="o">.</span><span class="n">LFrf</span>
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
 </pre></div>
@@ -558,7 +558,7 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/2c270e57ff6c2434b9dc23b0586017745cf0aab7f05d92494900b4628e85f897.png" src="../_images/2c270e57ff6c2434b9dc23b0586017745cf0aab7f05d92494900b4628e85f897.png" />
+<img alt="../_images/b6fa425f64d7f00fe84effcc13e092bcd5ea335e02fdcd5aca5fe3ead3dcd262.png" src="../_images/b6fa425f64d7f00fe84effcc13e092bcd5ea335e02fdcd5aca5fe3ead3dcd262.png" />
 </div>
 </div>
 <p>We observe that the relaxation is a pure transfer from modulation of the isotropic part of the hyperfine coupling. No magnetization is lost.</p>
@@ -594,7 +594,7 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/f58f55f2a443418573641a1430da3d49c410d542fd7eb79597a9ef73b53447ac.png" src="../_images/f58f55f2a443418573641a1430da3d49c410d542fd7eb79597a9ef73b53447ac.png" />
+<img alt="../_images/373823d525b08ae3e9c30498fe6d595390268e8c18bcd78bb2522d8882fe6fd1.png" src="../_images/373823d525b08ae3e9c30498fe6d595390268e8c18bcd78bb2522d8882fe6fd1.png" />
 </div>
 </div>
 <p>We see sharp contrasts between the two Overhauser effect mechanisms. When the scalar coupling is modulated, the total magnetization is conserved: it is simply transferred between the electron and nucleus until the magnetization is equilibrated. On the other hand, reorientation of the dipolar component both transfers magnetization between electron and nucleus, but also gradually destroys the total magnetization. We also notice that the sign of the transfer changes. We can simulate both mechanisms simultaneously (we reduce the size of the dipolar modulation to make the two effects occur on a similar timescale).</p>
@@ -614,7 +614,7 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/015b0b62593c6caf40d978a24a53f5b2a54e6371925e439dae0b991771072021.png" src="../_images/015b0b62593c6caf40d978a24a53f5b2a54e6371925e439dae0b991771072021.png" />
+<img alt="../_images/957144d8d4f602ff13ec4ab70813b88ec8993c35fade8d8d10d2ab416ddf0e80.png" src="../_images/957144d8d4f602ff13ec4ab70813b88ec8993c35fade8d8d10d2ab416ddf0e80.png" />
 </div>
 </div>
 <p>Then, the sign of the transfer turns positive, indicating the scalar mechanism, but the dipolar mechanism is also present and gradually destroys the magnetization. Note that in the real experiment, we would have a <em>much</em> faster electron relaxation, which would effectively decouple it from the <span class="math notranslate nohighlight">\(^1\)</span>H relaxation, and provide a constant source of polarization to transfer to many <span class="math notranslate nohighlight">\(^1\)</span>H. However, if the electron is saturated, then during its recovery, the <span class="math notranslate nohighlight">\(^1\)</span>H would become polarized. We demonstrate this effect next.</p>
@@ -665,7 +665,7 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/cf823a747ba69bdc7b4e08f75c14aa82b39029954d15d7f5a1ce5b980049c911.png" src="../_images/cf823a747ba69bdc7b4e08f75c14aa82b39029954d15d7f5a1ce5b980049c911.png" />
+<img alt="../_images/339c52faeab250796d100f858cf1706c3618c4f527e316997bf2230cea0de377.png" src="../_images/339c52faeab250796d100f858cf1706c3618c4f527e316997bf2230cea0de377.png" />
 </div>
 </div>
 <p>We get good performance here from the ‘DynamicThermal’ method. Now we observe the Overhauser effect enhancement by irradiating the electron such that it saturates, leading to enhancement on the <span class="math notranslate nohighlight">\(^1\)</span>H.</p>
@@ -705,7 +705,7 @@ Completed
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/ed2f90f3e6a610d6096460cfd2e71f12eca0905e380b702ce4a3197278464e09.png" src="../_images/ed2f90f3e6a610d6096460cfd2e71f12eca0905e380b702ce4a3197278464e09.png" />
+<img alt="../_images/932774a2b2a24c6d6b84a7403e7f43dd0d413e969149d2615c1557b60fbbf606.png" src="../_images/932774a2b2a24c6d6b84a7403e7f43dd0d413e969149d2615c1557b60fbbf606.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -785,7 +785,7 @@ Completed
 Completed
 </pre></div>
 </div>
-<img alt="../_images/cb920e880afe0fe5490a8a2ae2ee70366485c995f16ef00c178ab641948a8448.png" src="../_images/cb920e880afe0fe5490a8a2ae2ee70366485c995f16ef00c178ab641948a8448.png" />
+<img alt="../_images/bad4696df823215429f4e6b364711a219ed37041ffc6f596b6f2bbae384b10c4.png" src="../_images/bad4696df823215429f4e6b364711a219ed37041ffc6f596b6f2bbae384b10c4.png" />
 </div>
 </div>
 <div class="cell docutils container">

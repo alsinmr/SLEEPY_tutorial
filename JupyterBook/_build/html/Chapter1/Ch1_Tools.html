@@ -34,7 +34,7 @@
     <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=a3416100" />
     <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
   
@@ -788,7 +788,7 @@ C(t)=S^2+(1-S^2)\sum_i{A_i\exp(-t/\tau_i)}
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/5f8b2ff67a9d1214e3531ca12955eed5ce73782806fe1d47e8ca3c0d77fe9ddf.png" src="../_images/5f8b2ff67a9d1214e3531ca12955eed5ce73782806fe1d47e8ca3c0d77fe9ddf.png" />
+<img alt="../_images/d454541a9ecad483a8f980792336effb0918574292d5e9f8422dbf63413bb875.png" src="../_images/d454541a9ecad483a8f980792336effb0918574292d5e9f8422dbf63413bb875.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -805,18 +805,6 @@ C(t)=S^2+(1-S^2)\sum_i{A_i\exp(-t/\tau_i)}
 </div>
 <p>As we see, the model for tumbling yields a very nearly monoexponential correlation function, with an order parameter of nearly zero. We later use our tumbling model for predicting dynamics effects in solution.</p>
 <p>Note that the tumbling model will effect tensors differently if they are not initially pointing along the <em>z</em>-axis. The simplest way to deal with this is to always set the Euler angles to zero, but some simulations require multiple tensors with different Euler angles. In this case, it may be useful to check the correlation function and Euler angles for each tensor separately. Then, we may use <code class="docutils literal notranslate"><span class="pre">sl.Tools.L2A</span></code>, which will extract parameters for the correlation function for all anisotropic interactions in the Liouvillian. We build a system with two non-parallel interactions and demonstrate below (note we use a tool from the next section to perform the setup).</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">tc</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">shape</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(9,)
-</pre></div>
-</div>
-</div>
-</div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ex</span><span class="o">=</span><span class="n">sl</span><span class="o">.</span><span class="n">ExpSys</span><span class="p">(</span><span class="n">v0H</span><span class="o">=</span><span class="mi">600</span><span class="p">,</span><span class="n">Nucs</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;1H&#39;</span><span class="p">,</span><span class="s1">&#39;15N&#39;</span><span class="p">],</span><span class="n">vr</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">pwdavg</span><span class="o">=</span><span class="s1">&#39;alpha0beta0&#39;</span><span class="p">)</span>
@@ -840,7 +828,7 @@ C(t)=S^2+(1-S^2)\sum_i{A_i\exp(-t/\tau_i)}
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/854dae8e3cb0773dc01be4a2b17cd010535cdaed6ea787f7ae7511fc5529ef2f.png" src="../_images/854dae8e3cb0773dc01be4a2b17cd010535cdaed6ea787f7ae7511fc5529ef2f.png" />
+<img alt="../_images/bf331c6ae56b884b1238b2564afc3adab05c502f8df5fa06f1f4a0f5e0c13be1.png" src="../_images/bf331c6ae56b884b1238b2564afc3adab05c502f8df5fa06f1f4a0f5e0c13be1.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -895,10 +883,10 @@ S2 for CSA: 0.0088
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/ea862a928146a28aa2f37bac600adbe7266fdd58d4b09a53f5fff615f6fc015a.png" src="../_images/ea862a928146a28aa2f37bac600adbe7266fdd58d4b09a53f5fff615f6fc015a.png" />
+<img alt="../_images/8137feb596b5a2095e69cb51efc165e8018088222726248cc272d3e6e1834073.png" src="../_images/8137feb596b5a2095e69cb51efc165e8018088222726248cc272d3e6e1834073.png" />
 </div>
 </div>
-<p>Then, <code class="docutils literal notranslate"><span class="pre">L</span></code> is derived from the interactions in <code class="docutils literal notranslate"><span class="pre">ex</span></code>, but exchanges over 10 different sets of Euler angles. The exchange matrix can be viewed as follows:</p>
+<p>Then, <code class="docutils literal notranslate"><span class="pre">L</span></code> is derived from the interactions in <code class="docutils literal notranslate"><span class="pre">ex</span></code>, but exchanges over 4 different sets of Euler angles (for tetrahedral hopping). The exchange matrix can be viewed as follows:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">_</span><span class="o">=</span><span class="n">L</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">what</span><span class="o">=</span><span class="s1">&#39;kex&#39;</span><span class="p">,</span><span class="n">mode</span><span class="o">=</span><span class="s1">&#39;re&#39;</span><span class="p">)</span>
@@ -906,7 +894,7 @@ S2 for CSA: 0.0088
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/003630a509908ed58a9b299fa03a24e1ffb080d5a4cd62ccf8eae65ace530241.png" src="../_images/003630a509908ed58a9b299fa03a24e1ffb080d5a4cd62ccf8eae65ace530241.png" />
+<img alt="../_images/4d31ae6d1585225a2551025232b50166518a2a19d9d3bc303527416ba3310a6f.png" src="../_images/4d31ae6d1585225a2551025232b50166518a2a19d9d3bc303527416ba3310a6f.png" />
 </div>
 </div>
 </section>

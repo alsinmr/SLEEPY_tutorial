@@ -34,7 +34,7 @@
     <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=a3416100" />
     <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
   
@@ -575,7 +575,7 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/d0ad81ffeba6e18d09f2f91099ffee6c9cb1b8514ad4966f2114157b3432f5c8.png" src="../_images/d0ad81ffeba6e18d09f2f91099ffee6c9cb1b8514ad4966f2114157b3432f5c8.png" />
+<img alt="../_images/8a938b6d1fa4c2642843982d0764f5604b3d4ede4d15bed97408470ddfc09fcf.png" src="../_images/8a938b6d1fa4c2642843982d0764f5604b3d4ede4d15bed97408470ddfc09fcf.png" />
 </div>
 </div>
 </section>
@@ -596,7 +596,7 @@
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>State-space reduction: 32-&gt;16
 </pre></div>
 </div>
-<img alt="../_images/d45240f6e58d500a60a615c5dfc3c38ab7c5a30917ca3ea11549d0c776b4e896.png" src="../_images/d45240f6e58d500a60a615c5dfc3c38ab7c5a30917ca3ea11549d0c776b4e896.png" />
+<img alt="../_images/167f94ed4330a5f004a12f597092e3a7584d7ee0d4305ead3fb1349622b8fc4c.png" src="../_images/167f94ed4330a5f004a12f597092e3a7584d7ee0d4305ead3fb1349622b8fc4c.png" />
 </div>
 </div>
 <p>Indeed, we see two very different decay curves, corresponding to the two different components. However, this is somewhat unrealistic in solid-state NMR, where <span class="math notranslate nohighlight">\(^1\)</span>H spin-diffusion periodically inverts the <span class="math notranslate nohighlight">\(^1\)</span>H spins. We may add this effect by flipping the <span class="math notranslate nohighlight">\(^1\)</span>H with a rate of 50 s<span class="math notranslate nohighlight">\(^{-1}\)</span>, to see how the two curves re-converge. Here, we plot the average curve plus the two <span class="math notranslate nohighlight">\(^1\)</span>H states separately.</p>
@@ -615,7 +615,7 @@
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>State-space reduction: 32-&gt;16
 </pre></div>
 </div>
-<img alt="../_images/84db025d0b45bd78c2ae40df029a9fa841f317da0043601b1265faec630944d0.png" src="../_images/84db025d0b45bd78c2ae40df029a9fa841f317da0043601b1265faec630944d0.png" />
+<img alt="../_images/0dfb0214b91e92735426ecb450826d24e17499d7aa104507cf70f55bd08a450f.png" src="../_images/0dfb0214b91e92735426ecb450826d24e17499d7aa104507cf70f55bd08a450f.png" />
 </div>
 </div>
 </section>
@@ -649,7 +649,7 @@ State-space reduction: 32-&gt;16
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/b7bbfa3f5605ba9bd27b0278b2eeb4cc2bfe60eb3d2197c0c510d322c72a07f3.png" src="../_images/b7bbfa3f5605ba9bd27b0278b2eeb4cc2bfe60eb3d2197c0c510d322c72a07f3.png" />
+<img alt="../_images/b22bf5e15e9812c5ec27a7486b52ea12c79f339c0c211b781d1d99952e1a8956.png" src="../_images/b22bf5e15e9812c5ec27a7486b52ea12c79f339c0c211b781d1d99952e1a8956.png" />
 </div>
 </div>
 <p>The curves are fairly similar, indicating a relatively fast motion (300 ns was input). We may slow down this motion to obtain faster relaxation, but also more dispersion among the curves.</p>
@@ -681,7 +681,7 @@ State-space reduction: 32-&gt;16
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/df5e7f5f0c1942d6cde36f78ed2073cda8be8661acab56f3fbce97b91941d530.png" src="../_images/df5e7f5f0c1942d6cde36f78ed2073cda8be8661acab56f3fbce97b91941d530.png" />
+<img alt="../_images/88392f912d6bcdedd29bd5f24e083a9a940a905543ad3b56d6181c9a282c2024.png" src="../_images/88392f912d6bcdedd29bd5f24e083a9a940a905543ad3b56d6181c9a282c2024.png" />
 </div>
 </div>
 <p>We may also investigate correlation time dependence for several field strengths. In this case, we use a special feature of SLEEPY, the <code class="docutils literal notranslate"><span class="pre">rho.extract_decay_rates(...)</span></code> function, which extracts non-oscillating terms from the propagator or sequence directly, without actually propagating the system. This is achieved by finding the eigenvalues and eigenvectors of the propagator. The real parts of the logarithm of the eigenvalues yield the decay rates, where we may filter for non-oscillating terms by finding eigenvalues that are strictly real.</p>
@@ -709,11 +709,11 @@ State-space reduction: 32-&gt;16
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>log10(tc)=-8.0, 14 seconds elapsed
-log10(tc)=-7.0, 153 seconds elapsed
-log10(tc)=-6.0, 272 seconds elapsed
-log10(tc)=-5.0, 385 seconds elapsed
-log10(tc)=-4.0, 540 seconds elapsed
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>log10(tc)=-8.0, 15 seconds elapsed
+log10(tc)=-7.0, 249 seconds elapsed
+log10(tc)=-6.0, 373 seconds elapsed
+log10(tc)=-5.0, 492 seconds elapsed
+log10(tc)=-4.0, 633 seconds elapsed
 </pre></div>
 </div>
 </div>
@@ -730,7 +730,7 @@ log10(tc)=-4.0, 540 seconds elapsed
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/b3a8341eef3deb341d844a2eb5c704dda8f8a24280450ce72da2b87d8c23f11b.png" src="../_images/b3a8341eef3deb341d844a2eb5c704dda8f8a24280450ce72da2b87d8c23f11b.png" />
+<img alt="../_images/4700f22575fd3ecfff1d20c08b6a3524274c182efc1242d57549ffa0a0a954ff.png" src="../_images/4700f22575fd3ecfff1d20c08b6a3524274c182efc1242d57549ffa0a0a954ff.png" />
 </div>
 </div>
 </section>

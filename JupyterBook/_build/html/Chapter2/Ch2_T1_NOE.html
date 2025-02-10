@@ -34,7 +34,7 @@
     <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=a3416100" />
     <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
   
@@ -536,7 +536,7 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/118d2936c23af4a49182d46be361cf299f767d2bfc658642c09d50f2633d6116.png" src="../_images/118d2936c23af4a49182d46be361cf299f767d2bfc658642c09d50f2633d6116.png" />
+<img alt="../_images/d2726139ad7ccedfc903bbc57880f531b6cc0626e02901a0c2b584e6c75f474a.png" src="../_images/d2726139ad7ccedfc903bbc57880f531b6cc0626e02901a0c2b584e6c75f474a.png" />
 </div>
 </div>
 <p>We observe both spins start from their thermal equilibrium and decay towards zero. The <span class="math notranslate nohighlight">\(^{15}\)</span>N magnetization is briefly enhanced by magnetization from the <span class="math notranslate nohighlight">\(^1\)</span>H spin, but then decays together with the <span class="math notranslate nohighlight">\(^1\)</span>H.</p>
@@ -557,7 +557,7 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/17e9d34d5c37f73ea50e99182c169acae171f001048f17db7c5b1b1279af88a5.png" src="../_images/17e9d34d5c37f73ea50e99182c169acae171f001048f17db7c5b1b1279af88a5.png" />
+<img alt="../_images/9b8cd1af95ea01cd6666c3fd7d02822b161ffaeeaa0c842e1429b09c1a54d949.png" src="../_images/9b8cd1af95ea01cd6666c3fd7d02822b161ffaeeaa0c842e1429b09c1a54d949.png" />
 </div>
 </div>
 <p><code class="docutils literal notranslate"><span class="pre">'DynamicThermal'</span></code> works by calculating the full Liouvillian (referred to here as <span class="math notranslate nohighlight">\(\hat{\hat{L}}_0\)</span>) and equilibrium density matrix, <span class="math notranslate nohighlight">\(\hat{\rho}_{eq}\)</span>. Then, a correction term is calculated, such that:</p>
@@ -578,7 +578,7 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/caef14e998503673de150e6399086f7414a3697c23d9ff59aaa57e79a1ca2525.png" src="../_images/caef14e998503673de150e6399086f7414a3697c23d9ff59aaa57e79a1ca2525.png" />
+<img alt="../_images/142c438da23adc6407f1a657ef8d528fdde54e1adecdd7becfd77718e31dd746.png" src="../_images/142c438da23adc6407f1a657ef8d528fdde54e1adecdd7becfd77718e31dd746.png" />
 </div>
 </div>
 <p>Then, it is important to note: this correction will result in polarization on, for example, the <span class="math notranslate nohighlight">\(\hat{S}_z\)</span> term, by continually reducing the population of <span class="math notranslate nohighlight">\(\hat{S}_\beta\)</span> and increasing the population of <span class="math notranslate nohighlight">\(\hat{S}_\alpha\)</span>, whereas the rest of the Liouvillian is continuously try to equilibrate these populations. However, we also expect asymmetric transfer between, for example, the <span class="math notranslate nohighlight">\(\hat{I}^+\hat{S}_\alpha\)</span> and <span class="math notranslate nohighlight">\(\hat{I}^+\hat{S}_\beta\)</span> populations. This is what gives rise to the <a class="reference internal" href="../Chapter5/Ch5_ContactShift.html"><span class="std std-doc">contact shift</span></a> occuring due to fast relaxing electrons. However, both the <span class="math notranslate nohighlight">\(\hat{I}^+\hat{S}_\alpha\)</span> and <span class="math notranslate nohighlight">\(\hat{I}^+\hat{S}_\beta\)</span> terms are zero under thermal conditions, and therefore are not included in the “DynamicThermal” correction term, as we can see above where we note that the correction is calculated from the density matrix at thermal equilibrium, <span class="math notranslate nohighlight">\(\hat{\rho}_{eq}\)</span>. We will later see that we can correctly produce contact and pseudo-contact shifts using Lindblad formalism,<span class="math notranslate nohighlight">\(^1\)</span> but this is obtained with a different set of settings which we will use later for paramagnetic effects.</p>
@@ -611,7 +611,7 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/0dc5dd8ed6d5993ad5462e7915929a75de318d39ca13fac351b74a819a503815.png" src="../_images/0dc5dd8ed6d5993ad5462e7915929a75de318d39ca13fac351b74a819a503815.png" />
+<img alt="../_images/fd563102640ebd39a9c4bbbf441cf5e1be836dd095cd14a2f3bc549ce0ea5a31.png" src="../_images/fd563102640ebd39a9c4bbbf441cf5e1be836dd095cd14a2f3bc549ce0ea5a31.png" />
 </div>
 </div>
 <p>First, we get the propagator for the lab-frame RF. Then, we apply it to a system at thermal equilibrium, to observe it evolve away from thermal equilibrium due to the RF irradation saturating the <span class="math notranslate nohighlight">\(^1\)</span>H.</p>
@@ -626,7 +626,7 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/7db47308af6f43cce1f63179a9bbdd167a590f615fc11bcbfb3a67ad3b13fce5.png" src="../_images/7db47308af6f43cce1f63179a9bbdd167a590f615fc11bcbfb3a67ad3b13fce5.png" />
+<img alt="../_images/27e2abfca69cb20f34f5d778b9f5e20d429ba4e97430089efdcdb9b4ef059b57.png" src="../_images/27e2abfca69cb20f34f5d778b9f5e20d429ba4e97430089efdcdb9b4ef059b57.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -670,7 +670,7 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/6d401b0da597e0699cca8f28b3b6669363462cf3a377f03721c1f598014ce0dc.png" src="../_images/6d401b0da597e0699cca8f28b3b6669363462cf3a377f03721c1f598014ce0dc.png" />
+<img alt="../_images/704ad18e44610067e2cf0da5f4e1770fe8b56f2bea8af8356230b3ef2eb24036.png" src="../_images/704ad18e44610067e2cf0da5f4e1770fe8b56f2bea8af8356230b3ef2eb24036.png" />
 </div>
 </div>
 <p>We then get the expected enhancement values for an H–N heteronuclear NOE. A little noise appears at short correlation times where the <code class="docutils literal notranslate"><span class="pre">DynamicThermal</span></code> method is less numerically stable. Limits to this method are discussed in detail in <a class="reference internal" href="Ch2_T1_limits.html"><span class="std std-doc">T<span class="math notranslate nohighlight">\(_1\)</span>tests</span></a>.</p>

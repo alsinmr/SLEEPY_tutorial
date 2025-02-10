@@ -34,7 +34,7 @@
     <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=a3416100" />
     <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
   
@@ -559,9 +559,7 @@
 <span class="n">ex0</span><span class="o">.</span><span class="n">set_inter</span><span class="p">(</span><span class="s1">&#39;CSA&#39;</span><span class="p">,</span><span class="n">delta</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span><span class="n">i</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
 
 <span class="c1"># This builds a 3-site symmetric exchange, with opening angle phi</span>
-<span class="n">ex</span><span class="p">,</span><span class="n">kex</span><span class="o">=</span><span class="n">sl</span><span class="o">.</span><span class="n">Tools</span><span class="o">.</span><span class="n">Setup3siteSym</span><span class="p">(</span><span class="n">ex0</span><span class="p">,</span><span class="n">tc</span><span class="o">=</span><span class="mf">1e-9</span><span class="p">,</span><span class="n">phi</span><span class="o">=</span><span class="n">phi</span><span class="p">)</span>
-
-<span class="n">L</span><span class="o">=</span><span class="n">sl</span><span class="o">.</span><span class="n">Liouvillian</span><span class="p">(</span><span class="n">ex</span><span class="p">,</span><span class="n">kex</span><span class="o">=</span><span class="n">kex</span><span class="p">)</span>
+<span class="n">L</span><span class="o">=</span><span class="n">sl</span><span class="o">.</span><span class="n">Tools</span><span class="o">.</span><span class="n">Setup3siteSym</span><span class="p">(</span><span class="n">ex0</span><span class="p">,</span><span class="n">tc</span><span class="o">=</span><span class="mf">1e-9</span><span class="p">,</span><span class="n">phi</span><span class="o">=</span><span class="n">phi</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -630,7 +628,7 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/650a216c40232b5992840db1830b7245b37fb8f73a45db7e62384c6b73a82d3a.png" src="../_images/650a216c40232b5992840db1830b7245b37fb8f73a45db7e62384c6b73a82d3a.png" />
+<img alt="../_images/85df121df7a5521bddbd76661751840974addbf031a56f1daf77977cbba322ac.png" src="../_images/85df121df7a5521bddbd76661751840974addbf031a56f1daf77977cbba322ac.png" />
 </div>
 </div>
 <p>Below, we build propagators for steps within the rotor period. The decoupling sequences are in “cyclic” mode by default (<code class="docutils literal notranslate"><span class="pre">cyclic=True</span></code>). In this mode, when we create a propagator from a sequence, it advances the time in the rotor period and the time in the sequence, so the second propagator starts where the previous propagator left off both in the rotor cycle and in the pulse sequence. At the end of the sequence, the propagators will come back to the beginning of the sequence.</p>
@@ -690,7 +688,7 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/da5c78fd21806118dfac6ca6c396986c14d5688e7642cda55abb49404e077f45.png" src="../_images/da5c78fd21806118dfac6ca6c396986c14d5688e7642cda55abb49404e077f45.png" />
+<img alt="../_images/f166177e99876de23327f6b683b4a7a31e4518f5c67c87d3f671520f95b4a0cc.png" src="../_images/f166177e99876de23327f6b683b4a7a31e4518f5c67c87d3f671520f95b4a0cc.png" />
 </div>
 </div>
 <p>Above, we obtain a typical DIPSHIFT dephasing curve.</p>
@@ -709,7 +707,7 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/8c6d2a6f3e9443c07889c03c6b02b0037c9ed7c577046bac02c1c278d1b65655.png" src="../_images/8c6d2a6f3e9443c07889c03c6b02b0037c9ed7c577046bac02c1c278d1b65655.png" />
+<img alt="../_images/0b10f105fb95ef65534af9621255bfd1e446c6681d67efaa65e4b16324db8a5d.png" src="../_images/0b10f105fb95ef65534af9621255bfd1e446c6681d67efaa65e4b16324db8a5d.png" />
 </div>
 </div>
 </section>
@@ -752,15 +750,15 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>log10(tc/s) = -9, 15 seconds elapsed
-log10(tc/s) = -8, 30 seconds elapsed
-log10(tc/s) = -7, 43 seconds elapsed
-log10(tc/s) = -6, 55 seconds elapsed
-log10(tc/s) = -5, 68 seconds elapsed
-log10(tc/s) = -4, 81 seconds elapsed
-log10(tc/s) = -3, 95 seconds elapsed
-log10(tc/s) = -2, 108 seconds elapsed
-log10(tc/s) = -1, 121 seconds elapsed
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>log10(tc/s) = -9, 8 seconds elapsed
+log10(tc/s) = -8, 16 seconds elapsed
+log10(tc/s) = -7, 24 seconds elapsed
+log10(tc/s) = -6, 32 seconds elapsed
+log10(tc/s) = -5, 39 seconds elapsed
+log10(tc/s) = -4, 47 seconds elapsed
+log10(tc/s) = -3, 54 seconds elapsed
+log10(tc/s) = -2, 61 seconds elapsed
+log10(tc/s) = -1, 69 seconds elapsed
 </pre></div>
 </div>
 </div>
@@ -784,10 +782,10 @@ log10(tc/s) = -1, 121 seconds elapsed
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/bf1ae1c14a2e24d274dc3c7844b16b57d4157ca2cf7176e180f84fa94b16e914.png" src="../_images/bf1ae1c14a2e24d274dc3c7844b16b57d4157ca2cf7176e180f84fa94b16e914.png" />
+<img alt="../_images/70c9b5fa2af4626c5a0a9f42e748d7c12c3bd2d0fbb6689dc870f8e2b9698577.png" src="../_images/70c9b5fa2af4626c5a0a9f42e748d7c12c3bd2d0fbb6689dc870f8e2b9698577.png" />
 </div>
 </div>
-<p>Finally, we see the behavior of the DIPSHIFT curve as a function of correlation time. For short correlation times, we get a reduced dipole coupling, whereas for long correlation times, we obtain the full coupling. For intermediate times, we get a broadened curve.</p>
+<p>Finally, we see the behavior of the DIPSHIFT curve as a function of correlation time. For short correlation times, we get a reduced dipole coupling, whereas for long correlation times, we obtain the full coupling. For intermediate times, we get a broadened curve. There is also significant signal loss for intermediate times, which may not be obvious experimentally since we usually reference these curves to their first time point.</p>
 </section>
 </section>
 
