@@ -561,6 +561,7 @@
  &#39;ctype&#39;: numpy.complex128,
  &#39;parallel&#39;: False,
  &#39;cache&#39;: True,
+ &#39;MaxPropCache&#39;: 10,
  &#39;ncores&#39;: None,
  &#39;verbose&#39;: True,
  &#39;zoom&#39;: False,
@@ -628,7 +629,7 @@
 </div>
 <div class="cell_output docutils container">
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;Nuc&#39;: &#39;C&#39;,
- &#39;mass&#39;: 13.0,
+ &#39;mass&#39;: 13,
  &#39;spin&#39;: 0.5,
  &#39;gyro&#39;: 10708398.762252755,
  &#39;abundance&#39;: 0.010700000000000001}
@@ -643,14 +644,11 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>                     0
-Nuc                  N
-mass              15.0
-spin               0.5
-gyro        -4317266.6
-abundance      0.00368
-
-[1 experiments with 5 parameters]
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;Nuc&#39;: &#39;N&#39;,
+ &#39;mass&#39;: 15,
+ &#39;spin&#39;: 0.5,
+ &#39;gyro&#39;: -4317266.628692447,
+ &#39;abundance&#39;: 0.00368}
 </pre></div>
 </div>
 </div>
@@ -664,7 +662,7 @@ abundance      0.00368
 <div class="cell_output docutils container">
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>                     0           1           2
 Nuc                  O           O           O
-mass              16.0        17.0        18.0
+mass                16          17          18
 spin               0.0         2.5         0.0
 gyro               0.0  -5774236.2         0.0
 abundance   0.99757000  0.00037999  0.00204999

@@ -610,7 +610,7 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/Users/albertsmith/Documents/GitHub/SLEEPY/SLEEPY/Liouvillian.py:541: UserWarning: T1 relaxation included without T2 relaxation. Unphysical system
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/Users/albertsmith/Documents/GitHub/SLEEPY/SLEEPY/Liouvillian.py:499: UserWarning: T1 relaxation included without T2 relaxation. Unphysical system
   warnings.warn(&#39;T1 relaxation included without T2 relaxation. Unphysical system&#39;)
 </pre></div>
 </div>
@@ -735,7 +735,7 @@
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">L</span><span class="o">.</span><span class="n">clear_relax</span><span class="p">()</span>
-<span class="n">L</span><span class="o">.</span><span class="n">add_relax</span><span class="p">(</span><span class="s1">&#39;T2&#39;</span><span class="p">,</span><span class="n">i</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">T2</span><span class="o">=</span><span class="mf">5e-13</span><span class="p">)</span>
+<span class="n">L</span><span class="o">.</span><span class="n">add_relax</span><span class="p">(</span><span class="s1">&#39;T2&#39;</span><span class="p">,</span><span class="n">i</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">T2</span><span class="o">=</span><span class="mf">5e-13</span><span class="p">,</span><span class="n">OS</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 <span class="n">seq</span><span class="o">=</span><span class="n">L</span><span class="o">.</span><span class="n">Sequence</span><span class="p">()</span>
 <span class="n">U</span><span class="o">=</span><span class="n">seq</span><span class="o">**</span><span class="mi">20</span>
 
@@ -757,7 +757,7 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/c2bf5419952204e6ca7c7b23403f09f4accdc5d337f539d2a91564428ffb0326.png" src="../_images/c2bf5419952204e6ca7c7b23403f09f4accdc5d337f539d2a91564428ffb0326.png" />
+<img alt="../_images/b680ba0d76cd36264369996723b40ac3871eebad826a5ca321abb21b3fdff602.png" src="../_images/b680ba0d76cd36264369996723b40ac3871eebad826a5ca321abb21b3fdff602.png" />
 </div>
 </div>
 <p>Electron <span class="math notranslate nohighlight">\(T_2\)</span> then similarly induces a nuclear <span class="math notranslate nohighlight">\(T_2\)</span> and <span class="math notranslate nohighlight">\(T_1\)</span>. Unlike the scalar case, the <span class="math notranslate nohighlight">\(T_1\)</span> is not a pure Overhauser effect transfer, and eventually the full magnetization is destroyed.</p>
@@ -770,7 +770,7 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/677d18475a1fb21c3c439b189f97af4c18dcde43de6f5126eb588bc9875a5762.png" src="../_images/677d18475a1fb21c3c439b189f97af4c18dcde43de6f5126eb588bc9875a5762.png" />
+<img alt="../_images/de57eb2e23ee8f7626586b0722ca2a222c0493986d6ff798156debc7748c97c1.png" src="../_images/de57eb2e23ee8f7626586b0722ca2a222c0493986d6ff798156debc7748c97c1.png" />
 </div>
 </div>
 <p>We can also sweep the electron <span class="math notranslate nohighlight">\(T_2\)</span> to determine the dependence of the nuclear <span class="math notranslate nohighlight">\(T_1\)</span> on the <span class="math notranslate nohighlight">\(T_2\)</span>.</p>
@@ -839,7 +839,7 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/Users/albertsmith/Documents/GitHub/SLEEPY/SLEEPY/Liouvillian.py:541: UserWarning: T1 relaxation included without T2 relaxation. Unphysical system
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/Users/albertsmith/Documents/GitHub/SLEEPY/SLEEPY/Liouvillian.py:499: UserWarning: T1 relaxation included without T2 relaxation. Unphysical system
   warnings.warn(&#39;T1 relaxation included without T2 relaxation. Unphysical system&#39;)
 </pre></div>
 </div>
@@ -881,7 +881,7 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/Users/albertsmith/Documents/GitHub/SLEEPY/SLEEPY/Liouvillian.py:541: UserWarning: T1 relaxation included without T2 relaxation. Unphysical system
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/Users/albertsmith/Documents/GitHub/SLEEPY/SLEEPY/Liouvillian.py:499: UserWarning: T1 relaxation included without T2 relaxation. Unphysical system
   warnings.warn(&#39;T1 relaxation included without T2 relaxation. Unphysical system&#39;)
 </pre></div>
 </div>

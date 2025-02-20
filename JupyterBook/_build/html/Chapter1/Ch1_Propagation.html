@@ -620,7 +620,7 @@ Constructed from the following Liouvillian:
 		array([[-50000.,  50000.],
 		       [ 50000., -50000.]])
 	
-&lt;SLEEPY.SLEEPY.Propagator.Propagator object at 0x7fc8d0bc2fd0&gt;
+&lt;SLEEPY.SLEEPY.Propagator.Propagator object at 0x7fe2e85758d0&gt;
 </pre></div>
 </div>
 </div>
@@ -633,7 +633,7 @@ Constructed from the following Liouvillian:
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/Users/albertsmith/Documents/GitHub/SLEEPY/SLEEPY/Propagator.py:259: UserWarning: 
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/Users/albertsmith/Documents/GitHub/SLEEPY/SLEEPY/Propagator.py:260: UserWarning: 
 First propagator ends at 5.555555555555556e-06 but second propagator starts at 0.0
   warnings.warn(f&#39;\nFirst propagator ends at {U.tf%self.taur} but second propagator starts at {self.t0%U.taur}&#39;)
 </pre></div>
@@ -702,7 +702,7 @@ First propagator ends at 5.555555555555556e-06 but second propagator starts at 0
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/68e6f9878a90e5fb29cd3c95fda7e7da187c9bb5ff0a842c92088e22379234df.png" src="../_images/68e6f9878a90e5fb29cd3c95fda7e7da187c9bb5ff0a842c92088e22379234df.png" />
+<img alt="../_images/fe18615d9b001360de2d0e3692a6499f7866e595f4f36ee490f73083fa03313a.png" src="../_images/fe18615d9b001360de2d0e3692a6499f7866e595f4f36ee490f73083fa03313a.png" />
 </div>
 </div>
 <p>Alternatively, we may use pulses. We may overwrite the existing channels, or just create a new sequence. Here we overwrite the <span class="math notranslate nohighlight">\(^{13}\)</span>C channel by calling it without any arguments (the default for v1 is 0). Note that the <code class="docutils literal notranslate"><span class="pre">seq.add_channel(...)</span></code> function returns the sequence, so we can string together multiple calls to <code class="docutils literal notranslate"><span class="pre">seq</span></code>.</p>
@@ -716,7 +716,7 @@ First propagator ends at 5.555555555555556e-06 but second propagator starts at 0
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/39f62bc9d86fd7fd4e04d09ebe037b6bf5deec27eafa9da2d1c3bdb8a32d0e80.png" src="../_images/39f62bc9d86fd7fd4e04d09ebe037b6bf5deec27eafa9da2d1c3bdb8a32d0e80.png" />
+<img alt="../_images/54c2f422502b562523baf5ca4491e8fb0fa0426e979e0836778f3920e1f09b93.png" src="../_images/54c2f422502b562523baf5ca4491e8fb0fa0426e979e0836778f3920e1f09b93.png" />
 </div>
 </div>
 <p>This setup lets us easily create shaped pulses by just providing a time axis and a time-dependent amplitude. Note that for complex shapes, it is computationally advantageous to synchronize the time axis for the sequence with <code class="docutils literal notranslate"><span class="pre">n_gamma</span></code> for the rotor period, i.e. if <code class="docutils literal notranslate"><span class="pre">n_gamma</span></code> is 100, and we define a sequence over one rotor period, we would take 100 uniform time steps (i.e. <code class="docutils literal notranslate"><span class="pre">t=np.linspace(0,L.taur,ex.n_gamma)</span></code>). This is because a new propagator needs to be calculated for every new <span class="math notranslate nohighlight">\(\gamma\)</span>-angle, but also for every new field strength, but these can be synchronized.</p>
@@ -802,7 +802,7 @@ Constructed from the following Liouvillian:
 		array([[-50000.,  50000.],
 		       [ 50000., -50000.]])
 	
-&lt;SLEEPY.SLEEPY.Propagator.Propagator object at 0x7fc8503dd940&gt;
+&lt;SLEEPY.SLEEPY.Propagator.Propagator object at 0x7fe2f8c500b8&gt;
 </pre></div>
 </div>
 </div>
