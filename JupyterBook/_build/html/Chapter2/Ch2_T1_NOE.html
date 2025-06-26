@@ -516,7 +516,7 @@
 <span class="n">ex0</span><span class="o">.</span><span class="n">set_inter</span><span class="p">(</span><span class="s1">&#39;dipole&#39;</span><span class="p">,</span><span class="n">i0</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">i1</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">delta</span><span class="o">=</span><span class="n">delta</span><span class="p">)</span>
 
 <span class="c1"># Set up 4-site motion</span>
-<span class="n">L</span><span class="o">=</span><span class="n">sl</span><span class="o">.</span><span class="n">Tools</span><span class="o">.</span><span class="n">SetupTumbling</span><span class="p">(</span><span class="n">ex0</span><span class="p">,</span><span class="n">tc</span><span class="o">=</span><span class="mf">1e-9</span><span class="p">,</span><span class="n">q</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span> <span class="c1">#q=1 gives just the tetrahedral orientations</span>
+<span class="n">L</span><span class="o">=</span><span class="n">sl</span><span class="o">.</span><span class="n">Tools</span><span class="o">.</span><span class="n">SetupTumbling</span><span class="p">(</span><span class="n">ex0</span><span class="p">,</span><span class="n">tc</span><span class="o">=</span><span class="mf">1e-9</span><span class="p">,</span><span class="n">q</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span> <span class="c1">#q=1 gives just the tetrahedral orientations</span>
 
 <span class="n">seq</span><span class="o">=</span><span class="n">L</span><span class="o">.</span><span class="n">Sequence</span><span class="p">(</span><span class="n">Dt</span><span class="o">=</span><span class="mf">.1</span><span class="p">)</span>
 </pre></div>
@@ -536,7 +536,7 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/d2726139ad7ccedfc903bbc57880f531b6cc0626e02901a0c2b584e6c75f474a.png" src="../_images/d2726139ad7ccedfc903bbc57880f531b6cc0626e02901a0c2b584e6c75f474a.png" />
+<img alt="../_images/519ea51df5fadb90ef5f6ccaab16c00839465852f5f74a1528b8e0e7ae7311f7.png" src="../_images/519ea51df5fadb90ef5f6ccaab16c00839465852f5f74a1528b8e0e7ae7311f7.png" />
 </div>
 </div>
 <p>We observe both spins start from their thermal equilibrium and decay towards zero. The <span class="math notranslate nohighlight">\(^{15}\)</span>N magnetization is briefly enhanced by magnetization from the <span class="math notranslate nohighlight">\(^1\)</span>H spin, but then decays together with the <span class="math notranslate nohighlight">\(^1\)</span>H.</p>
