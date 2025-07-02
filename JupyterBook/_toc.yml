@@ -50,7 +50,6 @@ parts:
     - file: Chapter5/Ch5_PseudoContactShift
   - file: Chapter6/Ch6_RelaxationOptions
   - file: Chapter7/Ch7_SleepyBenchmark
-  
   - file: ColabTemplate
 - caption: User library
   numbered: false
