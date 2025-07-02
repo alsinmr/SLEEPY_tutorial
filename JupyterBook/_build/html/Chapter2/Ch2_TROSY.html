@@ -542,7 +542,7 @@
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>State-space reduction: 64-&gt;8
 </pre></div>
 </div>
-<img alt="../_images/6c69237b1bd26e7c65ac0b442a7a1927d9292d30f15d8b66ace25800997b5247.png" src="../_images/6c69237b1bd26e7c65ac0b442a7a1927d9292d30f15d8b66ace25800997b5247.png" />
+<img alt="../_images/7388465809094b9b75ff09c79da3a7b76d078d6ca711a54f3c846ee0033b232b.png" src="../_images/7388465809094b9b75ff09c79da3a7b76d078d6ca711a54f3c846ee0033b232b.png" />
 </div>
 </div>
 <p>We obtain two peaks, separated by the J-coupling, one being notably more intense and narrower than the other, where relaxation effects from the <span class="math notranslate nohighlight">\(^{15}\)</span>N CSA and H–N dipole coupling cancel. Note that since the CSA scales with field, the cancelation effect is also field dependent. We calculate the spectrum maximum as a function of field, and record the spectrum maximum to demonstrate.</p>
@@ -572,7 +572,7 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/658e857404a33e34353fbe1c84cd0811d13b147639e632d18a8a2673fc077823.png" src="../_images/658e857404a33e34353fbe1c84cd0811d13b147639e632d18a8a2673fc077823.png" />
+<img alt="../_images/298b6f6be0c3dbd40eddcd29e5dc710d42f1edde53337c507ab00a41600f136a.png" src="../_images/298b6f6be0c3dbd40eddcd29e5dc710d42f1edde53337c507ab00a41600f136a.png" />
 </div>
 </div>
 <p>We see the max occuring at ~24 T, as predicted by Fernández and Wider (23.5 T).<span class="math notranslate nohighlight">\(^2\)</span></p>
@@ -608,7 +608,7 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/88dd4e098b2a65fcc3130a9e1dc308c1d738c682c5e40f6ab8036950e6c23881.png" src="../_images/88dd4e098b2a65fcc3130a9e1dc308c1d738c682c5e40f6ab8036950e6c23881.png" />
+<img alt="../_images/27d59758a02f4cc89e045d26ad819967a3d7c4c7b0ed3d3c4f1d221fa78714f1.png" src="../_images/27d59758a02f4cc89e045d26ad819967a3d7c4c7b0ed3d3c4f1d221fa78714f1.png" />
 </div>
 </div>
 <p>The decoupled spectrum has significantly less intensity than the larger peak of the undecoupled spectrum, motivating the application of TROSY.</p>
@@ -618,14 +618,14 @@
 <p>When measuring <span class="math notranslate nohighlight">\(T_1\)</span> in solution NMR, one must take care to account for multiexponential <span class="math notranslate nohighlight">\(T_1\)</span> relaxation. To obtain <span class="math notranslate nohighlight">\(T_1\)</span> relaxation from exchange, we need to perform our calculations in the lab frame, so we set up a new <code class="docutils literal notranslate"><span class="pre">ExpSys</span></code> object (<code class="docutils literal notranslate"><span class="pre">ex</span></code> is constructed from <code class="docutils literal notranslate"><span class="pre">ex0</span></code> using the <code class="docutils literal notranslate"><span class="pre">SetupTumbling</span></code> function).</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ex0</span><span class="o">=</span><span class="n">sl</span><span class="o">.</span><span class="n">ExpSys</span><span class="p">(</span><span class="n">v0H</span><span class="o">=</span><span class="mi">1200</span><span class="p">,</span><span class="n">Nucs</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;15N&#39;</span><span class="p">,</span><span class="s1">&#39;1H&#39;</span><span class="p">],</span><span class="n">vr</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">LF</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">pwdavg</span><span class="o">=</span><span class="s1">&#39;alpha0beta90&#39;</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ex0</span><span class="o">=</span><span class="n">sl</span><span class="o">.</span><span class="n">ExpSys</span><span class="p">(</span><span class="n">v0H</span><span class="o">=</span><span class="mi">1200</span><span class="p">,</span><span class="n">Nucs</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;15N&#39;</span><span class="p">,</span><span class="s1">&#39;1H&#39;</span><span class="p">],</span><span class="n">LF</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 <span class="n">delta</span><span class="o">=</span><span class="n">sl</span><span class="o">.</span><span class="n">Tools</span><span class="o">.</span><span class="n">dipole_coupling</span><span class="p">(</span><span class="mf">.102</span><span class="p">,</span><span class="s1">&#39;1H&#39;</span><span class="p">,</span><span class="s1">&#39;15N&#39;</span><span class="p">)</span>
 <span class="n">ex0</span><span class="o">.</span><span class="n">set_inter</span><span class="p">(</span><span class="s1">&#39;dipole&#39;</span><span class="p">,</span><span class="n">i0</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">i1</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">delta</span><span class="o">=</span><span class="n">delta</span><span class="p">)</span>
 <span class="n">ex0</span><span class="o">.</span><span class="n">set_inter</span><span class="p">(</span><span class="s1">&#39;CSA&#39;</span><span class="p">,</span><span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">delta</span><span class="o">=</span><span class="mi">113</span><span class="p">)</span>
 <span class="n">ex0</span><span class="o">.</span><span class="n">set_inter</span><span class="p">(</span><span class="s1">&#39;J&#39;</span><span class="p">,</span><span class="n">i0</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">i1</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">J</span><span class="o">=</span><span class="mi">92</span><span class="p">)</span>
 
 <span class="c1"># Set up 4-site motion</span>
-<span class="n">L</span><span class="o">=</span><span class="n">sl</span><span class="o">.</span><span class="n">Tools</span><span class="o">.</span><span class="n">SetupTumbling</span><span class="p">(</span><span class="n">ex0</span><span class="p">,</span><span class="n">tc</span><span class="o">=</span><span class="mf">1e-9</span><span class="p">,</span><span class="n">q</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span> <span class="c1">#Defaults to the magic angle, which will average the couplings</span>
+<span class="n">L</span><span class="o">=</span><span class="n">sl</span><span class="o">.</span><span class="n">Tools</span><span class="o">.</span><span class="n">SetupTumbling</span><span class="p">(</span><span class="n">ex0</span><span class="p">,</span><span class="n">tc</span><span class="o">=</span><span class="mf">1e-9</span><span class="p">,</span><span class="n">q</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span> <span class="c1">#Defaults to the magic angle, which will average the couplings</span>
 <span class="n">L</span><span class="o">.</span><span class="n">add_relax</span><span class="p">(</span><span class="s1">&#39;DynamicThermal&#39;</span><span class="p">)</span>
 
 <span class="n">rho</span><span class="o">=</span><span class="n">sl</span><span class="o">.</span><span class="n">Rho</span><span class="p">(</span><span class="s1">&#39;zero&#39;</span><span class="p">,</span><span class="s1">&#39;15Nz&#39;</span><span class="p">)</span>
@@ -637,7 +637,7 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/8a89daf3dc3a91896df404ef6454d02ae54aa87ba61b64dcaf440f9c4cf12413.png" src="../_images/8a89daf3dc3a91896df404ef6454d02ae54aa87ba61b64dcaf440f9c4cf12413.png" />
+<img alt="../_images/732cc95ce70ad6542d4647a2934d15a8934edfd7e1f9802eb1033d62b07feac4.png" src="../_images/732cc95ce70ad6542d4647a2934d15a8934edfd7e1f9802eb1033d62b07feac4.png" />
 </div>
 </div>
 <p>We observe a strongly bi-exponential behavior, corresponding to relaxation of the <span class="math notranslate nohighlight">\(\hat{S}_z\hat{I}_\alpha\)</span> and <span class="math notranslate nohighlight">\(\hat{S}_z\hat{I}_\beta\)</span> states. We can saturate the <span class="math notranslate nohighlight">\(^1\)</span>H to recover monoexponential behavior. However, because this calculation is in the lab frame, we cannot apply RF-fields as easily. This is because the applied RF is not static in the lab frame, but rather oscillates as in the real experiment, complicating its application in simulation. SLEEPY has a special tool, <code class="docutils literal notranslate"><span class="pre">sl.LFrf</span></code>,  for adding cw-irradation in the lab frame. This class takes a sequence as argument for initialization (which is used to specify the field strength and nucleus), and returns a propagator, <code class="docutils literal notranslate"><span class="pre">U</span></code>, with the corresponding applied field. We do not currently support time-dependent sequences for lab-frame irradiation.</p>
@@ -652,15 +652,11 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>LF calculation: |------------------------------| 0% complete
-
-LF calculation: |██████████████████████████████| 100% complete
-
-LF calculation: |██████████████████████████████| 100% complete
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>LF calculation: |██████████████████████████████| 100% complete
 Completed
 </pre></div>
 </div>
-<img alt="../_images/16e209e82650f8d5359e561da77b79c0c7530a425b0a1831669f83ecb8ee19ce.png" src="../_images/16e209e82650f8d5359e561da77b79c0c7530a425b0a1831669f83ecb8ee19ce.png" />
+<img alt="../_images/6e65da9582a5febac94f645e9266c3119cce8640895a8947c0dc742f3efea522.png" src="../_images/6e65da9582a5febac94f645e9266c3119cce8640895a8947c0dc742f3efea522.png" />
 </div>
 </div>
 <p>The decay curve becomes monoexponential. Note the equilibrium’s  absolute value is also slightly decreased, due to an unfavorable NOE condition at 1 ns for H–N NOE.</p>

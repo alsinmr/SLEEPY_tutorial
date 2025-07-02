@@ -553,7 +553,7 @@
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Set up experimental system, create Liouvillian</span>
-<span class="n">ex0</span><span class="o">=</span><span class="n">sl</span><span class="o">.</span><span class="n">ExpSys</span><span class="p">(</span><span class="mi">600</span><span class="p">,</span><span class="n">Nucs</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;13C&#39;</span><span class="p">,</span><span class="s1">&#39;1H&#39;</span><span class="p">],</span><span class="n">vr</span><span class="o">=</span><span class="n">vr</span><span class="p">,</span><span class="n">pwdavg</span><span class="o">=</span><span class="n">sl</span><span class="o">.</span><span class="n">PowderAvg</span><span class="p">(</span><span class="n">q</span><span class="o">=</span><span class="mi">2</span><span class="p">),</span><span class="n">n_gamma</span><span class="o">=</span><span class="mi">30</span><span class="p">)</span>
+<span class="n">ex0</span><span class="o">=</span><span class="n">sl</span><span class="o">.</span><span class="n">ExpSys</span><span class="p">(</span><span class="mi">600</span><span class="p">,</span><span class="n">Nucs</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;13C&#39;</span><span class="p">,</span><span class="s1">&#39;1H&#39;</span><span class="p">],</span><span class="n">vr</span><span class="o">=</span><span class="n">vr</span><span class="p">,</span><span class="n">pwdavg</span><span class="o">=</span><span class="n">sl</span><span class="o">.</span><span class="n">PowderAvg</span><span class="p">(</span><span class="s1">&#39;bcr20&#39;</span><span class="p">),</span><span class="n">n_gamma</span><span class="o">=</span><span class="mi">30</span><span class="p">)</span>
 <span class="n">ex0</span><span class="o">.</span><span class="n">set_inter</span><span class="p">(</span><span class="s1">&#39;dipole&#39;</span><span class="p">,</span><span class="n">delta</span><span class="o">=</span><span class="n">dHC</span><span class="p">,</span><span class="n">i0</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">i1</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
 <span class="n">ex0</span><span class="o">.</span><span class="n">set_inter</span><span class="p">(</span><span class="s1">&#39;CSA&#39;</span><span class="p">,</span><span class="n">delta</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span><span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">euler</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="n">tetra</span><span class="p">,</span><span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">/</span><span class="mi">3</span><span class="p">])</span>
 <span class="n">ex0</span><span class="o">.</span><span class="n">set_inter</span><span class="p">(</span><span class="s1">&#39;CSA&#39;</span><span class="p">,</span><span class="n">delta</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span><span class="n">i</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
@@ -628,7 +628,7 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/85df121df7a5521bddbd76661751840974addbf031a56f1daf77977cbba322ac.png" src="../_images/85df121df7a5521bddbd76661751840974addbf031a56f1daf77977cbba322ac.png" />
+<img alt="../_images/c075c0fe69ffcc99f28046c6c1117360d8b4243085deed449eda920c204cbd1e.png" src="../_images/c075c0fe69ffcc99f28046c6c1117360d8b4243085deed449eda920c204cbd1e.png" />
 </div>
 </div>
 <p>Below, we build propagators for steps within the rotor period. The decoupling sequences are in “cyclic” mode by default (<code class="docutils literal notranslate"><span class="pre">cyclic=True</span></code>). In this mode, when we create a propagator from a sequence, it advances the time in the rotor period and the time in the sequence, so the second propagator starts where the previous propagator left off both in the rotor cycle and in the pulse sequence. At the end of the sequence, the propagators will come back to the beginning of the sequence.</p>
@@ -683,12 +683,12 @@
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ax</span><span class="o">=</span><span class="n">rho</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
 <span class="n">ax</span><span class="o">.</span><span class="n">figure</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
-<span class="n">_</span><span class="o">=</span><span class="n">ax</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">])</span>
+<span class="n">_</span><span class="o">=</span><span class="n">ax</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">([</span><span class="o">-</span><span class="mf">.5</span><span class="p">,</span><span class="mi">1</span><span class="p">])</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/f166177e99876de23327f6b683b4a7a31e4518f5c67c87d3f671520f95b4a0cc.png" src="../_images/f166177e99876de23327f6b683b4a7a31e4518f5c67c87d3f671520f95b4a0cc.png" />
+<img alt="../_images/ba0563c5ab4c9611bd76b730bd1788bcce46553ec1ae5c481f9c95cf945d1580.png" src="../_images/ba0563c5ab4c9611bd76b730bd1788bcce46553ec1ae5c481f9c95cf945d1580.png" />
 </div>
 </div>
 <p>Above, we obtain a typical DIPSHIFT dephasing curve.</p>
@@ -707,7 +707,7 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/0b10f105fb95ef65534af9621255bfd1e446c6681d67efaa65e4b16324db8a5d.png" src="../_images/0b10f105fb95ef65534af9621255bfd1e446c6681d67efaa65e4b16324db8a5d.png" />
+<img alt="../_images/2d236a50f8321139492a7fe7afcf21c8daec5ff85f8cf4119ebef25f60f5f498.png" src="../_images/2d236a50f8321139492a7fe7afcf21c8daec5ff85f8cf4119ebef25f60f5f498.png" />
 </div>
 </div>
 </section>
@@ -750,15 +750,15 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>log10(tc/s) = -9, 8 seconds elapsed
-log10(tc/s) = -8, 15 seconds elapsed
-log10(tc/s) = -7, 22 seconds elapsed
-log10(tc/s) = -6, 32 seconds elapsed
-log10(tc/s) = -5, 39 seconds elapsed
-log10(tc/s) = -4, 48 seconds elapsed
-log10(tc/s) = -3, 58 seconds elapsed
-log10(tc/s) = -2, 65 seconds elapsed
-log10(tc/s) = -1, 71 seconds elapsed
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>log10(tc/s) = -9, 75 seconds elapsed
+log10(tc/s) = -8, 148 seconds elapsed
+log10(tc/s) = -7, 221 seconds elapsed
+log10(tc/s) = -6, 297 seconds elapsed
+log10(tc/s) = -5, 373 seconds elapsed
+log10(tc/s) = -4, 446 seconds elapsed
+log10(tc/s) = -3, 532 seconds elapsed
+log10(tc/s) = -2, 635 seconds elapsed
+log10(tc/s) = -1, 733 seconds elapsed
 </pre></div>
 </div>
 </div>
@@ -782,10 +782,11 @@ log10(tc/s) = -1, 71 seconds elapsed
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/70c9b5fa2af4626c5a0a9f42e748d7c12c3bd2d0fbb6689dc870f8e2b9698577.png" src="../_images/70c9b5fa2af4626c5a0a9f42e748d7c12c3bd2d0fbb6689dc870f8e2b9698577.png" />
+<img alt="../_images/3e43b7086278fe6beb921c3c721fef8c840737d90618254304d1e2a25c24d820.png" src="../_images/3e43b7086278fe6beb921c3c721fef8c840737d90618254304d1e2a25c24d820.png" />
 </div>
 </div>
 <p>Finally, we see the behavior of the DIPSHIFT curve as a function of correlation time. For short correlation times, we get a reduced dipole coupling, whereas for long correlation times, we obtain the full coupling. For intermediate times, we get a broadened curve. There is also significant signal loss for intermediate times, which may not be obvious experimentally since we usually reference these curves to their first time point.</p>
+<p>We further note: the relaxation rate may change depending on the type of decoupling used, so the DIPSHIFT curves may not necessarily be symmetric.</p>
 </section>
 </section>
 

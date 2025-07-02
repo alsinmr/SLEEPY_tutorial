@@ -566,7 +566,7 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/94a44f129e1de6425df7945c0316164e5a8a6c31b3537e89f3296059ec7a3342.png" src="../_images/94a44f129e1de6425df7945c0316164e5a8a6c31b3537e89f3296059ec7a3342.png" />
+<img alt="../_images/cbf7b7e4c13f19937acf5cf561c289f573d1185c1ea36aaf7357da85b13c73da.png" src="../_images/cbf7b7e4c13f19937acf5cf561c289f573d1185c1ea36aaf7357da85b13c73da.png" />
 </div>
 </div>
 <p>Note, the propagator, <code class="docutils literal notranslate"><span class="pre">U</span></code>, isn’t actually calculated until it’s needed, so the above step is fast, whereas the calculation below is much slower.</p>
@@ -594,7 +594,7 @@ detect[1]: 13Cx
 Current time is 600.000 microseconds
 2 time points have been recorded
 
-&lt;SLEEPY.SLEEPY.Rho.Rho object at 0x7fc0d843f8d0&gt;
+&lt;SLEEPY.SLEEPY.Rho.Rho object at 0x11ed7cf10&gt;
 </pre></div>
 </div>
 </div>
@@ -672,7 +672,7 @@ Current time is 600.000 microseconds
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/88083296e072390eb43af7de2d374557b111a8cbb0480d4cea43761b3b3bda38.png" src="../_images/88083296e072390eb43af7de2d374557b111a8cbb0480d4cea43761b3b3bda38.png" />
+<img alt="../_images/7b712f76f10035b7b6248fc806c75eb571b58191b64b887b7e8b4d5b5b24cbfc.png" src="../_images/7b712f76f10035b7b6248fc806c75eb571b58191b64b887b7e8b4d5b5b24cbfc.png" />
 </div>
 </div>
 <p>Another good application of this approach is to simulate spinning sidebands. We use an emtpy sequence in this case (no RF-field applied).</p>
@@ -699,7 +699,7 @@ Prop: 20 steps per every 1 rotor period
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/33302c66be8f475bfbde0be44b03858756be8f5edd5c742a90c13173f9ae5ba9.png" src="../_images/33302c66be8f475bfbde0be44b03858756be8f5edd5c742a90c13173f9ae5ba9.png" />
+<img alt="../_images/1c39c372646c3286280104c44f4f7fd642114e6b8658176ee6ad7fde6a1d7275.png" src="../_images/1c39c372646c3286280104c44f4f7fd642114e6b8658176ee6ad7fde6a1d7275.png" />
 </div>
 </div>
 <p>Aside from reducing coding, <code class="docutils literal notranslate"><span class="pre">rho.DetProp</span></code> has also executed a few computational speedups. First, it has identified that only 2 of the 16 spin-states would actually be accessed in this simulation, so it reduces the size of the matrix being propagated significantly. Second, it has performed the propagation in the eigenbasis. Note that because we have 20 steps per rotor period, 20 different eigenbases have been used, each corresponding to a different starting point in the rotor period. That is, we take 20 steps through the first rotor period. However, starting from each of those 20 steps, we then take rotor-period length steps, which can be propagated in the eigenbasis, vastly accelerating the computation time through the 20000 total timesteps (or 1000 steps per each starting point in the rotor period).</p>

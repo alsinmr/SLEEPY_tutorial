@@ -548,7 +548,7 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/908f630f9f5a929bbc08e99efe42f02e4b6ea9ebf32350cab580341ba7783adf.png" src="../_images/908f630f9f5a929bbc08e99efe42f02e4b6ea9ebf32350cab580341ba7783adf.png" />
+<img alt="../_images/ce120ddbec73893208101b81dfcb27746ae769db23f77a6b3540ff80d12ac0b8.png" src="../_images/ce120ddbec73893208101b81dfcb27746ae769db23f77a6b3540ff80d12ac0b8.png" />
 </div>
 </div>
 </section>
@@ -575,7 +575,7 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/8a938b6d1fa4c2642843982d0764f5604b3d4ede4d15bed97408470ddfc09fcf.png" src="../_images/8a938b6d1fa4c2642843982d0764f5604b3d4ede4d15bed97408470ddfc09fcf.png" />
+<img alt="../_images/8f3f9104bb7f743216d2d06d6ece129b71b2fbda3df3c93cef920ff11ee4c0f1.png" src="../_images/8f3f9104bb7f743216d2d06d6ece129b71b2fbda3df3c93cef920ff11ee4c0f1.png" />
 </div>
 </div>
 </section>
@@ -596,7 +596,7 @@
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>State-space reduction: 32-&gt;16
 </pre></div>
 </div>
-<img alt="../_images/167f94ed4330a5f004a12f597092e3a7584d7ee0d4305ead3fb1349622b8fc4c.png" src="../_images/167f94ed4330a5f004a12f597092e3a7584d7ee0d4305ead3fb1349622b8fc4c.png" />
+<img alt="../_images/2f0661716769a9a896589ddef752e6138c7ad97f788bcde272baffd7cb4abd65.png" src="../_images/2f0661716769a9a896589ddef752e6138c7ad97f788bcde272baffd7cb4abd65.png" />
 </div>
 </div>
 <p>Indeed, we see two very different decay curves, corresponding to the two different components. However, this is somewhat unrealistic in solid-state NMR, where <span class="math notranslate nohighlight">\(^1\)</span>H spin-diffusion periodically inverts the <span class="math notranslate nohighlight">\(^1\)</span>H spins. We may add this effect by flipping the <span class="math notranslate nohighlight">\(^1\)</span>H with a rate of 50 s<span class="math notranslate nohighlight">\(^{-1}\)</span>, to see how the two curves re-converge. Here, we plot the average curve plus the two <span class="math notranslate nohighlight">\(^1\)</span>H states separately.</p>
@@ -615,7 +615,7 @@
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>State-space reduction: 32-&gt;16
 </pre></div>
 </div>
-<img alt="../_images/0dfb0214b91e92735426ecb450826d24e17499d7aa104507cf70f55bd08a450f.png" src="../_images/0dfb0214b91e92735426ecb450826d24e17499d7aa104507cf70f55bd08a450f.png" />
+<img alt="../_images/b728eef89cf8c099c3b8f9b55d1bfbba8073192ed69a8cb89d4d3ab7bae1c77d.png" src="../_images/b728eef89cf8c099c3b8f9b55d1bfbba8073192ed69a8cb89d4d3ab7bae1c77d.png" />
 </div>
 </div>
 </section>
@@ -649,7 +649,7 @@ State-space reduction: 32-&gt;16
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/b22bf5e15e9812c5ec27a7486b52ea12c79f339c0c211b781d1d99952e1a8956.png" src="../_images/b22bf5e15e9812c5ec27a7486b52ea12c79f339c0c211b781d1d99952e1a8956.png" />
+<img alt="../_images/fe946fa6e60d902bb9d754b1892b53a2f5ba75b27a5ea15c0ed443b3ba4623ca.png" src="../_images/fe946fa6e60d902bb9d754b1892b53a2f5ba75b27a5ea15c0ed443b3ba4623ca.png" />
 </div>
 </div>
 <p>The curves are fairly similar, indicating a relatively fast motion (300 ns was input). We may slow down this motion to obtain faster relaxation, but also more dispersion among the curves.</p>
@@ -681,7 +681,7 @@ State-space reduction: 32-&gt;16
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/88392f912d6bcdedd29bd5f24e083a9a940a905543ad3b56d6181c9a282c2024.png" src="../_images/88392f912d6bcdedd29bd5f24e083a9a940a905543ad3b56d6181c9a282c2024.png" />
+<img alt="../_images/653dfdef9ca616740522ae66d14154d48688b20ecc1a6b689809dcb4e13ca421.png" src="../_images/653dfdef9ca616740522ae66d14154d48688b20ecc1a6b689809dcb4e13ca421.png" />
 </div>
 </div>
 <p>We may also investigate correlation time dependence for several field strengths. In this case, we use a special feature of SLEEPY, the <code class="docutils literal notranslate"><span class="pre">rho.extract_decay_rates(...)</span></code> function, which extracts non-oscillating terms from the propagator or sequence directly, without actually propagating the system. This is achieved by finding the eigenvalues and eigenvectors of the propagator. The real parts of the logarithm of the eigenvalues yield the decay rates, where we may filter for non-oscillating terms by finding eigenvalues that are strictly real.</p>
@@ -709,11 +709,11 @@ State-space reduction: 32-&gt;16
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>log10(tc)=-8.0, 21 seconds elapsed
-log10(tc)=-7.0, 176 seconds elapsed
-log10(tc)=-6.0, 303 seconds elapsed
-log10(tc)=-5.0, 419 seconds elapsed
-log10(tc)=-4.0, 535 seconds elapsed
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>log10(tc)=-8.0, 5 seconds elapsed
+log10(tc)=-7.0, 55 seconds elapsed
+log10(tc)=-6.0, 100 seconds elapsed
+log10(tc)=-5.0, 145 seconds elapsed
+log10(tc)=-4.0, 192 seconds elapsed
 </pre></div>
 </div>
 </div>
@@ -730,7 +730,7 @@ log10(tc)=-4.0, 535 seconds elapsed
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/4700f22575fd3ecfff1d20c08b6a3524274c182efc1242d57549ffa0a0a954ff.png" src="../_images/4700f22575fd3ecfff1d20c08b6a3524274c182efc1242d57549ffa0a0a954ff.png" />
+<img alt="../_images/c3e6c81950b8df2ce7d4b04ee039b654f3420a7f82cfd8c121c91a08ad3b824c.png" src="../_images/c3e6c81950b8df2ce7d4b04ee039b654f3420a7f82cfd8c121c91a08ad3b824c.png" />
 </div>
 </div>
 </section>
@@ -766,7 +766,7 @@ log10(tc)=-4.0, 535 seconds elapsed
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/bd481647f1cbcc2bc1b4ea6339d4fa351b97f241109fc8ced724473b461e336b.png" src="../_images/bd481647f1cbcc2bc1b4ea6339d4fa351b97f241109fc8ced724473b461e336b.png" />
+<img alt="../_images/3cba2d48ba258b708b96a6c11a6d4a54a9d2c1498241855a7ec308b5a5f9c03d.png" src="../_images/3cba2d48ba258b708b96a6c11a6d4a54a9d2c1498241855a7ec308b5a5f9c03d.png" />
 </div>
 </div>
 <p>We see increased relaxation rate constants at low RF-fields, due to chemical shift modulation, and at high RF-fields due to reorientational motion of the <span class="math notranslate nohighlight">\(^{15}\)</span>N CSA and H–N dipole coupling. Note that the timescale dependence of the two relaxation mechanisms is different. This experiment is particularly interesting because while being essentially the same experiment, we investigate two different mechanisms of relaxation just based on the field-strength setting.<span class="math notranslate nohighlight">\(^{4-5}\)</span></p>

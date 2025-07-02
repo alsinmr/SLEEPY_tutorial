@@ -570,7 +570,7 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/4c08e8974f0b0f5c035bbe71bf6c7660d2d2b23d8d50ecfcb92118cc37615eb7.png" src="../_images/4c08e8974f0b0f5c035bbe71bf6c7660d2d2b23d8d50ecfcb92118cc37615eb7.png" />
+<img alt="../_images/3457ab682f8b45a17b1e8d32ae9a9061c38e8aaa859a2291942d40d6495f0c4b.png" src="../_images/3457ab682f8b45a17b1e8d32ae9a9061c38e8aaa859a2291942d40d6495f0c4b.png" />
 </div>
 </div>
 </section>
@@ -602,7 +602,11 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/66a1eae33f87fe54612ae4b4729d5a4d405600cc4dd1a12b776e84ce58d3cbed.png" src="../_images/66a1eae33f87fe54612ae4b4729d5a4d405600cc4dd1a12b776e84ce58d3cbed.png" />
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/Users/albertsmith/Documents/GitHub/SLEEPY/SLEEPY/Rho.py:633: UserWarning: Reduced Liouvillian applied to uninitialized rho. Make sure reduction was perfomed with same Rho
+  warnings.warn(&#39;Reduced Liouvillian applied to uninitialized rho. Make sure reduction was perfomed with same Rho&#39;)
+</pre></div>
+</div>
+<img alt="../_images/43c1c683dcb3318dd1c61550c23d9ab1f46c4efe101f2dd33c3accf4490003f2.png" src="../_images/43c1c683dcb3318dd1c61550c23d9ab1f46c4efe101f2dd33c3accf4490003f2.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -644,7 +648,7 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/ee2d4b87308d36bb10e732aef4603559257400d497c422c5d8efc4a9b0e22a40.png" src="../_images/ee2d4b87308d36bb10e732aef4603559257400d497c422c5d8efc4a9b0e22a40.png" />
+<img alt="../_images/e6eee07993ea9237391321c648bb7470551690ae1d1fa30eabcf46d98c682f32.png" src="../_images/e6eee07993ea9237391321c648bb7470551690ae1d1fa30eabcf46d98c682f32.png" />
 </div>
 </div>
 <p>Indeed, oscillations at the beginning of the decay curve have been almost entirely removed. However, it is worth noting that the decay rate at the beginning of the curve appears to be faster than with the standard <span class="math notranslate nohighlight">\(R_{1\rho}\)</span> experiment. We overlay the two curves, scaling the RECRR curve to match the beginning of the non-coherent decay of the <span class="math notranslate nohighlight">\(R_{1\rho}\)</span> curve.</p>
@@ -657,7 +661,7 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/0ba7fd154b010e3be7757c6c26f67ce3bc01789ce0d3d6cd8ade0b980ba6ea05.png" src="../_images/0ba7fd154b010e3be7757c6c26f67ce3bc01789ce0d3d6cd8ade0b980ba6ea05.png" />
+<img alt="../_images/ae0e5a102693291e74bf7be99ada5d2129b54d0513c4fa36e6c8205ba1a16ef8.png" src="../_images/ae0e5a102693291e74bf7be99ada5d2129b54d0513c4fa36e6c8205ba1a16ef8.png" />
 </div>
 </div>
 <p>We clearly see that the RECRR curve is relaxing more quickly at the beginning.</p>
@@ -683,9 +687,9 @@
     <span class="n">UA</span><span class="o">=</span><span class="n">seqA</span><span class="o">.</span><span class="n">U</span><span class="p">()</span>
     <span class="n">UB</span><span class="o">=</span><span class="n">seqB</span><span class="o">.</span><span class="n">U</span><span class="p">()</span>
 
-    <span class="n">R1p</span><span class="o">.</span><span class="n">clear</span><span class="p">(</span><span class="n">data_only</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>  <span class="c1">#This keeps the Liouvillian in R1p</span>
+    <span class="n">R1p</span><span class="o">.</span><span class="n">clear</span><span class="p">()</span>  <span class="c1">#This keeps the Liouvillian in R1p</span>
     <span class="c1">#Without this, we would have to re-determine how R1p is block diagonal</span>
-    <span class="n">RECRR</span><span class="o">.</span><span class="n">clear</span><span class="p">(</span><span class="n">data_only</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">RECRR</span><span class="o">.</span><span class="n">clear</span><span class="p">()</span>
 
     <span class="c1"># R1p calculation</span>
     <span class="n">r1p</span><span class="p">,</span><span class="n">A</span><span class="o">=</span><span class="n">R1p</span><span class="o">.</span><span class="n">extract_decay_rates</span><span class="p">(</span><span class="n">Ux</span><span class="p">,</span><span class="n">mode</span><span class="o">=</span><span class="s1">&#39;rates&#39;</span><span class="p">)</span>
@@ -721,7 +725,11 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/0ffd1aeed34511825c596b28f68bdd8b22d9d9cfaba4e4bac65bcccd5c5db999.png" src="../_images/0ffd1aeed34511825c596b28f68bdd8b22d9d9cfaba4e4bac65bcccd5c5db999.png" />
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/Users/albertsmith/Documents/GitHub/SLEEPY/SLEEPY/Rho.py:633: UserWarning: Reduced Liouvillian applied to uninitialized rho. Make sure reduction was perfomed with same Rho
+  warnings.warn(&#39;Reduced Liouvillian applied to uninitialized rho. Make sure reduction was perfomed with same Rho&#39;)
+</pre></div>
+</div>
+<img alt="../_images/604c9dde033733c02eb84dccb979121dfac4088543eccaaecfcbe04925ca51f4.png" src="../_images/604c9dde033733c02eb84dccb979121dfac4088543eccaaecfcbe04925ca51f4.png" />
 </div>
 </div>
 <p>Then, while the RECRR pulse sequence presents some significant advantages over the <span class="math notranslate nohighlight">\(R_{1\rho}\)</span> sequence, because of the more complex relaxation behavior, it becomes necessary to use simulation to fit the curves, rather than relying on simple mono-exponential or bi-exponential fitting. This is especially important at slower correlation times, where a second relaxation mechanism emerges, and the sensitivity of this experiment to correlation time varies throughout the duration of the experiment.</p>

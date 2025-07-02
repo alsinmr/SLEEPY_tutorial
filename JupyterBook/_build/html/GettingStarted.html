@@ -34,7 +34,7 @@
     <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=a3416100" />
     <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=13237357" />
     <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
     <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
   
@@ -452,12 +452,12 @@
 <p>SLEEPY does not exist for installation via <a class="reference external" href="https://docs.conda.io/en/latest/">conda</a>, but package requirements for SLEEPY are relatively limited (numpy, scipy, matplotlib), so installing via pip is unlikely to break your conda installation.</p>
 <p>For the latest (potentially less stable) version of SLEEPY, download from GitHub and add its folder to your system path. The required modules must be installed separately by the user.</p>
 <p><a class="reference external" href="https://github.com/alsinmr/SLEEPY/"><strong>SLEEPY on GitHub</strong></a></p>
-<p>Versions listed have been tested for SLEEPY, although any recent module version should work.</p>
+<p>Versions listed have been used for <a class="reference internal" href="Chapter7/Ch7_SleepyBenchmark.html"><span class="doc std std-doc">benchmarking SLEEPY</span></a>, although we expect most recent versions to be stable.</p>
 <section id="requirements">
 <h3>Requirements<a class="headerlink" href="#requirements" title="Link to this heading">#</a></h3>
 <ul class="simple">
-<li><p>Python 3 (3.7.3)</p></li>
-<li><p>numpy (1.19.2)</p></li>
+<li><p>Python 3 (3.11.13)</p></li>
+<li><p>numpy (1.24.3)</p></li>
 <li><p>matplotlib (3.4.2)</p></li>
 <li><p>scipy (1.5.2)</p></li>
 </ul>
@@ -465,9 +465,20 @@
 <section id="recommended-installations">
 <h3>Recommended Installations<a class="headerlink" href="#recommended-installations" title="Link to this heading">#</a></h3>
 <ul class="simple">
+<li><p>multiprocess (0.70.15 – in benchmarking, much faster than the built-in multiprocessing)</p></li>
 <li><p><a class="reference external" href="https://jupyter.org/">Jupyter notebooks</a>: Neat code organization based in a web browser</p></li>
+<li><p>ipywidgets (7.7.1): Used primarily in Google Colab to make zoomable plots</p></li>
 </ul>
-<p>If you’re starting from scratch, you may consider installing <a class="reference external" href="https://anaconda.org">Anaconda</a>, which will install Python 3, numpy, matplotlib, scipy, and Jupyter Notebooks for you.</p>
+<p>Note that we have used numpy and scipy with Intel’s MKL BLAS/LAPACK libraries. In our tests, this results in considerable speedup. Installation can be challenging.</p>
+<ul class="simple">
+<li><p>Currently will not install with python&gt;3.11</p></li>
+<li><p>May not yield improvements if not using an Intel processor (e.g. Apple Silicon, esp. AMD)</p></li>
+<li><p>We used conda for installation
+conda config –add channels defaults
+conda config –set channel_priority strict
+conda install numpy scipy mkl mkl-service libblas=*=*mkl</p></li>
+</ul>
+<p>If you’re starting from scratch, you may consider installing <a class="reference external" href="https://anaconda.org">Anaconda</a>, which will install Python 3, numpy, matplotlib, scipy, and Jupyter Notebooks for you. This <em>should</em> also use the MKL libraries.</p>
 <p>Once set up, any of the webpages with code in the tutorial can be downloaded with the button in the upper right (pick .ipynb) and run locally.</p>
 </section>
 </section>

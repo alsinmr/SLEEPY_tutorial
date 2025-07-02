@@ -566,7 +566,8 @@
  &#39;verbose&#39;: True,
  &#39;zoom&#39;: False,
  &#39;Colab&#39;: False,
- &#39;Binder&#39;: False}
+ &#39;Binder&#39;: False,
+ &#39;parallel_chunk_size&#39;: None}
 </pre></div>
 </div>
 </div>
@@ -741,16 +742,16 @@ abundance   0.99757000  0.00037999  0.00204999
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>-768.1  180.7    0.0  173.4  173.2  119.8    0.0    0.0    0.0  121.0
- 180.7 -752.9    0.0    0.0    0.0  180.9   28.9  180.3    0.0  182.2
-   0.0    0.0 -753.7  181.6  180.9    0.0  180.8   28.9  181.5    0.0
- 173.4    0.0  181.6 -769.3  120.0    0.0  121.3    0.0    0.0  173.1
- 173.2    0.0  180.9  120.0 -768.4  173.7    0.0    0.0  120.5    0.0
- 119.8  180.9    0.0    0.0  173.7 -768.1    0.0  120.2  173.4    0.0
-   0.0   28.9  180.8  121.3    0.0    0.0 -797.5  173.3  119.7  173.4
-   0.0  180.3   28.9    0.0    0.0  120.2  173.3 -796.5  173.6  120.2
-   0.0    0.0  181.5    0.0  120.5  173.4  119.7  173.6 -768.8    0.0
- 121.0  182.2    0.0  173.1    0.0    0.0  173.4  120.2    0.0 -769.9
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>-748.8  186.1    0.0  171.2  170.9  118.1    0.0    0.0    0.0  119.6
+ 170.2 -804.9    0.0    0.0    0.0  170.4   54.5  169.8    0.0  172.1
+   0.0    0.0 -806.5  171.2  170.3    0.0  170.3   54.4  170.9    0.0
+ 170.6    0.0  186.9 -751.2  118.1    0.0  119.5    0.0    0.0  170.8
+ 170.8    0.0  186.5  118.5 -749.4  171.2    0.0    0.0  118.9    0.0
+ 118.2  186.3    0.0    0.0  171.4 -749.1    0.0  118.5  171.2    0.0
+   0.0   59.4  186.3  119.8    0.0    0.0 -804.2  170.6  118.0  171.3
+   0.0  185.9   59.7    0.0    0.0  118.6  171.2 -802.3  171.4  118.9
+   0.0    0.0  187.0    0.0  118.8  170.8  118.1  170.9 -750.5    0.0
+ 119.0  187.2    0.0  170.6    0.0    0.0  170.7  118.1    0.0 -752.7
 </pre></div>
 </div>
 </div>
@@ -786,7 +787,7 @@ C(t)=S^2+(1-S^2)\sum_i{A_i\exp(-t/\tau_i)}
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/d454541a9ecad483a8f980792336effb0918574292d5e9f8422dbf63413bb875.png" src="../_images/d454541a9ecad483a8f980792336effb0918574292d5e9f8422dbf63413bb875.png" />
+<img alt="../_images/7fd8f6452bc96da5d29fca2fac144c3850daa6391b0f1a12d877692f5ba466da.png" src="../_images/7fd8f6452bc96da5d29fca2fac144c3850daa6391b0f1a12d877692f5ba466da.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -796,7 +797,7 @@ C(t)=S^2+(1-S^2)\sum_i{A_i\exp(-t/\tau_i)}
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>S2 = 0.00023
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>S2 = 0.00000
 </pre></div>
 </div>
 </div>
@@ -826,7 +827,7 @@ C(t)=S^2+(1-S^2)\sum_i{A_i\exp(-t/\tau_i)}
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/bf331c6ae56b884b1238b2564afc3adab05c502f8df5fa06f1f4a0f5e0c13be1.png" src="../_images/bf331c6ae56b884b1238b2564afc3adab05c502f8df5fa06f1f4a0f5e0c13be1.png" />
+<img alt="../_images/2452341dd03a3df401ae1a96503aa34106801d36d789714669539b39acec0f4a.png" src="../_images/2452341dd03a3df401ae1a96503aa34106801d36d789714669539b39acec0f4a.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -837,8 +838,8 @@ C(t)=S^2+(1-S^2)\sum_i{A_i\exp(-t/\tau_i)}
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>S2 for dipole: 0.0002
-S2 for CSA: 0.0088
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>S2 for dipole: 0.0000
+S2 for CSA: 0.0074
 </pre></div>
 </div>
 </div>
@@ -881,7 +882,7 @@ S2 for CSA: 0.0088
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/8137feb596b5a2095e69cb51efc165e8018088222726248cc272d3e6e1834073.png" src="../_images/8137feb596b5a2095e69cb51efc165e8018088222726248cc272d3e6e1834073.png" />
+<img alt="../_images/b86ecd189bc122092ef0a626072aca09a6dde22a86ffb7031c63b6d2ba6caf69.png" src="../_images/b86ecd189bc122092ef0a626072aca09a6dde22a86ffb7031c63b6d2ba6caf69.png" />
 </div>
 </div>
 <p>Then, <code class="docutils literal notranslate"><span class="pre">L</span></code> is derived from the interactions in <code class="docutils literal notranslate"><span class="pre">ex</span></code>, but exchanges over 4 different sets of Euler angles (for tetrahedral hopping). The exchange matrix can be viewed as follows:</p>
@@ -892,7 +893,7 @@ S2 for CSA: 0.0088
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/4d31ae6d1585225a2551025232b50166518a2a19d9d3bc303527416ba3310a6f.png" src="../_images/4d31ae6d1585225a2551025232b50166518a2a19d9d3bc303527416ba3310a6f.png" />
+<img alt="../_images/acb9a2fee30be6b5dfa0c89a747776ef449fbf0487230531d7d9ab673574fee1.png" src="../_images/acb9a2fee30be6b5dfa0c89a747776ef449fbf0487230531d7d9ab673574fee1.png" />
 </div>
 </div>
 </section>

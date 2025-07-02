@@ -1,0 +1,926 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>SLEEPY Benchmark &#8212; SLEEPY Tutorial</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=a3416100" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- So that users can add custom icons -->
+  <script src="../_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
+
+    <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../_static/doctools.js?v=888ff710"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'Chapter7/Ch7_SleepyBenchmark';</script>
+    <link rel="icon" href="../_static/favicon.png"/>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="SLEEPY Colab Template" href="../ColabTemplate.html" />
+    <link rel="prev" title="Relaxation Options" href="../Chapter6/Ch6_RelaxationOptions.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/logo_dark.png" class="logo__image only-light" alt="SLEEPY Tutorial - Home"/>
+    <img src="../_static/logo_dark.png" class="logo__image only-dark pst-js-only" alt="SLEEPY Tutorial - Home"/>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../intro.html">
+                    Relax with SLEEPY!
+                </a>
+            </li>
+        </ul>
+        <ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../GettingStarted.html"><font color="#B00000">Getting Started</font></a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Tutorial</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../Ch1_SLEEPY_basics.html"><font color="#B00000">SLEEPY basics</font></a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../Chapter1/Ch1_basics.html"><font color="#0093AF">A Quick Start</font></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Chapter1/Ch1_ShortExamples.html"><font color="#0093AF">Short Examples</font></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Chapter1/Ch1_Objects.html"><font color="#0093AF">Objects</font></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Chapter1/Ch1_expsys.html"><font color="#0093AF">Experimental Settings and Spin-System Definition</font></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Chapter1/Ch1_Liouvillian.html"><font color="#0093AF">Hamiltonians and Liouvillians</font></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Chapter1/Ch1_Propagation.html"><font color="#0093AF">Propagators and Sequences</font></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Chapter1/Ch1_rho.html"><font color="#0093AF">The Density Matrix</font></a></li>
+
+<li class="toctree-l2"><a class="reference internal" href="../Chapter1/Ch1_Tools.html"><font color="#0093AF">Defaults, Constants, and Tools</font></a></li>
+
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../Ch2_SolutionNMR.html"><font color="#B00000">Solution NMR</font></a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../Chapter2/Ch2_exchange1D.html"><font color="#0093AF">Exchange in 1D spectra</font></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Chapter2/Ch2_EXSY.html"><font color="#0093AF">Exchange Spectroscopy (EXSY)</font></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Chapter2/Ch2_BMRD.html"><font color="#0093AF">Bloch-McConnell Relaxation Dispersion</font></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Chapter2/Ch2_CEST.html"><font color="#0093AF">Chemical Exchange Saturation Transfer (CEST)</font></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Chapter2/Ch2_T1_NOE.html"><font color="#0093AF"><span class="math notranslate nohighlight">\(T_1\)</span> and Nuclear Overhauser Effect</font></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Chapter2/Ch2_T1_limits.html"><font color="#0093AF"><span class="math notranslate nohighlight">\(T_1\)</span> limits</font></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Chapter2/Ch2_TROSY.html"><font color="#0093AF">TROSY effects</font></a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../Ch3_DynamicsSolids.html"><font color="#B00000">Solid-state NMR</font></a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../Chapter3/Ch3_R1p.html"><font color="#0093AF">R<span class="math notranslate nohighlight">\(_{1ρ}\)</span> Relaxation</font></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Chapter3/Ch3_REDOR.html"><font color="#0093AF">REDOR</font></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Chapter3/Ch3_DIPSHIFT.html"><font color="#0093AF">DIPSHIFT</font></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Chapter3/Ch3_RECRR.html"><font color="#0093AF">Relaxation in complex sequences: RECRR</font></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Chapter3/Ch3_T1_NOE.html"><font color="#0093AF"><span class="math notranslate nohighlight">\(T_1\)</span> and Nuclear Overhauser Effect</font></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Chapter3/Ch3_DARR.html"><font color="#0093AF">Understanding DARR with simulation</font></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Chapter3/Ch3_Quad.html"><font color="#0093AF">Quadrupolar phenomena</font></a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../Ch4_DNP.html"><font color="#B00000">Dynamic Nuclear Polarization</font></a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../Chapter4/Ch4_SolidEffect.html"><font color="#0093AF">Solid Effect</font></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Chapter4/Ch4_CrossEffect.html"><font color="#0093AF">Cross Effect</font></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Chapter4/Ch4_OverhauserEffect.html"><font color="#0093AF">Overhauser Effect</font></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Chapter4/Ch4_NOVEL.html"><font color="#0093AF">Pulsed-DNP: NOVEL</font></a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../Ch5_ParamagneticEffects.html"><font color="#B00000">Paramagnetic Effects</font></a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../Chapter5/Ch5_PRE.html"><font color="#0093AF">Paramagnetic Relaxation Enhancement</font></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Chapter5/Ch5_ContactShift.html"><font color="#0093AF">Contact shift</font></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Chapter5/Ch5_PseudoContactShift.html"><font color="#0093AF">Pseudo-Contact Shift</font></a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../Chapter6/Ch6_RelaxationOptions.html"><font color="#B00000">Relaxation Options</font></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ColabTemplate.html"><font color="#B00000"> SLEEPY Colab Template</font></a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">User library</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../SharingSleepy.html"><font color="#B00000">Sharing SLEEPY Simulations</font></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../UserLibrary.html"><font color="#B00000">User contributions</font></a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://mybinder.org/v2/gh/alsinmr/SLEEPY_tutorial/master?urlpath=lab/tree/JupyterBook/Chapter7/Ch7_SleepyBenchmark.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch on Binder"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img alt="Binder logo" src="../_static/images/logo_binder.svg">
+  </span>
+<span class="btn__text-container">Binder</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://colab.research.google.com/github/alsinmr/SLEEPY_tutorial/blob/master/JupyterBook/Chapter7/Ch7_SleepyBenchmark.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch on Colab"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img alt="Colab logo" src="../_static/images/logo_colab.png">
+  </span>
+<span class="btn__text-container">Colab</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/alsinmr/SLEEPY_tutorial" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/alsinmr/SLEEPY_tutorial/issues/new?title=Issue%20on%20page%20%2FChapter7/Ch7_SleepyBenchmark.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/Chapter7/Ch7_SleepyBenchmark.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button>
+
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1><font  color = "#B00000">SLEEPY Benchmark</font></h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#versions">Versions</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#benchmark-1-r-1-rho-relaxation">Benchmark 1: <span class="math notranslate nohighlight">\(R_{1\rho}\)</span> relaxation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#benchmark-2-redor">Benchmark 2: REDOR</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#benchmark-3-pseudocontact-shift-under-mas">Benchmark 3: Pseudocontact shift under MAS</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#benchmark-4-water-hopping-4-5-6-spin-simulation">Benchmark 4: Water hopping (4/5/6-spin simulation)</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="sleepy-benchmark">
+<h1><font  color = "#B00000">SLEEPY Benchmark</font><a class="headerlink" href="#sleepy-benchmark" title="Link to this heading">#</a></h1>
+<p><a href="https://githubtocolab.com/alsinmr/SLEEPY_tutorial/blob/main/ColabNotebooks/Chapter7/Ch7_SleepyBenchmark.ipynb" target="_blank"><img src="https://colab.research.google.com/assets/colab-badge.svg"></a></p>
+<p>The following notebook is for comparing SLEEPY performance among different systems. We run each simulation with and without parallel usage to determine additionally where parallel processing improves behavior. Plotting is not counted in computational time.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">scipy</span> <span class="k">as</span> <span class="nn">sp</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">subprocess</span>
+<span class="kn">import</span> <span class="nn">sys</span>
+</pre></div>
+</div>
+</div>
+</div>
+<section id="versions">
+<h2>Versions<a class="headerlink" href="#versions" title="Link to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Python: </span><span class="si">{</span><span class="n">sys</span><span class="o">.</span><span class="n">version</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot; (&quot;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Numpy: </span><span class="si">{</span><span class="n">np</span><span class="o">.</span><span class="n">version</span><span class="o">.</span><span class="n">version</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Scipy: </span><span class="si">{</span><span class="n">sp</span><span class="o">.</span><span class="n">version</span><span class="o">.</span><span class="n">version</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="k">try</span><span class="p">:</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="n">subprocess</span><span class="o">.</span><span class="n">run</span><span class="p">([</span><span class="s1">&#39;pip&#39;</span><span class="p">,</span><span class="s1">&#39;show&#39;</span><span class="p">,</span><span class="s1">&#39;multiprocess&#39;</span><span class="p">],</span> <span class="n">stdout</span><span class="o">=</span><span class="n">subprocess</span><span class="o">.</span><span class="n">PIPE</span><span class="p">)</span>
+    <span class="n">vs</span><span class="o">=</span><span class="n">result</span><span class="o">.</span><span class="n">stdout</span><span class="o">.</span><span class="n">decode</span><span class="p">()</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;Version: &#39;</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;Summary&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Multiprocessing: </span><span class="si">{</span><span class="n">vs</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="k">except</span><span class="p">:</span>
+    <span class="k">pass</span>
+<span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">__config__</span><span class="p">,</span><span class="s1">&#39;blas_mkl_info&#39;</span><span class="p">)</span> <span class="ow">and</span> <span class="s1">&#39;mkl_rt&#39;</span> <span class="ow">in</span> <span class="n">np</span><span class="o">.</span><span class="n">__config__</span><span class="o">.</span><span class="n">blas_mkl_info</span><span class="p">[</span><span class="s1">&#39;libraries&#39;</span><span class="p">]:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Uses Intel MKL&#39;</span><span class="p">)</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Intel MKL not in use&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Python: 3.11.13
+Numpy: 1.24.3
+Scipy: 1.10.1
+Multiprocessing: 0.70.15
+Uses Intel MKL
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="benchmark-1-r-1-rho-relaxation">
+<h2>Benchmark 1: <span class="math notranslate nohighlight">\(R_{1\rho}\)</span> relaxation<a class="headerlink" href="#benchmark-1-r-1-rho-relaxation" title="Link to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sl</span><span class="o">.</span><span class="n">Defaults</span><span class="p">[</span><span class="s1">&#39;cache&#39;</span><span class="p">]</span><span class="o">=</span><span class="kc">False</span>
+<span class="k">for</span> <span class="n">parallel</span> <span class="ow">in</span> <span class="p">[</span><span class="kc">False</span><span class="p">,</span><span class="kc">True</span><span class="p">]:</span>
+    <span class="n">sl</span><span class="o">.</span><span class="n">Defaults</span><span class="p">[</span><span class="s1">&#39;parallel&#39;</span><span class="p">]</span><span class="o">=</span><span class="n">parallel</span>
+    <span class="n">t0</span><span class="o">=</span><span class="n">time</span><span class="p">()</span>
+    <span class="n">ex0</span><span class="o">=</span><span class="n">sl</span><span class="o">.</span><span class="n">ExpSys</span><span class="p">(</span><span class="mi">600</span><span class="p">,</span><span class="n">Nucs</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;15N&#39;</span><span class="p">,</span><span class="s1">&#39;1H&#39;</span><span class="p">],</span><span class="n">vr</span><span class="o">=</span><span class="mi">60000</span><span class="p">,</span><span class="n">pwdavg</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span><span class="n">n_gamma</span><span class="o">=</span><span class="mi">30</span><span class="p">)</span>
+    <span class="n">ex0</span><span class="o">.</span><span class="n">set_inter</span><span class="p">(</span><span class="s1">&#39;dipole&#39;</span><span class="p">,</span><span class="n">i0</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">i1</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">delta</span><span class="o">=</span><span class="mi">22000</span><span class="p">)</span>
+    <span class="n">ex0</span><span class="o">.</span><span class="n">set_inter</span><span class="p">(</span><span class="s1">&#39;CSA&#39;</span><span class="p">,</span><span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">delta</span><span class="o">=</span><span class="mi">110</span><span class="p">,</span><span class="n">euler</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">15</span><span class="p">,</span><span class="mi">0</span><span class="p">])</span>
+    <span class="n">ex1</span><span class="o">=</span><span class="n">ex0</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+    <span class="n">ex0</span><span class="o">.</span><span class="n">set_inter</span><span class="p">(</span><span class="s1">&#39;dipole&#39;</span><span class="p">,</span><span class="n">i0</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">i1</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">delta</span><span class="o">=</span><span class="mi">22000</span><span class="p">,</span><span class="n">euler</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">30</span><span class="p">,</span><span class="mi">0</span><span class="p">])</span>
+    <span class="n">ex0</span><span class="o">.</span><span class="n">set_inter</span><span class="p">(</span><span class="s1">&#39;CSA&#39;</span><span class="p">,</span><span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">delta</span><span class="o">=</span><span class="mi">110</span><span class="p">,</span><span class="n">euler</span><span class="o">=</span><span class="p">[[</span><span class="mi">0</span><span class="p">,</span><span class="mi">15</span><span class="p">,</span><span class="mi">0</span><span class="p">],[</span><span class="mi">0</span><span class="p">,</span><span class="mi">30</span><span class="p">,</span><span class="mi">0</span><span class="p">]])</span>
+    
+    <span class="n">L</span><span class="o">=</span><span class="n">sl</span><span class="o">.</span><span class="n">Liouvillian</span><span class="p">(</span><span class="n">ex0</span><span class="p">,</span><span class="n">ex1</span><span class="p">,</span><span class="n">kex</span><span class="o">=</span><span class="n">sl</span><span class="o">.</span><span class="n">Tools</span><span class="o">.</span><span class="n">twoSite_kex</span><span class="p">(</span><span class="mf">1e-6</span><span class="p">))</span>
+    <span class="n">seq</span><span class="o">=</span><span class="n">L</span><span class="o">.</span><span class="n">Sequence</span><span class="p">()</span><span class="o">.</span><span class="n">add_channel</span><span class="p">(</span><span class="s1">&#39;15N&#39;</span><span class="p">,</span><span class="n">v1</span><span class="o">=</span><span class="mi">35000</span><span class="p">)</span>
+    <span class="n">rho</span><span class="o">=</span><span class="n">sl</span><span class="o">.</span><span class="n">Rho</span><span class="p">(</span><span class="n">rho0</span><span class="o">=</span><span class="s1">&#39;15Nx&#39;</span><span class="p">,</span><span class="n">detect</span><span class="o">=</span><span class="s1">&#39;15Nx&#39;</span><span class="p">)</span>
+    <span class="n">rho</span><span class="o">.</span><span class="n">DetProp</span><span class="p">(</span><span class="n">seq</span><span class="p">,</span><span class="n">n</span><span class="o">=</span><span class="mi">1000</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="s2">&quot;Parallel&quot;</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="n">parallel</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="s2">&quot;Series&quot;</span><span class="si">}</span><span class="s1"> time: </span><span class="si">{</span><span class="p">(</span><span class="n">time</span><span class="p">()</span><span class="o">-</span><span class="n">t0</span><span class="p">)</span><span class="o">*</span><span class="mf">1e3</span><span class="si">:</span><span class="s1">.0f</span><span class="si">}</span><span class="s1"> ms&#39;</span><span class="p">)</span>
+<span class="n">rho</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>State-space reduction: 32-&gt;16
+Series time: 270 ms
+State-space reduction: 32-&gt;16
+Parallel time: 266 ms
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;Axes: xlabel=&#39;t / ms&#39;, ylabel=&#39;&lt;$^{15}N_x$&gt;&#39;&gt;
+</pre></div>
+</div>
+<img alt="../_images/312dad0b3b7d8a64fd789889bc5ee8cb6bc93f34245db0b66e9728efd7292c65.png" src="../_images/312dad0b3b7d8a64fd789889bc5ee8cb6bc93f34245db0b66e9728efd7292c65.png" />
+</div>
+</div>
+</section>
+<section id="benchmark-2-redor">
+<h2>Benchmark 2: REDOR<a class="headerlink" href="#benchmark-2-redor" title="Link to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sl</span><span class="o">.</span><span class="n">Defaults</span><span class="p">[</span><span class="s1">&#39;cache&#39;</span><span class="p">]</span><span class="o">=</span><span class="kc">True</span>
+<span class="k">for</span> <span class="n">parallel</span> <span class="ow">in</span> <span class="p">[</span><span class="kc">False</span><span class="p">,</span><span class="kc">True</span><span class="p">]:</span>
+    <span class="n">sl</span><span class="o">.</span><span class="n">Defaults</span><span class="p">[</span><span class="s1">&#39;parallel&#39;</span><span class="p">]</span><span class="o">=</span><span class="n">parallel</span>    
+    <span class="n">t0</span><span class="o">=</span><span class="n">time</span><span class="p">()</span>
+    <span class="n">ex0</span><span class="o">=</span><span class="n">sl</span><span class="o">.</span><span class="n">ExpSys</span><span class="p">(</span><span class="n">v0H</span><span class="o">=</span><span class="mi">600</span><span class="p">,</span><span class="n">Nucs</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;15N&#39;</span><span class="p">,</span><span class="s1">&#39;1H&#39;</span><span class="p">],</span><span class="n">vr</span><span class="o">=</span><span class="mi">60000</span><span class="p">,</span><span class="n">pwdavg</span><span class="o">=</span><span class="n">sl</span><span class="o">.</span><span class="n">PowderAvg</span><span class="p">(</span><span class="s1">&#39;bcr20&#39;</span><span class="p">),</span><span class="n">n_gamma</span><span class="o">=</span><span class="mi">30</span><span class="p">)</span>
+    <span class="c1"># After varying the powder average and n_gamma</span>
+    <span class="c1"># a beta-average and 30 gamma angles were determined to be sufficient</span>
+    <span class="n">delta</span><span class="o">=</span><span class="n">sl</span><span class="o">.</span><span class="n">Tools</span><span class="o">.</span><span class="n">dipole_coupling</span><span class="p">(</span><span class="mf">.102</span><span class="p">,</span><span class="s1">&#39;15N&#39;</span><span class="p">,</span><span class="s1">&#39;1H&#39;</span><span class="p">)</span>
+    <span class="n">phi</span><span class="o">=</span><span class="mi">35</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">/</span><span class="mi">180</span>
+
+    <span class="n">ex0</span><span class="o">.</span><span class="n">set_inter</span><span class="p">(</span><span class="s1">&#39;dipole&#39;</span><span class="p">,</span><span class="n">i0</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">i1</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">delta</span><span class="o">=</span><span class="n">delta</span><span class="p">)</span>
+    <span class="n">L</span><span class="o">=</span><span class="n">sl</span><span class="o">.</span><span class="n">Tools</span><span class="o">.</span><span class="n">Setup3siteSym</span><span class="p">(</span><span class="n">ex0</span><span class="p">,</span><span class="n">tc</span><span class="o">=</span><span class="mf">1e-9</span><span class="p">,</span><span class="n">phi</span><span class="o">=</span><span class="n">phi</span><span class="p">)</span>
+    
+    <span class="n">v1</span><span class="o">=</span><span class="mf">120e3</span> <span class="c1">#100 kHz pulse</span>
+    <span class="n">tp</span><span class="o">=</span><span class="mi">1</span><span class="o">/</span><span class="n">v1</span><span class="o">/</span><span class="mi">2</span> <span class="c1">#pi/2 pulse length</span>
+
+    <span class="n">t</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="n">L</span><span class="o">.</span><span class="n">taur</span><span class="o">/</span><span class="mi">2</span><span class="o">-</span><span class="n">tp</span><span class="p">,</span><span class="n">L</span><span class="o">.</span><span class="n">taur</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span><span class="n">L</span><span class="o">.</span><span class="n">taur</span><span class="o">-</span><span class="n">tp</span><span class="p">,</span><span class="n">L</span><span class="o">.</span><span class="n">taur</span><span class="p">]</span>
+    <span class="n">first</span><span class="o">=</span><span class="n">L</span><span class="o">.</span><span class="n">Sequence</span><span class="p">()</span><span class="o">.</span><span class="n">add_channel</span><span class="p">(</span><span class="s1">&#39;1H&#39;</span><span class="p">,</span><span class="n">t</span><span class="o">=</span><span class="n">t</span><span class="p">,</span><span class="n">v1</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="n">v1</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="n">v1</span><span class="p">],</span><span class="n">phase</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span><span class="mi">0</span><span class="p">])</span>
+    <span class="n">t</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="n">tp</span><span class="p">,</span><span class="n">L</span><span class="o">.</span><span class="n">taur</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span><span class="n">L</span><span class="o">.</span><span class="n">taur</span><span class="o">/</span><span class="mi">2</span><span class="o">+</span><span class="n">tp</span><span class="p">,</span><span class="n">L</span><span class="o">.</span><span class="n">taur</span><span class="p">]</span>
+    <span class="n">second</span><span class="o">=</span><span class="n">L</span><span class="o">.</span><span class="n">Sequence</span><span class="p">()</span><span class="o">.</span><span class="n">add_channel</span><span class="p">(</span><span class="s1">&#39;1H&#39;</span><span class="p">,</span><span class="n">t</span><span class="o">=</span><span class="n">t</span><span class="p">,</span><span class="n">v1</span><span class="o">=</span><span class="p">[</span><span class="n">v1</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="n">v1</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span><span class="n">phase</span><span class="o">=</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">])</span>
+    <span class="n">center</span><span class="o">=</span><span class="n">L</span><span class="o">.</span><span class="n">Sequence</span><span class="p">()</span><span class="o">.</span><span class="n">add_channel</span><span class="p">(</span><span class="s1">&#39;15N&#39;</span><span class="p">,</span><span class="n">t</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="n">L</span><span class="o">.</span><span class="n">taur</span><span class="o">/</span><span class="mi">2</span><span class="o">-</span><span class="n">tp</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span><span class="n">L</span><span class="o">.</span><span class="n">taur</span><span class="o">/</span><span class="mi">2</span><span class="o">+</span><span class="n">tp</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span><span class="n">L</span><span class="o">.</span><span class="n">taur</span><span class="p">],</span>
+                                   <span class="n">v1</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="n">v1</span><span class="p">,</span><span class="mi">0</span><span class="p">])</span>
+
+    <span class="n">Ucenter</span><span class="o">=</span><span class="n">center</span><span class="o">.</span><span class="n">U</span><span class="p">()</span>
+    <span class="n">Ufirst</span><span class="o">=</span><span class="n">first</span><span class="o">.</span><span class="n">U</span><span class="p">()</span>
+    <span class="n">Usecond</span><span class="o">=</span><span class="n">second</span><span class="o">.</span><span class="n">U</span><span class="p">()</span>
+
+    <span class="n">rho</span><span class="o">=</span><span class="n">sl</span><span class="o">.</span><span class="n">Rho</span><span class="p">(</span><span class="s1">&#39;15Nx&#39;</span><span class="p">,</span><span class="s1">&#39;15Nx&#39;</span><span class="p">)</span>
+    <span class="n">U1</span><span class="o">=</span><span class="n">L</span><span class="o">.</span><span class="n">Ueye</span><span class="p">()</span>
+    <span class="n">U2</span><span class="o">=</span><span class="n">L</span><span class="o">.</span><span class="n">Ueye</span><span class="p">()</span>
+
+
+    <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">48</span><span class="p">):</span>
+        <span class="n">rho</span><span class="o">.</span><span class="n">reset</span><span class="p">()</span>
+        <span class="p">(</span><span class="n">U2</span><span class="o">*</span><span class="n">Ucenter</span><span class="o">*</span><span class="n">U1</span><span class="o">*</span><span class="n">rho</span><span class="p">)()</span>
+        <span class="n">U1</span><span class="o">=</span><span class="n">Ufirst</span><span class="o">*</span><span class="n">U1</span>
+        <span class="n">U2</span><span class="o">=</span><span class="n">Usecond</span><span class="o">*</span><span class="n">U2</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="s2">&quot;Parallel&quot;</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="n">parallel</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="s2">&quot;Series&quot;</span><span class="si">}</span><span class="s1"> time: </span><span class="si">{</span><span class="p">(</span><span class="n">time</span><span class="p">()</span><span class="o">-</span><span class="n">t0</span><span class="p">)</span><span class="si">:</span><span class="s1">.1f</span><span class="si">}</span><span class="s1"> s&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Series time: 18.9 s
+Parallel time: 62.2 s
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">rho</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;Axes: xlabel=&#39;t / ms&#39;, ylabel=&#39;&lt;$^{15}N_x$&gt;&#39;&gt;
+</pre></div>
+</div>
+<img alt="../_images/871969dbc7826902449e155e88935c43b93b45fe05d5ad760a4370ec0a92e871.png" src="../_images/871969dbc7826902449e155e88935c43b93b45fe05d5ad760a4370ec0a92e871.png" />
+</div>
+</div>
+</section>
+<section id="benchmark-3-pseudocontact-shift-under-mas">
+<h2>Benchmark 3: Pseudocontact shift under MAS<a class="headerlink" href="#benchmark-3-pseudocontact-shift-under-mas" title="Link to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">parallel</span> <span class="ow">in</span> <span class="p">[</span><span class="kc">False</span><span class="p">,</span><span class="kc">True</span><span class="p">]:</span>
+    <span class="n">sl</span><span class="o">.</span><span class="n">Defaults</span><span class="p">[</span><span class="s1">&#39;cache&#39;</span><span class="p">]</span><span class="o">=</span><span class="kc">True</span>
+    <span class="n">sl</span><span class="o">.</span><span class="n">Defaults</span><span class="p">[</span><span class="s1">&#39;parallel&#39;</span><span class="p">]</span><span class="o">=</span><span class="n">parallel</span>
+    <span class="n">t0</span><span class="o">=</span><span class="n">time</span><span class="p">()</span>
+    <span class="n">delta</span><span class="o">=</span><span class="n">sl</span><span class="o">.</span><span class="n">Tools</span><span class="o">.</span><span class="n">dipole_coupling</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="s1">&#39;e-&#39;</span><span class="p">,</span><span class="s1">&#39;13C&#39;</span><span class="p">)</span>    <span class="c1">#10 Angstroms from electron</span>
+    <span class="n">ex</span><span class="o">=</span><span class="n">sl</span><span class="o">.</span><span class="n">ExpSys</span><span class="p">(</span><span class="n">v0H</span><span class="o">=</span><span class="mi">600</span><span class="p">,</span><span class="n">Nucs</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;13C&#39;</span><span class="p">,</span><span class="s1">&#39;e-&#39;</span><span class="p">],</span><span class="n">vr</span><span class="o">=</span><span class="mi">6000</span><span class="p">,</span><span class="n">LF</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">T_K</span><span class="o">=</span><span class="mi">200</span><span class="p">,</span><span class="n">pwdavg</span><span class="o">=</span><span class="mi">6</span><span class="p">,</span><span class="n">n_gamma</span><span class="o">=</span><span class="mi">30</span><span class="p">)</span>  <span class="c1">#Electron-nuclear system</span>
+    <span class="n">ex</span><span class="o">.</span><span class="n">set_inter</span><span class="p">(</span><span class="s1">&#39;hyperfine&#39;</span><span class="p">,</span><span class="n">i0</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">i1</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">Axx</span><span class="o">=-</span><span class="n">delta</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span><span class="n">Ayy</span><span class="o">=-</span><span class="n">delta</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span><span class="n">Azz</span><span class="o">=</span><span class="n">delta</span><span class="p">)</span>
+    <span class="n">ex</span><span class="o">.</span><span class="n">set_inter</span><span class="p">(</span><span class="s1">&#39;g&#39;</span><span class="p">,</span><span class="n">i</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">gxx</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">gyy</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">gzz</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span>
+    
+    <span class="n">L</span><span class="o">=</span><span class="n">sl</span><span class="o">.</span><span class="n">Liouvillian</span><span class="p">(</span><span class="n">ex</span><span class="p">)</span>        <span class="c1">#Generate a Liouvillian</span>
+    
+    <span class="n">L</span><span class="o">.</span><span class="n">add_relax</span><span class="p">(</span><span class="s1">&#39;T1&#39;</span><span class="p">,</span><span class="n">i</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">T1</span><span class="o">=</span><span class="mf">2e-8</span><span class="p">,</span><span class="n">OS</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">Thermal</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>  
+    <span class="n">L</span><span class="o">.</span><span class="n">add_relax</span><span class="p">(</span><span class="s1">&#39;T2&#39;</span><span class="p">,</span><span class="n">i</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">T2</span><span class="o">=</span><span class="mf">2e-8</span><span class="p">,</span><span class="n">OS</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    
+    <span class="n">seq</span><span class="o">=</span><span class="n">L</span><span class="o">.</span><span class="n">Sequence</span><span class="p">()</span> <span class="c1">#Generate an empty sequence</span>
+    
+    <span class="n">rho200</span><span class="o">=</span><span class="n">sl</span><span class="o">.</span><span class="n">Rho</span><span class="p">(</span><span class="s1">&#39;13Cx&#39;</span><span class="p">,</span><span class="s1">&#39;13Cp&#39;</span><span class="p">)</span>  <span class="c1">#Generate initial state, detection operator</span>
+    <span class="n">_</span><span class="o">=</span><span class="n">rho200</span><span class="o">.</span><span class="n">DetProp</span><span class="p">(</span><span class="n">seq</span><span class="p">,</span><span class="n">n</span><span class="o">=</span><span class="mi">8000</span><span class="p">,</span><span class="n">n_per_seq</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span> <span class="c1">#Propagate the system</span>
+    
+    <span class="n">rho200</span><span class="o">.</span><span class="n">downmix</span><span class="p">()</span>
+    
+    
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="s2">&quot;Parallel&quot;</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="n">parallel</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="s2">&quot;Series&quot;</span><span class="si">}</span><span class="s1"> time: </span><span class="si">{</span><span class="p">(</span><span class="n">time</span><span class="p">()</span><span class="o">-</span><span class="n">t0</span><span class="p">)</span><span class="si">:</span><span class="s1">.1f</span><span class="si">}</span><span class="s1"> s&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Series time: 18.3 s
+Parallel time: 18.1 s
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ax</span><span class="o">=</span><span class="n">rho200</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">FT</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;maroon&#39;</span><span class="p">)</span> <span class="c1">#Plot the results into the same axis</span>
+<span class="n">_</span><span class="o">=</span><span class="n">ax</span><span class="o">.</span><span class="n">set_xlim</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="o">-</span><span class="mf">.5</span><span class="p">])</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_yticklabels</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xticks</span><span class="p">([</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="o">-</span><span class="mf">.5</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mf">.5</span><span class="p">,</span><span class="mi">1</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&lt;matplotlib.axis.XTick at 0x1191346d0&gt;,
+ &lt;matplotlib.axis.XTick at 0x11921cf10&gt;,
+ &lt;matplotlib.axis.XTick at 0x1195073d0&gt;,
+ &lt;matplotlib.axis.XTick at 0x1195110d0&gt;,
+ &lt;matplotlib.axis.XTick at 0x119506510&gt;]
+</pre></div>
+</div>
+<img alt="../_images/215642e44c22527ed70133905dc383d668ea15ec82aa1c8613e5f09a2c71f3c9.png" src="../_images/215642e44c22527ed70133905dc383d668ea15ec82aa1c8613e5f09a2c71f3c9.png" />
+</div>
+</div>
+</section>
+<section id="benchmark-4-water-hopping-4-5-6-spin-simulation">
+<h2>Benchmark 4: Water hopping (4/5/6-spin simulation)<a class="headerlink" href="#benchmark-4-water-hopping-4-5-6-spin-simulation" title="Link to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">n</span><span class="o">=</span><span class="mi">3</span> <span class="c1">#Number of 1H (number of spins is n+1)</span>
+<span class="n">sl</span><span class="o">.</span><span class="n">Defaults</span><span class="p">[</span><span class="s1">&#39;cache&#39;</span><span class="p">]</span><span class="o">=</span><span class="kc">False</span>
+<span class="k">for</span> <span class="n">parallel</span> <span class="ow">in</span> <span class="p">[</span><span class="kc">False</span><span class="p">,</span><span class="kc">True</span><span class="p">]:</span>
+    <span class="n">sl</span><span class="o">.</span><span class="n">Defaults</span><span class="p">[</span><span class="s1">&#39;parallel&#39;</span><span class="p">]</span><span class="o">=</span><span class="n">parallel</span>
+    <span class="n">t0</span><span class="o">=</span><span class="n">time</span><span class="p">()</span>
+
+    <span class="c1"># CH couplings</span>
+    <span class="n">delta</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">4606.92351485</span><span class="p">,</span> <span class="mf">1797.74007351</span><span class="p">,</span> <span class="mf">3013.38969601</span><span class="p">,</span> <span class="mf">1109.64922884</span><span class="p">,</span>
+       <span class="mf">2016.55071255</span><span class="p">,</span>  <span class="mf">985.46533497</span><span class="p">])</span>
+    <span class="n">beta</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">1.52269289</span><span class="p">,</span> <span class="mf">1.32442461</span><span class="p">,</span> <span class="mf">1.72911212</span><span class="p">,</span> <span class="mf">2.00710785</span><span class="p">,</span> <span class="mf">0.79886871</span><span class="p">,</span>
+       <span class="mf">2.50129217</span><span class="p">])</span>
+    <span class="n">gamma</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span> <span class="mf">0.90747836</span><span class="p">,</span>  <span class="mf">1.24462096</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.94198315</span><span class="p">,</span> <span class="o">-</span><span class="mf">2.26840075</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.28942014</span><span class="p">,</span>
+       <span class="o">-</span><span class="mf">0.97775707</span><span class="p">])</span>
+
+    <span class="c1"># HH couplings</span>
+    <span class="n">deltaHH</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mf">240240.30545617</span><span class="p">,</span>  <span class="mf">61146.36447292</span><span class="p">,</span>   <span class="mf">1970.3813349</span> <span class="p">,</span>
+          <span class="mf">1155.61145146</span><span class="p">,</span>   <span class="mf">6094.10132617</span><span class="p">,</span>   <span class="mf">1985.91135194</span><span class="p">],</span>
+       <span class="p">[</span> <span class="mf">61146.36447292</span><span class="p">,</span> <span class="mf">240240.30545617</span><span class="p">,</span>   <span class="mf">1794.04721071</span><span class="p">,</span>
+          <span class="mf">1006.48333044</span><span class="p">,</span>   <span class="mf">5846.61932559</span><span class="p">,</span>   <span class="mf">2152.90241365</span><span class="p">],</span>
+       <span class="p">[</span>  <span class="mf">1970.3813349</span> <span class="p">,</span>   <span class="mf">1794.04721071</span><span class="p">,</span> <span class="mf">240240.30545617</span><span class="p">,</span>
+         <span class="mf">61145.15653655</span><span class="p">,</span>   <span class="mf">2294.80686596</span><span class="p">,</span>   <span class="mf">7166.863992</span>  <span class="p">],</span>
+       <span class="p">[</span>  <span class="mf">1155.61145146</span><span class="p">,</span>   <span class="mf">1006.48333044</span><span class="p">,</span>  <span class="mf">61145.15653655</span><span class="p">,</span>
+        <span class="mf">240240.30545617</span><span class="p">,</span>   <span class="mf">2580.00271199</span><span class="p">,</span>   <span class="mf">6890.73630547</span><span class="p">],</span>
+       <span class="p">[</span>  <span class="mf">6094.10132617</span><span class="p">,</span>   <span class="mf">5846.61932559</span><span class="p">,</span>   <span class="mf">2294.80686596</span><span class="p">,</span>
+          <span class="mf">2580.00271199</span><span class="p">,</span> <span class="mf">240240.30545617</span><span class="p">,</span>  <span class="mf">61343.71356863</span><span class="p">],</span>
+       <span class="p">[</span>  <span class="mf">1985.91135194</span><span class="p">,</span>   <span class="mf">2152.90241365</span><span class="p">,</span>   <span class="mf">7166.863992</span>  <span class="p">,</span>
+          <span class="mf">6890.73630547</span><span class="p">,</span>  <span class="mf">61343.71356863</span><span class="p">,</span> <span class="mf">240240.30545617</span><span class="p">]])</span>
+    <span class="n">betaHH</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mf">1.57079633</span><span class="p">,</span> <span class="mf">2.42558372</span><span class="p">,</span> <span class="mf">1.29852807</span><span class="p">,</span> <span class="mf">1.13067005</span><span class="p">,</span> <span class="mf">2.41964498</span><span class="p">,</span> <span class="mf">2.4303553</span> <span class="p">],</span>
+       <span class="p">[</span><span class="mf">0.71600894</span><span class="p">,</span> <span class="mf">1.57079633</span><span class="p">,</span> <span class="mf">1.05488134</span><span class="p">,</span> <span class="mf">0.9288108</span> <span class="p">,</span> <span class="mf">1.97712181</span><span class="p">,</span> <span class="mf">2.13051745</span><span class="p">],</span>
+       <span class="p">[</span><span class="mf">1.84306458</span><span class="p">,</span> <span class="mf">2.08671132</span><span class="p">,</span> <span class="mf">1.57079633</span><span class="p">,</span> <span class="mf">0.71601651</span><span class="p">,</span> <span class="mf">0.67347314</span><span class="p">,</span> <span class="mf">0.68760657</span><span class="p">],</span>
+       <span class="p">[</span><span class="mf">2.0109226</span> <span class="p">,</span> <span class="mf">2.21278185</span><span class="p">,</span> <span class="mf">2.42557615</span><span class="p">,</span> <span class="mf">1.57079633</span><span class="p">,</span> <span class="mf">0.98826407</span><span class="p">,</span> <span class="mf">1.16112572</span><span class="p">],</span>
+       <span class="p">[</span><span class="mf">0.72194768</span><span class="p">,</span> <span class="mf">1.16447084</span><span class="p">,</span> <span class="mf">2.46811952</span><span class="p">,</span> <span class="mf">2.15332858</span><span class="p">,</span> <span class="mf">1.57079633</span><span class="p">,</span> <span class="mf">2.42864234</span><span class="p">],</span>
+       <span class="p">[</span><span class="mf">0.71123735</span><span class="p">,</span> <span class="mf">1.01107521</span><span class="p">,</span> <span class="mf">2.45398609</span><span class="p">,</span> <span class="mf">1.98046694</span><span class="p">,</span> <span class="mf">0.71295032</span><span class="p">,</span> <span class="mf">1.57079633</span><span class="p">]])</span>
+    <span class="n">gammaHH</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span> <span class="mf">0.00000000e+00</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.04923238e+00</span><span class="p">,</span>  <span class="mf">1.05757029e+00</span><span class="p">,</span>
+<span class="mf">8.88208378e-01</span><span class="p">,</span>  <span class="mf">1.51992907e+00</span><span class="p">,</span>  <span class="mf">1.40024175e+00</span><span class="p">],</span>
+       <span class="p">[</span> <span class="mf">2.09236028e+00</span><span class="p">,</span>  <span class="mf">0.00000000e+00</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.14726745e+00</span><span class="p">,</span>
+        <span class="o">-</span><span class="mf">9.56226609e-01</span><span class="p">,</span>  <span class="mf">1.69785967e+00</span><span class="p">,</span>  <span class="mf">1.56297278e+00</span><span class="p">],</span>
+       <span class="p">[</span><span class="o">-</span><span class="mf">2.08402236e+00</span><span class="p">,</span>  <span class="mf">1.99432521e+00</span><span class="p">,</span>  <span class="mf">0.00000000e+00</span><span class="p">,</span>
+        <span class="o">-</span><span class="mf">2.04361472e-03</span><span class="p">,</span> <span class="o">-</span><span class="mf">2.43231532e+00</span><span class="p">,</span> <span class="o">-</span><span class="mf">2.64270770e+00</span><span class="p">],</span>
+       <span class="p">[</span><span class="o">-</span><span class="mf">2.25338428e+00</span><span class="p">,</span>  <span class="mf">2.18536604e+00</span><span class="p">,</span>  <span class="mf">3.13954904e+00</span><span class="p">,</span>
+         <span class="mf">0.00000000e+00</span><span class="p">,</span> <span class="o">-</span><span class="mf">2.61192428e+00</span><span class="p">,</span> <span class="o">-</span><span class="mf">2.80947505e+00</span><span class="p">],</span>
+       <span class="p">[</span><span class="o">-</span><span class="mf">1.62166358e+00</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.44373298e+00</span><span class="p">,</span>  <span class="mf">7.09277331e-01</span><span class="p">,</span>
+         <span class="mf">5.29668373e-01</span><span class="p">,</span>  <span class="mf">0.00000000e+00</span><span class="p">,</span>  <span class="mf">1.13672151e+00</span><span class="p">],</span>
+       <span class="p">[</span><span class="o">-</span><span class="mf">1.74135091e+00</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.57861987e+00</span><span class="p">,</span>  <span class="mf">4.98884952e-01</span><span class="p">,</span>
+         <span class="mf">3.32117606e-01</span><span class="p">,</span> <span class="o">-</span><span class="mf">2.00487114e+00</span><span class="p">,</span>  <span class="mf">0.00000000e+00</span><span class="p">]])</span>
+
+    <span class="c1"># 13C CSA</span>
+    <span class="n">deltaCSA</span><span class="o">=</span><span class="mf">15.983465288047174</span>
+    <span class="n">etaCSA</span><span class="o">=-</span><span class="mf">0.10233422812456781</span>
+    <span class="n">alphaCSA</span><span class="o">=-</span><span class="mf">1.1674898472001762</span>
+    <span class="n">betaCSA</span><span class="o">=</span><span class="mf">0.914512792179852</span>
+    <span class="n">gammaCSA</span><span class="o">=-</span><span class="mf">1.312316331380307</span>
+
+    <span class="c1"># 1H CS/CSA</span>
+    <span class="n">HCS</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">22.99922011</span><span class="p">,</span> <span class="mf">24.97644825</span><span class="p">,</span> <span class="mf">24.97644846</span><span class="p">,</span> <span class="mf">22.99921996</span><span class="p">,</span> <span class="mf">24.52192647</span><span class="p">,</span> <span class="mf">23.98644806</span><span class="p">])</span>
+
+    <span class="n">deltaHCSA</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">17.60332199</span><span class="p">,</span> <span class="mf">15.80323671</span><span class="p">,</span> <span class="mf">15.97227992</span><span class="p">,</span> <span class="mf">18.56681946</span><span class="p">,</span> <span class="mf">16.48042676</span><span class="p">,</span> <span class="mf">16.77075626</span><span class="p">])</span>
+    <span class="n">etaHCSA</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="o">-</span><span class="mf">0.10418638</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.10503486</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.08225994</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.14162113</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.18843222</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.11487855</span><span class="p">])</span>
+    <span class="n">alphaHCSA</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="o">-</span><span class="mf">2.12485296</span><span class="p">,</span> <span class="o">-</span><span class="mf">2.14137643</span><span class="p">,</span>  <span class="mf">0.91297352</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.55202972</span><span class="p">,</span>  <span class="mf">2.27784746</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.91270437</span><span class="p">])</span>
+    <span class="n">betaHCSA</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">0.93737428</span><span class="p">,</span> <span class="mf">2.23403156</span><span class="p">,</span> <span class="mf">2.228757</span>  <span class="p">,</span> <span class="mf">2.17804567</span><span class="p">,</span> <span class="mf">2.26820148</span><span class="p">,</span> <span class="mf">0.96358604</span><span class="p">])</span>
+    <span class="n">gammaHCSA</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span> <span class="mf">1.25827576</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.2144375</span> <span class="p">,</span> <span class="o">-</span><span class="mf">2.31668105</span><span class="p">,</span>  <span class="mf">2.28178711</span><span class="p">,</span>  <span class="mf">0.17926152</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.23977268</span><span class="p">])</span>
+
+    <span class="n">ex</span><span class="o">=</span><span class="n">sl</span><span class="o">.</span><span class="n">ExpSys</span><span class="p">(</span><span class="n">v0H</span><span class="o">=</span><span class="mi">400</span><span class="p">,</span><span class="n">Nucs</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;13C&#39;</span><span class="p">,</span><span class="o">*</span><span class="p">[</span><span class="s1">&#39;1H&#39;</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">)]],</span><span class="n">vr</span><span class="o">=</span><span class="mi">5000</span><span class="p">,</span><span class="n">pwdavg</span><span class="o">=</span><span class="n">sl</span><span class="o">.</span><span class="n">PowderAvg</span><span class="p">(</span><span class="n">q</span><span class="o">=</span><span class="mi">2</span><span class="p">))</span>
+    <span class="n">ex</span><span class="o">.</span><span class="n">set_inter</span><span class="p">(</span><span class="s1">&#39;CSA&#39;</span><span class="p">,</span><span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">delta</span><span class="o">=</span><span class="n">deltaCSA</span><span class="p">,</span><span class="n">eta</span><span class="o">=</span><span class="n">etaCSA</span><span class="p">,</span><span class="n">euler</span><span class="o">=</span><span class="p">[</span><span class="n">alphaCSA</span><span class="p">,</span><span class="n">betaCSA</span><span class="p">,</span><span class="n">gammaCSA</span><span class="p">])</span>
+    <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+        <span class="n">ex</span><span class="o">.</span><span class="n">set_inter</span><span class="p">(</span><span class="s1">&#39;dipole&#39;</span><span class="p">,</span><span class="n">i0</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">i1</span><span class="o">=</span><span class="n">k</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span><span class="n">delta</span><span class="o">=</span><span class="n">delta</span><span class="p">[</span><span class="n">k</span><span class="p">],</span><span class="n">euler</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="n">beta</span><span class="p">[</span><span class="n">k</span><span class="p">],</span><span class="n">gamma</span><span class="p">[</span><span class="n">k</span><span class="p">]])</span>
+        <span class="n">ex</span><span class="o">.</span><span class="n">set_inter</span><span class="p">(</span><span class="s1">&#39;CSA&#39;</span><span class="p">,</span><span class="n">i</span><span class="o">=</span><span class="n">k</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span><span class="n">delta</span><span class="o">=</span><span class="n">deltaHCSA</span><span class="p">[</span><span class="n">k</span><span class="p">],</span><span class="n">euler</span><span class="o">=</span><span class="p">[</span><span class="n">alphaHCSA</span><span class="p">[</span><span class="n">k</span><span class="p">],</span><span class="n">betaHCSA</span><span class="p">[</span><span class="n">k</span><span class="p">],</span><span class="n">gammaHCSA</span><span class="p">[</span><span class="n">k</span><span class="p">]])</span>
+        <span class="n">ex</span><span class="o">.</span><span class="n">set_inter</span><span class="p">(</span><span class="s1">&#39;CS&#39;</span><span class="p">,</span><span class="n">i</span><span class="o">=</span><span class="n">k</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span><span class="n">ppm</span><span class="o">=</span><span class="n">HCS</span><span class="p">[</span><span class="n">k</span><span class="p">])</span>
+        <span class="k">for</span> <span class="n">m</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">k</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span><span class="n">n</span><span class="p">):</span>
+            <span class="n">ex</span><span class="o">.</span><span class="n">set_inter</span><span class="p">(</span><span class="s1">&#39;dipole&#39;</span><span class="p">,</span><span class="n">i0</span><span class="o">=</span><span class="n">k</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span><span class="n">i1</span><span class="o">=</span><span class="n">m</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span><span class="n">delta</span><span class="o">=</span><span class="n">deltaHH</span><span class="p">[</span><span class="n">k</span><span class="p">,</span><span class="n">m</span><span class="p">],</span><span class="n">euler</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="n">betaHH</span><span class="p">[</span><span class="n">k</span><span class="p">,</span><span class="n">m</span><span class="p">],</span><span class="n">gammaHH</span><span class="p">[</span><span class="n">k</span><span class="p">,</span><span class="n">m</span><span class="p">]])</span>
+
+    <span class="n">L</span><span class="o">=</span><span class="n">ex</span><span class="o">.</span><span class="n">Liouvillian</span><span class="p">()</span>
+
+    <span class="n">L</span><span class="o">.</span><span class="n">add_SpinEx</span><span class="p">(</span><span class="n">i</span><span class="o">=</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">],</span><span class="n">tc</span><span class="o">=</span><span class="mf">1e-4</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">n</span><span class="o">&gt;</span><span class="mi">3</span><span class="p">:</span>
+        <span class="n">L</span><span class="o">.</span><span class="n">add_SpinEx</span><span class="p">(</span><span class="n">i</span><span class="o">=</span><span class="p">[</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">],</span><span class="n">tc</span><span class="o">=</span><span class="mf">1e-4</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="p">(</span><span class="n">time</span><span class="p">()</span><span class="o">-</span><span class="n">t0</span><span class="p">)</span><span class="si">:</span><span class="s1">.1f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+        <span class="n">L</span><span class="o">.</span><span class="n">add_relax</span><span class="p">(</span><span class="n">Type</span><span class="o">=</span><span class="s1">&#39;SpinDiffusion&#39;</span><span class="p">,</span><span class="n">i</span><span class="o">=</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span><span class="n">k</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="p">(</span><span class="n">time</span><span class="p">()</span><span class="o">-</span><span class="n">t0</span><span class="p">)</span><span class="si">:</span><span class="s1">.1f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+    <span class="n">seq</span><span class="o">=</span><span class="n">L</span><span class="o">.</span><span class="n">Sequence</span><span class="p">()</span><span class="o">.</span><span class="n">add_channel</span><span class="p">(</span><span class="s1">&#39;13C&#39;</span><span class="p">,</span><span class="n">v1</span><span class="o">=</span><span class="mi">22000</span><span class="p">)</span>
+
+    <span class="n">t0</span><span class="o">=</span><span class="n">time</span><span class="p">()</span>
+    <span class="n">rho</span><span class="o">=</span><span class="n">sl</span><span class="o">.</span><span class="n">Rho</span><span class="p">(</span><span class="n">rho0</span><span class="o">=</span><span class="s1">&#39;13Cx&#39;</span><span class="p">,</span><span class="n">detect</span><span class="o">=</span><span class="s1">&#39;13Cx&#39;</span><span class="p">)</span>
+    <span class="n">rho</span><span class="p">,</span><span class="n">seq</span><span class="o">=</span><span class="n">rho</span><span class="o">.</span><span class="n">ReducedSetup</span><span class="p">(</span><span class="n">seq</span><span class="p">)</span>
+    <span class="n">rho</span><span class="o">.</span><span class="n">DetProp</span><span class="p">(</span><span class="n">seq</span><span class="p">,</span><span class="n">n</span><span class="o">=</span><span class="mi">500</span><span class="p">)</span>
+
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="s2">&quot;Parallel&quot;</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="n">parallel</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="s2">&quot;Series&quot;</span><span class="si">}</span><span class="s1"> time: </span><span class="si">{</span><span class="p">(</span><span class="n">time</span><span class="p">()</span><span class="o">-</span><span class="n">t0</span><span class="p">)</span><span class="si">:</span><span class="s1">.1f</span><span class="si">}</span><span class="s1"> s&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.2
+0.3
+State-space reduction: 256-&gt;80
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./Chapter7"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="../Chapter6/Ch6_RelaxationOptions.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title"><font  color = "#B00000">Relaxation Options</font></p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="../ColabTemplate.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title"><font  color = "#B00000"> SLEEPY Colab Template</font></p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#versions">Versions</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#benchmark-1-r-1-rho-relaxation">Benchmark 1: <span class="math notranslate nohighlight">\(R_{1\rho}\)</span> relaxation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#benchmark-2-redor">Benchmark 2: REDOR</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#benchmark-3-pseudocontact-shift-under-mas">Benchmark 3: Pseudocontact shift under MAS</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#benchmark-4-water-hopping-4-5-6-spin-simulation">Benchmark 4: Water hopping (4/5/6-spin simulation)</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Albert Smith, Kai Zumpfe
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2025.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
+<script defer src="../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

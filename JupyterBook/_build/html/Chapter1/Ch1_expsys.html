@@ -541,7 +541,7 @@ Temperature = 298 K
 Powder Average: JCP59 with 99 angles
 Interactions:
 
-&lt;SLEEPY.SLEEPY.ExpSys.ExpSys object at 0x7fc1284b97b8&gt;
+&lt;SLEEPY.SLEEPY.ExpSys.ExpSys object at 0x11ccf2c90&gt;
 </pre></div>
 </div>
 </div>
@@ -594,7 +594,7 @@ Interactions:
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/240ad77af2fc660e7d7aaeeaf444d2e32cffd53f086fbd3d6abf2c0687566ef2.png" src="../_images/240ad77af2fc660e7d7aaeeaf444d2e32cffd53f086fbd3d6abf2c0687566ef2.png" />
+<img alt="../_images/c55e8397677c5021961caa1e3732eb821d1d5a9f3bbab374ccd7923f1b99a906.png" src="../_images/c55e8397677c5021961caa1e3732eb821d1d5a9f3bbab374ccd7923f1b99a906.png" />
 </div>
 </div>
 <p>Note, if we try to plot an isotropic term, we just obtain a sphere.</p>
@@ -605,7 +605,7 @@ Interactions:
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/2762ce89343e2814a4b40259577a9c946c5f8c944fa91970f8f322889b28b139.png" src="../_images/2762ce89343e2814a4b40259577a9c946c5f8c944fa91970f8f322889b28b139.png" />
+<img alt="../_images/ab5505891ba1cf30932372f752d706e238d681379adef08a33aea5061c0373e6.png" src="../_images/ab5505891ba1cf30932372f752d706e238d681379adef08a33aea5061c0373e6.png" />
 </div>
 </div>
 <p>When setting an interaction, ex returns itself. This lets us string together multiple commands, for example, the following line will achieve the same interactions as above. Note that if an interaction is defined twice for the same spin or spins, the former definition will be overwritten.</p>
@@ -637,7 +637,7 @@ Interactions:
 	CSA on spin 1 with arguments: (delta=100.00,eta=1.00)
 	CS on spin 0 with arguments: (ppm=10.00)
 
-&lt;SLEEPY.SLEEPY.ExpSys.ExpSys object at 0x7fc1284e99b0&gt;
+&lt;SLEEPY.SLEEPY.ExpSys.ExpSys object at 0x11cd08b10&gt;
 </pre></div>
 </div>
 </div>
@@ -711,7 +711,7 @@ Interactions:
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Powder Average
 Type:	rep256 with 25600 angles
 
-&lt;SLEEPY.SLEEPY.PowderAvg.PowderAvg object at 0x7fc1284e9b00&gt;
+&lt;SLEEPY.SLEEPY.PowderAvg.PowderAvg object at 0x11cd09590&gt;
 </pre></div>
 </div>
 </div>
@@ -724,7 +724,7 @@ Type:	rep256 with 25600 angles
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/df171539b397b195fa1194b0266bbcf91a72e2952f74ef549dbc8b15a5e9ed7e.png" src="../_images/df171539b397b195fa1194b0266bbcf91a72e2952f74ef549dbc8b15a5e9ed7e.png" />
+<img alt="../_images/82e06d6ddda7eb96a0f2eb860dc94f63cc80ea964cc20151e8429171151b7c46.png" src="../_images/82e06d6ddda7eb96a0f2eb860dc94f63cc80ea964cc20151e8429171151b7c46.png" />
 </div>
 </div>
 </section>
@@ -789,20 +789,24 @@ Type:	rep256 with 25600 angles
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[array([[0., 0., 0., 0.],
         [0., 0., 0., 0.],
         [0., 0., 0., 0.],
-        [0., 0., 0., 0.]]), array([[0. +0.j, 0. +0.j, 0. +0.j, 0. +0.j],
+        [0., 0., 0., 0.]]),
+ array([[0. +0.j, 0. +0.j, 0. +0.j, 0. +0.j],
         [0. +0.j, 0. +0.j, 0. +0.j, 0. +0.j],
         [0.5+0.j, 0. +0.j, 0. +0.j, 0. +0.j],
-        [0. +0.j, 0.5+0.j, 0. +0.j, 0. +0.j]]), array([[ 0.40824829+0.j,  0.        +0.j,  0.        +0.j,
+        [0. +0.j, 0.5+0.j, 0. +0.j, 0. +0.j]]),
+ array([[ 0.40824829+0.j,  0.        +0.j,  0.        +0.j,
           0.        +0.j],
         [ 0.        +0.j,  0.40824829+0.j,  0.        +0.j,
           0.        +0.j],
         [ 0.        +0.j,  0.        +0.j, -0.40824829+0.j,
          -0.        +0.j],
         [ 0.        +0.j,  0.        +0.j, -0.        +0.j,
-         -0.40824829+0.j]]), array([[-0. +0.j, -0. +0.j, -0.5+0.j, -0. +0.j],
+         -0.40824829+0.j]]),
+ array([[-0. +0.j, -0. +0.j, -0.5+0.j, -0. +0.j],
         [-0. +0.j, -0. +0.j, -0. +0.j, -0.5+0.j],
         [-0. +0.j, -0. +0.j, -0. +0.j, -0. +0.j],
-        [-0. +0.j, -0. +0.j, -0. +0.j, -0. +0.j]]), array([[0., 0., 0., 0.],
+        [-0. +0.j, -0. +0.j, -0. +0.j, -0. +0.j]]),
+ array([[0., 0., 0., 0.],
         [0., 0., 0., 0.],
         [0., 0., 0., 0.],
         [0., 0., 0., 0.]])]
@@ -824,10 +828,10 @@ Type:	rep256 with 25600 angles
         [0., 0., 0., 0.],
         [0., 0., 0., 0.],
         [0., 0., 0., 0.]]),
- array([[-0.  +0.j, -0.  +0.j, -0.25+0.j, -0.  +0.j],
-        [-0.  +0.j, -0.  +0.j, -0.  +0.j,  0.25-0.j],
-        [-0.  +0.j, -0.  +0.j, -0.  +0.j, -0.  +0.j],
-        [-0.  +0.j, -0.  +0.j, -0.  +0.j, -0.  +0.j]]),
+ array([[ 0.  +0.j,  0.  +0.j,  0.  +0.j,  0.  +0.j],
+        [ 0.  +0.j,  0.  +0.j,  0.  +0.j,  0.  +0.j],
+        [ 0.25+0.j,  0.  +0.j,  0.  +0.j,  0.  +0.j],
+        [ 0.  +0.j, -0.25+0.j,  0.  +0.j,  0.  +0.j]]),
  array([[ 0.20412415+0.j,  0.        +0.j,  0.        +0.j,
           0.        +0.j],
         [ 0.        +0.j, -0.20412415+0.j,  0.        +0.j,
@@ -836,10 +840,10 @@ Type:	rep256 with 25600 angles
           0.        +0.j],
         [ 0.        +0.j,  0.        +0.j,  0.        +0.j,
           0.20412415+0.j]]),
- array([[ 0.  +0.j,  0.  +0.j,  0.  +0.j,  0.  +0.j],
-        [ 0.  +0.j,  0.  +0.j,  0.  +0.j,  0.  +0.j],
-        [ 0.25+0.j,  0.  +0.j,  0.  +0.j,  0.  +0.j],
-        [ 0.  +0.j, -0.25+0.j,  0.  +0.j,  0.  +0.j]]),
+ array([[-0.  +0.j, -0.  +0.j, -0.25+0.j, -0.  +0.j],
+        [-0.  +0.j, -0.  +0.j, -0.  +0.j,  0.25-0.j],
+        [-0.  +0.j, -0.  +0.j, -0.  +0.j, -0.  +0.j],
+        [-0.  +0.j, -0.  +0.j, -0.  +0.j, -0.  +0.j]]),
  array([[0., 0., 0., 0.],
         [0., 0., 0., 0.],
         [0., 0., 0., 0.],
@@ -860,20 +864,24 @@ Type:	rep256 with 25600 angles
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[array([[0., 0., 0., 0.],
         [0., 0., 0., 0.],
         [0., 0., 0., 0.],
-        [0., 0., 0., 0.]]), array([[0., 0., 0., 0.],
+        [0., 0., 0., 0.]]),
+ array([[0., 0., 0., 0.],
         [0., 0., 0., 0.],
         [0., 0., 0., 0.],
-        [0., 0., 0., 0.]]), array([[ 0.20412415+0.j,  0.        +0.j,  0.        +0.j,
+        [0., 0., 0., 0.]]),
+ array([[ 0.20412415+0.j,  0.        +0.j,  0.        +0.j,
           0.        +0.j],
         [ 0.        +0.j, -0.20412415+0.j, -0.20412415+0.j,
           0.        +0.j],
         [ 0.        +0.j, -0.20412415+0.j, -0.20412415+0.j,
           0.        +0.j],
         [ 0.        +0.j,  0.        +0.j,  0.        +0.j,
-          0.20412415+0.j]]), array([[0., 0., 0., 0.],
+          0.20412415+0.j]]),
+ array([[0., 0., 0., 0.],
         [0., 0., 0., 0.],
         [0., 0., 0., 0.],
-        [0., 0., 0., 0.]]), array([[0., 0., 0., 0.],
+        [0., 0., 0., 0.]]),
+ array([[0., 0., 0., 0.],
         [0., 0., 0., 0.],
         [0., 0., 0., 0.],
         [0., 0., 0., 0.]])]
@@ -892,20 +900,24 @@ Type:	rep256 with 25600 angles
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[array([[0., 0., 0., 0.],
         [0., 0., 0., 0.],
         [0., 0., 0., 0.],
-        [0., 0., 0., 0.]]), array([[0., 0., 0., 0.],
+        [0., 0., 0., 0.]]),
+ array([[0., 0., 0., 0.],
         [0., 0., 0., 0.],
         [0., 0., 0., 0.],
-        [0., 0., 0., 0.]]), array([[ 0.20412415+0.j,  0.        +0.j,  0.        +0.j,
+        [0., 0., 0., 0.]]),
+ array([[ 0.20412415+0.j,  0.        +0.j,  0.        +0.j,
           0.        +0.j],
         [ 0.        +0.j, -0.20412415+0.j,  0.        +0.j,
           0.        +0.j],
         [ 0.        +0.j,  0.        +0.j, -0.20412415+0.j,
           0.        +0.j],
         [ 0.        +0.j,  0.        +0.j,  0.        +0.j,
-          0.20412415+0.j]]), array([[0., 0., 0., 0.],
+          0.20412415+0.j]]),
+ array([[0., 0., 0., 0.],
         [0., 0., 0., 0.],
         [0., 0., 0., 0.],
-        [0., 0., 0., 0.]]), array([[0., 0., 0., 0.],
+        [0., 0., 0., 0.]]),
+ array([[0., 0., 0., 0.],
         [0., 0., 0., 0.],
         [0., 0., 0., 0.],
         [0., 0., 0., 0.]])]

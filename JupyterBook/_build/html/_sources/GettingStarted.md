@@ -19,18 +19,29 @@ For the latest (potentially less stable) version of SLEEPY, download from GitHub
 
 [**SLEEPY on GitHub**](https://github.com/alsinmr/SLEEPY/)
 
-Versions listed have been tested for SLEEPY, although any recent module version should work.
+Versions listed have been used for [benchmarking SLEEPY](Chapter7/Ch7_SleepyBenchmark), although we expect most recent versions to be stable.
 
 ### Requirements
-* Python 3 (3.7.3)
-* numpy (1.19.2)
+* Python 3 (3.11.13)
+* numpy (1.24.3)
 * matplotlib (3.4.2) 
 * scipy (1.5.2)
 
 ### Recommended Installations
+* multiprocess (0.70.15 – in benchmarking, much faster than the built-in multiprocessing)
 * [Jupyter notebooks](https://jupyter.org/): Neat code organization based in a web browser
+* ipywidgets (7.7.1): Used primarily in Google Colab to make zoomable plots
 
-If you're starting from scratch, you may consider installing [Anaconda](https://anaconda.org), which will install Python 3, numpy, matplotlib, scipy, and Jupyter Notebooks for you. 
+Note that we have used numpy and scipy with Intel's MKL BLAS/LAPACK libraries. In our tests, this results in considerable speedup. Installation can be challenging. 
+* Currently will not install with python>3.11
+* May not yield improvements if not using an Intel processor (e.g. Apple Silicon, esp. AMD)
+* We used conda for installation
+conda config --add channels defaults
+conda config --set channel_priority strict
+conda install numpy scipy mkl mkl-service libblas=*=*mkl
+
+
+If you're starting from scratch, you may consider installing [Anaconda](https://anaconda.org), which will install Python 3, numpy, matplotlib, scipy, and Jupyter Notebooks for you. This *should* also use the MKL libraries.
 
 Once set up, any of the webpages with code in the tutorial can be downloaded with the button in the upper right (pick .ipynb) and run locally. 
 
