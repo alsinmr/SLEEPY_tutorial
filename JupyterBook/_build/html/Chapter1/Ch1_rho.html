@@ -32,7 +32,7 @@
     <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=eba8b062" />
     <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
   
@@ -520,6 +520,11 @@ document.write(`
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Loading Defaults from file
+</pre></div>
+</div>
+</div>
 </div>
 </section>
 <section id="build-the-system">
@@ -609,7 +614,7 @@ detect[1]: 13Cx
 Current time is 600.000 microseconds
 2 time points have been recorded
 
-&lt;SLEEPY.SLEEPY.Rho.Rho object at 0x114960890&gt;
+&lt;SLEEPY.SLEEPY.Rho.Rho object at 0x11da370d0&gt;
 </pre></div>
 </div>
 </div>
@@ -629,7 +634,7 @@ Current time is 600.000 microseconds
 </div>
 </div>
 </div>
-<p>We may also multiply the sequence by <code class="docutils literal notranslate"><span class="pre">rho</span></code>. First, we fully clear <code class="docutils literal notranslate"><span class="pre">rho</span></code>, to go back to the initial conditions. When multiplying a sequence by <code class="docutils literal notranslate"><span class="pre">rho</span></code>, the sequence uses its default length (<code class="docutils literal notranslate"><span class="pre">seq.Dt</span></code>) to produce a propagator, which is what actually gets multiplied by <code class="docutils literal notranslate"><span class="pre">rho</span></code>. This takes a little less code, but if the resulting propagator is discarded in this approach, so cannot be reused (which may or may not matter to the user).</p>
+<p>We may also multiply the <code class="docutils literal notranslate"><span class="pre">rho</span></code> by the sequence. First, we fully clear <code class="docutils literal notranslate"><span class="pre">rho</span></code>, to go back to the initial conditions. When multiplying a sequence by <code class="docutils literal notranslate"><span class="pre">rho</span></code>, the sequence uses its default length (<code class="docutils literal notranslate"><span class="pre">seq.Dt</span></code>) to produce a propagator, which is what actually gets multiplied by <code class="docutils literal notranslate"><span class="pre">rho</span></code>. This takes a little less code, but if the resulting propagator is discarded in this approach, so cannot be reused (which may or may not matter to the user).</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">rho</span><span class="o">.</span><span class="n">clear</span><span class="p">()</span>
@@ -694,7 +699,7 @@ Current time is 600.000 microseconds
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">rho</span><span class="o">=</span><span class="n">sl</span><span class="o">.</span><span class="n">Rho</span><span class="p">(</span><span class="n">rho0</span><span class="o">=</span><span class="s1">&#39;13Cx&#39;</span><span class="p">,</span><span class="n">detect</span><span class="o">=</span><span class="s1">&#39;13Cp&#39;</span><span class="p">)</span>
-<span class="n">seq</span><span class="o">=</span><span class="n">L</span><span class="o">.</span><span class="n">Sequence</span><span class="p">(</span><span class="n">cyclic</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span><span class="o">.</span><span class="n">add_channel</span><span class="p">(</span><span class="s1">&#39;13C&#39;</span><span class="p">,</span><span class="n">t</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="n">L</span><span class="o">.</span><span class="n">taur</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span><span class="n">L</span><span class="o">.</span><span class="n">taur</span><span class="p">],</span><span class="n">v1</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>  <span class="c1">#Default sequence with length taur</span>
+<span class="n">seq</span><span class="o">=</span><span class="n">L</span><span class="o">.</span><span class="n">Sequence</span><span class="p">(</span><span class="n">cyclic</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>  <span class="c1">#Default sequence with length taur</span>
 <span class="n">_</span><span class="o">=</span><span class="n">rho</span><span class="o">.</span><span class="n">DetProp</span><span class="p">(</span><span class="n">seq</span><span class="p">,</span><span class="n">n</span><span class="o">=</span><span class="mi">20000</span><span class="p">,</span><span class="n">n_per_seq</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
 <span class="c1">#8 steps per sequence gives us a spectral with 8 times the rotor frequency</span>
 </pre></div>
@@ -714,7 +719,7 @@ Prop: 20 steps per every 1 rotor period
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/1c39c372646c3286280104c44f4f7fd642114e6b8658176ee6ad7fde6a1d7275.png" src="../_images/1c39c372646c3286280104c44f4f7fd642114e6b8658176ee6ad7fde6a1d7275.png" />
+<img alt="../_images/b8ba06ec25707c02a4fa547ceb6b16080391ec6b6c47a0220fc68ba30c780a26.png" src="../_images/b8ba06ec25707c02a4fa547ceb6b16080391ec6b6c47a0220fc68ba30c780a26.png" />
 </div>
 </div>
 <p>Aside from reducing coding, <code class="docutils literal notranslate"><span class="pre">rho.DetProp</span></code> has also executed a few computational speedups. First, it has identified that only 2 of the 16 spin-states would actually be accessed in this simulation, so it reduces the size of the matrix being propagated significantly. Second, it has performed the propagation in the eigenbasis. Note that because we have 20 steps per rotor period, 20 different eigenbases have been used, each corresponding to a different starting point in the rotor period. That is, we take 20 steps through the first rotor period. However, starting from each of those 20 steps, we then take rotor-period length steps, which can be propagated in the eigenbasis, vastly accelerating the computation time through the 20000 total timesteps (or 1000 steps per each starting point in the rotor period).</p>

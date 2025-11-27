@@ -32,7 +32,7 @@
     <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=eba8b062" />
     <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
   
@@ -489,6 +489,7 @@ document.write(`
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#build-the-system">Build the system</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#propagate-the-system-plot">Propagate the system, plot</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#second-order-quadrupolar-broadening-in-the-lab-frame">Second order quadrupolar broadening in the lab frame</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#second-order-quadrupoloar-broadening-in-the-rotating-frame">Second order quadrupoloar broadening in the rotating frame</a></li>
 </ul>
             </nav>
         </div>
@@ -516,6 +517,11 @@ document.write(`
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Loading Defaults from file
+</pre></div>
+</div>
+</div>
 </div>
 </section>
 <section id="build-the-system">
@@ -524,9 +530,9 @@ document.write(`
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ex0</span><span class="o">=</span><span class="n">sl</span><span class="o">.</span><span class="n">ExpSys</span><span class="p">(</span><span class="n">v0H</span><span class="o">=</span><span class="mi">600</span><span class="p">,</span><span class="n">Nucs</span><span class="o">=</span><span class="s1">&#39;2H&#39;</span><span class="p">,</span><span class="n">vr</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">pwdavg</span><span class="o">=</span><span class="s1">&#39;bcr400&#39;</span><span class="p">)</span>
-<span class="n">ex0</span><span class="o">.</span><span class="n">set_inter</span><span class="p">(</span><span class="s1">&#39;quadrupole&#39;</span><span class="p">,</span><span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">DelPP</span><span class="o">=</span><span class="mf">167e3</span><span class="o">*</span><span class="mf">.15</span><span class="p">)</span>
+<span class="n">ex0</span><span class="o">.</span><span class="n">set_inter</span><span class="p">(</span><span class="s1">&#39;quadrupole&#39;</span><span class="p">,</span><span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">DelPP</span><span class="o">=</span><span class="mf">167e3</span><span class="o">*</span><span class="mf">.15</span><span class="p">,</span><span class="n">order</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
 <span class="n">ex1</span><span class="o">=</span><span class="n">ex0</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
-<span class="n">ex1</span><span class="o">.</span><span class="n">set_inter</span><span class="p">(</span><span class="s1">&#39;quadrupole&#39;</span><span class="p">,</span><span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">DelPP</span><span class="o">=</span><span class="mf">167e3</span><span class="o">*</span><span class="mf">.3</span><span class="p">)</span>
+<span class="n">ex1</span><span class="o">.</span><span class="n">set_inter</span><span class="p">(</span><span class="s1">&#39;quadrupole&#39;</span><span class="p">,</span><span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">DelPP</span><span class="o">=</span><span class="mf">167e3</span><span class="o">*</span><span class="mf">.3</span><span class="p">,</span><span class="n">order</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
 
 <span class="n">L</span><span class="o">=</span><span class="n">sl</span><span class="o">.</span><span class="n">Liouvillian</span><span class="p">(</span><span class="n">ex0</span><span class="p">,</span><span class="n">ex1</span><span class="p">,</span><span class="n">kex</span><span class="o">=</span><span class="n">sl</span><span class="o">.</span><span class="n">Tools</span><span class="o">.</span><span class="n">twoSite_kex</span><span class="p">(</span><span class="n">tc</span><span class="o">=</span><span class="mf">5e-5</span><span class="p">,</span><span class="n">p1</span><span class="o">=</span><span class="mf">.5</span><span class="p">))</span>
 </pre></div>
@@ -552,7 +558,7 @@ document.write(`
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>State-space reduction: 18-&gt;4
 </pre></div>
 </div>
-<img alt="../_images/a8f318fb744fd24a3430c0e4ff44e150a572c81380c5009f9bbea487610d9e6b.png" src="../_images/a8f318fb744fd24a3430c0e4ff44e150a572c81380c5009f9bbea487610d9e6b.png" />
+<img alt="../_images/9a7d96655a5bd38693820768f5647fde3dce6a895b21801e5945e0c13de9e492.png" src="../_images/9a7d96655a5bd38693820768f5647fde3dce6a895b21801e5945e0c13de9e492.png" />
 </div>
 </div>
 <p>Note the behavior at the central frequency comes from couplings oriented near the magic angle, where the change in the size of the quadrupole coupling has little influence on the resonance frequency, and so very little relaxation is induced at these orientations.</p>
@@ -588,17 +594,19 @@ document.write(`
 State-space reduction: 18-&gt;4
 </pre></div>
 </div>
-<img alt="../_images/ca700f1ba644546cb74e500bba57b425bef955ff05fe2ae00b42b8eab259eef9.png" src="../_images/ca700f1ba644546cb74e500bba57b425bef955ff05fe2ae00b42b8eab259eef9.png" />
+<img alt="../_images/d96a7a0e56f9ef235875dffc93d289c03398910ca74b9a14cc11cc9fa3323cec.png" src="../_images/d96a7a0e56f9ef235875dffc93d289c03398910ca74b9a14cc11cc9fa3323cec.png" />
 </div>
 </div>
 </section>
 <section id="second-order-quadrupolar-broadening-in-the-lab-frame">
 <h2>Second order quadrupolar broadening in the lab frame<a class="headerlink" href="#second-order-quadrupolar-broadening-in-the-lab-frame" title="Link to this heading">#</a></h2>
-<p>Half-integer spins produce a narrow peak in the middle of the quadrupolar spectrum. However, this peak is broadened by the second-order quadrupole coupling. Simulating this broadening presents a challenge, because it is a rank-4 tensor, making its transformation under rotation different than the rank-2 tensors that most simulation packages are setup to handle. However, if the quadrupolar interaction is simulated in the lab frame, the second order quadrupole coupling arises naturally. We demonstrate here, with one simulation in the rotating frame, and one in the lab frame.</p>
+<p>Half-integer spins produce a narrow peak in the middle of the quadrupolar spectrum. However, this peak is broadened by the second-order quadrupole coupling. Simulating this broadening presents a challenge, because it is a rank-4 tensor, making its transformation under rotation different than the rank-2 tensors that SLEEPY was originally setup to handle. However, if the quadrupolar interaction is simulated in the lab frame, the second order quadrupole coupling arises naturally. We demonstrate here, with one simulation in the rotating frame, and one in the lab frame.</p>
+<p><strong>SEE BELOW</strong>
+SLEEPY 1.0.2 introduces handling of rank-4 tensors, enabling us to simulate the second-order broadening in the rotating frame. Here, we deactivate it for our discussion by setting the quadrupole order to 1, but this will no longer be the default behavior. Note that using order=2 (default) will slow down simulations due to sweeping over 9 (<span class="math notranslate nohighlight">\(=2*4+1\)</span>) instead of 5 (<span class="math notranslate nohighlight">\(=2*2+1\)</span>) rotating components, so if you don’t need it, consider setting <code class="docutils literal notranslate"><span class="pre">order=1</span></code>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">exRF</span><span class="o">=</span><span class="n">sl</span><span class="o">.</span><span class="n">ExpSys</span><span class="p">(</span><span class="mi">250</span><span class="p">,</span><span class="n">Nucs</span><span class="o">=</span><span class="s1">&#39;17O&#39;</span><span class="p">,</span><span class="n">vr</span><span class="o">=</span><span class="mi">60000</span><span class="p">,</span><span class="n">pwdavg</span><span class="o">=</span><span class="mi">6</span><span class="p">,</span><span class="n">n_gamma</span><span class="o">=</span><span class="mi">32</span><span class="p">)</span>
-<span class="n">exRF</span><span class="o">.</span><span class="n">set_inter</span><span class="p">(</span><span class="s1">&#39;quadrupole&#39;</span><span class="p">,</span><span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">delta</span><span class="o">=</span><span class="mi">150000</span><span class="p">)</span>
+<span class="n">exRF</span><span class="o">.</span><span class="n">set_inter</span><span class="p">(</span><span class="s1">&#39;quadrupole&#39;</span><span class="p">,</span><span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">delta</span><span class="o">=</span><span class="mi">150000</span><span class="p">,</span><span class="n">order</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
 <span class="n">seqRF</span><span class="o">=</span><span class="n">exRF</span><span class="o">.</span><span class="n">Liouvillian</span><span class="p">()</span><span class="o">.</span><span class="n">Sequence</span><span class="p">()</span>
 <span class="n">rhoRF</span><span class="o">=</span><span class="n">sl</span><span class="o">.</span><span class="n">Rho</span><span class="p">(</span><span class="s1">&#39;17Ox&#39;</span><span class="p">,</span><span class="s1">&#39;17Op&#39;</span><span class="p">)</span>
 <span class="n">rhoRF</span><span class="o">.</span><span class="n">DetProp</span><span class="p">(</span><span class="n">seqRF</span><span class="p">,</span><span class="n">n</span><span class="o">=</span><span class="mi">16000</span><span class="p">,</span><span class="n">n_per_seq</span><span class="o">=</span><span class="mi">32</span><span class="p">)</span>
@@ -635,10 +643,7 @@ Prop: 32 steps per every 1 rotor period
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Already downmixed
-</pre></div>
-</div>
-<img alt="../_images/f3d350e383105eea87610a327a9d1d9fdd8f8bd11ab83713c24545533cbed0e4.png" src="../_images/f3d350e383105eea87610a327a9d1d9fdd8f8bd11ab83713c24545533cbed0e4.png" />
+<img alt="../_images/42b31faf439f0cdefd09b2ce757fc396c05c4a2ff688eae4ba7dd0d15c5f669f.png" src="../_images/42b31faf439f0cdefd09b2ce757fc396c05c4a2ff688eae4ba7dd0d15c5f669f.png" />
 </div>
 </div>
 <p>A benefit of high-field magnets is that they narrow the second-order quadrupole broadening. We demonstrate that here, by comparing the spectrum from 250 MHz to that using a 1.2 GHz magnet.</p>
@@ -669,7 +674,41 @@ Prop: 32 steps per every 1 rotor period
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/649c338719400bb557d8a47868a7f106eee70dfef6438402c4a6f544ed81ada0.png" src="../_images/649c338719400bb557d8a47868a7f106eee70dfef6438402c4a6f544ed81ada0.png" />
+<img alt="../_images/2432f4a441e34a82fe5f88a1c90e5a08e95342ee5f9b94f90356674dc7c7740d.png" src="../_images/2432f4a441e34a82fe5f88a1c90e5a08e95342ee5f9b94f90356674dc7c7740d.png" />
+</div>
+</div>
+</section>
+<section id="second-order-quadrupoloar-broadening-in-the-rotating-frame">
+<h2>Second order quadrupoloar broadening in the rotating frame<a class="headerlink" href="#second-order-quadrupoloar-broadening-in-the-rotating-frame" title="Link to this heading">#</a></h2>
+<p>SLEEPY version 1.0.2 introduces a second-order correction to the rotating-frame quadrupolar interaction. This is now the default behavior, and can be controlled by specifying the order (default: <code class="docutils literal notranslate"><span class="pre">order=2</span></code>). Consider setting <code class="docutils literal notranslate"><span class="pre">order=1</span></code> if the second order correction is not needed, as this can slow down simulations.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">exRF</span><span class="o">=</span><span class="n">sl</span><span class="o">.</span><span class="n">ExpSys</span><span class="p">(</span><span class="mi">250</span><span class="p">,</span><span class="n">Nucs</span><span class="o">=</span><span class="s1">&#39;17O&#39;</span><span class="p">,</span><span class="n">vr</span><span class="o">=</span><span class="mi">60000</span><span class="p">,</span><span class="n">pwdavg</span><span class="o">=</span><span class="mi">6</span><span class="p">,</span><span class="n">n_gamma</span><span class="o">=</span><span class="mi">32</span><span class="p">)</span>
+<span class="n">exRF</span><span class="o">.</span><span class="n">set_inter</span><span class="p">(</span><span class="s1">&#39;quadrupole&#39;</span><span class="p">,</span><span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">delta</span><span class="o">=</span><span class="mi">150000</span><span class="p">)</span>
+<span class="n">seqRF</span><span class="o">=</span><span class="n">exRF</span><span class="o">.</span><span class="n">Liouvillian</span><span class="p">()</span><span class="o">.</span><span class="n">Sequence</span><span class="p">()</span>
+<span class="n">rhoRF</span><span class="o">=</span><span class="n">sl</span><span class="o">.</span><span class="n">Rho</span><span class="p">(</span><span class="s1">&#39;17Ox&#39;</span><span class="p">,</span><span class="s1">&#39;17Op&#39;</span><span class="p">)</span>
+<span class="n">_</span><span class="o">=</span><span class="n">rhoRF</span><span class="o">.</span><span class="n">DetProp</span><span class="p">(</span><span class="n">seqRF</span><span class="p">,</span><span class="n">n</span><span class="o">=</span><span class="mi">16000</span><span class="p">,</span><span class="n">n_per_seq</span><span class="o">=</span><span class="mi">32</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>State-space reduction: 36-&gt;5
+Prop: 32 steps per every 1 rotor period
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ax</span><span class="o">=</span><span class="n">rhoRF</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">FT</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">apodize</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">axis</span><span class="o">=</span><span class="s1">&#39;kHz&#39;</span><span class="p">)</span>
+<span class="n">rhoLF</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">FT</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">apodize</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">axis</span><span class="o">=</span><span class="s1">&#39;kHz&#39;</span><span class="p">,</span><span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">([</span><span class="s1">&#39;RF&#39;</span><span class="p">,</span><span class="s1">&#39;LF&#39;</span><span class="p">])</span>
+<span class="n">_</span><span class="o">=</span><span class="n">ax</span><span class="o">.</span><span class="n">set_xlim</span><span class="p">([</span><span class="mi">12</span><span class="p">,</span><span class="o">-</span><span class="mi">12</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/170b149176313f6476791caf61d44e4ff26cb6f8d0525d8eacd3b6366f2a1780.png" src="../_images/170b149176313f6476791caf61d44e4ff26cb6f8d0525d8eacd3b6366f2a1780.png" />
 </div>
 </div>
 </section>
@@ -743,6 +782,7 @@ Prop: 32 steps per every 1 rotor period
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#build-the-system">Build the system</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#propagate-the-system-plot">Propagate the system, plot</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#second-order-quadrupolar-broadening-in-the-lab-frame">Second order quadrupolar broadening in the lab frame</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#second-order-quadrupoloar-broadening-in-the-rotating-frame">Second order quadrupoloar broadening in the rotating frame</a></li>
 </ul>
   </nav></div>
 

@@ -15,7 +15,7 @@
 /Users/albertsmith/Documents/GitHub/SLEEPY_tutorial/Chapters/Chapter3/Ch3_RECRR.ipynb	1751492602
 /Users/albertsmith/Documents/GitHub/SLEEPY_tutorial/Chapters/Chapter3/Ch3_REDOR.ipynb	1751546334
 /Users/albertsmith/Documents/GitHub/SLEEPY_tutorial/Chapters/Chapter3/Ch3_T1_NOE.ipynb	1751546556
-/Users/albertsmith/Documents/GitHub/SLEEPY_tutorial/Chapters/Chapter3/Ch3_Quad.ipynb	1764234523
+/Users/albertsmith/Documents/GitHub/SLEEPY_tutorial/Chapters/Chapter3/Ch3_Quad.ipynb	1764249393
 /Users/albertsmith/Documents/GitHub/SLEEPY_tutorial/Chapters/Chapter3/Ch3_DIPSHIFT.ipynb	1751546284
 /Users/albertsmith/Documents/GitHub/SLEEPY_tutorial/Chapters/Chapter3/Ch3_R1p.ipynb	1751546739
 /Users/albertsmith/Documents/GitHub/SLEEPY_tutorial/Chapters/Chapter3/Ch3_DARR.ipynb	1751546438
