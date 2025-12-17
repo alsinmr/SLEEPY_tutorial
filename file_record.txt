@@ -20,7 +20,7 @@
 /Users/albertsmith/Documents/GitHub/SLEEPY_tutorial/Chapters/Chapter3/Ch3_R1p.ipynb	1751546739
 /Users/albertsmith/Documents/GitHub/SLEEPY_tutorial/Chapters/Chapter3/Ch3_DARR.ipynb	1751546438
 /Users/albertsmith/Documents/GitHub/SLEEPY_tutorial/Chapters/Chapter4/Ch4_OverhauserEffect.ipynb	1752503154
-/Users/albertsmith/Documents/GitHub/SLEEPY_tutorial/Chapters/Chapter4/Ch4_CrossEffect.ipynb	1751546901
+/Users/albertsmith/Documents/GitHub/SLEEPY_tutorial/Chapters/Chapter4/Ch4_CrossEffect.ipynb	1765954494
 /Users/albertsmith/Documents/GitHub/SLEEPY_tutorial/Chapters/Chapter4/Ch4_NOVEL.ipynb	1751546811
 /Users/albertsmith/Documents/GitHub/SLEEPY_tutorial/Chapters/Chapter4/Ch4_SolidEffect.ipynb	1751552480
 /Users/albertsmith/Documents/GitHub/SLEEPY_tutorial/Chapters/Chapter5/Ch5_PseudoContactShift.ipynb	1751552460
