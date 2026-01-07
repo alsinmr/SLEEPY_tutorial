@@ -56,3 +56,4 @@ parts:
   chapters:
   - file: SharingSleepy
   - file: UserLibrary
+  - file: CitingSLEEPY

@@ -4,5 +4,12 @@ Spins in Liouville space for rElaxation and Exchange in PYthon (SLEEPY) is softw
 
 Please [get in touch](https://biophysik.medizin.uni-leipzig.de/research/dr-albert-a-smith-penzel/) if you have questions, find a bug, etc.
 
+
+
+**SLEEPY is published!**
+
+A.A. Smith, K. Zumpfe. "SLEEPY: a comprehensive Python module for simulating relaxation and dynamics in nuclear magnetic resonance." *Nature Communications.* **16**, 9278 (2025). 
+DOI: [10.1038/s41467-025-65091-6](https://doi.org/10.1038/s41467-025-65091-6).
+
 ```{tableofcontents}
 ```
